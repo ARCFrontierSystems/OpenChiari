@@ -375,14 +375,15 @@ import time
 t_fluid = time.time()
 brain_tree = bvh_of(['cerebellum', 'tonsil', 'brainstem', 'ventricle-fourth', 'cord'])
 bone_tree = bvh_of(['occipital', 'skull', 'c1', 'c2'])
-roof_tree = bvh_of(['tentorium', 'cerebrum', 'cerebellum'])
+tent_tree = bvh_of(['tentorium'])
+above_tree = bvh_of(['cerebrum', 'diencephalon', 'callosum'])
 
 def inside(tree, p):
     loc, nrm, _, dist = tree.find_nearest(p)
     return loc is not None and (p - loc).dot(nrm) < 0, (dist if loc is not None else 1e9)
 
 STEP = 1.0
-XS, YS, ZS = range(-14, 78), range(-36, 37), range(-8, 48)
+XS, YS, ZS = range(-34, 80), range(-62, 63), range(-8, 62)
 NX, NY, NZ = len(XS), len(YS), len(ZS)
 brain = np.zeros((NX, NY, NZ), bool)
 space = np.zeros((NX, NY, NZ), bool)   # inside the skull, above the line, not bone
@@ -403,7 +404,13 @@ for i, ix in enumerate(XS):
                 continue
             if bone_tree.ray_cast(p, Vector((0, 1, 0)), 150)[0] is None or bone_tree.ray_cast(p, Vector((0, -1, 0)), 150)[0] is None:
                 continue
-            if roof_tree.ray_cast(p, Vector((0, 0, 1)), 150)[0] is None:
+            # Below the tentorium: going up, the tentorium comes before the cerebrum. In front of the brainstem
+            # (no tentorium above), the fluid in front of the pons counts up to the level of the dorsum sellae.
+            up = Vector((0, 0, 1))
+            ht, hc = tent_tree.ray_cast(p, up, 150), above_tree.ray_cast(p, up, 150)
+            dt = ht[3] if ht[0] is not None else 1e9
+            dc = hc[3] if hc[0] is not None else 1e9
+            if not (dt < dc or (ix < 0 and iz < 40 and dc < 1e9)):
                 continue
             space[i, j, k] = True
 
@@ -439,7 +446,7 @@ for seed in zip(*np.nonzero(fluid_grid)):
 keep = 1 + int(np.argmax(sizes))
 fluid = [Vector((XS[i] * STEP, YS[j] * STEP, ZS[k] * STEP)) for i, j, k in zip(*np.nonzero(labels == keep))]
 print(f'posterior fossa fluid: {len(fluid)} points ({len(fluid) * STEP ** 3 / 1000:.1f} ml) kept of {sum(sizes)} in {len(sizes)} pieces, {time.time() - t_fluid:.0f} s', flush=True)
-POINT_RADIUS = 1.0  # mm: points on a 1 mm grid merge into one surface
+POINT_RADIUS = 1.2  # mm: points on a 1 mm grid merge into one surface
 
 # Fluid points -> a smooth closed surface: geometry nodes turn points into a volume and the volume into a mesh.
 me = D.meshes.new('csf-points')
@@ -467,7 +474,7 @@ ng.links.new(v2m.outputs['Mesh'], go.inputs[0])
 gn = tmp.modifiers.new('surface', 'NODES')
 gn.node_group = ng
 sm = tmp.modifiers.new('smooth', 'SMOOTH')
-sm.iterations = 8
+sm.iterations = 24
 sm.factor = 0.6
 dg = bpy.context.evaluated_depsgraph_get()
 ev = tmp.evaluated_get(dg)
@@ -475,6 +482,21 @@ bm = bmesh.new()
 bm.from_mesh(ev.to_mesh())
 ev.to_mesh_clear()
 D.objects.remove(tmp)
+# Drop tiny separate bits the surface step can leave at narrow places (under about 100 points).
+seen = set()
+for v0 in list(bm.verts):
+    if v0 in seen:
+        continue
+    comp, stack = [], [v0]
+    seen.add(v0)
+    while stack:
+        v = stack.pop(); comp.append(v)
+        for e in v.link_edges:
+            w = e.other_vert(v)
+            if w not in seen:
+                seen.add(w); stack.append(w)
+    if len(comp) < 100:
+        bmesh.ops.delete(bm, geom=comp, context='VERTS')
 GROUPS['csf-cranial'] = dict(layer='csf', part='csf', color='#9CC3DA', opacity=0.75)
 built.append(finish('csf-cranial', bm))
 print(f'fluid surface done, {time.time() - t_fluid:.0f} s', flush=True)

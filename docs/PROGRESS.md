@@ -3,6 +3,21 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Phase 2, step 3: realistic Typical model checked against EVIDENCE.md
+
+- **Automatic measurements** for the realistic model (`npm run model:check:realistic -- <file>`, in `model/realistic/check.mjs`). All pass:
+  - Opening at the base of the skull (McRae line): 38.4 mm, measured from the bone's own edge. That's the atlas's value: within normal variation (36.2 ± 3.3 mm in controls) though above the 33 to 36 mm typical range. Recorded in EVIDENCE.md and left as is.
+  - Tonsil tip: 0.9 mm above the line (EVIDENCE.md: about 1 mm). Matthew agreed to the recommendation to match the Simple model; the lower ends of the atlas tonsils were stretched down 1.8 mm.
+  - Clivus: 43.6 mm (39 to 47).
+  - Spinal cord at C2: 8.3 mm (about 9; now reaches the measured size within 6 mm of the medulla).
+  - Dens: tip 10 mm below the line, in front of the cord.
+  - Fourth ventricle: 6.6 mm above the line.
+  - Fluid behind and around the cerebellum: one connected space.
+- **Fluid spots fixed:** the fluid is now computed around the brain treated as one solid mass (the gaps between the atlas's separate cerebellum pieces no longer count), below the tentorium, and only the connected space is kept. It reaches from in front of the brainstem, around the cerebellum, to the opening.
+- **Known, for later steps:** cut faces look hollow in a plain viewer (filled by the Explorer's viewer work, step 5); the fluid surface is a little lumpy; the model is still about 1 million triangles (slimmed in step 5).
+- **Not public:** the Realistic switch stays off. Before it can be shown, the views need the independent audit and MRI comparison (CLAUDE.md rule 1a) and Matthew's approval.
+- **Next (step 4):** Chiari I: tonsils lowered to about 12 mm below the line and made pointed, fluid behind them crowded, checked automatically; then stop for review.
+
 ## 2026-11-04: Text re-audit items applied (Matthew approved)
 
 - Printed visit-prep sheet: the figure caption now carries the required tonsil note ("Chiari I. Tonsils shown at their lowest point, where MRI measures them. Illustration, not a medical image."); added to COPY.md.

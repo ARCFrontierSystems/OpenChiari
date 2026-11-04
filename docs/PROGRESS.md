@@ -3,6 +3,34 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Realistic model: audit fixes (Matthew approved)
+
+- **Fluid through the opening** (High): the fluid around the neck cord is now built as one space with the fluid behind the brain, replacing the atlas's thin spinal covering.
+  - About 14 mm front to back below C1 (EVIDENCE.md 13 to 15 mm), roomier just below the opening.
+  - A thin layer wraps the cord all round, so the cord sits inside the fluid at every level checked.
+  - Typical is now open all the way down.
+- **Chiari I crowding:** the fluid space behind the cerebellum stays, narrowed by the tonsils, instead of leaving an empty hole. At the opening, the fluid behind the cord is blocked where the tonsils plug it; the space in front stays open.
+- **Measure tool:** on the realistic model it uses that model's own McRae line (38.4 mm) and tonsil tips, saved in its file.
+- **After surgery:** the re-formed fluid stays in front of the patch's real curved, oval shape.
+- **Tonsils (Matthew chose option A):** their lower ends are drawn to the midline in every view, so the midline cut shows them at their lowest point, as the site says.
+- **Clivus (Matthew chose option B):** EVIDENCE.md now says Chiari I's shorter clivus is not shown in either model.
+- **Smaller fixes:**
+  - the cerebellum pushed out of the occipital bone;
+  - the fluid kept clear of the bone's inner surface;
+  - the README's patch description corrected.
+- **Checks tightened** (`check.mjs`):
+  - tonsil tip on the midline;
+  - tip shape measured around the tip;
+  - fluid from behind the cerebellum down the neck;
+  - the space behind the cerebellum not left empty;
+  - passage behind the cord open (Typical, after surgery) or plugged (Chiari I);
+  - cord inside the fluid at 16 levels;
+  - fluid column 12 to 18 mm;
+  - bone window measured along the bone;
+  - the whole C1 gap.
+- **Results:** all four views pass. Explorer files rebuilt (desktop 1.4 MB, phone 0.5 MB). 74 tests pass.
+- **Next:** a fresh independent re-audit; then Matthew decides whether the realistic model can go public.
+
 ## 2026-11-04: Phase 2, step 5: realistic model in the Explorer (preview only)
 
 - **Slimmed:** `model/realistic/web.mjs` turns the four realistic views into one file per detail level (desktop about 410,000 triangles, 1.4 MB; phone about 135,000, 0.5 MB).

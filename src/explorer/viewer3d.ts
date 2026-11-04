@@ -272,12 +272,16 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
 
   // Realistic model: loaded the first time the visitor picks it.
   let realistic: 'none' | 'loading' | 'ready' | 'failed' = 'none';
+  /** The realistic model's own McRae line and tonsil tips (model mm), saved in its file by model/realistic/web.mjs. */
+  interface RealisticLandmarks { mcrae: { basion: number[]; opisthion: number[] }; tonsilTip: Record<string, number[]> }
+  let realisticLandmarks: RealisticLandmarks | null = null;
   async function loadRealistic() {
     if (realistic !== 'none' || !options.realisticUrl) return;
     realistic = 'loading';
     options.onRealistic?.('loading');
     try {
       const g = await loader.loadAsync(options.realisticUrl());
+      realisticLandmarks = (g.scene.userData as RealisticLandmarks).mcrae ? (g.scene.userData as RealisticLandmarks) : null;
       await addParts(g.scene, 'realistic');
       await renderer.compileAsync(scene, camera);
       realistic = 'ready';
@@ -818,12 +822,15 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   const bracketMat = new THREE.MeshBasicMaterial({ color: FLOW_BLUE, depthTest: false, depthWrite: false, transparent: true });
   const measureMats = [inkMat, bracketMat];
   let measureCondition = '';
-  function buildMeasure(condition: string) {
-    if (condition === measureCondition) return;
-    measureCondition = condition;
+  function buildMeasure(condition: string, lm: RealisticLandmarks | null) {
+    const key = condition + (lm ? ' realistic' : ' simple');
+    if (key === measureCondition) return;
+    measureCondition = key;
     measureGroup.clear();
     const [bx, by] = shapes.mcrae.basion, [ox, oy] = shapes.mcrae.opisthion;
-    const b = fig(bx, by, 0.5), o = fig(ox, oy, 0.5);
+    // On the realistic model, its own McRae line (model mm), just in front of the midline cut.
+    const mmPoint = (p: number[]) => new THREE.Vector3(p[0], p[1], 0.5);
+    const b = lm ? mmPoint(lm.mcrae.basion) : fig(bx, by, 0.5), o = lm ? mmPoint(lm.mcrae.opisthion) : fig(ox, oy, 0.5);
     // Dashed line: 2 mm dashes, 1.5 mm gaps (the figure's dash pattern).
     const total = b.distanceTo(o);
     for (let d = 0; d < total; d += 3.5) {
@@ -835,7 +842,16 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       dot.position.copy(p);
       measureGroup.add(dot);
     }
-    const tip = condition === 'typical' ? null : condition === 'surgery' ? 467 : 471;
+    if (lm && condition !== 'typical') {
+      // From the line straight down to the tonsils' lowest point, at the tip's own front-to-back position.
+      const t = lm.tonsilTip[condition];
+      const d = [o.x - b.x, o.y - b.y], len = Math.hypot(d[0], d[1]);
+      const k = ((t[0] - b.x) * d[0] + (t[1] - b.y) * d[1]) / (len * len);
+      const top = new THREE.Vector3(b.x + k * d[0], b.y + k * d[1], 0.5), end = new THREE.Vector3(t[0], t[1], 0.5);
+      measureGroup.add(bar(top, end, 0.75, bracketMat));
+      measureGroup.add(bar(new THREE.Vector3(t[0] - 3, t[1], 0.5), new THREE.Vector3(t[0] + 3, t[1], 0.5), 0.75, bracketMat));
+    }
+    const tip = lm || condition === 'typical' ? null : condition === 'surgery' ? 467 : 471;
     if (tip !== null) {
       // Starts on the McRae line at x = 368 (y 444.4), ends at the tonsil tip.
       measureGroup.add(bar(fig(368, 444.4, 0.5), fig(368, tip, 0.5), 0.75, bracketMat));
@@ -889,7 +905,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       flowLoop = 0;
       placeFlow(null);
     }
-    buildMeasure(st.condition);
+    buildMeasure(st.condition, simpleShown ? null : realisticLandmarks);
     measureGroup.visible = st.measure;
     requestRender();
   }

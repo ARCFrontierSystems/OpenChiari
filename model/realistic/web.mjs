@@ -20,7 +20,7 @@ for (const c of ['typical', 'chiari', 'syrinx', 'surgery']) src[c] = await io.re
 const ALL = ['typical', 'chiari', 'syrinx', 'surgery'];
 const PLAN = [
   ...['skin', 'skull', 'c2', 'c3-c5', 'discs', 'tentorium', 'cerebrum', 'callosum', 'diencephalon', 'brainstem', 'cerebellum',
-    'cord', 'dura', 'ventricles', 'ventricle-fourth'].map((n) => [n, n, 'typical', ALL]),
+    'cord', 'ventricles', 'ventricle-fourth'].map((n) => [n, n, 'typical', ALL]),
   ['occipital', 'occipital', 'typical', ['typical', 'chiari', 'syrinx']],
   ['occipital-surgery', 'occipital', 'surgery', ['surgery']],
   ['c1', 'c1', 'typical', ['typical', 'chiari', 'syrinx']],
@@ -39,17 +39,59 @@ const PLAN = [
 const BUDGET = {
   skin: 40000, skull: 60000, occipital: 12000, c1: 6000, c2: 8000, 'c3-c5': 15000, discs: 4000, tentorium: 3000,
   cerebrum: 80000, callosum: 6000, diencephalon: 8000, brainstem: 14000, cerebellum: 40000, tonsil: 5000, cord: 4000,
-  dura: 6000, ventricles: 8000, 'ventricle-fourth': 4000, 'csf-cranial': 20000, syrinx: 2000, 'bone-removed': 2000, 'dural-patch': 1400,
+  ventricles: 8000, 'ventricle-fourth': 4000, 'csf-cranial': 26000, syrinx: 2000, 'bone-removed': 2000, 'dural-patch': 1400,
 };
 
 function sourceNode(doc, name) {
   return doc.getRoot().listNodes().find((n) => n.getName() === name);
 }
+function worldVerts(doc, name) {
+  const node = sourceNode(doc, name), m = node.getWorldMatrix(), out = [], el = [0, 0, 0];
+  for (const prim of node.getMesh().listPrimitives()) {
+    const pos = prim.getAttribute('POSITION');
+    for (let i = 0; i < pos.getCount(); i++) { pos.getElement(i, el); out.push([0, 1, 2].map((r) => m[r] * el[0] + m[4 + r] * el[1] + m[8 + r] * el[2] + m[12 + r])); }
+  }
+  return out;
+}
+// Landmarks for the Explorer's Measure tool, from the realistic model itself (same method as check.mjs):
+// the McRae line (basion and opisthion, where the occipital bone is cut in two on the midline) and each view's
+// lowest tonsil point.
+function landmarks() {
+  const node = sourceNode(src.typical, 'occipital'), m = node.getWorldMatrix(), pts = [], el = [0, 0, 0];
+  for (const prim of node.getMesh().listPrimitives()) {
+    const pos = prim.getAttribute('POSITION'), idx = prim.getIndices().getArray();
+    const V = (i) => { pos.getElement(i, el); return [0, 1, 2].map((r) => m[r] * el[0] + m[4 + r] * el[1] + m[8 + r] * el[2] + m[12 + r]); };
+    for (let t = 0; t < idx.length; t += 3) {
+      const v = [V(idx[t]), V(idx[t + 1]), V(idx[t + 2])];
+      for (let e = 0; e < 3; e++) {
+        const a = v[e], b = v[(e + 1) % 3];
+        if ((a[2] > 0) !== (b[2] > 0)) { const k = a[2] / (a[2] - b[2]); pts.push([a[0] + k * (b[0] - a[0]), a[1] + k * (b[1] - a[1])]); }
+      }
+    }
+  }
+  const near = pts.filter((p) => Math.abs(p[1]) < 20 && Math.abs(p[0]) < 35);
+  let best = Infinity, basion, opisthion;
+  for (const p of near.filter((q) => q[0] < 0)) for (const q of near.filter((r) => r[0] > 0)) {
+    const d = Math.hypot(p[0] - q[0], p[1] - q[1]);
+    if (d < best) { best = d; basion = p; opisthion = q; }
+  }
+  const L = best, dir = [(opisthion[0] - basion[0]) / L, (opisthion[1] - basion[1]) / L];
+  const n = dir[0] > 0 ? [-dir[1], dir[0]] : [dir[1], -dir[0]];
+  const above = (v) => (v[0] - basion[0]) * n[0] + (v[1] - basion[1]) * n[1];
+  const tonsilTip = {};
+  for (const c of ['typical', 'chiari', 'syrinx', 'surgery']) {
+    const tip = worldVerts(src[c], 'tonsil').reduce((a, v) => (above(v) < above(a) ? v : a));
+    tonsilTip[c] = tip.map((x) => +x.toFixed(2));
+  }
+  return { mcrae: { basion: basion.map((x) => +x.toFixed(2)), opisthion: opisthion.map((x) => +x.toFixed(2)) }, tonsilTip };
+}
+const LANDMARKS = landmarks();
+console.log('landmarks', JSON.stringify(LANDMARKS));
 
 async function build(level) {
   const out = new Document();
   out.createBuffer();
-  const scene = out.createScene('realistic');
+  const scene = out.createScene('realistic').setExtras(LANDMARKS);
   for (const [name, from, view, conditions] of PLAN) {
     const node = sourceNode(src[view], from);
     if (!node) throw new Error(`${from} missing in ${view}`);

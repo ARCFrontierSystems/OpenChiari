@@ -49,8 +49,8 @@ node model/realistic/check.mjs surgery-raw.glb --condition surgery --typical typ
 
 How After decompression is made: the Chiari I tonsils, risen about 2 mm (to about 10.4 mm below the McRae line).
 - **Bone:** the bone is cut exactly along the edges of a window 30 mm across and 25 mm up the back of the skull from the opisthion. The middle 25 mm of C1's back arch is cut away too. Both removed pieces are kept as a faint red outline ("bone-removed").
-- **Dural patch:** a thin curved oval membrane, a few mm outside where the bone was.
-- **Fluid:** the fluid space behind the cerebellum is re-formed in front of the patch, joined to the space behind the cord.
+- **Dural patch:** a thin curved oval membrane across the opening, within the thickness of the removed bone.
+- **Fluid:** the fluid space behind the cerebellum is re-formed in front of the patch, joined to the space behind the cord; it stays in front of the patch's curved, oval shape.
 - **McRae line:** its back end (the opisthion) is removed with the bone, so the check takes the line from the typical model; it shows where the opening was.
 
 How Chiari I is made: the lower part of each atlas tonsil is stretched down (the top, where it joins the

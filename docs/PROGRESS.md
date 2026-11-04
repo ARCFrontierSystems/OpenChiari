@@ -3,6 +3,15 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Step 4 follow-up: a plain, natural head (Matthew chose option 1)
+
+- **Feedback:** the face looked weird, then creepy. Building a realistic face from simple shapes lands in the "almost human" zone, so Matthew chose a deliberately plain head for now, with a real head surface from Z-Anatomy planned for the Phase 2 realistic model.
+- **The head** (`model/simple/build.mjs`, "the head (sculpted)") is now sculpted in 3D from smooth blended forms: an oval cranium about 152 mm wide that always covers the skull (checked automatically), a face mass, jaw, chin, brow, closed-lid curve, a soft nose, soft closed lips, ears and neck. No eyes or eye hollows.
+- **Figure outline follows the 3D head:** the head outline in the 2D figures (Home page, Explorer, `design/figures/`) is traced from the 3D head's midline, so they match exactly. The figure frame without labels was widened slightly so the back of the head isn't clipped. Nothing inside the head changed; `npm run model:check` still passes (35.3 mm; 0.9 mm above; 12.4 mm below).
+- **Skin fades when the model is turned:** solid in the side view (so the cut face matches the figures), fading to about 30% once turned more than about 15 degrees, so the anatomy inside shows. The layer's own opacity slider still applies.
+- **Other fixes:** removed a crease down the middle of the face and neck; cut faces are drawn only where the cut passes through a structure; the "Whole" cut-away no longer clips the ears; the Explorer hint and caption no longer overlap.
+- **Known simplification:** the skull seen through the faded skin is smooth and egg-shaped from the front, with a small ledge at its base. A boxier attempt with a flat base produced streaks and was reverted.
+
 ## 2026-11-04: Phase 1, step 4: Simple 3D model, Typical and Chiari I
 
 - **How the model is made** (`model/simple/build.mjs`, run with `npm run model:simple`): each structure starts from its midline shape in the figure (`src/lib/anatomy-shapes.json`, extracted from the figure code) and is given rounded width to either side. The skull is a shell around the cranial cavity with the foramen magnum open; C1 to C4 have rings (arches) around the spinal canal. Output: `public/models/simple.glb` (about 595 KB, 163,000 triangles, compressed).

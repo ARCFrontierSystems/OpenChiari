@@ -31,6 +31,13 @@ interface Part {
   layer: LayerId;
   conditions: string[] | null;
   baseOpacity: number;
+  /** The skin layer fades when the model is turned away from the side view. */
+  ghost: boolean;
+  /** Opacity from the model and the layer slider, before any fading. */
+  opacity: number;
+  /** Side-to-side extent (mm); a cut outside it doesn't touch this structure. */
+  zMin: number;
+  zMax: number;
   stencil: THREE.Group;
   cap: THREE.Mesh;
 }
@@ -151,6 +158,10 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       layer: extras.layer as LayerId,
       conditions: (extras.conditions as string[] | null) ?? null,
       baseOpacity,
+      ghost: extras.layer === 'skin',
+      opacity: baseOpacity,
+      zMin: 0,
+      zMax: 0,
       stencil,
       cap,
     });
@@ -159,6 +170,9 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   for (const p of parts) {
     // Stencil meshes follow the model's transform.
     p.mesh.updateWorldMatrix(true, false);
+    const box = new THREE.Box3().setFromObject(p.mesh);
+    p.zMin = box.min.z;
+    p.zMax = box.max.z;
     p.stencil.children.forEach((c) => c.matrix.copy(p.mesh.matrixWorld));
     scene.add(p.stencil, p.cap);
   }
@@ -252,7 +266,10 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     pending = true;
     requestAnimationFrame(() => {
       pending = false;
-      if (visible && !document.hidden) renderer.render(scene, camera);
+      if (visible && !document.hidden) {
+        applyOpacity();
+        renderer.render(scene, camera);
+      }
     });
   }
   new IntersectionObserver((entries) => {
@@ -261,6 +278,36 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   }).observe(host);
   document.addEventListener('visibilitychange', () => !document.hidden && requestRender());
   new ResizeObserver(resize).observe(host);
+
+  // ----- Opacity, including the skin fading when the model is turned -----
+  const SIDE_VIEW = new THREE.Vector3(0, 0, 1);
+  const toCamera = new THREE.Vector3();
+  /** 1 within 15 degrees of the side view, fading to 0.3 by 35 degrees. */
+  let fadeEnabled = true;
+  function skinFade(): number {
+    if (!fadeEnabled) return 1;
+    toCamera.copy(camera.position).sub(controls.target).normalize();
+    const angle = THREE.MathUtils.radToDeg(toCamera.angleTo(SIDE_VIEW));
+    return 1 - 0.7 * THREE.MathUtils.clamp((angle - 15) / 20, 0, 1);
+  }
+  function applyOpacity() {
+    const fade = skinFade();
+    for (const p of parts) {
+      const opacity = p.ghost ? p.opacity * fade : p.opacity;
+      const see = opacity < 1;
+      const mat = p.mesh.material as THREE.MeshStandardMaterial;
+      if (mat.transparent !== see) mat.needsUpdate = true;
+      mat.opacity = opacity;
+      mat.transparent = see;
+      mat.depthWrite = !see;
+      // A see-through skin shows only its outside, so it doesn't look muddy.
+      mat.side = see && p.ghost ? THREE.FrontSide : THREE.DoubleSide;
+      const capMat = p.cap.material as THREE.MeshBasicMaterial;
+      if (capMat.transparent !== see) capMat.needsUpdate = true;
+      capMat.opacity = opacity;
+      capMat.transparent = see;
+    }
+  }
 
   // ----- Apply the view state -----
   function apply(st: ViewState) {
@@ -271,16 +318,12 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       const layer = st.layers[p.layer];
       const shown = layer.on && (!p.conditions || p.conditions.includes(st.condition));
       const opacity = p.baseOpacity * (layer.opacity / 100);
-      const mat = p.mesh.material as THREE.MeshStandardMaterial;
-      mat.opacity = opacity;
-      mat.transparent = opacity < 1;
-      mat.depthWrite = opacity >= 1;
+      p.opacity = opacity;
       p.mesh.visible = shown && opacity > 0;
-      p.stencil.visible = p.mesh.visible && !midline;
-      p.cap.visible = p.mesh.visible && !midline;
-      const capMat = p.cap.material as THREE.MeshBasicMaterial;
-      capMat.opacity = opacity;
-      capMat.transparent = opacity < 1;
+      // Cut faces are only needed where the cut actually passes through this structure.
+      const cutsThrough = !midline && depth > p.zMin && depth < p.zMax;
+      p.stencil.visible = p.mesh.visible && cutsThrough;
+      p.cap.visible = p.mesh.visible && cutsThrough;
       p.cap.position.set(TARGET.x, TARGET.y, depth);
     }
     section.visible = midline;
@@ -306,7 +349,15 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     requestRender();
   }
   // Camera helpers on the element, used by tests (and the camera buttons in step 6).
-  (host as HTMLElement & { viewer?: unknown }).viewer = { look, reset: frame };
+  (host as HTMLElement & { viewer?: unknown }).viewer = {
+    look,
+    reset: frame,
+    /** For screenshots of the head's shape: keep the skin solid when turned. */
+    setSkinFade(on: boolean) {
+      fadeEnabled = on;
+      requestRender();
+    },
+  };
 
   return {
     renderer,

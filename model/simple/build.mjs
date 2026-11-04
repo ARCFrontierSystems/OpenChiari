@@ -388,19 +388,18 @@ function headSdf(x, y, z) {
   const both = (f, k) => smin(f(Z), f(-Z), k);
   d = smin(d, both((zz) => sdCone(X, Y, zz, [-120, -8, 6], [-74, -8, 42], 16, 12), 20), 26);
   d = smin(d, sdEllipsoid(X + 128, Y + 8, Z, 13, 12, 26), 18);
-  // Cheekbones and brow (subtle).
+  // Cheekbones and brow.
   d = smin(d, sdEllipsoid(X + 110, Y - 48, az - 42, 16, 10, 15), 16);
-  d = smin(d, both((zz) => sdCone(X, Y, zz, [-133, 73, 0], [-124, 75, 36], 6.5, 5.5), 10), 12);
-  // Eyes: shallow sockets under the brow with the eyeball just showing.
-  d = ssub(d, sdEllipsoid(X + 131, Y - 60, az - 31, 9, 7, 12), 8);
-  d = smin(d, sdEllipsoid(X + 120, Y - 59.5, az - 31, 9.5, 8, 11.5), 3);
-  // Nose: bridge to tip, nostril wings.
-  d = smin(d, sdCone(X, Y, Z, [-132, 68, 0], [-148, 45, 0], 5.5, 8.5), 9);
-  d = smin(d, both((zz) => sdEllipsoid(X + 139, Y - 37, zz - 11, 8, 6.5, 7), 6), 7);
-  // Lips, with a soft line between them.
-  d = smin(d, sdEllipsoid(X + 140, Y - 21, Z, 6, 5, 23), 8);
-  d = smin(d, sdEllipsoid(X + 139, Y - 10, Z, 6, 5.5, 21), 8);
-  d = ssub(d, sdEllipsoid(X + 146, Y - 15.5, Z, 6, 1.2, 21), 1.5);
+  d = smin(d, both((zz) => sdCone(X, Y, zz, [-134, 74, 0], [-125, 76, 34], 7.5, 6.5), 10), 10);
+  // Eyes: closed lids, a gentle curve under the brow (no hollows).
+  d = smin(d, sdEllipsoid(X + 128, Y - 60, az - 31, 6, 7, 12), 8);
+  // Nose: a clear bridge and tip, with the nostril wings.
+  d = smin(d, sdCone(X, Y, Z, [-134, 68, 0], [-151, 43, 0], 6, 9), 6);
+  d = smin(d, both((zz) => sdEllipsoid(X + 138, Y - 38, zz - 10, 8, 6.5, 7), 6), 6);
+  // Lips: soft and closed.
+  d = smin(d, sdEllipsoid(X + 139, Y - 21, Z, 6, 5, 22), 7);
+  d = smin(d, sdEllipsoid(X + 138, Y - 11, Z, 6, 5.5, 20), 7);
+  d = ssub(d, sdEllipsoid(X + 145, Y - 16, Z, 5, 0.8, 19), 2.5);
   // Ears.
   d = smin(d, sdEllipsoid(X + 4, Y - 52, az - 79, 12, 29, 7), 6);
   const bottom = -(640 - fmCenter[1]) / S.unitsPerMm; // the figure's bottom edge
@@ -465,6 +464,16 @@ function midlineOutline(f, [x0, y0, x1, y1], step = 0.5) {
   return 'M' + simple.map(([px, py]) => `${+px.toFixed(1)} ${+py.toFixed(1)}`).join(' L') + ' Z';
 }
 
+if (process.env.SLICE) {
+  // Text map of the skull (#) and the cavity (.) on a slice across the head at figure x = SLICE.
+  const xx = Number(process.env.SLICE);
+  for (let yy = 80; yy <= 360; yy += 8) {
+    let row = '';
+    for (let zz = -150; zz <= 150; zz += 5) row += skullField(xx, yy, zz) > 0 ? '#' : cavityOffset(xx, yy, zz, 0) > 0 ? '.' : ' ';
+    console.log(String(yy).padStart(4), row);
+  }
+  process.exit(0);
+}
 if (process.env.PROBE) {
   // Front surface position (figure x) across the midline at a few heights, to look for creases.
   for (const yy of [280, 330, 600]) {

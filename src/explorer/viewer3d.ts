@@ -8,6 +8,9 @@
  *   structure's palette color (stencil caps).
  * - Renders only when something changes (no animation loop), so nothing runs while idle,
  *   off screen or in a hidden tab.
+ * - Realistic model (Phase 2, preview only): loaded on request into the same scene, from the URL given in
+ *   options.realisticUrl. Its cut faces are the inside of each surface painted flat in the structure's color,
+ *   which works even where the atlas surfaces have small gaps. If it can't load, the view goes back to Simple.
  */
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
@@ -30,6 +33,8 @@ const TARGET = new THREE.Vector3(-40, 40, 0);
 
 interface Part {
   mesh: THREE.Mesh;
+  /** Which model this structure belongs to. */
+  model: 'simple' | 'realistic';
   name: string;
   /** Structure-list id (cerebrum, tonsil, ...) or null for parts not in the list. */
   partId: string | null;
@@ -97,6 +102,10 @@ export interface ViewerOptions {
   labels?: LabelDef[];
   /** Called when the visitor taps a structure in the model. */
   onPick?: (part: string) => void;
+  /** Where to load the realistic model from, when the visitor picks it (preview builds only). */
+  realisticUrl?: () => string;
+  /** Called when the realistic model starts or finishes loading, or fails ('loading' | 'ready' | 'failed'). */
+  onRealistic?: (status: 'loading' | 'ready' | 'failed') => void;
 }
 
 export async function createViewer(host: HTMLElement, store: Store, figureStrings: FigureStrings, options: ViewerOptions = {}) {
@@ -136,12 +145,13 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   const parts: Part[] = [];
   let order = 1;
   const capGeometry = new THREE.PlaneGeometry(400, 400);
-  const meshes: THREE.Mesh[] = [];
-  gltf.scene.traverse((obj) => {
-    if ((obj as THREE.Mesh).isMesh) meshes.push(obj as THREE.Mesh);
-  });
   // Set up a few structures at a time and let the page breathe in between (no long freezes).
   const breathe = () => new Promise<void>((resolve) => setTimeout(resolve, 0));
+  async function addParts(root: THREE.Object3D, model: Part['model']) {
+  const meshes: THREE.Mesh[] = [];
+  root.traverse((obj) => {
+    if ((obj as THREE.Mesh).isMesh) meshes.push(obj as THREE.Mesh);
+  });
   for (const [i, mesh] of meshes.entries()) {
     if (i % 4 === 3) await breathe();
     const extras = (mesh.userData.layer ? mesh.userData : mesh.parent?.userData) as Record<string, unknown>;
@@ -159,6 +169,24 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       depthWrite: baseOpacity >= 1,
     });
     mesh.renderOrder = 1000;
+    if (model === 'realistic') {
+      // Cut faces: where the cut opens a surface, its inside shows, painted flat in the structure's color.
+      // The skin's inside stays solid even when its outside is see-through, so the head's outline shows.
+      // Written after the renderer's color conversion, so convert to screen colors here.
+      const capColor = color.clone().multiplyScalar(0.92).convertLinearToSRGB();
+      const capAlpha = { value: baseOpacity };
+      mesh.userData.capAlpha = capAlpha;
+      // One pass for both sides, so 'inside' is the real inside even when see-through.
+      (mesh.material as THREE.MeshStandardMaterial).forceSinglePass = true;
+      (mesh.material as THREE.MeshStandardMaterial).onBeforeCompile = (shader) => {
+        shader.uniforms.capColor = { value: capColor };
+        shader.uniforms.capAlpha = capAlpha;
+        shader.fragmentShader = 'uniform vec3 capColor;\nuniform float capAlpha;\n' + shader.fragmentShader.replace(
+          '#include <dithering_fragment>',
+          '#include <dithering_fragment>\n  if (!gl_FrontFacing) gl_FragColor = vec4(capColor, capAlpha);',
+        );
+      };
+    }
 
     // Stencil passes count how many surfaces lie behind the cut plane; where the count is odd
     // the plane is inside this structure, so its cap is drawn there.
@@ -212,6 +240,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
 
     parts.push({
       mesh,
+      model,
       name: mesh.name,
       partId: (extras.part as string | null) ?? null,
       layer: extras.layer as LayerId,
@@ -225,16 +254,41 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       cap,
     });
   }
-  lap('materials and normals');
-  scene.add(gltf.scene);
+  scene.add(root);
   for (const p of parts) {
+    if (p.model !== model) continue;
     // Stencil meshes follow the model's transform.
     p.mesh.updateWorldMatrix(true, false);
     const box = new THREE.Box3().setFromObject(p.mesh);
     p.zMin = box.min.z;
     p.zMax = box.max.z;
     p.stencil.children.forEach((c) => c.matrix.copy(p.mesh.matrixWorld));
-    scene.add(p.stencil, p.cap);
+    // The realistic model paints its own cut faces (see above), so it needs no stencil caps.
+    if (model === 'simple') scene.add(p.stencil, p.cap);
+  }
+  }
+  await addParts(gltf.scene, 'simple');
+  lap('materials and normals');
+
+  // Realistic model: loaded the first time the visitor picks it.
+  let realistic: 'none' | 'loading' | 'ready' | 'failed' = 'none';
+  async function loadRealistic() {
+    if (realistic !== 'none' || !options.realisticUrl) return;
+    realistic = 'loading';
+    options.onRealistic?.('loading');
+    try {
+      const g = await loader.loadAsync(options.realisticUrl());
+      await addParts(g.scene, 'realistic');
+      await renderer.compileAsync(scene, camera);
+      realistic = 'ready';
+      options.onRealistic?.('ready');
+      apply(store.get());
+    } catch (error) {
+      console.warn('Realistic model unavailable, staying with Simple.', error);
+      realistic = 'failed';
+      options.onRealistic?.('failed');
+      store.set({ model: 'simple' });
+    }
   }
 
   // Midline cut face: the figure itself, drawn without labels.
@@ -422,7 +476,8 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       mat.transparent = see;
       mat.depthWrite = !see;
       // A see-through skin shows only its outside, so it doesn't look muddy.
-      mat.side = see && p.ghost ? THREE.FrontSide : THREE.DoubleSide;
+      mat.side = see && p.ghost && p.model === 'simple' ? THREE.FrontSide : THREE.DoubleSide;
+      if (p.model === 'realistic') (p.mesh.userData.capAlpha as { value: number }).value = p.ghost ? p.opacity : opacity;
       const capMat = p.cap.material as THREE.MeshBasicMaterial;
       const capOpacity = p.ghost ? p.opacity : opacity;
       const capSee = capOpacity < 1;
@@ -798,18 +853,22 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     const midline = depth === 0;
     for (const p of parts) {
       const layer = st.layers[p.layer];
-      const shown = layer.on && (!p.conditions || p.conditions.includes(st.condition));
+      const model = st.model === 'realistic' && realistic === 'ready' ? 'realistic' : 'simple';
+      const shown = p.model === model && layer.on && (!p.conditions || p.conditions.includes(st.condition));
       const opacity = p.baseOpacity * (layer.opacity / 100);
       p.opacity = opacity;
       p.mesh.visible = shown && opacity > 0;
       // Cut faces are only needed where the cut actually passes through this structure.
-      const cutsThrough = !midline && depth > p.zMin && depth < p.zMax;
+      const cutsThrough = p.model === 'simple' && !midline && depth > p.zMin && depth < p.zMax;
       p.stencil.visible = p.mesh.visible && cutsThrough;
       p.cap.visible = p.mesh.visible && cutsThrough;
       p.cap.position.set(TARGET.x, TARGET.y, depth);
     }
-    section.visible = midline;
-    if (midline) void drawSection(st);
+    // The figure on the midline cut face belongs to the Simple model.
+    const simpleShown = !(st.model === 'realistic' && realistic === 'ready');
+    if (st.model === 'realistic') void loadRealistic();
+    section.visible = midline && simpleShown;
+    if (section.visible) void drawSection(st);
     if (st.part !== lastPart) {
       lastPart = st.part;
       applyHighlight(st.part);
@@ -821,7 +880,8 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     if (labelsHost) labelsHost.hidden = !st.labels;
     overlayPlane.constant = cutDepth(st.cut) + 1;
     buildFlow(st.condition);
-    flowGroup.visible = st.flow && st.layers.csf.on;
+    // Flow marks follow the Simple figure's fluid spaces; not shown on the realistic model yet.
+    flowGroup.visible = st.flow && st.layers.csf.on && simpleShown;
     if (flowGroup.visible && !stillOnly()) startFlowLoop();
     else {
       // Stop right away (not on the next frame), so turning flow off or Calm mode on takes effect at once.

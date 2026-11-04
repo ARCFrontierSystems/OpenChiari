@@ -90,7 +90,7 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
         <section class="x-section" aria-labelledby="model-heading">
           <h2 class="x-h" id="model-heading">{x.model}</h2>
           <div class="x-segmented" role="group" aria-labelledby="model-heading">
-            <button type="button" data-model="realistic" aria-pressed="false" disabled>{x.realistic}</button>
+            <button type="button" data-model="realistic" aria-pressed="false" disabled={import.meta.env.PUBLIC_REALISTIC_PREVIEW !== '1'}>{x.realistic}</button>
             <button type="button" data-model="simple" aria-pressed="true">{x.simple}</button>
           </div>
         </section>
@@ -302,6 +302,15 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
           const viewer = await createViewer(viewerHost, store, strings.figure, {
             labelsHost,
             labels: x.parts.map((p) => ({ part: p.id, num: p.num, name: p.name, layer: LABEL_LAYERS[p.id], anchor: labelAnchor(p.id, store.get().condition), conditions: p.conditions })),
+            // Realistic model: preview builds only (not public until it passes the accuracy checks).
+            // Phones and small screens get the lighter version.
+            realisticUrl:
+              import.meta.env.PUBLIC_REALISTIC_PREVIEW === '1'
+                ? () => `/models/realistic/realistic-${Math.min(window.innerWidth, window.innerHeight) < 700 ? 'phone' : 'desktop'}.glb`
+                : undefined,
+            onRealistic: (status) => {
+              $$<HTMLButtonElement>('[data-model="realistic"]').forEach((b) => b.setAttribute('aria-busy', String(status === 'loading')));
+            },
             onPick: (part) => {
               store.set({ part });
               // On phones, open the parts list so the info card shows.

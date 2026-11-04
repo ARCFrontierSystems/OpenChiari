@@ -74,3 +74,22 @@ How the syrinx is made: Chiari I, plus a cavity along the cord's own centre line
 McRae line) to the bottom of the view. It measures about 45% of the cord front to back and 42% side to side, with
 beads every 10 mm and a tapered top. The cord's centre line is the middle of the atlas's spinal dura at each height,
 smoothed.
+
+## For the Explorer (step 5)
+
+`web.mjs` turns the four builds into one file per detail level, in `model/realistic/web/`:
+- **What goes in:** structures shared by all views appear once. Structures that differ (tonsils, fluid around the cerebellum, occipital bone, C1, syrinx, removed bone, dural patch) carry the views they belong to, as in the Simple model.
+- **Sizes:** each structure is simplified to a triangle budget. Desktop is about 410,000 triangles (1.4 MB); phone about a third of that (0.5 MB).
+
+```bash
+node model/realistic/web.mjs <folder with typical-raw.glb, chiari-raw.glb, syrinx-raw.glb, surgery-raw.glb>
+```
+
+These files are **not public**:
+- the normal site build leaves them out, and the Realistic button stays off (a test checks both);
+- a preview build includes them and turns the button on: `PUBLIC_REALISTIC_PREVIEW=1 npm run build` (or `npm run dev`). Never deploy a preview build.
+
+In the Explorer:
+- the realistic model loads only when picked (phones and small screens get the lighter file), and falls back to Simple if it can't load;
+- cut faces are each structure's inside painted flat in its color, so small gaps in the atlas surfaces don't show.
+- Not yet on the realistic model: the flow arrows, and the figure on the midline cut face (both follow the Simple figure).

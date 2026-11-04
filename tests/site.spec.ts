@@ -346,3 +346,13 @@ test.describe('Doctor visit prep', () => {
     await expect(page).toHaveURL(/\/prep\/$/);
   });
 });
+
+test('the realistic model is not public: its button is off and its files are not in the site', async ({ page, request }) => {
+  // CLAUDE.md: not shown publicly until it passes the accuracy checks and Matthew approves it.
+  await page.goto('/explorer/');
+  await expect(page.locator('[data-model="realistic"]').first()).toBeDisabled();
+  for (const level of ['desktop', 'phone']) {
+    const res = await request.get(`/models/realistic/realistic-${level}.glb`);
+    expect(res.status()).toBe(404);
+  }
+});

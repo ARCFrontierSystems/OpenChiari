@@ -3,6 +3,17 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Phase 2, step 5: realistic model in the Explorer (preview only)
+
+- **Slimmed:** `model/realistic/web.mjs` turns the four realistic views into one file per detail level (desktop about 410,000 triangles, 1.4 MB; phone about 135,000, 0.5 MB).
+- **In the Explorer:** the Realistic button loads the model on request into the same 3D view.
+  - Phones get the lighter file. If loading fails, the view stays Simple.
+  - Cut faces are each structure's inside painted flat in its color, so the midline view looks like the figure: head outline, skull, brain, tonsils, fluid, syrinx, removed bone.
+  - Two fixes along the way: a color-conversion step (cut faces were too dark) and a single-pass setting (the see-through skin's inside wasn't painted).
+- **Not public:** the files and the button are only in a preview build (`PUBLIC_REALISTIC_PREVIEW=1`). The normal build leaves both out, and a new test checks that. 74 tests pass.
+- **Not yet on the realistic model:** flow arrows; labels point to the Simple figure's positions (close, since the Simple figure now follows the same atlas). Selecting a structure highlights it but doesn't outline it on the cut face.
+- **Next:** the accuracy checks for the realistic views (CLAUDE.md rule 1a): an independent audit and the MRI comparison, then Matthew's approval before it can be public.
+
 ## 2026-11-04: Phase 2: realistic Chiari I with syrinx; all four views done
 
 - **Built:** `extract.py ... syrinx`.

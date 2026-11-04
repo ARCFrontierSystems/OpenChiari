@@ -36,7 +36,7 @@ const current = Astro.url.pathname;
     <a class="lang nav-wide-only" href={routes.es} lang="es" hreflang="es">{t.espanol}</a>
 
     <label class="calm-toggle">
-      <input type="checkbox" role="switch" id="calm-switch" aria-label={t.calm} />
+      <input type="checkbox" role="switch" data-calm-switch aria-label={t.calm} />
       <span class="calm-label-off" aria-hidden="true">{t.calm}</span>
       <span class="calm-label-on" aria-hidden="true">{calm.on}</span>
     </label>
@@ -58,17 +58,9 @@ const current = Astro.url.pathname;
 </header>
 
 <script>
-  import { isCalm, setCalm, onCalmChange, followSystemSetting } from '../lib/calm';
+  import { bindCalmSwitches } from '../lib/calm';
 
-  const calmSwitch = document.getElementById('calm-switch') as HTMLInputElement | null;
-  if (calmSwitch) {
-    calmSwitch.checked = isCalm();
-    calmSwitch.addEventListener('change', () => setCalm(calmSwitch.checked));
-    onCalmChange((on) => {
-      calmSwitch.checked = on;
-    });
-    followSystemSetting();
-  }
+  bindCalmSwitches();
 
   const button = document.querySelector<HTMLButtonElement>('.menu-button');
   const menu = document.getElementById('site-menu');

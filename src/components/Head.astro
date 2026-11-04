@@ -1,0 +1,37 @@
+---
+/**
+ * Shared <head> contents for every page. No third-party requests: fonts are bundled,
+ * there are no external scripts or stylesheets.
+ */
+import '../styles/fonts.css';
+import '../styles/tokens.css';
+import '../styles/global.css';
+import { getStrings } from '../i18n';
+
+interface Props {
+  title?: string;
+  description?: string;
+  themeColor?: string;
+}
+
+const t = getStrings();
+const { title, description = t.metaDescription, themeColor = '#FFFFFF' } = Astro.props;
+const pageTitle = title ? `${title} · ${t.siteName}` : t.siteName;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{pageTitle}</title>
+<meta name="description" content={description} />
+<meta name="theme-color" content={themeColor} />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<script is:inline>
+  // Calm mode, decided before the page draws (no flash). Same key as src/lib/calm.ts.
+  // Saved choice wins; with none, follow the system "reduce motion" setting.
+  (function () {
+    var saved = null;
+    try { saved = localStorage.getItem('openchiari-calm'); } catch (e) {}
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (saved === 'on' || (saved !== 'off' && reduce)) document.documentElement.dataset.calm = 'on';
+  })();
+</script>

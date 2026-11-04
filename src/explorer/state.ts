@@ -1,0 +1,73 @@
+/**
+ * The Explorer's view state: everything the visitor has chosen.
+ * Every control writes here and every view (the 2D figure now, the 3D model from step 4)
+ * reads from here, so desktop and phone controls always agree.
+ * Nothing here is stored or sent anywhere. (Explain It will later encode it after the # in a link.)
+ */
+import type { Condition } from '../lib/anatomy-figure';
+
+export type LayerId = 'skin' | 'bone' | 'brain' | 'csf' | 'nerves' | 'vessels';
+export const LAYERS: LayerId[] = ['skin', 'bone', 'brain', 'csf', 'nerves', 'vessels'];
+
+export interface Layer {
+  on: boolean;
+  /** 0 to 100 */
+  opacity: number;
+}
+
+export interface ViewState {
+  condition: Condition;
+  flow: boolean;
+  labels: boolean;
+  measure: boolean;
+  layers: Record<LayerId, Layer>;
+  /** 0 = whole model, 50 = midline cut, 100 = far side */
+  cut: number;
+  model: 'simple' | 'realistic';
+  part: string;
+}
+
+// Starting view, from the Explorer mockup.
+export const initialState: ViewState = {
+  condition: 'chiari',
+  flow: true,
+  labels: true,
+  measure: true,
+  layers: {
+    skin: { on: false, opacity: 40 },
+    bone: { on: true, opacity: 100 },
+    brain: { on: true, opacity: 100 },
+    csf: { on: true, opacity: 75 },
+    nerves: { on: false, opacity: 100 },
+    vessels: { on: false, opacity: 100 },
+  },
+  cut: 50,
+  // The realistic model is Phase 2 and stays hidden until its medical review.
+  model: 'simple',
+  part: 'tonsil',
+};
+
+type Listener = (state: ViewState) => void;
+
+export function createStore(start: ViewState = initialState) {
+  let state: ViewState = structuredClone(start);
+  const listeners = new Set<Listener>();
+  return {
+    get: () => state,
+    set(change: Partial<ViewState>) {
+      state = { ...state, ...change };
+      listeners.forEach((listener) => listener(state));
+    },
+    setLayer(id: LayerId, change: Partial<Layer>) {
+      state = { ...state, layers: { ...state.layers, [id]: { ...state.layers[id], ...change } } };
+      listeners.forEach((listener) => listener(state));
+    },
+    subscribe(listener: Listener) {
+      listeners.add(listener);
+      listener(state);
+      return () => listeners.delete(listener);
+    },
+  };
+}
+
+export type Store = ReturnType<typeof createStore>;

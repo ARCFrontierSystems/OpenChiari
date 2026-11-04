@@ -5,6 +5,10 @@
  */
 import { getStrings, routes, externalLinks } from '../i18n';
 
+interface Props {
+  dark?: boolean;
+}
+const { dark = false } = Astro.props;
 const t = getStrings().footer;
 const links = [
   { href: routes.support, label: t.links.support },
@@ -17,7 +21,7 @@ const links = [
 const espanol = getStrings().header.espanol;
 ---
 
-<footer class="site-footer">
+<footer class:list={['site-footer', { dark }]}>
   <div class="inner container">
     <p class="advice">
       <strong>{t.notAdvice}</strong>{' '}<span class="only-wide">{t.notAdviceRest.wide}</span><span class="only-narrow">{t.notAdviceRest.narrow}</span>
@@ -50,6 +54,27 @@ const espanol = getStrings().header.espanol;
   .credit {
     flex: 1 1 340px;
   }
+  /* Dark variant (3D Explorer) */
+  .dark {
+    background: var(--x-panel);
+    border-top-color: var(--x-border);
+  }
+  .dark .inner {
+    color: var(--x-muted);
+  }
+  .dark .advice strong {
+    color: var(--x-text);
+  }
+  .dark a {
+    color: var(--x-accent);
+  }
+  .dark a:hover {
+    color: var(--x-text);
+  }
+  .dark :focus-visible {
+    outline-color: var(--x-accent);
+  }
+
   .advice strong {
     color: var(--ink);
     font-weight: 600;

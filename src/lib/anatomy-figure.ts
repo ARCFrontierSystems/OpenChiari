@@ -1,0 +1,115 @@
+/**
+ * Midline anatomy figure (head and upper neck) as an SVG string, in four conditions.
+ * One source for the Home page (rendered at build time) and the Explorer (updated in the browser).
+ *
+ * Inner structures (skull, brain, tonsils, McRae line, spine, cord, CSF) are ported shape for
+ * shape from design/mockups/Anatomy.dc.html and match design/figures/. The outer skin outline
+ * was redrawn on 2026-11-04 at Matthew's request for a realistic head shape (not a measured structure).
+ * Do not change any inner shape or position without updating docs/EVIDENCE.md and getting Matthew's OK.
+ * Colors are the anatomy palette in docs/DESIGN.md.
+ */
+
+export type Condition = 'typical' | 'chiari' | 'syrinx' | 'surgery';
+export const CONDITIONS: Condition[] = ['typical', 'chiari', 'syrinx', 'surgery'];
+
+export interface FigureOptions {
+  condition?: Condition;
+  flow?: boolean;
+  labels?: boolean;
+  measure?: boolean;
+  dark?: boolean;
+  className?: string;
+}
+
+export interface FigureStrings {
+  ariaPrefix: string;
+  aria: Record<Condition, string>;
+  labels: {
+    cerebrum: string; callosum: string; cerebellum: string; fourthVentricle: string; brainstem: string;
+    tonsil: string; foramen: string; foramenNote: string; cord: string; csf: string; c2: string;
+    syrinx: string; syrinxNote: string; boneRemoved: string; boneRemovedNote: string;
+  };
+}
+
+const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+const SKIN = 'M99.1 265.7 C99.9 256.3 100.1 242.3 101.7 231.2 C103.3 220 105.7 209.2 108.8 198.9 C111.9 188.6 115.8 178.6 120.5 169.3 C125.1 160 130.2 151.4 136.7 143 C143.2 134.7 149.6 126.3 159.5 119.2 C169.4 112.1 183.2 105.5 196.1 100.3 C209 95.2 222.9 91.3 236.8 88.3 C250.8 85.3 265.5 83.5 279.9 82.4 C294.4 81.4 309.2 81.3 323.6 82.1 C338 82.9 352.4 84.5 366.2 87 C380 89.5 393.7 92.6 406.4 97.1 C419.1 101.6 431.3 107.3 442.5 114 C453.7 120.6 464.2 128.3 473.7 136.8 C483.2 145.3 491.9 154.8 499.4 164.9 C506.9 175.1 513.5 186.2 518.9 197.7 C524.2 209.3 528.5 221.7 531.6 234.4 C534.6 247.2 536.2 262.8 537 274.3 C537.8 285.8 537.2 293.8 536.5 303.4 C535.8 312.9 534.7 322.3 532.9 331.4 C531.1 340.6 528.8 349.6 525.9 358.2 C523 366.8 519.5 375.2 515.3 383.2 C511.2 391.2 504.9 400.4 501 406 C497.1 411.6 495.2 410.1 492 416.8 C488.9 423.5 485 435.5 482 446 C479 456.5 475.3 466 474 480 C472.7 494 473 511.7 474 530 C475 548.3 477.7 571.7 480 590 C482.3 608.3 486.7 626.7 488 640 L218 640 C217.3 625 215.8 598.3 214 580 C212.2 561.7 210 541.3 207 530 C204 518.7 203.8 516 196 512 C188.2 508 172.3 507.7 160 506 C147.7 504.3 131.3 504 122 502 C112.7 500 108.8 497.8 104 494 C99.2 490.2 95.5 484.2 93 479 C90.5 473.8 88.7 468.3 89 463 C89.3 457.7 95.2 451.7 95 447 C94.8 442.3 90 439 88 435 C86 431 82.8 426.5 83 423 C83.2 419.5 89.2 417.3 89 414 C88.8 410.7 83.2 406.8 82 403 C80.8 399.2 81.3 394.7 82 391 C82.7 387.3 87.3 383.2 86 381 C84.7 378.8 77.8 379.3 74 378 C70.2 376.7 65.7 375.3 63 373 C60.3 370.7 57.8 367.8 58 364 C58.2 360.2 60.3 355.7 64 350 C67.7 344.3 75 336 80 330 C85 324 90.5 318.3 94 314 C97.5 309.7 100.5 308.3 101 304 C101.5 299.7 97.3 294.4 97 288 C96.7 281.6 98.4 275.2 99.1 265.7 Z';
+
+const TONSIL = {
+  typical: 'M372 412 C382 416 391 426 390 434 C389 442 380 446 374 442 C368 437 366 422 372 412 Z',
+  low: 'M372 412 C384 418 392 430 390 446 C388 458 382 466 377 471 C371 464 366 454 366 442 C366 428 366 420 372 412 Z',
+  surgery: 'M372 412 C384 418 392 428 390 442 C388 452 382 459 377 463 C371 458 366 450 366 440 C366 428 366 420 372 412 Z',
+};
+
+export function anatomyFigureSvg(options: FigureOptions, t: FigureStrings): string {
+  const { condition: c = 'chiari', flow = true, labels = true, measure = true, dark = false, className = '' } = options;
+  const L = t.labels;
+  const low = c === 'chiari' || c === 'syrinx';
+  const surgery = c === 'surgery';
+  const viewBox = labels ? '40 70 720 570' : '50 70 480 570';
+  const tonsilPath = low ? TONSIL.low : surgery ? TONSIL.surgery : TONSIL.typical;
+  const tonsilTip = low ? 471 : 463;
+  const tonsilMid = low ? 448 : surgery ? 444 : 430;
+  const tonsilFill = low ? '#D2A79B' : '#DDBDB3';
+  const tonsilStroke = low ? '#1F5F8B' : '#B38D82';
+  const tonsilWidth = low ? 2.25 : 1.5;
+  const ink = dark ? '#ECEAE4' : '#1C1D21';
+  const muted = dark ? '#A3A1A9' : '#5E5F66';
+  const leader = dark ? '#6E6C74' : '#9E9DA4';
+  const sp = '&#160;&#160;';
+  const lbl = (y: number, num: string, text: string, bold = false, x = 556) =>
+    `<text x="${x}" y="${y}"${bold ? ' font-weight="600"' : ''}><tspan class="fig-mono" fill="${muted}"${bold ? ' font-weight="400"' : ''}>${num}${sp}</tspan>${esc(text)}</text>`;
+  const note = (y: number, text: string) => `<text x="580" y="${y}" font-size="11" fill="${muted}">${esc(text)}</text>`;
+
+  const parts: string[] = [];
+  const add = (cond: boolean, s: string) => { if (cond) parts.push(s); };
+
+  add(true, `<path class="fig-skin" d="${SKIN}" fill="#EFE3D8" stroke="#C9B2A2" stroke-width="1.5"/>`);
+  add(true, `<path d="M112 362 L246 374" fill="none" stroke="#D2BBAA" stroke-width="5" stroke-linecap="round"/>`);
+  add(true, `<path d="M252 378 C268 392 276 430 280 480 L286 640" fill="none" stroke="#E2CFC2" stroke-width="16" stroke-linecap="round"/>`);
+  add(true, `<path d="M326 446 L336 446 L342 640 L330 640 Z" fill="#9CC3DA" fill-opacity="0.75"/>`);
+  add(true, `<path d="M358 446 L386 450 C388 510 390 580 392 640 L364 640 C362 580 360 510 358 446 Z" fill="#9CC3DA" fill-opacity="0.75"/>`);
+  add(!low && !surgery, `<path d="M402 428 C430 422 452 412 466 400 C456 414 434 426 402 436 Z" fill="#9CC3DA" fill-opacity="0.75"/>`);
+  add(surgery, `<path d="M398 446 C420 440 444 428 452 420 C462 444 448 478 396 486 Z" fill="#9CC3DA" fill-opacity="0.75"/><path d="M452 414 C470 440 456 486 394 494" fill="none" stroke="#7D6F58" stroke-width="1.5" stroke-dasharray="5 4"/>`);
+  const skull = 'M120 300 C112 230 130 170 170 135 C230 95 330 92 400 115 C470 140 515 200 518 275 C520 330 505 380 470 412 C450 430 425 442 398 448';
+  add(true, `<path d="${skull}" fill="none" stroke="#A69B85" stroke-width="16" stroke-linecap="round"/><path d="${skull}" fill="none" stroke="#E7DFCF" stroke-width="12" stroke-linecap="round"/><path d="${skull}" fill="none" stroke="#D3C8B2" stroke-width="2" stroke-dasharray="2 5"/>`);
+  add(surgery, `<path d="M398 448 C420 442 440 432 454 420" fill="none" stroke="#EFE3D8" stroke-width="18" stroke-linecap="butt"/><path d="M398 448 C420 442 440 432 454 420" fill="none" stroke="#9A3412" stroke-width="1.75" stroke-dasharray="5 4"/>`);
+  add(true, `<path d="M128 300 C170 305 220 310 252 322 C255 338 272 340 278 330 L282 354" fill="none" stroke="#A69B85" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>`);
+  add(true, `<path d="M276 354 L290 356 C292 390 304 420 334 440 L328 446 C298 432 278 400 276 354 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"/>`);
+  add(true, `<path d="M140 292 C134 232 150 185 188 156 C240 120 330 118 392 138 C452 160 490 210 492 272 C494 305 488 330 476 345 C440 340 400 338 360 338 C340 336 322 332 305 322 C295 318 285 312 272 312 C240 306 190 300 140 292 Z" fill="#E9CFC6" stroke="#B38D82" stroke-width="1.5"/>`);
+  add(true, `<path d="M160 200 C180 185 200 205 225 185 M250 150 C270 170 290 150 310 165 M330 150 C350 175 375 160 395 180 M420 175 C430 200 455 200 465 225 M165 262 C185 247 200 272 222 264 M440 262 C455 282 470 277 482 302 M150 236 C170 229 175 246 195 241 M398 268 C412 286 436 280 452 300 M182 282 C202 272 222 286 244 280" fill="none" stroke="#CFA79B" stroke-width="1.5" stroke-linecap="round"/>`);
+  add(true, `<path d="M236 254 C260 236 330 236 352 250 C332 246 262 246 240 262 Z" fill="#A9CBE0"/>`);
+  add(true, `<path d="M205 230 C230 200 330 195 370 225 C382 236 378 252 362 250 C335 228 250 225 228 250 C215 262 196 248 205 230 Z" fill="#F4E6E1" stroke="#C39C90" stroke-width="1.25"/>`);
+  add(true, `<ellipse cx="300" cy="282" rx="34" ry="20" fill="#E3BFB3" stroke="#C39C90" stroke-width="1"/>`);
+  add(true, `<path d="M352 337 L498 347" fill="none" stroke="#A69B85" stroke-width="2.5" stroke-linecap="round"/>`);
+  add(true, `<path d="M296 300 C310 296 326 304 332 318 C340 334 348 346 348 362 L348 404 C350 420 356 434 358 446 L336 446 C330 430 320 414 316 402 C304 390 300 376 304 362 C306 346 300 330 294 318 C290 310 290 302 296 300 Z" fill="#E3C2B6" stroke="#B38D82" stroke-width="1.5"/>`);
+  add(true, `<path d="M348 362 L374 384 L348 404 Z" fill="#A9CBE0" stroke="#7FA6BF" stroke-width="1"/>`);
+  add(true, `<path d="M360 352 C392 340 452 342 474 356 C486 366 484 386 468 398 C456 410 430 420 404 426 C388 430 376 424 372 414 C382 404 384 392 374 384 C368 372 360 362 360 352 Z" fill="#DDBDB3" stroke="#B38D82" stroke-width="1.5"/>`);
+  add(true, `<path d="M374 360 C402 352 442 352 468 362 M474 372 C478 380 477 388 470 394 M446 412 C430 418 416 420 404 422" fill="none" stroke="#C79E92" stroke-width="1" stroke-linecap="round"/>`);
+  add(true, `<path d="M378 386 C400 378 422 370 452 364 M402 378 C412 366 426 360 442 356 M378 388 C404 392 430 396 464 396 M410 392 C426 404 442 412 458 418 M394 390 C404 404 412 416 420 428" fill="none" stroke="#F6E9E4" stroke-width="3" stroke-linecap="round"/>`);
+  add(true, `<path d="${tonsilPath}" fill="${tonsilFill}" stroke="${tonsilStroke}" stroke-width="${tonsilWidth}" stroke-linejoin="round"/>`);
+  add(true, `<path d="M336 446 L358 446 C360 510 362 580 364 640 L342 640 C340 580 338 510 336 446 Z" fill="#EAD9B9" stroke="#B59E73" stroke-width="1.5"/>`);
+  add(c === 'syrinx', `<path d="M347 540 C352 538 355 546 354 556 C353 564 356 570 355 580 C354 590 357 598 356 608 L356 640 L345 640 L345 608 C344 598 347 590 346 580 C345 570 348 564 347 556 C346 548 344 542 347 540 Z" fill="#7FB3D3" stroke="#3F6F90" stroke-width="1.25"/>`);
+  add(true, `<ellipse cx="298" cy="462" rx="9" ry="7" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"/><path d="M312 456 C314 448 322 448 324 456 L326 472 L312 472 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"/><rect x="300" y="472" width="28" height="46" rx="4" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"/><rect x="300" y="519" width="27" height="6" rx="2" fill="#D9C3A4"/><rect x="296" y="526" width="29" height="38" rx="4" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"/><rect x="295" y="565" width="28" height="6" rx="2" fill="#D9C3A4"/><rect x="292" y="572" width="29" height="40" rx="4" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"/><rect x="291" y="613" width="28" height="6" rx="2" fill="#D9C3A4"/>`);
+  add(!surgery, `<ellipse cx="414" cy="470" rx="12" ry="8" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"/>`);
+  add(surgery, `<ellipse cx="414" cy="470" rx="12" ry="8" fill="none" stroke="#9A3412" stroke-width="1.75" stroke-dasharray="4 3"/>`);
+  add(true, `<path d="M394 500 L446 506 C452 510 452 520 446 522 L394 524 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"/><path d="M396 548 L438 554 C444 558 444 566 438 568 L396 570 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"/><path d="M398 594 L434 598 C440 602 440 610 434 612 L398 614 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"/>`);
+  add(flow && !low, `<path d="M326 478 L331 484 L336 478 M327 528 L332 534 L337 528 M328 578 L333 584 L338 578 M369 478 L374 484 L379 478 M370 528 L375 534 L380 528 M371 578 L376 584 L381 578 M410 422 L416 429 L422 422" fill="none" stroke="#1F5F8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`);
+  add(flow && low, `<path d="M326 478 L331 484 L336 478 M327 528 L332 534 L337 528 M328 578 L333 584 L338 578 M370 548 L375 554 L380 548" fill="none" stroke="#1F5F8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M390 440 L398 434 M390 448 L398 442 M390 456 L398 450" fill="none" stroke="#9A3412" stroke-width="2" stroke-linecap="round"/>`);
+  if (measure) {
+    // The McRae line sits on the anatomy, not the page background, so it is always dark ink
+    // (on the dark Explorer a light line nearly disappeared against the light anatomy).
+    parts.push(`<line x1="334" y1="440" x2="404" y2="449" stroke="#1C1D21" stroke-width="1.25" stroke-dasharray="4 3"/><circle cx="334" cy="440" r="2.5" fill="#1C1D21"/><circle cx="404" cy="449" r="2.5" fill="#1C1D21"/>`);
+    add(low || surgery, `<line x1="368" y1="447" x2="368" y2="${tonsilTip}" stroke="#1F5F8B" stroke-width="1.5"/><line x1="362" y1="${tonsilTip}" x2="374" y2="${tonsilTip}" stroke="#1F5F8B" stroke-width="1.5"/>`);
+  }
+  if (labels) {
+    const leaders = ['M250 170 L548 116', 'M300 214 L548 156', 'M452 372 L548 196', 'M364 384 L548 236', 'M318 372 L548 276', `M386 ${tonsilMid} L548 316`, 'M372 445 L548 356', 'M350 480 L548 396', 'M380 620 L548 436', 'M318 500 L548 476'];
+    parts.push(`<g font-size="12.5" fill="${ink}" aria-hidden="true"><g stroke="${leader}" stroke-width="0.75" fill="none">${leaders.map((d) => `<path d="${d}"/>`).join('')}</g>`);
+    parts.push(lbl(120, '01', L.cerebrum), lbl(160, '02', L.callosum), lbl(200, '03', L.cerebellum), lbl(240, '04', L.fourthVentricle), lbl(280, '05', L.brainstem), lbl(320, '06', L.tonsil, true), lbl(360, '07', L.foramen), note(376, L.foramenNote), lbl(400, '08', L.cord), lbl(440, '09', L.csf), lbl(480, '10', L.c2));
+    add(c === 'syrinx', `<path d="M350 585 L548 516" stroke="${leader}" stroke-width="0.75" fill="none"/>${lbl(520, '11', L.syrinx, true)}${note(536, L.syrinxNote)}`);
+    add(surgery, `<path d="M434 434 L548 516" stroke="${leader}" stroke-width="0.75" fill="none"/><text x="556" y="520" font-weight="600" fill="#9A3412"><tspan class="fig-mono" font-weight="400">11${sp}</tspan>${esc(L.boneRemoved)}</text>${note(536, L.boneRemovedNote)}`);
+    parts.push('</g>');
+  }
+  const aria = esc(t.ariaPrefix + t.aria[c]);
+  return `<svg class="anatomy-figure${className ? ' ' + esc(className) : ''}" viewBox="${viewBox}" role="img" aria-label="${aria}" xmlns="http://www.w3.org/2000/svg">${parts.join('')}</svg>`;
+}

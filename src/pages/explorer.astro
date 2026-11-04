@@ -1,0 +1,877 @@
+---
+/**
+ * 3D Explorer. Layout from design/mockups/Explorer.dc.html (desktop) and ExplorerPhone.dc.html (phone).
+ * Step 3: the workspace and controls, with the 2D anatomy figure in the view.
+ * The Simple 3D model replaces the figure in step 4; camera presets, cut-away and layers
+ * take effect on the model in steps 4 to 6.
+ * All text from src/i18n/en.json (medical text word for word from docs/COPY.md).
+ */
+import Head from '../components/Head.astro';
+import Footer from '../components/Footer.astro';
+import { anatomyFigureSvg, CONDITIONS } from '../lib/anatomy-figure';
+import { initialState, LAYERS } from '../explorer/state';
+import { getStrings, routes } from '../i18n';
+
+const s = getStrings();
+const x = s.explorer;
+const st = initialState;
+const figureWide = anatomyFigureSvg({ condition: st.condition, flow: st.flow, labels: st.labels, measure: st.measure, dark: true }, s.figure);
+const figureNarrow = anatomyFigureSvg({ condition: st.condition, flow: st.flow, labels: false, measure: st.measure, dark: true }, s.figure);
+const part = x.parts.find((p) => p.id === st.part)!;
+const cond = x.conditions[st.condition];
+const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head title={x.title} themeColor="#17181C" />
+  </head>
+  <body class="x">
+    <a class="skip-link" href="#viewer">{s.skipLink}</a>
+
+    <header class="x-header">
+      <a class="x-back only-narrow-x" href={routes.home} aria-label={x.backHome}>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+      </a>
+      <a class="x-brand only-wide-x" href={routes.home}>
+        <span class="x-mark" aria-hidden="true"></span>
+        <span class="x-brand-name">{s.siteName}</span>
+      </a>
+      <span class="x-sep only-wide-x" aria-hidden="true">/</span>
+      <h1 class="x-title">{x.title}</h1>
+      <span class="x-spacer"></span>
+      <a class="x-lang only-wide-x" href={routes.es} lang="es" hreflang="es">{s.header.espanol}</a>
+      <label class="x-calm">
+        <input type="checkbox" role="switch" data-calm-switch aria-label={s.header.calm} />
+        <span class="x-calm-off" aria-hidden="true">{s.header.calm}</span>
+        <span class="x-calm-on" aria-hidden="true">{s.calm.on}</span>
+      </label>
+      <a class="x-explain" href={routes.explain} aria-label={x.explainAria}>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={linkIcon}></path></svg>
+        <span class="only-wide-x">{x.explain}</span>
+      </a>
+    </header>
+
+    <div class="workspace">
+      <!-- Left panel on desktop; the "Layers" panel on phones. -->
+      <aside class="x-left" id="view-options" aria-label={x.viewOptions}>
+        <fieldset class="x-section x-cond-list only-wide-x">
+          <legend class="x-h">{x.condition}</legend>
+          {CONDITIONS.map((c) => (
+            <label class="x-cond-row">
+              <input class="visually-hidden" type="radio" name="condition-wide" value={c} checked={c === st.condition} />
+              <span class="x-dot" aria-hidden="true"></span>
+              {x.conditions[c].label}
+            </label>
+          ))}
+        </fieldset>
+
+        <section class="x-section" aria-labelledby="layers-heading">
+          <h2 class="x-h" id="layers-heading">{x.layers}</h2>
+          <div class="x-layers">
+            {LAYERS.map((id) => (
+              <>
+                <input id={`layer-${id}`} type="checkbox" data-layer-on={id} checked={st.layers[id].on} />
+                <label for={`layer-${id}`}>{x.layerNames[id]}</label>
+                <input type="range" min="0" max="100" step="5" value={st.layers[id].opacity} data-layer-opacity={id} aria-label={x.layerNames[id] + x.opacitySuffix} />
+              </>
+            ))}
+          </div>
+        </section>
+
+        <section class="x-section" aria-labelledby="cut-heading">
+          <h2 class="x-h" id="cut-heading">{x.cutaway}</h2>
+          <input class="x-cut" type="range" min="0" max="100" step="5" value={st.cut} data-cut aria-label={x.cutawayAria} />
+          <div class="x-scale" aria-hidden="true"><span>{x.cutWhole}</span><span>{x.cutMidline}</span><span>{x.cutFar}</span></div>
+        </section>
+
+        <section class="x-section" aria-labelledby="model-heading">
+          <h2 class="x-h" id="model-heading">{x.model}</h2>
+          <div class="x-segmented" role="group" aria-labelledby="model-heading">
+            <button type="button" data-model="realistic" aria-pressed="false" disabled>{x.realistic}</button>
+            <button type="button" data-model="simple" aria-pressed="true">{x.simple}</button>
+          </div>
+        </section>
+
+        <button type="button" class="x-tool x-close only-narrow-x" data-layers-close>{x.close}</button>
+      </aside>
+
+      <main class="x-view" id="viewer" aria-label={x.viewerLabel}>
+        <div class="x-figure only-wide-x" data-figure="wide" set:html={figureWide} />
+        <div class="x-figure x-figure-narrow only-narrow-x" data-figure="narrow" set:html={figureNarrow} />
+
+        <div class="x-toolbar only-wide-x" role="group" aria-label={x.viewTools}>
+          <button type="button" class="x-tool" data-toggle="flow" aria-pressed={(st.flow) ? 'true' : 'false'}>{x.flow}</button>
+          <button type="button" class="x-tool" data-toggle="labels" aria-pressed={(st.labels) ? 'true' : 'false'}>{x.labels}</button>
+          <button type="button" class="x-tool" data-toggle="measure" aria-pressed={(st.measure) ? 'true' : 'false'}>{x.measure}</button>
+        </div>
+        <div class="x-tools-narrow only-narrow-x" role="group" aria-label={x.viewTools}>
+          <button type="button" class="x-tool" data-toggle="flow" aria-pressed={(st.flow) ? 'true' : 'false'}>{x.flowShort}</button>
+          <button type="button" class="x-tool" data-toggle="measure" aria-pressed={(st.measure) ? 'true' : 'false'}>{x.measure}</button>
+          <button type="button" class="x-tool" data-layers-toggle aria-expanded="false" aria-controls="view-options">{x.layers}</button>
+        </div>
+
+        <p class="x-caption only-wide-x">
+          {x.captionIllustration} · {x.captionFlow} · <a href={routes.evidence}>{x.evidence}</a>
+        </p>
+      </main>
+
+      <aside class="x-right only-wide-x" aria-label={x.structures}>
+        <div class="x-search">
+          <label class="x-h" for="part-search">{x.structures}</label>
+          <input id="part-search" type="search" placeholder={x.search} data-part-search autocomplete="off" />
+        </div>
+        <ul class="x-parts">
+          {x.parts.map((p) => (
+            <li>
+              <button type="button" data-part={p.id} aria-pressed={(p.id === st.part) ? 'true' : 'false'}>
+                <span class="x-num">{p.num}</span>{p.name}
+              </button>
+            </li>
+          ))}
+        </ul>
+        <div class="x-card" aria-live="polite">
+          <p class="x-h"><span data-part-num>{part.num}</span> · {x.selected}</p>
+          <h2 class="x-card-title" data-part-name>{part.name}</h2>
+          <p class="x-card-text" data-part-text>{part.text}</p>
+          <p class="x-card-note" data-cond-note>{cond.note}</p>
+        </div>
+      </aside>
+
+      <section class="x-sheet only-narrow-x" aria-label={x.condition}>
+        <fieldset class="x-cond-grid">
+          <legend class="visually-hidden">{x.condition}</legend>
+          {CONDITIONS.map((c) => (
+            <label>
+              <input class="visually-hidden" type="radio" name="condition-narrow" value={c} checked={c === st.condition} />
+              {x.conditions[c].short}
+            </label>
+          ))}
+        </fieldset>
+        <div class="x-sheet-note" aria-live="polite">
+          <p class="x-h" data-cond-title>{cond.label}</p>
+          <p data-cond-note-short>{cond.noteShort}</p>
+        </div>
+        <button type="button" class="x-parts-toggle" aria-expanded="false" aria-controls="parts-narrow" data-parts-toggle>
+          <span>{x.partsButton}</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"></path></svg>
+        </button>
+        <div id="parts-narrow" class="x-parts-narrow" hidden>
+          <ul class="x-parts">
+            {x.parts.map((p) => (
+              <li>
+                <button type="button" data-part={p.id} aria-pressed={(p.id === st.part) ? 'true' : 'false'}>
+                  <span class="x-num">{p.num}</span>{p.name}
+                </button>
+              </li>
+            ))}
+          </ul>
+          <div class="x-card" aria-live="polite">
+            <p class="x-h"><span data-part-num>{part.num}</span> · {x.selected}</p>
+            <h2 class="x-card-title" data-part-name>{part.name}</h2>
+            <p class="x-card-text" data-part-text>{part.text}</p>
+          </div>
+        </div>
+        <p class="x-caption-narrow">
+          {x.captionIllustration} · {x.captionFlow} · <a href={routes.evidence}>{x.evidence}</a>
+        </p>
+      </section>
+    </div>
+
+    <Footer dark />
+
+    <script>
+      import { bindCalmSwitches } from '../lib/calm';
+      import { createStore, LAYERS, type ViewState } from '../explorer/state';
+      import { anatomyFigureSvg, type Condition } from '../lib/anatomy-figure';
+      import strings from '../i18n/en.json';
+
+      bindCalmSwitches();
+
+      const x = strings.explorer;
+      const store = createStore();
+      const $$ = <T extends Element = HTMLElement>(sel: string) => Array.from(document.querySelectorAll<T>(sel));
+
+      // ----- Controls write to the store -----
+      $$<HTMLInputElement>('input[name^="condition-"]').forEach((radio) =>
+        radio.addEventListener('change', () => radio.checked && store.set({ condition: radio.value as Condition })),
+      );
+      $$<HTMLButtonElement>('[data-toggle]').forEach((button) =>
+        button.addEventListener('click', () => {
+          const key = button.dataset.toggle as 'flow' | 'labels' | 'measure';
+          store.set({ [key]: !store.get()[key] });
+        }),
+      );
+      $$<HTMLInputElement>('[data-layer-on]').forEach((box) =>
+        box.addEventListener('change', () => store.setLayer(box.dataset.layerOn as (typeof LAYERS)[number], { on: box.checked })),
+      );
+      $$<HTMLInputElement>('[data-layer-opacity]').forEach((range) =>
+        range.addEventListener('input', () => store.setLayer(range.dataset.layerOpacity as (typeof LAYERS)[number], { opacity: Number(range.value) })),
+      );
+      $$<HTMLInputElement>('[data-cut]').forEach((range) => range.addEventListener('input', () => store.set({ cut: Number(range.value) })));
+      $$<HTMLButtonElement>('[data-model]').forEach((button) =>
+        button.addEventListener('click', () => store.set({ model: button.dataset.model as ViewState['model'] })),
+      );
+      $$<HTMLButtonElement>('[data-part]').forEach((button) => button.addEventListener('click', () => store.set({ part: button.dataset.part! })));
+
+      // Search the structures list
+      const search = document.querySelector<HTMLInputElement>('[data-part-search]');
+      search?.addEventListener('input', () => {
+        const q = search.value.trim().toLowerCase();
+        search.closest('aside')!.querySelectorAll<HTMLLIElement>('.x-parts li').forEach((li) => {
+          li.hidden = q !== '' && !li.textContent!.toLowerCase().includes(q);
+        });
+      });
+
+      // Phone: Layers panel
+      const panel = document.getElementById('view-options')!;
+      const layersButton = document.querySelector<HTMLButtonElement>('[data-layers-toggle]')!;
+      const setPanel = (open: boolean, returnFocus = false) => {
+        panel.classList.toggle('is-open', open);
+        layersButton.setAttribute('aria-expanded', String(open));
+        if (open) panel.querySelector<HTMLElement>('input, button:not([disabled])')?.focus();
+        else if (returnFocus) layersButton.focus();
+      };
+      layersButton.addEventListener('click', () => setPanel(!panel.classList.contains('is-open')));
+      document.querySelector('[data-layers-close]')!.addEventListener('click', () => setPanel(false, true));
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && panel.classList.contains('is-open')) setPanel(false, true);
+      });
+
+      // Phone: parts list
+      const partsToggle = document.querySelector<HTMLButtonElement>('[data-parts-toggle]')!;
+      const partsList = document.getElementById('parts-narrow')!;
+      partsToggle.addEventListener('click', () => {
+        const open = partsToggle.getAttribute('aria-expanded') !== 'true';
+        partsToggle.setAttribute('aria-expanded', String(open));
+        partsList.hidden = !open;
+      });
+
+      // ----- The store updates every view and control -----
+      const figures = $$('[data-figure]');
+      let lastFigure = '';
+      store.subscribe((st) => {
+        const key = [st.condition, st.flow, st.labels, st.measure].join();
+        if (key !== lastFigure) {
+          lastFigure = key;
+          figures.forEach((host) => {
+            const wide = host.dataset.figure === 'wide';
+            host.innerHTML = anatomyFigureSvg(
+              { condition: st.condition, flow: st.flow, labels: wide && st.labels, measure: st.measure, dark: true },
+              strings.figure,
+            );
+          });
+        }
+        $$<HTMLInputElement>('input[name^="condition-"]').forEach((radio) => (radio.checked = radio.value === st.condition));
+        $$('[data-toggle]').forEach((b) => b.setAttribute('aria-pressed', String(st[b.dataset.toggle as 'flow' | 'labels' | 'measure'])));
+        $$<HTMLInputElement>('[data-layer-on]').forEach((box) => (box.checked = st.layers[box.dataset.layerOn as (typeof LAYERS)[number]].on));
+        $$<HTMLInputElement>('[data-layer-opacity]').forEach((r) => (r.value = String(st.layers[r.dataset.layerOpacity as (typeof LAYERS)[number]].opacity)));
+        $$<HTMLInputElement>('[data-cut]').forEach((r) => (r.value = String(st.cut)));
+        $$('[data-model]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.model === st.model)));
+        $$('[data-part]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.part === st.part)));
+
+        const part = x.parts.find((p) => p.id === st.part)!;
+        const cond = x.conditions[st.condition];
+        const setText = (sel: string, text: string) => $$(sel).forEach((el) => el.textContent !== text && (el.textContent = text));
+        setText('[data-part-num]', part.num);
+        setText('[data-part-name]', part.name);
+        setText('[data-part-text]', part.text);
+        setText('[data-cond-note]', cond.note);
+        setText('[data-cond-title]', cond.label);
+        setText('[data-cond-note-short]', cond.noteShort);
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  /* Dark Explorer workspace. Colors: the 3D Explorer tokens in DESIGN.md. */
+  .x {
+    --x-size: 14px;
+    --x-size-small: 13px;
+    --x-size-label: 12px;
+    --x-size-caption: 11px;
+    background: var(--x-bg);
+    color: var(--x-text);
+    font-size: var(--x-size);
+    line-height: 1.45;
+  }
+  :global(:root[data-calm='on']) .x {
+    --x-size: 16px;
+    --x-size-small: 15px;
+    --x-size-label: 14px;
+    --x-size-caption: 13px;
+  }
+  .x :focus-visible {
+    outline: 2px solid var(--x-accent);
+    outline-offset: 2px;
+  }
+  .x a {
+    color: var(--x-text);
+  }
+
+  @media (max-width: 960px) {
+    .only-wide-x {
+      display: none !important;
+    }
+  }
+  @media (min-width: 961px) {
+    .only-narrow-x {
+      display: none !important;
+    }
+  }
+
+  /* Small mono section labels (not uppercase) */
+  .x-h {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-mono);
+    font-size: var(--x-size-label);
+    font-weight: 500;
+    color: var(--x-muted);
+  }
+
+  /* ---------- Header ---------- */
+  .x-header {
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    gap: var(--s-20);
+    padding: 0 var(--s-20);
+    background: var(--x-panel);
+    border-bottom: 1px solid var(--x-border);
+  }
+  .x-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: var(--touch);
+    text-decoration: none;
+  }
+  .x-mark {
+    width: 9px;
+    height: 9px;
+    background: var(--x-brand-mark);
+  }
+  .x-brand-name {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 17px;
+  }
+  .x-sep {
+    color: var(--x-faint);
+  }
+  .x-title {
+    font-size: var(--x-size);
+    font-weight: 500;
+  }
+  .x-spacer {
+    flex: 1 1 auto;
+  }
+  .x-lang {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch);
+    text-decoration: none;
+    font-size: var(--x-size-small);
+  }
+  .x-calm {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: var(--touch);
+    font-size: var(--x-size-small);
+    color: var(--x-text-2);
+    cursor: pointer;
+  }
+  .x-calm input {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    accent-color: var(--x-accent);
+    cursor: pointer;
+  }
+  .x-calm-on {
+    display: none;
+  }
+  .x-explain {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: var(--touch);
+    padding: 0 14px;
+    border-radius: var(--radius);
+    background: var(--x-button-bg);
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .x .x-explain {
+    color: var(--x-button-text);
+  }
+  .x-back {
+    width: var(--touch);
+    height: var(--touch);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ---------- Workspace ---------- */
+  .workspace {
+    display: grid;
+    grid-template-columns: 272px minmax(0, 1fr) 320px;
+    height: calc(100dvh - 53px);
+    min-height: 600px;
+  }
+  .x-left {
+    background: var(--x-panel);
+    border-right: 1px solid var(--x-border);
+    padding: var(--s-20);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-24);
+    overflow-y: auto;
+  }
+  .x-section {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-8);
+    min-width: 0;
+  }
+  .x-section > legend {
+    margin-bottom: var(--s-8);
+  }
+
+  /* Condition list (desktop) */
+  .x-cond-list {
+    gap: 0;
+  }
+  .x-cond-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: var(--touch);
+    padding: 0 12px;
+    border: 1px solid var(--x-border);
+    cursor: pointer;
+  }
+  .x-cond-row + .x-cond-row {
+    border-top: 0;
+  }
+  .x-cond-row:first-of-type {
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .x-cond-row:last-of-type {
+    border-radius: 0 0 var(--radius) var(--radius);
+  }
+  .x-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex: none;
+    border: 1.5px solid var(--x-muted);
+  }
+  .x-cond-row:has(input:checked) {
+    background: var(--x-border);
+    font-weight: 600;
+  }
+  .x-cond-row:has(input:checked) .x-dot {
+    background: var(--x-accent);
+    border-color: var(--x-accent);
+  }
+  .x-cond-row:has(input:focus-visible) {
+    outline: 2px solid var(--x-accent);
+    outline-offset: -2px;
+  }
+
+  /* Layers */
+  .x-layers {
+    display: grid;
+    grid-template-columns: 20px minmax(0, 1fr) 84px;
+    align-items: center;
+    column-gap: 10px;
+  }
+  .x-layers input[type='checkbox'] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    accent-color: var(--x-accent);
+  }
+  .x-layers label {
+    min-height: var(--touch);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  .x input[type='range'] {
+    width: 100%;
+    height: var(--touch);
+    margin: 0;
+    accent-color: var(--x-accent);
+  }
+  .x-scale {
+    display: flex;
+    justify-content: space-between;
+    margin-top: -6px;
+    font-family: var(--font-mono);
+    font-size: var(--x-size-caption);
+    color: var(--x-muted);
+  }
+
+  /* Segmented control (Model) */
+  .x-segmented {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border: 1px solid var(--x-border);
+    border-radius: var(--radius);
+  }
+  .x-segmented button {
+    min-height: var(--touch);
+    border: 0;
+    background: transparent;
+    color: var(--x-muted);
+    font: 500 var(--x-size-small) var(--font-sans);
+    cursor: pointer;
+  }
+  .x-segmented button[aria-pressed='true'] {
+    background: var(--x-border);
+    color: var(--x-text);
+  }
+  .x-segmented button:disabled {
+    color: var(--x-faint);
+    cursor: not-allowed;
+  }
+
+  /* ---------- Viewport ---------- */
+  .x-view {
+    position: relative;
+    background: var(--x-viewport);
+    overflow: hidden;
+    min-width: 0;
+  }
+  .x-figure {
+    position: absolute;
+    inset: 72px 24px 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .x-figure :global(.anatomy-figure) {
+    width: 100%;
+    height: 100%;
+  }
+  .x-toolbar {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    display: flex;
+    gap: 6px;
+  }
+  .x-tool {
+    min-height: var(--touch);
+    padding: 0 12px;
+    border-radius: var(--radius);
+    border: 1px solid var(--x-control-border);
+    background: var(--x-panel);
+    color: var(--x-text);
+    font: 500 var(--x-size-small) var(--font-sans);
+    cursor: pointer;
+  }
+  .x-tool[aria-pressed='true'],
+  .x-tool[aria-expanded='true'] {
+    border-color: var(--x-accent);
+    background: var(--x-accent-tint);
+  }
+  .x-caption {
+    position: absolute;
+    right: 16px;
+    bottom: 12px;
+    margin: 0;
+    font-size: var(--x-size-caption);
+    color: var(--x-faint);
+  }
+  .x-caption a,
+  .x-caption-narrow a {
+    color: var(--an-ventricle);
+  }
+
+  /* ---------- Structures (desktop right panel) ---------- */
+  .x-right {
+    background: var(--x-panel);
+    border-left: 1px solid var(--x-border);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .x-search {
+    padding: var(--s-20) var(--s-20) var(--s-12);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .x-search input {
+    min-height: var(--touch);
+    padding: 0 10px;
+    border: 1px solid var(--x-control-border);
+    border-radius: var(--radius);
+    background: var(--x-bg);
+    color: var(--x-text);
+    font: 400 var(--x-size) var(--font-sans);
+  }
+  .x-search input::placeholder {
+    color: var(--x-faint);
+  }
+  .x-parts {
+    list-style: none;
+    margin: 0;
+    padding: 0 12px;
+  }
+  .x-parts button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 0 8px;
+    border: 0;
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--x-text);
+    font: 400 var(--x-size) var(--font-sans);
+    text-align: left;
+    cursor: pointer;
+  }
+  .x-parts button[aria-pressed='true'] {
+    background: var(--x-border);
+    font-weight: 600;
+  }
+  /* Lighter number on the highlighted row keeps contrast above 4.5:1 */
+  .x-parts button[aria-pressed='true'] .x-num {
+    color: var(--x-muted);
+  }
+  .x-num {
+    width: 22px;
+    flex: none;
+    font-family: var(--font-mono);
+    font-size: var(--x-size-caption);
+    font-weight: 400;
+    color: var(--x-faint);
+  }
+  .x-card {
+    margin-top: auto;
+    border-top: 1px solid var(--x-border);
+    padding: var(--s-20);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .x-card-title {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 1.25;
+  }
+  .x-card-text {
+    margin: 0;
+    line-height: 1.55;
+    color: var(--x-text-2);
+  }
+  .x-card-note {
+    margin: 0;
+    padding-top: 10px;
+    border-top: 1px solid var(--x-border);
+    line-height: 1.55;
+    color: var(--x-muted);
+  }
+
+  /* ---------- Phone ---------- */
+  @media (max-width: 960px) {
+    .x-header {
+      min-height: 56px;
+      gap: 8px;
+      padding: 0 8px;
+    }
+    .x-title {
+      flex: 1 1 auto;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .x-spacer {
+      display: none;
+    }
+    /* Calm mode as an outlined button, like "Tour" in the phone mockup */
+    .x-calm {
+      padding: 0 10px;
+      border: 1px solid var(--x-control-border);
+      border-radius: var(--radius);
+      color: var(--x-text);
+      font-size: 13px;
+    }
+    .x-calm input {
+      position: absolute;
+      opacity: 0;
+      width: 1px;
+      height: 1px;
+    }
+    .x-calm:has(input:focus-visible) {
+      outline: 2px solid var(--x-accent);
+      outline-offset: 2px;
+    }
+    :global(:root[data-calm='on']) .x-calm {
+      background: var(--x-button-bg);
+      border-color: var(--x-button-bg);
+      color: var(--x-button-text);
+      font-weight: 500;
+    }
+    :global(:root[data-calm='on']) .x-calm-off {
+      display: none;
+    }
+    :global(:root[data-calm='on']) .x-calm-on {
+      display: inline;
+    }
+    .x-explain {
+      width: var(--touch);
+      padding: 0;
+      justify-content: center;
+      background: transparent;
+    }
+    .x .x-explain {
+      color: var(--x-text);
+    }
+
+    .workspace {
+      position: relative;
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: minmax(0, 1fr) auto;
+      height: calc(100dvh - 57px);
+      min-height: 560px;
+    }
+    /* The left panel becomes the "Layers" panel, opened from the viewport. */
+    .x-left {
+      position: absolute;
+      z-index: 5;
+      top: 8px;
+      left: 8px;
+      right: 8px;
+      max-height: calc(100% - 16px);
+      border: 1px solid var(--x-control-border);
+      border-radius: var(--radius);
+      gap: var(--s-20);
+    }
+    .x-left:not(.is-open) {
+      display: none;
+    }
+    .x-layers {
+      grid-template-columns: 20px minmax(0, 1fr) minmax(96px, 40%);
+    }
+    .x-close {
+      align-self: flex-end;
+    }
+    .x-view {
+      grid-row: 1;
+    }
+    .x-figure {
+      inset: 8px 8px 8px 8px;
+    }
+    .x-tools-narrow {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .x-sheet {
+      grid-row: 2;
+      background: var(--x-panel);
+      border-top: 1px solid var(--x-border);
+      padding: var(--s-12) var(--s-16) var(--s-16);
+      display: flex;
+      flex-direction: column;
+      gap: var(--s-12);
+      max-height: 62dvh;
+      overflow-y: auto;
+    }
+    .x-cond-grid {
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      border: 1px solid var(--x-border);
+      border-radius: var(--radius);
+    }
+    .x-cond-grid label {
+      min-height: var(--touch);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .x-cond-grid label:nth-of-type(even) {
+      border-left: 1px solid var(--x-border);
+    }
+    .x-cond-grid label:nth-of-type(n + 3) {
+      border-top: 1px solid var(--x-border);
+    }
+    .x-cond-grid label:has(input:checked) {
+      background: var(--x-border);
+      font-weight: 600;
+    }
+    .x-cond-grid label:has(input:focus-visible) {
+      outline: 2px solid var(--x-accent);
+      outline-offset: -2px;
+    }
+    .x-sheet-note {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .x-sheet-note p:last-child {
+      margin: 0;
+      line-height: 1.5;
+      color: var(--x-text-2);
+    }
+    .x-parts-toggle {
+      min-height: var(--touch);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 0 14px;
+      border: 1px solid var(--x-control-border);
+      border-radius: var(--radius);
+      background: transparent;
+      color: var(--x-text);
+      font: 500 var(--x-size) var(--font-sans);
+      text-align: left;
+      cursor: pointer;
+    }
+    .x-parts-toggle svg {
+      flex: none;
+      transform: rotate(180deg);
+    }
+    .x-parts-toggle[aria-expanded='true'] svg {
+      transform: none;
+    }
+    .x-parts-narrow .x-parts {
+      padding: 0;
+    }
+    .x-parts-narrow .x-parts button {
+      min-height: var(--touch);
+    }
+    .x-parts-narrow .x-card {
+      padding: var(--s-16) 0 0;
+    }
+    .x-caption-narrow {
+      margin: 0;
+      font-size: var(--x-size-caption);
+      color: var(--x-faint);
+      text-align: center;
+    }
+  }
+</style>

@@ -167,3 +167,14 @@ a:hover {
     scroll-behavior: auto !important;
   }
 }
+
+/* Anatomy figure (src/lib/anatomy-figure.ts) */
+.anatomy-figure {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: var(--font-sans);
+}
+.anatomy-figure .fig-mono {
+  font-family: var(--font-mono);
+}

@@ -2,7 +2,7 @@ import { test, expect, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
 // Every page that exists so far. Add new pages here as they're built.
-const pages = ['/', '/explorer/', '/explain/', '/studies/', '/prep/', '/model/', '/support/', '/kit/', '/impact/', '/about/', '/privacy/', '/es/'];
+const pages = ['/', '/explorer/', '/evidence/', '/explain/', '/studies/', '/prep/', '/model/', '/support/', '/kit/', '/impact/', '/about/', '/privacy/', '/es/'];
 const sizes = [
   { name: 'desktop', width: 1440, height: 900 },
   { name: 'phone', width: 390, height: 844 },
@@ -86,4 +86,67 @@ test('phone: Calm mode button reads "Calm on" and the menu opens', async ({ page
   await menu.click();
   await expect(menu).toHaveAttribute('aria-expanded', 'true');
   await expect(page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Research studies' })).toBeVisible();
+});
+
+test.describe('3D Explorer (step 3: controls, with the 2D figure)', () => {
+  test('desktop: condition switch updates the figure and the condition text', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/explorer/');
+    const figure = page.locator('[data-figure="wide"] svg');
+    await expect(figure).toHaveAttribute('aria-label', /Chiari I: the cerebellar tonsils extend below/);
+    await page.locator('.x-cond-list label', { hasText: 'Typical anatomy' }).click();
+    await expect(page.getByRole('radio', { name: 'Typical anatomy' })).toBeChecked();
+    await expect(figure).toHaveAttribute('aria-label', /typical anatomy: the cerebellar tonsils sit above/);
+    await expect(page.locator('[data-cond-note]')).toContainText('The tonsils usually sit at or above the dashed line');
+  });
+
+  test('desktop: picking a structure shows its info card, and search filters the list', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/explorer/');
+    const card = page.locator('.x-right .x-card');
+    await expect(card).toContainText('the model shows them at their lowest point, where MRI measures them');
+    await page.getByRole('button', { name: 'Brainstem' }).click();
+    await expect(card.getByRole('heading')).toHaveText('Brainstem');
+    await expect(page.getByRole('button', { name: 'Brainstem' })).toHaveAttribute('aria-pressed', 'true');
+    await page.getByRole('searchbox').fill('spinal');
+    await expect(page.locator('.x-right .x-parts li:visible')).toHaveCount(2);
+  });
+
+  test('desktop: tools toggle labels, flow and measure', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/explorer/');
+    const labels = page.getByRole('button', { name: 'Labels' });
+    await labels.click();
+    await expect(labels).toHaveAttribute('aria-pressed', 'false');
+    await expect(page.locator('[data-figure="wide"] svg')).toHaveAttribute('viewBox', '50 70 480 570');
+  });
+
+  test('phone: condition grid, parts list and Layers panel', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('/explorer/');
+    await page.locator('.x-cond-grid label', { hasText: 'After surgery' }).click();
+    await expect(page.getByRole('radio', { name: 'After surgery' })).toBeChecked();
+    await expect(page.locator('[data-cond-note-short]')).toHaveText('Bone is removed at the back of the opening to make room. Most people improve or stabilize; results vary.');
+
+    const parts = page.getByRole('button', { name: /Parts list/ });
+    await parts.click();
+    await expect(parts).toHaveAttribute('aria-expanded', 'true');
+    await page.locator('#parts-narrow').getByRole('button', { name: 'Spinal cord' }).click();
+    await expect(page.locator('#parts-narrow [data-part-name]')).toHaveText('Spinal cord');
+
+    const layers = page.getByRole('button', { name: 'Layers' });
+    await layers.click();
+    await expect(page.getByRole('checkbox', { name: 'Skull and spine' })).toBeVisible();
+    await page.keyboard.press('Escape');
+    await expect(page.getByRole('checkbox', { name: 'Skull and spine' })).toBeHidden();
+    await expect(layers).toBeFocused();
+  });
+
+  test('required captions and credits are on the page', async ({ page }) => {
+    await page.goto('/explorer/');
+    await expect(page.getByText('Illustration, not a medical image').first()).toBeVisible();
+    await expect(page.getByText('Fluid flow simplified').first()).toBeVisible();
+    await expect(page.getByText('Not medical advice.')).toBeVisible();
+    await expect(page.locator('footer')).toContainText('3D model by Open Chiari, CC BY-SA 4.0, adapted from Z-Anatomy (CC BY-SA 4.0) and BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 JP).');
+  });
 });

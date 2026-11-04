@@ -1,11 +1,6 @@
 ---
-/**
- * Base layout for the light pages: head, header, main, footer.
- * No third-party requests: fonts are bundled, there are no external scripts or stylesheets.
- */
-import '../styles/fonts.css';
-import '../styles/tokens.css';
-import '../styles/global.css';
+/** Base layout for the light pages: head, header, main, footer. */
+import Head from '../components/Head.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { getStrings } from '../i18n';
@@ -16,33 +11,16 @@ interface Props {
   lang?: string;
 }
 
-const t = getStrings();
-const { title, description = t.metaDescription, lang = 'en' } = Astro.props;
-const pageTitle = title ? `${title} · ${t.siteName}` : t.siteName;
+const { title, description, lang = 'en' } = Astro.props;
 ---
 
 <!doctype html>
 <html lang={lang}>
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{pageTitle}</title>
-    <meta name="description" content={description} />
-    <meta name="theme-color" content="#FFFFFF" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <script is:inline>
-      // Calm mode, decided before the page draws (no flash). Same key as src/lib/calm.ts.
-      // Saved choice wins; with none, follow the system "reduce motion" setting.
-      (function () {
-        var saved = null;
-        try { saved = localStorage.getItem('openchiari-calm'); } catch (e) {}
-        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (saved === 'on' || (saved !== 'off' && reduce)) document.documentElement.dataset.calm = 'on';
-      })();
-    </script>
+    <Head title={title} description={description} />
   </head>
   <body>
-    <a class="skip-link" href="#content">{t.skipLink}</a>
+    <a class="skip-link" href="#content">{getStrings().skipLink}</a>
     <Header />
     <main id="content">
       <slot />

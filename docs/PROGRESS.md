@@ -1,6 +1,30 @@
 # Progress log
 
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
+Matthew's preference: when a step is done, lay out what the next step will cover.
+
+## 2026-11-04: Phase 1, step 3: Explorer page (layout and controls, no 3D yet)
+
+- **CI fix first:** the first GitHub run of step 2 failed at the type check (it also checks the test files: missing Node types, and two copies of Playwright). Fixed; GitHub checks now pass.
+- **Explorer page** (`src/pages/explorer.astro`), dark workspace matching `Explorer` (desktop) and `ExplorerPhone`:
+  - Desktop: left panel (Condition, Layers with on/off and opacity, Cut-away, Model), center view with Fluid flow / Labels / Measure, right panel (searchable Structures list and info card with the condition note).
+  - Phone: condition 2x2 switch with the short notes, Flow / Measure / Layers buttons on the view, a Layers panel (layers, cut-away, model), and an expandable parts list with the info card.
+  - Header: Calm mode switch and Español on every page, as SPEC requires (the Explorer mockups didn't show them). "Explain It" opens its "Not built yet" page. "Guided tour" and "Side by side" are left out until Phase 4, when they exist.
+  - Footer with the disclaimer and full model credit; captions "Illustration, not a medical image" and "Fluid flow simplified"; "Evidence notes for this view" links to a "Not built yet" page for now.
+- **The view shows the 2D anatomy figure for now** (as the mockup does). Condition, Fluid flow, Labels and Measure already change it. Layers, Cut-away and Model are real controls saved in the view state, but have nothing to act on until the 3D model arrives. Camera presets (Side, Back, Below, Front, Reset) come with the 3D model in step 6.
+- **Realistic model button is shown but switched off:** the realistic model is Phase 2 and stays hidden until its medical review.
+- **One drawing source:** the figure is now drawn by `src/lib/anatomy-figure.ts`, used by both Home and the Explorer (Home output checked identical). The dashed McRae line is now always dark ink; on the dark Explorer it was nearly invisible.
+- **View state** (`src/explorer/state.ts`): one place holding condition, tools, layers, cut-away, model and selected part. The 3D model will read from it.
+- **Text:** all 60 Explorer strings checked word for word against COPY.md.
+- **Checks:** 62 tests passing (accessibility on every page at both sizes and both Calm settings, plus Explorer behavior). Fixed one contrast problem the scan found (the number on the selected part).
+
+**Next: step 4, the Simple 3D model, Typical and Chiari I.**
+- Add Three.js and replace the 2D figure in the Explorer with a 3D model built from simple shapes: skull and upper spine, brain, cerebellum and tonsils, brainstem, spinal cord, spinal fluid space, C1 and C2.
+- Typical: rounded tonsils about 1 mm above the McRae line, open fluid space behind them. Chiari I: pointed tonsils about 12 mm below the line, crowded fluid space (numbers from EVIDENCE.md).
+- Anatomy palette colors from DESIGN.md; drag to rotate, pinch or scroll to zoom; no auto-rotation in Calm mode; pauses when off screen or the tab is hidden.
+- The midline cut-away view set up to match the figures, so you can compare them side by side.
+- A text description of each view for screen readers.
+- **Stop for Matthew** to compare the 3D Typical and Chiari I against `design/figures/` before syringomyelia and surgery are built (step 5).
 
 ## 2026-11-04: Phase 1, step 2: Calm mode and automatic checks
 
@@ -8,7 +32,6 @@ Claude Code: add an entry after each working session (date, what was done, what'
 - **What it changes:** softer colors and base text 19 px (DESIGN.md Calm tokens), larger small text (captions, footer, lists), buttons at least 56 px tall, and all animation and transitions turned off. Animation is also always off when the system asks for reduced motion, even with Calm mode off. The Explorer will use `isCalm()` and `onCalmChange()` to stop auto-rotation.
 - **Home in Calm mode** (HomeCalm mockup): "Calm mode is on" note; on phones a filled "Calm on" button, no eyebrow line, the shorter intro and "Still image" caption from COPY.md; the tour button is replaced by "In Calm mode, the model only moves when you move it." The HomeCalm mockup stops after "What is Chiari malformation?"; the rest of the page stays the same, just with Calm styling. No medical text was hidden.
 - **Automatic checks:** `npm test` (Playwright + axe) runs an accessibility scan of every page at desktop and phone width, with Calm mode off and on (48 scans); checks that the browser never contacts another site; and tests the Calm switch, remembering, reduced motion, the phone "Calm on" button and the phone menu. 53 tests, all passing. A GitHub workflow (`.github/workflows/checks.yml`) runs the type check, build and tests on every push. Lighthouse is added when the Explorer exists, so it measures the real 3D page.
-- **Next (step 3):** the Explorer page without 3D: the dark workspace on desktop and phone, condition switch, layer controls, cut-away slider, structure list with info cards, captions and credits.
 - **Open questions:** none.
 
 ## 2026-11-04: Step 1 follow-up: realistic head outline in Fig. 1

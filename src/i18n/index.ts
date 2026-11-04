@@ -22,6 +22,7 @@ export const routes = {
   openSource: '/impact/#open-source',
   about: '/about/',
   privacy: '/privacy/',
+  evidence: '/evidence/',
   es: '/es/',
   // The guided tour is Phase 4; until then it opens the Explorer (approved by Matthew).
   tour: '/explorer/',

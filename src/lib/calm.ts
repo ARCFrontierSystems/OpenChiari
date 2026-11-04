@@ -58,3 +58,14 @@ export function followSystemSetting(): void {
     if (readChoice() === null) apply(event.matches);
   });
 }
+
+/** Wire up every Calm mode switch on the page (`<input data-calm-switch>`). */
+export function bindCalmSwitches(): void {
+  const switches = Array.from(document.querySelectorAll<HTMLInputElement>('input[data-calm-switch]'));
+  if (!switches.length) return;
+  const sync = () => switches.forEach((s) => (s.checked = isCalm()));
+  sync();
+  switches.forEach((s) => s.addEventListener('change', () => setCalm(s.checked)));
+  onCalmChange(sync);
+  followSystemSetting();
+}

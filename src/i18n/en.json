@@ -213,7 +213,6 @@
     "notBuilt": "Not built yet. This page comes in a later step of the build.",
     "backHome": "Back to home",
     "pages": {
-      "explorer": "3D Explorer",
       "explain": "Explain It",
       "studies": "Research studies",
       "prep": "Doctor visit prep",
@@ -222,7 +221,136 @@
       "kit": "Awareness kit",
       "impact": "Impact",
       "about": "About and contact",
-      "privacy": "Privacy"
+      "privacy": "Privacy",
+      "evidence": "Evidence notes"
     }
+  },
+  "explorer": {
+    "title": "3D Explorer",
+    "backHome": "Back to home",
+    "explain": "Explain It",
+    "explainAria": "Explain It: share this view",
+    "condition": "Condition",
+    "conditions": {
+      "typical": {
+        "label": "Typical anatomy",
+        "short": "Typical",
+        "note": "The tonsils usually sit at or above the dashed line across the skull opening (a few millimeters below can still be normal), and spinal fluid moves freely around them.",
+        "noteShort": "Tonsils usually sit at or above the skull opening (a few millimeters below can be normal); fluid moves freely."
+      },
+      "chiari": {
+        "label": "Chiari I",
+        "short": "Chiari I",
+        "note": "The tonsils extend below the opening, at least about 5 mm by the usual definition. In people who need surgery it's often around 10 to 12 mm, but it varies widely. They are often pointed rather than rounded. The fluid space behind them is often crowded, and in many people fluid flow slows or is blocked there.",
+        "noteShort": "Tonsils extend below the opening and crowd the fluid space; in many people flow slows there."
+      },
+      "syrinx": {
+        "label": "Chiari I with syrinx",
+        "short": "With syrinx",
+        "note": "A syrinx is a fluid-filled cavity inside the spinal cord. It often develops alongside Chiari, most often in the neck part of the spinal cord.",
+        "noteShort": "A fluid-filled cavity has formed inside the spinal cord."
+      },
+      "surgery": {
+        "label": "After decompression",
+        "short": "After surgery",
+        "note": "Surgeons remove a small piece of bone at the back of the skull opening and usually the back of the first vertebra. Often they also open and patch the brain's covering to make more room for spinal fluid. The tonsils often rise only partly. Surgery improves or stabilizes symptoms in most people, though damage that has already happened may not fully reverse, and some people need more than one operation. Results vary, and surgery isn't right for everyone.",
+        "noteShort": "Bone is removed at the back of the opening to make room. Most people improve or stabilize; results vary."
+      }
+    },
+    "layers": "Layers",
+    "layerNames": {
+      "skin": "Skin",
+      "bone": "Skull and spine",
+      "brain": "Brain",
+      "csf": "Spinal fluid",
+      "nerves": "Nerves",
+      "vessels": "Blood vessels"
+    },
+    "opacitySuffix": " opacity",
+    "cutaway": "Cut-away",
+    "cutawayAria": "Cut-away depth",
+    "cutWhole": "Whole",
+    "cutMidline": "Midline",
+    "cutFar": "Far side",
+    "model": "Model",
+    "realistic": "Realistic",
+    "simple": "Simple",
+    "viewTools": "View tools",
+    "flow": "Fluid flow",
+    "flowShort": "Flow",
+    "labels": "Labels",
+    "measure": "Measure",
+    "close": "Close",
+    "viewerLabel": "Anatomy view",
+    "captionIllustration": "Illustration, not a medical image",
+    "captionFlow": "Fluid flow simplified",
+    "evidence": "Evidence notes for this view",
+    "structures": "Structures",
+    "search": "Search parts",
+    "selected": "selected",
+    "partsButton": "Parts list · tap a part in the model",
+    "parts": [
+      {
+        "id": "cerebrum",
+        "num": "01",
+        "name": "Cerebrum",
+        "text": "The largest part of the brain, responsible for thinking, movement and the senses."
+      },
+      {
+        "id": "callosum",
+        "num": "02",
+        "name": "Corpus callosum",
+        "text": "A thick band of nerve fibers connecting the left and right halves of the brain."
+      },
+      {
+        "id": "cerebellum",
+        "num": "03",
+        "name": "Cerebellum",
+        "text": "The back part of the brain that helps control balance and coordination."
+      },
+      {
+        "id": "ventricle",
+        "num": "04",
+        "name": "Fourth ventricle",
+        "text": "A small fluid-filled space between the brainstem and cerebellum, where spinal fluid passes through."
+      },
+      {
+        "id": "brainstem",
+        "num": "05",
+        "name": "Brainstem",
+        "text": "Connects the brain to the spinal cord and runs automatic functions like breathing, heart rate and swallowing."
+      },
+      {
+        "id": "tonsil",
+        "num": "06",
+        "name": "Cerebellar tonsil",
+        "text": "The two lowest parts of the cerebellum. In Chiari, they extend below the opening at the base of the skull and are often pointed (peg-shaped) rather than rounded. They really sit just to either side of the midline and often descend unevenly; the model shows them at their lowest point, where MRI measures them."
+      },
+      {
+        "id": "foramen",
+        "num": "07",
+        "name": "Foramen magnum",
+        "text": "The opening at the base of the skull where the brainstem becomes the spinal cord."
+      },
+      {
+        "id": "cord",
+        "num": "08",
+        "name": "Spinal cord",
+        "text": "Carries signals between the brain and the rest of the body."
+      },
+      {
+        "id": "csf",
+        "num": "09",
+        "name": "Spinal fluid (CSF)",
+        "text": "Cerebrospinal fluid: clear fluid that cushions the brain and spinal cord. With each heartbeat it pulses back and forth between the skull and the spinal canal."
+      },
+      {
+        "id": "c2",
+        "num": "10",
+        "name": "C2 vertebra",
+        "text": "The second bone of the neck. Its upward peg, the dens, sits just in front of the spinal cord."
+      }
+    ],
+    "viewOptions": "View and layers"
   }
 }

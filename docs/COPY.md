@@ -809,7 +809,8 @@ Mockup: `design/mockups/About.dc.html`
 - The 3D model is built from
 - Z-Anatomy
 - and BodyParts3D, open anatomy data.
-- Text and every 3D view are checked against the published sources listed in the evidence notes, by automatic measurements and independent audits, before they're published. They have not been reviewed by a medical professional. Last check: [date].
+- Text and every 3D view are checked against the published sources listed in the evidence notes, by automatic measurements and independent audits, before they're published. They have not been reviewed by a medical professional. Last check: November 4, 2026.
+<!-- Placeholder filled 2026-11-04 (Matthew): the date of the last independent audit. -->
 <!-- Changed 2026-11-04: Matthew decided not to use a medical reviewer (was "Text and every 3D view are checked by [reviewer name, credentials] before they're published. Last review: [date]."). -->
 - AI tools helped write the code and first drafts; every page is checked by a person.
 - Principles
@@ -852,7 +853,8 @@ Mockup: `design/mockups/Privacy.dc.html`
 - Español
 - Calm mode
 - Privacy
-- Last updated [date]
+- Last updated November 4, 2026
+<!-- Placeholders filled 2026-11-04 (Matthew): "Last updated" date, and the host (Cloudflare Pages). -->
 - The short version: Open Chiari doesn't know who you are, doesn't use cookies, and never collects health information.
 - What is counted
 - To show the totals on the
@@ -874,7 +876,7 @@ Mockup: `design/mockups/Privacy.dc.html`
 - Calm mode and your language choice are remembered in your own browser so they stay on next time. Clearing your browser data removes them. They're never sent to the site.
 - Outside services
 - Hosting:
-- [host], which handles the site's traffic like any web host.
+- Cloudflare Pages, which handles the site's traffic like any web host.
 - Fonts and 3D files:
 - served from Open Chiari itself, not from Google or other companies.
 - Research studies:

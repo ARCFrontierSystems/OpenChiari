@@ -592,7 +592,7 @@
       "modelBefore": "The 3D model is built from",
       "zAnatomy": "Z-Anatomy",
       "modelAfter": "and BodyParts3D, open anatomy data.",
-      "checks": "Text and every 3D view are checked against the published sources listed in the evidence notes, by automatic measurements and independent audits, before they're published. They have not been reviewed by a medical professional. Last check: [date].",
+      "checks": "Text and every 3D view are checked against the published sources listed in the evidence notes, by automatic measurements and independent audits, before they're published. They have not been reviewed by a medical professional. Last check: November 4, 2026.",
       "ai": "AI tools helped write the code and first drafts; every page is checked by a person."
     },
     "principlesTitle": "Principles",
@@ -633,7 +633,7 @@
   },
   "privacy": {
     "title": "Privacy",
-    "updated": "Last updated [date]",
+    "updated": "Last updated November 4, 2026",
     "short": "The short version: Open Chiari doesn't know who you are, doesn't use cookies, and never collects health information.",
     "countedTitle": "What is counted",
     "counted": {
@@ -671,7 +671,7 @@
     "outside": [
       {
         "term": "Hosting:",
-        "text": "[host], which handles the site's traffic like any web host."
+        "text": "Cloudflare Pages, which handles the site's traffic like any web host."
       },
       {
         "term": "Fonts and 3D files:",

@@ -2,6 +2,7 @@
 // Works on the raw export (millimetres, origin at the middle of the foramen magnum, +x back, +y up, +z side).
 // Run: node model/realistic/check.mjs typical-raw.glb [--condition typical]
 //      node model/realistic/check.mjs chiari-raw.glb --condition chiari --typical typical-raw.glb
+//      node model/realistic/check.mjs surgery-raw.glb --condition surgery --typical typical-raw.glb --chiari chiari-raw.glb
 import { NodeIO } from '@gltf-transform/core';
 import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
 import { MeshoptDecoder } from 'meshoptimizer';
@@ -12,6 +13,7 @@ const condition = process.argv.includes('--condition') ? process.argv[process.ar
 const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({ 'meshopt.decoder': MeshoptDecoder });
 let doc = await io.read(file);
 const typicalFile = process.argv.includes('--typical') ? process.argv[process.argv.indexOf('--typical') + 1] : null;
+const chiariFile = process.argv.includes('--chiari') ? process.argv[process.argv.indexOf('--chiari') + 1] : null;
 const problems = [];
 
 /** World-space vertices and triangles of one structure. */
@@ -50,7 +52,17 @@ const ok = (cond, msg) => { if (!cond) problems.push(msg); };
 
 // ---- McRae line: on the midline, the occipital bone is cut in two by the foramen magnum. The basion is the
 // back tip of the front piece and the opisthion the front tip of the back piece: the closest pair across the gap.
-const occ = section('occipital').filter((p) => Math.abs(p[1]) < 20 && Math.abs(p[0]) < 35);
+// After decompression the back edge has been removed; the line then shows where the opening was, taken from the
+// typical model (same skull).
+let occ;
+if (condition === 'surgery') {
+  if (!typicalFile) throw new Error('after decompression needs --typical <file> for the McRae line');
+  const saved = doc;
+  doc = await io.read(typicalFile);
+  occ = section('occipital');
+  doc = saved;
+} else occ = section('occipital');
+occ = occ.filter((p) => Math.abs(p[1]) < 20 && Math.abs(p[0]) < 35);
 const front = occ.filter((p) => p[0] < 0), back = occ.filter((p) => p[0] > 0);
 let basion = null, opisthion = null, best = Infinity;
 for (const p of front) for (const q of back) { const d = dist(p, q); if (d < best) { best = d; basion = p; opisthion = q; } }
@@ -69,9 +81,12 @@ const tipText = tipAbove >= 0 ? `${tipAbove.toFixed(1)} mm above` : `${(-tipAbov
 if (condition === 'typical') {
   console.log(`Tonsil tip: ${tipText} the McRae line (EVIDENCE.md typical: about 1 mm above)`);
   ok(tipAbove >= 0 && tipAbove <= 2, `typical tonsil tip ${tipText} the line (expected about 1 mm above, 0 to 2)`);
-} else {
+} else if (condition === 'chiari') {
   console.log(`Tonsil tip: ${tipText} the McRae line (EVIDENCE.md Chiari I: at least about 5 mm below; model about 12 mm)`);
   ok(tipAbove <= -10 && tipAbove >= -14, `Chiari I tonsil tip ${tipText} the line (expected about 12 mm below, 10 to 14)`);
+} else {
+  console.log(`Tonsil tip: ${tipText} the McRae line (EVIDENCE.md after decompression: often rise only partly and may stay below)`);
+  ok(tipAbove < 0, 'after decompression the tonsils should still be below the line');
 }
 /** Front-to-back width of the tonsils 3 mm above their lowest point: rounded tips are wide, pointed ones narrow. */
 const tipWidth = (verts, tipY) => { const band = verts.filter((v) => Math.abs(v[1] - (tipY + 3)) < 1.2); return Math.max(...band.map((v) => v[0])) - Math.min(...band.map((v) => v[0])); };
@@ -84,8 +99,37 @@ if (typicalFile) {
   const typWidth = tipWidth(t.verts, tTip[1]);
   doc = saved;
   console.log(`Tonsil tip shape (width 3 mm above the tip): ${condition} ${myWidth.toFixed(1)} mm, typical ${typWidth.toFixed(1)} mm (EVIDENCE.md: rounded vs often pointed or peg-shaped)`);
-  if (condition === 'chiari') ok(myWidth < typWidth * 0.85 && myWidth > typWidth * 0.45, 'the Chiari I tonsil tip should be narrower (peg-shaped) than the typical one, but not a sharp spike (45 to 85% of its width)');
+  if (condition !== 'typical') ok(myWidth < typWidth * 0.85 && myWidth > typWidth * 0.45, 'the Chiari I tonsil tip should be narrower (peg-shaped) than the typical one, but not a sharp spike (45 to 85% of its width)');
 } else console.log(`Tonsil tip width 3 mm above the tip: ${myWidth.toFixed(1)} mm`);
+
+if (chiariFile) {
+  const saved = doc;
+  doc = await io.read(chiariFile);
+  const c = mesh('tonsil');
+  const cTip = Math.min(...c.verts.map(above));
+  doc = saved;
+  const rise = tipAbove - cTip;
+  console.log(`After decompression: tonsils risen ${rise.toFixed(1)} mm from Chiari I (EVIDENCE.md: about 2 mm on average)`);
+  ok(rise >= 1 && rise <= 3, 'after decompression the tonsils should rise about 2 mm (1 to 3) from Chiari I');
+}
+
+// ---- After decompression: bone removed, C1 arch, dural patch.
+if (condition === 'surgery') {
+  const rem = mesh('bone-removed');
+  if (rem) {
+    const skullPart = rem.verts.filter((v) => above(v) > -3);
+    const across = Math.max(...skullPart.map((v) => v[2])) - Math.min(...skullPart.map((v) => v[2]));
+    let along = 0;
+    for (let i = 0; i < skullPart.length; i += 3) for (let j = i + 3; j < skullPart.length; j += 3) along = Math.max(along, Math.hypot(skullPart[i][0] - skullPart[j][0], skullPart[i][1] - skullPart[j][1]));
+    console.log(`Bone removed at the back of the opening: about ${along.toFixed(0)} mm up the skull by ${across.toFixed(0)} mm across (EVIDENCE.md: a window about 3 x 2.5 cm)`);
+    ok(across >= 24 && across <= 34 && along >= 18 && along <= 32, 'the bone removed should be about 30 mm across and 25 mm up the skull');
+  } else problems.push('the removed bone is missing');
+  const c1 = mesh('c1');
+  const middle = c1.verts.filter((v) => Math.abs(v[2]) < 8 && v[0] > 8).length;
+  console.log(`C1 back arch: ${middle} points left in its middle (EVIDENCE.md: the middle of the back arch removed)`);
+  ok(middle === 0, 'the middle of the C1 back arch should be removed');
+  ok(!!mesh('dural-patch'), 'the dural patch is missing');
+}
 
 // ---- Tonsils clear of bone and the spinal cord (nearest surface faces away from the point).
 function insideCount(points, names) {
@@ -139,7 +183,7 @@ ok(densTip[0] < cordFront, 'the dens should sit in front of the spinal cord');
 
 // ---- Fourth ventricle stays above the foramen magnum.
 const v4 = mesh('ventricle-fourth');
-const v4low = Math.min(...v4.verts.map(above));
+const v4low = v4.verts.reduce((m, v) => Math.min(m, above(v)), Infinity);
 console.log(`Fourth ventricle: lowest point ${v4low.toFixed(1)} mm above the McRae line (EVIDENCE.md: normal position)`);
 ok(v4low > 0, 'the fourth ventricle should stay above the foramen magnum');
 
@@ -168,7 +212,12 @@ ok(parts.length === 1, 'the fluid around the cerebellum should be one continuous
 const behind = csf.verts.filter((v) => v[0] > 0 && above(v) < 8).length;
 console.log(`Fluid behind the brainstem within 8 mm above the McRae line: ${behind} points (EVIDENCE.md: typical open; Chiari I often crowded)`);
 if (condition === 'chiari') ok(behind === 0, 'in Chiari I the fluid space behind the tonsils at the opening should be crowded out');
-else ok(behind > 0, 'in typical anatomy there should be fluid behind the brainstem at the opening');
+else ok(behind > 0, 'there should be fluid behind the brainstem at the opening');
+if (condition === 'surgery') {
+  const reach = csf.verts.filter((v) => v[0] > 0).reduce((m, v) => Math.min(m, above(v)), Infinity);
+  console.log(`Re-formed fluid space reaches ${(-reach).toFixed(1)} mm below the McRae line, behind the cord (EVIDENCE.md: re-formed and joined to the fluid behind the cord)`);
+  ok(reach < -8, 'after decompression the re-formed fluid space should reach down past the opening, behind the cord');
+}
 
 if (problems.length) {
   console.error('\nFAILED: the realistic model does not match docs/EVIDENCE.md yet:\n- ' + problems.join('\n- '));

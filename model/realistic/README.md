@@ -33,7 +33,7 @@ confirms "scripts disabled ... skipping".
 | `inventory.py` | Lists all 7,184 objects in the atlas (4,569 surfaces) as JSON |
 | `measure_typical.py` | Foramen magnum along the midline and the tonsil tip vs the McRae line, as the atlas comes |
 | `export_midline_probe.py` | First-look export of the head and upper neck, cut at the midline, as glTF |
-| `extract.py` | Builds the realistic model for one condition: `typical` (tonsils about 1 mm above the McRae line) or `chiari` (about 12 mm below, peg-shaped, fluid behind them crowded out) |
+| `extract.py` | Builds the realistic model for one condition: `typical` (tonsils about 1 mm above the McRae line), `chiari` (about 12 mm below, peg-shaped, fluid behind them crowded out) or `surgery` (after decompression) |
 | `check.mjs` | Automatic measurements against EVIDENCE.md (`npm run model:check:realistic -- <file> [--condition chiari --typical <typical file>]`) |
 
 ```bash
@@ -41,7 +41,15 @@ model/realistic/.venv/bin/python -I model/realistic/extract.py model/source/Z-An
 model/realistic/.venv/bin/python -I model/realistic/extract.py model/source/Z-Anatomy/Startup.blend chiari-raw.glb chiari
 node model/realistic/check.mjs typical-raw.glb
 node model/realistic/check.mjs chiari-raw.glb --condition chiari --typical typical-raw.glb
+model/realistic/.venv/bin/python -I model/realistic/extract.py model/source/Z-Anatomy/Startup.blend surgery-raw.glb surgery
+node model/realistic/check.mjs surgery-raw.glb --condition surgery --typical typical-raw.glb --chiari chiari-raw.glb
 ```
+
+How After decompression is made: the Chiari I tonsils, risen about 2 mm (to about 10.4 mm below the McRae line).
+- **Bone:** the bone is cut exactly along the edges of a window 30 mm across and 25 mm up the back of the skull from the opisthion. The middle 25 mm of C1's back arch is cut away too. Both removed pieces are kept as a faint red outline ("bone-removed").
+- **Dural patch:** a thin curved oval membrane, a few mm outside where the bone was.
+- **Fluid:** the fluid space behind the cerebellum is re-formed in front of the patch, joined to the space behind the cord.
+- **McRae line:** its back end (the opisthion) is removed with the bone, so the check takes the line from the typical model; it shows where the opening was.
 
 How Chiari I is made: the lower part of each atlas tonsil is stretched down (the top, where it joins the
 cerebellum, stays), narrowed toward a blunt tip and drawn toward the midline so it passes through the opening;

@@ -3,6 +3,22 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Phase 2: realistic After decompression
+
+- **Built:** `extract.py ... surgery`.
+  - **Tonsils:** the Chiari I tonsils, risen 2.0 mm (EVIDENCE.md: about 2 mm on average), still 10.4 mm below the line.
+  - **Bone:** the bone is cut exactly along a window about 30 mm across and 25 mm up the back of the skull (EVIDENCE.md: about 3 x 2.5 cm), and the middle 25 mm of C1's back arch is removed. Both are shown as a faint red outline.
+  - **Dural patch:** a thin curved oval membrane, bulging slightly into where the bone was (PMC10549945: "The dura expanded posteriorly into the craniectomy").
+  - **Fluid:** the re-formed space behind the cerebellum, joined to the fluid behind the cord.
+- **Automatic checks** (`check.mjs --condition surgery`), all passing:
+  - tonsils still below the line, risen 2.0 mm from Chiari I;
+  - removed bone about 30 by 30 mm, measured including its thickness;
+  - C1 arch middle gone;
+  - patch present;
+  - fluid one piece, reaching 19.8 mm below the line behind the cord.
+- **Not public:** stays hidden until the accuracy checks and Matthew's approval.
+- **Next:** the syrinx (Chiari I with a fluid-filled cavity in the neck part of the cord), then step 5 (slimming for phones and showing the model in the Explorer behind the Realistic switch).
+
 ## 2026-11-04: Phase 2, step 4: realistic Chiari I
 
 - **Built:** `extract.py ... chiari` makes the Chiari I model from the same atlas.

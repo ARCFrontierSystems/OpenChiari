@@ -20,7 +20,8 @@ from mathutils import Vector, Matrix
 
 blend, out_glb = sys.argv[1], sys.argv[2]
 CONDITION = sys.argv[3] if len(sys.argv) > 3 else 'typical'
-assert CONDITION in ('typical', 'chiari'), CONDITION
+assert CONDITION in ('typical', 'chiari', 'surgery'), CONDITION
+LOW_TONSILS = CONDITION in ('chiari', 'surgery')
 print('condition:', CONDITION)
 bpy.ops.wm.open_mainfile(filepath=blend, load_ui=False, use_scripts=False)
 D = bpy.data
@@ -336,7 +337,8 @@ built.append(finish('cord', bm))
 # model uses 1 mm). Chiari I: about 12 mm below the line (the average in a study of 160 people; the Simple model
 # uses the same), pointed or peg-shaped. The top of each tonsil, where it joins the cerebellum, stays in place;
 # the lower part is stretched down, and for Chiari I narrowed toward the tip.
-TONSIL_TIP_ABOVE = 1.0 if CONDITION == 'typical' else -12.4  # mm
+# After decompression: the tonsils often rise only partly, about 2 mm on average (EVIDENCE.md, PMC10549945).
+TONSIL_TIP_ABOVE = {'typical': 1.0, 'chiari': -12.4, 'surgery': -10.4}[CONDITION]  # mm
 bas_m = TO_MODEL @ basion
 opi_m = TO_MODEL @ opisthion
 def above_mcrae(p):
@@ -357,7 +359,7 @@ def centre(side):
 centres = {True: centre(True), False: centre(False)}
 for v in ton.vertices:
     w = min(1.0, max(0.0, (z_top - v.co.z) / (z_top - z_low)))
-    if CONDITION == 'chiari':
+    if LOW_TONSILS:
         # Narrow toward the tip (peg shape, with a blunt end): up to 38% narrower front to back and side to side
         # near the tip, and drawn in toward the midline so the tonsils pass through the opening (about 30 mm across).
         c = centres[v.co.y > 0]
@@ -400,7 +402,7 @@ above_tree = bvh_of(['cerebrum', 'diencephalon', 'callosum'])
 def inside(tree, p):
     loc, nrm, _, dist = tree.find_nearest(p)
     return loc is not None and (p - loc).dot(nrm) < 0, (dist if loc is not None else 1e9)
-if CONDITION == 'chiari':
+if LOW_TONSILS:
     # Where the lowered tonsils would pass into bone or the spinal cord, push them back out (0.6 mm clear), then
     # smooth lightly; repeated a few times. This leaves them squeezed where the space is tight, as in Chiari I.
     tm = D.objects['tonsil'].data
@@ -423,8 +425,28 @@ brain_tree = bvh_of(['cerebellum', 'tonsil', 'brainstem', 'ventricle-fourth', 'c
 tv_all = [v.co.copy() for v in D.objects['tonsil'].data.vertices]
 print(f'tonsil points inside bone: {sum(1 for v in tv_all if inside(bone_tree, v)[0])}, inside the cord: {sum(1 for v in tv_all if inside(cord_tree, v)[0])} (of {len(tv_all)})', flush=True)
 
+# ---- After decompression: the dural patch's midline curve (model x back, z up; mm). It runs from the top of the
+# bone window down past the opening to behind the cord at C1, a few mm outside where the bone was, so the
+# re-formed fluid space reaches into the opening (EVIDENCE.md: "The dura expanded posteriorly into the craniectomy").
+O2 = (opi_m.x, opi_m.z)
+WIN_DIR = (0.902, 0.432)       # up the back of the skull from the opisthion (as the Simple model's red line)
+WIN_LEN, WIN_HALF = 25.0, 15.0  # mm: window about 25 mm up the skull and 30 mm across (EVIDENCE.md)
+CUT_LEN, CUT_HALF = 20.0, 11.5  # mm: face centres within this; the atlas's faces are coarse, so whole faces reach the full size
+PATCH = [(O2[0] + WIN_LEN * WIN_DIR[0] - 1, O2[1] + WIN_LEN * WIN_DIR[1] + 1), (O2[0] + 12, O2[1] + 4.5),
+         (O2[0] + 5.5, O2[1] - 1.5), (O2[0] - 1, O2[1] - 9), (O2[0] - 7, O2[1] - 16.5)]
+def patch_x(z):
+    # x of the patch at height z (it runs top to bottom), or None outside its range
+    for (xa, za), (xb, zb) in zip(PATCH, PATCH[1:]):
+        if zb <= z <= za:
+            return xa + (xb - xa) * (z - za) / (zb - za)
+    return None
+def in_reformed(p):
+    # below or near the opening, behind the brain, in front of the patch, within the window's width
+    px = patch_x(p.z)
+    return px is not None and abs(p.y) < WIN_HALF and p.x < px - 0.6 and p.x > -2
+
 STEP = 1.0
-XS, YS, ZS = range(-34, 80), range(-62, 63), range(-8, 62)
+XS, YS, ZS = range(-34, 80), range(-62, 63), range(-22, 62)
 NX, NY, NZ = len(XS), len(YS), len(ZS)
 brain = np.zeros((NX, NY, NZ), bool)
 space = np.zeros((NX, NY, NZ), bool)   # inside the skull, above the line, not bone
@@ -436,6 +458,11 @@ for i, ix in enumerate(XS):
             p = Vector((ix * STEP, iy * STEP, iz * STEP))
             b_in, b_d = inside(brain_tree, p)
             brain[i, j, k] = b_in or b_d < 0.6
+            if CONDITION == 'surgery' and in_reformed(p):
+                o_in, o_d = inside(bone_tree, p)
+                if not (o_in or o_d < 0.6):
+                    space[i, j, k] = True
+                continue
             if above_mcrae(p) < -1.0:
                 continue
             o_in, o_d = inside(bone_tree, p)
@@ -550,6 +577,77 @@ for v0 in list(bm.verts):
 GROUPS['csf-cranial'] = dict(layer='csf', part='csf', color='#9CC3DA', opacity=0.75)
 built.append(finish('csf-cranial', bm))
 print(f'fluid surface done, {time.time() - t_fluid:.0f} s', flush=True)
+
+# ---------------------------------------------------------------- after decompression: bone removed, dural patch
+if CONDITION == 'surgery':
+    GROUPS['bone-removed'] = dict(layer='bone', part='removed', color='#9A3412', opacity=0.45)
+    GROUPS['dural-patch'] = dict(layer='csf', part=None, color='#7D6F58', opacity=0.55)
+    removed = bmesh.new()
+    def cut(name, test, planes):
+        # Split the surface exactly along the window's edges (planes: point, normal), then move the faces whose
+        # centre passes `test` into the removed-bone outline.
+        me = D.objects[name].data
+        bm = bmesh.new(); bm.from_mesh(me)
+        for co, no in planes:
+            geom = bm.verts[:] + bm.edges[:] + bm.faces[:]
+            bmesh.ops.bisect_plane(bm, geom=geom, plane_co=co, plane_no=no)
+        bmesh.ops.triangulate(bm, faces=bm.faces)
+        gone = [f for f in bm.faces if test(f.calc_center_median())]
+        tmp = D.meshes.new('tmp')
+        part = bmesh.new()
+        vmap = {}
+        for f in gone:
+            vs = []
+            for v in f.verts:
+                if v not in vmap:
+                    vmap[v] = part.verts.new(v.co)
+                vs.append(vmap[v])
+            part.faces.new(vs)
+        part.to_mesh(tmp); part.free(); removed.from_mesh(tmp); D.meshes.remove(tmp)
+        bmesh.ops.delete(bm, geom=gone, context='FACES')
+        bm.to_mesh(me); bm.free(); me.update()
+        print(f'{name}: {len(gone)} faces removed', flush=True)
+    def skull_window(c):
+        rx, rz = c.x - O2[0], c.z - O2[1]
+        t = rx * WIN_DIR[0] + rz * WIN_DIR[1]
+        s_ = -rx * WIN_DIR[1] + rz * WIN_DIR[0]
+        return abs(c.y) < WIN_HALF and -2 <= t <= WIN_LEN and abs(s_) < 9
+    top = Vector((O2[0] + WIN_LEN * WIN_DIR[0], 0, O2[1] + WIN_LEN * WIN_DIR[1]))
+    win_planes = [(Vector((0, WIN_HALF, 0)), Vector((0, 1, 0))), (Vector((0, -WIN_HALF, 0)), Vector((0, 1, 0))),
+                  (top, Vector((WIN_DIR[0], 0, WIN_DIR[1])))]
+    cut('occipital', skull_window, win_planes)
+    cut('skull', skull_window, win_planes)
+    # C1: the middle of its back arch, about 25 mm across (EVIDENCE.md), behind the cord.
+    cut('c1', lambda c: abs(c.y) < 12.5 and c.x > 3, [(Vector((0, 12.5, 0)), Vector((0, 1, 0))), (Vector((0, -12.5, 0)), Vector((0, 1, 0)))])
+    built.append(finish('bone-removed', removed))
+    # Dural patch: a thin curved sheet along PATCH, 32 mm across, its side edges tucked in a little.
+    pb = bmesh.new()
+    N, M, T = 24, 13, 0.4
+    pts = []
+    for a in range(N + 1):
+        z = PATCH[0][1] + (PATCH[-1][1] - PATCH[0][1]) * a / N
+        pts.append((patch_x(z), z))
+    grid = {}
+    for side, off in ((0, -T), (1, T)):
+        for a, (px, pz) in enumerate(pts):
+            # Rounded ends: narrower at the top and bottom, like a sewn-in oval patch.
+            half = 16 * max(0.35, math.sin(math.pi * (a + 0.5) / (N + 1)) ** 0.5)
+            for b in range(M + 1):
+                y = -half + 2 * half * b / M
+                # Curved like a membrane: the middle bulges back, the edges curve in toward the bone's cut edges.
+                grid[side, a, b] = pb.verts.new((px - 0.03 * y * y + off, y, pz))
+    for side in (0, 1):
+        for a in range(N):
+            for b in range(M):
+                q = [grid[side, a, b], grid[side, a + 1, b], grid[side, a + 1, b + 1], grid[side, a, b + 1]]
+                pb.faces.new(q if side else q[::-1])
+    for a in range(N):
+        for b in (0, M):
+            pb.faces.new([grid[0, a, b], grid[0, a + 1, b], grid[1, a + 1, b], grid[1, a, b]])
+    for b in range(M):
+        for a in (0, N):
+            pb.faces.new([grid[0, a, b], grid[0, a, b + 1], grid[1, a, b + 1], grid[1, a, b]])
+    built.append(finish('dural-patch', pb))
 
 # ---------------------------------------------------------------- measurements (model mm)
 bas = TO_MODEL @ basion

@@ -3,6 +3,25 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Phase 2, step 1: feasibility check of the Z-Anatomy atlas
+
+Matthew said "Proceed" after the Phase 1 review page; taken as the go-ahead for Phase 2. The five open Phase 1 decisions stay open (nothing changed for them).
+
+- **Tools work here:** Blender 5.2.3 runs as a Python package (`bpy`); the Z-Anatomy atlas downloads from GitHub. (blender.org and the BodyParts3D site are blocked by this environment's network settings, but aren't needed.)
+- **License confirmed:** CC BY-SA 4.0, attributing Z-Anatomy and BodyParts3D, matching LICENSE-MODEL.md and the site credit.
+- **Safety:** the atlas contains a script; it's always opened with scripts turned off, and Blender confirms it skipped it.
+- **What the atlas has:** every skull bone, the cerebellum in lobules with **both cerebellar tonsils as separate surfaces**, brainstem, C1 to C4 and discs, spinal dura, ventricles, tentorium, falx. **Missing:** a whole spinal cord, the fluid spaces around the brain, and a usable head skin.
+- **Measured as it comes:** tonsil tip 2.8 mm above the McRae line (EVIDENCE.md: typical about 1 mm above; normal roughly 8 mm above to 5 mm below). Foramen magnum about 38 mm (EVIDENCE.md: 33 to 36 mm) by a rough method, to refine.
+- **First look:** head and upper neck exported and viewed in Three.js (screenshots sent to Matthew). Scripts and notes in `model/realistic/`.
+- **Size:** the first-look export is 8.8 MB uncompressed (249 surfaces); the web versions will need heavy slimming, especially for phones.
+
+**Phase 2 plan (each step ends with screenshots and a stop):**
+1. Feasibility check. *Done (this entry).*
+2. **Extraction pipeline:** a script that picks the head and upper neck structures, groups them into the site's 10 structures and layers (for example, the cerebellar lobules into "Cerebellum"), builds the missing spinal cord inside the atlas's spinal dura, builds the fluid spaces (spinal fluid around the cord, cisterna magna behind the cerebellum), and colours everything with the DESIGN.md anatomy palette. Decide the skin: the atlas's coarse surface regions, or the plain head from Phase 1 fitted around the real skull.
+3. **Typical anatomy checked against EVIDENCE.md:** refine the foramen magnum measurement; Matthew decides whether to keep the atlas's tonsil position (2.8 mm above, within the normal range) or move it to about 1 mm above.
+4. **Chiari I alone:** a script reshapes the tonsils (pointed, peg-like) and lowers their tips about 12 mm below the McRae line, crowds the cisterna magna, shortens the clivus a few millimetres and steepens the tentorium (EVIDENCE.md ranges). The automatic measurement check covers it. Render the views a medical reviewer needs (midline, three-quarter, below). **Stop for Matthew and the medical reviewer.** If scripted reshaping doesn't look convincing, say so: a freelance medical 3D artist may be needed.
+5. After review: Typical, Chiari I with syrinx, After decompression; desktop and phone versions; built into the Explorer behind the "Realistic" switch, which stays off for visitors until the medical review is done.
+
 ## 2026-11-04: Phase 1, step 10: wrap-up — Phase 1 complete, awaiting Matthew's review
 
 - **All checks pass**, from a clean install and on GitHub: type check, 3D model vs EVIDENCE.md, build (13 pages), 72 automated tests (including accessibility on every page at desktop and phone width with Calm mode on and off), and Lighthouse (Home 100/100/100/100; Explorer accessibility, best practices and SEO 100, speed 67 for the reason explained in step 8).

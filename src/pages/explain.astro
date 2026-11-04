@@ -1,0 +1,629 @@
+---
+/**
+ * Explain It. Layout from design/mockups/ExplainShare.dc.html (create a link) and ExplainView.dc.html (what the
+ * recipient sees). All text from src/i18n/en.json, word for word from docs/COPY.md.
+ *
+ * One page, two modes, chosen by the part of the address after the # (see src/explorer/share.ts):
+ * - no note there: make a link. It starts from the view passed by the Explorer (or the starting view), and the
+ *   preview can be turned to set the exact view.
+ * - a note there: the recipient's view, with the note, the model in that view, and an explanation.
+ * Privacy (CLAUDE.md rule 2): the view and the note live only after the #, which browsers never send to a server.
+ * Nothing is stored and no request carries them. The note is only ever inserted as plain text.
+ */
+import Base from '../layouts/Base.astro';
+import { getStrings, routes } from '../i18n';
+import { AUDIENCES, NOTE_MAX } from '../explorer/share';
+
+const s = getStrings();
+const t = s.explain;
+---
+
+<Base title={t.title}>
+  <div class="ex container">
+    <!-- Make a link -->
+    <section class="create" data-create aria-labelledby="explain-title">
+      <div class="preview">
+        <div class="preview-bar">
+          <span class="mono">{t.previewTitle}</span>
+          <span class="mono" data-summary></span>
+        </div>
+        <div class="stage" data-stage>
+          <div class="viewer" data-viewer hidden role="application" aria-roledescription={s.explorer.viewerRole} aria-label={t.previewTitle}></div>
+          <div class="labels" data-labels hidden></div>
+          <div class="figure" data-figure></div>
+        </div>
+      </div>
+
+      <div class="form">
+        <p><a class="button button-secondary back" href={routes.explorer} data-back>{t.backToExplorer}</a></p>
+        <h1 id="explain-title" class="serif">{t.title}</h1>
+        <p class="intro">{t.intro}</p>
+
+        <fieldset class="audience">
+          <legend class="field-label">{t.whoFor}</legend>
+          <div class="segmented">
+            {AUDIENCES.map((a, i) => (
+              <label>
+                <input type="radio" name="audience" value={a} checked={i === 0} />
+                <span>{t.audiences[a]}</span>
+              </label>
+            ))}
+          </div>
+          <p class="hint">{t.audienceHint}</p>
+        </fieldset>
+
+        <div class="note-field">
+          <label class="field-label" for="note">{t.noteLabel}</label>
+          <textarea id="note" maxlength={NOTE_MAX} rows="4" data-note aria-describedby="note-count">{t.starterNotes.fam}</textarea>
+          <p class="count mono" id="note-count" data-count aria-live="polite"></p>
+        </div>
+
+        <label class="check"><input type="checkbox" data-explore checked /> {t.explore}</label>
+
+        <div class="link-block">
+          <label class="field-label" for="link">{t.yourLink}</label>
+          <div class="link-row">
+            <input id="link" class="mono" type="text" readonly data-link />
+            <button type="button" class="button button-primary" data-copy>{t.copy}</button>
+          </div>
+          <div class="share-row">
+            <a class="button button-secondary" data-sms href="sms:">{t.sms}</a>
+            <a class="button button-secondary" data-email href="mailto:">{t.email}</a>
+            <button type="button" class="button button-secondary" data-qr-open>{t.qr}</button>
+          </div>
+          <p class="status" role="status" data-status></p>
+          <p class="hint">{t.privacy}</p>
+        </div>
+      </div>
+
+      <dialog class="qr" data-qr aria-labelledby="qr-title">
+        <h2 id="qr-title">{t.qr}</h2>
+        <div class="qr-code" data-qr-code></div>
+        <form method="dialog"><button class="button button-secondary">{s.explorer.close}</button></form>
+      </dialog>
+    </section>
+
+    <!-- What the recipient sees -->
+    <section class="recipient" data-recipient hidden aria-labelledby="shared-title">
+      <h1 id="shared-title" class="eyebrow mono">{t.sharedWithYou}</h1>
+      <blockquote class="note serif" data-shared-note></blockquote>
+      <figure class="card">
+        <div class="stage" data-stage>
+          <div class="viewer" data-viewer hidden role="application" aria-roledescription={s.explorer.viewerRole}></div>
+          <div class="labels" data-labels hidden></div>
+          <div class="figure" data-figure></div>
+        </div>
+        <figcaption data-caption></figcaption>
+      </figure>
+      <h2 class="serif">{t.lookingTitle}</h2>
+      <div class="looking" data-looking></div>
+      <h3>{t.helpTitle}</h3>
+      <p class="help">{t.help}</p>
+      <p><a class="button button-primary full" href={routes.explorer} data-full>{t.exploreFull}</a></p>
+    </section>
+  </div>
+</Base>
+
+<script>
+  import qrcode from 'qrcode-generator';
+  import { createStore, initialState, type ViewState } from '../explorer/state';
+  import { decodeView, encodeView, NOTE_MAX, type Audience, type Orbit } from '../explorer/share';
+  import { anatomyFigureSvg } from '../lib/anatomy-figure';
+  import strings from '../i18n/en.json';
+
+  const t = strings.explain;
+  const x = strings.explorer;
+  const shared = decodeView(location.hash);
+  const recipientMode = !!shared && shared.note !== null;
+  // A new set of settings after the # (without a page load) starts the page afresh.
+  window.addEventListener('hashchange', () => location.reload());
+
+  const section = document.querySelector<HTMLElement>(recipientMode ? '[data-recipient]' : '[data-create]')!;
+  document.querySelector<HTMLElement>('[data-create]')!.hidden = recipientMode;
+  document.querySelector<HTMLElement>('[data-recipient]')!.hidden = !recipientMode;
+  const store = createStore(shared?.state ?? initialState);
+  const LABEL_LAYERS: Record<string, 'brain' | 'csf' | 'bone'> = {
+    cerebrum: 'brain', callosum: 'brain', cerebellum: 'brain', brainstem: 'brain', tonsil: 'brain', cord: 'brain',
+    ventricle: 'csf', csf: 'csf', foramen: 'bone', c2: 'bone', syrinx: 'brain', removed: 'bone',
+  };
+  const viewName = (st: ViewState) => x.viewNames[st.camera].toLowerCase();
+
+  // ----- The model: 2D figure until the 3D view is ready (or if it can't run) -----
+  const host = section.querySelector<HTMLElement>('[data-viewer]')!;
+  const figure = section.querySelector<HTMLElement>('[data-figure]')!;
+  let viewer: { orbit(): Orbit } | null = null;
+  /** Rewrites the link (make-a-link mode only; set below). */
+  let refreshLink = () => {};
+  store.subscribe((st) => {
+    figure.innerHTML = anatomyFigureSvg({ condition: st.condition, flow: st.flow, labels: false, measure: st.measure, dark: true }, strings.figure);
+  });
+  const interactive = !recipientMode || !!shared?.explore;
+  import('../explorer/viewer3d').then(async ({ webglAvailable, createViewer, labelAnchor }) => {
+    if (!webglAvailable()) return;
+    host.hidden = false;
+    try {
+      const v = await createViewer(host, store, strings.figure, {
+        labelsHost: section.querySelector<HTMLElement>('[data-labels]'),
+        labelMargins: { top: 12, bottom: 12 },
+        labels: x.parts.map((p) => ({ part: p.id, num: p.num, name: p.name, layer: LABEL_LAYERS[p.id], anchor: labelAnchor(p.id, store.get().condition), conditions: p.conditions })),
+        realisticUrl: () => `/models/realistic/realistic-${Math.min(window.innerWidth, window.innerHeight) < 700 ? 'phone' : 'desktop'}.glb`,
+        startOrbit: shared?.orbit ?? null,
+        interactive,
+      });
+      viewer = (host as HTMLElement & { viewer: { orbit(): Orbit } }).viewer;
+      void v;
+      section.classList.add('has-3d');
+      if (!interactive) host.setAttribute('role', 'img');
+      host.setAttribute('aria-label', `${strings.figure.ariaPrefix}${strings.figure.aria[store.get().condition]}. ${x.viewNames[store.get().camera]}.`);
+      refreshLink();
+    } catch (error) {
+      console.warn('3D view unavailable, showing the figure instead.', error);
+      host.hidden = true;
+      host.replaceChildren();
+    }
+  });
+
+  const viewLink = (path: string, note: string | null, explore: boolean, audience: Audience) =>
+    `${location.origin}${path}#${encodeView({ state: store.get(), orbit: store.get().camera === 'custom' ? viewer?.orbit() ?? shared?.orbit ?? null : null, explore, audience, note })}`;
+
+  if (recipientMode && shared) {
+    // ----- What the recipient sees -----
+    const st = store.get();
+    const cond = x.conditions[st.condition];
+    section.querySelector('[data-shared-note]')!.textContent = shared.note;
+    const caption = [`${cond.label}, ${viewName(st)}.`];
+    if (interactive) caption.push(t.dragHint);
+    caption.push(`${x.captionIllustration}.`);
+    if (st.flow) caption.push(`${x.captionFlow}.`);
+    section.querySelector('[data-caption]')!.textContent = caption.join(' ');
+    // The approved Chiari I explanation refers to the dashed line and the blue bracket, so it's used only when the
+    // Measure marks are shown; otherwise each view's own approved note from the Explorer explains it.
+    const looking = section.querySelector<HTMLElement>('[data-looking]')!;
+    if ((st.condition === 'chiari' || st.condition === 'syrinx') && st.measure) {
+      const ol = document.createElement('ol');
+      for (const line of t.lookingChiari) ol.appendChild(document.createElement('li')).textContent = line;
+      looking.appendChild(ol);
+      if (st.condition === 'syrinx') looking.appendChild(document.createElement('p')).textContent = x.conditions.syrinx.note;
+    } else looking.appendChild(document.createElement('p')).textContent = cond.note;
+    section.querySelector<HTMLAnchorElement>('[data-full]')!.href = viewLink('/explorer/', null, true, shared.audience);
+  } else {
+    // ----- Make a link -----
+    const note = section.querySelector<HTMLTextAreaElement>('[data-note]')!;
+    const count = section.querySelector<HTMLElement>('[data-count]')!;
+    const explore = section.querySelector<HTMLInputElement>('[data-explore]')!;
+    const link = section.querySelector<HTMLInputElement>('[data-link]')!;
+    const status = section.querySelector<HTMLElement>('[data-status]')!;
+    const summary = section.querySelector<HTMLElement>('[data-summary]')!;
+    const radios = Array.from(section.querySelectorAll<HTMLInputElement>('input[name="audience"]'));
+    const audience = () => (radios.find((r) => r.checked)?.value ?? 'fam') as Audience;
+    if (shared) {
+      radios.forEach((r) => (r.checked = r.value === shared.audience));
+      explore.checked = shared.explore;
+      note.value = t.starterNotes[shared.audience];
+    }
+    // Picking who it's for puts in that starter note, unless the note has been changed by hand.
+    let starter = note.value;
+    radios.forEach((r) =>
+      r.addEventListener('change', () => {
+        if (note.value === starter) note.value = starter = t.starterNotes[audience()];
+        update();
+      }),
+    );
+
+    let qrFor = '';
+    function update() {
+      const st = store.get();
+      count.textContent = `${note.value.length} / ${NOTE_MAX}`;
+      const parts = [x.conditions[st.condition].label, viewName(st)];
+      if (st.flow) parts.push(x.flow.toLowerCase());
+      if (st.measure) parts.push(x.measure.toLowerCase());
+      if (st.labels) parts.push(x.labels.toLowerCase());
+      summary.textContent = parts.join(' · ');
+      const url = viewLink('/explain/', note.value, explore.checked, audience());
+      if (link.value !== url) {
+        link.value = url;
+        status.textContent = '';
+      }
+      section.querySelector<HTMLAnchorElement>('[data-sms]')!.href = `sms:?&body=${encodeURIComponent(url)}`;
+      section.querySelector<HTMLAnchorElement>('[data-email]')!.href = `mailto:?body=${encodeURIComponent(url)}`;
+      section.querySelector<HTMLAnchorElement>('[data-back]')!.href = viewLink('/explorer/', null, true, audience());
+      qrFor = '';
+    }
+    refreshLink = update;
+    note.addEventListener('input', update);
+    explore.addEventListener('change', update);
+    store.subscribe(() => update());
+    // Turning the preview by hand changes the view in the link.
+    const stage = section.querySelector<HTMLElement>('[data-stage]')!;
+    let timer = 0;
+    const soon = () => {
+      clearTimeout(timer);
+      timer = window.setTimeout(update, 150);
+    };
+    ['pointerup', 'wheel', 'keyup', 'touchend'].forEach((type) => stage.addEventListener(type, soon, { passive: true }));
+
+    section.querySelector('[data-copy]')!.addEventListener('click', async () => {
+      update();
+      try {
+        await navigator.clipboard.writeText(link.value);
+        status.textContent = strings.model.copied;
+      } catch {
+        link.select();
+      }
+    });
+    const dialog = section.querySelector<HTMLDialogElement>('[data-qr]')!;
+    section.querySelector('[data-qr-open]')!.addEventListener('click', () => {
+      update();
+      if (qrFor !== link.value) {
+        const q = qrcode(0, 'M');
+        q.addData(link.value);
+        q.make();
+        section.querySelector('[data-qr-code]')!.innerHTML = q.createSvgTag({ cellSize: 4, margin: 4, scalable: true });
+        qrFor = link.value;
+      }
+      dialog.showModal();
+    });
+    update();
+  }
+</script>
+
+<style>
+  .ex {
+    padding-top: var(--s-48);
+    padding-bottom: var(--s-72);
+  }
+  .field-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: var(--s-8);
+  }
+  .hint {
+    font-size: var(--text-small);
+    color: var(--muted);
+  }
+
+  /* ---------- Make a link ---------- */
+  .create {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-40);
+    align-items: flex-start;
+  }
+  .create[hidden],
+  .recipient[hidden] {
+    display: none;
+  }
+  .preview {
+    flex: 999 1 520px;
+    min-width: 0;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+  }
+  .preview-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--s-8) var(--s-16);
+    padding: var(--s-12) var(--s-16);
+    border-bottom: 1px solid var(--rule);
+    font-size: var(--text-mono);
+    color: var(--muted);
+  }
+  .form {
+    flex: 1 1 380px;
+    max-width: 460px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-24);
+  }
+  .form h1 {
+    font-size: 40px;
+    line-height: 1.1;
+  }
+  .intro {
+    color: var(--ink-2);
+    margin-top: calc(-1 * var(--s-16));
+  }
+  .back {
+    align-self: flex-start;
+  }
+  .audience {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  .segmented {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--ink);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: var(--s-8);
+  }
+  .segmented label {
+    position: relative;
+    cursor: pointer;
+  }
+  .segmented label + label {
+    border-left: 1px solid var(--ink);
+  }
+  .segmented input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+  }
+  .segmented span {
+    min-height: var(--touch);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 var(--s-8);
+    background: var(--surface);
+  }
+  .segmented input:checked + span {
+    background: var(--ink);
+    color: #FFFFFF;
+  }
+  .segmented input:focus-visible + span {
+    outline: 2px solid var(--accent);
+    outline-offset: -4px;
+  }
+  .note-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: var(--s-12);
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    font: inherit;
+    color: var(--ink);
+    resize: vertical;
+  }
+  .count {
+    text-align: right;
+    font-size: var(--text-mono);
+    color: var(--muted);
+    margin-top: var(--s-4);
+  }
+  .check {
+    min-height: var(--touch);
+    display: flex;
+    align-items: center;
+    gap: var(--s-12);
+    cursor: pointer;
+  }
+  .check input {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--accent);
+  }
+  .link-block {
+    border-top: 1px solid var(--rule);
+    padding-top: var(--s-24);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-8);
+  }
+  .link-row {
+    display: flex;
+    gap: var(--s-8);
+  }
+  .link-row input {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: var(--touch);
+    padding: 0 var(--s-12);
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    font-size: var(--text-mono);
+    color: var(--ink);
+  }
+  .share-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-8);
+  }
+  .share-row .button {
+    padding: 0 var(--s-8);
+    white-space: nowrap;
+    font-size: 15px;
+  }
+  button.button {
+    font: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: transparent;
+  }
+  button.button-primary {
+    background: var(--accent);
+  }
+  .status {
+    color: var(--status-good);
+    font-size: var(--text-small);
+    min-height: 1em;
+  }
+  .qr {
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: var(--s-24);
+    text-align: center;
+  }
+  .qr::backdrop {
+    background: rgba(17, 18, 21, 0.6);
+  }
+  .qr h2 {
+    font-size: 18px;
+    margin-bottom: var(--s-12);
+  }
+  .qr-code {
+    width: min(70vw, 320px);
+    margin: 0 auto var(--s-16);
+  }
+  .qr-code :global(svg) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* ---------- The model, in a dark stage like the Explorer ---------- */
+  .stage {
+    position: relative;
+    height: min(70vh, 640px);
+    min-height: 340px;
+    background: var(--x-viewport);
+    overflow: hidden;
+  }
+  .viewer {
+    position: absolute;
+    inset: 0;
+  }
+  .viewer :global(canvas) {
+    display: block;
+    cursor: grab;
+  }
+  .viewer[role='img'] :global(canvas) {
+    cursor: default;
+  }
+  .figure {
+    position: absolute;
+    inset: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .figure :global(.anatomy-figure) {
+    width: 100%;
+    height: 100%;
+  }
+  .has-3d .figure {
+    display: none;
+  }
+  .labels {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  @media (max-width: 599px) {
+    .labels {
+      display: none !important;
+    }
+  }
+  .labels :global(.x-label-lines) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .labels :global(.x-label-lines line) {
+    stroke: var(--x-faint);
+    stroke-width: 0.75;
+  }
+  .labels :global(.x-label) {
+    position: absolute;
+    right: 16px;
+    width: 200px;
+    min-height: var(--touch);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 8px;
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    background: var(--x-viewport);
+    color: var(--x-text);
+    font: 400 13px var(--font-sans);
+    text-align: left;
+    cursor: pointer;
+    pointer-events: auto;
+  }
+  .labels :global(.x-label[hidden]) {
+    display: none;
+  }
+  .labels :global(.x-label.is-selected) {
+    border-color: var(--x-accent);
+    background: var(--x-accent-tint);
+  }
+  .labels :global(.x-label-num) {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--x-muted);
+  }
+
+  /* ---------- What the recipient sees ---------- */
+  .recipient {
+    max-width: 760px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-20);
+  }
+  .eyebrow {
+    font-size: var(--text-mono);
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .note {
+    margin: 0;
+    padding: var(--s-20) var(--s-24);
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--accent);
+    font-size: 22px;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  .card {
+    margin: 0;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+  }
+  .card .stage {
+    height: min(60vh, 560px);
+  }
+  .card figcaption {
+    padding: var(--s-12) var(--s-16);
+    font-size: var(--text-small);
+    color: var(--muted);
+  }
+  .recipient h2 {
+    font-size: 28px;
+    margin-top: var(--s-12);
+  }
+  .looking :global(ol) {
+    padding-left: 1.3em;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-8);
+  }
+  .looking,
+  .help {
+    color: var(--ink-2);
+  }
+  .recipient h3 {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .full {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  @media (max-width: 720px) {
+    .ex {
+      padding-top: var(--s-24);
+    }
+    .form h1 {
+      font-size: 32px;
+    }
+    .stage {
+      height: 62vh;
+    }
+    .note {
+      font-size: 19px;
+    }
+    .recipient h2 {
+      font-size: 24px;
+    }
+  }
+</style>

@@ -3,6 +3,31 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Phase 3, step 3: Explain It
+
+- **Live site (Matthew):** the site is on Cloudflare Pages. Merging into `main` publishes it automatically (`.github/workflows/deploy.yml`, with the two Cloudflare secrets in GitHub). First published November 4, 2026.
+- **Explain It** (`/explain/`, from the ExplainShare and ExplainView mockups). One page with two modes.
+  - **Make a link:**
+    - It opens in the view passed by the Explorer's Explain It button: condition, camera (including a hand-turned angle and zoom), layers, cut-away, flow, measure, labels and model.
+    - The preview can be turned to set the exact view.
+    - It has "Who is it for?", the note (280 characters, with a counter), "Let them rotate and explore on their own", and the link with Copy, Text message, Email and QR code.
+    - The QR code is made in the browser (qrcode-generator, MIT, bundled; no outside requests).
+  - **Recipient:**
+    - the note, shown as plain text only;
+    - the model in that exact view, look-only if the sender turned off exploring;
+    - a caption built from approved pieces, for example "Chiari I, side view. Drag to turn the model. Illustration, not a medical image. Fluid flow simplified.";
+    - "What you're looking at", "How you can help" and "Explore the full 3D model". That button opens the Explorer in the same view, without the note.
+- **Privacy:** the view and note live only after the # (`src/explorer/share.ts`). A test checks that no request carries the note and that the link has nothing before the #.
+- **Approved text only (Matthew's decision):**
+  - The family starter note is the starter for all four audiences.
+  - The approved Chiari I explanation is shown for Chiari I and Chiari I with syrinx when the measure marks are on, since it refers to the dashed line and the blue bracket. Otherwise each view's approved note from the Explorer is shown.
+  - Drafts of the missing notes and explanations are next, for Matthew's approval.
+- **Viewer:**
+  - can start from an exact camera, report the camera angle, and run look-only;
+  - a view starting from a named direction other than the side now opens from that direction (it used to open from the side);
+  - the Explorer opens a view passed after the #.
+- **Checks:** new tests cover the view passing from the Explorer, privacy, a note containing code shown as plain text, the 280-character limit and the recipient explanation. The recipient view is added to the accessibility scans. 87 tests pass.
+
 ## 2026-11-04: Logo, and getting ready to go live
 
 - **Logo (Matthew):** saved as `design/brand/open-chiari-logo.png`. `scripts/make-brand.py` makes the web versions in `public/brand/`:

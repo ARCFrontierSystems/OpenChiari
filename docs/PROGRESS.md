@@ -3,6 +3,26 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Phase 1, step 7: fluid flow and Measure in 3D
+
+- **Fluid flow** is now part of the 3D scene: blue chevrons in the spinal fluid spaces, at the figure's positions, pulse down and back with each heartbeat (about 72 beats a minute), fading slightly with the pulse.
+  - Typical and After decompression: flow moves freely, including in the fluid space behind the cerebellum.
+  - Chiari I and with syrinx: the column behind the tonsils barely moves, and the red restricted-flow marks sit at the skull opening, as in the figure. The on-screen text keeps the EVIDENCE.md wording ("in many people").
+  - No motion in Calm mode or when the system asks for reduced motion: the chevrons stay still. The animation only runs while Fluid flow is on, the spinal fluid layer is on, and the view is on screen; capped at about 30 frames a second to save battery.
+  - "Fluid flow simplified" stays on screen.
+- **Measure** is now part of the 3D scene too: the dashed McRae line with its end dots (basion and opisthion) and the blue bracket down to the lowest tonsil tip (Chiari views and after decompression). It's drawn on top of the model, so it stays visible when the model is turned. Nothing changed in the numbers (`npm run model:check` still passes).
+- The midline cut face no longer paints its own flow and measure marks (the 3D ones replace them); the 2D fallback figure still has them.
+- **Checks:** 69 tests pass, including flow animating by default and stopping in Calm mode, with reduced motion, and when turned off.
+
+**Open question for Matthew:** a number next to the bracket would need new medical text. Proposed wording, for approval: "In this model, the tonsil tip sits about 12 mm below the line" (Chiari I), "about 1 mm above the line" (Typical) and "about 9 mm below the line, about 4 mm higher than before surgery" (After decompression). Each matches `npm run model:check` and EVIDENCE.md. Not added until approved.
+
+**Next: step 8, phone check.**
+- Measure how the Explorer runs on a mid-range phone profile: load time, download size (about 810 KB compressed for the 3D view now), frame rate while turning and with fluid flow, and memory.
+- Slim the model if needed (stronger simplification, especially the two skull versions) and keep the 2D figure fallback fast.
+- Check touch: pinch to zoom, two-finger move, tap to identify, the Layers panel and parts list; smooth the small cosmetic items noted earlier (skull shading line, temple line) if time allows.
+- Add Lighthouse to the automatic checks for the Home and Explorer pages.
+- Stop for Matthew's review.
+
 ## 2026-11-04: Phase 1, step 6: viewer tools
 
 - **Camera buttons:** Side, Back, Below, Front and Reset (top right of the view on desktop; in the Layers panel on phones). The camera glides to each view, or jumps in Calm mode. The current view is shown as pressed; turning the model yourself switches to "Turned view".

@@ -217,6 +217,31 @@ test.describe('3D Explorer controls', () => {
     await expect(page.getByRole('application')).toHaveAccessibleName(/Turned view/);
   });
 
+  test('fluid flow animates, and stays still in Calm mode, with reduced motion, or when turned off', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/explorer/');
+    await expect(page.locator('.x-view')).toHaveClass(/has-3d/, { timeout: 30000 });
+    const animating = () => page.evaluate(() => (document.querySelector('[data-viewer]') as HTMLElement & { viewer: { flowAnimating: boolean } }).viewer.flowAnimating);
+    await expect.poll(animating).toBe(true);
+    await page.locator('.x-toolbar').getByRole('button', { name: 'Fluid flow' }).click();
+    await expect.poll(animating).toBe(false);
+    await page.locator('.x-toolbar').getByRole('button', { name: 'Fluid flow' }).click();
+    await expect.poll(animating).toBe(true);
+    await page.getByRole('switch', { name: 'Calm mode' }).check();
+    await expect.poll(animating).toBe(false);
+  });
+
+  test('reduced motion: fluid flow does not animate', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await setCalm(page, 'off');
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/explorer/');
+    await expect(page.locator('.x-view')).toHaveClass(/has-3d/, { timeout: 30000 });
+    await page.waitForTimeout(500);
+    const animating = await page.evaluate(() => (document.querySelector('[data-viewer]') as HTMLElement & { viewer: { flowAnimating: boolean } }).viewer.flowAnimating);
+    expect(animating).toBe(false);
+  });
+
   test('required captions and credits are on the page', async ({ page }) => {
     await page.goto('/explorer/');
     await expect(page.getByText('Illustration, not a medical image').first()).toBeVisible();

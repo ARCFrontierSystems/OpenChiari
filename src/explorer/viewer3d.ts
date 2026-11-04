@@ -15,7 +15,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import type { Store, ViewState, LayerId, CameraView } from './state';
 import { anatomyFigureSvg, type FigureStrings, type FigureLayer } from '../lib/anatomy-figure';
-import { isCalm } from '../lib/calm';
+import { isCalm, onCalmChange } from '../lib/calm';
 import shapes from '../lib/anatomy-shapes.json';
 
 const MODEL_URL = '/models/simple.glb';
@@ -245,11 +245,11 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       const l = st.layers[id as LayerId];
       layers[id] = l.on ? l.opacity / 100 : 0;
     }
-    const key = JSON.stringify([st.condition, st.flow, st.measure, layers, st.part]);
+    const key = JSON.stringify([st.condition, layers, st.part]);
     if (key === sectionKey) return;
     sectionKey = key;
     const job = ++sectionJob;
-    const svg = anatomyFigureSvg({ condition: st.condition, flow: st.flow, measure: st.measure, labels: false, layers }, figureStrings)
+    const svg = anatomyFigureSvg({ condition: st.condition, flow: false, measure: false, labels: false, layers }, figureStrings)
       .replace('<svg ', `<svg width="${sectionCanvas.width}" height="${sectionCanvas.height}" `);
     const img = new Image();
     img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
@@ -628,6 +628,133 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     }
   }
 
+  // ----- Fluid flow and Measure, drawn in the model -----
+  /** A point on the midline, from figure units, just in front of the midline cut face. */
+  const fig = (x: number, y: number, z = 0.35) =>
+    new THREE.Vector3((x - ORIGIN.x) / FIGURE_UNITS_PER_MM, -(y - ORIGIN.y) / FIGURE_UNITS_PER_MM, z);
+  /** A thin bar between two points (used for chevrons, marks, lines). */
+  function bar(a: THREE.Vector3, b: THREE.Vector3, width: number, material: THREE.Material) {
+    const length = a.distanceTo(b);
+    const mesh = new THREE.Mesh(new THREE.BoxGeometry(length, width, 0.3), material);
+    mesh.position.copy(a).add(b).multiplyScalar(0.5);
+    mesh.rotation.z = Math.atan2(b.y - a.y, b.x - a.x);
+    return mesh;
+  }
+  const FLOW_BLUE = '#1F5F8B';
+  const RESTRICTED = '#9A3412';
+  // Flow marks sit just in front of the cut face, so they get their own cut, 1 mm further out.
+  const overlayPlane = new THREE.Plane(new THREE.Vector3(0, 0, -1), 1);
+  // (Marked see-through so they're drawn after the cut face, in the order set below.)
+  const flowMat = new THREE.MeshBasicMaterial({ color: FLOW_BLUE, clippingPlanes: [overlayPlane], transparent: true });
+  const restrictedMat = new THREE.MeshBasicMaterial({ color: RESTRICTED, clippingPlanes: [overlayPlane], transparent: true });
+  /** A downward chevron (as in the figure: 5 mm wide, 3 mm tall), centred on the origin. */
+  function chevron() {
+    const g = new THREE.Group();
+    g.add(bar(new THREE.Vector3(-2.5, 1.5, 0), new THREE.Vector3(0, -1.5, 0), 1, flowMat));
+    g.add(bar(new THREE.Vector3(0, -1.5, 0), new THREE.Vector3(2.5, 1.5, 0), 1, flowMat));
+    return g;
+  }
+  // Chevron positions and the restricted-flow marks are the figure's own (src/lib/anatomy-figure.ts).
+  const FLOW_OPEN: [number, number][] = [[331, 481], [332, 531], [333, 581], [374, 481], [375, 531], [376, 581], [416, 425]];
+  const FLOW_BLOCKED: [number, number][] = [[331, 481], [332, 531], [333, 581], [375, 551]];
+  const RESTRICTED_MARKS: [number, number, number, number][] = [[390, 440, 398, 434], [390, 448, 398, 442], [390, 456, 398, 450]];
+  const flowGroup = new THREE.Group();
+  flowGroup.renderOrder = 2500;
+  scene.add(flowGroup);
+  /** Each chevron with its resting place and how far it moves with each heartbeat (mm). */
+  let chevrons: { obj: THREE.Object3D; base: THREE.Vector3; amp: number }[] = [];
+  let flowCondition = '';
+  function buildFlow(condition: string) {
+    if (condition === flowCondition) return;
+    flowCondition = condition;
+    flowGroup.clear();
+    chevrons = [];
+    const blocked = condition === 'chiari' || condition === 'syrinx';
+    for (const [x, y] of blocked ? FLOW_BLOCKED : FLOW_OPEN) {
+      const obj = chevron();
+      const base = fig(x, y);
+      obj.position.copy(base);
+      // Behind the tonsils in Chiari views, fluid barely moves (restricted); elsewhere it moves freely.
+      const restrictedHere = blocked && x > 360;
+      chevrons.push({ obj, base, amp: restrictedHere ? 0.8 : 3 });
+      obj.traverse((m) => (m.renderOrder = 2500));
+      flowGroup.add(obj);
+    }
+    if (blocked)
+      for (const [x1, y1, x2, y2] of RESTRICTED_MARKS) {
+        const mark = bar(fig(x1, y1), fig(x2, y2), 1, restrictedMat);
+        mark.renderOrder = 2500;
+        flowGroup.add(mark);
+      }
+  }
+  /** Heartbeat-like motion, about 72 beats a minute: a quick push down, then a slower return. */
+  const BEAT = 60 / 72;
+  function heartbeat(seconds: number) {
+    const p = (seconds % BEAT) / BEAT;
+    return p < 0.3 ? Math.sin((p / 0.3) * (Math.PI / 2)) : 0.5 + 0.5 * Math.cos(((p - 0.3) / 0.7) * Math.PI);
+  }
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const stillOnly = () => isCalm() || reducedMotion.matches;
+  function placeFlow(seconds: number | null) {
+    const w = seconds === null ? 0.5 : heartbeat(seconds);
+    for (const c of chevrons) c.obj.position.set(c.base.x, c.base.y - c.amp * (w - 0.5), c.base.z);
+    flowMat.opacity = seconds === null ? 1 : 0.65 + 0.35 * w;
+  }
+  let flowLoop = 0;
+  let lastFlowFrame = 0;
+  function startFlowLoop() {
+    if (flowLoop) return;
+    const tick = (now: number) => {
+      flowLoop = 0;
+      const st = store.get();
+      if (!st.flow || stillOnly() || !flowGroup.visible) {
+        placeFlow(null);
+        requestRender();
+        return;
+      }
+      // About 30 frames a second is plenty for a gentle pulse, and easier on phone batteries.
+      if (visible && !document.hidden && now - lastFlowFrame > 30) {
+        lastFlowFrame = now;
+        placeFlow(now / 1000);
+        requestRender();
+      }
+      flowLoop = requestAnimationFrame(tick);
+    };
+    flowLoop = requestAnimationFrame(tick);
+  }
+
+  // Measure: the McRae line (basion to opisthion) and the bracket down to the lowest tonsil tip.
+  // Drawn on top of the model so it stays visible when the model is turned.
+  const measureGroup = new THREE.Group();
+  scene.add(measureGroup);
+  const inkMat = new THREE.MeshBasicMaterial({ color: '#1C1D21', depthTest: false, depthWrite: false, transparent: true });
+  const bracketMat = new THREE.MeshBasicMaterial({ color: FLOW_BLUE, depthTest: false, depthWrite: false, transparent: true });
+  let measureCondition = '';
+  function buildMeasure(condition: string) {
+    if (condition === measureCondition) return;
+    measureCondition = condition;
+    measureGroup.clear();
+    const [bx, by] = shapes.mcrae.basion, [ox, oy] = shapes.mcrae.opisthion;
+    const b = fig(bx, by, 0.5), o = fig(ox, oy, 0.5);
+    // Dashed line: 2 mm dashes, 1.5 mm gaps (the figure's dash pattern).
+    const total = b.distanceTo(o);
+    for (let d = 0; d < total; d += 3.5) {
+      const a = b.clone().lerp(o, d / total), e = b.clone().lerp(o, Math.min(total, d + 2) / total);
+      measureGroup.add(bar(a, e, 0.65, inkMat));
+    }
+    for (const p of [b, o]) {
+      const dot = new THREE.Mesh(new THREE.SphereGeometry(1.25, 16, 12), inkMat);
+      dot.position.copy(p);
+      measureGroup.add(dot);
+    }
+    const tip = condition === 'typical' ? null : condition === 'surgery' ? 463 : 471;
+    if (tip !== null) {
+      measureGroup.add(bar(fig(368, 447, 0.5), fig(368, tip, 0.5), 0.75, bracketMat));
+      measureGroup.add(bar(fig(362, tip, 0.5), fig(374, tip, 0.5), 0.75, bracketMat));
+    }
+    measureGroup.traverse((m) => (m.renderOrder = 3000));
+  }
+
   // ----- Apply the view state -----
   let lastCamera: CameraView = store.get().camera;
   let lastPart = '';
@@ -658,9 +785,21 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       goToPreset(st.camera);
     }
     if (labelsHost) labelsHost.hidden = !st.labels;
+    overlayPlane.constant = cutDepth(st.cut) + 1;
+    buildFlow(st.condition);
+    flowGroup.visible = st.flow && st.layers.csf.on;
+    if (flowGroup.visible) {
+      if (stillOnly()) placeFlow(null);
+      else startFlowLoop();
+    }
+    buildMeasure(st.condition);
+    measureGroup.visible = st.measure;
     requestRender();
   }
   store.subscribe(apply);
+  // Calm mode or the system's reduced-motion setting can change while the page is open.
+  onCalmChange(() => apply(store.get()));
+  reducedMotion.addEventListener('change', () => apply(store.get()));
 
   resize();
   frame();
@@ -682,6 +821,10 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   (host as HTMLElement & { viewer?: unknown }).viewer = {
     look,
     reset: frame,
+    /** For tests: whether the fluid flow is animating right now. */
+    get flowAnimating() {
+      return flowLoop !== 0;
+    },
     /** For screenshots of the head's shape: keep the skin solid when turned. */
     setSkinFade(on: boolean) {
       fadeEnabled = on;

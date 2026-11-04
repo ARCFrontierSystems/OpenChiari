@@ -36,8 +36,7 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
       </a>
       <a class="x-brand only-wide-x" href={routes.home}>
-        <span class="x-mark" aria-hidden="true"></span>
-        <span class="x-brand-name">{s.siteName}</span>
+        <img class="x-logo" src="/brand/logo-header-dark.png" alt={s.siteName} width="267" height="112" />
       </a>
       <span class="x-sep only-wide-x" aria-hidden="true">/</span>
       <h1 class="x-title">{x.title}</h1>
@@ -444,15 +443,10 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
     min-height: var(--touch);
     text-decoration: none;
   }
-  .x-mark {
-    width: 9px;
-    height: 9px;
-    background: var(--x-brand-mark);
-  }
-  .x-brand-name {
-    font-family: var(--font-serif);
-    font-weight: 600;
-    font-size: 17px;
+  .x-logo {
+    display: block;
+    height: 34px;
+    width: auto;
   }
   .x-sep {
     color: var(--x-faint);

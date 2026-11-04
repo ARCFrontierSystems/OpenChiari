@@ -19,7 +19,7 @@
   --input-border: #A9A8A2;
   --accent: #1F5F8B;
   --accent-hover: #123E5C;
-  --awareness: #6B4FA0;
+  --awareness: #5B027E; /* the logo's deep purple */
   --status-good: #1D6B3A;
   --status-warn-text: #8A3B12;
 
@@ -35,7 +35,7 @@
   --x-faint: #8A8890;
   --x-accent: #7FB3D3;
   --x-accent-tint: #1F3A4D;
-  --x-brand-mark: #8F74C6;
+  --x-brand-mark: #CB98E1; /* the logo's purple, lightened for dark backgrounds */
   --x-button-bg: #E8E6E0;
   --x-button-text: #111215;
 

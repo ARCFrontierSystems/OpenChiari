@@ -24,7 +24,19 @@ const pageTitle = title ? `${title} · ${t.siteName}` : t.siteName;
 <title>{pageTitle}</title>
 <meta name="description" content={description} />
 <meta name="theme-color" content={themeColor} />
-<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/brand/icon-32.png" type="image/png" sizes="32x32" />
+<link rel="apple-touch-icon" href="/brand/icon-180.png" />
+<!-- What a shared link shows (the logo on white). Absolute addresses, as link previews need them. -->
+<meta property="og:site_name" content={t.siteName} />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={new URL(Astro.url.pathname, Astro.site ?? 'https://openchiari.org').href} />
+<meta property="og:image" content="https://openchiari.org/brand/share.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={t.siteName} />
+<meta name="twitter:card" content="summary_large_image" />
 <script is:inline>
   // Calm mode, decided before the page draws (no flash). Same key as src/lib/calm.ts.
   // Saved choice wins; with none, follow the system "reduce motion" setting.

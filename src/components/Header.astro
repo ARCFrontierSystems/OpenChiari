@@ -23,8 +23,7 @@ const current = Astro.url.pathname;
 <header class="site-header">
   <div class="bar container">
     <a class="brand" href={routes.home}>
-      <span class="brand-mark" aria-hidden="true"></span>
-      <span class="brand-name">{getStrings().siteName}</span>
+      <img class="brand-logo" src="/brand/logo-header.png" alt={getStrings().siteName} width="267" height="112" />
     </a>
 
     <nav class="nav-wide" aria-label={t.mainNavLabel}>
@@ -100,15 +99,11 @@ const current = Astro.url.pathname;
     color: var(--ink);
     text-decoration: none;
   }
-  .brand-mark {
-    width: 10px;
-    height: 10px;
-    background: var(--awareness);
-  }
-  .brand-name {
-    font-family: var(--font-serif);
-    font-weight: 600;
-    font-size: 20px;
+  /* The logo (design/brand/; web copies made by scripts/make-brand.py) */
+  .brand-logo {
+    display: block;
+    height: 48px;
+    width: auto;
   }
   .nav-wide {
     flex: 1 1 auto;
@@ -196,12 +191,8 @@ const current = Astro.url.pathname;
     .brand {
       flex: 1 1 auto;
     }
-    .brand-mark {
-      width: 9px;
-      height: 9px;
-    }
-    .brand-name {
-      font-size: 18px;
+    .brand-logo {
+      height: 40px;
     }
     .nav-wide,
     .nav-wide-only {
@@ -236,12 +227,8 @@ const current = Astro.url.pathname;
     :global(:root[data-calm='on']) .bar {
       min-height: 64px;
     }
-    :global(:root[data-calm='on']) .brand-mark {
-      width: 10px;
-      height: 10px;
-    }
-    :global(:root[data-calm='on']) .brand-name {
-      font-size: 20px;
+    :global(:root[data-calm='on']) .brand-logo {
+      height: 46px;
     }
     :global(:root[data-calm='on']) .calm-toggle {
       padding: 0 12px;

@@ -27,7 +27,7 @@ Self-host all three (they're under the SIL Open Font License). No Google Fonts r
 | `--input-border` | `#A9A8A2` | Form fields |
 | `--accent` | `#1F5F8B` | Primary buttons, links, highlights |
 | `--accent-hover` | `#123E5C` | Link hover |
-| `--awareness` | `#6B4FA0` | The small square brand mark only |
+| `--awareness` | `#5B027E` | Brand purple, from the logo (changed 2026-11-04, Matthew: keep blue for buttons and links, purple for brand only) |
 | `--status-good` | `#1D6B3A` | "Recruiting" |
 | `--status-warn-text` | `#8A3B12` | Restricted-flow text |
 
@@ -46,7 +46,7 @@ Self-host all three (they're under the SIL Open Font License). No Google Fonts r
 | `--x-faint` | `#8A8890` | Hints and captions |
 | `--x-accent` | `#7FB3D3` | Active tool border, sliders, checkboxes |
 | `--x-accent-tint` | `#1F3A4D` | Active tool background |
-| `--x-brand-mark` | `#8F74C6` | Brand square on dark |
+| `--x-brand-mark` | `#CB98E1` | Brand purple on dark, from the logo's light version |
 | Primary button on dark | `#E8E6E0` background, `#111215` text | "Explain It" |
 
 ## Color: Calm mode
@@ -95,7 +95,8 @@ Muted, realistic tones. Use the same colors for the Simple model's materials and
 
 ## Components (see mockups)
 
-- **Header:** brand square plus "Open Chiari" in serif, nav, "Español" link, Calm mode switch.
+- **Header:** the Open Chiari logo (links home), nav, "Español" link, Calm mode switch. On the dark 3D Explorer, the logo's light version.
+- **Logo** (Matthew, 2026-11-04): source `design/brand/open-chiari-logo.png`. Web versions in `public/brand/`, made by `scripts/make-brand.py`: see-through logo for light backgrounds, a light version for dark backgrounds (light outline and lettering, lighter purple), the head-and-brain mark as the browser tab and home-screen icon, and a 1200 by 630 link-preview picture. A vector (SVG) version from a designer would be sharper and can replace these.
 - **Buttons:** primary (accent fill, white text), secondary (1 px ink outline), text button.
 - **Numbered tool list:** mono number, accent title, one-line description, hairline rules.
 - **Definition lists** for specs and principles; **pipe tables** for comparisons.

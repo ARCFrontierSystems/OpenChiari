@@ -3,6 +3,24 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Realistic model: re-audit fixes (all 8, Matthew approved)
+
+- **Cord no longer looks painted blue (1):** the fluid around the cord is now a tube with the cord inside it, and the fluid around the cerebellum is kept 1 mm clear of the brain, so the cut view shows the cord, then fluid in front of and behind it.
+- **Fluid column (2):** the tube is fitted to the vertebrae by rays: 14.0 mm front to back at C3 (EVIDENCE.md 13 to 15 mm), with almost no fluid inside the bone.
+- **Chiari I pockets (3):** no stray fluid pockets below the line; the space behind the cord at the opening is plugged by the tonsils (0 points), and open in Typical and after surgery.
+- **Tonsils on the midline (4):** each tonsil is slid (not squashed) so its lowest point is on the midline, then the two are joined into one surface. Tip 0.1 to 0.4 mm from the midline in every view, at the right heights (Typical 1.2 mm above, Chiari I 12.5 mm below, after surgery 10.5 mm below).
+- **Fluid behind the patch (5):** none. The patch's outline is now a rounded rectangle that covers the whole bone window; before, its narrow top left a small uncovered gap.
+- **Cord top (6):** tapers smoothly into the brainstem.
+- **Overlaps (8):** tonsils kept out of the cord and brainstem (a last step moves any leftover point straight back); cerebellum kept 1.2 mm clear of bone.
+- **New checks (7), so these can't slip through again:**
+  - cord inside the fluid at 16 levels;
+  - fluid kept out of the cord, tonsils and brainstem, and tonsils kept out of the fluid (counted by rays, which don't depend on the atlas's surface directions);
+  - the patch covers the whole bone window;
+  - the finished Explorer files: every view complete, tonsil tips match, and the fluid is never drawn over the tonsils on the midline.
+- **Viewer:** the camera's depth range now hugs the model, so surfaces about 1 mm apart draw correctly even on phones with coarse depth buffers.
+- **Results:** all four views pass every check; Explorer files rebuilt (desktop 1.5 MB, phone 0.6 MB); 74 site tests pass; type check clean.
+- **Next:** one more fresh independent audit (`docs/audits/2026-11-04-realistic-reaudit-2.md`); then Matthew decides whether the realistic model goes public.
+
 ## 2026-11-04: Realistic model: audit fixes (Matthew approved)
 
 - **Fluid through the opening** (High): the fluid around the neck cord is now built as one space with the fluid behind the brain, replacing the atlas's thin spinal covering.

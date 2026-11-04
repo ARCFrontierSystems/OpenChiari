@@ -380,6 +380,15 @@ const cranialSample = csf.verts.filter((v, i) => i % 4 === 0);
 const brainDepth = depthsInside(cranialSample, ['cord', 'tonsil', 'brainstem', 'syrinx'], 2.5, true);
 const intoBrain = brainDepth.filter((d) => d > 0.3);
 if (process.env.DEBUG) { for (const n of ['cord', 'tonsil', 'brainstem']) console.log(`  fluid inside ${n}: ${depthsInside(cranialSample, [n], 2.5, true).filter((d) => d > 0.3).length}`); const w = cranialSample.filter((_, i) => brainDepth[i] > 0.3); if (w.length) console.log(`  heights: ${[...new Set(w.map((v) => Math.round(v[1])))].sort((a, b) => a - b).join(' ')}`); }
+// The tonsils are never inside either fluid surface (it would be drawn over them in the cut view), counted by rays.
+{
+  const fluidTris = ['csf-cranial', 'csf-spinal'].flatMap((n) => { const g = mesh(n); return g ? g.tris.map((t) => t.map((i) => g.verts[i])).filter((t) => t.some((v) => v[1] < 20 && v[1] > -40)) : []; });
+  const tonsilPts = tonsil.verts.filter((v, i) => i % 10 === 0 && v[1] < 10);
+  const dirs = [[1, 0, 0], [-1, 0, 0], [0, 0, 1], [0, 0, -1], [0.6, 0.64, 0.48]];
+  const engulfed = tonsilPts.filter((p) => dirs.filter((d) => rayHits(p, d, fluidTris) % 2 === 1).length >= 3).length;
+  console.log(`Tonsils inside a fluid surface: ${engulfed} of ${tonsilPts.length} points`);
+  ok(engulfed === 0, 'the tonsils should not sit inside the fluid (it would cover them in the cut view)');
+}
 console.log(`Fluid inside bone or discs: ${intoBone.length} points (deepest ${intoBone.length ? Math.max(...intoBone).toFixed(1) : 0} mm); fluid around the cerebellum inside the cord, tonsils or brainstem: ${intoBrain.length} points (deepest ${intoBrain.length ? Math.max(...intoBrain).toFixed(1) : 0} mm)`);
 ok(intoBone.length <= csfSample.length * 0.002, 'the fluid should stay out of the bones and discs');
 ok(intoBrain.length === 0, 'the fluid should stay out of the cord, tonsils and brainstem (otherwise it paints over them in the cut view)');

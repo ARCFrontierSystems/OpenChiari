@@ -693,9 +693,14 @@ tb = bmesh.new()
 axis_s = sorted(cord_axis)
 fm_mid_z = (bas_m.z + opi_m.z) / 2
 z_top = fm_mid_z + 2.0
-heights = [z_top - k * 1.5 for k in range(int((z_top - BOTTOM_MM) / 1.5) + 1)] + [BOTTOM_MM]
+# rings every 0.75 mm in the top 20 mm (where the tonsils sit beside it), then every 1.5 mm
+heights = [z_top - k * 0.75 for k in range(27)]
+heights += [heights[-1] - k * 1.5 for k in range(1, int((heights[-1] - BOTTOM_MM) / 1.5) + 1)] + [BOTTOM_MM]
 N_ANG = 32
 rings_t = []
+# The tube stops 0.5 mm in front of the tonsils wherever they reach down behind the cord (every view), so the
+# tonsils are never inside it (a fluid surface around them would be drawn over them in the cut view).
+tonsil_tree = bvh_of(['tonsil'])
 def cord_at(z):
     if z >= axis_s[-1][0]:
         return axis_s[-1][1:]
@@ -722,9 +727,19 @@ for z in heights:
         hit = bone_tree.ray_cast(Vector((cx, cy, z)), d, r + 2)
         if hit[0] is not None:
             r = min(r, max(0.5, hit[3] - 0.4))
+        hit_t = tonsil_tree.ray_cast(Vector((cx, cy, z)), d, r + 1)
+        if hit_t[0] is not None:
+            r = min(r, hit_t[3] - 0.5)
         # never inside the cord itself
         rc = 1 / math.sqrt((d.x / ax) ** 2 + (d.y / ay) ** 2)
         r = max(r, rc + 0.3)
+        # and at least 0.8 mm from the tonsils, so they cannot poke in between the tube's points
+        while r > rc + 0.3:
+            q = Vector((cx + d.x * r, cy + d.y * r, z))
+            loc, nrm, _, dist = tonsil_tree.find_nearest(q)
+            if loc is None or (dist >= 0.8 and (q - loc).dot(nrm) > 0):
+                break
+            r -= 0.2
         ring.append(tb.verts.new((cx + d.x * r, cy + d.y * r, z)))
     rings_t.append(ring)
 for r0, r1 in zip(rings_t, rings_t[1:]):

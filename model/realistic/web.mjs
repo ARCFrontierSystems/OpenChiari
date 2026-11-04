@@ -6,13 +6,14 @@
 import { Document, NodeIO } from '@gltf-transform/core';
 import { ALL_EXTENSIONS, EXTMeshoptCompression, KHRMeshQuantization } from '@gltf-transform/extensions';
 import { weld, simplify, quantize, meshopt, dedup, prune } from '@gltf-transform/functions';
-import { MeshoptEncoder, MeshoptSimplifier } from 'meshoptimizer';
+import { MeshoptDecoder, MeshoptEncoder, MeshoptSimplifier } from 'meshoptimizer';
 import { statSync } from 'node:fs';
 
 const dir = process.argv[2];
 await MeshoptSimplifier.ready;
 await MeshoptEncoder.ready;
-const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({ 'meshopt.encoder': MeshoptEncoder });
+await MeshoptDecoder.ready;
+const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({ 'meshopt.encoder': MeshoptEncoder, 'meshopt.decoder': MeshoptDecoder });
 const src = {};
 for (const c of ['typical', 'chiari', 'syrinx', 'surgery']) src[c] = await io.read(`${dir}/${c}-raw.glb`);
 
@@ -31,6 +32,9 @@ const PLAN = [
   ['csf-cranial-typical', 'csf-cranial', 'typical', ['typical']],
   ['csf-cranial-chiari', 'csf-cranial', 'chiari', ['chiari', 'syrinx']],
   ['csf-cranial-surgery', 'csf-cranial', 'surgery', ['surgery']],
+  ['csf-spinal-typical', 'csf-spinal', 'typical', ['typical']],
+  ['csf-spinal-chiari', 'csf-spinal', 'chiari', ['chiari', 'syrinx']],
+  ['csf-spinal-surgery', 'csf-spinal', 'surgery', ['surgery']],
   ['syrinx', 'syrinx', 'syrinx', ['syrinx']],
   ['bone-removed', 'bone-removed', 'surgery', ['surgery']],
   ['dural-patch', 'dural-patch', 'surgery', ['surgery']],
@@ -39,7 +43,7 @@ const PLAN = [
 const BUDGET = {
   skin: 40000, skull: 60000, occipital: 12000, c1: 6000, c2: 8000, 'c3-c5': 15000, discs: 4000, tentorium: 3000,
   cerebrum: 80000, callosum: 6000, diencephalon: 8000, brainstem: 14000, cerebellum: 40000, tonsil: 5000, cord: 4000,
-  ventricles: 8000, 'ventricle-fourth': 4000, 'csf-cranial': 26000, syrinx: 2000, 'bone-removed': 2000, 'dural-patch': 1400,
+  ventricles: 8000, 'ventricle-fourth': 4000, 'csf-cranial': 26000, 'csf-spinal': 5000, syrinx: 2000, 'bone-removed': 2000, 'dural-patch': 1400,
 };
 
 function sourceNode(doc, name) {
@@ -134,3 +138,108 @@ async function build(level) {
 }
 await build('desktop');
 await build('phone');
+
+// ---- Check the finished web files: in every view each structure appears exactly once, the parts each view needs
+// are there, and the tonsils' lowest point still matches the measured landmark after simplification.
+const NEEDS = {
+  typical: ['skull', 'occipital', 'c1', 'cord', 'brainstem', 'cerebellum', 'tonsil', 'csf-cranial', 'csf-spinal'],
+  chiari: ['skull', 'occipital', 'c1', 'cord', 'brainstem', 'cerebellum', 'tonsil', 'csf-cranial', 'csf-spinal'],
+  syrinx: ['skull', 'occipital', 'c1', 'cord', 'brainstem', 'cerebellum', 'tonsil', 'csf-cranial', 'csf-spinal', 'syrinx'],
+  surgery: ['skull', 'occipital', 'c1', 'cord', 'brainstem', 'cerebellum', 'tonsil', 'csf-cranial', 'csf-spinal', 'bone-removed', 'dural-patch'],
+};
+const base = (name) => PLAN.find((p) => p[0] === name)[1];
+const DIRS = [[1, 0, 0], [-1, 0, 0], [0, 0, 1], [0, 0, -1], [0.6, 0.64, 0.48]];
+/** Midline cut, as the viewer draws it: at points on the midline inside the tonsils (0.5 mm grid), looking
+ * straight to either side, the tonsils' far wall must come before any fluid surface. Returns the failing points. */
+function coveredTonsil(tonT, fluT) {
+  let bad = 0;
+  const box = tonT.flat().reduce((b, v) => [Math.min(b[0], v[0]), Math.max(b[1], v[0]), Math.min(b[2], v[1]), Math.max(b[3], v[1])], [Infinity, -Infinity, Infinity, -Infinity]);
+  for (let x = box[0]; x <= box[1]; x += 0.5)
+    for (let y = box[2]; y <= Math.min(box[3], 12); y += 0.5) {
+      const o = [x, y, 0];
+      if (DIRS.filter((d) => rayHits(o, d, tonT) % 2 === 1).length < 3) continue; // not inside the tonsils here
+      coveredTonsil.tested = (coveredTonsil.tested ?? 0) + 1;
+      for (const dz of [1, -1]) {
+        const t = firstHit(o, [0, 0, dz], tonT), f = firstHit(o, [0, 0, dz], fluT);
+        if (f < t - 0.05) { bad++; break; }
+      }
+    }
+  return bad;
+}
+function firstHit(o, d, tris) {
+  let best = Infinity;
+  for (const [a, b, c] of tris) {
+    const e1 = [b[0] - a[0], b[1] - a[1], b[2] - a[2]], e2 = [c[0] - a[0], c[1] - a[1], c[2] - a[2]];
+    const p = [d[1] * e2[2] - d[2] * e2[1], d[2] * e2[0] - d[0] * e2[2], d[0] * e2[1] - d[1] * e2[0]];
+    const det = e1[0] * p[0] + e1[1] * p[1] + e1[2] * p[2];
+    if (Math.abs(det) < 1e-9) continue;
+    const s = [o[0] - a[0], o[1] - a[1], o[2] - a[2]], u = (s[0] * p[0] + s[1] * p[1] + s[2] * p[2]) / det;
+    if (u < 0 || u > 1) continue;
+    const q = [s[1] * e1[2] - s[2] * e1[1], s[2] * e1[0] - s[0] * e1[2], s[0] * e1[1] - s[1] * e1[0]];
+    const v = (d[0] * q[0] + d[1] * q[1] + d[2] * q[2]) / det;
+    if (v < 0 || u + v > 1) continue;
+    const t = (e2[0] * q[0] + e2[1] * q[1] + e2[2] * q[2]) / det;
+    if (t > 1e-6 && t < best) best = t;
+  }
+  return best;
+}
+function rayHits(o, d, tris) {
+  let n = 0;
+  for (const [a, b, c] of tris) {
+    const e1 = [b[0] - a[0], b[1] - a[1], b[2] - a[2]], e2 = [c[0] - a[0], c[1] - a[1], c[2] - a[2]];
+    const p = [d[1] * e2[2] - d[2] * e2[1], d[2] * e2[0] - d[0] * e2[2], d[0] * e2[1] - d[1] * e2[0]];
+    const det = e1[0] * p[0] + e1[1] * p[1] + e1[2] * p[2];
+    if (Math.abs(det) < 1e-9) continue;
+    const s = [o[0] - a[0], o[1] - a[1], o[2] - a[2]], u = (s[0] * p[0] + s[1] * p[1] + s[2] * p[2]) / det;
+    if (u < 0 || u > 1) continue;
+    const q = [s[1] * e1[2] - s[2] * e1[1], s[2] * e1[0] - s[0] * e1[2], s[0] * e1[1] - s[1] * e1[0]];
+    const v = (d[0] * q[0] + d[1] * q[1] + d[2] * q[2]) / det;
+    if (v < 0 || u + v > 1) continue;
+    if ((e2[0] * q[0] + e2[1] * q[1] + e2[2] * q[2]) / det > 1e-6) n++;
+  }
+  return n;
+}
+const problems = [];
+for (const level of ['desktop', 'phone']) {
+  const doc = await io.read(new URL(`./web/realistic-${level}.glb`, import.meta.url).pathname);
+  const nodes = doc.getRoot().listNodes();
+  for (const c of ALL) {
+    const shown = nodes.filter((n) => (n.getExtras().conditions ?? []).includes(c));
+    const parts = shown.map((n) => base(n.getName()));
+    const twice = parts.filter((p, i) => parts.indexOf(p) !== i);
+    if (twice.length) problems.push(`${level} ${c}: shown twice: ${twice.join(', ')}`);
+    const missing = NEEDS[c].filter((p) => !parts.includes(p));
+    if (missing.length) problems.push(`${level} ${c}: missing ${missing.join(', ')}`);
+    // The fluid and the tonsils must not overlap after simplification (fluid would be drawn over the tonsils in the
+    // cut view): no tonsil point inside a fluid surface and no fluid point inside the tonsils, counted by rays.
+    const world = (n) => {
+      const m = n.getWorldMatrix(), V = [], T = [], el = [0, 0, 0];
+      for (const prim of n.getMesh().listPrimitives()) {
+        const pos = prim.getAttribute('POSITION'), idx = prim.getIndices().getArray(), b = V.length;
+        for (let i = 0; i < pos.getCount(); i++) { pos.getElement(i, el); V.push([0, 1, 2].map((r) => m[r] * el[0] + m[4 + r] * el[1] + m[8 + r] * el[2] + m[12 + r])); }
+        for (let t = 0; t < idx.length; t += 3) T.push([V[b + idx[t]], V[b + idx[t + 1]], V[b + idx[t + 2]]]);
+      }
+      return { V, T };
+    };
+    const near = (g) => ({ V: g.V, T: g.T.filter((t) => t.some((v) => v[1] < 15 && v[1] > -35)) });
+    const tonT = near(world(shown.find((n) => base(n.getName()) === 'tonsil'))).T;
+    const fluT = shown.filter((n) => base(n.getName()).startsWith('csf-')).flatMap((n) => near(world(n)).T);
+    const covered = coveredTonsil(tonT, fluT);
+    if (process.env.DEBUG) console.log(level, c, 'midline tonsil points tested', coveredTonsil.tested, 'covered', covered); coveredTonsil.tested = 0;
+    if (covered) problems.push(`${level} ${c}: fluid drawn over the tonsils in the midline cut at ${covered} points`);
+    const ton = shown.find((n) => base(n.getName()) === 'tonsil');
+    if (ton) {
+      // positions are quantized; the node's matrix turns them back into millimetres
+      const pos = ton.getMesh().listPrimitives()[0].getAttribute('POSITION'), el = [0, 0, 0], m = ton.getWorldMatrix();
+      let low = Infinity;
+      for (let i = 0; i < pos.getCount(); i++) { pos.getElement(i, el); low = Math.min(low, m[1] * el[0] + m[5] * el[1] + m[9] * el[2] + m[13]); }
+      const want = LANDMARKS.tonsilTip[c][1];
+      if (Math.abs(low - want) > 1) problems.push(`${level} ${c}: tonsils' lowest point ${low.toFixed(1)} vs measured ${want.toFixed(1)}`);
+    }
+  }
+}
+if (problems.length) {
+  console.error('\nFAILED: the web files do not match the measured views:\n- ' + problems.join('\n- '));
+  process.exit(1);
+}
+console.log('\nWeb files: every view has its parts once each, and the tonsil tips match the measurements.');

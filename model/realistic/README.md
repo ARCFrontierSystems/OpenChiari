@@ -49,15 +49,26 @@ node model/realistic/check.mjs surgery-raw.glb --condition surgery --typical typ
 
 How After decompression is made: the Chiari I tonsils, risen about 2 mm (to about 10.4 mm below the McRae line).
 - **Bone:** the bone is cut exactly along the edges of a window 30 mm across and 25 mm up the back of the skull from the opisthion. The middle 25 mm of C1's back arch is cut away too. Both removed pieces are kept as a faint red outline ("bone-removed").
-- **Dural patch:** a thin curved oval membrane across the opening, within the thickness of the removed bone.
-- **Fluid:** the fluid space behind the cerebellum is re-formed in front of the patch, joined to the space behind the cord; it stays in front of the patch's curved, oval shape.
+- **Dural patch:** a thin curved membrane across the opening, within the thickness of the removed bone. Its outline is a rounded rectangle a little wider than the bone window, so it covers the whole opening (a check confirms there is bone or patch behind all the fluid there).
+- **Fluid:** the fluid space behind the cerebellum is re-formed in front of the patch, joined to the space behind the cord; none of it sits behind the patch.
 - **McRae line:** its back end (the opisthion) is removed with the bone, so the check takes the line from the typical model; it shows where the opening was.
 
 How Chiari I is made: the lower part of each atlas tonsil is stretched down (the top, where it joins the
-cerebellum, stays), narrowed toward a blunt tip and drawn toward the midline so it passes through the opening;
-anything that would pass into bone or the spinal cord is pushed back out, leaving the tonsils slightly squeezed
-where the space is tight. The fluid around the cerebellum is computed around the brain, and in Chiari I the space
-behind the brainstem up to 12 mm above the McRae line is left out (filled by the tonsils), as in the Simple model.
+cerebellum, stays), narrowed toward a blunt tip, and slid sideways (not squashed) until its lowest point is on the
+midline, so the midline cut shows the tonsils at their lowest point (in every view). The two tonsils are then joined
+into one closed surface. Anything that would pass into bone, the spinal cord or the brainstem is pushed back out,
+leaving the tonsils slightly squeezed where the space is tight.
+
+The fluid comes in two parts:
+- **Around the cerebellum** (`csf-cranial`): computed on a 1 mm grid as the space between the brain and the skull,
+  kept 1 mm clear of the brain. As the tonsils go lower (Chiari I), this space shrinks automatically.
+- **Around the cord** (`csf-spinal`): a tube around the cord, fitted to the bone by rays (about 14 mm front to back
+  at C3; EVIDENCE.md 13 to 15 mm). The cord sits inside it, which draws correctly in the cut view. The tube stops in
+  front of the tonsils wherever they reach down behind the cord. In Chiari I, from 2 to 14 mm below the line, its
+  back is pulled in to the cord, where the tonsils plug the space.
+
+Rules for the cut view (each one is checked): the fluid never sits inside the cord, tonsils or brainstem, and the
+tonsils never sit inside the fluid. Otherwise the fluid would be drawn over them.
 
 ## First findings (2026-11-04)
 
@@ -79,7 +90,8 @@ smoothed.
 
 `web.mjs` turns the four builds into one file per detail level, in `model/realistic/web/`:
 - **What goes in:** structures shared by all views appear once. Structures that differ (tonsils, fluid around the cerebellum, occipital bone, C1, syrinx, removed bone, dural patch) carry the views they belong to, as in the Simple model.
-- **Sizes:** each structure is simplified to a triangle budget. Desktop is about 410,000 triangles (1.4 MB); phone about a third of that (0.5 MB).
+- **Sizes:** each structure is simplified to a triangle budget. Desktop is about 410,000 triangles (1.5 MB); phone about a third of that (0.6 MB).
+- **Checked after writing:** in each view every structure appears once, the needed parts are there, the tonsils' lowest point matches the measured one within 1 mm, and on the midline the fluid is never drawn over the tonsils (simplification can move surfaces). The script fails if any of these is wrong.
 
 ```bash
 node model/realistic/web.mjs <folder with typical-raw.glb, chiari-raw.glb, syrinx-raw.glb, surgery-raw.glb>

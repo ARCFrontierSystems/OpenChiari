@@ -126,6 +126,24 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   camera.add(keyLight);
   scene.add(camera);
 
+  // Depth range: the camera's near and far limits hug the model (its bounding sphere), so the depth buffer can tell
+  // apart surfaces about 1 mm apart, such as the tonsils and the fluid around them, even on devices with a coarse
+  // (16-bit) depth buffer. A fixed 10 mm to 3 m range could not.
+  const modelBox = new THREE.Box3();
+  const modelSphere = new THREE.Sphere();
+  function fitDepthRange() {
+    if (modelBox.isEmpty()) return;
+    modelBox.getBoundingSphere(modelSphere);
+    const d = camera.position.distanceTo(modelSphere.center);
+    const near = Math.max(5, d - modelSphere.radius - 10);
+    const far = d + modelSphere.radius + 10;
+    if (Math.abs(camera.near - near) > 0.5 || Math.abs(camera.far - far) > 0.5) {
+      camera.near = near;
+      camera.far = far;
+      camera.updateProjectionMatrix();
+    }
+  }
+
   // Keeps z <= depth. The plane faces the default (side) camera.
   const plane = new THREE.Plane(new THREE.Vector3(0, 0, -1), 0);
 
@@ -262,6 +280,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     const box = new THREE.Box3().setFromObject(p.mesh);
     p.zMin = box.min.z;
     p.zMax = box.max.z;
+    modelBox.union(box);
     p.stencil.children.forEach((c) => c.matrix.copy(p.mesh.matrixWorld));
     // The realistic model paints its own cut faces (see above), so it needs no stencil caps.
     if (model === 'simple') scene.add(p.stencil, p.cap);
@@ -441,6 +460,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       if (visible && !document.hidden) {
         applyOpacity();
         updateLabelSpace();
+        fitDepthRange();
         renderer.render(scene, camera);
         placeLabels();
       }
@@ -922,6 +942,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   await renderer.compileAsync(scene, camera);
   lap('prepare graphics');
   apply(store.get());
+  fitDepthRange();
   renderer.render(scene, camera);
   lap('first frame');
   requestRender();

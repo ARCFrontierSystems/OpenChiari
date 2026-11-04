@@ -15,7 +15,8 @@ Run:
   model/realistic/.venv/bin/python -I model/realistic/extract.py model/source/Z-Anatomy/Startup.blend out.glb [typical|chiari]
 """
 import sys, math, os
-import bpy, bmesh
+import bpy
+import os, bmesh
 from mathutils import Vector, Matrix
 
 blend, out_glb = sys.argv[1], sys.argv[2]
@@ -509,6 +510,163 @@ if True:
     tm.update()
     print(f'  tonsil points moved back out of the brainstem or cord: {moved_back}', flush=True)
     print(f'  tonsil tip after pushing: {tonsil_tip_above():+.1f} mm from the McRae line', flush=True)
+    # Where the lower ends are joined, a shallow groove down the middle of their back (up to 1.2 mm deep), starting
+    # 3 mm above the tip (full depth by 4.5 mm), so from behind they still read as two tonsils (EVIDENCE.md: they sit to either side).
+    # The groove is cut relative to the tonsils' own back surface just beside it (2.5 to 4 mm from the midline), at
+    # each 1 mm of height, and only where the brainstem and cord are at least 3 mm away.
+    tip_a = tonsil_tip_above()
+    side_back = {}
+    for v in tm.vertices:
+        if 2.5 <= abs(v.co.y) < 4:
+            k = round(above_mcrae(v.co))
+            side_back[k] = max(side_back.get(k, -1e9), v.co.x)
+    grooved = 0
+    for v in tm.vertices:
+        a = above_mcrae(v.co)
+        h = a - tip_a
+        if abs(v.co.y) >= 2.5 or h <= 3 or a >= SLIDE_NONE + 0.5 or round(a) not in side_back:
+            continue
+        if min(cord_tree.find_nearest(v.co)[3] or 1e9, stem_tree.find_nearest(v.co)[3] or 1e9) < 3:
+            continue
+        t = min(1.0, (h - 3) / 1.5)
+        depth = 1.2 * (1 - (v.co.y / 2.5) ** 2) * t * t * (3 - 2 * t)
+        limit = side_back[round(a)] - depth
+        if v.co.x > limit:
+            v.co.x = limit
+            grooved += 1
+    tm.update()
+    print(f'  groove between the tonsils: {grooved} points', flush=True)
+    # Outlet of the fourth ventricle: between the tonsils, just below and behind the ventricle, a channel 4 mm wide is
+    # kept open (the tonsils' inner faces are moved to 2 mm from the midline there), so the fluid behind the
+    # cerebellum reaches the ventricle's outlet (EVIDENCE.md: "from the fourth ventricle outlet into the cisterna magna").
+    v4_pts = [v.co for v in D.objects['ventricle-fourth'].data.vertices if abs(v.co.y) < 3 and above_mcrae(v.co) < 14]
+    v4_back = max(c.x for c in v4_pts) if v4_pts else None
+    opened = 0
+    if v4_back is not None:
+        for v in tm.vertices:
+            a = above_mcrae(v.co)
+            if 5 <= a <= 14 and v.co.x < v4_back + 10 and abs(v.co.y) < 2.0:
+                v.co.y = 2.0 if v.co.y >= 0 else -2.0
+                opened += 1
+        tm.update()
+    print(f'  channel under the fourth ventricle: {opened} tonsil points moved aside', flush=True)
+    # Clean-up: the pushes above can fold the surface back on itself where the space is tight. Rebuild it as one
+    # clean surface (voxel remesh, 0.4 mm), then smooth it in small steps, keeping each step only where the point stays
+    # at least 0.3 mm clear of bone, cord, brainstem and the fourth ventricle.
+    tob = D.objects['tonsil']
+    rm = tob.modifiers.new('clean', 'REMESH')
+    rm.mode = 'VOXEL'; rm.voxel_size = 0.4; rm.use_smooth_shade = True
+    dg = bpy.context.evaluated_depsgraph_get()
+    me_c = bpy.data.meshes.new_from_object(tob.evaluated_get(dg))
+    tob.modifiers.remove(rm)
+    old_me = tob.data
+    tob.data = me_c
+    D.meshes.remove(old_me)
+    tm = tob.data
+    trees = (bone_tree, cord_tree, stem_tree, v4_tree)
+    def folds(label):
+        # faces near or below the line whose direction is opposite to the surface around them (as check.mjs counts)
+        bm_f = bmesh.new(); bm_f.from_mesh(tm)
+        bmesh.ops.triangulate(bm_f, faces=bm_f.faces, quad_method='BEAUTY')
+        bm_f.normal_update()
+        band = bad = 0
+        for f in bm_f.faces:
+            if above_mcrae(f.calc_center_median()) > 4:
+                continue
+            band += 1
+            avg = sum((v.normal for v in f.verts), Vector())
+            if avg.dot(f.normal) < 0:
+                bad += 1
+                if os.environ.get('DEBUG_FOLDS') and label == 'after the last step':
+                    c_ = f.calc_center_median()
+                    near_ = min((t.find_nearest(c_)[3] or 99, nm) for t, nm in zip(trees, ('bone', 'cord', 'brainstem', 'ventricle')))
+                    print(f'      fold at ({c_.x:.1f}, {c_.y:.1f}, {c_.z:.1f}) above {above_mcrae(c_):.1f}: nearest {near_[1]} {near_[0]:.1f} mm', flush=True)
+        bm_f.free()
+        print(f'    folds {label}: {bad} of {band}', flush=True)
+    folds('after rebuild')
+    def clear(p):
+        for tree in trees:
+            loc, nrm, _, dist = tree.find_nearest(p)
+            if loc is not None and (p - loc).dot(nrm) < -0.25 and inside_by_rays(tree, p):
+                return False
+        return True
+    def push_soft():
+        for v in tm.vertices:
+            for tree in trees:
+                loc, nrm, _, dist = tree.find_nearest(v.co)
+                if loc is not None and (v.co - loc).dot(nrm) < -0.25 and inside_by_rays(tree, v.co):
+                    v.co = loc + nrm.normalized() * 0.15
+    def smooth(constrained, f=0.5):
+        bm_c = bmesh.new(); bm_c.from_mesh(tm)
+        new_pos = []
+        for v in bm_c.verts:
+            nb = [e.other_vert(v).co for e in v.link_edges]
+            q = v.co.lerp(sum(nb, Vector()) / len(nb), f) if nb else v.co.copy()
+            new_pos.append(q if (not constrained or clear(q)) else v.co.copy())
+        for v, q in zip(bm_c.verts, new_pos):
+            v.co = q
+        bm_c.to_mesh(tm); bm_c.free()
+    # relax: smooth freely, then push clear, several rounds (settles smoothly against bone and brainstem)
+    push_soft()
+    # smooth and, where a point would go into bone, cord, brainstem or ventricle, set it back on the surface there:
+    # pinned points can then slide along it instead of folding
+    def settle(q):
+        for tree in trees:
+            loc, nrm, _, dist = tree.find_nearest(q)
+            if loc is not None and (q - loc).dot(nrm) < -0.25 and inside_by_rays(tree, q):
+                q = loc + nrm.normalized() * 0.15
+        return q
+    # (smoothing alternates a step toward the neighbours and a slightly larger step back, which smooths creases
+    # without shrinking thin parts such as the Chiari I tips)
+    for it in range(10):
+        f = 0.5 if it % 2 == 0 else -0.53
+        bm_c = bmesh.new(); bm_c.from_mesh(tm)
+        new_pos = []
+        for v in bm_c.verts:
+            nb = [e.other_vert(v).co for e in v.link_edges]
+            q = v.co.lerp(sum(nb, Vector()) / len(nb), f) if nb else v.co.copy()
+            new_pos.append(settle(q))
+        for v, q in zip(bm_c.verts, new_pos):
+            v.co = q
+        bm_c.to_mesh(tm); bm_c.free()
+    folds('after relaxing')
+    for it in range(6):
+        smooth(True, 0.5 if it % 2 == 0 else -0.53)
+    folds('after smoothing')
+    # last: anything still inside the cord, brainstem or fourth ventricle by ray count moves straight back, just far
+    # enough (0.2 mm clear), and the points around it are smoothed so it doesn't leave a dent or fold
+    moved_idx = set()
+    for v in tm.vertices:
+        if above_mcrae(v.co) > 15:
+            continue
+        for tree in (cord_tree, stem_tree, v4_tree):
+            if inside_by_rays(tree, v.co):
+                for _ in range(80):
+                    v.co.x += 0.1
+                    if not inside_by_rays(tree, v.co):
+                        break
+                v.co.x += 0.2
+                moved_idx.add(v.index)
+    if moved_idx:
+        bm_c = bmesh.new(); bm_c.from_mesh(tm); bm_c.verts.ensure_lookup_table()
+        ring = {e.other_vert(bm_c.verts[i]).index for i in moved_idx for e in bm_c.verts[i].link_edges} - moved_idx
+        for _ in range(3):
+            for i in ring:
+                v = bm_c.verts[i]
+                nb = [e.other_vert(v).co for e in v.link_edges]
+                q = v.co.lerp(sum(nb, Vector()) / len(nb), 0.5)
+                if clear(q) and not any(inside_by_rays(t, q) for t in (cord_tree, stem_tree, v4_tree)):
+                    v.co = q
+        bm_c.to_mesh(tm); bm_c.free()
+    print(f'  tonsil points moved straight back at the end: {len(moved_idx)}', flush=True)
+    # split four-sided faces into triangles here, choosing the better diagonal (the exporter's own split can fold a
+    # bent face)
+    bm_t = bmesh.new(); bm_t.from_mesh(tm)
+    bmesh.ops.triangulate(bm_t, faces=bm_t.faces, quad_method='BEAUTY')
+    bm_t.to_mesh(tm); bm_t.free()
+    tm.update()
+    folds('after the last step')
+    print(f'  tonsil surface cleaned: {len(tm.vertices)} points, tip now {tonsil_tip_above():+.1f} mm', flush=True)
 # Where the tonsils' surface still spans a small bulge of the fourth ventricle, that bit of the ventricle moves
 # forward (away from the tonsils, which lie behind it) until it is 0.4 mm clear.
 ton_tree_f = bvh_of(['tonsil'])
@@ -579,7 +737,10 @@ def patch_half(z):
     # so it covers the whole opening, narrowing only near its top and bottom ends
     u = (PATCH[0][1] - z) / (PATCH[0][1] - PATCH[-1][1])
     u = (u * PATCH_N + 0.5) / (PATCH_N + 1)  # the patch's rows sit between its ends
-    return 17 * max(0.35, (1 - abs(2 * u - 1) ** 6) ** (1 / 6))
+    prof = (1 - abs(2 * u - 1) ** 6) ** (1 / 6)
+    if u > 0.5:
+        prof = max(prof, 14.5 / 17)  # the lower end (at C1) stays wider than the 25 mm gap in C1's arch
+    return 17 * max(0.35, prof)
 def in_reformed(p):
     # below or near the opening, behind the brain, in front of the (curved, oval) patch
     px = patch_x(p.z)
@@ -654,6 +815,11 @@ for i, ix in enumerate(XS):
             for j, iy in enumerate(YS):
                 if abs(iy) <= 2:
                     solid[i, j, k] = brain[i, j, k]
+# Exactly on the midline, the upward test ray passes through the narrow gap between the two halves of the brain (and
+# the tentorium's midline seam), so the inside-the-skull test fails there. On the midline, use the result on both
+# sides instead (the space is symmetric).
+j0 = list(YS).index(0)
+space[:, j0, :] = space[:, j0 - 1, :] & space[:, j0 + 1, :]
 fluid_grid = space & ~solid & ~near_brain
 # keep the largest connected space (6-neighbour flood fill)
 labels = np.zeros(fluid_grid.shape, np.int32)
@@ -757,6 +923,24 @@ def cord_at(z):
             t = (z - lo[0]) / (hi[0] - lo[0])
             return tuple(lo[i] + (hi[i] - lo[i]) * t for i in range(1, 5))
     return axis_s[0][1:]
+# Typical: from the opening down to C1, the space behind the cord is fluid all the way to the back of the canal
+# (the dura between the opisthion and C1's back arch), as on MRI. Chiari I is plugged there by the tonsils, and
+# after surgery the re-formed space fills it.
+c1_back = [v.co.copy() for v in D.objects['c1'].data.vertices if abs(v.co.y) < 4 and v.co.x > 3]
+c1_in = min((c for c in c1_back if abs(c.y) < 3), key=lambda c: c.x) if c1_back else None
+def canal_back_x(z):
+    if CONDITION != 'typical' or c1_in is None or not (c1_in.z <= z <= opi_m.z):
+        return None
+    t = (opi_m.z - z) / (opi_m.z - c1_in.z)
+    x = opi_m.x + (c1_in.x - opi_m.x) * t
+    # and never past bone straight behind the cord on the midline (C1's arch top rises toward the skull)
+    # (probed at this ring and just below it, so the surface between rings can't cut across the arch's top edge)
+    for dz in (0.0, -0.4, -0.8):
+        hit = bone_tree.ray_cast(Vector((cord_at(z)[0], 0, z + dz)), Vector((1, 0, 0)), 40)
+        if hit[0] is not None:
+            x = min(x, hit[0].x - 0.6)
+    return x
+print(f'canal back: opisthion ({opi_m.x:.1f}, {opi_m.z:.1f}) to C1 arch ({c1_in.x:.1f}, {c1_in.z:.1f})' if c1_in else 'canal back: no C1 arch', flush=True)
 for z in heights:
     cx, cy, ax, ay = cord_at(z)
     depth = fm_mid_z - z
@@ -770,6 +954,9 @@ for z in heights:
         front, back, side = ax + 2.0 + 2 * roomy, ax + 3.0 + 2 * roomy, 9.5
         if blocked and d.x > 0.3:
             back = ax + 0.4
+        cb = canal_back_x(z)
+        if cb is not None:
+            back = max(back, cb - cx - 0.8)
         rx_ = back if d.x > 0 else front
         r = 1 / math.sqrt((d.x / rx_) ** 2 + (d.y / side) ** 2)
         hit = bone_tree.ray_cast(Vector((cx, cy, z)), d, r + 2)
@@ -907,6 +1094,18 @@ if CONDITION == 'surgery':
     for b in range(M):
         for a in (0, N):
             pb.faces.new([grid[0, a, b], grid[0, a, b + 1], grid[1, a, b + 1], grid[1, a, b]])
+    # Where the patch's curved side edges would pass into the cerebellum, they move back until 0.5 mm clear.
+    cb_tree = bvh_of(['cerebellum'])
+    pushed = 0
+    for v in pb.verts:
+        if inside_by_rays(cb_tree, v.co):
+            for _ in range(40):
+                v.co.x += 0.25
+                if not inside_by_rays(cb_tree, v.co):
+                    break
+            v.co.x += 0.5
+            pushed += 1
+    print(f'dural patch: {pushed} points moved out of the cerebellum', flush=True)
     built.append(finish('dural-patch', pb))
 
 # ---------------------------------------------------------------- measurements (model mm)

@@ -189,15 +189,15 @@ const PART_NODES = {
   cerebrum: ['cerebrum'], callosum: ['callosum'], cerebellum: ['cerebellum'], ventricle: ['ventricle-fourth'], brainstem: ['brainstem'],
   tonsil: ['tonsil'], cord: ['cord'], csf: ['csf-spinal', 'csf-cranial'], c2: ['c2'], syrinx: ['syrinx'], removed: ['bone-removed'],
 };
-const PART_LIMITS = { cord: { y0: -45, y1: -12 }, csf: { y0: -75, y1: -40 }, cerebrum: { y1: 125 } };
+const PART_LIMITS = { cord: { y0: -45, y1: -12 }, csf: { y0: -75, y1: -40 }, cerebrum: { y1: 125 }, ventricle: { y0: 8, y1: 22 } };
 function guides(lm) {
   const out = { labels: {}, flow: {} };
   const mid = [(lm.mcrae.basion[0] + lm.mcrae.opisthion[0]) / 2, (lm.mcrae.basion[1] + lm.mcrae.opisthion[1]) / 2];
   for (const c of ['typical', 'chiari', 'syrinx', 'surgery']) {
     const map = midlineMap(src[c]);
     if (process.env.DEBUG_MAP && c === process.env.DEBUG_MAP) {
-      const L = { cord: 'C', brainstem: 'B', tonsil: 'T', 'csf-cranial': '~', 'csf-spinal': '-', cerebellum: 'c', occipital: 'o', c1: '1', c2: '2' };
-      for (let y = 4; y >= -14; y--) { let r = ''; for (let x = -20; x <= 20; x++) r += L[at(map, x, y)] ?? (at(map, x, y) ? '?' : '.'); console.log(String(y).padStart(4), r); }
+      const L = { cord: 'C', brainstem: 'B', tonsil: 'T', 'csf-cranial': '~', 'csf-spinal': '-', cerebellum: 'c', occipital: 'o', c1: '1', c2: '2', 'ventricle-fourth': 'V' };
+      for (let y = 20; y >= -14; y--) { let r = ''; for (let x = -20; x <= 30; x++) r += L[at(map, x, y)] ?? (at(map, x, y) ? '?' : '.'); console.log(String(y).padStart(4), r); }
     }
     const labels = { foramen: mid.map((v) => +v.toFixed(1)) };
     for (const [part, names] of Object.entries(PART_NODES)) {
@@ -378,8 +378,11 @@ for (const level of ['desktop', 'phone']) {
     const map = midlineMap(doc, (n) => (n.getExtras().conditions ?? []).includes(c), base);
     for (const [part, xy] of Object.entries(LANDMARKS.labels[c])) {
       if (part === 'foramen') continue;
-      const who = at(map, xy[0], xy[1]);
-      if (!PART_NODES[part].includes(who)) problems.push(`${level} ${c}: the ${part} label points at ${who ?? 'nothing'}`);
+      // the point itself, and at least 3 of the 4 points 1 mm around it, show the structure
+      const centre = at(map, xy[0], xy[1]);
+      const around = [[1, 0], [-1, 0], [0, 1], [0, -1]].map(([dx, dy]) => at(map, xy[0] + dx, xy[1] + dy));
+      if (!PART_NODES[part].includes(centre) || around.filter((w) => PART_NODES[part].includes(w)).length < 3)
+        problems.push(`${level} ${c}: the ${part} label point is not well inside it (${centre ?? 'nothing'} there, ${around.map((w) => w ?? '-').join('/')} around)`);
     }
     for (const part of ['cerebrum', 'callosum', 'cerebellum', 'ventricle', 'brainstem', 'tonsil', 'cord', 'csf', 'c2', ...(c === 'syrinx' ? ['syrinx'] : []), ...(c === 'surgery' ? ['removed'] : [])])
       if (!LANDMARKS.labels[c][part]) problems.push(`${level} ${c}: no place found for the ${part} label`);

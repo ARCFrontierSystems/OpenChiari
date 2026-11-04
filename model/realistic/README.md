@@ -49,7 +49,7 @@ node model/realistic/check.mjs surgery-raw.glb --condition surgery --typical typ
 
 How After decompression is made: the Chiari I tonsils, risen about 2 mm (to about 10.4 mm below the McRae line).
 - **Bone:** the bone is cut exactly along the edges of a window 30 mm across and 25 mm up the back of the skull from the opisthion, plus the back rim of the opening itself across 25 mm (it curves down and forward off the midline; PMC11912941: "approximately 2.5 cm of the posterior margin of the foramen magnum was excised"). The middle 25 mm of C1's back arch is cut away too. Both removed pieces are kept as a faint red outline ("bone-removed").
-- **Dural patch:** a thin curved membrane across the opening, within the thickness of the removed bone. Its outline is a rounded rectangle a little wider than the bone window, so it covers the whole opening (a check confirms there is bone or patch behind all the fluid there).
+- **Dural patch:** a thin curved membrane across the opening, within the thickness of the removed bone. Its outline is a rounded rectangle a little wider than the bone window; its lower end stays wider than the gap in C1's arch. A check confirms there is bone or patch behind all the fluid there. Where its curved side edges would pass into the cerebellum, they are moved back.
 - **Fluid:** the fluid space behind the cerebellum is re-formed in front of the patch, joined to the space behind the cord; none of it sits behind the patch.
 - **McRae line:** its back end (the opisthion) is removed with the bone, so the check takes the line from the typical model; it shows where the opening was.
 
@@ -59,14 +59,22 @@ midline, so the midline cut shows the tonsils at their lowest point (in every vi
 (fully below 2 mm above the McRae line, none above 5 mm), so higher up the tonsils keep their natural gap under the
 fourth ventricle, and its outlet opens into the fluid behind the cerebellum. The lower ends are joined into one
 closed surface. Anything that would pass into bone, the spinal cord, the brainstem or the fourth ventricle is pushed
-back out, leaving the tonsils slightly squeezed where the space is tight. Where the atlas's cerebellum reaches into
+back out, leaving the tonsils slightly squeezed where the space is tight. Where the lower ends are joined, a shallow
+groove runs down the middle of their back (from 3 mm above the tip), so from behind they still read as two. Under the
+fourth ventricle a channel 4 mm wide is kept open between the tonsils, so its outlet opens into the fluid behind the
+cerebellum. Finally the tonsil surface is rebuilt cleanly (voxel remesh, 0.4 mm) and smoothed with a method that
+doesn't shrink thin parts. Points are moved out of bone, cord, brainstem or ventricle only when a ray count confirms
+they are inside, because near the open edges of the atlas's surfaces the surface direction can't be trusted. This
+keeps the surface free of folds (checked: at most 1% of faces folded). Where the atlas's cerebellum reaches into
 the occipital bone, it is moved inward (toward its own centre), never through to the outside of the skull.
 
 The fluid comes in two parts:
 - **Around the cerebellum** (`csf-cranial`): computed on a 1 mm grid as the space between the brain and the skull,
   kept 1 mm clear of the brain. As the tonsils go lower (Chiari I), this space shrinks automatically.
 - **Around the cord** (`csf-spinal`): a tube around the cord, fitted to the bone by rays (about 14 mm front to back
-  at C3; EVIDENCE.md 13 to 15 mm). The cord sits inside it, which draws correctly in the cut view. The tube stops in
+  at C3; EVIDENCE.md 13 to 15 mm). The cord sits inside it, which draws correctly in the cut view. In Typical, from
+the opening down to C1, it reaches back to the canal's back edge (the line from the opisthion to C1's arch, never past
+bone). The tube stops in
   front of the tonsils wherever they reach down behind the cord. In Chiari I, from 2 to 14 mm below the line, its
   back is pulled in to the cord, where the tonsils plug the space.
 

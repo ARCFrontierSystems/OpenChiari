@@ -155,16 +155,25 @@ if (condition === 'surgery') {
         if (d < best) { best = d; q0 = q; const u = [b[0] - a[0], b[1] - a[1], b[2] - a[2]], w = [c[0] - a[0], c[1] - a[1], c[2] - a[2]]; n0 = [u[1] * w[2] - u[2] * w[1], u[2] * w[0] - u[0] * w[2], u[0] * w[1] - u[1] * w[0]]; }
       }
       // behind = on the side of the patch's back face (its outward direction points toward the back of the head)
-      if (best < 6 && n0[0] > 0 && (p[0] - q0[0]) * n0[0] + (p[1] - q0[1]) * n0[1] + (p[2] - q0[2]) * n0[2] > 0.3) { outside++; if (process.env.DEBUG && outside < 15) console.log("  behind patch", p.map((x) => x.toFixed(1)).join(","), "dist", best.toFixed(1)); }
+      const nl = Math.hypot(...n0) || 1;
+      if (best < 6 && n0[0] > 0 && ((p[0] - q0[0]) * n0[0] + (p[1] - q0[1]) * n0[1] + (p[2] - q0[2]) * n0[2]) / nl > 0.3) { outside++; if (process.env.DEBUG && outside < 15) console.log("  behind patch", p.map((x) => x.toFixed(1)).join(","), "dist", best.toFixed(1)); }
     }
     console.log(`Fluid behind the dural patch: ${outside} points (EVIDENCE.md: re-formed space in front of it)`);
     ok(outside === 0, 'no fluid should sit behind the dural patch');
     // The patch covers the whole bone window: looking straight back from the fluid above the opening, there is
     // always bone or the patch (no gap where the fluid is open to the outside).
     const shell = [...['occipital', 'skull'].flatMap((n) => { const g = mesh(n); return g ? g.tris.map((t) => t.map((i) => g.verts[i])) : []; }), ...tris];
-    const uncovered = pts.filter((p) => above(p) > 0 && rayHits(p, [1, 0, 0], shell) === 0).length;
+    const pts2 = mesh('csf-cranial').verts.filter((v, i) => i % 3 === 0 && v[0] > 0 && Math.abs(v[2]) < 20 && above(v) > -18 && v[1] < 20);
+    const shellC1 = [...shell, ...['c1', 'c2'].flatMap((n) => { const g = mesh(n); return g ? g.tris.map((t) => t.map((i) => g.verts[i])) : []; })];
+    const uncovered = pts2.filter((p) => rayHits(p, [1, 0, 0], shellC1) === 0).length;
     console.log(`Fluid in the bone window not covered by the patch: ${uncovered} points`);
     ok(uncovered === 0, 'the dural patch should cover the whole bone window');
+    const cbM = mesh('cerebellum');
+    const cbT = cbM.tris.map((t) => t.map((i) => cbM.verts[i])).filter((t) => t.some((v) => v[0] > 10));
+    const dirs5 = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0.6, 0.48, 0.64]];
+    const patchInCb = patch.verts.filter((v) => dirs5.filter((d) => rayHits(v, d, cbT) % 2 === 1).length >= 3).length;
+    console.log(`Dural patch inside the cerebellum: ${patchInCb} points`);
+    ok(patchInCb === 0, 'the dural patch should stay out of the cerebellum');
   }
 }
 
@@ -402,6 +411,80 @@ console.log(`Fluid inside bone or discs: ${intoBone.length} points (deepest ${in
 ok(intoBone.length <= csfSample.length * 0.002, 'the fluid should stay out of the bones and discs');
 ok(intoBrain.length === 0, 'the fluid should stay out of the cord, tonsils and brainstem (otherwise it paints over them in the cut view)');
 
+// ---- The tonsil surface is smooth, not crumpled: near and below the McRae line (up to 4 mm above it), at most 1% of
+// the surface area may be folded back, meaning a face turned more than 120 degrees from the faces next to it (the
+// independent audit's measure). Vertices at the same place are merged first.
+{
+  const key = (v) => v.map((x) => Math.round(x * 1000)).join(',');
+  const id = new Map(), P = [];
+  const vi = tonsil.verts.map((v) => { const k = key(v); if (!id.has(k)) { id.set(k, P.length); P.push(v); } return id.get(k); });
+  const faces = tonsil.tris.map((t) => t.map((i) => vi[i]));
+  const fn = faces.map(([a, b, c]) => { const u = [0, 1, 2].map((k) => P[b][k] - P[a][k]), w = [0, 1, 2].map((k) => P[c][k] - P[a][k]); return [u[1] * w[2] - u[2] * w[1], u[2] * w[0] - u[0] * w[2], u[0] * w[1] - u[1] * w[0]]; });
+  const edges = new Map();
+  faces.forEach((f, i) => { for (let e = 0; e < 3; e++) { const a = f[e], b = f[(e + 1) % 3], k = a < b ? `${a}_${b}` : `${b}_${a}`; if (!edges.has(k)) edges.set(k, []); edges.get(k).push(i); } });
+  const len = (v) => Math.hypot(v[0], v[1], v[2]);
+  let bandArea = 0, foldArea = 0, folded = 0;
+  faces.forEach((f, i) => {
+    const ctr = [0, 1, 2].map((k) => (P[f[0]][k] + P[f[1]][k] + P[f[2]][k]) / 3);
+    if (above(ctr) > 4) return;
+    const area = len(fn[i]) / 2;
+    bandArea += area;
+    const avg = [0, 0, 0];
+    for (let e = 0; e < 3; e++) { const a = f[e], b = f[(e + 1) % 3]; for (const j of edges.get(a < b ? `${a}_${b}` : `${b}_${a}`)) if (j !== i) for (let k = 0; k < 3; k++) avg[k] += fn[j][k]; }
+    const cos = (avg[0] * fn[i][0] + avg[1] * fn[i][1] + avg[2] * fn[i][2]) / (len(avg) * len(fn[i]) || 1);
+    if (cos < -0.5) { folded++; foldArea += area; }
+  });
+  const pct = (100 * foldArea) / Math.max(1e-9, bandArea);
+  console.log(`Tonsil surface up to 4 mm above the line: ${pct.toFixed(2)}% of its area folded (${folded} faces)`);
+  ok(pct <= 1, 'the tonsil surface should be smooth (no crumpled folds): at most 1% of its area folded');
+}
+
+// ---- From behind, the joined tonsil tips still read as two: a groove down the middle of their back, above the tip.
+{
+  const tipA = above(tip);
+  let shallowest = Infinity, rows = 0;
+  for (let h = 4; h <= 12; h += 1) {
+    const a = tipA + h;
+    if (a > 5) break;
+    const row = tonsil.verts.filter((v) => Math.abs(above(v) - a) < 0.5);
+    const mid = row.filter((v) => Math.abs(v[2]) < 0.5), side = row.filter((v) => Math.abs(v[2]) > 2 && Math.abs(v[2]) < 4);
+    if (!mid.length || !side.length) continue;
+    rows++;
+    shallowest = Math.min(shallowest, Math.max(...side.map((v) => v[0])) - Math.max(...mid.map((v) => v[0])));
+  }
+  console.log(`Groove between the tonsils, from behind: ${rows ? shallowest.toFixed(1) + ' mm deep at its shallowest' : 'no joined part to check'} (${rows} heights)`);
+  if (rows) ok(shallowest >= 0.4, 'the joined tonsil tips should keep a groove between them, so they read as two');
+}
+
+// ---- Typical: behind the cord, from the opening down to C1, the canal is fluid out to its back edge (the line
+// from the opisthion to C1's back arch), not left empty.
+if (condition === 'typical') {
+  const c1 = mesh('c1');
+  const arch = c1.verts.filter((v) => Math.abs(v[2]) < 3 && v[0] > 3).reduce((a, v) => (v[0] < a[0] ? v : a));
+  const fl = [...section('csf-spinal'), ...section('csf-cranial')];
+  const cordS = section('cord'), bonesS = [...section('c1'), ...section('occipital')];
+  let worst = Infinity, at = '';
+  for (let y = Math.round(opisthion[1]) - 3; y >= arch[1] + 1; y -= 2) {
+    const t = (opisthion[1] - y) / (opisthion[1] - arch[1]);
+    const canal = opisthion[0] + (arch[0] - opisthion[0]) * t;
+    const cb = cordS.filter((p) => Math.abs(p[1] - y) < 1.5), fr = fl.filter((p) => Math.abs(p[1] - y) < 1);
+    if (!cb.length || !fr.length) { worst = 0; at = `${y} (no section)`; break; }
+    const cordBackX = Math.max(...cb.map((p) => p[0])), fluidBackX = Math.max(...fr.map((p) => p[0]));
+    // the back edge is the line, or bone (C1's arch top) where it comes first
+    const bone = bonesS.filter((p) => p[1] <= y + 0.3 && p[1] >= y - 1 && p[0] > cordBackX).map((p) => p[0]);
+    // measured from the opening down to the top of C1's arch (below that the arch itself is the back edge)
+    if (bone.length) break;
+    const edge = canal;
+    // fluid past bone at the same height (within 0.3 mm) would be inside or behind it
+    const past = fr.some((f) => bonesS.some((b) => Math.abs(b[1] - f[1]) < 0.3 && b[0] > cordBackX && f[0] > b[0] + 0.5));
+    if (past) { worst = 0; at = `${y} mm (fluid passes the bone)`; break; }
+    const share = (fluidBackX - cordBackX) / (edge - cordBackX);
+    if (share < worst) { worst = share; at = `${y} mm`; }
+  }
+  console.log(`Canal behind the cord from the opening to the top of C1: fluid reaches ${(worst * 100).toFixed(0)}% of the way to its back edge at least (at ${at}; C1 arch at ${arch.map((v) => v.toFixed(1)).join(', ')})`);
+  ok(worst >= 0.85, 'in Typical the fluid behind the cord should reach the back of the canal from the opening down to C1');
+}
+
 // ---- Fluid all the way round the cord, at every height below C1 (not only on the midline): cross-sections across
 // the neck, measured from the cord's centre in 12 directions. Chiari I's back is plugged near the opening, so its
 // check starts lower.
@@ -463,12 +546,14 @@ ok(intoBrain.length === 0, 'the fluid should stay out of the cord, tonsils and b
   const inside = (p, T) => dirs.filter((d) => rayHits(p, d, T) % 2 === 1).length >= 3;
   const tonIn = tonsil.verts.filter((v, i) => i % 5 === 0 && above(v) > 3 && inside(v, v4T)).length;
   const v4In = v4.verts.filter((v) => above(v) < 20 && inside(v, tonT)).length;
-  const outlet = v4.verts.filter((v) => Math.abs(v[2]) < 3).reduce((a, v) => (above(v) < above(a) ? v : a));
+  // measured in the midline cut (what the visitor sees): from the ventricle's lowest point there to the fluid
+  const v4cut = section('ventricle-fourth'), csfCut = section('csf-cranial');
+  const outlet = v4cut.reduce((a, p) => (above(p) < above(a) ? p : a));
   let near = Infinity;
-  for (const v of csf.verts) near = Math.min(near, Math.hypot(v[0] - outlet[0], v[1] - outlet[1], v[2] - outlet[2]));
-  console.log(`Fourth ventricle: tonsils inside it ${tonIn}, it inside the tonsils ${v4In}; fluid behind the cerebellum ${near.toFixed(1)} mm from its outlet (EVIDENCE.md: from the fourth ventricle outlet into the cisterna magna)`);
+  for (const p of csfCut) near = Math.min(near, dist(p, outlet));
+  console.log(`Fourth ventricle: tonsils inside it ${tonIn}, it inside the tonsils ${v4In}; fluid behind the cerebellum ${near.toFixed(1)} mm from its outlet in the midline cut (EVIDENCE.md: from the fourth ventricle outlet into the cisterna magna)`);
   ok(tonIn === 0 && v4In === 0, 'the tonsils should stay out of the fourth ventricle');
-  ok(near <= 3, 'the fourth ventricle outlet should open into the fluid behind the cerebellum (within about 3 mm)');
+  ok(near <= 2, 'the fourth ventricle outlet should open into the fluid behind the cerebellum in the midline cut (within about 2 mm)');
 }
 
 if (problems.length) {

@@ -3,6 +3,23 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Realistic model: minor items and third audit (Matthew approved)
+
+- **Third independent audit** (`docs/audits/2026-11-04-realistic-reaudit-3.md`): no High findings. Second-audit findings 1 to 4 fixed and 5 mostly fixed. One new Medium finding (crumpled tonsil surface) and a few Low ones. Verdict: nothing else blocks going public once the Medium one is fixed or accepted. The auditor could not open the source websites from this session (blocked by the network settings) and relied on earlier quotes.
+- **Crumpled tonsil surface (Medium):** folded faces near the McRae line drop from about 15% (audit) to 0.1 to 0.3%.
+  - The surface is rebuilt cleanly at the end and smoothed without shrinking.
+  - Points are pushed out only when a ray count confirms they're inside: the brainstem's open lower edge had been fooling the surface-direction test.
+  - New fold check.
+- **Tonsils read as one (Low):** a shallow groove down the back of the joined tips (0.4 to 0.7 mm); new check.
+- **Canal behind the cord at the opening (Low):** in Typical the fluid now reaches 96% of the way to the canal's back edge from the opening to the top of C1, without passing bone. It was 35 to 43%. New check.
+- **Patch edges (Low):** the patch stays out of the cerebellum, and its lower end covers the whole gap in C1's arch. New checks.
+- **Fourth ventricle outlet in the cut (Low):**
+  - A 4 mm channel between the tonsils under the ventricle.
+  - Found and fixed an older bug: the fluid space was never counted exactly on the midline, because one test ray slipped between the brain's halves.
+  - The outlet is now 1.3 to 1.4 mm from the fluid in the midline cut, in every view. The check now measures in the cut.
+- **Labels (Low):** every label point, and at least 3 of the 4 points around it, must show its own structure in the files the Explorer loads.
+- **Next:** Matthew decides whether the realistic model goes public. Deploying needs a separate go-ahead.
+
 ## 2026-11-04: Realistic model: fixes from the second re-audit (findings 1 to 5, Matthew approved)
 
 - **Second independent re-audit** (`docs/audits/2026-11-04-realistic-reaudit-2.md`): 5 of the 8 earlier findings fixed, 2 partly, 1 not; 2 new High and 3 new Medium findings; verdict "not yet public".

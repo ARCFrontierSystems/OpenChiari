@@ -11,3 +11,6 @@ test-results/
 playwright-report/
 lighthouse-*.json
 model/realistic/.venv
+
+# Scratch scripts used by independent audit agents while they work
+scripts/audit-tmp/

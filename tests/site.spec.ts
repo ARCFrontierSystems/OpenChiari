@@ -132,7 +132,7 @@ test.describe('3D Explorer controls', () => {
     const labels = page.getByRole('button', { name: 'Labels' });
     await labels.click();
     await expect(labels).toHaveAttribute('aria-pressed', 'false');
-    await expect(page.locator('[data-figure="wide"] svg')).toHaveAttribute('viewBox', '36 62 522 578');
+    await expect(page.locator('[data-figure="wide"] svg')).toHaveAttribute('viewBox', '60 128 488 512');
   });
 
   test('part 11 (syrinx, bone removed) is listed only in its own view', async ({ page }) => {

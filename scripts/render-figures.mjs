@@ -8,14 +8,19 @@ import strings from '../src/i18n/en.json' with { type: 'json' };
 const out = process.argv[2] ?? new URL('../design/figures/', import.meta.url).pathname;
 mkdirSync(out, { recursive: true });
 const browser = await chromium.launch();
-const page = await browser.newPage({ viewport: { width: 1440, height: 1156 } });
 for (const condition of CONDITIONS) {
-  const svg = anatomyFigureSvg({ condition }, strings.figure)
-    .replace('<svg ', '<svg width="1440" height="1156" font-family="IBM Plex Sans, system-ui, sans-serif" ')
+  const raw = anatomyFigureSvg({ condition }, strings.figure);
+  // Two pixels per figure unit.
+  const [, , vw, vh] = raw.match(/viewBox="([^"]+)"/)[1].split(' ').map(Number);
+  const width = vw * 2, height = vh * 2;
+  const page = await browser.newPage({ viewport: { width, height } });
+  const svg = raw
+    .replace('<svg ', `<svg width="${width}" height="${height}" font-family="IBM Plex Sans, system-ui, sans-serif" `)
     .replace('class="anatomy-figure"', '');
   writeFileSync(`${out}/anatomy-${condition}.svg`, svg + '\n');
   await page.setContent(`<html><body style="margin:0;background:#fff">${svg}</body></html>`);
-  await page.screenshot({ path: `${out}/anatomy-${condition}.png`, clip: { x: 0, y: 0, width: 1440, height: 1156 } });
+  await page.screenshot({ path: `${out}/anatomy-${condition}.png`, clip: { x: 0, y: 0, width, height } });
+  await page.close();
 }
 await browser.close();
 console.log('wrote', CONDITIONS.length, 'figures to', out);

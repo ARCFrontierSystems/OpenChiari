@@ -23,7 +23,7 @@ const FIGURE_UNITS_PER_MM = 2;
 // Origin of the model: middle of the foramen magnum, in figure units (see build.mjs).
 const ORIGIN = { x: 369, y: 444.5 };
 // The figure without labels uses this viewBox; the midline cut face covers the same area.
-const SECTION_BOX = { x: 36, y: 62, w: 522, h: 578 };
+const SECTION_BOX = { x: 60, y: 128, w: 488, h: 512 };
 const BACKGROUND = 0x1a1c20; // --x-viewport
 // Middle of the head, in mm, where the camera looks.
 const TARGET = new THREE.Vector3(-40, 40, 0);
@@ -62,7 +62,7 @@ export interface LabelDef {
 export function labelAnchor(part: string, condition: string): [number, number] {
   const tonsilMid = condition === 'typical' ? 430 : condition === 'surgery' ? 446 : 448;
   const anchors: Record<string, [number, number]> = {
-    cerebrum: [250, 170], callosum: [300, 214], cerebellum: [452, 372], ventricle: [364, 384], brainstem: [318, 372],
+    cerebrum: [262, 262], callosum: [300, 265], cerebellum: [440, 390], ventricle: [360, 394], brainstem: [326, 370],
     tonsil: [386, tonsilMid], foramen: [372, 445], cord: [342, 480], csf: [351, 620], c2: [318, 500],
     syrinx: [337, 585], removed: [420, 440],
   };

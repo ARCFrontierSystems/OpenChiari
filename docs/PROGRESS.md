@@ -3,6 +3,15 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Real head for the Simple figure and 3D model
+
+- **Matthew's feedback:** the smooth head looked like it was wearing a helmet. He asked for it to be based on a real model.
+- **Cause:** the Simple skull and brain were drawn about 3 cm too tall above the base of the skull (top of skull 177 mm vs 146 mm in a real head), with no face bones. No real head could fit around it.
+- **Done (Matthew approved):** the head, skull, skull base, clivus, brain, corpus callosum, ventricles, thalamus, brainstem and tentorium are now traced from midline cross-sections of the Z-Anatomy atlas, the open model already credited. The 3D skin is Z-Anatomy's real head surface (`model/simple/reference/head-skin.glb`), shown see-through in the Explorer.
+- **Unchanged:** the McRae line, tonsils, cord, canal, fluid in the neck and vertebrae. Every `model:check` measurement passes, plus a new clivus check: 43.7 mm, within the published 39 to 47 mm. This fixes the re-audit's skull-height and clivus findings.
+- **Figure frame:** now 704 by 512 units (was 720 by 578), with labels and the Explorer cut face updated. All 73 tests pass.
+- **Next:** Matthew reviews the new head; then his decisions on the re-audit text items, and Phase 2 step 3.
+
 ## 2026-11-04: Smooth, plain 3D skin (option 1)
 
 - **Matthew's question:** why does the 3D face still have bumps, and do we need the skin? The bumps came from building the face out of about twenty blended rounded shapes; their joins show as lumps when turned. Without skin, the Simple model's skull (braincase only, no face bones) looks like a bare dome, so the skin stays.

@@ -195,6 +195,14 @@ for (const name of ['csf-typical', 'csf-chiari', 'csf-surgery']) {
   if (name === 'csf-chiari' && !(top < 2)) problems.push('in Chiari I the tonsil should fill the fluid space behind it (no fluid continuing up into the skull)');
 }
 
+// Clivus (EVIDENCE.md "Clivus"): dorsum sellae to basion on the midline, about 39 to 47 mm.
+{
+  const top = [...shapes.clivus.matchAll(/(-?[\d.]+) (-?[\d.]+)/g)].map((m) => [Number(m[1]), Number(m[2])]).reduce((a, p) => (p[1] < a[1] ? p : a));
+  const len = Math.hypot(top[0] - shapes.mcrae.basion[0], top[1] - shapes.mcrae.basion[1]) / shapes.unitsPerMm;
+  console.log(`Clivus: ${len.toFixed(1)} mm from the dorsum sellae to the basion (EVIDENCE.md: about 39 to 47 mm)`);
+  if (!(len >= 39 && len <= 47)) problems.push('the clivus should be about 39 to 47 mm long');
+}
+
 if (problems.length) {
   console.error('\nFAILED: the model no longer matches docs/EVIDENCE.md:\n- ' + problems.join('\n- '));
   process.exit(1);

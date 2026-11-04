@@ -324,7 +324,7 @@ function smooth(mesh, iterations = 10) {
 // across the foramen magnum (which is cut open again below).
 const CAVITY_PATH =
   S.skull.d +
-  ' L334 440 C304 420 292 390 290 356 L282 354 L278 330 C272 340 255 338 252 322 C220 310 170 305 128 300 Z';
+  ' L334 440 C318 414 304 382 299 360 L290 368 C284 381 268 378 266 362 C265 356 261 352 252 351 C222 350 185 356 150 352 Z';
 const cavity = distanceGrid(CAVITY_PATH, { margin: 130, step: 1 });
 const CAV_W = 132; // half-width of the cranial cavity at its widest: 66 mm
 const CAV_R = cavity.dMax;
@@ -336,7 +336,7 @@ const insideSkull = (x, y, z) => cavityOffset(x, y, z, -9);
 
 // Skull thickness follows the figure: 8 units (4 mm) for the vault, thinner along the base.
 const vaultLine = distanceGrid(S.skull.d, { unsigned: true, margin: 40 });
-const baseLine = distanceGrid('M128 300 C170 305 220 310 252 322 C255 338 272 340 278 330 L282 354 L290 356 C292 390 304 420 334 440 L404 449', { unsigned: true, margin: 40 });
+const baseLine = distanceGrid(S.skullBase.d + ' C304 382 318 414 334 440 L404 449', { unsigned: true, margin: 40 });
 function skullHalfThickness(x, y) {
   const dv = vaultLine.sample(x, y), db = baseLine.sample(x, y);
   return lerp(8, 3.5, smoothstep(30, -30, db - dv));
@@ -374,64 +374,103 @@ const skullAfterSurgery = (x, y, z) => Math.min(skullField(x, y, z), -skullRemov
 const skullRemovedPiece = (x, y, z) => Math.min(skullField(x, y, z), skullRemoval(x, y, z));
 
 // ---------------------------------------------------------------- the head (skin)
-// The skin is built from the approved midline head outline (S.skin, the 2D figure's own outline),
-// rounded off to the sides like the other structures, so the side view matches the figure exactly
-// and the surface stays smooth when the model is turned (no separately modelled cheeks, eyes or ears).
-// Matthew chose this plain, smooth head on 2026-11-04; a natural face comes with the realistic model.
-// Half-widths: about 76 mm at the cranium, 66 mm at the face, 56 mm at the neck (figure units below).
-const skinGrid = distanceGrid(S.skin, { step: 2, margin: 6, blur: 6 });
-// A smoothed copy of the outline for the sides of the face: the front of the face between the brow and
-// the chin is averaged over about 15 mm up and down, so the nose, lips and chin stay narrow (as on a
-// real face) instead of running across its whole width, without pulling the face back.
-function softenFace(path) {
-  const pts = [...path.matchAll(/(-?[\d.]+) (-?[\d.]+)/g)].map((m) => [Number(m[1]), Number(m[2])]);
-  const frontAt = (y) => {
-    let best = Infinity;
-    for (let k = 0; k < pts.length; k++) {
-      const [ax, ay] = pts[k], [bx, by] = pts[(k + 1) % pts.length];
-      if ((ay - y) * (by - y) <= 0 && ay !== by) best = Math.min(best, ax + ((y - ay) / (by - ay)) * (bx - ax));
+// The real head surface from the Z-Anatomy atlas (CC BY-SA 4.0), saved by
+// model/simple/reference/extract-skin.mjs. Matthew chose a real head on 2026-11-04 after the
+// sculpted heads looked unnatural. It is turned into a smooth inside/outside field on a 1.5 mm grid
+// (rays across the head mark what is inside), so it meshes like every other structure.
+const skinIO = new NodeIO();
+const skinDoc = await skinIO.read(new URL('./reference/head-skin.glb', import.meta.url).pathname);
+const skinTris = (() => {
+  const prim = skinDoc.getRoot().listMeshes()[0].listPrimitives()[0];
+  const pos = prim.getAttribute('POSITION'), idx = prim.getIndices().getArray(), el = [0, 0, 0];
+  const v = [];
+  for (let i = 0; i < pos.getCount(); i++) {
+    pos.getElement(i, el);
+    v.push([fmCenter[0] + el[0] * S.unitsPerMm, fmCenter[1] - el[1] * S.unitsPerMm, el[2] * S.unitsPerMm]);
+  }
+  const t = [];
+  for (let k = 0; k < idx.length; k += 3) t.push([v[idx[k]], v[idx[k + 1]], v[idx[k + 2]]]);
+  return t;
+})();
+const SK = { x0: 30, y0: 110, z0: -210, step: 3, nx: 0, ny: 0, nz: 0 };
+SK.nx = Math.ceil((590 - SK.x0) / SK.step) + 1;
+SK.ny = Math.ceil((660 - SK.y0) / SK.step) + 1;
+SK.nz = Math.ceil(-2 * SK.z0 / SK.step) + 1;
+const skinGrid3 = (() => {
+  const { x0, y0, z0, step, nx, ny, nz } = SK;
+  const occ = new Float32Array(nx * ny * nz).fill(-1);
+  const idx3 = (i, j, k) => i + nx * (j + ny * k);
+  // Cast rays along one axis (a) across a grid of the other two (u, v); mark cells between the first and
+  // last crossing as inside. Done along z (side to side) and x (front to back): a point is inside if
+  // either says so, so openings such as the ear canals can't tunnel through the head.
+  const lo = [x0, y0, z0], n3 = [nx, ny, nz];
+  const cast = (a, u, v) => {
+    const B = 6, bu = Math.ceil(n3[u] / B), bv = Math.ceil(n3[v] / B), buckets = Array.from({ length: bu * bv }, () => []);
+    for (const tri of skinTris) {
+      const us = tri.map((p) => (p[u] - lo[u]) / step), vs = tri.map((p) => (p[v] - lo[v]) / step);
+      for (let j = Math.max(0, Math.floor(Math.min(...vs) / B)); j <= Math.min(bv - 1, Math.floor(Math.max(...vs) / B)); j++)
+        for (let i = Math.max(0, Math.floor(Math.min(...us) / B)); i <= Math.min(bu - 1, Math.floor(Math.max(...us) / B)); i++) buckets[i + bu * j].push(tri);
     }
-    return best;
+    for (let j = 0; j < n3[v]; j++)
+      for (let i = 0; i < n3[u]; i++) {
+        const pu = lo[u] + i * step + 0.013, pv = lo[v] + j * step + 0.017;
+        let zin = Infinity, zout = -Infinity, count = 0;
+        for (const [A, Bp, C] of buckets[Math.floor(i / B) + bu * Math.floor(j / B)]) {
+          const d = (Bp[v] - C[v]) * (A[u] - C[u]) + (C[u] - Bp[u]) * (A[v] - C[v]);
+          if (Math.abs(d) < 1e-12) continue;
+          const l1 = ((Bp[v] - C[v]) * (pu - C[u]) + (C[u] - Bp[u]) * (pv - C[v])) / d;
+          const l2 = ((C[v] - A[v]) * (pu - C[u]) + (A[u] - C[u]) * (pv - C[v])) / d;
+          const l3 = 1 - l1 - l2;
+          if (l1 < 0 || l2 < 0 || l3 < 0) continue;
+          const h = l1 * A[a] + l2 * Bp[a] + l3 * C[a];
+          zin = Math.min(zin, h); zout = Math.max(zout, h); count++;
+        }
+        if (count < 2) continue;
+        for (let k = 0; k < n3[a]; k++) {
+          const h = lo[a] + k * step;
+          if (h > zin && h < zout) {
+            const c = [0, 0, 0]; c[a] = k; c[u] = i; c[v] = j;
+            occ[idx3(c[0], c[1], c[2])] = 1;
+          }
+        }
+      }
   };
-  const out = pts.map(([x, y]) => {
-    if (x > 150 || y < 270 || y > 505) return [x, y];
-    let sum = 0, n = 0;
-    for (let yy = y - 30; yy <= y + 30; yy += 2) if (yy >= 260 && yy <= 505) { sum += frontAt(yy); n++; }
-    const w = smoothstep(270, 290, y) * smoothstep(505, 485, y);
-    return [lerp(x, sum / n, w), y];
-  });
-  return 'M' + out.map(([x, y]) => `${x.toFixed(1)} ${y.toFixed(1)}`).join(' L') + ' Z';
+  cast(2, 0, 1);
+  cast(0, 1, 2);
+  // Smooth (two box passes in each direction) so the surface is soft rather than stepped.
+  const blur = (a, stride, n, count) => {
+    const out = new Float32Array(a.length);
+    for (let s = 0; s < a.length; s++) {
+      const p = Math.floor(s / stride) % n;
+      let sum = 0, w = 0;
+      for (let d = -1; d <= 1; d++) if (p + d >= 0 && p + d < n) { sum += a[s + d * stride]; w++; }
+      out[s] = sum / w;
+    }
+    return count > 1 ? blur(out, stride, n, count - 1) : out;
+  };
+  let g = blur(occ, 1, nx, 2);
+  g = blur(g, nx, ny, 2);
+  g = blur(g, nx * ny, nz, 2);
+  return g;
+})();
+/** The real head as a field: about the distance in figure units near the surface, positive inside. */
+function realSkin(x, y, z) {
+  const { x0, y0, z0, step, nx, ny, nz } = SK;
+  const fx = (x - x0) / step, fy = (y - y0) / step, fz = (z - z0) / step;
+  if (fx < 0 || fy < 0 || fz < 0 || fx >= nx - 1 || fy >= ny - 1 || fz >= nz - 1) return -6;
+  const i = Math.floor(fx), j = Math.floor(fy), k = Math.floor(fz), tx = fx - i, ty = fy - j, tz = fz - k;
+  const at = (a, b, c) => skinGrid3[i + a + nx * (j + b + ny * (k + c))];
+  const lx = (b, c) => at(0, b, c) * (1 - tx) + at(1, b, c) * tx;
+  const v = (lx(0, 0) * (1 - ty) + lx(1, 0) * ty) * (1 - tz) + (lx(0, 1) * (1 - ty) + lx(1, 1) * ty) * tz;
+  return v * 6;
 }
-const softGrid = distanceGrid(softenFace(S.skin), { step: 2, margin: 6, blur: 6 });
-const skinHalfWidth = (x, y) => {
-  const face = smoothstep(250, 150, x) * smoothstep(270, 350, y); // in front of the ear, below the brow
-  // Below the jaw: the jawline rises from the chin toward the ear.
-  const jaw = y + (x - 100) * 0.18;
-  const neck = smoothstep(440, 570, jaw) * smoothstep(140, 240, x);
-  return lerp(lerp(160, 140, face), 114, neck);
-};
-const SKIN_ROUND = 170; // how far in from the outline the sides finish rounding (figure units)
-// At the midline the exact outline keeps the side view identical to the figure; from about 4 to 18 mm
-// to the side the surface follows the smooth version instead.
-const skinShape = {
-  f: (x, y, z) => {
-    const az = Math.abs(z), W = skinHalfWidth(x, y);
-    const d = skinGrid.sample(x, y);
-    const t = d <= 0 ? d : lerp(d, Math.max(skinGrid.sampleSmooth(x, y), d * 0.5), smoothstep(0, 24, d));
-    const exact = (t > 0 ? roundedHalfWidth(t, W, SKIN_ROUND) : t) - az;
-    const dd = softGrid.sample(x, y);
-    const ds = dd <= 0 ? dd : lerp(dd, Math.max(softGrid.sampleSmooth(x, y), dd * 0.5), smoothstep(0, 24, dd));
-    const soft = (ds > 0 ? roundedHalfWidth(ds, W, SKIN_ROUND) : ds) - az;
-    return lerp(exact, soft, smoothstep(8, 36, az));
-  },
-};
+const bottomY = 640; // the figure's bottom edge
 const smoothUnion = (a, b, k) => {
   const h = Math.max(k - Math.abs(a - b), 0) / k;
   return Math.max(a, b) + (h * h * k) / 4;
 };
-const bottomY = 640; // the figure's bottom edge
 /** Head and neck, as an "inside is positive" field in figure units. Always covers the skull. */
-const skinField = (x, y, z) => Math.min(smoothUnion(skinShape.f(x, y, z), cavityOffset(x, y, z, 16), 16), bottomY - y);
+const skinField = (x, y, z) => Math.min(smoothUnion(realSkin(x, y, z), cavityOffset(x, y, z, 14), 8), bottomY - y);
 
 if (process.env.SLICE) {
   // Text map of the skull (#) and the cavity (.) on a slice across the head at figure x = SLICE.
@@ -459,10 +498,11 @@ if (process.env.PROBE) {
 // The skin must cover the skull everywhere (with at least 1 mm to spare).
 {
   let exposed = 0;
+  const exposedAt = [];
   for (let xx = 90; xx <= 550; xx += 4)
     for (let yy = 60; yy <= 480; yy += 4)
-      for (let zz = -150; zz <= 150; zz += 4) if (skullField(xx, yy, zz) > 0 && skinField(xx, yy, zz) < 2) exposed++;
-  if (exposed) console.warn(`WARNING: the skull comes within 1 mm of the skin surface at ${exposed} sample points.`);
+      for (let zz = -150; zz <= 150; zz += 4) if (skullField(xx, yy, zz) > 0 && skinField(xx, yy, zz) < 2) { exposed++; if (exposedAt.length < 12) exposedAt.push([xx, yy, zz]); }
+  if (exposed) console.warn(`WARNING: the skull comes within 1 mm of the skin surface at ${exposed} sample points, e.g. ${exposedAt.map((p) => p.join(',')).join('  ')}`);
   else console.log('Skin covers the skull everywhere.');
 }
 
@@ -494,7 +534,7 @@ const brainstemW = (x, y) => lerp(34, 16, smoothstep(330, 446, y));
 /** All structures. part = id used by the structure list; layer = layer switch it belongs to. */
 const structures = [
   // Skin and soft tissue
-  { name: 'skin', layer: 'skin', part: null, color: '#EFE3D8', step: 3, field: skinField, box: [20, 50, -195, 580, 660, 195] },
+  { name: 'skin', layer: 'skin', part: null, color: '#EFE3D8', step: 2.5, field: skinField, box: [30, 110, -205, 590, 645, 205] },
   { name: 'palate', layer: 'skin', part: null, color: '#D2BBAA', step: 1, ...inflateBox(distanceGrid(S.palate.d, { band: S.palate.halfWidth }), 30, 2.5) },
   { name: 'pharynx', layer: 'skin', part: null, color: '#E2CFC2', step: 1.5, ...inflateBox(distanceGrid(S.pharynx.d, { band: S.pharynx.halfWidth }), 26, 8) },
 

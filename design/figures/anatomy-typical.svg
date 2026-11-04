@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1140" viewBox="40 70 720 570" role="img" aria-label="Midline section, typical" >
+  <path d="M140 150 C190 95 300 80 390 100 C470 120 530 190 535 270 C540 330 520 380 490 420 C470 450 470 500 480 560 L490 640 L215 640 C222 590 224 545 212 512 C182 502 150 496 136 482 C118 470 120 452 126 442 C111 433 109 421 116 411 C103 401 101 391 111 381 C99 371 90 342 70 331 C61 323 69 313 84 301 C92 270 99 232 105 210 C110 182 121 165 140 150 Z" fill="#EFE3D8" stroke="#C9B2A2" stroke-width="1.5"></path>
+  <path d="M112 362 L246 374" fill="none" stroke="#D2BBAA" stroke-width="5" stroke-linecap="round"></path>
+  <path d="M252 378 C268 392 276 430 280 480 L286 640" fill="none" stroke="#E2CFC2" stroke-width="16" stroke-linecap="round"></path>
+
+  <path d="M326 446 L336 446 L342 640 L330 640 Z" fill="#9CC3DA" fill-opacity="0.75"></path>
+  <path d="M358 446 L386 450 C388 510 390 580 392 640 L364 640 C362 580 360 510 358 446 Z" fill="#9CC3DA" fill-opacity="0.75"></path>
+  
+    <path d="M402 428 C430 422 452 412 466 400 C456 414 434 426 402 436 Z" fill="#9CC3DA" fill-opacity="0.75"></path>
+  
+  
+
+  <path d="M120 300 C112 230 130 170 170 135 C230 95 330 92 400 115 C470 140 515 200 518 275 C520 330 505 380 470 412 C450 430 425 442 398 448" fill="none" stroke="#A69B85" stroke-width="16" stroke-linecap="round"></path>
+  <path d="M120 300 C112 230 130 170 170 135 C230 95 330 92 400 115 C470 140 515 200 518 275 C520 330 505 380 470 412 C450 430 425 442 398 448" fill="none" stroke="#E7DFCF" stroke-width="12" stroke-linecap="round"></path>
+  <path d="M120 300 C112 230 130 170 170 135 C230 95 330 92 400 115 C470 140 515 200 518 275 C520 330 505 380 470 412 C450 430 425 442 398 448" fill="none" stroke="#D3C8B2" stroke-width="2" stroke-dasharray="2 5"></path>
+  
+
+  <path d="M128 300 C170 305 220 310 252 322 C255 338 272 340 278 330 L282 354" fill="none" stroke="#A69B85" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"></path>
+  <path d="M276 354 L290 356 C292 390 304 420 334 440 L328 446 C298 432 278 400 276 354 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"></path>
+
+  <path d="M140 292 C134 232 150 185 188 156 C240 120 330 118 392 138 C452 160 490 210 492 272 C494 305 488 330 476 345 C440 340 400 338 360 338 C340 336 322 332 305 322 C295 318 285 312 272 312 C240 306 190 300 140 292 Z" fill="#E9CFC6" stroke="#B38D82" stroke-width="1.5"></path>
+  <path d="M160 200 C180 185 200 205 225 185 M250 150 C270 170 290 150 310 165 M330 150 C350 175 375 160 395 180 M420 175 C430 200 455 200 465 225 M165 262 C185 247 200 272 222 264 M440 262 C455 282 470 277 482 302 M150 236 C170 229 175 246 195 241 M398 268 C412 286 436 280 452 300 M182 282 C202 272 222 286 244 280" fill="none" stroke="#CFA79B" stroke-width="1.5" stroke-linecap="round"></path>
+  <path d="M236 254 C260 236 330 236 352 250 C332 246 262 246 240 262 Z" fill="#A9CBE0"></path>
+  <path d="M205 230 C230 200 330 195 370 225 C382 236 378 252 362 250 C335 228 250 225 228 250 C215 262 196 248 205 230 Z" fill="#F4E6E1" stroke="#C39C90" stroke-width="1.25"></path>
+  <ellipse cx="300" cy="282" rx="34" ry="20" fill="#E3BFB3" stroke="#C39C90" stroke-width="1"></ellipse>
+  <path d="M352 337 L498 347" fill="none" stroke="#A69B85" stroke-width="2.5" stroke-linecap="round"></path>
+
+  <path d="M296 300 C310 296 326 304 332 318 C340 334 348 346 348 362 L348 404 C350 420 356 434 358 446 L336 446 C330 430 320 414 316 402 C304 390 300 376 304 362 C306 346 300 330 294 318 C290 310 290 302 296 300 Z" fill="#E3C2B6" stroke="#B38D82" stroke-width="1.5"></path>
+  <path d="M348 362 L374 384 L348 404 Z" fill="#A9CBE0" stroke="#7FA6BF" stroke-width="1"></path>
+
+  <path d="M360 352 C392 340 452 342 474 356 C486 366 484 386 468 398 C456 410 430 420 404 426 C388 430 376 424 372 414 C382 404 384 392 374 384 C368 372 360 362 360 352 Z" fill="#DDBDB3" stroke="#B38D82" stroke-width="1.5"></path>
+  <path d="M374 360 C402 352 442 352 468 362 M474 372 C478 380 477 388 470 394 M446 412 C430 418 416 420 404 422" fill="none" stroke="#C79E92" stroke-width="1" stroke-linecap="round"></path>
+  <path d="M378 386 C400 378 422 370 452 364 M402 378 C412 366 426 360 442 356 M378 388 C404 392 430 396 464 396 M410 392 C426 404 442 412 458 418 M394 390 C404 404 412 416 420 428" fill="none" stroke="#F6E9E4" stroke-width="3" stroke-linecap="round"></path>
+
+  <path d="M372 412 C382 416 391 426 390 434 C389 442 380 446 374 442 C368 437 366 422 372 412 Z" fill="#DDBDB3" stroke="#B38D82" stroke-width="1.5" stroke-linejoin="round"></path>
+
+  <path d="M336 446 L358 446 C360 510 362 580 364 640 L342 640 C340 580 338 510 336 446 Z" fill="#EAD9B9" stroke="#B59E73" stroke-width="1.5"></path>
+  
+
+  <ellipse cx="298" cy="462" rx="9" ry="7" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"></ellipse>
+  <path d="M312 456 C314 448 322 448 324 456 L326 472 L312 472 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"></path>
+  <rect x="300" y="472" width="28" height="46" rx="4" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"></rect>
+  <rect x="300" y="519" width="27" height="6" rx="2" fill="#D9C3A4"></rect>
+  <rect x="296" y="526" width="29" height="38" rx="4" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"></rect>
+  <rect x="295" y="565" width="28" height="6" rx="2" fill="#D9C3A4"></rect>
+  <rect x="292" y="572" width="29" height="40" rx="4" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"></rect>
+  <rect x="291" y="613" width="28" height="6" rx="2" fill="#D9C3A4"></rect>
+  
+    <ellipse cx="414" cy="470" rx="12" ry="8" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"></ellipse>
+  
+  
+  <path d="M394 500 L446 506 C452 510 452 520 446 522 L394 524 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"></path>
+  <path d="M396 548 L438 554 C444 558 444 566 438 568 L396 570 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"></path>
+  <path d="M398 594 L434 598 C440 602 440 610 434 612 L398 614 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"></path>
+
+  
+    <path d="M326 478 L331 484 L336 478 M327 528 L332 534 L337 528 M328 578 L333 584 L338 578 M369 478 L374 484 L379 478 M370 528 L375 534 L380 528 M371 578 L376 584 L381 578 M410 422 L416 429 L422 422" fill="none" stroke="#1F5F8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+  
+  
+
+  
+    <line x1="334" y1="440" x2="404" y2="449" stroke="#1C1D21" stroke-width="1.25" stroke-dasharray="4 3"></line>
+    <circle cx="334" cy="440" r="2.5" fill="#1C1D21"></circle>
+    <circle cx="404" cy="449" r="2.5" fill="#1C1D21"></circle>
+    
+  
+
+  
+    <g font-size="12.5" fill="#1C1D21">
+      <g stroke="#9E9DA4" stroke-width="0.75" fill="none">
+        <path d="M250 170 L548 116"></path>
+        <path d="M300 214 L548 156"></path>
+        <path d="M452 372 L548 196"></path>
+        <path d="M364 384 L548 236"></path>
+        <path d="M318 372 L548 276"></path>
+        <path d="M386 430 L548 316"></path>
+        <path d="M372 445 L548 356"></path>
+        <path d="M350 480 L548 396"></path>
+        <path d="M380 620 L548 436"></path>
+        <path d="M318 500 L548 476"></path>
+      </g>
+      <text x="556" y="120"><tspan font-family="IBM Plex Mono, monospace" fill="#5E5F66">01&#160;&#160;</tspan>Cerebrum</text>
+      <text x="556" y="160"><tspan font-family="IBM Plex Mono, monospace" fill="#5E5F66">02&#160;&#160;</tspan>Corpus callosum</text>
+      <text x="556" y="200"><tspan font-family="IBM Plex Mono, monospace" fill="#5E5F66">03&#160;&#160;</tspan>Cerebellum</text>
+      <text x="556" y="240"><tspan font-family="IBM Plex Mono, monospace" fill="#5E5F66">04&#160;&#160;</tspan>Fourth ventricle</text>
+      <text x="556" y="280"><tspan font-family="IBM Plex Mono, monospace" fill="#5E5F66">05&#160;&#160;</tspan>Brainstem</text>
+      <text x="556" y="320" font-weight="600"><tspan font-family="IBM Plex Mono, monospace" fill="#5E5F66" font-weight="400">06&#160;&#160;</tspan>Cerebellar tonsil</text>
+      <text x="556" y="360"><tspan font-family="IBM Plex Mono, monospace" fill="#5E5F66">07&#160;&#160;</tspan>Foramen magnum</text>
+      <text x="580" y="376" font-size="11" fill="#5E5F66">opening at the skull base</text>
+      <text x="556" y="400"><tspan font-family="IBM Plex Mono, monospace" fill="#5E5F66">08&#160;&#160;</tspan>Spinal cord</text>
+      <text x="556" y="440"><tspan font-family="IBM Plex Mono, monospace" fill="#5E5F66">09&#160;&#160;</tspan>Spinal fluid (CSF)</text>
+      <text x="556" y="480"><tspan font-family="IBM Plex Mono, monospace" fill="#5E5F66">10&#160;&#160;</tspan>C2 vertebra</text>
+      
+      
+    </g>
+  
+</svg>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>3D Explorer — side by side</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; height: 900px; display: flex; flex-direction: column; background: #111215; color: #ECEAE4; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 14px;">
+  <header style="height: 52px; flex: 0 0 auto; display: flex; align-items: center; gap: 20px; padding: 0 20px; border-bottom: 1px solid #2A2C31; background: #17181C;">
+    <a href="Main.dc.html" style="display: flex; align-items: center; gap: 10px; color: #ECEAE4; text-decoration: none;">
+      <span style="width: 9px; height: 9px; background: #8F74C6;" aria-hidden="true"></span>
+      <span style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 17px;">Open Chiari</span>
+    </a>
+    <span style="color: #5D5F66;">/</span>
+    <a href="Explorer.dc.html" style="color: #A3A1A9; text-decoration: none;">3D Explorer</a>
+    <span style="color: #5D5F66;">/</span>
+    <span style="font-weight: 500;">Side by side</span>
+    <span style="flex: 1 1 auto;"></span>
+    <label style="display: flex; align-items: center; gap: 8px; color: #D2D0CA;"><input type="checkbox" checked style="accent-color: #7FB3D3; margin: 0;"> Rotate together</label>
+    <a href="Explorer.dc.html" style="display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; border: 1px solid #3A3C42; border-radius: 4px; color: #ECEAE4; text-decoration: none;">Back to single view</a>
+  </header>
+
+  <div style="flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));">
+    <section style="position: relative; background: #1A1C20; border-right: 1px solid #2A2C31; display: flex; flex-direction: column;">
+      <div style="padding: 16px 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #2A2C31;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A3A1A9;">A</span>
+        <label for="left-cond" style="position: absolute; left: -9999px;">Left view condition</label>
+        <select id="left-cond" style="min-height: 36px; padding: 0 10px; border: 1px solid #3A3C42; border-radius: 4px; background: #17181C; color: #ECEAE4; font: 500 14px 'IBM Plex Sans', sans-serif;">
+          <option selected>Typical anatomy</option><option>Chiari I</option><option>Chiari I with syrinx</option><option>After decompression</option>
+        </select>
+      </div>
+      <div style="flex: 1 1 auto; display: flex; align-items: center; justify-content: center; padding: 16px;">
+        <div style="width: 560px;"><dc-import name="Anatomy" condition="typical" flow="{{yes}}" labels="{{no}}" measure="{{yes}}" dark="{{yes}}" hint-size="560px,660px"></dc-import></div>
+      </div>
+      <p style="margin: 0; padding: 14px 20px; border-top: 1px solid #2A2C31; color: #D2D0CA; line-height: 1.5;">Tonsils usually sit at or above the dashed line (a few millimeters below can be normal). The fluid space behind them is open.</p>
+    </section>
+    <section style="position: relative; background: #1A1C20; display: flex; flex-direction: column;">
+      <div style="padding: 16px 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #2A2C31;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A3A1A9;">B</span>
+        <label for="right-cond" style="position: absolute; left: -9999px;">Right view condition</label>
+        <select id="right-cond" style="min-height: 36px; padding: 0 10px; border: 1px solid #7FB3D3; border-radius: 4px; background: #17181C; color: #ECEAE4; font: 500 14px 'IBM Plex Sans', sans-serif;">
+          <option>Typical anatomy</option><option selected>Chiari I</option><option>Chiari I with syrinx</option><option>After decompression</option>
+        </select>
+      </div>
+      <div style="flex: 1 1 auto; display: flex; align-items: center; justify-content: center; padding: 16px;">
+        <div style="width: 560px;"><dc-import name="Anatomy" condition="chiari" flow="{{yes}}" labels="{{no}}" measure="{{yes}}" dark="{{yes}}" hint-size="560px,660px"></dc-import></div>
+      </div>
+      <p style="margin: 0; padding: 14px 20px; border-top: 1px solid #2A2C31; color: #D2D0CA; line-height: 1.5;">Tonsils extend below the line (blue bracket) and fill the space where fluid should pass. Red marks show where flow is often restricted.</p>
+    </section>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return { yes: true, no: false }; }
+}
+</script>
+</body>
+</html>

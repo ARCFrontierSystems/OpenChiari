@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>3D Explorer — desktop</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; height: 900px; display: flex; flex-direction: column; background: #111215; color: #ECEAE4; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 14px;">
+
+  <header style="height: 52px; flex: 0 0 auto; display: flex; align-items: center; gap: 20px; padding: 0 20px; border-bottom: 1px solid #2A2C31; background: #17181C;">
+    <a href="Main.dc.html" style="display: flex; align-items: center; gap: 10px; color: #ECEAE4; text-decoration: none;">
+      <span style="width: 9px; height: 9px; background: #8F74C6;" aria-hidden="true"></span>
+      <span style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 17px;">Open Chiari</span>
+    </a>
+    <span style="color: #5D5F66;">/</span>
+    <span style="font-weight: 500;">3D Explorer</span>
+    <span style="flex: 1 1 auto;"></span>
+    <a href="TourPhone.dc.html" style="display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; border: 1px solid #3A3C42; border-radius: 4px; color: #ECEAE4; text-decoration: none;">Guided tour</a>
+    <a href="Compare.dc.html" style="display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; border: 1px solid #3A3C42; border-radius: 4px; color: #ECEAE4; text-decoration: none;">Side by side</a>
+    <a href="ExplainShare.dc.html" style="display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 14px; border-radius: 4px; background: #E8E6E0; color: #111215; font-weight: 500; text-decoration: none;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"></path></svg>
+      Explain It
+    </a>
+  </header>
+
+  <div style="flex: 1 1 auto; min-height: 0; display: flex;">
+
+    <aside aria-label="View and layers" style="width: 272px; flex: 0 0 auto; border-right: 1px solid #2A2C31; background: #17181C; padding: 20px; display: flex; flex-direction: column; gap: 24px; overflow: hidden;">
+      <section style="display: flex; flex-direction: column; gap: 8px;">
+        <h2 style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; color: #A3A1A9;">Condition</h2>
+        <div role="radiogroup" aria-label="Condition" style="display: flex; flex-direction: column; border: 1px solid #2A2C31; border-radius: 4px;">
+          <sc-for list="{{conditions}}" as="c" hint-placeholder-count="4">
+            <button type="button" role="radio" aria-checked="{{c.checked}}" onClick="{{c.pick}}" style="{{c.style}}">
+              <span style="{{c.dot}}" aria-hidden="true"></span>{{c.label}}
+            </button>
+          </sc-for>
+        </div>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 10px;">
+        <h2 style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; color: #A3A1A9;">Layers</h2>
+        <div style="display: grid; grid-template-columns: 20px 1fr 84px; align-items: center; row-gap: 6px; column-gap: 10px;">
+          <input id="l-skin" type="checkbox" style="accent-color: #7FB3D3; margin: 0;"><label for="l-skin" style="min-height: 32px; display: flex; align-items: center;">Skin</label><input type="range" aria-label="Skin opacity" value="40" style="width: 84px; accent-color: #7FB3D3;">
+          <input id="l-bone" type="checkbox" checked style="accent-color: #7FB3D3; margin: 0;"><label for="l-bone" style="min-height: 32px; display: flex; align-items: center;">Skull and spine</label><input type="range" aria-label="Bone opacity" value="100" style="width: 84px; accent-color: #7FB3D3;">
+          <input id="l-brain" type="checkbox" checked style="accent-color: #7FB3D3; margin: 0;"><label for="l-brain" style="min-height: 32px; display: flex; align-items: center;">Brain</label><input type="range" aria-label="Brain opacity" value="100" style="width: 84px; accent-color: #7FB3D3;">
+          <input id="l-csf" type="checkbox" checked style="accent-color: #7FB3D3; margin: 0;"><label for="l-csf" style="min-height: 32px; display: flex; align-items: center;">Spinal fluid</label><input type="range" aria-label="Fluid opacity" value="75" style="width: 84px; accent-color: #7FB3D3;">
+          <input id="l-nerves" type="checkbox" style="accent-color: #7FB3D3; margin: 0;"><label for="l-nerves" style="min-height: 32px; display: flex; align-items: center;">Nerves</label><input type="range" aria-label="Nerves opacity" value="100" style="width: 84px; accent-color: #7FB3D3;">
+          <input id="l-vessels" type="checkbox" style="accent-color: #7FB3D3; margin: 0;"><label for="l-vessels" style="min-height: 32px; display: flex; align-items: center;">Blood vessels</label><input type="range" aria-label="Vessels opacity" value="100" style="width: 84px; accent-color: #7FB3D3;">
+        </div>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 8px;">
+        <h2 style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; color: #A3A1A9;">Cut-away</h2>
+        <input type="range" aria-label="Cut-away depth" value="50" style="width: 100%; accent-color: #7FB3D3;">
+        <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A3A1A9;"><span>Whole</span><span>Midline</span><span>Far side</span></div>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 8px;">
+        <h2 style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; color: #A3A1A9;">Model</h2>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 1px solid #2A2C31; border-radius: 4px;">
+          <button type="button" aria-pressed="true" style="min-height: 36px; border: 0; background: #2A2C31; color: #ECEAE4; font: 500 13px 'IBM Plex Sans', sans-serif;">Realistic</button>
+          <button type="button" style="min-height: 36px; border: 0; background: transparent; color: #A3A1A9; font: 500 13px 'IBM Plex Sans', sans-serif;">Simple</button>
+        </div>
+      </section>
+    </aside>
+
+    <main style="flex: 1 1 auto; min-width: 0; position: relative; background: #1A1C20; display: flex; align-items: center; justify-content: center;">
+      <div style="width: 820px;">
+        <dc-import name="Anatomy" condition="{{condition}}" flow="{{flow}}" labels="{{labels}}" measure="{{measure}}" dark="{{yes}}" hint-size="820px,650px"></dc-import>
+      </div>
+      <div role="toolbar" aria-label="View tools" style="position: absolute; top: 16px; left: 16px; display: flex; gap: 6px;">
+        <button type="button" aria-pressed="{{flow}}" onClick="{{toggleFlow}}" style="{{flowStyle}}">Fluid flow</button>
+        <button type="button" aria-pressed="{{labels}}" onClick="{{toggleLabels}}" style="{{labelsStyle}}">Labels</button>
+        <button type="button" aria-pressed="{{measure}}" onClick="{{toggleMeasure}}" style="{{measureStyle}}">Measure</button>
+      </div>
+      <div role="group" aria-label="Camera" style="position: absolute; top: 16px; right: 16px; display: flex; border: 1px solid #3A3C42; border-radius: 4px; background: #17181C;">
+        <button type="button" aria-pressed="true" style="min-height: 36px; padding: 0 12px; border: 0; background: #2A2C31; color: #ECEAE4; font: 500 13px 'IBM Plex Sans', sans-serif;">Side</button>
+        <button type="button" style="min-height: 36px; padding: 0 12px; border: 0; background: transparent; color: #A3A1A9; font: 500 13px 'IBM Plex Sans', sans-serif;">Back</button>
+        <button type="button" style="min-height: 36px; padding: 0 12px; border: 0; background: transparent; color: #A3A1A9; font: 500 13px 'IBM Plex Sans', sans-serif;">Below</button>
+        <button type="button" style="min-height: 36px; padding: 0 12px; border: 0; background: transparent; color: #A3A1A9; font: 500 13px 'IBM Plex Sans', sans-serif;">Front</button>
+        <button type="button" aria-label="Reset camera" style="min-height: 36px; width: 40px; border: 0; border-left: 1px solid #3A3C42; background: transparent; color: #ECEAE4; display: flex; align-items: center; justify-content: center;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v4h4"></path></svg>
+        </button>
+      </div>
+      <p style="position: absolute; left: 16px; bottom: 12px; margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8A8890;">Drag to rotate · Scroll to zoom · Shift-drag to move · Mockup shows the midline cut-away</p>
+      <p style="position: absolute; right: 16px; bottom: 12px; margin: 0; font-size: 11px; color: #8A8890;">Illustration, not a medical image · Fluid flow simplified · <a href="#" style="color: #A9CBE0;">Evidence notes for this view</a></p>
+    </main>
+
+    <aside aria-label="Structures" style="width: 320px; flex: 0 0 auto; border-left: 1px solid #2A2C31; background: #17181C; display: flex; flex-direction: column;">
+      <div style="padding: 20px 20px 12px; display: flex; flex-direction: column; gap: 10px;">
+        <label for="find-part" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A3A1A9;">Structures</label>
+        <input id="find-part" type="search" placeholder="Search parts" style="min-height: 36px; box-sizing: border-box; padding: 0 10px; border: 1px solid #3A3C42; border-radius: 4px; background: #111215; color: #ECEAE4; font: 400 14px 'IBM Plex Sans', sans-serif;">
+      </div>
+      <ul style="list-style: none; margin: 0; padding: 0 12px; display: flex; flex-direction: column;">
+        <sc-for list="{{parts}}" as="p" hint-placeholder-count="8">
+          <li><button type="button" aria-pressed="{{p.pressed}}" onClick="{{p.pick}}" style="{{p.style}}"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8A8890; width: 22px;">{{p.num}}</span>{{p.name}}</button></li>
+        </sc-for>
+      </ul>
+      <div style="margin-top: auto; border-top: 1px solid #2A2C31; padding: 20px; display: flex; flex-direction: column; gap: 10px;">
+        <p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A3A1A9;">{{partNum}} · selected</p>
+        <h2 style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 22px;">{{partName}}</h2>
+        <p style="margin: 0; line-height: 1.55; color: #D2D0CA;">{{partText}}</p>
+        <p style="margin: 0; padding-top: 10px; border-top: 1px solid #2A2C31; line-height: 1.55; color: #A3A1A9;">{{conditionNote}}</p>
+      </div>
+    </aside>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { condition: 'chiari', flow: true, labels: true, measure: true, part: 'tonsil' };
+  }
+  renderVals() {
+    const s = this.state;
+    const conds = [
+      { id: 'typical', label: 'Typical anatomy', note: 'The tonsils usually sit at or above the dashed line across the skull opening (a few millimeters below can still be normal), and spinal fluid moves freely around them.' },
+      { id: 'chiari', label: 'Chiari I', note: 'The tonsils extend below the opening, at least about 5 mm by the usual definition. In people who need surgery it\'s often around 10 to 12 mm, but it varies widely. They are often pointed rather than rounded. The fluid space behind them is often crowded, and in many people fluid flow slows or is blocked there.' },
+      { id: 'syrinx', label: 'Chiari I with syrinx', note: 'A syrinx is a fluid-filled cavity inside the spinal cord. It often develops alongside Chiari, most often in the neck part of the spinal cord.' },
+      { id: 'surgery', label: 'After decompression', note: 'Surgeons remove a small piece of bone at the back of the skull opening and usually the back of the first vertebra. Often they also open and patch the brain\'s covering to make more room for spinal fluid. The tonsils often rise only partly. Surgery improves or stabilizes symptoms in most people, though damage that has already happened may not fully reverse, and some people need more than one operation. Results vary, and surgery isn\'t right for everyone.' }
+    ];
+    const partDefs = [
+      { id: 'cerebrum', num: '01', name: 'Cerebrum', text: 'The largest part of the brain, responsible for thinking, movement and the senses.' },
+      { id: 'callosum', num: '02', name: 'Corpus callosum', text: 'A thick band of nerve fibers connecting the left and right halves of the brain.' },
+      { id: 'cerebellum', num: '03', name: 'Cerebellum', text: 'The back part of the brain that helps control balance and coordination.' },
+      { id: 'ventricle', num: '04', name: 'Fourth ventricle', text: 'A small fluid-filled space between the brainstem and cerebellum, where spinal fluid passes through.' },
+      { id: 'brainstem', num: '05', name: 'Brainstem', text: 'Connects the brain to the spinal cord and runs automatic functions like breathing, heart rate and swallowing.' },
+      { id: 'tonsil', num: '06', name: 'Cerebellar tonsil', text: 'The two lowest parts of the cerebellum. In Chiari, they extend below the opening at the base of the skull and are often pointed (peg-shaped) rather than rounded. They really sit just to either side of the midline and often descend unevenly; the model shows them at their lowest point, where MRI measures them.' },
+      { id: 'foramen', num: '07', name: 'Foramen magnum', text: 'The opening at the base of the skull where the brainstem becomes the spinal cord.' },
+      { id: 'cord', num: '08', name: 'Spinal cord', text: 'Carries signals between the brain and the rest of the body.' },
+      { id: 'csf', num: '09', name: 'Spinal fluid (CSF)', text: 'Cerebrospinal fluid: clear fluid that cushions the brain and spinal cord. With each heartbeat it pulses back and forth between the skull and the spinal canal.' },
+      { id: 'c2', num: '10', name: 'C2 vertebra', text: 'The second bone of the neck. Its upward peg, the dens, sits just in front of the spinal cord.' }
+    ];
+    const on = (x) => x ? '#2A2C31' : 'transparent';
+    const toolStyle = (x) => 'min-height: 36px; padding: 0 12px; border-radius: 4px; font: 500 13px \'IBM Plex Sans\', sans-serif; color: #ECEAE4; border: 1px solid ' + (x ? '#7FB3D3' : '#3A3C42') + '; background: ' + (x ? '#1F3A4D' : '#17181C') + ';';
+    const current = partDefs.find((p) => p.id === s.part) || partDefs[5];
+    const cond = conds.find((c) => c.id === s.condition);
+    return {
+      yes: true,
+      condition: s.condition,
+      flow: s.flow,
+      labels: s.labels,
+      measure: s.measure,
+      conditions: conds.map((c, i) => ({
+        label: c.label,
+        checked: s.condition === c.id ? 'true' : 'false',
+        pick: () => this.setState({ condition: c.id }),
+        style: 'display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 0 12px; border: 0; ' + (i > 0 ? 'border-top: 1px solid #2A2C31; ' : '') + 'background: ' + on(s.condition === c.id) + '; color: #ECEAE4; text-align: left; font: ' + (s.condition === c.id ? '600' : '400') + ' 14px \'IBM Plex Sans\', sans-serif;',
+        dot: 'width: 8px; height: 8px; border-radius: 50%; flex: 0 0 auto; border: 1.5px solid #A3A1A9; background: ' + (s.condition === c.id ? '#7FB3D3' : 'transparent') + ';'
+      })),
+      parts: partDefs.map((p) => ({
+        num: p.num,
+        name: p.name,
+        pressed: s.part === p.id ? 'true' : 'false',
+        pick: () => this.setState({ part: p.id }),
+        style: 'width: 100%; display: flex; align-items: center; gap: 8px; min-height: 34px; padding: 0 8px; border: 0; border-radius: 4px; text-align: left; font: ' + (s.part === p.id ? '600' : '400') + ' 14px \'IBM Plex Sans\', sans-serif; color: #ECEAE4; background: ' + on(s.part === p.id) + ';'
+      })),
+      partNum: current.num,
+      partName: current.name,
+      partText: current.text,
+      conditionNote: cond.note,
+      flowStyle: toolStyle(s.flow),
+      labelsStyle: toolStyle(s.labels),
+      measureStyle: toolStyle(s.measure),
+      toggleFlow: () => this.setState({ flow: !s.flow }),
+      toggleLabels: () => this.setState({ labels: !s.labels }),
+      toggleMeasure: () => this.setState({ measure: !s.measure })
+    };
+  }
+}
+</script>
+</body>
+</html>

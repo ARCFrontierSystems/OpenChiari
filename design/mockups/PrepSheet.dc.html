@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Doctor visit prep — printed sheet</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 816px; height: 1056px; box-sizing: border-box; padding: 64px 72px; background: #FFFFFF; color: #1C1D21; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 16px; line-height: 1.45; display: flex; flex-direction: column; gap: 20px;">
+  <div style="display: flex; gap: 32px; align-items: flex-start; border-bottom: 2px solid #1C1D21; padding-bottom: 16px;">
+    <div style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 6px;">
+      <h1 style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 30px;">Questions for my doctor</h1>
+      <p style="margin: 0; font-size: 14px; color: #5E5F66;">Chiari malformation · Date: ____________ · Doctor: ______________________</p>
+    </div>
+    <div style="width: 150px; flex: 0 0 auto; border: 1px solid #DCDBD6;">
+      <dc-import name="Anatomy" condition="chiari" flow="{{no}}" labels="{{no}}" measure="{{yes}}" dark="{{no}}" hint-size="150px,178px"></dc-import>
+    </div>
+  </div>
+  <ol style="margin: 0; padding-left: 24px; display: flex; flex-direction: column; gap: 18px;">
+    <li style="font-weight: 600;">Which type of Chiari do I have?<div style="margin-top: 8px; height: 36px; border-bottom: 1px solid #C9C8C2;"></div></li>
+    <li style="font-weight: 600;">Can I have a copy of my MRI report and images?<div style="margin-top: 8px; height: 36px; border-bottom: 1px solid #C9C8C2;"></div></li>
+    <li style="font-weight: 600;">Which of my symptoms do you think come from Chiari?<div style="margin-top: 8px; height: 36px; border-bottom: 1px solid #C9C8C2;"></div></li>
+    <li style="font-weight: 600;">What changes should make me call you or go to the ER?<div style="margin-top: 8px; height: 36px; border-bottom: 1px solid #C9C8C2;"></div></li>
+    <li style="font-weight: 600;">What are my options besides surgery?<div style="margin-top: 8px; height: 36px; border-bottom: 1px solid #C9C8C2;"></div></li>
+    <li style="font-weight: 600;">Are there research studies I could join?<div style="margin-top: 8px; height: 36px; border-bottom: 1px solid #C9C8C2;"></div></li>
+  </ol>
+  <div style="margin-top: 4px; display: flex; flex-direction: column; gap: 8px;">
+    <h2 style="margin: 0; font-size: 16px; font-weight: 600;">Things I want to mention</h2>
+    <div style="height: 28px; border-bottom: 1px solid #C9C8C2;"></div>
+    <div style="height: 28px; border-bottom: 1px solid #C9C8C2;"></div>
+  </div>
+  <p style="margin: auto 0 0; padding-top: 12px; border-top: 1px solid #DCDBD6; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #5E5F66;">Made with Open Chiari · openchiari.org · Not medical advice</p>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":816,"height":1056}}'>
+class Component extends DCLogic {
+  renderVals() { return { yes: true, no: false }; }
+}
+</script>
+</body>
+</html>

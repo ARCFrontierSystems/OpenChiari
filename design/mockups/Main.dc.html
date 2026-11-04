@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Home — desktop</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#F5F5F3}
+a{color:#1F5F8B}a:hover{color:#123E5C}
+</style>
+</helmet>
+<div style="background: #F5F5F3; color: #1C1D21; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 17px; line-height: 1.6;">
+
+  <header style="border-bottom: 1px solid #DCDBD6; background: #FFFFFF;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 32px; min-height: 64px; display: flex; flex-wrap: wrap; gap: 24px; align-items: center;">
+      <a href="#top" style="display: flex; align-items: center; gap: 10px; color: #1C1D21; text-decoration: none;">
+        <span style="width: 10px; height: 10px; background: #6B4FA0;" aria-hidden="true"></span>
+        <span style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 20px;">Open Chiari</span>
+      </a>
+      <nav aria-label="Main" style="flex: 1 1 auto; display: flex; flex-wrap: wrap; gap: 24px; font-size: 15px;">
+        <a href="Explorer.dc.html" style="color: #1C1D21; text-decoration: none;">3D Explorer</a>
+        <a href="ExplainShare.dc.html" style="color: #1C1D21; text-decoration: none;">Explain It</a>
+        <a href="Studies.dc.html" style="color: #1C1D21; text-decoration: none;">Research studies</a>
+        <a href="Prep.dc.html" style="color: #1C1D21; text-decoration: none;">Visit prep</a>
+        <a href="OpenModel.dc.html" style="color: #1C1D21; text-decoration: none;">Open model</a>
+        <a href="Support.dc.html" style="color: #1C1D21; text-decoration: none;">Support</a>
+      </nav>
+      <a href="HomeES.dc.html" lang="es" style="font-size: 14px; color: #1C1D21; text-decoration: none; min-height: 44px; display: flex; align-items: center;">Español</a>
+      <label style="display: flex; align-items: center; gap: 10px; font-size: 14px; color: #3B3C42; min-height: 44px;">
+        <input type="checkbox" role="switch" style="width: 36px; height: 20px; accent-color: #1F5F8B; margin: 0;">
+        Calm mode
+      </label>
+    </div>
+  </header>
+
+  <section id="top" style="max-width: 1200px; margin: 0 auto; padding: 72px 32px 64px; display: flex; flex-wrap: wrap; gap: 56px; align-items: flex-start;">
+    <div style="flex: 1 1 420px; display: flex; flex-direction: column; gap: 20px; padding-top: 24px;">
+      <p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #5E5F66;">Chiari malformation, Type I</p>
+      <h1 style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 54px; line-height: 1.08; letter-spacing: -0.01em;">See what's happening at the base of the skull.</h1>
+      <p style="margin: 0; font-size: 19px; color: #3B3C42; max-width: 500px;">In Chiari malformation, the lowest part of the cerebellum sits below the opening where the brain meets the spinal cord. Explore it in 3D, free, in plain language.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px;">
+        <a href="Explorer.dc.html" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; border-radius: 4px; background: #1F5F8B; color: #FFFFFF; font-weight: 500; text-decoration: none;">Open the 3D Explorer</a>
+        <a href="TourPhone.dc.html" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; border-radius: 4px; border: 1px solid #1C1D21; color: #1C1D21; font-weight: 500; text-decoration: none;">Take the 2-minute tour</a>
+      </div>
+    </div>
+    <figure style="flex: 1 1 560px; margin: 0; background: #FFFFFF; border: 1px solid #DCDBD6; display: flex; flex-direction: column;">
+      <div style="padding: 16px 16px 0;">
+        <dc-import condition="chiari" flow="{{no}}" labels="{{yes}}" measure="{{yes}}" dark="{{no}}" name="Anatomy" hint-size="100%,500px"></dc-import>
+      </div>
+      <figcaption style="border-top: 1px solid #DCDBD6; padding: 12px 16px; font-size: 14px; color: #5E5F66; display: flex; gap: 12px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; color: #1C1D21;">Fig. 1</span>
+        <span>Midline view of Chiari I. The tonsil (06) extends below the dashed line across the skull opening. The tonsils really sit just to either side of the midline; they're shown here where MRI measures them, at their lowest point. Illustration, not to scale.</span>
+      </figcaption>
+    </figure>
+  </section>
+
+  <section style="border-top: 1px solid #DCDBD6; background: #FFFFFF;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 72px 32px; display: flex; flex-direction: column; gap: 32px;">
+      <h2 style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 36px;">What is Chiari malformation?</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0;">
+        <div style="padding: 0 32px 0 0; border-top: 2px solid #1C1D21; padding-top: 16px; margin-right: 32px; display: flex; flex-direction: column; gap: 8px;">
+          <h3 style="margin: 0; font-size: 18px; font-weight: 600;">What it is</h3>
+          <p style="margin: 0; color: #3B3C42;">The lowest part of the cerebellum, the tonsils, extends below the foramen magnum, the opening at the base of the skull. The cerebellum helps control balance and coordination. It's often linked to a lower back part of the skull that is smaller or shaped differently than usual, which crowds the brain. Less often, it develops later in life for other reasons.</p>
+        </div>
+        <div style="border-top: 2px solid #1C1D21; padding-top: 16px; margin-right: 32px; display: flex; flex-direction: column; gap: 8px;">
+          <h3 style="margin: 0; font-size: 18px; font-weight: 600;">Who has it</h3>
+          <p style="margin: 0; color: #3B3C42;">Most people are born with the skull differences that lead to it. Some never have symptoms; others first notice them as teens or adults.</p>
+        </div>
+        <div style="border-top: 2px solid #1C1D21; padding-top: 16px; display: flex; flex-direction: column; gap: 8px;">
+          <h3 style="margin: 0; font-size: 18px; font-weight: 600;">How it's found</h3>
+          <p style="margin: 0; color: #3B3C42;">Usually with an MRI scan and a doctor's exam, sometimes by chance during a scan for something else. A neurologist or neurosurgeon looks at the scan together with your symptoms.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="border-top: 1px solid #DCDBD6;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 72px 32px; display: flex; flex-wrap: wrap; gap: 56px;">
+      <div style="flex: 1 1 400px; display: flex; flex-direction: column; gap: 16px;">
+        <h2 style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 36px;">What it can feel like</h2>
+        <p style="margin: 0; color: #3B3C42;">Chiari looks different for everyone, and many people with Type I have no symptoms at all.</p>
+        <blockquote style="margin: 8px 0 0; padding: 4px 0 4px 20px; border-left: 3px solid #1F5F8B; font-family: 'Source Serif 4', Georgia, serif; font-size: 23px; line-height: 1.4;">The classic sign is a headache at the back of the head that comes on after coughing, sneezing or straining.</blockquote>
+      </div>
+      <table style="flex: 1 1 400px; border-collapse: collapse; font-size: 16px;">
+        <caption style="text-align: left; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #5E5F66; padding-bottom: 8px;">Other symptoms people report</caption>
+        <tbody>
+          <tr><td style="border-top: 1px solid #DCDBD6; padding: 12px 0;">Neck pain</td></tr>
+          <tr><td style="border-top: 1px solid #DCDBD6; padding: 12px 0;">Dizziness and trouble with balance</td></tr>
+          <tr><td style="border-top: 1px solid #DCDBD6; padding: 12px 0;">Numbness or tingling in the hands and feet</td></tr>
+          <tr><td style="border-top: 1px solid #DCDBD6; padding: 12px 0;">Weakness or trouble with fine hand movements</td></tr>
+          <tr><td style="border-top: 1px solid #DCDBD6; padding: 12px 0;">Trouble swallowing, or voice changes</td></tr>
+          <tr><td style="border-top: 1px solid #DCDBD6; padding: 12px 0;">Breathing or sleep problems, such as sleep apnea</td></tr>
+          <tr><td style="border-top: 1px solid #DCDBD6; padding: 12px 0;">Ringing in the ears</td></tr>
+          <tr><td style="border-top: 1px solid #DCDBD6; border-bottom: 1px solid #DCDBD6; padding: 12px 0; color: #5E5F66;">Less often: blurry or shaky vision</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section style="border-top: 1px solid #DCDBD6; background: #FFFFFF;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 72px 32px; display: flex; flex-direction: column; gap: 32px;">
+      <h2 style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 36px;">Common misunderstandings</h2>
+      <dl style="margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); column-gap: 48px; row-gap: 32px;">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <dt style="font-family: 'Source Serif 4', Georgia, serif; font-size: 22px; font-weight: 600;">"It's just a bad headache."</dt>
+          <dd style="margin: 0; color: #3B3C42;">Chiari is a structural difference that can affect balance, nerves and the flow of spinal fluid, not only headaches.</dd>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <dt style="font-family: 'Source Serif 4', Georgia, serif; font-size: 22px; font-weight: 600;">"The measurement tells the whole story."</dt>
+          <dd style="margin: 0; color: #3B3C42;">Doctors traditionally use about 5 mm below the opening as a cutoff. Lower tonsils make symptoms somewhat more likely, but the measurement alone doesn't reliably predict how someone will feel. Some people with a clear descent have no symptoms, and some with less than 5 mm do. Doctors also look at the shape of the tonsils, spinal fluid flow, and whether a syrinx is present.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section style="border-top: 1px solid #DCDBD6;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 72px 32px; display: flex; flex-direction: column; gap: 32px;">
+      <h2 style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 36px;">Tools</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); border-top: 1px solid #1C1D21;">
+        <a href="Explorer.dc.html" style="padding: 24px 24px 24px 0; border-bottom: 1px solid #DCDBD6; display: flex; gap: 20px; text-decoration: none; color: #1C1D21;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #5E5F66; padding-top: 4px;">01</span>
+          <span style="display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 19px; font-weight: 600; color: #1F5F8B;">3D Explorer</span><span style="color: #3B3C42;">Compare typical anatomy, Chiari, syrinx and after surgery. Peel back layers and cut through the model.</span></span>
+        </a>
+        <a href="ExplainShare.dc.html" style="padding: 24px 24px 24px 0; border-bottom: 1px solid #DCDBD6; display: flex; gap: 20px; text-decoration: none; color: #1C1D21;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #5E5F66; padding-top: 4px;">02</span>
+          <span style="display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 19px; font-weight: 600; color: #1F5F8B;">Explain It</span><span style="color: #3B3C42;">Send family, teachers or your employer a link that shows exactly what you have.</span></span>
+        </a>
+        <a href="Studies.dc.html" style="padding: 24px 24px 24px 0; border-bottom: 1px solid #DCDBD6; display: flex; gap: 20px; text-decoration: none; color: #1C1D21;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #5E5F66; padding-top: 4px;">03</span>
+          <span style="display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 19px; font-weight: 600; color: #1F5F8B;">Research studies</span><span style="color: #3B3C42;">Chiari and syringomyelia studies looking for participants, updated daily.</span></span>
+        </a>
+        <a href="Prep.dc.html" style="padding: 24px 24px 24px 0; border-bottom: 1px solid #DCDBD6; display: flex; gap: 20px; text-decoration: none; color: #1C1D21;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #5E5F66; padding-top: 4px;">04</span>
+          <span style="display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 19px; font-weight: 600; color: #1F5F8B;">Doctor visit prep</span><span style="color: #3B3C42;">Build a one-page list of questions for your next appointment. Nothing is saved.</span></span>
+        </a>
+        <a href="OpenModel.dc.html" style="padding: 24px 24px 24px 0; border-bottom: 1px solid #DCDBD6; display: flex; gap: 20px; text-decoration: none; color: #1C1D21;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #5E5F66; padding-top: 4px;">05</span>
+          <span style="display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 19px; font-weight: 600; color: #1F5F8B;">Open model</span><span style="color: #3B3C42;">Free to download and embed for foundations, nurses and teachers.</span></span>
+        </a>
+        <a href="Support.dc.html" style="padding: 24px 24px 24px 0; border-bottom: 1px solid #DCDBD6; display: flex; gap: 20px; text-decoration: none; color: #1C1D21;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #5E5F66; padding-top: 4px;">06</span>
+          <span style="display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 19px; font-weight: 600; color: #1F5F8B;">Support Chiari organizations</span><span style="color: #3B3C42;">Donate to or volunteer with the groups funding research and running registries.</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer style="border-top: 1px solid #DCDBD6; background: #FFFFFF;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 40px 32px; display: flex; flex-wrap: wrap; gap: 32px; font-size: 14px; color: #5E5F66;">
+      <p style="flex: 1 1 340px; margin: 0;"><strong style="color: #1C1D21; font-weight: 600;">Not medical advice.</strong> This site is for education. Talk to your doctor about your own diagnosis and care.</p>
+      <p style="flex: 1 1 340px; margin: 0;">Facts adapted from the <a href="https://www.ninds.nih.gov/publications/chiari-malformation">NINDS fact sheet</a>. 3D model by Open Chiari, CC BY-SA 4.0, adapted from <a href="https://github.com/Z-Anatomy/Models-of-human-anatomy">Z-Anatomy</a> (CC BY-SA 4.0) and BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 JP). A personal project by Matthew Borgfeld.</p>
+      <nav aria-label="More" style="flex: 1 1 100%; display: flex; flex-wrap: wrap; gap: 24px;"><a href="Support.dc.html">Support</a><a href="Kit.dc.html">Awareness kit</a><a href="Impact.dc.html">Impact</a><a href="Impact.dc.html">Open source</a><a href="About.dc.html">About and contact</a><a href="Privacy.dc.html">Privacy</a><a href="HomeES.dc.html" lang="es">Español</a></nav>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3700}}'>
+class Component extends DCLogic {
+  renderVals() { return { yes: true, no: false }; }
+}
+</script>
+</body>
+</html>

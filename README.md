@@ -1,1 +1,28 @@
-# OpenChiari
+# Open Chiari
+
+A free, independent website that helps people see and understand Chiari malformation type I, with an interactive 3D anatomy explorer, plain-language explanations, tools for doctor visits and for explaining the condition to others, and a live list of research studies.
+
+**Status:** planning complete; build starting with Phase 1.
+
+## What's in this repository
+
+| Path | Contents |
+| --- | --- |
+| `CLAUDE.md` | Instructions for Claude Code: rules, stack, phases |
+| `docs/SPEC.md` | What to build |
+| `docs/EVIDENCE.md` | Every medical claim and 3D shape with its source |
+| `docs/COPY.md` | Approved text for every screen |
+| `docs/DESIGN.md` | Colors, type and components |
+| `design/mockups/` | Mockups of all 22 screens |
+| `design/figures/` | The anatomy figure in four conditions |
+
+## Not medical advice
+
+Open Chiari is for education only. Talk to your doctor about your own diagnosis and care.
+
+## License
+
+- Code: MIT License (`LICENSE`).
+- 3D model and figures: CC BY-SA 4.0 (`LICENSE-MODEL.md`). 3D model by Open Chiari, CC BY-SA 4.0, adapted from Z-Anatomy (CC BY-SA 4.0) and BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 JP).
+
+A personal project by Matthew Borgfeld.

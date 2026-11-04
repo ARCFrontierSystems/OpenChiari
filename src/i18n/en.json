@@ -351,6 +351,7 @@
         "text": "The second bone of the neck. Its upward peg, the dens, sits just in front of the spinal cord."
       }
     ],
-    "viewOptions": "View and layers"
+    "viewOptions": "View and layers",
+    "hint": "Drag to rotate · Scroll to zoom · Shift-drag to move"
   }
 }

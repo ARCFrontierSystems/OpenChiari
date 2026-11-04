@@ -9,7 +9,7 @@
 import Head from '../components/Head.astro';
 import Footer from '../components/Footer.astro';
 import { anatomyFigureSvg, CONDITIONS } from '../lib/anatomy-figure';
-import { initialState, LAYERS } from '../explorer/state';
+import { initialState, LAYERS, SIMPLE_LAYERS } from '../explorer/state';
 import { getStrings, routes } from '../i18n';
 
 const s = getStrings();
@@ -72,9 +72,9 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
           <div class="x-layers">
             {LAYERS.map((id) => (
               <>
-                <input id={`layer-${id}`} type="checkbox" data-layer-on={id} checked={st.layers[id].on} />
+                <input id={`layer-${id}`} type="checkbox" data-layer-on={id} checked={st.layers[id].on} disabled={!SIMPLE_LAYERS.includes(id)} />
                 <label for={`layer-${id}`}>{x.layerNames[id]}</label>
-                <input type="range" min="0" max="100" step="5" value={st.layers[id].opacity} data-layer-opacity={id} aria-label={x.layerNames[id] + x.opacitySuffix} />
+                <input type="range" min="0" max="100" step="5" value={st.layers[id].opacity} data-layer-opacity={id} aria-label={x.layerNames[id] + x.opacitySuffix} disabled={!SIMPLE_LAYERS.includes(id)} />
               </>
             ))}
           </div>
@@ -98,12 +98,13 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
       </aside>
 
       <main class="x-view" id="viewer" aria-label={x.viewerLabel}>
+        <div class="x-3d" data-viewer role="img" aria-label={s.figure.ariaPrefix + s.figure.aria[st.condition]} hidden></div>
         <div class="x-figure only-wide-x" data-figure="wide" set:html={figureWide} />
         <div class="x-figure x-figure-narrow only-narrow-x" data-figure="narrow" set:html={figureNarrow} />
 
         <div class="x-toolbar only-wide-x" role="group" aria-label={x.viewTools}>
           <button type="button" class="x-tool" data-toggle="flow" aria-pressed={(st.flow) ? 'true' : 'false'}>{x.flow}</button>
-          <button type="button" class="x-tool" data-toggle="labels" aria-pressed={(st.labels) ? 'true' : 'false'}>{x.labels}</button>
+          <button type="button" class="x-tool" data-toggle="labels" data-2d-only aria-pressed={(st.labels) ? 'true' : 'false'}>{x.labels}</button>
           <button type="button" class="x-tool" data-toggle="measure" aria-pressed={(st.measure) ? 'true' : 'false'}>{x.measure}</button>
         </div>
         <div class="x-tools-narrow only-narrow-x" role="group" aria-label={x.viewTools}>
@@ -112,6 +113,7 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
           <button type="button" class="x-tool" data-layers-toggle aria-expanded="false" aria-controls="view-options">{x.layers}</button>
         </div>
 
+        <p class="x-hint only-wide-x" data-3d-only>{x.hint}</p>
         <p class="x-caption only-wide-x">
           {x.captionIllustration} · {x.captionFlow} · <a href={routes.evidence}>{x.evidence}</a>
         </p>
@@ -246,6 +248,23 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
         const open = partsToggle.getAttribute('aria-expanded') !== 'true';
         partsToggle.setAttribute('aria-expanded', String(open));
         partsList.hidden = !open;
+      });
+
+      // ----- 3D view (falls back to the 2D figure if WebGL is missing or loading fails) -----
+      const view = document.querySelector<HTMLElement>('.x-view')!;
+      const viewerHost = document.querySelector<HTMLElement>('[data-viewer]')!;
+      import('../explorer/viewer3d').then(async ({ webglAvailable, createViewer }) => {
+        if (!webglAvailable()) return;
+        viewerHost.hidden = false;
+        try {
+          await createViewer(viewerHost, store, strings.figure);
+          view.classList.add('has-3d');
+          store.subscribe((st) => viewerHost.setAttribute('aria-label', strings.figure.ariaPrefix + strings.figure.aria[st.condition]));
+        } catch (error) {
+          console.warn('3D view unavailable, showing the figure instead.', error);
+          viewerHost.hidden = true;
+          viewerHost.replaceChildren();
+        }
       });
 
       // ----- The store updates every view and control -----
@@ -563,6 +582,32 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
   .x-figure :global(.anatomy-figure) {
     width: 100%;
     height: 100%;
+  }
+  .x-3d {
+    position: absolute;
+    inset: 0;
+  }
+  .x-3d :global(canvas) {
+    display: block;
+    cursor: grab;
+  }
+  .has-3d .x-figure,
+  .has-3d [data-2d-only],
+  .x-view:not(.has-3d) [data-3d-only] {
+    display: none;
+  }
+  .x-hint {
+    position: absolute;
+    left: 16px;
+    bottom: 12px;
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--x-size-caption);
+    color: var(--x-faint);
+  }
+  .x-layers input:disabled + label {
+    color: var(--x-faint);
+    cursor: default;
   }
   .x-toolbar {
     position: absolute;

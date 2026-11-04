@@ -8,6 +8,8 @@ import type { Condition } from '../lib/anatomy-figure';
 
 export type LayerId = 'skin' | 'bone' | 'brain' | 'csf' | 'nerves' | 'vessels';
 export const LAYERS: LayerId[] = ['skin', 'bone', 'brain', 'csf', 'nerves', 'vessels'];
+/** Layers the Simple model has. Nerves and blood vessels aren't in the figure or EVIDENCE.md yet. */
+export const SIMPLE_LAYERS: LayerId[] = ['skin', 'bone', 'brain', 'csf'];
 
 export interface Layer {
   on: boolean;
@@ -27,17 +29,17 @@ export interface ViewState {
   part: string;
 }
 
-// Starting view, from the Explorer mockup.
+// Starting view. Skin starts on, so the midline cut matches the figures; the mockup had it off.
 export const initialState: ViewState = {
   condition: 'chiari',
   flow: true,
   labels: true,
   measure: true,
   layers: {
-    skin: { on: false, opacity: 40 },
+    skin: { on: true, opacity: 100 },
     bone: { on: true, opacity: 100 },
     brain: { on: true, opacity: 100 },
-    csf: { on: true, opacity: 75 },
+    csf: { on: true, opacity: 100 },
     nerves: { on: false, opacity: 100 },
     vessels: { on: false, opacity: 100 },
   },

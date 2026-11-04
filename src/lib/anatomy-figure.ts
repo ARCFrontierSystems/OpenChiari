@@ -19,7 +19,11 @@ export interface FigureOptions {
   measure?: boolean;
   dark?: boolean;
   className?: string;
+  /** Opacity of each layer, 0 to 1 (0 hides it). Leave out for the full figure. Used by the 3D cut face. */
+  layers?: Partial<Record<FigureLayer, number>>;
 }
+
+export type FigureLayer = 'skin' | 'bone' | 'brain' | 'csf';
 
 export interface FigureStrings {
   ariaPrefix: string;
@@ -42,7 +46,7 @@ const TONSIL = {
 };
 
 export function anatomyFigureSvg(options: FigureOptions, t: FigureStrings): string {
-  const { condition: c = 'chiari', flow = true, labels = true, measure = true, dark = false, className = '' } = options;
+  const { condition: c = 'chiari', flow = true, labels = true, measure = true, dark = false, className = '', layers = {} } = options;
   const L = t.labels;
   const low = c === 'chiari' || c === 'syrinx';
   const surgery = c === 'surgery';
@@ -62,38 +66,43 @@ export function anatomyFigureSvg(options: FigureOptions, t: FigureStrings): stri
   const note = (y: number, text: string) => `<text x="580" y="${y}" font-size="11" fill="${muted}">${esc(text)}</text>`;
 
   const parts: string[] = [];
-  const add = (cond: boolean, s: string) => { if (cond) parts.push(s); };
+  const add = (cond: boolean, s: string, layer?: FigureLayer) => {
+    if (!cond) return;
+    const opacity = layer ? (layers[layer] ?? 1) : 1;
+    if (opacity <= 0) return;
+    parts.push(opacity < 1 ? `<g opacity="${opacity}">${s}</g>` : s);
+  };
 
-  add(true, `<path class="fig-skin" d="${SKIN}" fill="#EFE3D8" stroke="#C9B2A2" stroke-width="1.5"/>`);
-  add(true, `<path d="M112 362 L246 374" fill="none" stroke="#D2BBAA" stroke-width="5" stroke-linecap="round"/>`);
-  add(true, `<path d="M252 378 C268 392 276 430 280 480 L286 640" fill="none" stroke="#E2CFC2" stroke-width="16" stroke-linecap="round"/>`);
-  add(true, `<path d="M326 446 L336 446 L342 640 L330 640 Z" fill="#9CC3DA" fill-opacity="0.75"/>`);
-  add(true, `<path d="M358 446 L386 450 C388 510 390 580 392 640 L364 640 C362 580 360 510 358 446 Z" fill="#9CC3DA" fill-opacity="0.75"/>`);
-  add(!low && !surgery, `<path d="M402 428 C430 422 452 412 466 400 C456 414 434 426 402 436 Z" fill="#9CC3DA" fill-opacity="0.75"/>`);
-  add(surgery, `<path d="M398 446 C420 440 444 428 452 420 C462 444 448 478 396 486 Z" fill="#9CC3DA" fill-opacity="0.75"/><path d="M452 414 C470 440 456 486 394 494" fill="none" stroke="#7D6F58" stroke-width="1.5" stroke-dasharray="5 4"/>`);
+  add(true, `<path class="fig-skin" d="${SKIN}" fill="#EFE3D8" stroke="#C9B2A2" stroke-width="1.5"/>`, 'skin');
+  add(true, `<path d="M112 362 L246 374" fill="none" stroke="#D2BBAA" stroke-width="5" stroke-linecap="round"/>`, 'skin');
+  add(true, `<path d="M252 378 C268 392 276 430 280 480 L286 640" fill="none" stroke="#E2CFC2" stroke-width="16" stroke-linecap="round"/>`, 'skin');
+  add(true, `<path d="M326 446 L336 446 L342 640 L330 640 Z" fill="#9CC3DA" fill-opacity="0.75"/>`, 'csf');
+  add(true, `<path d="M358 446 L386 450 C388 510 390 580 392 640 L364 640 C362 580 360 510 358 446 Z" fill="#9CC3DA" fill-opacity="0.75"/>`, 'csf');
+  add(!low && !surgery, `<path d="M402 428 C430 422 452 412 466 400 C456 414 434 426 402 436 Z" fill="#9CC3DA" fill-opacity="0.75"/>`, 'csf');
+  add(surgery, `<path d="M398 446 C420 440 444 428 452 420 C462 444 448 478 396 486 Z" fill="#9CC3DA" fill-opacity="0.75"/><path d="M452 414 C470 440 456 486 394 494" fill="none" stroke="#7D6F58" stroke-width="1.5" stroke-dasharray="5 4"/>`, 'csf');
   const skull = 'M120 300 C112 230 130 170 170 135 C230 95 330 92 400 115 C470 140 515 200 518 275 C520 330 505 380 470 412 C450 430 425 442 398 448';
-  add(true, `<path d="${skull}" fill="none" stroke="#A69B85" stroke-width="16" stroke-linecap="round"/><path d="${skull}" fill="none" stroke="#E7DFCF" stroke-width="12" stroke-linecap="round"/><path d="${skull}" fill="none" stroke="#D3C8B2" stroke-width="2" stroke-dasharray="2 5"/>`);
-  add(surgery, `<path d="M398 448 C420 442 440 432 454 420" fill="none" stroke="#EFE3D8" stroke-width="18" stroke-linecap="butt"/><path d="M398 448 C420 442 440 432 454 420" fill="none" stroke="#9A3412" stroke-width="1.75" stroke-dasharray="5 4"/>`);
-  add(true, `<path d="M128 300 C170 305 220 310 252 322 C255 338 272 340 278 330 L282 354" fill="none" stroke="#A69B85" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>`);
-  add(true, `<path d="M276 354 L290 356 C292 390 304 420 334 440 L328 446 C298 432 278 400 276 354 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"/>`);
-  add(true, `<path d="M140 292 C134 232 150 185 188 156 C240 120 330 118 392 138 C452 160 490 210 492 272 C494 305 488 330 476 345 C440 340 400 338 360 338 C340 336 322 332 305 322 C295 318 285 312 272 312 C240 306 190 300 140 292 Z" fill="#E9CFC6" stroke="#B38D82" stroke-width="1.5"/>`);
-  add(true, `<path d="M160 200 C180 185 200 205 225 185 M250 150 C270 170 290 150 310 165 M330 150 C350 175 375 160 395 180 M420 175 C430 200 455 200 465 225 M165 262 C185 247 200 272 222 264 M440 262 C455 282 470 277 482 302 M150 236 C170 229 175 246 195 241 M398 268 C412 286 436 280 452 300 M182 282 C202 272 222 286 244 280" fill="none" stroke="#CFA79B" stroke-width="1.5" stroke-linecap="round"/>`);
-  add(true, `<path d="M236 254 C260 236 330 236 352 250 C332 246 262 246 240 262 Z" fill="#A9CBE0"/>`);
-  add(true, `<path d="M205 230 C230 200 330 195 370 225 C382 236 378 252 362 250 C335 228 250 225 228 250 C215 262 196 248 205 230 Z" fill="#F4E6E1" stroke="#C39C90" stroke-width="1.25"/>`);
-  add(true, `<ellipse cx="300" cy="282" rx="34" ry="20" fill="#E3BFB3" stroke="#C39C90" stroke-width="1"/>`);
-  add(true, `<path d="M352 337 L498 347" fill="none" stroke="#A69B85" stroke-width="2.5" stroke-linecap="round"/>`);
-  add(true, `<path d="M296 300 C310 296 326 304 332 318 C340 334 348 346 348 362 L348 404 C350 420 356 434 358 446 L336 446 C330 430 320 414 316 402 C304 390 300 376 304 362 C306 346 300 330 294 318 C290 310 290 302 296 300 Z" fill="#E3C2B6" stroke="#B38D82" stroke-width="1.5"/>`);
-  add(true, `<path d="M348 362 L374 384 L348 404 Z" fill="#A9CBE0" stroke="#7FA6BF" stroke-width="1"/>`);
-  add(true, `<path d="M360 352 C392 340 452 342 474 356 C486 366 484 386 468 398 C456 410 430 420 404 426 C388 430 376 424 372 414 C382 404 384 392 374 384 C368 372 360 362 360 352 Z" fill="#DDBDB3" stroke="#B38D82" stroke-width="1.5"/>`);
-  add(true, `<path d="M374 360 C402 352 442 352 468 362 M474 372 C478 380 477 388 470 394 M446 412 C430 418 416 420 404 422" fill="none" stroke="#C79E92" stroke-width="1" stroke-linecap="round"/>`);
-  add(true, `<path d="M378 386 C400 378 422 370 452 364 M402 378 C412 366 426 360 442 356 M378 388 C404 392 430 396 464 396 M410 392 C426 404 442 412 458 418 M394 390 C404 404 412 416 420 428" fill="none" stroke="#F6E9E4" stroke-width="3" stroke-linecap="round"/>`);
-  add(true, `<path d="${tonsilPath}" fill="${tonsilFill}" stroke="${tonsilStroke}" stroke-width="${tonsilWidth}" stroke-linejoin="round"/>`);
-  add(true, `<path d="M336 446 L358 446 C360 510 362 580 364 640 L342 640 C340 580 338 510 336 446 Z" fill="#EAD9B9" stroke="#B59E73" stroke-width="1.5"/>`);
-  add(c === 'syrinx', `<path d="M347 540 C352 538 355 546 354 556 C353 564 356 570 355 580 C354 590 357 598 356 608 L356 640 L345 640 L345 608 C344 598 347 590 346 580 C345 570 348 564 347 556 C346 548 344 542 347 540 Z" fill="#7FB3D3" stroke="#3F6F90" stroke-width="1.25"/>`);
-  add(true, `<ellipse cx="298" cy="462" rx="9" ry="7" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"/><path d="M312 456 C314 448 322 448 324 456 L326 472 L312 472 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"/><rect x="300" y="472" width="28" height="46" rx="4" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"/><rect x="300" y="519" width="27" height="6" rx="2" fill="#D9C3A4"/><rect x="296" y="526" width="29" height="38" rx="4" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"/><rect x="295" y="565" width="28" height="6" rx="2" fill="#D9C3A4"/><rect x="292" y="572" width="29" height="40" rx="4" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"/><rect x="291" y="613" width="28" height="6" rx="2" fill="#D9C3A4"/>`);
-  add(!surgery, `<ellipse cx="414" cy="470" rx="12" ry="8" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"/>`);
-  add(surgery, `<ellipse cx="414" cy="470" rx="12" ry="8" fill="none" stroke="#9A3412" stroke-width="1.75" stroke-dasharray="4 3"/>`);
-  add(true, `<path d="M394 500 L446 506 C452 510 452 520 446 522 L394 524 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"/><path d="M396 548 L438 554 C444 558 444 566 438 568 L396 570 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"/><path d="M398 594 L434 598 C440 602 440 610 434 612 L398 614 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"/>`);
+  add(true, `<path d="${skull}" fill="none" stroke="#A69B85" stroke-width="16" stroke-linecap="round"/><path d="${skull}" fill="none" stroke="#E7DFCF" stroke-width="12" stroke-linecap="round"/><path d="${skull}" fill="none" stroke="#D3C8B2" stroke-width="2" stroke-dasharray="2 5"/>`, 'bone');
+  add(surgery, `<path d="M398 448 C420 442 440 432 454 420" fill="none" stroke="#EFE3D8" stroke-width="18" stroke-linecap="butt"/><path d="M398 448 C420 442 440 432 454 420" fill="none" stroke="#9A3412" stroke-width="1.75" stroke-dasharray="5 4"/>`, 'bone');
+  add(true, `<path d="M128 300 C170 305 220 310 252 322 C255 338 272 340 278 330 L282 354" fill="none" stroke="#A69B85" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>`, 'bone');
+  add(true, `<path d="M276 354 L290 356 C292 390 304 420 334 440 L328 446 C298 432 278 400 276 354 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"/>`, 'bone');
+  add(true, `<path d="M140 292 C134 232 150 185 188 156 C240 120 330 118 392 138 C452 160 490 210 492 272 C494 305 488 330 476 345 C440 340 400 338 360 338 C340 336 322 332 305 322 C295 318 285 312 272 312 C240 306 190 300 140 292 Z" fill="#E9CFC6" stroke="#B38D82" stroke-width="1.5"/>`, 'brain');
+  add(true, `<path d="M160 200 C180 185 200 205 225 185 M250 150 C270 170 290 150 310 165 M330 150 C350 175 375 160 395 180 M420 175 C430 200 455 200 465 225 M165 262 C185 247 200 272 222 264 M440 262 C455 282 470 277 482 302 M150 236 C170 229 175 246 195 241 M398 268 C412 286 436 280 452 300 M182 282 C202 272 222 286 244 280" fill="none" stroke="#CFA79B" stroke-width="1.5" stroke-linecap="round"/>`, 'brain');
+  add(true, `<path d="M236 254 C260 236 330 236 352 250 C332 246 262 246 240 262 Z" fill="#A9CBE0"/>`, 'csf');
+  add(true, `<path d="M205 230 C230 200 330 195 370 225 C382 236 378 252 362 250 C335 228 250 225 228 250 C215 262 196 248 205 230 Z" fill="#F4E6E1" stroke="#C39C90" stroke-width="1.25"/>`, 'brain');
+  add(true, `<ellipse cx="300" cy="282" rx="34" ry="20" fill="#E3BFB3" stroke="#C39C90" stroke-width="1"/>`, 'brain');
+  add(true, `<path d="M352 337 L498 347" fill="none" stroke="#A69B85" stroke-width="2.5" stroke-linecap="round"/>`, 'bone');
+  add(true, `<path d="M296 300 C310 296 326 304 332 318 C340 334 348 346 348 362 L348 404 C350 420 356 434 358 446 L336 446 C330 430 320 414 316 402 C304 390 300 376 304 362 C306 346 300 330 294 318 C290 310 290 302 296 300 Z" fill="#E3C2B6" stroke="#B38D82" stroke-width="1.5"/>`, 'brain');
+  add(true, `<path d="M348 362 L374 384 L348 404 Z" fill="#A9CBE0" stroke="#7FA6BF" stroke-width="1"/>`, 'csf');
+  add(true, `<path d="M360 352 C392 340 452 342 474 356 C486 366 484 386 468 398 C456 410 430 420 404 426 C388 430 376 424 372 414 C382 404 384 392 374 384 C368 372 360 362 360 352 Z" fill="#DDBDB3" stroke="#B38D82" stroke-width="1.5"/>`, 'brain');
+  add(true, `<path d="M374 360 C402 352 442 352 468 362 M474 372 C478 380 477 388 470 394 M446 412 C430 418 416 420 404 422" fill="none" stroke="#C79E92" stroke-width="1" stroke-linecap="round"/>`, 'brain');
+  add(true, `<path d="M378 386 C400 378 422 370 452 364 M402 378 C412 366 426 360 442 356 M378 388 C404 392 430 396 464 396 M410 392 C426 404 442 412 458 418 M394 390 C404 404 412 416 420 428" fill="none" stroke="#F6E9E4" stroke-width="3" stroke-linecap="round"/>`, 'brain');
+  add(true, `<path d="${tonsilPath}" fill="${tonsilFill}" stroke="${tonsilStroke}" stroke-width="${tonsilWidth}" stroke-linejoin="round"/>`, 'brain');
+  add(true, `<path d="M336 446 L358 446 C360 510 362 580 364 640 L342 640 C340 580 338 510 336 446 Z" fill="#EAD9B9" stroke="#B59E73" stroke-width="1.5"/>`, 'brain');
+  add(c === 'syrinx', `<path d="M347 540 C352 538 355 546 354 556 C353 564 356 570 355 580 C354 590 357 598 356 608 L356 640 L345 640 L345 608 C344 598 347 590 346 580 C345 570 348 564 347 556 C346 548 344 542 347 540 Z" fill="#7FB3D3" stroke="#3F6F90" stroke-width="1.25"/>`, 'brain');
+  add(true, `<ellipse cx="298" cy="462" rx="9" ry="7" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"/><path d="M312 456 C314 448 322 448 324 456 L326 472 L312 472 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"/><rect x="300" y="472" width="28" height="46" rx="4" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"/><rect x="300" y="519" width="27" height="6" rx="2" fill="#D9C3A4"/><rect x="296" y="526" width="29" height="38" rx="4" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"/><rect x="295" y="565" width="28" height="6" rx="2" fill="#D9C3A4"/><rect x="292" y="572" width="29" height="40" rx="4" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"/><rect x="291" y="613" width="28" height="6" rx="2" fill="#D9C3A4"/>`, 'bone');
+  add(!surgery, `<ellipse cx="414" cy="470" rx="12" ry="8" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"/>`, 'bone');
+  add(surgery, `<ellipse cx="414" cy="470" rx="12" ry="8" fill="none" stroke="#9A3412" stroke-width="1.75" stroke-dasharray="4 3"/>`, 'bone');
+  add(true, `<path d="M394 500 L446 506 C452 510 452 520 446 522 L394 524 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"/><path d="M396 548 L438 554 C444 558 444 566 438 568 L396 570 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"/><path d="M398 594 L434 598 C440 602 440 610 434 612 L398 614 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"/>`, 'bone');
   add(flow && !low, `<path d="M326 478 L331 484 L336 478 M327 528 L332 534 L337 528 M328 578 L333 584 L338 578 M369 478 L374 484 L379 478 M370 528 L375 534 L380 528 M371 578 L376 584 L381 578 M410 422 L416 429 L422 422" fill="none" stroke="#1F5F8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`);
   add(flow && low, `<path d="M326 478 L331 484 L336 478 M327 528 L332 534 L337 528 M328 578 L333 584 L338 578 M370 548 L375 554 L380 548" fill="none" stroke="#1F5F8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M390 440 L398 434 M390 448 L398 442 M390 456 L398 450" fill="none" stroke="#9A3412" stroke-width="2" stroke-linecap="round"/>`);
   if (measure) {

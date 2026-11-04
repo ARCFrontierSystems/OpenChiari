@@ -11,7 +11,8 @@ export default defineConfig({
   reporter: process.env.CI ? 'github' : 'list',
   use: {
     baseURL: 'http://localhost:4322',
-    launchOptions: { executablePath },
+    // WebGL in headless Chromium runs on its software renderer (SwiftShader).
+    launchOptions: { executablePath, args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] },
   },
   webServer: {
     command: 'npx astro preview --port 4322 --ignore-lock',

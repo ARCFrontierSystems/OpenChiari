@@ -3,6 +3,32 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Phase 1, step 4: Simple 3D model, Typical and Chiari I
+
+- **How the model is made** (`model/simple/build.mjs`, run with `npm run model:simple`): each structure starts from its midline shape in the figure (`src/lib/anatomy-shapes.json`, extracted from the figure code) and is given rounded width to either side. The skull is a shell around the cranial cavity with the foramen magnum open; C1 to C4 have rings (arches) around the spinal canal. Output: `public/models/simple.glb` (about 595 KB, 163,000 triangles, compressed).
+- **Exact match at the midline:** because every 3D structure's midline slice is its figure shape, the midline cut face is painted with the figure itself. At other cut depths the cut faces are filled with each structure's palette color.
+- **Numbers checked in the 3D file** (`npm run model:check`, also runs on GitHub on every update and fails if they drift):
+  - Foramen magnum, basion to opisthion: 35.3 mm (EVIDENCE.md: about 33 to 36 mm)
+  - Typical tonsil tip: 0.9 mm above the McRae line (EVIDENCE.md: about 1 mm above)
+  - Chiari I tonsil tip: 12.4 mm below the McRae line (EVIDENCE.md: about 12 mm below)
+- **Explorer:** the 3D view replaces the 2D figure once loaded (the figure stays if the device can't show 3D). Drag to rotate, scroll or pinch to zoom, Shift-drag or two fingers to move. Condition switch, layers with opacity, and the cut-away slider all act on the model. It draws only when something changes, so nothing runs while idle, off screen or in a background tab. Screen readers get the figure's description of the current condition.
+- **Default view changed from the mockup:** skin starts on at full opacity so the starting view matches the figures; the mockup had skin off.
+- **Download size on the Explorer page:** about 610 KB compressed (3D code plus model). Other pages are unaffected.
+- **Checks:** 63 tests pass, including the 3D view loading and updating.
+
+**Not in this step (coming next):**
+- Nerves and Blood vessels: shown but switched off. They aren't in the figure or EVIDENCE.md, so the Simple model doesn't have them.
+- Labels in 3D, tapping a part in the model, camera presets and keyboard control: step 6. (The Labels button is hidden while the 3D view is showing.)
+- Fluid flow and Measure currently show on the midline cut face only; animated flow and a 3D measure come in step 7.
+- The face is a smooth, mannequin-like simplification; a realistic face comes with the Phase 2 model.
+
+**Open question for Matthew:** the side-to-side widths are my approximations of typical adult sizes (not in EVIDENCE.md yet): head about 152 mm wide; cranial cavity about 132 mm; skull about 8 mm thick (from the figure); cerebellum about 100 mm; cord about 12 mm; spinal fluid space about 26 mm; foramen magnum about 30 mm across; the pair of tonsils about 22 mm. Should I add a "Simple model widths" section to EVIDENCE.md with sources, for your approval?
+
+**Next: step 5, the Simple model's Chiari I with syrinx and After decompression.**
+- Syrinx: the long, beaded fluid cavity in the center of the neck cord, from the figure (EVIDENCE.md: neck cord, about 5 vertebrae long on average, shown only as "often").
+- After decompression: bone removed at the back of the foramen magnum and the C1 back arch (shown with the red dashed outline), the dural patch, the re-formed fluid space behind the cerebellum, and tonsils only partly risen (about 8.7 mm below the line in the figure, about 4 mm higher than Chiari I, matching EVIDENCE.md).
+- Extend the automatic measurement check to cover both, then stop for Matthew to compare all four views with `design/figures/`.
+
 ## 2026-11-04: Phase 1, step 3: Explorer page (layout and controls, no 3D yet)
 
 - **CI fix first:** the first GitHub run of step 2 failed at the type check (it also checks the test files: missing Node types, and two copies of Playwright). Fixed; GitHub checks now pass.

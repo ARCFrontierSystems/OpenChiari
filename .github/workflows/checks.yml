@@ -22,6 +22,8 @@ jobs:
       - run: npm ci
       - name: Type check
         run: npm run check
+      - name: 3D model matches EVIDENCE.md
+        run: npm run model:check
       - name: Build
         run: npm run build
       - name: Install test browser

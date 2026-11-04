@@ -8,6 +8,17 @@ const sizes = [
   { name: 'phone', width: 390, height: 844 },
 ];
 
+/** Simulates a browser without WebGL, so the Explorer keeps the 2D figure. */
+async function withoutWebGL(page: Page) {
+  await page.addInitScript(() => {
+    const original = HTMLCanvasElement.prototype.getContext;
+    // @ts-expect-error test override
+    HTMLCanvasElement.prototype.getContext = function (type: string, ...rest: unknown[]) {
+      return type.startsWith('webgl') ? null : original.call(this, type, ...rest);
+    };
+  });
+}
+
 async function setCalm(page: Page, value: 'on' | 'off') {
   await page.addInitScript((v) => localStorage.setItem('openchiari-calm', v), value);
 }
@@ -88,9 +99,10 @@ test('phone: Calm mode button reads "Calm on" and the menu opens', async ({ page
   await expect(page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Research studies' })).toBeVisible();
 });
 
-test.describe('3D Explorer (step 3: controls, with the 2D figure)', () => {
-  test('desktop: condition switch updates the figure and the condition text', async ({ page }) => {
+test.describe('3D Explorer controls', () => {
+  test('without 3D support: condition switch updates the 2D figure and the condition text', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
+    await withoutWebGL(page);
     await page.goto('/explorer/');
     const figure = page.locator('[data-figure="wide"] svg');
     await expect(figure).toHaveAttribute('aria-label', /Chiari I: the cerebellar tonsils extend below/);
@@ -112,8 +124,9 @@ test.describe('3D Explorer (step 3: controls, with the 2D figure)', () => {
     await expect(page.locator('.x-right .x-parts li:visible')).toHaveCount(2);
   });
 
-  test('desktop: tools toggle labels, flow and measure', async ({ page }) => {
+  test('without 3D support: tools toggle labels on the 2D figure', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
+    await withoutWebGL(page);
     await page.goto('/explorer/');
     const labels = page.getByRole('button', { name: 'Labels' });
     await labels.click();
@@ -140,6 +153,18 @@ test.describe('3D Explorer (step 3: controls, with the 2D figure)', () => {
     await page.keyboard.press('Escape');
     await expect(page.getByRole('checkbox', { name: 'Skull and spine' })).toBeHidden();
     await expect(layers).toBeFocused();
+  });
+
+  test('3D model loads, replaces the figure, and describes the view for screen readers', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/explorer/');
+    await expect(page.locator('.x-view')).toHaveClass(/has-3d/, { timeout: 30000 });
+    const viewer = page.getByRole('img', { name: /Midline section of the head and neck, Chiari I/ });
+    await expect(viewer).toBeVisible();
+    await expect(page.locator('[data-figure="wide"]')).toBeHidden();
+    await expect(page.getByText('Drag to rotate · Scroll to zoom · Shift-drag to move')).toBeVisible();
+    await page.locator('.x-cond-list label', { hasText: 'Typical anatomy' }).click();
+    await expect(page.getByRole('img', { name: /typical anatomy: the cerebellar tonsils sit above/ })).toBeVisible();
   });
 
   test('required captions and credits are on the page', async ({ page }) => {

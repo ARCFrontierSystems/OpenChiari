@@ -292,8 +292,17 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   // Realistic model: loaded the first time the visitor picks it.
   let realistic: 'none' | 'loading' | 'ready' | 'failed' = 'none';
   /** The realistic model's own McRae line and tonsil tips (model mm), saved in its file by model/realistic/web.mjs. */
-  interface RealisticLandmarks { mcrae: { basion: number[]; opisthion: number[] }; tonsilTip: Record<string, number[]> }
+  interface RealisticLandmarks {
+    mcrae: { basion: number[]; opisthion: number[] };
+    tonsilTip: Record<string, number[]>;
+    /** Where each label points on the midline cut, per view (model mm), from the model itself. */
+    labels?: Record<string, Record<string, number[]>>;
+    /** Flow marks per view: chevrons [x, y, width, moves freely 1 / barely 0] and restricted marks [x1, y1, x2, y2] (mm). */
+    flow?: Record<string, { chevrons: number[][]; marks: number[][] }>;
+  }
   let realisticLandmarks: RealisticLandmarks | null = null;
+  /** Whether the realistic model is what's on screen now. */
+  const realisticShown = () => store.get().model === 'realistic' && realistic === 'ready';
   async function loadRealistic() {
     if (realistic !== 'none' || !options.realisticUrl) return;
     realistic = 'loading';
@@ -724,8 +733,13 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       const y = top + gap * row++;
       button.style.top = `${y}px`;
       button.classList.toggle('is-selected', def.part === st.part);
-      const [fx, fy] = labelAnchor(def.part, st.condition);
-      anchorV.set((fx - ORIGIN.x) / FIGURE_UNITS_PER_MM, -(fy - ORIGIN.y) / FIGURE_UNITS_PER_MM, 0).project(camera);
+      // On the realistic model, its own anchor (model mm); otherwise the figure's leader-line end.
+      const own = realisticShown() ? realisticLandmarks?.labels?.[st.condition]?.[def.part] : undefined;
+      if (own) anchorV.set(own[0], own[1], 0).project(camera);
+      else {
+        const [fx, fy] = labelAnchor(def.part, st.condition);
+        anchorV.set((fx - ORIGIN.x) / FIGURE_UNITS_PER_MM, -(fy - ORIGIN.y) / FIGURE_UNITS_PER_MM, 0).project(camera);
+      }
       const ax = ((anchorV.x + 1) / 2) * w, ay = ((1 - anchorV.y) / 2) * h;
       const labelX = w - 216;
       const visibleAnchor = anchorV.z < 1 && ax > 0 && ax < labelX && ay > 0 && ay < h;
@@ -757,10 +771,11 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   const flowMat = new THREE.MeshBasicMaterial({ color: FLOW_BLUE, clippingPlanes: [overlayPlane], transparent: true });
   const restrictedMat = new THREE.MeshBasicMaterial({ color: RESTRICTED, clippingPlanes: [overlayPlane], transparent: true });
   /** A downward chevron (as in the figure: 5 mm wide, 3 mm tall), centred on the origin. */
-  function chevron() {
+  function chevron(width = 5, thickness = 1) {
     const g = new THREE.Group();
-    g.add(bar(new THREE.Vector3(-2.5, 1.5, 0), new THREE.Vector3(0, -1.5, 0), 1, flowMat));
-    g.add(bar(new THREE.Vector3(0, -1.5, 0), new THREE.Vector3(2.5, 1.5, 0), 1, flowMat));
+    const h = (width / 5) * 1.5;
+    g.add(bar(new THREE.Vector3(-width / 2, h, 0), new THREE.Vector3(0, -h, 0), thickness, flowMat));
+    g.add(bar(new THREE.Vector3(0, -h, 0), new THREE.Vector3(width / 2, h, 0), thickness, flowMat));
     return g;
   }
   // Chevron positions and the restricted-flow marks are the figure's own (src/lib/anatomy-figure.ts).
@@ -773,11 +788,31 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   /** Each chevron with its resting place and how far it moves with each heartbeat (mm). */
   let chevrons: { obj: THREE.Object3D; base: THREE.Vector3; amp: number }[] = [];
   let flowCondition = '';
-  function buildFlow(condition: string) {
-    if (condition === flowCondition) return;
-    flowCondition = condition;
+  function buildFlow(condition: string, lm: RealisticLandmarks | null) {
+    const own = lm?.flow?.[condition];
+    const key = `${condition}:${own ? 'realistic' : 'simple'}`;
+    if (key === flowCondition) return;
+    flowCondition = key;
     flowGroup.clear();
     chevrons = [];
+    if (own) {
+      // Realistic model: marks placed in its own fluid spaces (model/realistic/web.mjs), just in front of the cut.
+      for (const [x, y, w, free] of own.chevrons) {
+        // sized to the fluid space, with lines a steady 0.8 mm thick so narrow ones stay visible
+        const obj = chevron(w, 0.8);
+        const base = new THREE.Vector3(x, y, 0.35);
+        obj.position.copy(base);
+        chevrons.push({ obj, base, amp: free ? 3 : 0.8 });
+        obj.traverse((m) => (m.renderOrder = 2500));
+        flowGroup.add(obj);
+      }
+      for (const [x1, y1, x2, y2] of own.marks) {
+        const mark = bar(new THREE.Vector3(x1, y1, 0.35), new THREE.Vector3(x2, y2, 0.35), 1, restrictedMat);
+        mark.renderOrder = 2500;
+        flowGroup.add(mark);
+      }
+      return;
+    }
     const blocked = condition === 'chiari' || condition === 'syrinx';
     for (const [x, y, w] of blocked ? FLOW_BLOCKED : FLOW_OPEN) {
       const obj = chevron();
@@ -915,9 +950,9 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     }
     if (labelsHost) labelsHost.hidden = !st.labels;
     overlayPlane.constant = cutDepth(st.cut) + 1;
-    buildFlow(st.condition);
-    // Flow marks follow the Simple figure's fluid spaces; not shown on the realistic model yet.
-    flowGroup.visible = st.flow && st.layers.csf.on && simpleShown;
+    buildFlow(st.condition, simpleShown ? null : realisticLandmarks);
+    // Flow marks follow the fluid spaces of the model on show (the figure's, or the realistic model's own).
+    flowGroup.visible = st.flow && st.layers.csf.on && (simpleShown || !!realisticLandmarks?.flow);
     if (flowGroup.visible && !stillOnly()) startFlowLoop();
     else {
       // Stop right away (not on the next frame), so turning flow off or Calm mode on takes effect at once.

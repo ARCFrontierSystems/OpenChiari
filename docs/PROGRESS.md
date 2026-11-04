@@ -3,6 +3,16 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Realistic model: labels and fluid flow (Matthew approved)
+
+- **Labels** on the realistic model now point at its own structures (before, they used the drawn figure's positions). For each view, the build maps what the midline cut shows and points each label at the middle of its structure.
+- **Fluid flow** now works on the realistic model:
+  - arrows in the fluid in front of and behind the cord, and behind the cerebellum;
+  - in Chiari I (and with syrinx) the arrows behind the cord barely move, and red marks show the passage plugged at the opening, as in the Simple model;
+  - still in Calm mode and with reduced motion; arrow lines stay a steady thickness so the narrow ones are visible.
+- **Checks:** the web-file check now also confirms that every label points at its own structure and every flow mark sits in the fluid, in the simplified files the Explorer loads.
+- **Next:** the independent audit's report; then Matthew decides whether the realistic model goes public.
+
 ## 2026-11-04: Realistic model: re-audit fixes (all 8, Matthew approved)
 
 - **Cord no longer looks painted blue (1):** the fluid around the cord is now a tube with the cord inside it, and the fluid around the cerebellum is kept 1 mm clear of the brain, so the cut view shows the cord, then fluid in front of and behind it.

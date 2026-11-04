@@ -89,7 +89,154 @@ function landmarks() {
   }
   return { mcrae: { basion: basion.map((x) => +x.toFixed(2)), opisthion: opisthion.map((x) => +x.toFixed(2)) }, tonsilTip };
 }
+// ---- What the midline cut shows, for labels and flow marks -------------------------------------------------------
+// Looking at the cut from the side (as the Explorer's side view does), each 1 mm cell of the midline shows the first
+// surface behind the cut. That map, made from each view's own build, places the labels (each points at the middle of
+// where its structure shows) and the fluid-flow marks (in the fluid in front of and behind the cord, and behind the
+// cerebellum), so both follow the realistic model rather than the drawn figure.
+const GX0 = -100, GX1 = 100, GY0 = -110, GY1 = 130;
+function midlineMap(doc, keep = () => true, nameOf = (n) => n) {
+  const tris = [];
+  for (const node of doc.getRoot().listNodes()) {
+    if (!node.getMesh() || !keep(node)) continue;
+    const name = nameOf(node.getName()), m = node.getWorldMatrix(), el = [0, 0, 0];
+    if (name === 'skin') continue;
+    for (const prim of node.getMesh().listPrimitives()) {
+      const pos = prim.getAttribute('POSITION'), idx = prim.getIndices().getArray(), V = [];
+      for (let i = 0; i < pos.getCount(); i++) { pos.getElement(i, el); V.push([0, 1, 2].map((r) => m[r] * el[0] + m[4 + r] * el[1] + m[8 + r] * el[2] + m[12 + r])); }
+      for (let t = 0; t < idx.length; t += 3) {
+        const a = V[idx[t]], b = V[idx[t + 1]], c = V[idx[t + 2]];
+        if (a[2] > 0 && b[2] > 0 && c[2] > 0) continue; // cut away (the view keeps z <= 0)
+        tris.push([name, a, b, c]);
+      }
+    }
+  }
+  // Bin triangles by their extent in x and y (rays run along z).
+  const B = 4, bins = new Map();
+  for (const t of tris) {
+    const xs = [t[1][0], t[2][0], t[3][0]], ys = [t[1][1], t[2][1], t[3][1]];
+    for (let bx = Math.floor(Math.min(...xs) / B); bx <= Math.floor(Math.max(...xs) / B); bx++)
+      for (let by = Math.floor(Math.min(...ys) / B); by <= Math.floor(Math.max(...ys) / B); by++) {
+        const k = bx * 1000 + by;
+        if (!bins.has(k)) bins.set(k, []);
+        bins.get(k).push(t);
+      }
+  }
+  const map = new Map();
+  for (let x = GX0; x <= GX1; x++)
+    for (let y = GY0; y <= GY1; y++) {
+      let best = Infinity, who = null;
+      for (const [name, a, b, c] of bins.get(Math.floor(x / B) * 1000 + Math.floor(y / B)) ?? []) {
+        // where the line through (x, y) along z meets this triangle (2D barycentric test), at z <= 0
+        const d = (b[1] - c[1]) * (a[0] - c[0]) + (c[0] - b[0]) * (a[1] - c[1]);
+        if (Math.abs(d) < 1e-12) continue;
+        const u = ((b[1] - c[1]) * (x - c[0]) + (c[0] - b[0]) * (y - c[1])) / d;
+        const v = ((c[1] - a[1]) * (x - c[0]) + (a[0] - c[0]) * (y - c[1])) / d;
+        if (u < 0 || v < 0 || u + v > 1) continue;
+        const z = u * a[2] + v * b[2] + (1 - u - v) * c[2];
+        if (z > 0) continue;
+        if (-z < best) { best = -z; who = name; }
+      }
+      if (who) map.set(`${x},${y}`, who);
+    }
+  return map;
+}
+const at = (map, x, y) => map.get(`${Math.round(x)},${Math.round(y)}`) ?? null;
+/** The cell of a structure's region (within limits) farthest from anything else: where a label should point. */
+function middleOf(map, names, lim = {}) {
+  const inside = (x, y) => names.includes(at(map, x, y));
+  const cells = [];
+  for (let x = lim.x0 ?? GX0; x <= (lim.x1 ?? GX1); x++)
+    for (let y = lim.y0 ?? GY0; y <= (lim.y1 ?? GY1); y++) if (inside(x, y)) cells.push([x, y]);
+  if (!cells.length) return null;
+  // distance to the region's edge, by growing in from outside (8 neighbours)
+  const dist = new Map(cells.map(([x, y]) => [`${x},${y}`, Infinity]));
+  let frontier = cells.filter(([x, y]) => [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => !dist.has(`${x + dx},${y + dy}`)));
+  for (const [x, y] of frontier) dist.set(`${x},${y}`, 1);
+  let d = 1;
+  while (frontier.length) {
+    const next = [];
+    for (const [x, y] of frontier)
+      for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+        const k = `${x + dx},${y + dy}`;
+        if (dist.get(k) === Infinity) { dist.set(k, d + 1); next.push([x + dx, y + dy]); }
+      }
+    frontier = next; d++;
+  }
+  let best = cells[0], bd = -1;
+  for (const [x, y] of cells) { const v = dist.get(`${x},${y}`); if (v > bd) { bd = v; best = [x, y]; } }
+  return best;
+}
+/** Along a row (height y), the fluid run that touches the cord on one side (+1 behind it, -1 in front): its middle and width. */
+function fluidBeside(map, y, side) {
+  let x = 0;
+  // find the cord at this height (search outward from the cord's rough centre)
+  const cordXs = [];
+  for (let cx = -40; cx <= 30; cx++) if (at(map, cx, y) === 'cord') cordXs.push(cx);
+  if (!cordXs.length) return null;
+  x = side > 0 ? Math.max(...cordXs) + 1 : Math.min(...cordXs) - 1;
+  const run = [];
+  for (let k = 0; k < 12; k++, x += side) {
+    const w = at(map, x, y);
+    if (w === 'csf-cranial' || w === 'csf-spinal') run.push(x);
+    else if (run.length) break;
+    else if (k > 1) break;
+  }
+  if (!run.length) return null;
+  return { x: (Math.min(...run) + Math.max(...run)) / 2, width: Math.max(...run) - Math.min(...run) + 1 };
+}
+const PART_NODES = {
+  cerebrum: ['cerebrum'], callosum: ['callosum'], cerebellum: ['cerebellum'], ventricle: ['ventricle-fourth'], brainstem: ['brainstem'],
+  tonsil: ['tonsil'], cord: ['cord'], csf: ['csf-spinal', 'csf-cranial'], c2: ['c2'], syrinx: ['syrinx'], removed: ['bone-removed'],
+};
+const PART_LIMITS = { cord: { y0: -45, y1: -12 }, csf: { y0: -75, y1: -40 }, cerebrum: { y1: 125 } };
+function guides(lm) {
+  const out = { labels: {}, flow: {} };
+  const mid = [(lm.mcrae.basion[0] + lm.mcrae.opisthion[0]) / 2, (lm.mcrae.basion[1] + lm.mcrae.opisthion[1]) / 2];
+  for (const c of ['typical', 'chiari', 'syrinx', 'surgery']) {
+    const map = midlineMap(src[c]);
+    if (process.env.DEBUG_MAP && c === process.env.DEBUG_MAP) {
+      const L = { cord: 'C', brainstem: 'B', tonsil: 'T', 'csf-cranial': '~', 'csf-spinal': '-', cerebellum: 'c', occipital: 'o', c1: '1', c2: '2' };
+      for (let y = 4; y >= -14; y--) { let r = ''; for (let x = -20; x <= 20; x++) r += L[at(map, x, y)] ?? (at(map, x, y) ? '?' : '.'); console.log(String(y).padStart(4), r); }
+    }
+    const labels = { foramen: mid.map((v) => +v.toFixed(1)) };
+    for (const [part, names] of Object.entries(PART_NODES)) {
+      const p = middleOf(map, names, PART_LIMITS[part]);
+      if (p) labels[part] = p;
+    }
+    out.labels[c] = labels;
+    // Flow: chevrons [x, y, width, moves freely (1) or barely (0)], restricted marks [x1, y1, x2, y2].
+    const blocked = c === 'chiari' || c === 'syrinx';
+    const chev = [], marks = [];
+    for (const y of [-25, -45, -65]) {
+      const f = fluidBeside(map, y, -1);
+      if (f) chev.push([f.x, y, Math.min(5, Math.max(2.5, f.width * 0.9)), 1]);
+    }
+    for (const y of blocked ? [-35, -55] : [-8, -30, -50]) {
+      const f = fluidBeside(map, y, 1);
+      if (f) chev.push([f.x, y, Math.min(5, Math.max(2.5, f.width * 0.9)), blocked ? 0 : 1]);
+    }
+    if (!blocked) {
+      // behind the cerebellum (cisterna magna): the middle of the fluid there, above the line
+      const p = middleOf(map, ['csf-cranial'], { x0: 5, y0: Math.ceil(mid[1]) + 2, y1: Math.ceil(mid[1]) + 25 });
+      if (p) chev.push([p[0], p[1], 5, 1]);
+    } else {
+      // where the tonsils plug the passage behind the cord at the opening: three short red marks
+      for (const dy of [1, -3, -7]) {
+        const y = Math.round(mid[1] + dy);
+        const cordXs = [];
+        for (let cx = -40; cx <= 30; cx++) if (at(map, cx, y) === 'cord' || at(map, cx, y) === 'brainstem') cordXs.push(cx);
+        const x = (cordXs.length ? Math.max(...cordXs) : 0) + 2;
+        marks.push([x, y - 1.5, x + 4, y + 1.5]);
+      }
+    }
+    out.flow[c] = { chevrons: chev.map((a) => a.map((v) => +v.toFixed(1))), marks };
+  }
+  return out;
+}
+
 const LANDMARKS = landmarks();
+Object.assign(LANDMARKS, guides(LANDMARKS));
 console.log('landmarks', JSON.stringify(LANDMARKS));
 
 async function build(level) {
@@ -227,6 +374,19 @@ for (const level of ['desktop', 'phone']) {
     const covered = coveredTonsil(tonT, fluT);
     if (process.env.DEBUG) console.log(level, c, 'midline tonsil points tested', coveredTonsil.tested, 'covered', covered); coveredTonsil.tested = 0;
     if (covered) problems.push(`${level} ${c}: fluid drawn over the tonsils in the midline cut at ${covered} points`);
+    // Labels point at their own structure, and flow marks sit in the fluid, as this file draws the midline cut.
+    const map = midlineMap(doc, (n) => (n.getExtras().conditions ?? []).includes(c), base);
+    for (const [part, xy] of Object.entries(LANDMARKS.labels[c])) {
+      if (part === 'foramen') continue;
+      const who = at(map, xy[0], xy[1]);
+      if (!PART_NODES[part].includes(who)) problems.push(`${level} ${c}: the ${part} label points at ${who ?? 'nothing'}`);
+    }
+    for (const part of ['cerebrum', 'callosum', 'cerebellum', 'ventricle', 'brainstem', 'tonsil', 'cord', 'csf', 'c2', ...(c === 'syrinx' ? ['syrinx'] : []), ...(c === 'surgery' ? ['removed'] : [])])
+      if (!LANDMARKS.labels[c][part]) problems.push(`${level} ${c}: no place found for the ${part} label`);
+    const fl = LANDMARKS.flow[c];
+    for (const [x, y] of fl.chevrons) if (!['csf-cranial', 'csf-spinal'].includes(at(map, x, y))) problems.push(`${level} ${c}: flow mark at ${x}, ${y} is not in the fluid (${at(map, x, y)})`);
+    if (fl.chevrons.length < (c === 'chiari' || c === 'syrinx' ? 4 : 7)) problems.push(`${level} ${c}: only ${fl.chevrons.length} flow marks`);
+    if ((c === 'chiari' || c === 'syrinx') !== fl.marks.length > 0) problems.push(`${level} ${c}: restricted-flow marks ${fl.marks.length ? 'shown' : 'missing'}`);
     const ton = shown.find((n) => base(n.getName()) === 'tonsil');
     if (ton) {
       // positions are quantized; the node's matrix turns them back into millimetres

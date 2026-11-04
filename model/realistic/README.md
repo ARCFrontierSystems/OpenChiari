@@ -104,4 +104,5 @@ These files are **not public**:
 In the Explorer:
 - the realistic model loads only when picked (phones and small screens get the lighter file), and falls back to Simple if it can't load;
 - cut faces are each structure's inside painted flat in its color, so small gaps in the atlas surfaces don't show.
-- Not yet on the realistic model: the flow arrows, and the figure on the midline cut face (both follow the Simple figure).
+- **Labels and flow marks** come from the realistic model itself. `web.mjs` maps what the midline cut shows (looking from the side, the first surface at each 1 mm point). Each label then points at the middle of where its structure shows. The flow marks sit in the fluid in front of and behind the cord and behind the cerebellum. In Chiari I they move only slightly behind the cord, and red marks show the plugged passage at the opening. These are saved in the file, and the web check confirms that every label points at its own structure and every flow mark sits in fluid.
+- The figure painted on the midline cut face stays Simple-only; the realistic model shows its own cut structures there.

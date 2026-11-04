@@ -7,7 +7,7 @@ Claude Code: add an entry after each working session (date, what was done, what'
 - **Matthew's feedback:** the head in the figure looked off; it should look like a real head. The mockups are reference ideas, not exact designs.
 - **Done:** redrew only the outer skin outline in `src/components/AnatomyFigure.astro`. The top and back of the head now follow the skull with an even scalp. The face is a realistic adult profile (upright forehead, brow, bridge of the nose, nose, lips, chin, jaw line, neck).
 - **Unchanged:** every inner structure (skull, brain, tonsils, McRae line, descent bracket, spine, cord, spinal fluid), so nothing in EVIDENCE.md is affected.
-- **Open question:** `design/figures/` (the 3D reference renders) still show the old head. Update them to match? The Simple 3D model in step 4 should follow the new outline either way.
+- **Reference figures updated** (Matthew approved): all four `design/figures/` SVGs and PNGs now use the new head outline. PNGs re-rendered with the site fonts (the old renders used a fallback serif font). `design/mockups/Anatomy.dc.html` still has the old outline; the site component and `design/figures/` are now the reference.
 
 ## 2026-11-04: Phase 1, step 1: project setup and Home page
 

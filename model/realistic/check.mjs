@@ -81,7 +81,7 @@ const tipText = tipAbove >= 0 ? `${tipAbove.toFixed(1)} mm above` : `${(-tipAbov
 if (condition === 'typical') {
   console.log(`Tonsil tip: ${tipText} the McRae line (EVIDENCE.md typical: about 1 mm above)`);
   ok(tipAbove >= 0 && tipAbove <= 2, `typical tonsil tip ${tipText} the line (expected about 1 mm above, 0 to 2)`);
-} else if (condition === 'chiari') {
+} else if (condition === 'chiari' || condition === 'syrinx') {
   console.log(`Tonsil tip: ${tipText} the McRae line (EVIDENCE.md Chiari I: at least about 5 mm below; model about 12 mm)`);
   ok(tipAbove <= -10 && tipAbove >= -14, `Chiari I tonsil tip ${tipText} the line (expected about 12 mm below, 10 to 14)`);
 } else {
@@ -129,6 +129,27 @@ if (condition === 'surgery') {
   console.log(`C1 back arch: ${middle} points left in its middle (EVIDENCE.md: the middle of the back arch removed)`);
   ok(middle === 0, 'the middle of the C1 back arch should be removed');
   ok(!!mesh('dural-patch'), 'the dural patch is missing');
+}
+
+// ---- Syrinx: in the neck part of the cord, inside it, near its centre.
+if (condition === 'syrinx') {
+  const sy = mesh('syrinx');
+  if (sy) {
+    const cord = mesh('cord');
+    const top = sy.verts.reduce((m, v) => Math.max(m, v[1]), -Infinity), bottom = sy.verts.reduce((m, v) => Math.min(m, v[1]), Infinity);
+    let worst = 0;
+    for (let y = Math.ceil(bottom) + 1; y < top - 1; y += 3) {
+      const s = sy.verts.filter((v) => Math.abs(v[1] - y) < 0.6), c = cord.verts.filter((v) => Math.abs(v[1] - y) < 1.5);
+      if (!s.length || !c.length) continue;
+      const span = (a, k) => [Math.min(...a.map((v) => v[k])), Math.max(...a.map((v) => v[k]))];
+      const [sx0, sx1] = span(s, 0), [sz0, sz1] = span(s, 2), [cx0, cx1] = span(c, 0), [cz0, cz1] = span(c, 2);
+      worst = Math.max(worst, (sx1 - sx0) / (cx1 - cx0), (sz1 - sz0) / (cz1 - cz0));
+      ok(sx0 > cx0 && sx1 < cx1 && sz0 > cz0 && sz1 < cz1, `the syrinx should stay inside the cord (at ${y} mm)`);
+    }
+    console.log(`Syrinx: from ${(-top).toFixed(0)} to ${(-bottom).toFixed(0)} mm below the foramen magnum, at most ${(worst * 100).toFixed(0)}% of the cord's width (EVIDENCE.md: inside the cord, most often in the neck part)`);
+    ok(top < -30, 'the syrinx should be in the neck part of the cord, below the opening');
+    ok(worst < 0.7, 'the syrinx should sit inside the cord, not fill it');
+  } else problems.push('the syrinx is missing');
 }
 
 // ---- Tonsils clear of bone and the spinal cord (nearest surface faces away from the point).
@@ -211,7 +232,7 @@ console.log(`Fluid around the cerebellum: ${parts.length} piece(s) (largest ${pa
 ok(parts.length === 1, 'the fluid around the cerebellum should be one continuous space (no stray spots)');
 const behind = csf.verts.filter((v) => v[0] > 0 && above(v) < 8).length;
 console.log(`Fluid behind the brainstem within 8 mm above the McRae line: ${behind} points (EVIDENCE.md: typical open; Chiari I often crowded)`);
-if (condition === 'chiari') ok(behind === 0, 'in Chiari I the fluid space behind the tonsils at the opening should be crowded out');
+if (condition === 'chiari' || condition === 'syrinx') ok(behind === 0, 'in Chiari I the fluid space behind the tonsils at the opening should be crowded out');
 else ok(behind > 0, 'there should be fluid behind the brainstem at the opening');
 if (condition === 'surgery') {
   const reach = csf.verts.filter((v) => v[0] > 0).reduce((m, v) => Math.min(m, above(v)), Infinity);

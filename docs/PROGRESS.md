@@ -3,6 +3,22 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Phase 2: realistic Chiari I with syrinx; all four views done
+
+- **Built:** `extract.py ... syrinx`.
+  - Chiari I, plus a syrinx: a beaded, spindle-shaped cavity in the centre of the neck cord.
+  - Position: from about C3 (46 mm below the opening) to the bottom of the view.
+  - Size: at most 54% of the cord's width, inside the cord all the way. Same position and size as the Simple model.
+- **Cord smoothed:** its centre line used to zigzag (it followed the uneven points of the atlas's spinal covering). It now uses the middle of the covering's outline, smoothed. Cord at C2: 8.5 mm.
+- **Automatic checks:** `check.mjs --condition syrinx` covers position, staying inside the cord and size. All four realistic views (Typical, Chiari I, with syrinx, after decompression) rebuilt and passing.
+- **Known, for step 5:**
+  - The piece of medulla cut off at the opening looks boxy where it joins the cord.
+  - Cut faces look hollow in a plain viewer.
+  - The fluid surface is a little lumpy.
+  - Each view is about 1 million triangles.
+- **Not public:** stays hidden until the independent audit, the MRI comparison and Matthew's approval.
+- **Next (step 5):** slim each view for desktop and phones, show the realistic model in the Explorer behind the Realistic switch (loading on demand, falling back to Simple), with filled cut faces. Then the accuracy checks for Matthew's approval.
+
 ## 2026-11-04: Phase 2: realistic After decompression
 
 - **Built:** `extract.py ... surgery`.

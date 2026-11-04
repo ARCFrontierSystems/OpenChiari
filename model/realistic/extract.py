@@ -20,8 +20,8 @@ from mathutils import Vector, Matrix
 
 blend, out_glb = sys.argv[1], sys.argv[2]
 CONDITION = sys.argv[3] if len(sys.argv) > 3 else 'typical'
-assert CONDITION in ('typical', 'chiari', 'surgery'), CONDITION
-LOW_TONSILS = CONDITION in ('chiari', 'surgery')
+assert CONDITION in ('typical', 'chiari', 'syrinx', 'surgery'), CONDITION
+LOW_TONSILS = CONDITION in ('chiari', 'syrinx', 'surgery')
 print('condition:', CONDITION)
 bpy.ops.wm.open_mainfile(filepath=blend, load_ui=False, use_scripts=False)
 D = bpy.data
@@ -303,17 +303,28 @@ steps = 40
 ring_n = 24
 bm = bmesh.new()
 rings = []
+cord_axis = []  # (height, centre front-back, centre side to side, half sizes): used for the syrinx
+# Centre line: the middle of the dura's outline at each height (not the average of its points, which are unevenly
+# spread), then smoothed so the cord runs evenly down the canal.
+centres = []
 for k in range(steps + 1):
     z = top_z + (BOTTOM_MM - top_z) * k / steps
-    slab = [v for v in dv if abs(v.z - z) < 2.0]
+    slab = [v for v in dv if abs(v.z - z) < 3.0]
     if slab:
-        cx = sum(v.x for v in slab) / len(slab)
-        cy = sum(v.y for v in slab) / len(slab)
+        cx = (min(v.x for v in slab) + max(v.x for v in slab)) / 2
+        cy = (min(v.y for v in slab) + max(v.y for v in slab)) / 2
+    centres.append([cx, cy])
+for _ in range(6):
+    centres = [centres[0]] + [[(a[0] + 2 * b[0] + c[0]) / 4, (a[1] + 2 * b[1] + c[1]) / 4] for a, b, c in zip(centres, centres[1:], centres[2:])] + [centres[-1]]
+for k in range(steps + 1):
+    z = top_z + (BOTTOM_MM - top_z) * k / steps
+    cx, cy = centres[k]
     below = top_z - z
     t = min(1.0, below / 6.0)
     deep = min(1.0, max(0.0, (below - 6.0) / max(1.0, top_z - BOTTOM_MM - 6.0)))
     ax = (1 - t) * rx + t * (4.4 + (4.35 - 4.4) * deep)   # half of 8.8 mm, toward 8.7 mm
     ay = (1 - t) * ry + t * (6.2 + (7.0 - 6.2) * deep)    # half of 12.4 mm, toward 14 mm
+    cord_axis.append((z, cx, cy, ax, ay))
     ring = [bm.verts.new((cx + ax * math.cos(2 * math.pi * j / ring_n),
                           cy + ay * math.sin(2 * math.pi * j / ring_n), z)) for j in range(ring_n)]
     rings.append(ring)
@@ -338,7 +349,7 @@ built.append(finish('cord', bm))
 # uses the same), pointed or peg-shaped. The top of each tonsil, where it joins the cerebellum, stays in place;
 # the lower part is stretched down, and for Chiari I narrowed toward the tip.
 # After decompression: the tonsils often rise only partly, about 2 mm on average (EVIDENCE.md, PMC10549945).
-TONSIL_TIP_ABOVE = {'typical': 1.0, 'chiari': -12.4, 'surgery': -10.4}[CONDITION]  # mm
+TONSIL_TIP_ABOVE = {'typical': 1.0, 'chiari': -12.4, 'syrinx': -12.4, 'surgery': -10.4}[CONDITION]  # mm
 bas_m = TO_MODEL @ basion
 opi_m = TO_MODEL @ opisthion
 def above_mcrae(p):
@@ -495,7 +506,7 @@ def grow(a, n):
 CLOSE = 4  # mm
 solid = ~grow(~grow(brain, CLOSE), CLOSE)
 fluid_grid = space & ~solid
-if CONDITION == 'chiari':
+if CONDITION in ('chiari', 'syrinx'):
     # EVIDENCE.md: in Chiari I the fluid space behind the cerebellum is often crowded or narrowed. As in the Simple
     # model, the space behind the brainstem near the opening (up to 12 mm above the line) is filled by the tonsils.
     for i, ix in enumerate(XS):
@@ -577,6 +588,40 @@ for v0 in list(bm.verts):
 GROUPS['csf-cranial'] = dict(layer='csf', part='csf', color='#9CC3DA', opacity=0.75)
 built.append(finish('csf-cranial', bm))
 print(f'fluid surface done, {time.time() - t_fluid:.0f} s', flush=True)
+
+# ---------------------------------------------------------------- syrinx (Chiari I with a syrinx)
+# EVIDENCE.md: a fluid-filled cavity near the centre of the cord, most often in the neck part, long and spindle-shaped
+# or beaded. As in the Simple model: from about C3 (49 mm below the McRae line) to the bottom of the view, about
+# 4 mm across in the 9 mm cord, with beads every 10 mm and a tapered top.
+if CONDITION == 'syrinx':
+    GROUPS['syrinx'] = dict(layer='brain', part='syrinx', color='#7FB3D3')
+    top_z = bas_m.z - 49.0
+    sb = bmesh.new()
+    rings_s = []
+    ring_n = 20
+    axis = sorted(cord_axis)  # by height, bottom first
+    def at_height(z):
+        for (za, xa, ya, axa, aya), (zb, xb, yb, axb, ayb) in zip(axis, axis[1:]):
+            if za <= z <= zb:
+                t = (z - za) / (zb - za)
+                return xa + (xb - xa) * t, ya + (yb - ya) * t, axa + (axb - axa) * t, aya + (ayb - aya) * t
+        return None
+    z = top_z
+    while z > BOTTOM_MM - 0.5:
+        c = at_height(max(z, BOTTOM_MM + 0.01))
+        below = top_z - z
+        bead = 1 + 0.18 * math.sin(2 * math.pi * below / 10.0)
+        taper = min(1.0, below / 6.0) ** 0.6
+        rx = 0.45 * c[2] * bead * taper + 0.05   # front to back: about 45% of the cord
+        ry = 0.42 * c[3] * bead * taper + 0.05   # side to side
+        rings_s.append([sb.verts.new((c[0] + rx * math.cos(2 * math.pi * j / ring_n), c[1] + ry * math.sin(2 * math.pi * j / ring_n), max(z, BOTTOM_MM))) for j in range(ring_n)])
+        z -= 1.0
+    for r0, r1 in zip(rings_s, rings_s[1:]):
+        for j in range(ring_n):
+            sb.faces.new((r0[j], r1[j], r1[(j + 1) % ring_n], r0[(j + 1) % ring_n]))
+    sb.faces.new(rings_s[0][::-1])
+    sb.faces.new(rings_s[-1])
+    built.append(finish('syrinx', sb))
 
 # ---------------------------------------------------------------- after decompression: bone removed, dural patch
 if CONDITION == 'surgery':

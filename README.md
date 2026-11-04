@@ -25,7 +25,7 @@ npm install
 npm run dev
 ```
 
-Then open http://localhost:4321. `npm run build` makes the static site in `dist/`; `npm run check` runs the type check.
+Then open http://localhost:4321. `npm run build` makes the static site in `dist/`; `npm run check` runs the type check; `npm test` runs the accessibility and behavior tests on the built site (run `npx playwright install chromium` once first).
 
 ## Not medical advice
 

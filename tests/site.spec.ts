@@ -1,0 +1,89 @@
+import { test, expect, type Page } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+
+// Every page that exists so far. Add new pages here as they're built.
+const pages = ['/', '/explorer/', '/explain/', '/studies/', '/prep/', '/model/', '/support/', '/kit/', '/impact/', '/about/', '/privacy/', '/es/'];
+const sizes = [
+  { name: 'desktop', width: 1440, height: 900 },
+  { name: 'phone', width: 390, height: 844 },
+];
+
+async function setCalm(page: Page, value: 'on' | 'off') {
+  await page.addInitScript((v) => localStorage.setItem('openchiari-calm', v), value);
+}
+
+// Accessibility: WCAG 2.2 AA (which includes 2.1 AA), on every page, both sizes, Calm off and on.
+for (const path of pages) {
+  for (const size of sizes) {
+    for (const calm of ['off', 'on'] as const) {
+      test(`accessibility: ${path} ${size.name} calm ${calm}`, async ({ page }) => {
+        await page.setViewportSize({ width: size.width, height: size.height });
+        await setCalm(page, calm);
+        await page.goto(path);
+        const results = await new AxeBuilder({ page })
+          .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice'])
+          .analyze();
+        expect(results.violations.map((v) => `${v.id}: ${v.help} (${v.nodes.length})`)).toEqual([]);
+      });
+    }
+  }
+}
+
+test('no third-party requests from the browser', async ({ page }) => {
+  const outside: string[] = [];
+  page.on('request', (request) => {
+    const url = new URL(request.url());
+    if (url.origin !== 'http://localhost:4322') outside.push(request.url());
+  });
+  for (const path of pages) await page.goto(path, { waitUntil: 'networkidle' });
+  expect(outside).toEqual([]);
+});
+
+test('Calm mode switch turns on, is remembered, and turns off', async ({ page }) => {
+  await page.goto('/');
+  const html = page.locator('html');
+  const toggle = page.getByRole('switch', { name: 'Calm mode' });
+  await expect(html).not.toHaveAttribute('data-calm', 'on');
+  await expect(page.getByText('Calm mode is on.')).toBeHidden();
+
+  await toggle.check();
+  await expect(html).toHaveAttribute('data-calm', 'on');
+  await expect(page.getByText('Calm mode is on.')).toBeVisible();
+  await expect(page.locator('body')).toHaveCSS('font-size', '19px');
+
+  await page.reload();
+  await expect(html).toHaveAttribute('data-calm', 'on');
+  await expect(toggle).toBeChecked();
+
+  await toggle.uncheck();
+  await page.reload();
+  await expect(html).not.toHaveAttribute('data-calm', 'on');
+});
+
+test('Calm mode turns on by itself when the system asks for reduced motion', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  await expect(page.locator('html')).toHaveAttribute('data-calm', 'on');
+  await expect(page.getByRole('switch', { name: 'Calm mode' })).toBeChecked();
+});
+
+test('a visitor who turned Calm mode off keeps it off, even with reduced motion', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await setCalm(page, 'off');
+  await page.goto('/');
+  await expect(page.locator('html')).not.toHaveAttribute('data-calm', 'on');
+});
+
+test('phone: Calm mode button reads "Calm on" and the menu opens', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await page.getByText('Calm mode', { exact: true }).click();
+  await expect(page.getByText('Calm on', { exact: true })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Take the 2-minute tour' })).toBeHidden();
+  await expect(page.getByText('In Calm mode, the model only moves when you move it.')).toBeVisible();
+
+  const menu = page.getByRole('button', { name: 'Menu' });
+  await menu.click();
+  await expect(menu).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Research studies' })).toBeVisible();
+});

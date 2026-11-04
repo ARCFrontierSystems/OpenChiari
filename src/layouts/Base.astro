@@ -30,6 +30,16 @@ const pageTitle = title ? `${title} · ${t.siteName}` : t.siteName;
     <meta name="description" content={description} />
     <meta name="theme-color" content="#FFFFFF" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script is:inline>
+      // Calm mode, decided before the page draws (no flash). Same key as src/lib/calm.ts.
+      // Saved choice wins; with none, follow the system "reduce motion" setting.
+      (function () {
+        var saved = null;
+        try { saved = localStorage.getItem('openchiari-calm'); } catch (e) {}
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (saved === 'on' || (saved !== 'off' && reduce)) document.documentElement.dataset.calm = 'on';
+      })();
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#content">{t.skipLink}</a>

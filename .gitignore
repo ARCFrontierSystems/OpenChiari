@@ -7,3 +7,5 @@ dist/
 *.log
 model/source/
 *.blend1
+test-results/
+playwright-report/

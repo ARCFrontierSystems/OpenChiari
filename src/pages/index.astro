@@ -8,21 +8,27 @@ import AnatomyFigure from '../components/AnatomyFigure.astro';
 import { getStrings, routes } from '../i18n';
 
 const h = getStrings().home;
+const calm = getStrings().calm;
 ---
 
 <Base>
+  <div class="calm-note only-calm" role="status">
+    <p><strong>{calm.noteStrong}</strong> {calm.noteRest}</p>
+  </div>
+
   <section class="hero container">
     <div class="hero-intro">
       <p class="eyebrow mono">{h.eyebrow}</p>
       <h1 class="serif">{h.title}</h1>
       <p class="lede">
-        <span class="only-wide">{h.lede.wide}</span><span class="only-narrow">{h.lede.narrow}</span>
+        <span class="only-wide">{h.lede.wide}</span><span class="only-narrow not-calm">{h.lede.narrow}</span><span class="only-narrow only-calm">{calm.lede}</span>
       </p>
     </div>
 
     <div class="hero-actions">
       <a class="button button-primary" href={routes.explorer}>{h.openExplorer}</a>
-      <a class="button button-secondary" href={routes.tour}>{h.tour}</a>
+      <a class="button button-secondary not-calm" href={routes.tour}>{h.tour}</a>
+      <p class="calm-explorer-note only-calm">{calm.explorerNote}</p>
     </div>
 
     <figure class="figure hero-figure">
@@ -32,7 +38,7 @@ const h = getStrings().home;
       </div>
       <figcaption>
         <span class="fig-num mono">{h.figNumber}</span>
-        <span class="only-wide">{h.figCaption.wide}</span><span class="only-narrow">{h.figCaption.narrow}</span>
+        <span class="only-wide">{h.figCaption.wide}</span><span class="only-narrow not-calm">{h.figCaption.narrow}</span><span class="only-narrow only-calm">{calm.figCaption}</span>
       </figcaption>
     </figure>
   </section>
@@ -116,6 +122,28 @@ const h = getStrings().home;
 </Base>
 
 <style>
+  /* ---------- Calm mode note (HomeCalm mockup) ---------- */
+  .calm-note {
+    max-width: var(--content-max);
+    margin: var(--s-24) auto 0;
+    padding: 0 var(--gutter);
+  }
+  .calm-note p {
+    padding: 14px var(--s-16);
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .calm-note strong {
+    font-weight: 600;
+  }
+  .calm-explorer-note {
+    flex: 1 1 100%;
+    font-size: 16px;
+    color: var(--ink-2);
+  }
+
   /* ---------- Hero ---------- */
   .hero {
     padding-top: var(--s-72);
@@ -328,6 +356,38 @@ const h = getStrings().home;
     color: var(--ink-2);
   }
 
+  /* ---------- Calm mode: larger text ---------- */
+  :global(:root[data-calm='on']) .hero {
+    padding-top: var(--s-56);
+  }
+  :global(:root[data-calm='on']) .eyebrow,
+  :global(:root[data-calm='on']) .list-label,
+  :global(:root[data-calm='on']) .tool-num {
+    font-size: 15px;
+  }
+  :global(:root[data-calm='on']) .lede {
+    font-size: 21px;
+  }
+  :global(:root[data-calm='on']) .figure figcaption {
+    font-size: 16px;
+    color: var(--ink-2);
+  }
+  :global(:root[data-calm='on']) .fact h3 {
+    font-size: 20px;
+  }
+  :global(:root[data-calm='on']) .classic {
+    font-size: 25px;
+  }
+  :global(:root[data-calm='on']) .symptoms {
+    font-size: var(--text-base);
+  }
+  :global(:root[data-calm='on']) .myth dt {
+    font-size: 24px;
+  }
+  :global(:root[data-calm='on']) .tool-title {
+    font-size: 21px;
+  }
+
   /* ---------- Tablet: hero stacks ---------- */
   @media (max-width: 1023px) {
     .hero {
@@ -458,6 +518,62 @@ const h = getStrings().home;
     }
     .tool-desc {
       font-size: 15px;
+    }
+
+    /* Calm mode on phones (HomeCalm mockup) */
+    .calm-note {
+      margin-top: var(--s-16);
+    }
+    :global(:root[data-calm='on']) .hero {
+      padding-top: 28px;
+    }
+    :global(:root[data-calm='on']) .hero-intro {
+      padding-bottom: var(--s-20);
+    }
+    :global(:root[data-calm='on']) .eyebrow {
+      display: none;
+    }
+    :global(:root[data-calm='on']) h1 {
+      font-size: 36px;
+      line-height: 1.15;
+    }
+    :global(:root[data-calm='on']) .lede {
+      font-size: var(--text-base);
+    }
+    :global(:root[data-calm='on']) .fig-num {
+      display: none;
+    }
+    :global(:root[data-calm='on']) .figure figcaption {
+      padding: var(--s-12);
+    }
+    :global(:root[data-calm='on']) .hero-actions {
+      gap: 10px;
+      padding: var(--s-20) var(--gutter) var(--s-32);
+    }
+    :global(:root[data-calm='on']) .section-title {
+      font-size: 28px;
+    }
+    :global(:root[data-calm='on']) .band-inner {
+      padding-top: var(--s-32);
+      padding-bottom: var(--s-32);
+    }
+    :global(:root[data-calm='on']) .fact h3 {
+      font-size: 19px;
+    }
+    :global(:root[data-calm='on']) .classic {
+      font-size: 21px;
+    }
+    :global(:root[data-calm='on']) .no-symptoms {
+      font-size: 17px;
+    }
+    :global(:root[data-calm='on']) .myth dt {
+      font-size: 21px;
+    }
+    :global(:root[data-calm='on']) .tool-title {
+      font-size: 19px;
+    }
+    :global(:root[data-calm='on']) .tool-desc {
+      font-size: 17px;
     }
   }
 </style>

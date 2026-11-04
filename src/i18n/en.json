@@ -17,6 +17,14 @@
     "espanol": "Español",
     "calm": "Calm mode"
   },
+  "calm": {
+    "on": "Calm on",
+    "noteStrong": "Calm mode is on.",
+    "noteRest": "No motion or auto-rotation, larger text, softer colors. You can turn it off any time.",
+    "lede": "The lowest part of the cerebellum sits below the opening where the brain meets the spinal cord.",
+    "figCaption": "Still image. Chiari I: the tonsil extends below the dashed line.",
+    "explorerNote": "In Calm mode, the model only moves when you move it."
+  },
   "home": {
     "eyebrow": "Chiari malformation, Type I",
     "title": "See what's happening at the base of the skull.",
@@ -58,13 +66,34 @@
       },
       "listLabel": "Other symptoms people report",
       "symptoms": [
-        { "wide": "Neck pain", "narrow": "Neck pain" },
-        { "wide": "Dizziness and trouble with balance", "narrow": "Dizziness and trouble with balance" },
-        { "wide": "Numbness or tingling in the hands and feet", "narrow": "Numbness or tingling in hands and feet" },
-        { "wide": "Weakness or trouble with fine hand movements", "narrow": "Weakness or trouble with fine hand movements" },
-        { "wide": "Trouble swallowing, or voice changes", "narrow": "Trouble swallowing, or voice changes" },
-        { "wide": "Breathing or sleep problems, such as sleep apnea", "narrow": "Breathing or sleep problems" },
-        { "wide": "Ringing in the ears", "narrow": "Ringing in the ears" }
+        {
+          "wide": "Neck pain",
+          "narrow": "Neck pain"
+        },
+        {
+          "wide": "Dizziness and trouble with balance",
+          "narrow": "Dizziness and trouble with balance"
+        },
+        {
+          "wide": "Numbness or tingling in the hands and feet",
+          "narrow": "Numbness or tingling in hands and feet"
+        },
+        {
+          "wide": "Weakness or trouble with fine hand movements",
+          "narrow": "Weakness or trouble with fine hand movements"
+        },
+        {
+          "wide": "Trouble swallowing, or voice changes",
+          "narrow": "Trouble swallowing, or voice changes"
+        },
+        {
+          "wide": "Breathing or sleep problems, such as sleep apnea",
+          "narrow": "Breathing or sleep problems"
+        },
+        {
+          "wide": "Ringing in the ears",
+          "narrow": "Ringing in the ears"
+        }
       ],
       "lessOften": "Less often: blurry or shaky vision",
       "noSymptoms": "Many people with Type I have no symptoms at all."

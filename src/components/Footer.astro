@@ -66,6 +66,11 @@ const espanol = getStrings().header.espanol;
     min-height: var(--touch);
   }
 
+  /* Calm mode: larger footer text. */
+  :global(:root[data-calm='on']) .inner {
+    font-size: 16px;
+  }
+
   @media (max-width: 720px) {
     .inner {
       padding-top: var(--s-24);
@@ -86,6 +91,9 @@ const espanol = getStrings().header.espanol;
     }
     .credit {
       order: 2;
+    }
+    :global(:root[data-calm='on']) .inner {
+      font-size: 16px;
     }
   }
 </style>

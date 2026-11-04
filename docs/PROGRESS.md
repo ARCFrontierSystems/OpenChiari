@@ -2,6 +2,15 @@
 
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 
+## 2026-11-04: Phase 1, step 2: Calm mode and automatic checks
+
+- **Calm mode works.** The header switch turns it on and off. The choice is saved in the visitor's own browser only (`localStorage`, key `openchiari-calm`). With no saved choice it turns on automatically when the system asks for reduced motion. A visitor who turns it off keeps it off. It's decided before the page draws, so there's no flash. Logic: `src/lib/calm.ts`, plus a tiny inline script in `src/layouts/Base.astro`.
+- **What it changes:** softer colors and base text 19 px (DESIGN.md Calm tokens), larger small text (captions, footer, lists), buttons at least 56 px tall, and all animation and transitions turned off. Animation is also always off when the system asks for reduced motion, even with Calm mode off. The Explorer will use `isCalm()` and `onCalmChange()` to stop auto-rotation.
+- **Home in Calm mode** (HomeCalm mockup): "Calm mode is on" note; on phones a filled "Calm on" button, no eyebrow line, the shorter intro and "Still image" caption from COPY.md; the tour button is replaced by "In Calm mode, the model only moves when you move it." The HomeCalm mockup stops after "What is Chiari malformation?"; the rest of the page stays the same, just with Calm styling. No medical text was hidden.
+- **Automatic checks:** `npm test` (Playwright + axe) runs an accessibility scan of every page at desktop and phone width, with Calm mode off and on (48 scans); checks that the browser never contacts another site; and tests the Calm switch, remembering, reduced motion, the phone "Calm on" button and the phone menu. 53 tests, all passing. A GitHub workflow (`.github/workflows/checks.yml`) runs the type check, build and tests on every push. Lighthouse is added when the Explorer exists, so it measures the real 3D page.
+- **Next (step 3):** the Explorer page without 3D: the dark workspace on desktop and phone, condition switch, layer controls, cut-away slider, structure list with info cards, captions and credits.
+- **Open questions:** none.
+
 ## 2026-11-04: Step 1 follow-up: realistic head outline in Fig. 1
 
 - **Matthew's feedback:** the head in the figure looked off; it should look like a real head. The mockups are reference ideas, not exact designs.

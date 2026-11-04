@@ -2,11 +2,13 @@
 /**
  * Site header. Desktop: brand, main nav, Español, Calm mode switch.
  * Phone and narrow screens: brand, Calm mode, and a Menu button that opens the nav.
- * The Calm mode switch is wired up in step 2.
+ * Calm mode: a real switch (checkbox with role="switch"). On phones it looks like the
+ * outlined button in HomePhone, and reads "Calm on" when on (HomeCalm). Logic is in src/lib/calm.ts.
  */
 import { getStrings, routes } from '../i18n';
 
 const t = getStrings().header;
+const calm = getStrings().calm;
 const navItems = [
   { href: routes.explorer, label: t.nav.explorer },
   { href: routes.explain, label: t.nav.explain },
@@ -34,8 +36,9 @@ const current = Astro.url.pathname;
     <a class="lang nav-wide-only" href={routes.es} lang="es" hreflang="es">{t.espanol}</a>
 
     <label class="calm-toggle">
-      <input type="checkbox" role="switch" id="calm-switch" />
-      <span>{t.calm}</span>
+      <input type="checkbox" role="switch" id="calm-switch" aria-label={t.calm} />
+      <span class="calm-label-off" aria-hidden="true">{t.calm}</span>
+      <span class="calm-label-on" aria-hidden="true">{calm.on}</span>
     </label>
 
     <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-menu">
@@ -55,6 +58,18 @@ const current = Astro.url.pathname;
 </header>
 
 <script>
+  import { isCalm, setCalm, onCalmChange, followSystemSetting } from '../lib/calm';
+
+  const calmSwitch = document.getElementById('calm-switch') as HTMLInputElement | null;
+  if (calmSwitch) {
+    calmSwitch.checked = isCalm();
+    calmSwitch.addEventListener('change', () => setCalm(calmSwitch.checked));
+    onCalmChange((on) => {
+      calmSwitch.checked = on;
+    });
+    followSystemSetting();
+  }
+
   const button = document.querySelector<HTMLButtonElement>('.menu-button');
   const menu = document.getElementById('site-menu');
   if (button && menu) {
@@ -144,6 +159,9 @@ const current = Astro.url.pathname;
     accent-color: var(--accent);
     cursor: pointer;
   }
+  .calm-label-on {
+    display: none;
+  }
   .menu-button {
     display: none;
     width: var(--touch);
@@ -220,6 +238,47 @@ const current = Astro.url.pathname;
     .calm-toggle:has(input:focus-visible) {
       outline: 2px solid var(--accent);
       outline-offset: 2px;
+    }
+
+    /* Calm mode on phones (HomeCalm mockup): taller bar, filled "Calm on" button. */
+    :global(:root[data-calm='on']) .bar {
+      min-height: 64px;
+    }
+    :global(:root[data-calm='on']) .brand-mark {
+      width: 10px;
+      height: 10px;
+    }
+    :global(:root[data-calm='on']) .brand-name {
+      font-size: 20px;
+    }
+    :global(:root[data-calm='on']) .calm-toggle {
+      padding: 0 12px;
+      border: 2px solid var(--ink);
+      background: var(--ink);
+      color: var(--surface);
+      font-size: 15px;
+      font-weight: 500;
+    }
+    :global(:root[data-calm='on']) .calm-label-off {
+      display: none;
+    }
+    :global(:root[data-calm='on']) .calm-label-on {
+      display: inline;
+    }
+    :global(:root[data-calm='on']) .menu-button {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  /* Calm mode: larger header text everywhere. */
+  :global(:root[data-calm='on']) .nav-wide,
+  :global(:root[data-calm='on']) .lang {
+    font-size: 16px;
+  }
+  @media (min-width: 961px) {
+    :global(:root[data-calm='on']) .calm-toggle {
+      font-size: 16px;
     }
   }
 </style>

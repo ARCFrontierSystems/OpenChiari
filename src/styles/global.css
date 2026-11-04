@@ -138,3 +138,32 @@ a:hover {
 .skip-link:focus {
   top: 8px;
 }
+
+/*
+ * Calm mode helpers. `only-calm` shows something only in Calm mode; `not-calm` hides it in
+ * Calm mode. They combine with only-wide / only-narrow.
+ */
+:root:not([data-calm='on']) .only-calm {
+  display: none !important;
+}
+:root[data-calm='on'] .not-calm {
+  display: none !important;
+}
+
+/* No motion: in Calm mode, and whenever the system asks for reduced motion. */
+:root[data-calm='on'] *,
+:root[data-calm='on'] *::before,
+:root[data-calm='on'] *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

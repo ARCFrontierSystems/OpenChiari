@@ -1,0 +1,148 @@
+---
+/**
+ * Privacy. Layout from design/mockups/Privacy.dc.html. All text from src/i18n/en.json, word for word from
+ * docs/COPY.md. The placeholders ([date], [analytics service], [host]) stay until Matthew confirms the details.
+ */
+import Base from '../layouts/Base.astro';
+import { getStrings, routes, externalLinks } from '../i18n';
+
+const t = getStrings().privacy;
+---
+
+<Base title={t.title}>
+  <div class="privacy container">
+    <div class="page-intro">
+      <h1 class="serif">{t.title}</h1>
+      <p class="mono updated">{t.updated}</p>
+      <p class="lead">{t.short}</p>
+    </div>
+
+    <section aria-labelledby="counted-title">
+      <h2 id="counted-title" class="serif">{t.countedTitle}</h2>
+      <p>{t.counted.before} <a href={routes.impact}>{t.counted.impact}</a>{t.counted.after}</p>
+      <p class="small">{t.countedNote}</p>
+    </section>
+
+    <section aria-labelledby="never-title">
+      <h2 id="never-title" class="serif ruled">{t.neverTitle}</h2>
+      <dl class="rows">
+        {t.never.map((r) => (
+          <div>
+            <dt>{r.term}</dt>
+            <dd>{r.text}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    <section aria-labelledby="saved-title">
+      <h2 id="saved-title" class="serif">{t.savedTitle}</h2>
+      <p>{t.saved}</p>
+    </section>
+
+    <section aria-labelledby="outside-title">
+      <h2 id="outside-title" class="serif">{t.outsideTitle}</h2>
+      <ul class="outside">
+        {t.outside.map((r) => (
+          <li><strong>{r.term}</strong> {r.text}</li>
+        ))}
+      </ul>
+    </section>
+
+    <section aria-labelledby="email-title">
+      <h2 id="email-title" class="serif">{t.emailTitle}</h2>
+      <p>{t.email.before} <a href={externalLinks.email}>{t.email.address}</a>{t.email.after}</p>
+    </section>
+
+    <section aria-labelledby="changes-title">
+      <h2 id="changes-title" class="serif">{t.changesTitle}</h2>
+      <p>{t.changes}</p>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .privacy {
+    max-width: calc(760px + 2 * var(--gutter));
+    padding-top: var(--s-56);
+    padding-bottom: var(--s-72);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-40);
+  }
+  .page-intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-12);
+  }
+  .page-intro h1 {
+    font-size: 42px;
+    line-height: 1.1;
+  }
+  .updated {
+    font-size: var(--text-mono);
+    color: var(--muted);
+  }
+  .lead {
+    font-size: 20px;
+    color: var(--ink-2);
+  }
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-12);
+  }
+  section p,
+  .outside {
+    color: var(--ink-2);
+  }
+  h2.serif {
+    font-size: 26px;
+  }
+  .ruled {
+    padding-bottom: var(--s-16);
+    border-bottom: 2px solid var(--ink);
+  }
+  .small {
+    font-size: var(--text-small);
+    color: var(--muted);
+  }
+  .rows div {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: var(--s-24);
+    padding: var(--s-16) 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .rows dt {
+    font-weight: 600;
+  }
+  .rows dd {
+    color: var(--ink-2);
+  }
+  .outside {
+    padding-left: 1.2em;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-8);
+  }
+  .outside strong {
+    color: var(--ink);
+  }
+  @media (max-width: 720px) {
+    .privacy {
+      padding-top: var(--s-32);
+      gap: var(--s-32);
+    }
+    .page-intro h1 {
+      font-size: 32px;
+    }
+    .lead {
+      font-size: 18px;
+    }
+    .rows div {
+      grid-template-columns: 1fr;
+      gap: var(--s-4);
+    }
+  }
+</style>

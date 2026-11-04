@@ -1,0 +1,187 @@
+---
+/**
+ * About. Layout from design/mockups/About.dc.html. All text from src/i18n/en.json, word for word from
+ * docs/COPY.md (the accuracy-checks wording, not a medical review: CLAUDE.md rule 1a).
+ */
+import Base from '../layouts/Base.astro';
+import { getStrings, routes, externalLinks } from '../i18n';
+
+const t = getStrings().about;
+const href = (key: string) => (routes as Record<string, string>)[key];
+---
+
+<Base title={t.title}>
+  <div class="about container">
+    <div class="about-main">
+      <div class="page-intro">
+        <h1 class="serif">{t.title}</h1>
+        <p class="lead">{t.intro}</p>
+      </div>
+
+      <section aria-labelledby="how-title">
+        <h2 id="how-title" class="serif">{t.howTitle}</h2>
+        <ul class="how">
+          <li>{t.how.factsBefore} <a href={externalLinks.ninds}>{t.how.ninds}</a> {t.how.factsAfter}</li>
+          <li>{t.how.modelBefore} <a href={externalLinks.zAnatomy}>{t.how.zAnatomy}</a> {t.how.modelAfter}</li>
+          <li>{t.how.checks}</li>
+          <li>{t.how.ai}</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="principles-title">
+        <h2 id="principles-title" class="serif ruled">{t.principlesTitle}</h2>
+        <dl class="principles">
+          {t.principles.map((p) => (
+            <div>
+              <dt>{p.term}</dt>
+              <dd>
+                {p.text}
+                {'link' in p && p.link && (
+                  <>
+                    {' '}
+                    <a href={href(p.href!)}>{p.link}</a>.
+                  </>
+                )}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section aria-labelledby="corrections-title">
+        <h2 id="corrections-title" class="serif">{t.correctionsTitle}</h2>
+        <p>{t.corrections}</p>
+      </section>
+    </div>
+
+    <aside class="about-side">
+      <section class="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title">{t.contactTitle}</h2>
+        <p>{t.contact}</p>
+        <p><a class="mono email" href={externalLinks.email}>{t.email}</a></p>
+        <p class="small">{t.noMedical}</p>
+      </section>
+      <section class="made-by" aria-labelledby="made-by-title">
+        <h2 id="made-by-title">{t.madeByTitle}</h2>
+        <p>{t.madeBy}</p>
+      </section>
+    </aside>
+  </div>
+</Base>
+
+<style>
+  .about {
+    padding-top: var(--s-56);
+    padding-bottom: var(--s-72);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-56);
+    align-items: flex-start;
+  }
+  .about-main {
+    flex: 999 1 560px;
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-48);
+  }
+  .about-side {
+    flex: 1 1 300px;
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-24);
+  }
+  .page-intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-16);
+  }
+  .page-intro h1 {
+    font-size: 42px;
+    line-height: 1.1;
+  }
+  .lead {
+    font-size: 20px;
+    color: var(--ink-2);
+  }
+  section h2.serif {
+    font-size: 26px;
+    margin-bottom: var(--s-16);
+  }
+  .ruled {
+    padding-bottom: var(--s-16);
+    border-bottom: 1px solid var(--ink);
+  }
+  .how {
+    padding-left: 1.2em;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-8);
+    color: var(--ink-2);
+  }
+  .principles {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-12);
+  }
+  .principles div {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: var(--s-24);
+  }
+  .principles dt {
+    font-weight: 600;
+  }
+  .principles dd {
+    color: var(--ink-2);
+  }
+  .contact {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    padding: var(--s-24);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-8);
+  }
+  .about-side h2 {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .email {
+    font-size: 15px;
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+  }
+  .small {
+    font-size: var(--text-small);
+    color: var(--muted);
+  }
+  .made-by {
+    border-top: 2px solid var(--ink);
+    padding-top: var(--s-16);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-8);
+  }
+  .made-by p {
+    color: var(--ink-2);
+  }
+  @media (max-width: 720px) {
+    .about {
+      padding-top: var(--s-32);
+      gap: var(--s-40);
+    }
+    .page-intro h1 {
+      font-size: 32px;
+    }
+    .lead {
+      font-size: 18px;
+    }
+    .principles div {
+      grid-template-columns: 1fr;
+      gap: var(--s-4);
+    }
+  }
+</style>

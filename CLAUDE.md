@@ -27,6 +27,16 @@ The mockups are also viewable as a live canvas (ask Matthew for the link). The `
 - Nothing on the site may read as medical advice. Keep "Not medical advice. Talk to your doctor about your own care." in every footer.
 - Never invent placeholder data that looks real (studies, counts, scores, names). Leave `[placeholder]` text until real data exists.
 
+### 1a. Accuracy checks (instead of a medical reviewer)
+On 2026-11-04 Matthew decided the site will **not** use a medical reviewer. Instead, every medical sentence and every 3D view must pass all of these before it's public:
+1. **Source check:** a row in `docs/EVIDENCE.md` whose source was actually opened and supports the wording.
+2. **Automatic measurements:** every number in EVIDENCE.md that can be measured on a model is checked by `npm run model:check` (and the realistic model's equivalent), on every change.
+3. **Independent audit:** a fresh agent that did not build or write the thing compares it against the opened sources and reports problems. Reports are kept in `docs/audits/`. Fixes to medical text still need Matthew's approval.
+4. **MRI comparison:** the 3D views are compared with public MRI scans (OpenNeuro, MNI152 template) wherever available; results are kept in `docs/audits/`.
+5. **Matthew approves** the result.
+
+The site must say this honestly: it never claims a medical professional reviewed it. Use the "Accuracy checks" wording in COPY.md (About, Open model, Impact).
+
 ### 2. Privacy (the site collects nothing personal)
 - No accounts, sign-ins, contact forms, tracking cookies, or health data. Ever.
 - **Explain It:** the view and the note live after the `#` in the link (the URL fragment). Never move them into the path or query string, never send them to a server, never log them.
@@ -70,7 +80,7 @@ If you think a different tool fits better, explain the trade-off in plain langua
 Build in this order. Each phase ends with something live and usable. Don't start a phase until the previous one is reviewed.
 
 1. **Phase 1: Home and Explorer foundation.** Home (desktop, phone, Calm mode), the 3D Explorer with the **Simple** model and all viewer tools (condition switch, layers, cut-away, structure list and info cards, fluid flow, measure, camera presets, keyboard controls), and Doctor visit prep including the printed sheet. Proves the viewer works on phones.
-2. **Phase 2: Realistic model.** Extract head and upper neck from Z-Anatomy; build Typical and Chiari I to the numbers in EVIDENCE.md; render the views for Matthew to get a medical review; then add After decompression. Build Chiari I alone first and stop for review. If scripted mesh edits don't look convincing, say so; a freelance medical 3D artist may be needed.
+2. **Phase 2: Realistic model.** Extract head and upper neck from Z-Anatomy; build Typical and Chiari I to the numbers in EVIDENCE.md; render the views and run the accuracy checks (rule 1a) for Matthew's approval; then add After decompression. Build Chiari I alone first and stop for review. If scripted mesh edits don't look convincing, say so; a freelance medical 3D artist may be needed.
 3. **Phase 3: Sharing and research.** Explain It (create and recipient pages), Research studies with the daily job, Open model (download and embed), Support, visitor counts, and the Impact page. About and Privacy pages.
 4. **Phase 4: Syrinx and polish.** Syrinx view, side-by-side compare, guided tour, full Spanish site, Awareness kit.
 
@@ -89,12 +99,11 @@ Build it as 3D geometry in Three.js that matches the midline figure in `design/f
 
 - Don't add a doctor or specialist directory, a symptom tracker, or anything that interprets MRI reports. These were deliberately left out.
 - Don't add donation handling. The Support page only links to each organization's own donate page.
-- Don't show the realistic model publicly until its views have had a medical review.
+- Don't show the realistic model publicly until its views pass the accuracy checks (rule 1a) and Matthew approves them.
 - Don't use stock icons, emoji, gradients, or rounded "pill" button styling. See DESIGN.md.
 
 ## Open items Matthew is handling
 
 - Buying the openchiari.org domain (use it in copy; it isn't live yet).
-- A medical reviewer to check the finished 3D views.
 - A medical translator to sign off on the Spanish.
 - Confirming the Bobby Jones Chiari & Syringomyelia Foundation registry status (currently "enrollment paused").

@@ -26,14 +26,16 @@ Mockup: `design/mockups/Main.dc.html`
 - Open the 3D Explorer
 - Take the 2-minute tour
 - Fig. 1
-- Midline view of Chiari I. The tonsil (06) extends below the dashed line across the skull opening. The tonsils really sit just to either side of the midline; they're shown here where MRI measures them, at their lowest point. Illustration, not to scale.
+- Midline view of Chiari I. The tonsil (06) extends below the dashed line across the skull opening. The tonsils really sit just to either side of the midline; they're shown here where MRI measures them, at their lowest point. Illustration, not a medical image.
+<!-- 2026-11-04 accuracy audit: was "Midline view of Chiari I. The tonsil (06) extends below the dashed line across the skull opening. The tonsils really sit just to either side of the midline; they're shown here where MRI measures them, at their lowest point. Illustration, not to scale." -->
 - What is Chiari malformation?
 - What it is
 - The lowest part of the cerebellum, the tonsils, extends below the foramen magnum, the opening at the base of the skull. The cerebellum helps control balance and coordination. It's often linked to a lower back part of the skull that is smaller or shaped differently than usual, which crowds the brain. Less often, it develops later in life for other reasons.
 - Who has it
 - Most people are born with the skull differences that lead to it. Some never have symptoms; others first notice them as teens or adults.
 - How it's found
-- Usually with an MRI scan and a doctor's exam, sometimes by chance during a scan for something else. A neurologist or neurosurgeon looks at the scan together with your symptoms.
+- Usually with an MRI scan and a doctor's exam, sometimes by chance during a scan for something else. A doctor looks at the scan together with your symptoms.
+<!-- 2026-11-04 text re-audit (approved): was "Usually with an MRI scan and a doctor's exam, sometimes by chance during a scan for something else. A neurologist or neurosurgeon looks at the scan together with your symptoms." -->
 - What it can feel like
 - Chiari looks different for everyone, and many people with Type I have no symptoms at all.
 - The classic sign is a headache at the back of the head that comes on after coughing, sneezing or straining.
@@ -42,20 +44,25 @@ Mockup: `design/mockups/Main.dc.html`
 - Dizziness and trouble with balance
 - Numbness or tingling in the hands and feet
 - Weakness or trouble with fine hand movements
-- Trouble swallowing, or voice changes
+- Trouble swallowing or speaking
+<!-- 2026-11-04 text re-audit (approved): was "Trouble swallowing, or voice changes" -->
 - Breathing or sleep problems, such as sleep apnea
 - Ringing in the ears
-- Less often: blurry or shaky vision
+- Blurry or double vision
+- A curve in the spine (scoliosis), especially in children
+<!-- 2026-11-04 accuracy audit (text items 5, 7): was "Less often: blurry or shaky vision"; scoliosis added. Sources: Cleveland Clinic, NINDS, MedlinePlus. -->
 - Common misunderstandings
 - "It's just a bad headache."
 - Chiari is a structural difference that can affect balance, nerves and the flow of spinal fluid, not only headaches.
 - "The measurement tells the whole story."
-- Doctors traditionally use about 5 mm below the opening as a cutoff. Lower tonsils make symptoms somewhat more likely, but the measurement alone doesn't reliably predict how someone will feel. Some people with a clear descent have no symptoms, and some with less than 5 mm do. Doctors also look at the shape of the tonsils, spinal fluid flow, and whether a syrinx is present.
+- Doctors traditionally use about 5 mm below the opening as a cutoff. How far the tonsils extend doesn't always match how someone feels. Some people with a clear descent have no symptoms, and some with less than 5 mm do. Doctors also look at the shape of the tonsils, spinal fluid flow, and whether a syrinx is present.
+<!-- 2026-11-04 accuracy audit: was "Doctors traditionally use about 5 mm below the opening as a cutoff. Lower tonsils make symptoms somewhat more likely, but the measurement alone doesn't reliably predict how someone will feel. Some people with a clear descent have no symptoms, and some with less than 5 mm do. Doctors also look at the shape of the tonsils, spinal fluid flow, and whether a syrinx is present." -->
 - Tools
 - 01
 - Compare typical anatomy, Chiari, syrinx and after surgery. Peel back layers and cut through the model.
 - 02
-- Send family, teachers or your employer a link that shows exactly what you have.
+- Send family, teachers or your employer a link to the view that matches your diagnosis.
+<!-- 2026-11-04 accuracy audit: was "Send family, teachers or your employer a link that shows exactly what you have." -->
 - 03
 - Chiari and syringomyelia studies looking for participants, updated daily.
 - 04
@@ -67,7 +74,8 @@ Mockup: `design/mockups/Main.dc.html`
 - Support Chiari organizations
 - Donate to or volunteer with the groups funding research and running registries.
 - Not medical advice.
-- This site is for education. Talk to your doctor about your own diagnosis and care.
+- Talk to your doctor about your own care.
+<!-- 2026-11-04 accuracy audit: was "This site is for education. Talk to your doctor about your own diagnosis and care." -->
 - Facts adapted from the
 - NINDS fact sheet
 - . 3D model by Open Chiari, CC BY-SA 4.0, adapted from
@@ -87,9 +95,11 @@ Mockup: `design/mockups/HomePhone.dc.html`
 - Calm mode
 - Chiari malformation, Type I
 - See what's happening at the base of the skull.
-- The lowest part of the cerebellum sits below the opening where the brain meets the spinal cord. Explore it in 3D, free.
+- In Chiari malformation, the lowest part of the cerebellum sits below the opening where the brain meets the spinal cord. Explore it in 3D, free.
+<!-- 2026-11-04 accuracy audit: was "The lowest part of the cerebellum sits below the opening where the brain meets the spinal cord. Explore it in 3D, free." -->
 - Fig. 1
-- Chiari I. The tonsil extends below the dashed line. Illustration.
+- Chiari I. The tonsil extends below the dashed line. Tonsils shown at their lowest point, where MRI measures them. Illustration, not a medical image.
+<!-- 2026-11-04 accuracy audit: was "Chiari I. The tonsil extends below the dashed line. Illustration." -->
 - Open the 3D Explorer
 - Take the 2-minute tour
 - What is Chiari malformation?
@@ -105,23 +115,28 @@ Mockup: `design/mockups/HomePhone.dc.html`
 - Dizziness and trouble with balance
 - Numbness or tingling in hands and feet
 - Weakness or trouble with fine hand movements
-- Trouble swallowing, or voice changes
+- Trouble swallowing or speaking
+<!-- 2026-11-04 text re-audit (approved): was "Trouble swallowing, or voice changes" -->
 - Breathing or sleep problems
 - Ringing in the ears
-- Less often: blurry or shaky vision
+- Blurry or double vision
+- A curve in the spine (scoliosis)
+<!-- 2026-11-04 accuracy audit (text items 5, 7): was "Less often: blurry or shaky vision"; scoliosis added. Sources: Cleveland Clinic, NINDS, MedlinePlus. -->
 - Many people with Type I have no symptoms at all.
 - Common misunderstandings
 - "It's just a bad headache."
 - It can affect balance, nerves and the flow of spinal fluid too.
 - "The measurement tells the whole story."
-- Lower tonsils make symptoms somewhat more likely, but the measurement alone doesn't reliably predict how someone will feel. Doctors also look at tonsil shape, fluid flow, and whether a syrinx is present.
+- How far the tonsils extend doesn't always match how someone feels. Doctors also look at tonsil shape, fluid flow, and whether a syrinx is present.
+<!-- 2026-11-04 accuracy audit: was "Lower tonsils make symptoms somewhat more likely, but the measurement alone doesn't reliably predict how someone will feel. Doctors also look at tonsil shape, fluid flow, and whether a syrinx is present." -->
 - Tools
 - 01
 - 3D Explorer
 - Compare typical, Chiari, syrinx and after surgery.
 - 02
 - Explain It
-- Send a link that shows exactly what you have.
+- Send a link to the view that matches your diagnosis.
+<!-- 2026-11-04 accuracy audit: was "Send a link that shows exactly what you have." -->
 - 03
 - Research studies
 - Studies looking for participants, updated daily.
@@ -150,8 +165,10 @@ Mockup: `design/mockups/HomeCalm.dc.html`
 - Calm mode is on.
 - No motion or auto-rotation, larger text, softer colors. You can turn it off any time.
 - See what's happening at the base of the skull.
-- The lowest part of the cerebellum sits below the opening where the brain meets the spinal cord.
-- Still image. Chiari I: the tonsil extends below the dashed line.
+- In Chiari malformation, the lowest part of the cerebellum sits below the opening where the brain meets the spinal cord.
+<!-- 2026-11-04 accuracy audit: was "The lowest part of the cerebellum sits below the opening where the brain meets the spinal cord." -->
+- Still image. Chiari I: the tonsil extends below the dashed line. Tonsils shown at their lowest point, where MRI measures them. Illustration, not a medical image.
+<!-- 2026-11-04 accuracy audit: was "Still image. Chiari I: the tonsil extends below the dashed line." -->
 - Open the 3D Explorer
 - In Calm mode, the model only moves when you move it.
 - What is Chiari malformation?
@@ -160,6 +177,8 @@ Mockup: `design/mockups/HomeCalm.dc.html`
 ## Home, Spanish (phone)
 
 Mockup: `design/mockups/HomeES.dc.html`
+
+> **Needs a matching update (2026-11-04).** The English Home text changed after the accuracy audit (symptom list, "How it's found", the measurement myth, the Explain It line, the caption and the footer). This Spanish text has not been changed to match yet; the medical translator should translate the new English lines. Still pending medical-translator review.
 
 - Open Chiari
 - Modo tranquilo
@@ -258,11 +277,13 @@ Mockup: `design/mockups/Explorer.dc.html`
 - Typical anatomy
 - The tonsils usually sit at or above the dashed line across the skull opening (a few millimeters below can still be normal), and spinal fluid moves freely around them.
 - Chiari I
-- The tonsils extend below the opening, at least about 5 mm by the usual definition. In people who need surgery it's often around 10 to 12 mm, but it varies widely. They are often pointed rather than rounded. The fluid space behind them is often crowded, and in many people fluid flow slows or is blocked there.
+- The tonsils extend below the opening, at least about 5 mm by the usual definition. In one study of 160 people with Chiari I, the average was about 12 mm, but it ranged from 5 to 25 mm, and the number alone doesn't decide who needs surgery. They are often pointed rather than rounded. The fluid space behind them is often crowded, and in many people fluid flow slows or is blocked there.
+<!-- 2026-11-04 accuracy audit: was "The tonsils extend below the opening, at least about 5 mm by the usual definition. In people who need surgery it's often around 10 to 12 mm, but it varies widely. They are often pointed rather than rounded. The fluid space behind them is often crowded, and in many people fluid flow slows or is blocked there." -->
 - Chiari I with syrinx
 - A syrinx is a fluid-filled cavity inside the spinal cord. It often develops alongside Chiari, most often in the neck part of the spinal cord.
 - After decompression
-- Surgeons remove a small piece of bone at the back of the skull opening and usually the back of the first vertebra. Often they also open and patch the brain's covering to make more room for spinal fluid. The tonsils often rise only partly. Surgery improves or stabilizes symptoms in most people, though damage that has already happened may not fully reverse, and some people need more than one operation. Results vary, and surgery isn't right for everyone.
+- Surgeons remove a small piece of bone at the back of the skull opening and often the back of the first vertebra. Often they also open and patch the brain's covering to make more room for spinal fluid. The tonsils often rise only partly. Surgery improves or stabilizes symptoms in most people, though damage that has already happened may not fully reverse, and some people need more than one operation. Results vary, and surgery isn't right for everyone.
+<!-- 2026-11-04 text re-audit (approved): was "Surgeons remove a small piece of bone at the back of the skull opening and usually the back of the first vertebra. Often they also open and patch the brain's covering to make more room for spinal fluid. The tonsils often rise only partly. Surgery improves or stabilizes symptoms in most people, though damage that has already happened may not fully reverse, and some people need more than one operation. Results vary, and surgery isn't right for everyone." -->
 - Cerebrum
 - The largest part of the brain, responsible for thinking, movement and the senses.
 - Corpus callosum
@@ -283,6 +304,13 @@ Mockup: `design/mockups/Explorer.dc.html`
 - Cerebrospinal fluid: clear fluid that cushions the brain and spinal cord. With each heartbeat it pulses back and forth between the skull and the spinal canal.
 - C2 vertebra
 - The second bone of the neck. Its upward peg, the dens, sits just in front of the spinal cord.
+- 11 (Chiari I with syrinx view only)
+- Syrinx
+- A fluid-filled cavity inside the spinal cord. It often develops alongside Chiari, most often in the neck part of the spinal cord.
+- 11 (After decompression view only)
+- Bone removed
+- Surgeons remove a small piece of bone at the back of the skull opening and often the back of the first vertebra.
+<!-- 2026-11-04: part 11 cards (3D audit item 5); text reuses the approved Syrinx and After decompression notes. -->
 
 ## 3D Explorer, side by side
 
@@ -317,13 +345,15 @@ Mockup: `design/mockups/ExplorerPhone.dc.html`
 - Typical anatomy
 - Tonsils usually sit at or above the skull opening (a few millimeters below can be normal); fluid moves freely.
 - Chiari I
-- Tonsils extend below the opening and crowd the fluid space; in many people flow slows there.
+- Tonsils extend below the opening and often crowd the fluid space; in many people flow slows there.
+<!-- 2026-11-04 accuracy audit: was "Tonsils extend below the opening and crowd the fluid space; in many people flow slows there." -->
 - With syrinx
 - Chiari I with syrinx
 - A fluid-filled cavity has formed inside the spinal cord.
 - After surgery
 - After decompression
-- Bone is removed at the back of the opening to make room. Most people improve or stabilize; results vary.
+- Bone is removed at the back of the opening to make room. Most people improve or stabilize, but results vary, some need another operation, and surgery isn't right for everyone.
+<!-- 2026-11-04 accuracy audit: was "Bone is removed at the back of the opening to make room. Most people improve or stabilize; results vary." -->
 
 ## Guided tour, step 3 (phone)
 
@@ -482,7 +512,8 @@ Mockup: `design/mockups/Prep.dc.html`
 - Do I need a fluid-flow MRI (cine MRI) or other tests?
 - Do I need follow-up scans, and if so, how often?
 - Treatment
-- What are my options besides surgery?
+- What are my treatment options, including monitoring?
+<!-- 2026-11-04 accuracy audit: was "What are my options besides surgery?" -->
 - Am I a candidate for decompression surgery? Why or why not?
 - How many of these surgeries have you done, and what is recovery like?
 - Daily life and research
@@ -512,7 +543,8 @@ Mockup: `design/mockups/PrepPhone.dc.html`
 - Can I have a copy of my MRI report and images?
 - Do I have a syrinx?
 - My symptoms
-- Which of my symptoms come from Chiari?
+- Which of my symptoms do you think come from Chiari?
+<!-- 2026-11-04 accuracy audit: was "Which of my symptoms come from Chiari?" -->
 - What should make me call you or go to the ER?
 - Tests and monitoring · 2
 - Treatment · 3
@@ -532,9 +564,12 @@ Mockup: `design/mockups/PrepSheet.dc.html`
 - Can I have a copy of my MRI report and images?
 - Which of my symptoms do you think come from Chiari?
 - What changes should make me call you or go to the ER?
-- What are my options besides surgery?
+- What are my treatment options, including monitoring?
+<!-- 2026-11-04 accuracy audit: was "What are my options besides surgery?" -->
 - Are there research studies I could join?
 - Things I want to mention
+- Chiari I. Tonsils shown at their lowest point, where MRI measures them. Illustration, not a medical image.
+<!-- 2026-11-04 text re-audit item 1 (approved): caption under the figure on the printed sheet; was "Illustration, not a medical image" (not listed here before). -->
 - Made with Open Chiari · openchiari.org · Not medical advice
 
 ## Open model
@@ -559,8 +594,9 @@ Mockup: `design/mockups/OpenModel.dc.html`
 - (CC BY-SA 4.0) and BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 JP)
 - Views included
 - Typical, Chiari I, Chiari I with syrinx, after decompression
-- Reviewed by
-- [Medical reviewer name and credentials]
+- Accuracy checks
+- Measured against published sources; not reviewed by a medical professional
+<!-- Changed 2026-11-04: Matthew decided not to use a medical reviewer (was "Reviewed by / [Medical reviewer name and credentials]"). -->
 - Fig. 2
 - Chiari I with syrinx, one of four included views.
 - Embed the viewer
@@ -730,9 +766,11 @@ Mockup: `design/mockups/Impact.dc.html`
 - Accessibility standard
 - WCAG 2.2 AA · [result]
 - The current W3C standard; also covers WCAG 2.1 AA, the level in U.S. ADA rules
-- Medical review
-- [date] · [reviewer]
-- Text and 3D views checked by a medical professional
+- Accuracy checks
+- [date] · [result]
+<!-- Changed 2026-11-04: Matthew decided not to use a medical reviewer (was "Medical review / [date] · [reviewer]"). -->
+- Text and 3D views checked against published sources; not reviewed by a medical professional
+<!-- Changed 2026-11-04: was "Text and 3D views checked by a medical professional". -->
 - Open source: nothing gets stranded
 - Every line of code and every model file is public: code under the MIT License, the 3D model under CC BY-SA 4.0. Any organization can run its own copy, change it, or take it over, with no fees and no dependence on one person or company.
 - Code
@@ -771,7 +809,9 @@ Mockup: `design/mockups/About.dc.html`
 - The 3D model is built from
 - Z-Anatomy
 - and BodyParts3D, open anatomy data.
-- Text and every 3D view are checked by [reviewer name, credentials] before they're published. Last review: [date].
+- Text and every 3D view are checked against the published sources listed in the evidence notes, by automatic measurements and independent audits, before they're published. They have not been reviewed by a medical professional. Last check: November 4, 2026.
+<!-- Placeholder filled 2026-11-04 (Matthew): the date of the last independent audit. -->
+<!-- Changed 2026-11-04: Matthew decided not to use a medical reviewer (was "Text and every 3D view are checked by [reviewer name, credentials] before they're published. Last review: [date]."). -->
 - AI tools helped write the code and first drafts; every page is checked by a person.
 - Principles
 - Free, always
@@ -813,7 +853,8 @@ Mockup: `design/mockups/Privacy.dc.html`
 - Español
 - Calm mode
 - Privacy
-- Last updated [date]
+- Last updated November 4, 2026
+<!-- Placeholders filled 2026-11-04 (Matthew): "Last updated" date, and the host (Cloudflare Pages). -->
 - The short version: Open Chiari doesn't know who you are, doesn't use cookies, and never collects health information.
 - What is counted
 - To show the totals on the
@@ -835,7 +876,7 @@ Mockup: `design/mockups/Privacy.dc.html`
 - Calm mode and your language choice are remembered in your own browser so they stay on next time. Clearing your browser data removes them. They're never sent to the site.
 - Outside services
 - Hosting:
-- [host], which handles the site's traffic like any web host.
+- Cloudflare Pages, which handles the site's traffic like any web host.
 - Fonts and 3D files:
 - served from Open Chiari itself, not from Google or other companies.
 - Research studies:
@@ -856,6 +897,16 @@ Mockup: `design/mockups/Privacy.dc.html`
 
 Mockup: `design/mockups/Anatomy.dc.html`
 
+Screen-reader descriptions of the figure and 3D view (one per condition):
+
+- Midline section of the head and neck, typical anatomy: the cerebellar tonsils sit above the opening at the base of the skull
+- Midline section of the head and neck, Chiari I: the cerebellar tonsils extend below the opening at the base of the skull and often crowd the spinal fluid space
+- Midline section of the head and neck, Chiari I with a syrinx, a fluid-filled cavity inside the spinal cord
+- Midline section of the head and neck, after decompression surgery: bone at the back of the skull opening and the back of the first vertebra are removed, opening the fluid space
+<!-- 2026-11-04 text re-audit item 5 (approved): added to COPY.md; the Chiari I one gained "often". -->
+
+Visible labels:
+
 - 01
 - Cerebrum
 - 02
@@ -871,6 +922,8 @@ Mockup: `design/mockups/Anatomy.dc.html`
 - 07
 - Foramen magnum
 - opening at the skull base
+- dashed line: where its edges were
+<!-- 2026-11-04 3D audit item 10: shown under 07 in the After decompression view only, because the McRae line is still drawn after that bone is removed. -->
 - 08
 - Spinal cord
 - 09

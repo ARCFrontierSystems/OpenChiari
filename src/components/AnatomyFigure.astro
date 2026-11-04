@@ -1,0 +1,19 @@
+---
+/** Static anatomy figure for light pages. Drawing code: src/lib/anatomy-figure.ts. */
+import { anatomyFigureSvg, type Condition } from '../lib/anatomy-figure';
+import { getStrings } from '../i18n';
+
+interface Props {
+  condition?: Condition;
+  flow?: boolean;
+  labels?: boolean;
+  measure?: boolean;
+  dark?: boolean;
+  class?: string;
+}
+
+const { class: className, ...options } = Astro.props;
+const svg = anatomyFigureSvg({ ...options, className }, getStrings().figure);
+---
+
+<Fragment set:html={svg} />

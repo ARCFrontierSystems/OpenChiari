@@ -1,0 +1,181 @@
+---
+/**
+ * Support. Layout from design/mockups/Support.dc.html (desktop) and SupportPhone.dc.html (phone).
+ * All text from src/i18n/en.json, word for word from docs/COPY.md. Open Chiari never handles money:
+ * every button goes to the organization's own page (CLAUDE.md "Don't").
+ */
+import Base from '../layouts/Base.astro';
+import { getStrings, routes, externalLinks } from '../i18n';
+
+const t = getStrings().support;
+const links: Record<string, { donate: string; second: string }> = {
+  bjcsf: { donate: externalLinks.bjcsfDonate, second: externalLinks.bjcsfRegistry },
+  conquer: { donate: externalLinks.conquerDonate, second: externalLinks.conquerInfo },
+  asap: { donate: externalLinks.asapDonate, second: externalLinks.asapInfo },
+};
+const otherHref: Record<string, string> = { studies: routes.studies, kit: routes.kit, explain: routes.explain };
+---
+
+<Base title={t.title}>
+  <div class="support container">
+    <div class="page-intro">
+      <h1 class="serif">{t.title}</h1>
+      <p><span class="only-wide">{t.intro.wide}</span><span class="only-narrow">{t.intro.narrow}</span></p>
+    </div>
+
+    <ul class="orgs">
+      {t.orgs.map((o) => (
+        <li class="org">
+          <div class="org-text">
+            <h2 class="serif">{o.name}</h2>
+            <p><span class="only-wide">{o.text.wide}</span><span class="only-narrow">{o.text.narrow}</span></p>
+            <p class="tags mono only-wide">{o.tags}</p>
+          </div>
+          <div class="org-actions">
+            <a class="button button-primary" href={links[o.id].donate}>{t.donate}</a>
+            <a class="button button-secondary only-wide" href={links[o.id].second}>{o.second}</a>
+          </div>
+        </li>
+      ))}
+    </ul>
+    <p class="checked only-wide">{t.checked}</p>
+
+    <section class="other" aria-labelledby="other-title">
+      <h2 id="other-title" class="serif">{t.otherTitle}</h2>
+      <ul>
+        {t.other.map((o) => (
+          <li>
+            <a href={otherHref[o.id]}>{o.title}</a>
+            <p class="only-wide">{o.text}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <p class="not-affiliated">{t.notAffiliated}</p>
+  </div>
+</Base>
+
+<style>
+  .support {
+    padding-top: var(--s-56);
+    padding-bottom: var(--s-72);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-40);
+  }
+  .page-intro {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .page-intro h1 {
+    font-size: 42px;
+    line-height: 1.1;
+  }
+  .page-intro p {
+    max-width: 700px;
+    color: var(--ink-2);
+  }
+  .orgs {
+    list-style: none;
+    padding: 0;
+    border-top: 2px solid var(--ink);
+  }
+  .org {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-24);
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: var(--s-24) 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .org-text {
+    flex: 1 1 480px;
+    max-width: 920px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-8);
+  }
+  .org h2 {
+    font-size: 26px;
+    line-height: 1.2;
+  }
+  .org-text p {
+    color: var(--ink-2);
+  }
+  .tags {
+    font-size: var(--text-mono);
+    color: var(--muted);
+  }
+  .org-actions {
+    flex: 0 0 220px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-8);
+  }
+  .checked,
+  .not-affiliated {
+    font-size: var(--text-small);
+    color: var(--muted);
+  }
+  .checked {
+    margin-top: calc(-1 * var(--s-24));
+  }
+  .other h2 {
+    font-size: 28px;
+    padding-bottom: var(--s-16);
+    border-bottom: 2px solid var(--ink);
+  }
+  .other ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--s-32);
+    margin-top: var(--s-16);
+  }
+  .other li {
+    padding: var(--s-8) 0 var(--s-16);
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+  .other a {
+    font-weight: 500;
+    text-decoration: none;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .other a:hover {
+    text-decoration: underline;
+  }
+  .other p {
+    color: var(--ink-2);
+  }
+  .not-affiliated {
+    border-top: 1px solid var(--rule);
+    padding-top: var(--s-24);
+  }
+  @media (max-width: 720px) {
+    .support {
+      padding-top: var(--s-32);
+      gap: var(--s-32);
+    }
+    .page-intro h1 {
+      font-size: 32px;
+    }
+    .org h2 {
+      font-size: 21px;
+    }
+    .org-actions {
+      flex: 1 1 100%;
+    }
+    .other ul {
+      gap: 0;
+    }
+  }
+</style>

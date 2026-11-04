@@ -1,0 +1,30 @@
+---
+/** Base layout for the light pages: head, header, main, footer. */
+import Head from '../components/Head.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { getStrings } from '../i18n';
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: string;
+}
+
+const { title, description, lang = 'en' } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <Head title={title} description={description} />
+  </head>
+  <body>
+    <a class="skip-link" href="#content">{getStrings().skipLink}</a>
+    <Header />
+    <main id="content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

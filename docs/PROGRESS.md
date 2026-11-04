@@ -14,7 +14,7 @@ Matthew's preference: when a step is done, lay out what the next step will cover
 - **Explorer:** the 3D view replaces the 2D figure once loaded (the figure stays if the device can't show 3D). Drag to rotate, scroll or pinch to zoom, Shift-drag or two fingers to move. Condition switch, layers with opacity, and the cut-away slider all act on the model. It draws only when something changes, so nothing runs while idle, off screen or in a background tab. Screen readers get the figure's description of the current condition.
 - **Default view changed from the mockup:** skin starts on at full opacity so the starting view matches the figures; the mockup had skin off.
 - **Download size on the Explorer page:** about 610 KB compressed (3D code plus model). Other pages are unaffected.
-- **Checks:** 63 tests pass, including the 3D view loading and updating.
+- **Checks:** 65 tests pass, including the 3D view loading and updating, and a guard that every 3D source shape is drawn identically in the figure.
 
 **Not in this step (coming next):**
 - Nerves and Blood vessels: shown but switched off. They aren't in the figure or EVIDENCE.md, so the Simple model doesn't have them.

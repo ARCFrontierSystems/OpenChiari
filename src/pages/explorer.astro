@@ -113,10 +113,12 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
           <button type="button" class="x-tool" data-layers-toggle aria-expanded="false" aria-controls="view-options">{x.layers}</button>
         </div>
 
-        <p class="x-hint only-wide-x" data-3d-only>{x.hint}</p>
-        <p class="x-caption only-wide-x">
-          {x.captionIllustration} · {x.captionFlow} · <a href={routes.evidence}>{x.evidence}</a>
-        </p>
+        <div class="x-footnotes only-wide-x">
+          <p class="x-hint" data-3d-only>{x.hint}</p>
+          <p class="x-caption">
+            {x.captionIllustration} · {x.captionFlow} · <a href={routes.evidence}>{x.evidence}</a>
+          </p>
+        </div>
       </main>
 
       <aside class="x-right only-wide-x" aria-label={x.structures}>
@@ -596,10 +598,21 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
   .x-view:not(.has-3d) [data-3d-only] {
     display: none;
   }
-  .x-hint {
+  .x-footnotes {
     position: absolute;
     left: 16px;
+    right: 16px;
     bottom: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4px 16px;
+    pointer-events: none;
+  }
+  .x-footnotes a {
+    pointer-events: auto;
+  }
+  .x-hint {
     margin: 0;
     font-family: var(--font-mono);
     font-size: var(--x-size-caption);
@@ -632,10 +645,7 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
     background: var(--x-accent-tint);
   }
   .x-caption {
-    position: absolute;
-    right: 16px;
-    bottom: 12px;
-    margin: 0;
+    margin: 0 0 0 auto;
     font-size: var(--x-size-caption);
     color: var(--x-faint);
   }

@@ -131,7 +131,7 @@ test.describe('3D Explorer controls', () => {
     const labels = page.getByRole('button', { name: 'Labels' });
     await labels.click();
     await expect(labels).toHaveAttribute('aria-pressed', 'false');
-    await expect(page.locator('[data-figure="wide"] svg')).toHaveAttribute('viewBox', '50 70 480 570');
+    await expect(page.locator('[data-figure="wide"] svg')).toHaveAttribute('viewBox', '36 62 522 578');
   });
 
   test('phone: condition grid, parts list and Layers panel', async ({ page }) => {

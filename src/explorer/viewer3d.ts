@@ -21,7 +21,7 @@ const FIGURE_UNITS_PER_MM = 2;
 // Origin of the model: middle of the foramen magnum, in figure units (see build.mjs).
 const ORIGIN = { x: 369, y: 444.5 };
 // The figure without labels uses this viewBox; the midline cut face covers the same area.
-const SECTION_BOX = { x: 50, y: 70, w: 480, h: 570 };
+const SECTION_BOX = { x: 36, y: 62, w: 522, h: 578 };
 const BACKGROUND = 0x1a1c20; // --x-viewport
 // Middle of the head, in mm, where the camera looks.
 const TARGET = new THREE.Vector3(-40, 40, 0);
@@ -47,7 +47,7 @@ export function webglAvailable(): boolean {
 /** Cut-away slider (0 whole, 50 midline, 100 far side) to plane depth in mm. */
 function cutDepth(slider: number): number {
   if (slider === 50) return 0;
-  return slider < 50 ? ((50 - slider) / 50) * 85 : -((slider - 50) / 50) * 60;
+  return slider < 50 ? ((50 - slider) / 50) * 100 : -((slider - 50) / 50) * 60;
 }
 
 export async function createViewer(host: HTMLElement, store: Store, figureStrings: FigureStrings) {

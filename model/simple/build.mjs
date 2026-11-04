@@ -17,7 +17,7 @@
  *
  * Run: npm run model:simple
  */
-import { readFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { Document, NodeIO } from '@gltf-transform/core';
 import { EXTMeshoptCompression, KHRMeshQuantization } from '@gltf-transform/extensions';
 import { weld, simplify, quantize, meshopt, dedup } from '@gltf-transform/functions';
@@ -176,13 +176,22 @@ function roundedHalfWidth(d, W, r) {
  * (the deepest point of the shape gets the full width W), which gives egg-like, natural forms.
  */
 function inflate(grid, W, r = 'auto') {
+  // (see inflatedField below)
   if (r === 'auto') r = grid.dMax;
   const Wf = typeof W === 'function' ? W : () => W;
   return {
     bbox: grid.bbox,
     zMax: typeof W === 'function' ? null : W,
-    f: (x, y, z) => roundedHalfWidth(grid.sample(x, y), Wf(x, y), r) - Math.abs(z),
+    f: (x, y, z) => inflatedField(grid.sample(x, y), Wf(x, y), r, z),
   };
+}
+
+/**
+ * Field of an inflated shape (positive inside). Outside the midline outline it is minus the distance
+ * to the outline's rim, which stays smooth across the midline, so blends with other shapes don't crease.
+ */
+function inflatedField(d, W, r, z) {
+  return d > 0 ? roundedHalfWidth(d, W, r) - Math.abs(z) : -Math.hypot(d, z);
 }
 
 const smoothstep = (a, b, v) => {
@@ -292,13 +301,12 @@ function smooth(mesh, iterations = 10) {
 const CAVITY_PATH =
   S.skull.d +
   ' L334 440 C304 420 292 390 290 356 L282 354 L278 330 C272 340 255 338 252 322 C220 310 170 305 128 300 Z';
-const cavity = distanceGrid(CAVITY_PATH, { margin: 40, step: 1 });
+const cavity = distanceGrid(CAVITY_PATH, { margin: 130, step: 1 });
 const CAV_W = 132; // half-width of the cranial cavity at its widest: 66 mm
 const CAV_R = cavity.dMax;
 const cavityLateral = (x, y) => roundedHalfWidth(cavity.sample(x, y), CAV_W, CAV_R);
 /** The cranial cavity grown (offset > 0) or shrunk (offset < 0) by `offset` units, as a field. */
-const cavityOffset = (x, y, z, offset) =>
-  roundedHalfWidth(cavity.sample(x, y) + offset, CAV_W + offset, CAV_R + offset) - Math.abs(z);
+const cavityOffset = (x, y, z, offset) => inflatedField(cavity.sample(x, y) + offset, CAV_W + offset, CAV_R + offset, z);
 /** Keeps brain structures inside the skull's inner surface (8 units of bone plus 1 of margin). */
 const insideSkull = (x, y, z) => cavityOffset(x, y, z, -9);
 
@@ -324,76 +332,167 @@ const skullField = (x, y, z) => {
   return Math.min(Math.max(shell, clivus.f(x, y, z)), -foramen(x, y, z));
 };
 
-// Head and neck outline: wide over the cranium, narrower at the face and the neck.
-const skinGrid = distanceGrid(S.skin, { margin: 20, step: 1.5 });
-/** Smooth union: like max, but blends the two shapes over about k units instead of leaving a crease. */
+// ---------------------------------------------------------------- the head (sculpted)
+// The head and face are sculpted in 3D from simple rounded forms blended together (like clay).
+// The skin's midline outline used by the 2D figure is then taken from this sculpt, so the
+// figure and the 3D head always match. Units here are millimetres: X toward the back of the
+// head, Y up, Z to the side, origin at the middle of the foramen magnum.
+
+const len3 = (x, y, z) => Math.sqrt(x * x + y * y + z * z);
+/** Signed distance to an ellipsoid (approximate; negative inside). */
+function sdEllipsoid(x, y, z, rx, ry, rz) {
+  const k0 = len3(x / rx, y / ry, z / rz);
+  const k1 = len3(x / (rx * rx), y / (ry * ry), z / (rz * rz));
+  return k1 === 0 ? -Math.min(rx, ry, rz) : (k0 * (k0 - 1)) / k1;
+}
+/** Signed distance to a capsule from a to b whose radius goes from ra to rb. */
+function sdCone(px, py, pz, [ax, ay, az], [bx, by, bz], ra, rb) {
+  const bax = bx - ax, bay = by - ay, baz = bz - az;
+  const pax = px - ax, pay = py - ay, paz = pz - az;
+  const t = Math.min(1, Math.max(0, (pax * bax + pay * bay + paz * baz) / (bax * bax + bay * bay + baz * baz)));
+  return len3(pax - bax * t, pay - bay * t, paz - baz * t) - lerp(ra, rb, t);
+}
+/** Smooth union and smooth subtraction of distances (blend width k, mm). */
+const smin = (a, b, k) => {
+  const h = Math.max(k - Math.abs(a - b), 0) / k;
+  return Math.min(a, b) - (h * h * k) / 4;
+};
+const ssub = (a, b, k) => -smin(-a, b, k);
+/** Smooth union of "inside is positive" fields (used for the vertebrae and skull). */
 const smoothMax = (a, b, k) => {
   const h = Math.max(k - Math.abs(a - b), 0) / k;
   return Math.max(a, b) + (h * h * k) / 4;
 };
-// The head is built in two parts that meet in a smooth blend:
-// - the head itself, wide and rounded, whose front surface sits about where the cheeks are;
-// - the facial features in front of the cheeks (nose, lips, chin), each with a realistic width.
-// Together their midline outline is exactly the figure's head outline.
-// Where the cheeks are, at each height: a smooth curve behind the profile (figure units).
-// Cheeks about 28 mm behind the nose tip, mouth corners about 8 mm behind the lips, chin about 6 mm proud.
-const CHEEK_POINTS = [[280, 60], [298, 92], [312, 106], [340, 117], [370, 114], [392, 102], [412, 97], [432, 98], [458, 101], [482, 106], [500, 116], [516, 60]];
-const cheekX = (() => {
-  const raw = (y) => {
-    if (y <= CHEEK_POINTS[0][0] || y >= CHEEK_POINTS[CHEEK_POINTS.length - 1][0]) return 60;
-    for (let k = 0; k < CHEEK_POINTS.length - 1; k++) {
-      const [y0, x0] = CHEEK_POINTS[k], [y1, x1] = CHEEK_POINTS[k + 1];
-      if (y <= y1) return lerp(x0, x1, smoothstep(y0, y1, y));
-    }
-    return 60;
-  };
-  const table = new Map();
-  for (let y = 250; y <= 540; y++) {
-    let sum = 0;
-    for (let k = -6; k <= 6; k++) sum += raw(y + k);
-    table.set(y, sum / 13);
-  }
-  return (y) => table.get(Math.round(y)) ?? 60;
-})();
-const featureHalfWidth = (y) => {
-  // nose about 30 mm wide, mouth about 50 mm, chin about 40 mm (half-widths in figure units)
-  const nose = 30, mouth = 42, chin = 38;
-  if (y < 372) return nose;
-  if (y < 392) return lerp(nose, mouth, smoothstep(372, 392, y));
-  if (y < 440) return mouth;
-  return lerp(mouth, chin, smoothstep(440, 470, y));
-};
-const headW = (x, y) => lerp(152, 112, smoothstep(470, 560, y) * smoothstep(180, 280, x));
-// Front-most point of the face outline at each height (figure units).
-const profileFront = (() => {
-  const front = new Map();
-  for (let y = 60; y <= 660; y++) {
-    let best = Infinity;
-    for (let x = 30; x < 300; x += 0.5) if (skinGrid.sample(x, y) > 0) { best = x; break; }
-    front.set(y, best);
-  }
-  return (y) => front.get(Math.round(Math.min(660, Math.max(60, y)))) ?? Infinity;
-})();
-/** The head itself: wide and rounded; its front curves back toward the sides like cheeks. */
-const headBase = (x, y, z) => {
-  const w = headW(x, y);
-  const h = Math.min(
-    roundedHalfWidth(skinGrid.sample(x, y), w, skinGrid.dMax),
-    roundedHalfWidth(x - cheekX(y) + 8, w, 95),
-  );
-  return h - Math.abs(z);
-};
-/** Facial features in front of the cheeks, with rounded cross-sections that blend into the cheeks. */
-const faceFeatures = (x, y, z) => {
-  const front = profileFront(y), cheek = cheekX(y);
-  if (!(front < cheek)) return -100;
-  const q = Math.max(0, (cheek + 8 - x) / (cheek + 8 - front)); // 0 at the cheeks, 1 at the tip
-  const h = featureHalfWidth(y) * Math.sqrt(Math.max(0, 1 - q));
-  return Math.min(skinGrid.sample(x, y) * 4, h - Math.abs(z));
-};
-const skinInflated = { f: (x, y, z) => smoothMax(headBase(x, y, z), faceFeatures(x, y, z), 10) };
 
-const skinField = (x, y, z) => smoothMax(skinInflated.f(x, y, z), cavityOffset(x, y, z, 13), 24);
+/** Distance to the head and neck surface in mm (negative inside). Inputs in figure units. */
+function headSdf(x, y, z) {
+  const X = (x - fmCenter[0]) / S.unitsPerMm, Y = -(y - fmCenter[1]) / S.unitsPerMm, Z = z / S.unitsPerMm;
+  const az = Math.abs(Z);
+  // Cranium: one smooth oval (about 152 mm wide), pushed out wherever the skull would come
+  // closer than about 4 mm to the surface (bone 4 mm + scalp 4 mm beyond the skull's midline curve).
+  let d = sdEllipsoid(X + 29.5, Y - 90, Z, 110, 95, 77);
+  d = smin(d, -cavityOffset(x, y, z, 16) / S.unitsPerMm, 8);
+  // Sides of the head: full and rounded from the temples down to the ears.
+  d = smin(d, sdEllipsoid(X + 22, Y - 56, Z, 94, 72, 72), 40);
+  // Neck: an oval column (about 120 mm front to back, 105 mm across) rising well into the head,
+  // plus the muscles at the back of the neck that fill up to the skull.
+  const nx = X + 8, k0 = Math.hypot(nx / 62, Z / 53), k1 = Math.hypot(nx / (62 * 62), Z / (53 * 53));
+  const neck = Math.max(k1 === 0 ? -53 : (k0 * (k0 - 1)) / k1, Y - 70);
+  d = smin(d, neck, 34);
+  d = smin(d, sdEllipsoid(X - 38, Y - 4, Z, 30, 42, 48), 30);
+  // Face: one oval mass from the brow down, about 135 mm across the cheekbones,
+  // blended widely into the skull at the temples and brow.
+  d = smin(d, sdEllipsoid(X + 100, Y - 30, Z, 44, 54, 66), 48);
+  // Lower jaw: a U from the chin back to the angles of the jaw (about 100 mm apart).
+  // Left and right halves are blended across the middle so there's no crease at the centerline.
+  const both = (f, k) => smin(f(Z), f(-Z), k);
+  d = smin(d, both((zz) => sdCone(X, Y, zz, [-120, -8, 6], [-74, -8, 42], 16, 12), 20), 26);
+  d = smin(d, sdEllipsoid(X + 128, Y + 8, Z, 13, 12, 26), 18);
+  // Cheekbones and brow (subtle).
+  d = smin(d, sdEllipsoid(X + 110, Y - 48, az - 42, 16, 10, 15), 16);
+  d = smin(d, both((zz) => sdCone(X, Y, zz, [-133, 73, 0], [-124, 75, 36], 6.5, 5.5), 10), 12);
+  // Eyes: shallow sockets under the brow with the eyeball just showing.
+  d = ssub(d, sdEllipsoid(X + 131, Y - 60, az - 31, 9, 7, 12), 8);
+  d = smin(d, sdEllipsoid(X + 120, Y - 59.5, az - 31, 9.5, 8, 11.5), 3);
+  // Nose: bridge to tip, nostril wings.
+  d = smin(d, sdCone(X, Y, Z, [-132, 68, 0], [-148, 45, 0], 5.5, 8.5), 9);
+  d = smin(d, both((zz) => sdEllipsoid(X + 139, Y - 37, zz - 11, 8, 6.5, 7), 6), 7);
+  // Lips, with a soft line between them.
+  d = smin(d, sdEllipsoid(X + 140, Y - 21, Z, 6, 5, 23), 8);
+  d = smin(d, sdEllipsoid(X + 139, Y - 10, Z, 6, 5.5, 21), 8);
+  d = ssub(d, sdEllipsoid(X + 146, Y - 15.5, Z, 6, 1.2, 21), 1.5);
+  // Ears.
+  d = smin(d, sdEllipsoid(X + 4, Y - 52, az - 79, 12, 29, 7), 6);
+  const bottom = -(640 - fmCenter[1]) / S.unitsPerMm; // the figure's bottom edge
+  return Math.max(d, bottom - Y);
+}
+/** Head and neck, as an "inside is positive" field in figure units. */
+const skinField = (x, y, z) => -headSdf(x, y, z) * S.unitsPerMm;
+
+/** The head's midline outline (z = 0), traced with marching squares, as an SVG path. */
+function midlineOutline(f, [x0, y0, x1, y1], step = 0.5) {
+  const nx = Math.ceil((x1 - x0) / step) + 1, ny = Math.ceil((y1 - y0) / step) + 1;
+  const v = new Float32Array(nx * ny);
+  for (let j = 0; j < ny; j++) for (let i = 0; i < nx; i++) v[i + nx * j] = f(x0 + i * step, y0 + j * step, 0);
+  // Collect boundary segments, then chain them into the longest loop.
+  const segs = [];
+  const at = (i, j) => v[i + nx * j];
+  const cross = (i0, j0, i1, j1) => {
+    const a = at(i0, j0), b = at(i1, j1), t = a / (a - b);
+    return [x0 + (i0 + t * (i1 - i0)) * step, y0 + (j0 + t * (j1 - j0)) * step];
+  };
+  for (let j = 0; j < ny - 1; j++)
+    for (let i = 0; i < nx - 1; i++) {
+      const pts = [];
+      if (at(i, j) > 0 !== at(i + 1, j) > 0) pts.push(cross(i, j, i + 1, j));
+      if (at(i + 1, j) > 0 !== at(i + 1, j + 1) > 0) pts.push(cross(i + 1, j, i + 1, j + 1));
+      if (at(i, j + 1) > 0 !== at(i + 1, j + 1) > 0) pts.push(cross(i, j + 1, i + 1, j + 1));
+      if (at(i, j) > 0 !== at(i, j + 1) > 0) pts.push(cross(i, j, i, j + 1));
+      if (pts.length === 2) segs.push(pts);
+      if (pts.length === 4) segs.push([pts[0], pts[1]], [pts[2], pts[3]]);
+    }
+  const key = (p) => p[0].toFixed(3) + ',' + p[1].toFixed(3);
+  const ends = new Map();
+  segs.forEach((sg, n) => sg.forEach((p) => ends.set(key(p), [...(ends.get(key(p)) ?? []), n])));
+  const used = new Set();
+  let best = [];
+  for (let n0 = 0; n0 < segs.length; n0++) {
+    if (used.has(n0)) continue;
+    const loop = [segs[n0][0], segs[n0][1]];
+    used.add(n0);
+    for (;;) {
+      const next = (ends.get(key(loop[loop.length - 1])) ?? []).find((m) => !used.has(m));
+      if (next === undefined) break;
+      used.add(next);
+      const [a, b] = segs[next];
+      loop.push(key(a) === key(loop[loop.length - 1]) ? b : a);
+    }
+    if (loop.length > best.length) best = loop;
+  }
+  // Simplify (Douglas-Peucker, 0.2 units) and write as a path.
+  const simplifyLine = (pts, tol) => {
+    if (pts.length < 3) return pts;
+    const [a, b] = [pts[0], pts[pts.length - 1]];
+    let far = 0, idx = 0;
+    for (let k = 1; k < pts.length - 1; k++) {
+      const dd = distToSegs(pts[k][0], pts[k][1], [[a[0], a[1], b[0], b[1]]]);
+      if (dd > far) { far = dd; idx = k; }
+    }
+    if (far <= tol) return [a, b];
+    return [...simplifyLine(pts.slice(0, idx + 1), tol).slice(0, -1), ...simplifyLine(pts.slice(idx), tol)];
+  };
+  const simple = simplifyLine(best, 0.2);
+  return 'M' + simple.map(([px, py]) => `${+px.toFixed(1)} ${+py.toFixed(1)}`).join(' L') + ' Z';
+}
+
+if (process.env.PROBE) {
+  // Front surface position (figure x) across the midline at a few heights, to look for creases.
+  for (const yy of [280, 330, 600]) {
+    const row = [];
+    for (let zz = -8; zz <= 8; zz += 2) {
+      let xs = null;
+      for (let xx = 30; xx < 300; xx += 0.05) if (skinField(xx, yy, zz) > 0) { xs = xx; break; }
+      row.push(`${zz}:${xs?.toFixed(2)}`);
+    }
+    console.log('y', yy, row.join('  '));
+  }
+  process.exit(0);
+}
+// The skin must cover the skull everywhere (with at least 1 mm to spare).
+{
+  let exposed = 0;
+  for (let xx = 90; xx <= 550; xx += 4)
+    for (let yy = 60; yy <= 480; yy += 4)
+      for (let zz = -150; zz <= 150; zz += 4) if (skullField(xx, yy, zz) > 0 && skinField(xx, yy, zz) < 2) exposed++;
+  if (exposed) console.warn(`WARNING: the skull comes within 1 mm of the skin surface at ${exposed} sample points.`);
+  else console.log('Skin covers the skull everywhere.');
+}
+const skinOutline = midlineOutline(skinField, [20, 50, 580, 650]);
+if (skinOutline !== S.skin) {
+  S.skin = skinOutline;
+  writeFileSync(new URL('../../src/lib/anatomy-shapes.json', import.meta.url), JSON.stringify(S, null, 2) + '\n');
+  console.log('Updated the head outline in src/lib/anatomy-shapes.json (the 2D figure uses it).');
+}
 
 /** A ring (vertebral arch) around the spinal canal. */
 function ring({ xc, yc, tilt = 0, a, b, tube, tubeSide = tube, tall = tube, tallSide = tall }) {
@@ -415,7 +514,7 @@ const brainstemW = (x, y) => lerp(34, 16, smoothstep(330, 446, y));
 /** All structures. part = id used by the structure list; layer = layer switch it belongs to. */
 const structures = [
   // Skin and soft tissue
-  { name: 'skin', layer: 'skin', part: null, color: '#EFE3D8', step: 3, field: skinField, box: [30, 60, -165, 560, 660, 165] },
+  { name: 'skin', layer: 'skin', part: null, color: '#EFE3D8', step: 3, field: skinField, box: [20, 50, -195, 580, 660, 195] },
   { name: 'palate', layer: 'skin', part: null, color: '#D2BBAA', step: 1, ...inflateBox(distanceGrid(S.palate.d, { band: S.palate.halfWidth }), 30, 2.5) },
   { name: 'pharynx', layer: 'skin', part: null, color: '#E2CFC2', step: 1.5, ...inflateBox(distanceGrid(S.pharynx.d, { band: S.pharynx.halfWidth }), 26, 8) },
 

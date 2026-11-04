@@ -4,10 +4,13 @@
  *
  * Inner structures (skull, brain, tonsils, McRae line, spine, cord, CSF) are ported shape for
  * shape from design/mockups/Anatomy.dc.html and match design/figures/. The outer skin outline
- * was redrawn on 2026-11-04 at Matthew's request for a realistic head shape (not a measured structure).
+ * was redrawn on 2026-11-04 at Matthew's request for a realistic head shape (not a measured structure),
+ * and is now traced from the sculpted 3D head so the figure and the 3D model match.
  * Do not change any inner shape or position without updating docs/EVIDENCE.md and getting Matthew's OK.
  * Colors are the anatomy palette in docs/DESIGN.md.
  */
+
+import shapes from './anatomy-shapes.json' with { type: 'json' };
 
 export type Condition = 'typical' | 'chiari' | 'syrinx' | 'surgery';
 export const CONDITIONS: Condition[] = ['typical', 'chiari', 'syrinx', 'surgery'];
@@ -37,7 +40,8 @@ export interface FigureStrings {
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-const SKIN = 'M99.1 265.7 C99.9 256.3 100.1 242.3 101.7 231.2 C103.3 220 105.7 209.2 108.8 198.9 C111.9 188.6 115.8 178.6 120.5 169.3 C125.1 160 130.2 151.4 136.7 143 C143.2 134.7 149.6 126.3 159.5 119.2 C169.4 112.1 183.2 105.5 196.1 100.3 C209 95.2 222.9 91.3 236.8 88.3 C250.8 85.3 265.5 83.5 279.9 82.4 C294.4 81.4 309.2 81.3 323.6 82.1 C338 82.9 352.4 84.5 366.2 87 C380 89.5 393.7 92.6 406.4 97.1 C419.1 101.6 431.3 107.3 442.5 114 C453.7 120.6 464.2 128.3 473.7 136.8 C483.2 145.3 491.9 154.8 499.4 164.9 C506.9 175.1 513.5 186.2 518.9 197.7 C524.2 209.3 528.5 221.7 531.6 234.4 C534.6 247.2 536.2 262.8 537 274.3 C537.8 285.8 537.2 293.8 536.5 303.4 C535.8 312.9 534.7 322.3 532.9 331.4 C531.1 340.6 528.8 349.6 525.9 358.2 C523 366.8 519.5 375.2 515.3 383.2 C511.2 391.2 504.9 400.4 501 406 C497.1 411.6 495.2 410.1 492 416.8 C488.9 423.5 485 435.5 482 446 C479 456.5 475.3 466 474 480 C472.7 494 473 511.7 474 530 C475 548.3 477.7 571.7 480 590 C482.3 608.3 486.7 626.7 488 640 L218 640 C217.3 625 215.8 598.3 214 580 C212.2 561.7 210 541.3 207 530 C204 518.7 203.8 516 196 512 C188.2 508 172.3 507.7 160 506 C147.7 504.3 131.3 504 122 502 C112.7 500 108.8 497.8 104 494 C99.2 490.2 95.5 484.2 93 479 C90.5 473.8 88.7 468.3 89 463 C89.3 457.7 95.2 451.7 95 447 C94.8 442.3 90 439 88 435 C86 431 82.8 426.5 83 423 C83.2 419.5 89.2 417.3 89 414 C88.8 410.7 83.2 406.8 82 403 C80.8 399.2 81.3 394.7 82 391 C82.7 387.3 87.3 383.2 86 381 C84.7 378.8 77.8 379.3 74 378 C70.2 376.7 65.7 375.3 63 373 C60.3 370.7 57.8 367.8 58 364 C58.2 360.2 60.3 355.7 64 350 C67.7 344.3 75 336 80 330 C85 324 90.5 318.3 94 314 C97.5 309.7 100.5 308.3 101 304 C101.5 299.7 97.3 294.4 97 288 C96.7 281.6 98.4 275.2 99.1 265.7 Z';
+// The head outline comes from the sculpted 3D head (model/simple/build.mjs writes it).
+const SKIN = shapes.skin;
 
 const TONSIL = {
   typical: 'M372 412 C382 416 391 426 390 434 C389 442 380 446 374 442 C368 437 366 422 372 412 Z',
@@ -50,7 +54,8 @@ export function anatomyFigureSvg(options: FigureOptions, t: FigureStrings): stri
   const L = t.labels;
   const low = c === 'chiari' || c === 'syrinx';
   const surgery = c === 'surgery';
-  const viewBox = labels ? '40 70 720 570' : '50 70 480 570';
+  // Without labels the frame is just the head and neck (widened 2026-11-04 so the back of the head isn't clipped).
+  const viewBox = labels ? '40 62 720 578' : '36 62 522 578';
   const tonsilPath = low ? TONSIL.low : surgery ? TONSIL.surgery : TONSIL.typical;
   const tonsilTip = low ? 471 : 463;
   const tonsilMid = low ? 448 : surgery ? 444 : 430;

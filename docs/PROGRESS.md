@@ -3,6 +3,25 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Logo, and getting ready to go live
+
+- **Logo (Matthew):** saved as `design/brand/open-chiari-logo.png`. `scripts/make-brand.py` makes the web versions in `public/brand/`:
+  - the see-through logo in every page header;
+  - a light version (light outline and lettering, lighter purple) in the dark 3D Explorer header;
+  - the head-and-brain mark as the browser tab and home-screen icon;
+  - a 1200 by 630 picture for link previews (new preview tags on every page).
+- **Colours (Matthew):** buttons and links stay blue; the brand colour tokens now use the logo's purples. DESIGN.md updated.
+- **Decisions (Matthew):**
+  - Explain It: build now with approved text only, and draft the missing notes and explanations with sources for approval.
+  - Go live now on Cloudflare Pages: openchiari.org was bought on Cloudflare.
+- **Hosting prep:** `.node-version` (22) so Cloudflare builds with the same Node version as here. The largest file is 8 MB (Pages allows 25 MiB). Everything the build needs is in the repository.
+- **To go live (Matthew):**
+  - merge this work into `main`;
+  - connect the repository to Cloudflare Pages: build command `npm run build`, output folder `dist`, production branch `main`;
+  - add openchiari.org as a custom domain.
+  - Leave Cloudflare's Web Analytics off until step 5, where its privacy settings get checked.
+- **Next:** Phase 3 step 3, Explain It.
+
 ## 2026-11-04: Phase 3, step 2: Open model page, downloads and embed
 
 - **Open model page:** the license box with Fig. 2 (Chiari I with syrinx), the embed builder, the downloads table and "How to credit it". All text word for word from COPY.md, with the "Accuracy checks" row (no reviewer).

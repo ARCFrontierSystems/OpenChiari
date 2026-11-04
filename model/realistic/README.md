@@ -33,6 +33,21 @@ confirms "scripts disabled ... skipping".
 | `inventory.py` | Lists all 7,184 objects in the atlas (4,569 surfaces) as JSON |
 | `measure_typical.py` | Foramen magnum along the midline and the tonsil tip vs the McRae line, as the atlas comes |
 | `export_midline_probe.py` | First-look export of the head and upper neck, cut at the midline, as glTF |
+| `extract.py` | Builds the realistic model for one condition: `typical` (tonsils about 1 mm above the McRae line) or `chiari` (about 12 mm below, peg-shaped, fluid behind them crowded out) |
+| `check.mjs` | Automatic measurements against EVIDENCE.md (`npm run model:check:realistic -- <file> [--condition chiari --typical <typical file>]`) |
+
+```bash
+model/realistic/.venv/bin/python -I model/realistic/extract.py model/source/Z-Anatomy/Startup.blend typical-raw.glb typical
+model/realistic/.venv/bin/python -I model/realistic/extract.py model/source/Z-Anatomy/Startup.blend chiari-raw.glb chiari
+node model/realistic/check.mjs typical-raw.glb
+node model/realistic/check.mjs chiari-raw.glb --condition chiari --typical typical-raw.glb
+```
+
+How Chiari I is made: the lower part of each atlas tonsil is stretched down (the top, where it joins the
+cerebellum, stays), narrowed toward a blunt tip and drawn toward the midline so it passes through the opening;
+anything that would pass into bone or the spinal cord is pushed back out, leaving the tonsils slightly squeezed
+where the space is tight. The fluid around the cerebellum is computed around the brain, and in Chiari I the space
+behind the brainstem up to 12 mm above the McRae line is left out (filled by the tonsils), as in the Simple model.
 
 ## First findings (2026-11-04)
 

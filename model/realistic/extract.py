@@ -12,13 +12,16 @@ What it does, in plain terms:
   one surface, and saves a glTF file. Prints the McRae line and tonsil measurements and how closed each surface is.
 
 Run:
-  model/realistic/.venv/bin/python -I model/realistic/extract.py model/source/Z-Anatomy/Startup.blend out.glb
+  model/realistic/.venv/bin/python -I model/realistic/extract.py model/source/Z-Anatomy/Startup.blend out.glb [typical|chiari]
 """
 import sys, math
 import bpy, bmesh
 from mathutils import Vector, Matrix
 
 blend, out_glb = sys.argv[1], sys.argv[2]
+CONDITION = sys.argv[3] if len(sys.argv) > 3 else 'typical'
+assert CONDITION in ('typical', 'chiari'), CONDITION
+print('condition:', CONDITION)
 bpy.ops.wm.open_mainfile(filepath=blend, load_ui=False, use_scripts=False)
 D = bpy.data
 
@@ -328,10 +331,12 @@ members['cord'] = []
 print(f'cord built: {2 * rx:.1f} x {2 * ry:.1f} mm at the medulla, 8.8 x 12.4 mm from 6 mm below it')
 built.append(finish('cord', bm))
 
-# ---------------------------------------------------------------- tonsil position (Typical)
-# EVIDENCE.md: typical tonsil tip about 1 mm above the McRae line (the Simple model uses the same). The atlas has
-# it at about 2.7 mm. Stretch the lower part of the tonsils down (the top, where they join the cerebellum, stays).
-TONSIL_TIP_ABOVE = 1.0  # mm
+# ---------------------------------------------------------------- tonsil position
+# Typical (EVIDENCE.md): tip about 1 mm above the McRae line, rounded (the atlas has about 2.7 mm; the Simple
+# model uses 1 mm). Chiari I: about 12 mm below the line (the average in a study of 160 people; the Simple model
+# uses the same), pointed or peg-shaped. The top of each tonsil, where it joins the cerebellum, stays in place;
+# the lower part is stretched down, and for Chiari I narrowed toward the tip.
+TONSIL_TIP_ABOVE = 1.0 if CONDITION == 'typical' else -12.4  # mm
 bas_m = TO_MODEL @ basion
 opi_m = TO_MODEL @ opisthion
 def above_mcrae(p):
@@ -345,11 +350,23 @@ ton = D.objects['tonsil'].data
 tz = [v.co.z for v in ton.vertices]
 z_top, z_low = max(tz), min(tz)
 drop = above_mcrae(min((v.co for v in ton.vertices), key=above_mcrae)) - TONSIL_TIP_ABOVE
+# Each tonsil's own centre line (left and right are separate, on either side of the midline).
+def centre(side):
+    vs = [v.co for v in ton.vertices if (v.co.y > 0) == side]
+    return Vector((sum(v.x for v in vs) / len(vs), sum(v.y for v in vs) / len(vs), 0))
+centres = {True: centre(True), False: centre(False)}
 for v in ton.vertices:
     w = min(1.0, max(0.0, (z_top - v.co.z) / (z_top - z_low)))
+    if CONDITION == 'chiari':
+        # Narrow toward the tip (peg shape, with a blunt end): up to 38% narrower front to back and side to side
+        # near the tip, and drawn in toward the midline so the tonsils pass through the opening (about 30 mm across).
+        c = centres[v.co.y > 0]
+        k = 1 - 0.38 * w ** 2.5
+        v.co.x = c.x + (v.co.x - c.x) * k
+        v.co.y = (c.y + (v.co.y - c.y) * k) * (1 - 0.35 * w ** 1.5)
     v.co.z -= drop * w ** 1.5
 ton.update()
-print(f'tonsils: lowest point moved down {drop:.1f} mm, to {TONSIL_TIP_ABOVE:.1f} mm above the McRae line')
+print(f'tonsils ({CONDITION}): lowest point moved down {drop:.1f} mm, to {TONSIL_TIP_ABOVE:+.1f} mm from the McRae line')
 
 # ---------------------------------------------------------------- fluid space around the brain in the posterior fossa
 # The atlas has no fluid spaces around the brain. Compute them on a 1 mm grid: inside the skull (bone behind and to
@@ -373,14 +390,38 @@ def bvh_of(names):
 
 import time
 t_fluid = time.time()
-brain_tree = bvh_of(['cerebellum', 'tonsil', 'brainstem', 'ventricle-fourth', 'cord'])
 bone_tree = bvh_of(['occipital', 'skull', 'c1', 'c2'])
 tent_tree = bvh_of(['tentorium'])
+# The tonsils must not pass into bone (the opening and C1) or into the spinal cord.
+cord_tree = bvh_of(['cord'])
+
 above_tree = bvh_of(['cerebrum', 'diencephalon', 'callosum'])
 
 def inside(tree, p):
     loc, nrm, _, dist = tree.find_nearest(p)
     return loc is not None and (p - loc).dot(nrm) < 0, (dist if loc is not None else 1e9)
+if CONDITION == 'chiari':
+    # Where the lowered tonsils would pass into bone or the spinal cord, push them back out (0.6 mm clear), then
+    # smooth lightly; repeated a few times. This leaves them squeezed where the space is tight, as in Chiari I.
+    tm = D.objects['tonsil'].data
+    for it in range(4):
+        moved = 0
+        for v in tm.vertices:
+            for tree in (bone_tree, cord_tree):
+                loc, nrm, _, dist = tree.find_nearest(v.co)
+                if loc is None:
+                    continue
+                if (v.co - loc).dot(nrm) < 0 or dist < 0.6:
+                    v.co = loc + nrm.normalized() * 0.6
+                    moved += 1
+        bm_t = bmesh.new(); bm_t.from_mesh(tm)
+        bmesh.ops.smooth_vert(bm_t, verts=bm_t.verts, factor=0.3, use_axis_x=True, use_axis_y=True, use_axis_z=True)
+        bm_t.to_mesh(tm); bm_t.free()
+        print(f'  tonsils pushed out of bone and cord: {moved} points (pass {it + 1})', flush=True)
+    tm.update()
+brain_tree = bvh_of(['cerebellum', 'tonsil', 'brainstem', 'ventricle-fourth', 'cord'])
+tv_all = [v.co.copy() for v in D.objects['tonsil'].data.vertices]
+print(f'tonsil points inside bone: {sum(1 for v in tv_all if inside(bone_tree, v)[0])}, inside the cord: {sum(1 for v in tv_all if inside(cord_tree, v)[0])} (of {len(tv_all)})', flush=True)
 
 STEP = 1.0
 XS, YS, ZS = range(-34, 80), range(-62, 63), range(-8, 62)
@@ -427,6 +468,15 @@ def grow(a, n):
 CLOSE = 4  # mm
 solid = ~grow(~grow(brain, CLOSE), CLOSE)
 fluid_grid = space & ~solid
+if CONDITION == 'chiari':
+    # EVIDENCE.md: in Chiari I the fluid space behind the cerebellum is often crowded or narrowed. As in the Simple
+    # model, the space behind the brainstem near the opening (up to 12 mm above the line) is filled by the tonsils.
+    for i, ix in enumerate(XS):
+        if ix < -2:
+            continue
+        for k, iz in enumerate(ZS):
+            if above_mcrae(Vector((ix, 0, iz))) < 12:
+                fluid_grid[i, :, k] = False
 # keep the largest connected space (6-neighbour flood fill)
 labels = np.zeros(fluid_grid.shape, np.int32)
 sizes = []

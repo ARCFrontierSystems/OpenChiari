@@ -3,6 +3,22 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Phase 2, step 4: realistic Chiari I
+
+- **Built:** `extract.py ... chiari` makes the Chiari I model from the same atlas.
+  - The lower part of each tonsil is stretched down to about 12 mm below the McRae line (EVIDENCE.md: the model uses about 12 mm, the average in a study of 160 people) and narrowed into a peg with a blunt tip.
+  - The tonsils are drawn toward the midline so they pass through the opening. Where they would touch bone or the cord they are pushed back out, so they look slightly squeezed, as in Chiari I.
+  - The fluid space behind them at the opening is crowded out (EVIDENCE.md: often crowded or narrowed), as in the Simple model.
+- **Automatic checks** (`model/realistic/check.mjs`) now cover both conditions. Results:
+  - Chiari I tonsil tip 12.4 mm below the line (10 to 14).
+  - Tip 7.2 mm wide 3 mm above its lowest point, against 14.0 mm in Typical: pointed, but not a spike.
+  - Tonsils clear of bone and the spinal cord.
+  - No fluid behind the brainstem near the opening.
+  - Typical still open there; everything else unchanged. Both pass.
+- **Unchanged from Typical:** skull, brainstem, fourth ventricle (EVIDENCE.md: normal position in Chiari I). The smaller posterior fossa, shorter clivus and steeper tentorium are not shown (EVIDENCE.md notes the tentorium claim needs a Chiari I source first).
+- **Not public:** stays hidden until the independent audit, MRI comparison and Matthew's approval (CLAUDE.md rule 1a).
+- **Next:** Matthew reviews Chiari I. Then After decompression (bone removed, C1 arch, dural patch, re-formed fluid space, tonsils risen about 2 mm), the syrinx, and step 5 (slimming for phones and showing it in the Explorer behind the Realistic switch).
+
 ## 2026-11-04: Phase 2, step 3: realistic Typical model checked against EVIDENCE.md
 
 - **Automatic measurements** for the realistic model (`npm run model:check:realistic -- <file>`, in `model/realistic/check.mjs`). All pass:

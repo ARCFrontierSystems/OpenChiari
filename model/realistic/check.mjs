@@ -1,6 +1,7 @@
 // Automatic measurements of the realistic model against docs/EVIDENCE.md (CLAUDE.md rule 1a, check 2).
 // Works on the raw export (millimetres, origin at the middle of the foramen magnum, +x back, +y up, +z side).
 // Run: node model/realistic/check.mjs typical-raw.glb [--condition typical]
+//      node model/realistic/check.mjs chiari-raw.glb --condition chiari --typical typical-raw.glb
 import { NodeIO } from '@gltf-transform/core';
 import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
 import { MeshoptDecoder } from 'meshoptimizer';
@@ -8,7 +9,9 @@ import { MeshoptDecoder } from 'meshoptimizer';
 await MeshoptDecoder.ready;
 const file = process.argv[2];
 const condition = process.argv.includes('--condition') ? process.argv[process.argv.indexOf('--condition') + 1] : 'typical';
-const doc = await new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({ 'meshopt.decoder': MeshoptDecoder }).read(file);
+const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({ 'meshopt.decoder': MeshoptDecoder });
+let doc = await io.read(file);
+const typicalFile = process.argv.includes('--typical') ? process.argv[process.argv.indexOf('--typical') + 1] : null;
 const problems = [];
 
 /** World-space vertices and triangles of one structure. */
@@ -66,7 +69,49 @@ const tipText = tipAbove >= 0 ? `${tipAbove.toFixed(1)} mm above` : `${(-tipAbov
 if (condition === 'typical') {
   console.log(`Tonsil tip: ${tipText} the McRae line (EVIDENCE.md typical: about 1 mm above)`);
   ok(tipAbove >= 0 && tipAbove <= 2, `typical tonsil tip ${tipText} the line (expected about 1 mm above, 0 to 2)`);
+} else {
+  console.log(`Tonsil tip: ${tipText} the McRae line (EVIDENCE.md Chiari I: at least about 5 mm below; model about 12 mm)`);
+  ok(tipAbove <= -10 && tipAbove >= -14, `Chiari I tonsil tip ${tipText} the line (expected about 12 mm below, 10 to 14)`);
 }
+/** Front-to-back width of the tonsils 3 mm above their lowest point: rounded tips are wide, pointed ones narrow. */
+const tipWidth = (verts, tipY) => { const band = verts.filter((v) => Math.abs(v[1] - (tipY + 3)) < 1.2); return Math.max(...band.map((v) => v[0])) - Math.min(...band.map((v) => v[0])); };
+const myWidth = tipWidth(tonsil.verts, tip[1]);
+if (typicalFile) {
+  const saved = doc;
+  doc = await io.read(typicalFile);
+  const t = mesh('tonsil');
+  const tTip = t.verts.reduce((a, v) => (v[1] < a[1] ? v : a));
+  const typWidth = tipWidth(t.verts, tTip[1]);
+  doc = saved;
+  console.log(`Tonsil tip shape (width 3 mm above the tip): ${condition} ${myWidth.toFixed(1)} mm, typical ${typWidth.toFixed(1)} mm (EVIDENCE.md: rounded vs often pointed or peg-shaped)`);
+  if (condition === 'chiari') ok(myWidth < typWidth * 0.85 && myWidth > typWidth * 0.45, 'the Chiari I tonsil tip should be narrower (peg-shaped) than the typical one, but not a sharp spike (45 to 85% of its width)');
+} else console.log(`Tonsil tip width 3 mm above the tip: ${myWidth.toFixed(1)} mm`);
+
+// ---- Tonsils clear of bone and the spinal cord (nearest surface faces away from the point).
+function insideCount(points, names) {
+  const tris = [];
+  for (const n of names) { const g = mesh(n); if (!g) continue; for (const t of g.tris) { const [a, b, c] = t.map((i) => g.verts[i]); if (Math.min(a[1], b[1], c[1]) < 25 && Math.max(a[1], b[1], c[1]) > -30) tris.push([a, b, c]); } }
+  let n = 0;
+  for (const p of points) {
+    let best = Infinity, side = 1;
+    for (const [a, b, c] of tris) {
+      const cx = (a[0] + b[0] + c[0]) / 3, cy = (a[1] + b[1] + c[1]) / 3, cz = (a[2] + b[2] + c[2]) / 3;
+      const d = (p[0] - cx) ** 2 + (p[1] - cy) ** 2 + (p[2] - cz) ** 2;
+      if (d < best) {
+        best = d;
+        const u = [b[0] - a[0], b[1] - a[1], b[2] - a[2]], w = [c[0] - a[0], c[1] - a[1], c[2] - a[2]];
+        const nrm = [u[1] * w[2] - u[2] * w[1], u[2] * w[0] - u[0] * w[2], u[0] * w[1] - u[1] * w[0]];
+        side = (p[0] - cx) * nrm[0] + (p[1] - cy) * nrm[1] + (p[2] - cz) * nrm[2];
+      }
+    }
+    if (best < 4 && side < 0) n++;
+  }
+  return n;
+}
+const low = tonsil.verts.filter((v) => v[1] < 8);
+const inBone = insideCount(low, ['occipital', 'c1']), inCord = insideCount(low, ['cord']);
+console.log(`Tonsils inside bone: ${inBone} points, inside the spinal cord: ${inCord} points (of ${low.length} near the opening)`);
+ok(inBone <= low.length * 0.01 && inCord <= low.length * 0.01, 'the tonsils should not pass into bone or the spinal cord');
 
 // ---- Clivus: dorsum sellae (top of the clivus, behind the sella) to the basion.
 const skull0 = section('skull');
@@ -120,6 +165,10 @@ const csf = mesh('csf-cranial');
 const parts = pieces(csf);
 console.log(`Fluid around the cerebellum: ${parts.length} piece(s) (largest ${parts[0]} points${parts.length > 1 ? `, others ${parts.slice(1, 6).join(', ')}` : ''})`);
 ok(parts.length === 1, 'the fluid around the cerebellum should be one continuous space (no stray spots)');
+const behind = csf.verts.filter((v) => v[0] > 0 && above(v) < 8).length;
+console.log(`Fluid behind the brainstem within 8 mm above the McRae line: ${behind} points (EVIDENCE.md: typical open; Chiari I often crowded)`);
+if (condition === 'chiari') ok(behind === 0, 'in Chiari I the fluid space behind the tonsils at the opening should be crowded out');
+else ok(behind > 0, 'in typical anatomy there should be fluid behind the brainstem at the opening');
 
 if (problems.length) {
   console.error('\nFAILED: the realistic model does not match docs/EVIDENCE.md yet:\n- ' + problems.join('\n- '));

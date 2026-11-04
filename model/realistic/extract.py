@@ -14,7 +14,7 @@ What it does, in plain terms:
 Run:
   model/realistic/.venv/bin/python -I model/realistic/extract.py model/source/Z-Anatomy/Startup.blend out.glb [typical|chiari]
 """
-import sys, math
+import sys, math, os
 import bpy, bmesh
 from mathutils import Vector, Matrix
 
@@ -288,17 +288,23 @@ for name, objs in members.items():
     built.append(finish(name, bm))
 
 # ---------------------------------------------------------------- spinal cord (not in the atlas)
-# Follow the middle of the spinal dura downward from the bottom of the medulla. Starts at the medulla's own
-# bottom cross-section and within 6 mm reaches the measured adult cord size (EVIDENCE.md "Spinal cord, upper
-# neck": 8.8 x 12.4 mm at C2, 8.7 x 14 mm at C4; PMC8334714).
+# Starts where the brainstem is cut at the McRae line, with the medulla's own size and position there, and narrows
+# smoothly over 12 mm (to about C1) to the measured adult cord size, following the middle of the spinal dura
+# (EVIDENCE.md "Spinal cord, upper neck": 8.8 x 12.4 mm at C2, 8.7 x 14 mm at C4; PMC8334714). The atlas's own
+# medulla below the line (a thick, boxy piece down to C1) is not used.
 dura = D.objects['dura']
 dv = [v.co for v in dura.data.vertices]
 medulla = [TO_MODEL @ (o.matrix_world @ v.co) for o in members['brainstem'] if 'Medulla' in o.name for v in o.data.vertices]
-med_bottom = min(v.z for v in medulla)
-ring_low = [v for v in medulla if v.z < med_bottom + 3]
-rx = (max(v.x for v in ring_low) - min(v.x for v in ring_low)) / 2  # front-back half size
-ry = (max(v.y for v in ring_low) - min(v.y for v in ring_low)) / 2  # side-to-side half size
-top_z = med_bottom + 2
+top_z = (bas0.z + opi0.z) / 2 + 1.0  # 1 mm above the McRae line's middle, overlapping the cut brainstem
+ring_top = [v for v in medulla if abs(v.z - top_z) < 1.5]
+rx = (max(v.x for v in ring_top) - min(v.x for v in ring_top)) / 2  # front-back half size
+ry = (max(v.y for v in ring_top) - min(v.y for v in ring_top)) / 2  # side-to-side half size
+# The atlas's medulla at this height includes the bulges on its front; cap the cord's starting size at about
+# 11.6 by 14 mm (the medulla where it meets the cord), so it narrows evenly to the cord's size.
+rx, ry = min(rx, 5.8), min(ry, 7.0)
+mx = (max(v.x for v in ring_top) + min(v.x for v in ring_top)) / 2
+my = (max(v.y for v in ring_top) + min(v.y for v in ring_top)) / 2
+TAPER = 12.0
 steps = 40
 ring_n = 24
 bm = bmesh.new()
@@ -307,6 +313,7 @@ cord_axis = []  # (height, centre front-back, centre side to side, half sizes): 
 # Centre line: the middle of the dura's outline at each height (not the average of its points, which are unevenly
 # spread), then smoothed so the cord runs evenly down the canal.
 centres = []
+cx, cy = mx, my  # until the dura is reached
 for k in range(steps + 1):
     z = top_z + (BOTTOM_MM - top_z) * k / steps
     slab = [v for v in dv if abs(v.z - z) < 3.0]
@@ -318,10 +325,12 @@ for _ in range(6):
     centres = [centres[0]] + [[(a[0] + 2 * b[0] + c[0]) / 4, (a[1] + 2 * b[1] + c[1]) / 4] for a, b, c in zip(centres, centres[1:], centres[2:])] + [centres[-1]]
 for k in range(steps + 1):
     z = top_z + (BOTTOM_MM - top_z) * k / steps
-    cx, cy = centres[k]
     below = top_z - z
-    t = min(1.0, below / 6.0)
-    deep = min(1.0, max(0.0, (below - 6.0) / max(1.0, top_z - BOTTOM_MM - 6.0)))
+    t = min(1.0, below / TAPER)
+    t = t * t * (3 - 2 * t)  # smooth start and finish
+    cx = (1 - t) * mx + t * (centres[k][0] + 0.8)  # 0.8 mm behind the dura's middle: the vertebral bodies sit close in front
+    cy = (1 - t) * my + t * centres[k][1]
+    deep = min(1.0, max(0.0, (below - TAPER) / max(1.0, top_z - BOTTOM_MM - TAPER)))
     ax = (1 - t) * rx + t * (4.4 + (4.35 - 4.4) * deep)   # half of 8.8 mm, toward 8.7 mm
     ay = (1 - t) * ry + t * (6.2 + (7.0 - 6.2) * deep)    # half of 12.4 mm, toward 14 mm
     cord_axis.append((z, cx, cy, ax, ay))
@@ -334,13 +343,9 @@ for r0, r1 in zip(rings, rings[1:]):
 bm.faces.new(list(reversed(rings[0])))
 bm.faces.new(rings[-1])
 if cord_top_piece is not None:
-    me_tmp = D.meshes.new('cord-top')
-    cord_top_piece.to_mesh(me_tmp)
     cord_top_piece.free()
-    bm.from_mesh(me_tmp)
-    D.meshes.remove(me_tmp)
 members['cord'] = []
-print(f'cord built: {2 * rx:.1f} x {2 * ry:.1f} mm at the medulla, 8.8 x 12.4 mm from 6 mm below it')
+print(f'cord built: {2 * rx:.1f} x {2 * ry:.1f} mm at the McRae line, 8.8 x 12.4 mm from {TAPER:.0f} mm below it')
 built.append(finish('cord', bm))
 
 # ---------------------------------------------------------------- tonsil position
@@ -376,11 +381,20 @@ for v in ton.vertices:
         k = 1 - 0.38 * w ** 2.5
         v.co.x = c.x + (v.co.x - c.x) * k
         v.co.y = c.y + (v.co.y - c.y) * k
-    # Lower ends drawn toward the midline in every view, so the midline cut shows the tonsils at their lowest point,
-    # as the site says and as MRI measures them (EVIDENCE.md "Midline simplification"); also lets the Chiari I tonsils
-    # pass through the opening (about 30 mm across).
-    v.co.y *= 1 - 0.7 * w ** 1.5
+    # Slightly narrower side to side toward the tip, so the Chiari I tonsils pass through the opening (about 30 mm).
+    v.co.y *= 1 - 0.35 * w ** 1.5
     v.co.z -= drop * w ** 1.5
+# Lower ends slid toward the midline in every view until the two tonsils overlap there (joined below), so the
+# midline cut shows the tonsils at their lowest point, as the site says and as MRI measures them (EVIDENCE.md
+# "Midline simplification"). Sliding, not squashing, keeps each tonsil's own shape.
+def tonsil_w(v):
+    return min(1.0, max(0.0, (z_top - v.co.z) / (z_top - z_low)))
+# Each tonsil is slid so its own lowest point lands on the midline (the inner parts overlap and are joined below).
+gap = {side: abs(min((v.co for v in ton.vertices if (v.co.y > 0) == side), key=above_mcrae).y) for side in (True, False)}
+for v in ton.vertices:
+    side = v.co.y > 0
+    v.co.y -= (1 if side else -1) * gap[side] * tonsil_w(v) ** 1.5
+print(f'tonsils slid toward the midline at the tip: {gap[True]:.1f} mm and {gap[False]:.1f} mm')
 ton.update()
 print(f'tonsils ({CONDITION}): lowest point moved down {drop:.1f} mm, to {TONSIL_TIP_ABOVE:+.1f} mm from the McRae line')
 
@@ -406,10 +420,11 @@ def bvh_of(names):
 
 import time
 t_fluid = time.time()
-bone_tree = bvh_of(['occipital', 'skull', 'c1', 'c2'])
+bone_tree = bvh_of(['occipital', 'skull', 'c1', 'c2', 'c3-c5', 'discs'])
 tent_tree = bvh_of(['tentorium'])
 # The tonsils must not pass into bone (the opening and C1) or into the spinal cord.
 cord_tree = bvh_of(['cord'])
+stem_tree = bvh_of(['brainstem'])
 
 above_tree = bvh_of(['cerebrum', 'diencephalon', 'callosum'])
 
@@ -417,13 +432,35 @@ def inside(tree, p):
     loc, nrm, _, dist = tree.find_nearest(p)
     return loc is not None and (p - loc).dot(nrm) < 0, (dist if loc is not None else 1e9)
 if True:
-    # Where the tonsils would pass into bone or the spinal cord, push them back out (0.6 mm clear), then
+    # Near their tips the two tonsils now meet at the midline: join them into one closed surface (voxel remesh,
+    # 0.5 mm), so "inside the tonsils" is well defined for the fluid and the checks.
+    tob = D.objects['tonsil']
+    rm = tob.modifiers.new('join', 'REMESH')
+    rm.mode = 'VOXEL'; rm.voxel_size = 0.5; rm.use_smooth_shade = True
+    dg = bpy.context.evaluated_depsgraph_get()
+    me_j = bpy.data.meshes.new_from_object(tob.evaluated_get(dg))
+    tob.modifiers.remove(rm)
+    old_me = tob.data
+    tob.data = me_j
+    D.meshes.remove(old_me)
+    # Where the tonsils would pass into bone, the cord or the brainstem, push them back out (0.6 mm clear), then
     # smooth lightly; repeated a few times. This leaves them squeezed where the space is tight, as in Chiari I.
     tm = D.objects['tonsil'].data
-    for it in range(4):
+    def tonsil_tip_above():
+        return min(above_mcrae(v.co) for v in tm.vertices)
+    for it in range(6):
+        if it == 3:
+            # Pushing can move the tip a little; set it back to the intended height (lower part only).
+            tz2 = [v.co.z for v in tm.vertices]
+            zt, zl = max(tz2), min(tz2)
+            fix = tonsil_tip_above() - TONSIL_TIP_ABOVE
+            for v in tm.vertices:
+                w = min(1.0, max(0.0, (zt - v.co.z) / (zt - zl)))
+                v.co.z -= fix * w ** 1.5
+            print(f'  tonsil tip set back by {fix:+.1f} mm', flush=True)
         moved = 0
         for v in tm.vertices:
-            for tree in (bone_tree, cord_tree):
+            for tree in (bone_tree, cord_tree, stem_tree):
                 loc, nrm, _, dist = tree.find_nearest(v.co)
                 if loc is None:
                     continue
@@ -433,15 +470,44 @@ if True:
         bm_t = bmesh.new(); bm_t.from_mesh(tm)
         bmesh.ops.smooth_vert(bm_t, verts=bm_t.verts, factor=0.3, use_axis_x=True, use_axis_y=True, use_axis_z=True)
         bm_t.to_mesh(tm); bm_t.free()
-        print(f'  tonsils pushed out of bone and cord: {moved} points (pass {it + 1})', flush=True)
+        print(f'  tonsils pushed out of bone, cord and brainstem: {moved} points (pass {it + 1})', flush=True)
+    # A last step with no smoothing after it: any tonsil point still inside the brainstem or cord (counted by rays,
+    # which does not depend on the atlas's surface directions) moves straight back until it is 0.6 mm clear. The
+    # tonsils sit behind the brainstem, so back is the right way out.
+    def hits(tree, o, d):
+        n, o = 0, o.copy()
+        for _ in range(50):
+            loc, _, _, _ = tree.ray_cast(o, d, 200.0)
+            if loc is None:
+                return n
+            n += 1
+            o = loc + d * 1e-3
+        return n
+    dirs = [Vector((1, 0, 0)), Vector((-1, 0, 0)), Vector((0, 1, 0)), Vector((0, -1, 0)), Vector((0.6, 0.48, 0.64))]
+    def inside_by_rays(tree, p):
+        return sum(hits(tree, p, d) % 2 for d in dirs) >= 3
+    moved_back = 0
+    for v in tm.vertices:
+        if above_mcrae(v.co) > 15:
+            continue
+        for tree in (cord_tree, stem_tree):
+            if inside_by_rays(tree, v.co):
+                for _ in range(80):
+                    v.co.x += 0.25
+                    if not inside_by_rays(tree, v.co):
+                        break
+                v.co.x += 0.6
+                moved_back += 1
     tm.update()
+    print(f'  tonsil points moved back out of the brainstem or cord: {moved_back}', flush=True)
+    print(f'  tonsil tip after pushing: {tonsil_tip_above():+.1f} mm from the McRae line', flush=True)
 # The atlas's cerebellum reaches up to about 4 mm into the occipital bone off the midline: push it back out.
 cm = D.objects['cerebellum'].data
 moved = 0
 for v in cm.vertices:
     loc, nrm, _, dist = bone_tree.find_nearest(v.co)
     if loc is not None and (v.co - loc).dot(nrm) < 0:
-        v.co = loc + nrm.normalized() * 0.4
+        v.co = loc + nrm.normalized() * 1.2
         moved += 1
 cm.update()
 print(f'cerebellum: {moved} points pushed out of bone', flush=True)
@@ -465,41 +531,23 @@ def patch_x(z):
             return xa + (xb - xa) * (z - za) / (zb - za)
     return None
 PATCH_N = 24
+PATCH_CURVE = 0.015  # the patch bulges back in the middle; its edges meet the dura at the bone's cut edges
 def patch_half(z):
-    # the patch's half-width at height z: narrower at the top and bottom (an oval patch)
+    # the patch's half-width at height z: a rounded rectangle, a little wider than the bone window (30 mm across)
+    # so it covers the whole opening, narrowing only near its top and bottom ends
     u = (PATCH[0][1] - z) / (PATCH[0][1] - PATCH[-1][1])
-    return 16 * max(0.35, math.sin(math.pi * (u * PATCH_N + 0.5) / (PATCH_N + 1)) ** 0.5)
+    u = (u * PATCH_N + 0.5) / (PATCH_N + 1)  # the patch's rows sit between its ends
+    return 17 * max(0.35, (1 - abs(2 * u - 1) ** 6) ** (1 / 6))
 def in_reformed(p):
     # below or near the opening, behind the brain, in front of the (curved, oval) patch
     px = patch_x(p.z)
-    return px is not None and abs(p.y) < patch_half(p.z) - 1.0 and p.x < px - 0.03 * p.y * p.y - 1.0 and p.x > -2
-
-# ---- The fluid around the spinal cord (the atlas's spinal dura is a thin, uneven shell, so it is built here):
-# an oval column around the cord, about 14 mm front to back below C1 (EVIDENCE.md: canal 13 to 15 mm; PMC2899662
-# fluid column 13.73 mm) and roomier just below the opening, about 19 mm across, a little behind the cord's centre.
-axis_s = sorted(cord_axis)  # (height, x, y, half sizes), bottom first
-def canal_centre(z):
-    if z >= axis_s[-1][0]:
-        return axis_s[-1][1], axis_s[-1][2]
-    for (za, xa, ya, *_), (zb, xb, yb, *_) in zip(axis_s, axis_s[1:]):
-        if za <= z <= zb:
-            t = (z - za) / (zb - za)
-            return xa + (xb - xa) * t, ya + (yb - ya) * t
-    return axis_s[0][1], axis_s[0][2]
-FM_Z = (bas_m.z + opi_m.z) / 2
-def in_canal(p):
-    if p.z > FM_Z + 2 or p.z < BOTTOM_MM + 0.5:
-        return False
-    cx, cy = canal_centre(p.z)
-    depth = FM_Z - p.z
-    a = 9.5 - 2.5 * min(1.0, max(0.0, (depth - 4) / 22))  # half front-to-back: 9.5 mm at the opening, 7 mm from C2 down
-    b = 9.5
-    return ((p.x - cx - 1.0) / a) ** 2 + ((p.y - cy) / b) ** 2 < 1
+    return px is not None and abs(p.y) < patch_half(p.z) - 1.0 and p.x < px - PATCH_CURVE * p.y * p.y - 1.0 and p.x > -2
 
 STEP = 1.0
-XS, YS, ZS = range(-34, 80), range(-62, 63), range(int(BOTTOM_MM) + 1, 62)
+XS, YS, ZS = range(-34, 80), range(-62, 63), range(-24, 62)
 NX, NY, NZ = len(XS), len(YS), len(ZS)
 brain = np.zeros((NX, NY, NZ), bool)
+near_brain = np.zeros((NX, NY, NZ), bool)
 space = np.zeros((NX, NY, NZ), bool)   # inside the skull, above the line, not bone
 for i, ix in enumerate(XS):
     if i % 20 == 0:
@@ -508,20 +556,19 @@ for i, ix in enumerate(XS):
         for k, iz in enumerate(ZS):
             p = Vector((ix * STEP, iy * STEP, iz * STEP))
             reformed = CONDITION == 'surgery' and in_reformed(p)
-            canal = in_canal(p)
-            # A thin sheath of fluid all round the cord, so it is wrapped in front as well as behind.
-            sheath = False
-            if FM_Z + 2 > p.z > BOTTOM_MM + 0.5:
-                loc = cord_tree.find_nearest(p)
-                sheath = loc[0] is not None and loc[3] < 2.6
-            canal = canal or sheath
-            if above_mcrae(p) < -1.0 and not reformed and not canal:
+            if above_mcrae(p) < -1.0 and not reformed:
                 continue
             b_in, b_d = inside(brain_tree, p)
             brain[i, j, k] = b_in or b_d < 0.6
-            if reformed or canal:
+            near_brain[i, j, k] = b_in or b_d < 1.0  # fluid stays clear of brain and cord (its surface grows 0.8 mm)
+            if CONDITION == 'surgery':
+                # nothing behind the dural patch (its curved, oval surface), above or below the opening
+                pxp = patch_x(p.z)
+                if pxp is not None and abs(p.y) < patch_half(p.z) + 3 and p.x > pxp - PATCH_CURVE * p.y * p.y - 0.8:
+                    continue
+            if reformed:
                 o_in, o_d = inside(bone_tree, p)
-                if not (o_in or o_d < (0.6 if sheath else 1.4)):
+                if not (o_in or o_d < 1.4):
                     space[i, j, k] = True
                 continue
             o_in, o_d = inside(bone_tree, p)
@@ -553,23 +600,13 @@ def grow(a, n):
     return a
 CLOSE = 4  # mm
 solid = ~grow(~grow(brain, CLOSE), CLOSE)
-fluid_grid = space & ~solid
-if CONDITION in ('chiari', 'syrinx'):
-    # EVIDENCE.md: in Chiari I the fluid space behind the cerebellum is often crowded or narrowed, and in many people
-    # flow slows or is blocked at the opening. The space behind the cerebellum stays (narrowed by the tonsils); at the
-    # opening, where the tonsils plug it, the fluid behind the cord is left out, down to just below their tips.
-    # Back surface of the cord (front-to-back position) at each height, near the midline.
-    cord_back = {}
-    for v in D.objects['cord'].data.vertices:
-        if abs(v.co.y) < 7:
-            zk = int(round(v.co.z))
-            cord_back[zk] = max(cord_back.get(zk, -1e9), v.co.x)
-    for i, ix in enumerate(XS):
-        for k, iz in enumerate(ZS):
-            pz = Vector((ix, 0, iz))
-            back = max(cord_back.get(iz + d, -1e9) for d in (-1, 0, 1))
-            if -14 < above_mcrae(pz) < 2 and ix > min(back, canal_centre(iz)[0] + 1.5) - 0.5:
-                fluid_grid[i, :, k] = False
+# Gaps between brain parts are filled (treated as brain) only above the opening, where they are the small gaps
+# between the atlas's cerebellum pieces; at and below the opening (tonsils, cord) they stay fluid, not empty.
+for i, ix in enumerate(XS):
+    for k, iz in enumerate(ZS):
+        if above_mcrae(Vector((ix, 0, iz))) < 2:
+            solid[i, :, k] = brain[i, :, k]
+fluid_grid = space & ~solid & ~near_brain
 # keep the largest connected space (6-neighbour flood fill)
 labels = np.zeros(fluid_grid.shape, np.int32)
 sizes = []
@@ -589,7 +626,7 @@ for seed in zip(*np.nonzero(fluid_grid)):
 keep = 1 + int(np.argmax(sizes))
 fluid = [Vector((XS[i] * STEP, YS[j] * STEP, ZS[k] * STEP)) for i, j, k in zip(*np.nonzero(labels == keep))]
 print(f'posterior fossa fluid: {len(fluid)} points ({len(fluid) * STEP ** 3 / 1000:.1f} ml) kept of {sum(sizes)} in {len(sizes)} pieces, {time.time() - t_fluid:.0f} s', flush=True)
-POINT_RADIUS = 1.2  # mm: points on a 1 mm grid merge into one surface
+POINT_RADIUS = 0.8  # mm: points on a 1 mm grid merge into one surface
 
 # Fluid points -> a smooth closed surface: geometry nodes turn points into a volume and the volume into a mesh.
 me = D.meshes.new('csf-points')
@@ -617,8 +654,8 @@ ng.links.new(v2m.outputs['Mesh'], go.inputs[0])
 gn = tmp.modifiers.new('surface', 'NODES')
 gn.node_group = ng
 sm = tmp.modifiers.new('smooth', 'SMOOTH')
-sm.iterations = 24
-sm.factor = 0.6
+sm.iterations = 10
+sm.factor = 0.5
 dg = bpy.context.evaluated_depsgraph_get()
 ev = tmp.evaluated_get(dg)
 bm = bmesh.new()
@@ -642,6 +679,61 @@ for v0 in list(bm.verts):
         bmesh.ops.delete(bm, geom=comp, context='VERTS')
 GROUPS['csf-cranial'] = dict(layer='csf', part='csf', color='#9CC3DA', opacity=0.75)
 built.append(finish('csf-cranial', bm))
+
+# ---------------------------------------------------------------- the fluid around the spinal cord
+# A solid tube around the cord, from just above the opening to the bottom of the view (the cord sits inside it; in
+# the cut view the cord shows in its own color, with the fluid around it). The atlas's spinal dura is a thin, uneven
+# shell, so it is not used. At each height the tube's outline is an oval about 14 mm front to back (EVIDENCE.md:
+# canal 13 to 15 mm; PMC2899662 fluid column 13.73 mm) and 19 mm across, a little behind the cord's centre (about 2 mm
+# of fluid in front, 3 mm behind), never closer than 0.4 mm to bone (rays cast out to the vertebrae).
+# Chiari I: from 2 to 14 mm below the line, where the tonsils plug the space behind the cord, the tube's back is
+# pulled in to the cord (EVIDENCE.md: in many people flow slows or is blocked there); the front stays open.
+GROUPS['csf-spinal'] = dict(layer='csf', part='csf', color='#9CC3DA', opacity=0.75)
+tb = bmesh.new()
+axis_s = sorted(cord_axis)
+fm_mid_z = (bas_m.z + opi_m.z) / 2
+z_top = fm_mid_z + 2.0
+heights = [z_top - k * 1.5 for k in range(int((z_top - BOTTOM_MM) / 1.5) + 1)] + [BOTTOM_MM]
+N_ANG = 32
+rings_t = []
+def cord_at(z):
+    if z >= axis_s[-1][0]:
+        return axis_s[-1][1:]
+    for lo, hi in zip(axis_s, axis_s[1:]):
+        if lo[0] <= z <= hi[0]:
+            t = (z - lo[0]) / (hi[0] - lo[0])
+            return tuple(lo[i] + (hi[i] - lo[i]) * t for i in range(1, 5))
+    return axis_s[0][1:]
+for z in heights:
+    cx, cy, ax, ay = cord_at(z)
+    depth = fm_mid_z - z
+    roomy = 1 - min(1.0, max(0.0, (depth - 4) / 22))     # roomier just below the opening
+    blocked = CONDITION in ('chiari', 'syrinx') and 2 <= depth <= 14
+    ring = []
+    for j in range(N_ANG):
+        th = 2 * math.pi * j / N_ANG
+        d = Vector((math.cos(th), math.sin(th), 0))
+        # wanted outline: front of the cord + 2 mm, back + 3 mm (+2 more each just below the opening), sides 9.5 mm
+        front, back, side = ax + 2.0 + 2 * roomy, ax + 3.0 + 2 * roomy, 9.5
+        if blocked and d.x > 0.3:
+            back = ax + 0.4
+        rx_ = back if d.x > 0 else front
+        r = 1 / math.sqrt((d.x / rx_) ** 2 + (d.y / side) ** 2)
+        hit = bone_tree.ray_cast(Vector((cx, cy, z)), d, r + 2)
+        if hit[0] is not None:
+            r = min(r, max(0.5, hit[3] - 0.4))
+        # never inside the cord itself
+        rc = 1 / math.sqrt((d.x / ax) ** 2 + (d.y / ay) ** 2)
+        r = max(r, rc + 0.3)
+        ring.append(tb.verts.new((cx + d.x * r, cy + d.y * r, z)))
+    rings_t.append(ring)
+for r0, r1 in zip(rings_t, rings_t[1:]):
+    for j in range(N_ANG):
+        tb.faces.new((r0[j], r1[j], r1[(j + 1) % N_ANG], r0[(j + 1) % N_ANG]))
+tb.faces.new(rings_t[0])
+tb.faces.new(rings_t[-1][::-1])
+bmesh.ops.recalc_face_normals(tb, faces=tb.faces)
+built.append(finish('csf-spinal', tb))
 print(f'fluid surface done, {time.time() - t_fluid:.0f} s', flush=True)
 
 # ---------------------------------------------------------------- syrinx (Chiari I with a syrinx)
@@ -735,7 +827,7 @@ if CONDITION == 'surgery':
             for b in range(M + 1):
                 y = -half + 2 * half * b / M
                 # Curved like a membrane: the middle bulges back, the edges curve in toward the bone's cut edges.
-                grid[side, a, b] = pb.verts.new((px - 0.03 * y * y + off, y, pz))
+                grid[side, a, b] = pb.verts.new((px - PATCH_CURVE * y * y + off, y, pz))
     for side in (0, 1):
         for a in range(N):
             for b in range(M):

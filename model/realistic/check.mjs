@@ -89,7 +89,7 @@ if (condition === 'typical') {
   ok(tipAbove < 0, 'after decompression the tonsils should still be below the line');
 }
 console.log(`Tonsil tip: ${Math.abs(tip[2]).toFixed(1)} mm from the midline (EVIDENCE.md: shown at their lowest point on the midline view, as MRI measures them)`);
-ok(Math.abs(tip[2]) < 3.5, 'the tonsils\' lowest point should be on the midline, so the midline cut shows it');
+ok(Math.abs(tip[2]) < 2.5, 'the tonsils\' lowest point should be at the midline, so the midline cut shows it');
 /** Front-to-back width of the tonsils 3 mm above their lowest point: rounded tips are wide, pointed ones narrow. */
 // Only the tonsil around its tip (within 10 mm of it, side to side and front to back).
 const tipWidth = (verts, tipY, tipV) => { const band = verts.filter((v) => Math.abs(v[1] - (tipY + 3)) < 1.2 && Math.hypot(v[0] - tipV[0], v[2] - tipV[2]) < 10); return Math.max(...band.map((v) => v[0])) - Math.min(...band.map((v) => v[0])); };
@@ -124,15 +124,39 @@ if (condition === 'surgery') {
     const across = Math.max(...skullPart.map((v) => v[2])) - Math.min(...skullPart.map((v) => v[2]));
     // Along the bone: up the back of the skull from the opisthion (the window's own direction).
     const t = skullPart.map((v) => v[0] * 0.902 + v[1] * 0.432);
-    const along = Math.max(...t) - Math.min(...t);
+    const along = Math.max(...t) - (opisthion[0] * 0.902 + opisthion[1] * 0.432); // from the opisthion up
     console.log(`Bone removed at the back of the opening: about ${along.toFixed(0)} mm up the skull by ${across.toFixed(0)} mm across (EVIDENCE.md: a window about 3 x 2.5 cm)`);
-    ok(across >= 26 && across <= 34 && along >= 21 && along <= 30, 'the bone removed should be about 30 mm across and 25 mm up the skull');
+    ok(across >= 26 && across <= 34 && along >= 21 && along <= 29, 'the bone removed should be about 30 mm across and 25 mm up the skull from the opisthion');
   } else problems.push('the removed bone is missing');
   const c1 = mesh('c1');
   const middle = c1.verts.filter((v) => Math.abs(v[2]) < 12 && v[0] > 8).length;
   console.log(`C1 back arch: ${middle} points left in its middle (EVIDENCE.md: the middle of the back arch removed)`);
   ok(middle === 0, 'the middle of the C1 back arch should be removed');
-  ok(!!mesh('dural-patch'), 'the dural patch is missing');
+  const patch = mesh('dural-patch');
+  ok(!!patch, 'the dural patch is missing');
+  if (patch) {
+    // No fluid behind the patch: fluid points near it must lie on its front side.
+    const pts = mesh('csf-cranial').verts.filter((v, i) => i % 3 === 0 && v[0] > 0 && Math.abs(v[2]) < 20 && v[1] > -25 && v[1] < 20);
+    const tris = patch.tris.map((t) => t.map((i) => patch.verts[i]));
+    let outside = 0;
+    for (const p of pts) {
+      let best = Infinity, q0 = null, n0 = null;
+      for (const [a, b, c] of tris) {
+        const q = closestOnTri(p, a, b, c), d = Math.hypot(p[0] - q[0], p[1] - q[1], p[2] - q[2]);
+        if (d < best) { best = d; q0 = q; const u = [b[0] - a[0], b[1] - a[1], b[2] - a[2]], w = [c[0] - a[0], c[1] - a[1], c[2] - a[2]]; n0 = [u[1] * w[2] - u[2] * w[1], u[2] * w[0] - u[0] * w[2], u[0] * w[1] - u[1] * w[0]]; }
+      }
+      // behind = on the side of the patch's back face (its outward direction points toward the back of the head)
+      if (best < 6 && n0[0] > 0 && (p[0] - q0[0]) * n0[0] + (p[1] - q0[1]) * n0[1] + (p[2] - q0[2]) * n0[2] > 0.3) { outside++; if (process.env.DEBUG && outside < 15) console.log("  behind patch", p.map((x) => x.toFixed(1)).join(","), "dist", best.toFixed(1)); }
+    }
+    console.log(`Fluid behind the dural patch: ${outside} points (EVIDENCE.md: re-formed space in front of it)`);
+    ok(outside === 0, 'no fluid should sit behind the dural patch');
+    // The patch covers the whole bone window: looking straight back from the fluid above the opening, there is
+    // always bone or the patch (no gap where the fluid is open to the outside).
+    const shell = [...['occipital', 'skull'].flatMap((n) => { const g = mesh(n); return g ? g.tris.map((t) => t.map((i) => g.verts[i])) : []; }), ...tris];
+    const uncovered = pts.filter((p) => above(p) > 0 && rayHits(p, [1, 0, 0], shell) === 0).length;
+    console.log(`Fluid in the bone window not covered by the patch: ${uncovered} points`);
+    ok(uncovered === 0, 'the dural patch should cover the whole bone window');
+  }
 }
 
 // ---- Syrinx: in the neck part of the cord, inside it, near its centre.
@@ -154,6 +178,77 @@ if (condition === 'syrinx') {
     ok(top < -30, 'the syrinx should be in the neck part of the cord, below the opening');
     ok(worst < 0.7, 'the syrinx should sit inside the cord, not fill it');
   } else problems.push('the syrinx is missing');
+}
+
+/** Closest point on triangle abc to p (Ericson, Real-Time Collision Detection). */
+function closestOnTri(p, a, b, c) {
+  const sub = (u, v) => [u[0] - v[0], u[1] - v[1], u[2] - v[2]], dot = (u, v) => u[0] * v[0] + u[1] * v[1] + u[2] * v[2];
+  const add = (u, v, k) => [u[0] + v[0] * k, u[1] + v[1] * k, u[2] + v[2] * k];
+  const ab = sub(b, a), ac = sub(c, a), ap = sub(p, a);
+  const d1 = dot(ab, ap), d2 = dot(ac, ap); if (d1 <= 0 && d2 <= 0) return a;
+  const bp = sub(p, b), d3 = dot(ab, bp), d4 = dot(ac, bp); if (d3 >= 0 && d4 <= d3) return b;
+  const vc = d1 * d4 - d3 * d2; if (vc <= 0 && d1 >= 0 && d3 <= 0) return add(a, ab, d1 / (d1 - d3));
+  const cp = sub(p, c), d5 = dot(ab, cp), d6 = dot(ac, cp); if (d6 >= 0 && d5 <= d6) return c;
+  const vb = d5 * d2 - d1 * d6; if (vb <= 0 && d2 >= 0 && d6 <= 0) return add(a, ac, d2 / (d2 - d6));
+  const va = d3 * d6 - d5 * d4; if (va <= 0 && d4 - d3 >= 0 && d5 - d6 >= 0) return add(b, sub(c, b), (d4 - d3) / (d4 - d3 + d5 - d6));
+  const den = 1 / (va + vb + vc); return add(add(a, ab, vb * den), ac, vc * den);
+}
+/** How deep each point lies inside the named surfaces (0 if outside), using the nearest surface point and its facing. */
+/* Only small overlaps (up to `reach` mm) are judged: some atlas surfaces face inconsistent ways, which makes
+   deeper readings unreliable. */
+/** Number of times a ray from o along d crosses the triangles (Moller-Trumbore). */
+function rayHits(o, d, tris) {
+  let n = 0;
+  for (const [a, b, c] of tris) {
+    const e1 = [b[0] - a[0], b[1] - a[1], b[2] - a[2]], e2 = [c[0] - a[0], c[1] - a[1], c[2] - a[2]];
+    const p = [d[1] * e2[2] - d[2] * e2[1], d[2] * e2[0] - d[0] * e2[2], d[0] * e2[1] - d[1] * e2[0]];
+    const det = e1[0] * p[0] + e1[1] * p[1] + e1[2] * p[2];
+    if (Math.abs(det) < 1e-9) continue;
+    const s = [o[0] - a[0], o[1] - a[1], o[2] - a[2]], u = (s[0] * p[0] + s[1] * p[1] + s[2] * p[2]) / det;
+    if (u < 0 || u > 1) continue;
+    const q = [s[1] * e1[2] - s[2] * e1[1], s[2] * e1[0] - s[0] * e1[2], s[0] * e1[1] - s[1] * e1[0]];
+    const v = (d[0] * q[0] + d[1] * q[1] + d[2] * q[2]) / det;
+    if (v < 0 || u + v > 1) continue;
+    if ((e2[0] * q[0] + e2[1] * q[1] + e2[2] * q[2]) / det > 1e-6) n++;
+  }
+  return n;
+}
+/** How deep each point is inside the named closed structures (0 when outside). The nearest face's direction
+ * finds candidates; with confirm, each candidate must also be inside by ray parity (odd crossings) in at least
+ * 3 of 5 directions, because near edges and folds the nearest face can point the wrong way. */
+function depthsInside(points, names, reach = 2.5, confirm = false) {
+  const d = depthsInsideRaw(points, names, reach);
+  if (!confirm) return d;
+  const tris = [];
+  for (const n of names) { const g = mesh(n); if (g) for (const t of g.tris) tris.push(t.map((i) => g.verts[i])); }
+  const dirs = [[1, 0, 0], [-1, 0, 0], [0, 0, 1], [0, 0, -1], [0.6, 0.64, 0.48]];
+  return d.map((v, i) => (v > 0 && dirs.filter((dir) => rayHits(points[i], dir, tris) % 2 === 1).length >= 3 ? v : 0));
+}
+function depthsInsideRaw(points, names, reach) {
+  const tris = [];
+  for (const n of names) { const g = mesh(n); if (!g) continue; for (const t of g.tris) tris.push(t.map((i) => g.verts[i])); }
+  const B = 4, grid = new Map(), key = (x, y, z) => `${x},${y},${z}`;
+  for (const t of tris) {
+    const lo = [0, 1, 2].map((k) => Math.floor((Math.min(t[0][k], t[1][k], t[2][k]) - reach) / B));
+    const hi = [0, 1, 2].map((k) => Math.floor((Math.max(t[0][k], t[1][k], t[2][k]) + reach) / B));
+    for (let x = lo[0]; x <= hi[0]; x++) for (let y = lo[1]; y <= hi[1]; y++) for (let z = lo[2]; z <= hi[2]; z++) {
+      const k = key(x, y, z); if (!grid.has(k)) grid.set(k, []); grid.get(k).push(t);
+    }
+  }
+  return points.map((p) => {
+    const cand = grid.get(key(...p.map((v) => Math.floor(v / B)))) ?? [];
+    let best = Infinity, side = 1;
+    for (const [a, b, c] of cand) {
+      const q = closestOnTri(p, a, b, c), d = Math.hypot(p[0] - q[0], p[1] - q[1], p[2] - q[2]);
+      if (d < best) {
+        best = d;
+        const u = [b[0] - a[0], b[1] - a[1], b[2] - a[2]], w = [c[0] - a[0], c[1] - a[1], c[2] - a[2]];
+        const nrm = [u[1] * w[2] - u[2] * w[1], u[2] * w[0] - u[0] * w[2], u[0] * w[1] - u[1] * w[0]];
+        side = (p[0] - q[0]) * nrm[0] + (p[1] - q[1]) * nrm[1] + (p[2] - q[2]) * nrm[2];
+      }
+    }
+    return best < reach && side < 0 ? best : 0;
+  });
 }
 
 // ---- Tonsils clear of bone and the spinal cord (nearest surface faces away from the point).
@@ -178,9 +273,14 @@ function insideCount(points, names) {
   return n;
 }
 const low = tonsil.verts.filter((v) => v[1] < 8);
-const inBone = insideCount(low, ['occipital', 'c1']), inCord = insideCount(low, ['cord']);
-console.log(`Tonsils inside bone: ${inBone} points, inside the spinal cord: ${inCord} points (of ${low.length} near the opening)`);
-ok(inBone <= low.length * 0.01 && inCord <= low.length * 0.01, 'the tonsils should not pass into bone or the spinal cord');
+const deep = (d) => d.filter((x) => x > 0.5);
+const inBone = deep(depthsInside(low, ['occipital', 'c1', 'c2'])), inCord = deep(depthsInside(low, ['cord', 'brainstem'], 2.5, true));
+console.log(`Tonsils inside bone: ${inBone.length} points, inside the cord or brainstem: ${inCord.length} points (of ${low.length} near the opening; deeper than 0.5 mm)`);
+ok(inBone.length === 0 && inCord.length === 0, 'the tonsils should not pass into bone, the cord or the brainstem');
+// The tonsils reach the midline near their lowest point, so the midline cut shows them there.
+const tonsilMid = section('tonsil').filter((p) => p[1] < tip[1] + 3);
+console.log(`Tonsils on the midline near their tip: ${tonsilMid.length ? 'yes' : 'no'} (lowest point ${Math.abs(tip[2]).toFixed(1)} mm from the midline)`);
+ok(tonsilMid.length > 0, 'the midline cut should pass through the tonsils near their lowest point');
 
 // ---- Clivus: dorsum sellae (top of the clivus, behind the sella) to the basion.
 const skull0 = section('skull');
@@ -234,45 +334,55 @@ const csf = mesh('csf-cranial');
 const parts = pieces(csf);
 console.log(`Fluid around the cerebellum: ${parts.length} piece(s) (largest ${parts[0]} points${parts.length > 1 ? `, others ${parts.slice(1, 6).join(', ')}` : ''})`);
 ok(parts.length === 1, 'the fluid around the cerebellum should be one continuous space (no stray spots)');
-// The fluid runs from behind the cerebellum, through the opening, down the neck around the cord.
+// The fluid has two parts: the space around the cerebellum (csf-cranial, computed) and a solid tube around the
+// spinal cord down the neck (csf-spinal; the cord sits inside it). Together they run from behind the cerebellum,
+// through the opening, down the neck.
+const spinal = mesh('csf-spinal');
+ok(!!spinal, 'the fluid around the spinal cord is missing');
 const csfTop = csf.verts.reduce((m, v) => Math.max(m, above(v)), -Infinity);
-const csfBottom = csf.verts.reduce((m, v) => Math.min(m, v[1]), Infinity);
-console.log(`Fluid reaches from ${csfTop.toFixed(0)} mm above the McRae line to ${(-csfBottom).toFixed(0)} mm below the foramen magnum (EVIDENCE.md: continuous through the foramen magnum and down behind the cord)`);
-ok(csfTop > 10 && csfBottom < -90, 'the fluid should run from behind the cerebellum down the neck');
+const cranialBottom = csf.verts.reduce((m, v) => Math.min(m, above(v)), Infinity);
+const spinalTop = spinal.verts.reduce((m, v) => Math.max(m, above(v)), -Infinity);
+const spinalBottom = spinal.verts.reduce((m, v) => Math.min(m, v[1]), Infinity);
+console.log(`Fluid: around the cerebellum from ${csfTop.toFixed(0)} mm above the line down to ${(-cranialBottom).toFixed(1)} mm below it; around the cord from ${spinalTop.toFixed(1)} mm above the line to ${(-spinalBottom).toFixed(0)} mm below the foramen magnum (EVIDENCE.md: continuous through the foramen magnum and down behind the cord)`);
+ok(csfTop > 10 && spinalBottom < -90 && spinalTop > cranialBottom + 1, 'the fluid should run from behind the cerebellum through the opening and down the neck, the two parts overlapping at the opening');
 // Behind the cerebellum just above the opening: open in every view (in Chiari I narrowed by the tonsils, not emptied).
 const cisterna = csf.verts.filter((v) => v[0] > 5 && above(v) > 2 && above(v) < 12).length;
 console.log(`Fluid behind the cerebellum 2 to 12 mm above the line: ${cisterna} points`);
 ok(cisterna > 0, 'the fluid space behind the cerebellum should not be left empty');
 // At the opening, behind the cord, at the level of the Chiari I tonsils (3 to 10 mm below the line).
-const cordSec = section('cord', 1.5); // just off the midline: near the opening the cord is the atlas's two medulla halves
 const cordMesh = mesh('cord');
-// Back of the cord at a height, from its whole surface near the midline (near the opening the cord is the atlas's
-// two medulla halves, so a single midline cut can miss its back).
 const cordBack = (y) => { const c = cordMesh.verts.filter((v) => Math.abs(v[1] - y) < 1.5 && Math.abs(v[2]) < 7); return c.length ? Math.max(...c.map((v) => v[0])) : 0; };
-const passagePts = csf.verts.filter((v) => above(v) < -3 && above(v) > -10 && Math.abs(v[2]) < 6 && v[0] > cordBack(v[1]) + 1);
+const passagePts = [...csf.verts, ...spinal.verts].filter((v) => above(v) < -3 && above(v) > -10 && Math.abs(v[2]) < 6 && v[0] > cordBack(v[1]) + 1);
 const passage = passagePts.length;
-if (process.env.DEBUG && passage) { const r = (k) => `${Math.min(...passagePts.map((v) => v[k])).toFixed(1)}..${Math.max(...passagePts.map((v) => v[k])).toFixed(1)}`; console.log(`  passage points x ${r(0)} y ${r(1)} z ${r(2)}; cord back there ${cordBack(passagePts[0][1]).toFixed(1)}`); }
 console.log(`Fluid behind the cord at the opening (3 to 10 mm below the line): ${passage} points (EVIDENCE.md: open in typical; in Chiari I flow often slows or is blocked there)`);
 if (condition === 'chiari' || condition === 'syrinx') ok(passage === 0, 'in Chiari I the passage behind the cord at the opening should be plugged by the tonsils');
 else ok(passage > 0, 'the passage behind the cord at the opening should be open');
-// The cord sits inside the fluid all the way down, and the fluid column is about 14 mm front to back below C1.
-const csfSec = section('csf-cranial', 1.5);
+// The cord sits inside the fluid tube at every level, and the tube is about 14 mm front to back below C1.
+const cordSec = section('cord'), tubeSec = section('csf-spinal');
 let cordOut = 0;
 for (let y = -15; y >= -90; y -= 5) {
-  const c = cordSec.filter((p) => Math.abs(p[1] - y) < 1), f = csfSec.filter((p) => Math.abs(p[1] - y) < 1);
-  if (!c.length || !f.length) { cordOut++; continue; }
-  if (Math.min(...c.map((p) => p[0])) <= Math.min(...f.map((p) => p[0])) || Math.max(...c.map((p) => p[0])) >= Math.max(...f.map((p) => p[0]))) { cordOut++; if (process.env.DEBUG) console.log('  cord outside at', y, 'cord', Math.min(...c.map((p) => p[0])).toFixed(1), Math.max(...c.map((p) => p[0])).toFixed(1), 'fluid', Math.min(...f.map((p) => p[0])).toFixed(1), Math.max(...f.map((p) => p[0])).toFixed(1)); }
+  const c = cordSec.filter((p) => Math.abs(p[1] - y) < 1.5), f = tubeSec.filter((p) => Math.abs(p[1] - y) < 1);
+  if (!c.length || !f.length || Math.min(...c.map((p) => p[0])) <= Math.min(...f.map((p) => p[0])) || Math.max(...c.map((p) => p[0])) >= Math.max(...f.map((p) => p[0]))) {
+    cordOut++;
+    if (process.env.DEBUG) console.log('  cord not inside the fluid at', y, 'cord', c.length ? [Math.min(...c.map((p) => p[0])), Math.max(...c.map((p) => p[0]))].map((v) => v.toFixed(1)).join('..') : '-', 'tube', f.length ? [Math.min(...f.map((p) => p[0])), Math.max(...f.map((p) => p[0]))].map((v) => v.toFixed(1)).join('..') : '-');
+  }
 }
-const col = csfSec.filter((p) => Math.abs(p[1] + 50) < 1);
+const col = tubeSec.filter((p) => Math.abs(p[1] + 50) < 1);
 const colAP = Math.max(...col.map((p) => p[0])) - Math.min(...col.map((p) => p[0]));
-console.log(`Fluid around the neck cord: ${colAP.toFixed(1)} mm front to back at C3; cord outside it at ${cordOut} of 16 levels (EVIDENCE.md: canal 13 to 15 mm)`);
+console.log(`Fluid around the neck cord: ${colAP.toFixed(1)} mm front to back at C3; cord not inside it at ${cordOut} of 16 levels (EVIDENCE.md: canal 13 to 15 mm)`);
 ok(cordOut === 0, 'the spinal cord should sit inside the fluid all the way down');
-ok(colAP >= 12 && colAP <= 18, 'the fluid around the neck cord should be about 14 mm front to back');
-if (condition === 'surgery') {
-  const reach = csf.verts.filter((v) => v[0] > 0).reduce((m, v) => Math.min(m, above(v)), Infinity);
-  console.log(`Re-formed fluid space reaches ${(-reach).toFixed(1)} mm below the McRae line, behind the cord (EVIDENCE.md: re-formed and joined to the fluid behind the cord)`);
-  ok(reach < -8, 'after decompression the re-formed fluid space should reach down past the opening, behind the cord');
-}
+ok(colAP >= 12.5 && colAP <= 15.5, 'the fluid around the neck cord should be about 14 mm front to back (13 to 15)');
+// The fluid stays out of bone and discs (both parts), and the space around the cerebellum stays out of the brain
+// (sampled; deeper than 0.3 mm). The tube contains the cord by design; the cut view shows the cord over it.
+const csfSample = [...csf.verts.filter((v, i) => i % 4 === 0), ...spinal.verts];
+const intoBone = depthsInside(csfSample, ['occipital', 'c1', 'c2', 'c3-c5', 'discs']).filter((d) => d > 0.3);
+const cranialSample = csf.verts.filter((v, i) => i % 4 === 0);
+const brainDepth = depthsInside(cranialSample, ['cord', 'tonsil', 'brainstem', 'syrinx'], 2.5, true);
+const intoBrain = brainDepth.filter((d) => d > 0.3);
+if (process.env.DEBUG) { for (const n of ['cord', 'tonsil', 'brainstem']) console.log(`  fluid inside ${n}: ${depthsInside(cranialSample, [n], 2.5, true).filter((d) => d > 0.3).length}`); const w = cranialSample.filter((_, i) => brainDepth[i] > 0.3); if (w.length) console.log(`  heights: ${[...new Set(w.map((v) => Math.round(v[1])))].sort((a, b) => a - b).join(' ')}`); }
+console.log(`Fluid inside bone or discs: ${intoBone.length} points (deepest ${intoBone.length ? Math.max(...intoBone).toFixed(1) : 0} mm); fluid around the cerebellum inside the cord, tonsils or brainstem: ${intoBrain.length} points (deepest ${intoBrain.length ? Math.max(...intoBrain).toFixed(1) : 0} mm)`);
+ok(intoBone.length <= csfSample.length * 0.002, 'the fluid should stay out of the bones and discs');
+ok(intoBrain.length === 0, 'the fluid should stay out of the cord, tonsils and brainstem (otherwise it paints over them in the cut view)');
 
 if (problems.length) {
   console.error('\nFAILED: the realistic model does not match docs/EVIDENCE.md yet:\n- ' + problems.join('\n- '));

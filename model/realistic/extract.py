@@ -387,13 +387,20 @@ for v in ton.vertices:
 # Lower ends slid toward the midline in every view until the two tonsils overlap there (joined below), so the
 # midline cut shows the tonsils at their lowest point, as the site says and as MRI measures them (EVIDENCE.md
 # "Midline simplification"). Sliding, not squashing, keeps each tonsil's own shape.
+# Only the lower ends are slid: fully below 2 mm above the McRae line, fading to none by 5 mm above it. Higher up
+# the two tonsils keep their natural gap, under the fourth ventricle, so its outlet into the fluid behind the
+# cerebellum stays open (EVIDENCE.md fluid pathway: "from the fourth ventricle outlet into the cisterna magna";
+# the fourth ventricle's lowest point is about 6.6 mm above the line).
+SLIDE_FULL, SLIDE_NONE = 2.0, 5.0
 def tonsil_w(v):
-    return min(1.0, max(0.0, (z_top - v.co.z) / (z_top - z_low)))
-# Each tonsil is slid so its own lowest point lands on the midline (the inner parts overlap and are joined below).
+    a = above_mcrae(v.co)
+    t = min(1.0, max(0.0, (SLIDE_NONE - a) / (SLIDE_NONE - SLIDE_FULL)))
+    return t * t * (3 - 2 * t)
+# Each tonsil is slid so its own lowest point lands on the midline (the lower ends overlap and are joined below).
 gap = {side: abs(min((v.co for v in ton.vertices if (v.co.y > 0) == side), key=above_mcrae).y) for side in (True, False)}
 for v in ton.vertices:
     side = v.co.y > 0
-    v.co.y -= (1 if side else -1) * gap[side] * tonsil_w(v) ** 1.5
+    v.co.y -= (1 if side else -1) * gap[side] * tonsil_w(v)
 print(f'tonsils slid toward the midline at the tip: {gap[True]:.1f} mm and {gap[False]:.1f} mm')
 ton.update()
 print(f'tonsils ({CONDITION}): lowest point moved down {drop:.1f} mm, to {TONSIL_TIP_ABOVE:+.1f} mm from the McRae line')
@@ -425,6 +432,7 @@ tent_tree = bvh_of(['tentorium'])
 # The tonsils must not pass into bone (the opening and C1) or into the spinal cord.
 cord_tree = bvh_of(['cord'])
 stem_tree = bvh_of(['brainstem'])
+v4_tree = bvh_of(['ventricle-fourth'])  # the tonsils stay out of the fourth ventricle too
 
 above_tree = bvh_of(['cerebrum', 'diencephalon', 'callosum'])
 
@@ -460,7 +468,7 @@ if True:
             print(f'  tonsil tip set back by {fix:+.1f} mm', flush=True)
         moved = 0
         for v in tm.vertices:
-            for tree in (bone_tree, cord_tree, stem_tree):
+            for tree in (bone_tree, cord_tree, stem_tree, v4_tree):
                 loc, nrm, _, dist = tree.find_nearest(v.co)
                 if loc is None:
                     continue
@@ -490,7 +498,7 @@ if True:
     for v in tm.vertices:
         if above_mcrae(v.co) > 15:
             continue
-        for tree in (cord_tree, stem_tree):
+        for tree in (cord_tree, stem_tree, v4_tree):
             if inside_by_rays(tree, v.co):
                 for _ in range(80):
                     v.co.x += 0.25
@@ -501,14 +509,48 @@ if True:
     tm.update()
     print(f'  tonsil points moved back out of the brainstem or cord: {moved_back}', flush=True)
     print(f'  tonsil tip after pushing: {tonsil_tip_above():+.1f} mm from the McRae line', flush=True)
-# The atlas's cerebellum reaches up to about 4 mm into the occipital bone off the midline: push it back out.
+# Where the tonsils' surface still spans a small bulge of the fourth ventricle, that bit of the ventricle moves
+# forward (away from the tonsils, which lie behind it) until it is 0.4 mm clear.
+ton_tree_f = bvh_of(['tonsil'])
+v4m = D.objects['ventricle-fourth'].data
+def in_tonsil(p):
+    n = 0
+    for d in (Vector((1, 0, 0)), Vector((-1, 0, 0)), Vector((0, 1, 0)), Vector((0, -1, 0)), Vector((0.6, 0.48, 0.64))):
+        k, o = 0, p.copy()
+        for _ in range(50):
+            loc = ton_tree_f.ray_cast(o, d, 200.0)[0]
+            if loc is None:
+                break
+            k += 1; o = loc + d * 1e-3
+        n += k % 2
+    return n >= 3
+moved_v4 = 0
+for v in v4m.vertices:
+    if in_tonsil(v.co):
+        for _ in range(40):
+            v.co.x -= 0.25
+            if not in_tonsil(v.co):
+                break
+        v.co.x -= 0.4
+        moved_v4 += 1
+v4m.update()
+print(f'fourth ventricle: {moved_v4} points moved out of the tonsils', flush=True)
+# The atlas's cerebellum reaches up to about 4 mm into the occipital bone off the midline: push it back in.
+# Each point inside the bone moves toward the cerebellum's centre until it is 1.2 mm clear of the bone's inner
+# surface (moving to the nearest bone surface could put it on the outside of the skull).
 cm = D.objects['cerebellum'].data
+c_centre = sum((v.co for v in cm.vertices), Vector()) / len(cm.vertices)
 moved = 0
 for v in cm.vertices:
     loc, nrm, _, dist = bone_tree.find_nearest(v.co)
-    if loc is not None and (v.co - loc).dot(nrm) < 0:
-        v.co = loc + nrm.normalized() * 1.2
-        moved += 1
+    if loc is None or (v.co - loc).dot(nrm) >= 0 or dist > 6:
+        continue
+    d_in = (c_centre - v.co).normalized()
+    hit = bone_tree.ray_cast(v.co, d_in, 8.0)
+    if hit[0] is None:
+        continue
+    v.co = hit[0] + d_in * 1.2
+    moved += 1
 cm.update()
 print(f'cerebellum: {moved} points pushed out of bone', flush=True)
 brain_tree = bvh_of(['cerebellum', 'tonsil', 'brainstem', 'ventricle-fourth', 'cord'])
@@ -604,8 +646,14 @@ solid = ~grow(~grow(brain, CLOSE), CLOSE)
 # between the atlas's cerebellum pieces; at and below the opening (tonsils, cord) they stay fluid, not empty.
 for i, ix in enumerate(XS):
     for k, iz in enumerate(ZS):
-        if above_mcrae(Vector((ix, 0, iz))) < 2:
+        a = above_mcrae(Vector((ix, 0, iz)))
+        if a < 2:
             solid[i, :, k] = brain[i, :, k]
+        elif a < 14 and ix > 0:
+            # the midline gap between the tonsils, under the fourth ventricle (its outlet), stays fluid too
+            for j, iy in enumerate(YS):
+                if abs(iy) <= 2:
+                    solid[i, j, k] = brain[i, j, k]
 fluid_grid = space & ~solid & ~near_brain
 # keep the largest connected space (6-neighbour flood fill)
 labels = np.zeros(fluid_grid.shape, np.int32)
@@ -692,7 +740,7 @@ GROUPS['csf-spinal'] = dict(layer='csf', part='csf', color='#9CC3DA', opacity=0.
 tb = bmesh.new()
 axis_s = sorted(cord_axis)
 fm_mid_z = (bas_m.z + opi_m.z) / 2
-z_top = fm_mid_z + 2.0
+z_top = fm_mid_z + 1.0
 # rings every 0.75 mm in the top 20 mm (where the tonsils sit beside it), then every 1.5 mm
 heights = [z_top - k * 0.75 for k in range(27)]
 heights += [heights[-1] - k * 1.5 for k in range(1, int((heights[-1] - BOTTOM_MM) / 1.5) + 1)] + [BOTTOM_MM]
@@ -733,11 +781,11 @@ for z in heights:
         # never inside the cord itself
         rc = 1 / math.sqrt((d.x / ax) ** 2 + (d.y / ay) ** 2)
         r = max(r, rc + 0.3)
-        # and at least 0.8 mm from the tonsils, so they cannot poke in between the tube's points
+        # and at least 1 mm from the tonsils, so they cannot poke in between the tube's points
         while r > rc + 0.3:
             q = Vector((cx + d.x * r, cy + d.y * r, z))
             loc, nrm, _, dist = tonsil_tree.find_nearest(q)
-            if loc is None or (dist >= 0.8 and (q - loc).dot(nrm) > 0):
+            if loc is None or dist >= 1.0:
                 break
             r -= 0.2
         ring.append(tb.verts.new((cx + d.x * r, cy + d.y * r, z)))
@@ -814,13 +862,18 @@ if CONDITION == 'surgery':
         bmesh.ops.delete(bm, geom=gone, context='FACES')
         bm.to_mesh(me); bm.free(); me.update()
         print(f'{name}: {len(gone)} faces removed', flush=True)
+    RIM_HALF = 12.5  # mm: the back rim of the foramen magnum removed across about 25 mm (PMC11912941)
     def skull_window(c):
         rx, rz = c.x - O2[0], c.z - O2[1]
         t = rx * WIN_DIR[0] + rz * WIN_DIR[1]
         s_ = -rx * WIN_DIR[1] + rz * WIN_DIR[0]
-        return abs(c.y) < WIN_HALF and -2 <= t <= WIN_LEN and abs(s_) < 9
+        if abs(c.y) < WIN_HALF and -2 <= t <= WIN_LEN and abs(s_) < 9:
+            return True
+        # the rim itself curves down and forward off the midline, below where the window starts
+        return abs(c.y) < RIM_HALF and c.x > 6 and t < 0 and above_mcrae(c) > -12
     top = Vector((O2[0] + WIN_LEN * WIN_DIR[0], 0, O2[1] + WIN_LEN * WIN_DIR[1]))
     win_planes = [(Vector((0, WIN_HALF, 0)), Vector((0, 1, 0))), (Vector((0, -WIN_HALF, 0)), Vector((0, 1, 0))),
+                  (Vector((0, RIM_HALF, 0)), Vector((0, 1, 0))), (Vector((0, -RIM_HALF, 0)), Vector((0, 1, 0))),
                   (top, Vector((WIN_DIR[0], 0, WIN_DIR[1])))]
     cut('occipital', skull_window, win_planes)
     cut('skull', skull_window, win_planes)

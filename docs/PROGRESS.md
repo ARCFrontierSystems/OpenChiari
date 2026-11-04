@@ -3,6 +3,18 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Realistic model: fixes from the second re-audit (findings 1 to 5, Matthew approved)
+
+- **Second independent re-audit** (`docs/audits/2026-11-04-realistic-reaudit-2.md`): 5 of the 8 earlier findings fixed, 2 partly, 1 not; 2 new High and 3 new Medium findings; verdict "not yet public".
+- **1. Fluid hidden on screen (High):** the see-through skin's solid inside was drawn over the fluid wherever no bone or brain lay behind. The skin is now drawn first. A new check (`model/realistic/view-check.mjs`) reads the actual screen colour wherever the model has fluid. Before the fix it found fluid covered in all four views; now all of it shows.
+- **2. Typical neck fluid collapsed onto the cord (High):** the tube's clearance from the tonsils now uses distance only. The fluid is now at least 1.1 mm all the way round the cord in every view, and 13.8 mm front to back at C3. A new check measures it all the way round at every height, not only on the midline.
+- **3. Cerebellum showing outside the skull (Medium):** points inside the bone now move inward, never outward. New check: none outside (0 points).
+- **4. After surgery, back rim of the opening (Medium):** now removed across 25 mm, as in PMC11912941. New check: 0 rim points left, 32 in Typical.
+- **5. Fourth ventricle sealed (Medium):** only the tonsils' lower ends slide to the midline. Higher up they keep their gap under the fourth ventricle, and the tonsils are kept out of it. Its outlet now opens into the fluid behind the cerebellum, 1.5 to 2.8 mm away. New checks for both.
+- **Not changed (Low, from the audit):** the two tonsils read as one near the tip (covered by the tonsil card); some empty canal behind the cord at the opening (shows as tissue colour); small patch-edge overlaps.
+- **Results:** all four views pass every check; web files and the on-screen check pass.
+- **Next:** another fresh independent audit; then Matthew decides whether the realistic model goes public.
+
 ## 2026-11-04: Realistic model: labels and fluid flow (Matthew approved)
 
 - **Labels** on the realistic model now point at its own structures (before, they used the drawn figure's positions). For each view, the build maps what the midline cut shows and points each label at the middle of its structure.

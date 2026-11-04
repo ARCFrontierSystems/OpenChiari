@@ -128,6 +128,15 @@ if (condition === 'surgery') {
     console.log(`Bone removed at the back of the opening: about ${along.toFixed(0)} mm up the skull by ${across.toFixed(0)} mm across (EVIDENCE.md: a window about 3 x 2.5 cm)`);
     ok(across >= 26 && across <= 34 && along >= 21 && along <= 29, 'the bone removed should be about 30 mm across and 25 mm up the skull from the opisthion');
   } else problems.push('the removed bone is missing');
+  // The back rim of the opening itself, which curves down and forward off the midline: removed across about 25 mm.
+  const rimPts = (g) => g.verts.filter((v) => Math.abs(v[2]) < 12 && v[0] > 6 && above(v) > -12 && (v[0] - opisthion[0]) * 0.902 + (v[1] - opisthion[1]) * 0.432 < 0).length;
+  const savedDoc = doc;
+  doc = await io.read(typicalFile);
+  const rimBefore = rimPts(mesh('occipital'));
+  doc = savedDoc;
+  const rimAfter = rimPts(mesh('occipital'));
+  console.log(`Back rim of the opening within 12 mm of the midline: ${rimAfter} points left (typical: ${rimBefore}) (PMC11912941: about 2.5 cm of the posterior margin excised)`);
+  ok(rimBefore > 0 && rimAfter === 0, 'after decompression the back rim of the opening should be removed across about 25 mm');
   const c1 = mesh('c1');
   const middle = c1.verts.filter((v) => Math.abs(v[2]) < 12 && v[0] > 8).length;
   console.log(`C1 back arch: ${middle} points left in its middle (EVIDENCE.md: the middle of the back arch removed)`);
@@ -392,6 +401,75 @@ if (process.env.DEBUG) { for (const n of ['cord', 'tonsil', 'brainstem']) consol
 console.log(`Fluid inside bone or discs: ${intoBone.length} points (deepest ${intoBone.length ? Math.max(...intoBone).toFixed(1) : 0} mm); fluid around the cerebellum inside the cord, tonsils or brainstem: ${intoBrain.length} points (deepest ${intoBrain.length ? Math.max(...intoBrain).toFixed(1) : 0} mm)`);
 ok(intoBone.length <= csfSample.length * 0.002, 'the fluid should stay out of the bones and discs');
 ok(intoBrain.length === 0, 'the fluid should stay out of the cord, tonsils and brainstem (otherwise it paints over them in the cut view)');
+
+// ---- Fluid all the way round the cord, at every height below C1 (not only on the midline): cross-sections across
+// the neck, measured from the cord's centre in 12 directions. Chiari I's back is plugged near the opening, so its
+// check starts lower.
+{
+  const ring = (g, y0) => {
+    const pts = [];
+    for (const t of g.tris) for (let e = 0; e < 3; e++) {
+      const a = g.verts[t[e]], b = g.verts[t[(e + 1) % 3]];
+      if ((a[1] > y0) !== (b[1] > y0)) { const k = (y0 - a[1]) / (b[1] - a[1]); pts.push([a[0] + k * (b[0] - a[0]), a[2] + k * (b[2] - a[2])]); }
+    }
+    return pts;
+  };
+  let thinnest = Infinity, where = '';
+  for (let y = -20; y >= -90; y -= 5) {
+    const c = ring(cordMesh, y), f = ring(spinal, y);
+    if (c.length < 6 || f.length < 6) { thinnest = 0; where = `${y} (no section)`; break; }
+    const cx = c.reduce((s, p) => s + p[0], 0) / c.length, cz = c.reduce((s, p) => s + p[1], 0) / c.length;
+    const reach = (pts, ang) => {
+      let best = 0;
+      for (const p of pts) {
+        const dx = p[0] - cx, dz = p[1] - cz, a = Math.atan2(dz, dx);
+        let da = Math.abs(a - ang); if (da > Math.PI) da = 2 * Math.PI - da;
+        if (da < Math.PI / 12) best = Math.max(best, Math.hypot(dx, dz));
+      }
+      return best;
+    };
+    for (let k = 0; k < 12; k++) {
+      const ang = -Math.PI + (k * Math.PI) / 6;
+      const gap = reach(f, ang) - reach(c, ang);
+      if (gap < thinnest) { thinnest = gap; where = `${y} mm, ${Math.round((ang * 180) / Math.PI)} deg`; }
+    }
+  }
+  console.log(`Fluid around the cord below C1: at least ${thinnest.toFixed(1)} mm thick all the way round (thinnest at ${where})`);
+  ok(thinnest >= 0.75, 'the fluid should surround the neck cord on every side, at every height (at least 0.75 mm where it meets the bone)');
+}
+
+// ---- No brain outside the skull: looking outward from the cerebellum's centre, every cerebellum point above the
+// opening has bone beyond it.
+{
+  const cb = mesh('cerebellum');
+  const ctr = [0, 1, 2].map((k) => cb.verts.reduce((s, v) => s + v[k], 0) / cb.verts.length);
+  const shell = ['occipital', 'skull'].flatMap((n) => { const g = mesh(n); return g ? g.tris.map((t) => t.map((i) => g.verts[i])) : []; })
+    .filter((t) => t.some((v) => v[0] > -10));
+  // the back half, where the cerebellum lies against the occipital bone
+  const pts = cb.verts.filter((v, i) => i % 7 === 0 && above(v) > 5 && v[0] > ctr[0]);
+  // looking straight out sideways and back (level, so the ray can't slip out through the opening below)
+  const outside = pts.filter((v) => { const d = [v[0] - ctr[0], 0, v[2] - ctr[2]], L = Math.hypot(...d); return rayHits(v, d.map((x) => x / L), shell) === 0; });
+  console.log(`Cerebellum outside the skull: ${outside.length} of ${pts.length} points`);
+  if (process.env.DEBUG) for (const v of outside.slice(0, 6)) console.log('  outside', v.map((x) => x.toFixed(1)).join(','));
+  ok(outside.length === 0, 'no part of the cerebellum should show outside the skull');
+}
+
+// ---- Fourth ventricle: the tonsils stay out of it, and its outlet opens into the fluid behind the cerebellum.
+{
+  const v4 = mesh('ventricle-fourth');
+  const v4T = v4.tris.map((t) => t.map((i) => v4.verts[i]));
+  const tonT = tonsil.tris.map((t) => t.map((i) => tonsil.verts[i]));
+  const dirs = [[1, 0, 0], [-1, 0, 0], [0, 0, 1], [0, 0, -1], [0.6, 0.64, 0.48]];
+  const inside = (p, T) => dirs.filter((d) => rayHits(p, d, T) % 2 === 1).length >= 3;
+  const tonIn = tonsil.verts.filter((v, i) => i % 5 === 0 && above(v) > 3 && inside(v, v4T)).length;
+  const v4In = v4.verts.filter((v) => above(v) < 20 && inside(v, tonT)).length;
+  const outlet = v4.verts.filter((v) => Math.abs(v[2]) < 3).reduce((a, v) => (above(v) < above(a) ? v : a));
+  let near = Infinity;
+  for (const v of csf.verts) near = Math.min(near, Math.hypot(v[0] - outlet[0], v[1] - outlet[1], v[2] - outlet[2]));
+  console.log(`Fourth ventricle: tonsils inside it ${tonIn}, it inside the tonsils ${v4In}; fluid behind the cerebellum ${near.toFixed(1)} mm from its outlet (EVIDENCE.md: from the fourth ventricle outlet into the cisterna magna)`);
+  ok(tonIn === 0 && v4In === 0, 'the tonsils should stay out of the fourth ventricle');
+  ok(near <= 3, 'the fourth ventricle outlet should open into the fluid behind the cerebellum (within about 3 mm)');
+}
 
 if (problems.length) {
   console.error('\nFAILED: the realistic model does not match docs/EVIDENCE.md yet:\n- ' + problems.join('\n- '));

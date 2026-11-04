@@ -187,6 +187,9 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       depthWrite: baseOpacity >= 1,
     });
     mesh.renderOrder = 1000;
+    // The realistic skin is see-through, but its cut face (its inside) is painted solid as the head's backdrop.
+    // Drawn first among the see-through parts, so it never covers the fluid or other see-through parts in front of it.
+    if (model === 'realistic' && extras.layer === 'skin') mesh.renderOrder = 999;
     if (model === 'realistic') {
       // Cut faces: where the cut opens a surface, its inside shows, painted flat in the structure's color.
       // The skin's inside stays solid even when its outside is see-through, so the head's outline shows.
@@ -1012,6 +1015,15 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     /** For tests: whether the fluid flow is animating right now. */
     get flowAnimating() {
       return flowLoop !== 0;
+    },
+    /** For checks: where a model point (mm) appears in the view, in CSS pixels from the view's top left. */
+    project(x: number, y: number, z: number) {
+      const v = new THREE.Vector3(x, y, z).project(camera);
+      return { x: ((v.x + 1) / 2) * host.clientWidth, y: ((1 - v.y) / 2) * host.clientHeight };
+    },
+    /** For checks: the realistic model's saved landmarks (labels, flow marks), once loaded. */
+    get realisticLandmarks() {
+      return realisticLandmarks;
     },
     /** For screenshots of the head's shape: keep the skin solid when turned. */
     setSkinFade(on: boolean) {

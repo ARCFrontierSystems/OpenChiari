@@ -48,16 +48,19 @@ node model/realistic/check.mjs surgery-raw.glb --condition surgery --typical typ
 ```
 
 How After decompression is made: the Chiari I tonsils, risen about 2 mm (to about 10.4 mm below the McRae line).
-- **Bone:** the bone is cut exactly along the edges of a window 30 mm across and 25 mm up the back of the skull from the opisthion. The middle 25 mm of C1's back arch is cut away too. Both removed pieces are kept as a faint red outline ("bone-removed").
+- **Bone:** the bone is cut exactly along the edges of a window 30 mm across and 25 mm up the back of the skull from the opisthion, plus the back rim of the opening itself across 25 mm (it curves down and forward off the midline; PMC11912941: "approximately 2.5 cm of the posterior margin of the foramen magnum was excised"). The middle 25 mm of C1's back arch is cut away too. Both removed pieces are kept as a faint red outline ("bone-removed").
 - **Dural patch:** a thin curved membrane across the opening, within the thickness of the removed bone. Its outline is a rounded rectangle a little wider than the bone window, so it covers the whole opening (a check confirms there is bone or patch behind all the fluid there).
 - **Fluid:** the fluid space behind the cerebellum is re-formed in front of the patch, joined to the space behind the cord; none of it sits behind the patch.
 - **McRae line:** its back end (the opisthion) is removed with the bone, so the check takes the line from the typical model; it shows where the opening was.
 
 How Chiari I is made: the lower part of each atlas tonsil is stretched down (the top, where it joins the
 cerebellum, stays), narrowed toward a blunt tip, and slid sideways (not squashed) until its lowest point is on the
-midline, so the midline cut shows the tonsils at their lowest point (in every view). The two tonsils are then joined
-into one closed surface. Anything that would pass into bone, the spinal cord or the brainstem is pushed back out,
-leaving the tonsils slightly squeezed where the space is tight.
+midline, so the midline cut shows the tonsils at their lowest point (in every view). Only the lower ends are slid
+(fully below 2 mm above the McRae line, none above 5 mm), so higher up the tonsils keep their natural gap under the
+fourth ventricle, and its outlet opens into the fluid behind the cerebellum. The lower ends are joined into one
+closed surface. Anything that would pass into bone, the spinal cord, the brainstem or the fourth ventricle is pushed
+back out, leaving the tonsils slightly squeezed where the space is tight. Where the atlas's cerebellum reaches into
+the occipital bone, it is moved inward (toward its own centre), never through to the outside of the skull.
 
 The fluid comes in two parts:
 - **Around the cerebellum** (`csf-cranial`): computed on a 1 mm grid as the space between the brain and the skull,
@@ -66,6 +69,10 @@ The fluid comes in two parts:
   at C3; EVIDENCE.md 13 to 15 mm). The cord sits inside it, which draws correctly in the cut view. The tube stops in
   front of the tonsils wherever they reach down behind the cord. In Chiari I, from 2 to 14 mm below the line, its
   back is pulled in to the cord, where the tonsils plug the space.
+
+Also checked: the fluid is at least about 1 mm thick all the way round the neck cord at every height (not only on
+the midline), no cerebellum shows outside the skull, the tonsils stay out of the fourth ventricle and its outlet
+meets the fluid, and after surgery the back rim of the opening is gone across 25 mm.
 
 Rules for the cut view (each one is checked): the fluid never sits inside the cord, tonsils or brainstem, and the
 tonsils never sit inside the fluid. Otherwise the fluid would be drawn over them.
@@ -95,6 +102,18 @@ smoothed.
 
 ```bash
 node model/realistic/web.mjs <folder with typical-raw.glb, chiari-raw.glb, syrinx-raw.glb, surgery-raw.glb>
+```
+
+**What the Explorer draws** (`view-check.mjs`): with a preview build served locally, it opens the Explorer, shows the
+realistic model cut at the midline in each view, and reads the screen colour wherever the model has fluid (the
+flow-mark places, with the marks turned off). Each must show the fluid's blue. This catches drawing problems that
+the geometry checks can't see; it found the see-through skin's solid inside covering the fluid, now fixed by drawing
+the skin first.
+
+```bash
+PUBLIC_REALISTIC_PREVIEW=1 npm run build
+npx astro preview --port 4330 &
+node model/realistic/view-check.mjs
 ```
 
 These files are **not public**:

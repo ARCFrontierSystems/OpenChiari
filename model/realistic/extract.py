@@ -285,7 +285,7 @@ for name, objs in members.items():
 
 # ---------------------------------------------------------------- spinal cord (not in the atlas)
 # Follow the middle of the spinal dura downward from the bottom of the medulla. Starts at the medulla's own
-# bottom cross-section and within 15 mm reaches the measured adult cord size (EVIDENCE.md "Spinal cord, upper
+# bottom cross-section and within 6 mm reaches the measured adult cord size (EVIDENCE.md "Spinal cord, upper
 # neck": 8.8 x 12.4 mm at C2, 8.7 x 14 mm at C4; PMC8334714).
 dura = D.objects['dura']
 dv = [v.co for v in dura.data.vertices]
@@ -306,8 +306,8 @@ for k in range(steps + 1):
         cx = sum(v.x for v in slab) / len(slab)
         cy = sum(v.y for v in slab) / len(slab)
     below = top_z - z
-    t = min(1.0, below / 15.0)
-    deep = min(1.0, max(0.0, (below - 15.0) / max(1.0, top_z - BOTTOM_MM - 15.0)))
+    t = min(1.0, below / 6.0)
+    deep = min(1.0, max(0.0, (below - 6.0) / max(1.0, top_z - BOTTOM_MM - 6.0)))
     ax = (1 - t) * rx + t * (4.4 + (4.35 - 4.4) * deep)   # half of 8.8 mm, toward 8.7 mm
     ay = (1 - t) * ry + t * (6.2 + (7.0 - 6.2) * deep)    # half of 12.4 mm, toward 14 mm
     ring = [bm.verts.new((cx + ax * math.cos(2 * math.pi * j / ring_n),
@@ -325,14 +325,40 @@ if cord_top_piece is not None:
     bm.from_mesh(me_tmp)
     D.meshes.remove(me_tmp)
 members['cord'] = []
-print(f'cord built: {2 * rx:.1f} x {2 * ry:.1f} mm at the medulla, 8.8 x 12.4 mm from 15 mm below it')
+print(f'cord built: {2 * rx:.1f} x {2 * ry:.1f} mm at the medulla, 8.8 x 12.4 mm from 6 mm below it')
 built.append(finish('cord', bm))
 
+# ---------------------------------------------------------------- tonsil position (Typical)
+# EVIDENCE.md: typical tonsil tip about 1 mm above the McRae line (the Simple model uses the same). The atlas has
+# it at about 2.7 mm. Stretch the lower part of the tonsils down (the top, where they join the cerebellum, stays).
+TONSIL_TIP_ABOVE = 1.0  # mm
+bas_m = TO_MODEL @ basion
+opi_m = TO_MODEL @ opisthion
+def above_mcrae(p):
+    # model x (back) and z (up); positive = above the line
+    d = Vector((opi_m.x - bas_m.x, opi_m.z - bas_m.z)).normalized()
+    n = Vector((-d.y, d.x))
+    if n.y < 0:
+        n = -n
+    return Vector((p.x - bas_m.x, p.z - bas_m.z)).dot(n)
+ton = D.objects['tonsil'].data
+tz = [v.co.z for v in ton.vertices]
+z_top, z_low = max(tz), min(tz)
+drop = above_mcrae(min((v.co for v in ton.vertices), key=above_mcrae)) - TONSIL_TIP_ABOVE
+for v in ton.vertices:
+    w = min(1.0, max(0.0, (z_top - v.co.z) / (z_top - z_low)))
+    v.co.z -= drop * w ** 1.5
+ton.update()
+print(f'tonsils: lowest point moved down {drop:.1f} mm, to {TONSIL_TIP_ABOVE:.1f} mm above the McRae line')
+
 # ---------------------------------------------------------------- fluid space around the brain in the posterior fossa
-# The atlas has no fluid spaces around the brain. Compute them: a point counts as spinal fluid if it lies inside
-# the skull (bone behind it and to both sides), above the McRae line, below the tentorium, and is not brain or bone.
-# Because it is computed, lowering the tonsils (Chiari I) shrinks this space automatically.
+# The atlas has no fluid spaces around the brain. Compute them on a 1 mm grid: inside the skull (bone behind and to
+# both sides, something above), above the McRae line, and outside the brain. The brain is first treated as one solid
+# mass (gaps between the atlas's separate cerebellum and brainstem pieces, up to about 8 mm, are filled), so the
+# fluid is the space between the brain and the skull, not the gaps inside the brain. Only the largest connected
+# space is kept. Because it is computed, lowering the tonsils (Chiari I) shrinks this space automatically.
 from mathutils.bvhtree import BVHTree
+import numpy as np
 
 def bvh_of(names):
     bm = bmesh.new()
@@ -351,47 +377,69 @@ brain_tree = bvh_of(['cerebellum', 'tonsil', 'brainstem', 'ventricle-fourth', 'c
 bone_tree = bvh_of(['occipital', 'skull', 'c1', 'c2'])
 roof_tree = bvh_of(['tentorium', 'cerebrum', 'cerebellum'])
 
-bas_m = TO_MODEL @ basion
-opi_m = TO_MODEL @ opisthion
-def above_mcrae(p):
-    # model x (back) and z (up); positive = above the line
-    d = Vector((opi_m.x - bas_m.x, opi_m.z - bas_m.z)).normalized()
-    n = Vector((-d.y, d.x))
-    if n.y < 0:
-        n = -n
-    return Vector((p.x - bas_m.x, p.z - bas_m.z)).dot(n)
-
 def inside(tree, p):
     loc, nrm, _, dist = tree.find_nearest(p)
     return loc is not None and (p - loc).dot(nrm) < 0, (dist if loc is not None else 1e9)
 
 STEP = 1.0
-BRAIN_CLEAR = 3.6  # mm: gaps between the atlas's cerebellar pieces (up to about 7 mm) do not count as fluid
-POINT_RADIUS = 3.4  # mm: each fluid point grows back by this much, so the fluid still reaches the brain surface
-fluid = []
-for ix in range(-8, 75):
-    if ix % 20 == 0:
-        print(f'  fluid scan {ix}/75, {len(fluid)} points so far, {time.time() - t_fluid:.0f} s', flush=True)
-    for iz in range(-6, 45):
-        for iy in range(-30, 31):
+XS, YS, ZS = range(-14, 78), range(-36, 37), range(-8, 48)
+NX, NY, NZ = len(XS), len(YS), len(ZS)
+brain = np.zeros((NX, NY, NZ), bool)
+space = np.zeros((NX, NY, NZ), bool)   # inside the skull, above the line, not bone
+for i, ix in enumerate(XS):
+    if i % 20 == 0:
+        print(f'  fluid scan {i}/{NX}, {time.time() - t_fluid:.0f} s', flush=True)
+    for j, iy in enumerate(YS):
+        for k, iz in enumerate(ZS):
             p = Vector((ix * STEP, iy * STEP, iz * STEP))
-            if above_mcrae(p) < -1.0:
-                continue
             b_in, b_d = inside(brain_tree, p)
-            if b_in or b_d < BRAIN_CLEAR:
+            brain[i, j, k] = b_in or b_d < 0.6
+            if above_mcrae(p) < -1.0:
                 continue
             o_in, o_d = inside(bone_tree, p)
             if o_in or o_d < 0.6:
                 continue
-            # enclosed: bone behind, and on both sides; something (tentorium or brain) above
             if bone_tree.ray_cast(p, Vector((1, 0, 0)), 150)[0] is None:
                 continue
             if bone_tree.ray_cast(p, Vector((0, 1, 0)), 150)[0] is None or bone_tree.ray_cast(p, Vector((0, -1, 0)), 150)[0] is None:
                 continue
             if roof_tree.ray_cast(p, Vector((0, 0, 1)), 150)[0] is None:
                 continue
-            fluid.append(p)
-print(f'posterior fossa fluid: {len(fluid)} points ({len(fluid) * STEP ** 3 / 1000:.1f} ml), {time.time() - t_fluid:.0f} s', flush=True)
+            space[i, j, k] = True
+
+def grow(a, n):
+    for it in range(n):
+        b = a.copy()
+        b[1:] |= a[:-1]; b[:-1] |= a[1:]; b[:, 1:] |= a[:, :-1]; b[:, :-1] |= a[:, 1:]; b[:, :, 1:] |= a[:, :, :-1]; b[:, :, :-1] |= a[:, :, 1:]
+        if it % 2:  # alternate with the 12 edge neighbours for a rounder shape
+            b[1:, 1:] |= a[:-1, :-1]; b[:-1, :-1] |= a[1:, 1:]; b[1:, :-1] |= a[:-1, 1:]; b[:-1, 1:] |= a[1:, :-1]
+            b[:, 1:, 1:] |= a[:, :-1, :-1]; b[:, :-1, :-1] |= a[:, 1:, 1:]; b[:, 1:, :-1] |= a[:, :-1, 1:]; b[:, :-1, 1:] |= a[:, 1:, :-1]
+            b[1:, :, 1:] |= a[:-1, :, :-1]; b[:-1, :, :-1] |= a[1:, :, 1:]; b[1:, :, :-1] |= a[:-1, :, 1:]; b[:-1, :, 1:] |= a[1:, :, :-1]
+        a = b
+    return a
+CLOSE = 4  # mm
+solid = ~grow(~grow(brain, CLOSE), CLOSE)
+fluid_grid = space & ~solid
+# keep the largest connected space (6-neighbour flood fill)
+labels = np.zeros(fluid_grid.shape, np.int32)
+sizes = []
+for seed in zip(*np.nonzero(fluid_grid)):
+    if labels[seed]:
+        continue
+    lab = len(sizes) + 1
+    stack, n = [seed], 0
+    labels[seed] = lab
+    while stack:
+        a, b, c = stack.pop(); n += 1
+        for da, db, dc in ((1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1)):
+            q = (a + da, b + db, c + dc)
+            if 0 <= q[0] < NX and 0 <= q[1] < NY and 0 <= q[2] < NZ and fluid_grid[q] and not labels[q]:
+                labels[q] = lab; stack.append(q)
+    sizes.append(n)
+keep = 1 + int(np.argmax(sizes))
+fluid = [Vector((XS[i] * STEP, YS[j] * STEP, ZS[k] * STEP)) for i, j, k in zip(*np.nonzero(labels == keep))]
+print(f'posterior fossa fluid: {len(fluid)} points ({len(fluid) * STEP ** 3 / 1000:.1f} ml) kept of {sum(sizes)} in {len(sizes)} pieces, {time.time() - t_fluid:.0f} s', flush=True)
+POINT_RADIUS = 1.0  # mm: points on a 1 mm grid merge into one surface
 
 # Fluid points -> a smooth closed surface: geometry nodes turn points into a volume and the volume into a mesh.
 me = D.meshes.new('csf-points')

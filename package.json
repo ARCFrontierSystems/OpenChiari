@@ -12,7 +12,8 @@
     "test": "playwright test",
     "model:simple": "node model/simple/build.mjs",
     "model:check": "node model/simple/check.mjs",
-    "lighthouse": "node scripts/lighthouse.mjs"
+    "lighthouse": "node scripts/lighthouse.mjs",
+    "model:check:realistic": "node model/realistic/check.mjs"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "^5.3.0",

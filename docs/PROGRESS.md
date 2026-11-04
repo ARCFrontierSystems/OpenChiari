@@ -3,6 +3,30 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Phase 1, step 5: Simple model, Chiari I with syrinx and After decompression
+
+- **Chiari I with syrinx:** the beaded fluid cavity from the figure, in the center of the neck cord (5 mm wide inside the 12 mm cord), below the skull opening. It runs past the bottom of the view (50 mm visible), consistent with EVIDENCE.md's "about 5 vertebrae long on average". It's inside the cord, so it shows in the cut-away.
+- **After decompression** (all shapes from the figure):
+  - Skull with bone removed at the back of the foramen magnum: about 31 mm along the skull from the opisthion and 30 mm across (EVIDENCE.md: about 3x3 to 3x4 cm; exact size not stated on the site).
+  - C1 with the middle 30 mm of its back arch removed.
+  - The removed bone shown as a faint red "ghost", like the figure's red dashed outline.
+  - The re-formed fluid space behind the cerebellum, and the dural patch (semi-transparent, like a membrane).
+  - Tonsils partly risen.
+- **Measured in the 3D file** (`npm run model:check`, on GitHub too):
+  - After decompression: tonsil tip 8.6 mm below the McRae line, risen 3.8 mm from Chiari I (EVIDENCE.md: rise only partly, about 4 mm on average; may stay below).
+  - Syrinx inside the cord and below the skull opening.
+  - Earlier numbers unchanged: foramen magnum 35.3 mm; typical 0.9 mm above; Chiari I 12.4 mm below.
+- **Size:** the model file is now about 645 KB compressed (was 444 KB), mainly because the skull has a second, after-surgery version. To check on phones in step 8.
+- **Checks:** 66 tests pass, including the new conditions in 3D.
+- **Small known item:** a faint rectangular shading line on the back of the skull, where the bone thickness changes. Cosmetic; can be smoothed in step 8.
+
+**Next: step 6, viewer tools.**
+- Camera buttons: Side, Back, Below, Front and Reset (desktop toolbar and phone Layers panel).
+- Tapping a part in the model selects it in the structure list and shows its info card; the selected part is highlighted in the model. Selecting in the list highlights it in the model too.
+- Labels in 3D: numbered labels for the 10 structures that follow the model as it turns (the Labels button comes back).
+- Full keyboard control of the 3D view (turn, zoom, move, presets) with visible focus, and a text description of the current view (condition, camera direction, cut-away) for screen readers.
+- Stop for Matthew's review.
+
 ## 2026-11-04: Step 4 follow-up: a plain, natural head (Matthew chose option 1)
 
 - **Feedback:** the face looked weird, then creepy. Building a realistic face from simple shapes lands in the "almost human" zone, so Matthew chose a deliberately plain head for now, with a real head surface from Z-Anatomy planned for the Phase 2 realistic model.

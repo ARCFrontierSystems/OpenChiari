@@ -167,6 +167,18 @@ test.describe('3D Explorer controls', () => {
     await expect(page.getByRole('img', { name: /typical anatomy: the cerebellar tonsils sit above/ })).toBeVisible();
   });
 
+  test('3D model shows the syrinx and after-decompression views', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/explorer/');
+    await expect(page.locator('.x-view')).toHaveClass(/has-3d/, { timeout: 30000 });
+    await page.locator('.x-cond-list label', { hasText: 'Chiari I with syrinx' }).click();
+    await expect(page.getByRole('img', { name: /Chiari I with a syrinx, a fluid-filled cavity inside the spinal cord/ })).toBeVisible();
+    await expect(page.locator('[data-cond-note]')).toContainText('A syrinx is a fluid-filled cavity inside the spinal cord.');
+    await page.locator('.x-cond-list label', { hasText: 'After decompression' }).click();
+    await expect(page.getByRole('img', { name: /after decompression surgery: bone at the back of the skull opening/ })).toBeVisible();
+    await expect(page.locator('[data-cond-note]')).toContainText("Results vary, and surgery isn't right for everyone.");
+  });
+
   test('required captions and credits are on the page', async ({ page }) => {
     await page.goto('/explorer/');
     await expect(page.getByText('Illustration, not a medical image').first()).toBeVisible();

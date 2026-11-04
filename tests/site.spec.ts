@@ -364,3 +364,15 @@ test('the realistic model is available: its button is on, its files are in the s
   const hasLandmarks = await page.evaluate(() => !!(document.querySelector('[data-viewer]') as HTMLElement & { viewer: { realisticLandmarks: unknown } }).viewer.realisticLandmarks);
   expect(hasLandmarks).toBe(true);
 });
+
+test('Support links only to the organizations themselves; About says how content is checked, honestly', async ({ page }) => {
+  // CLAUDE.md: no donation handling (every button goes to the organization's own page) and no claim of a
+  // medical review (rule 1a: the "Accuracy checks" wording).
+  await page.goto('/support/');
+  const outside = await page.locator('main a[href^="http"]').evaluateAll((as) => as.map((a) => new URL((a as HTMLAnchorElement).href).hostname));
+  expect(outside.length).toBeGreaterThanOrEqual(6);
+  for (const host of outside) expect(['bobbyjonescsf.org', 'conquerchiari.org', 'www.conquerchiari.org', 'asap.org']).toContain(host);
+  await expect(page.locator('main form')).toHaveCount(0);
+  await page.goto('/about/');
+  await expect(page.getByText('They have not been reviewed by a medical professional.', { exact: false })).toBeVisible();
+});

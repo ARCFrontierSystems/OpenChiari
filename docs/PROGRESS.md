@@ -3,6 +3,21 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Phase 3, step 1: About, Privacy and Support pages
+
+- **Built:** About, Privacy and Support, for desktop and phone (Support uses the phone mockup's shorter wording). All text is word for word from COPY.md, laid out from the mockups. Each page has the shared header and the footer with the disclaimer and model credit.
+- **Support** links go only to each organization's own pages (donate, registry, learn more), using the addresses in the mockup. A new test checks that every outside link on the page goes to one of the three organizations and that the page has no form.
+- **About** uses the accuracy-checks wording ("They have not been reviewed by a medical professional"); the test checks it's there.
+- **Placeholders kept, as COPY.md has them (for Matthew):**
+  - About: "Last check: [date]".
+  - Privacy: "Last updated [date]", "[analytics service]", "[host]" and "[Confirm this list against the chosen analytics service before launch.]".
+  - Support: "[Before launch: confirm with each organization.]".
+- **Links that don't go anywhere useful yet:**
+  - "See the code" goes to the Impact page's open-source section, as in the mockup; Impact is still a stand-in until step 5.
+  - hello@openchiari.org won't work until the domain exists.
+- **Checks:** build and type check clean; accessibility scans pass on all three pages at both sizes, Calm mode off and on.
+- **Next (step 2):** Open model page: downloads and the embed builder.
+
 ## 2026-11-04: Realistic model made public on the site (Matthew approved)
 
 - **Matthew approved the realistic model for the public site** (CLAUDE.md rule 1a: opened sources, automatic measurements, three independent audits, MRI comparison, Matthew's approval).

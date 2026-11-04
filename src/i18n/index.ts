@@ -31,4 +31,12 @@ export const routes = {
 export const externalLinks = {
   ninds: 'https://www.ninds.nih.gov/publications/chiari-malformation',
   zAnatomy: 'https://github.com/Z-Anatomy/Models-of-human-anatomy',
+  // Support page: each organization's own pages (from the Support mockup; confirm with each before launch)
+  bjcsfDonate: 'https://bobbyjonescsf.org/donate-online/',
+  bjcsfRegistry: 'https://bobbyjonescsf.org/keytoacure/',
+  conquerDonate: 'https://conquerchiari.org/donate',
+  conquerInfo: 'https://www.conquerchiari.org/',
+  asapDonate: 'https://asap.org/donate/',
+  asapInfo: 'https://asap.org/',
+  email: 'mailto:hello@openchiari.org',
 } as const;

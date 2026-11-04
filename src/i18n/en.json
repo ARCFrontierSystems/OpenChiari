@@ -224,11 +224,8 @@
       "explain": "Explain It",
       "studies": "Research studies",
       "model": "Open model",
-      "support": "Support",
       "kit": "Awareness kit",
       "impact": "Impact",
-      "about": "About and contact",
-      "privacy": "Privacy",
       "evidence": "Evidence notes"
     }
   },
@@ -524,5 +521,179 @@
     "sheetMeta": "Chiari malformation · Date: ____________ · Doctor: ______________________",
     "sheetFooter": "Made with Open Chiari · openchiari.org · Not medical advice",
     "diagramCaption": "Chiari I. Tonsils shown at their lowest point, where MRI measures them. Illustration, not a medical image."
+  },
+  "support": {
+    "title": "Support the groups doing the work",
+    "intro": {
+      "wide": "These nonprofits fund research, run patient registries and support families. Open Chiari doesn't take donations; every link below goes straight to the organization's own page.",
+      "narrow": "Open Chiari doesn't take donations. Every link goes to the organization's own page."
+    },
+    "orgs": [
+      {
+        "id": "bjcsf",
+        "name": "Bobby Jones Chiari & Syringomyelia Foundation",
+        "text": {
+          "wide": "Maintains an international patient registry (new enrollment currently paused), hosts a yearly research colloquium, and funds Chiari research grants and fellowships.",
+          "narrow": "International patient registry (enrollment paused), a yearly research colloquium, and research grants and fellowships."
+        },
+        "tags": "Research · Patient registry · Education",
+        "second": "Registry and research"
+      },
+      {
+        "id": "conquer",
+        "name": "Conquer Chiari",
+        "text": {
+          "wide": "Funds Chiari research, publishes patient education materials, and supported the Chiari1000 patient registry (now closed).",
+          "narrow": "Funds research and publishes patient education materials."
+        },
+        "tags": "Research funding · Education",
+        "second": "Learn more"
+      },
+      {
+        "id": "asap",
+        "name": "ASAP: American Syringomyelia & Chiari Alliance Project",
+        "text": {
+          "wide": "Supports patients and families, publishes a newsletter, and has helped fund research into the genetics of Chiari.",
+          "narrow": "Patient and family support, a newsletter, and research funding."
+        },
+        "tags": "Patient support · Research funding",
+        "second": "Learn more"
+      }
+    ],
+    "donate": "Donate on their site",
+    "checked": "Descriptions and links checked November 2026. [Before launch: confirm with each organization.]",
+    "otherTitle": "Other ways to help",
+    "other": [
+      {
+        "id": "studies",
+        "title": "Join a research study",
+        "text": "Studies recruiting now, updated daily."
+      },
+      {
+        "id": "kit",
+        "title": "Spread awareness in September",
+        "text": "Free graphics and cards for Chiari Awareness Month."
+      },
+      {
+        "id": "explain",
+        "title": "Share an Explain It link",
+        "text": "Help one person understand Chiari today."
+      }
+    ],
+    "notAffiliated": "Open Chiari is not affiliated with these organizations and receives nothing from donations."
+  },
+  "about": {
+    "title": "About Open Chiari",
+    "intro": "Open Chiari is a free, independent website that helps people see and understand Chiari malformation, and points them to the organizations and research moving the field forward.",
+    "howTitle": "How the content is made",
+    "how": {
+      "factsBefore": "Medical facts are adapted from the",
+      "ninds": "NINDS fact sheet",
+      "factsAfter": "and peer-reviewed research, listed on each page.",
+      "modelBefore": "The 3D model is built from",
+      "zAnatomy": "Z-Anatomy",
+      "modelAfter": "and BodyParts3D, open anatomy data.",
+      "checks": "Text and every 3D view are checked against the published sources listed in the evidence notes, by automatic measurements and independent audits, before they're published. They have not been reviewed by a medical professional. Last check: [date].",
+      "ai": "AI tools helped write the code and first drafts; every page is checked by a person."
+    },
+    "principlesTitle": "Principles",
+    "principles": [
+      {
+        "term": "Free, always",
+        "text": "No paywalls, ads or premium tiers."
+      },
+      {
+        "term": "No personal data",
+        "text": "No accounts and no cookies.",
+        "link": "Read the privacy policy",
+        "href": "privacy"
+      },
+      {
+        "term": "Open source",
+        "text": "Code and model are public, so anyone can keep it going.",
+        "link": "See the code",
+        "href": "openSource"
+      },
+      {
+        "term": "Independent",
+        "text": "Not affiliated with any company, hospital or nonprofit, and no money from donations."
+      },
+      {
+        "term": "Not medical advice",
+        "text": "Open Chiari explains; your doctor diagnoses and treats."
+      }
+    ],
+    "correctionsTitle": "Corrections",
+    "corrections": "Spot something wrong or out of date? Email with the page and what to fix. Corrections are made as quickly as possible and noted in the changelog.",
+    "contactTitle": "Contact",
+    "contact": "For corrections, organizations, researchers and press.",
+    "email": "hello@openchiari.org",
+    "noMedical": "Please don't send medical details. Open Chiari can't give medical advice.",
+    "madeByTitle": "Made by",
+    "madeBy": "Matthew Borgfeld, as an independent project."
+  },
+  "privacy": {
+    "title": "Privacy",
+    "updated": "Last updated [date]",
+    "short": "The short version: Open Chiari doesn't know who you are, doesn't use cookies, and never collects health information.",
+    "countedTitle": "What is counted",
+    "counted": {
+      "before": "To show the totals on the",
+      "impact": "Impact page",
+      "after": ", the site counts visits and a few actions, such as opening the 3D model or making an Explain It link. Counting uses [analytics service], which uses no cookies and doesn't build a profile of you. It sees which page was visited, the page you came from, your device and browser type, your country, and how fast the page loaded, then adds it to a total."
+    },
+    "countedNote": "[Confirm this list against the chosen analytics service before launch.]",
+    "neverTitle": "What is never collected",
+    "never": [
+      {
+        "term": "Your identity",
+        "text": "No accounts, sign-ins, names or email addresses."
+      },
+      {
+        "term": "Explain It notes",
+        "text": "Your note and chosen view live after the # in the link. Browsers don't send that part to our server, and our analytics are set up not to record it. Anyone with the link can read the note."
+      },
+      {
+        "term": "Visit prep questions",
+        "text": "Built and printed entirely in your browser. Nothing you tick or type leaves your device."
+      },
+      {
+        "term": "Your location",
+        "text": "The \"Near\" box on Research studies sorts the list on your device and is never sent."
+      },
+      {
+        "term": "Health information",
+        "text": "None, anywhere on the site."
+      }
+    ],
+    "savedTitle": "Saved on your device",
+    "saved": "Calm mode and your language choice are remembered in your own browser so they stay on next time. Clearing your browser data removes them. They're never sent to the site.",
+    "outsideTitle": "Outside services",
+    "outside": [
+      {
+        "term": "Hosting:",
+        "text": "[host], which handles the site's traffic like any web host."
+      },
+      {
+        "term": "Fonts and 3D files:",
+        "text": "served from Open Chiari itself, not from Google or other companies."
+      },
+      {
+        "term": "Research studies:",
+        "text": "collected from ClinicalTrials.gov, run by the U.S. National Library of Medicine, once a day by the site, so your browser never contacts them."
+      },
+      {
+        "term": "Links out:",
+        "text": "donate pages, study listings and other sites have their own privacy policies."
+      }
+    ],
+    "emailTitle": "Email",
+    "email": {
+      "before": "If you email",
+      "address": "hello@openchiari.org",
+      "after": ", your message is used only to reply and isn't shared. Please don't include medical details."
+    },
+    "changesTitle": "Changes",
+    "changes": "If this policy changes, the date at the top changes too, and anything significant is noted on the home page for 30 days."
   }
 }

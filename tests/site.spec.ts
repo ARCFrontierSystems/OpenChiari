@@ -347,12 +347,20 @@ test.describe('Doctor visit prep', () => {
   });
 });
 
-test('the realistic model is not public: its button is off and its files are not in the site', async ({ page, request }) => {
-  // CLAUDE.md: not shown publicly until it passes the accuracy checks and Matthew approves it.
-  await page.goto('/explorer/');
-  await expect(page.locator('[data-model="realistic"]').first()).toBeDisabled();
+test('the realistic model is available: its button is on, its files are in the site, and it loads', async ({ page, request }) => {
+  // Matthew approved it for the public site on 2026-11-04 (CLAUDE.md rule 1a; docs/audits/).
   for (const level of ['desktop', 'phone']) {
     const res = await request.get(`/models/realistic/realistic-${level}.glb`);
-    expect(res.status()).toBe(404);
+    expect(res.status()).toBe(200);
   }
+  await page.goto('/explorer/');
+  await expect(page.locator('.x-view.has-3d')).toBeVisible({ timeout: 30000 });
+  const button = page.locator('[data-model="realistic"]:visible').first();
+  await expect(button).toBeEnabled();
+  await button.click();
+  await expect(button).toHaveAttribute('aria-pressed', 'true');
+  await expect(button).toHaveAttribute('aria-busy', 'false', { timeout: 60000 });
+  // its own labels and flow marks came with it
+  const hasLandmarks = await page.evaluate(() => !!(document.querySelector('[data-viewer]') as HTMLElement & { viewer: { realisticLandmarks: unknown } }).viewer.realisticLandmarks);
+  expect(hasLandmarks).toBe(true);
 });

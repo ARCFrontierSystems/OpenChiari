@@ -2,7 +2,7 @@
 
 Built from the Z-Anatomy atlas (CC BY-SA 4.0), which is derived from BodyParts3D
 (© The Database Center for Life Science, CC BY-SA 2.1 JP). Every change is a script here, so it can be re-run and reviewed.
-The realistic model is **not shown publicly until its views pass the accuracy checks and Matthew approves them** (CLAUDE.md rule 1a). There is no medical reviewer (Matthew's decision, 2026-11-04).
+The realistic model passed the accuracy checks (CLAUDE.md rule 1a; three independent audits in `docs/audits/`, all automatic checks) and **Matthew approved it for the public site on 2026-11-04**. There is no medical reviewer (Matthew's decision, 2026-11-04). Any change to it must pass `check.mjs` (all four views), `web.mjs`'s own checks and `view-check.mjs` before it ships.
 
 ## Setup (once per machine)
 
@@ -119,14 +119,12 @@ the geometry checks can't see; it found the see-through skin's solid inside cove
 the skin first.
 
 ```bash
-PUBLIC_REALISTIC_PREVIEW=1 npm run build
+npm run build
 npx astro preview --port 4330 &
 node model/realistic/view-check.mjs
 ```
 
-These files are **not public**:
-- the normal site build leaves them out, and the Realistic button stays off (a test checks both);
-- a preview build includes them and turns the button on: `PUBLIC_REALISTIC_PREVIEW=1 npm run build` (or `npm run dev`). Never deploy a preview build.
+**On the site:** every build copies these two files into `dist/models/realistic/` (see `astro.config.mjs`), and the Explorer's Realistic button loads them on request. A site test checks that the button works and the model loads.
 
 In the Explorer:
 - the realistic model loads only when picked (phones and small screens get the lighter file), and falls back to Simple if it can't load;

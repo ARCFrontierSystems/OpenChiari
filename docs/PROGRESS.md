@@ -3,6 +3,14 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Realistic model made public on the site (Matthew approved)
+
+- **Matthew approved the realistic model for the public site** (CLAUDE.md rule 1a: opened sources, automatic measurements, three independent audits, MRI comparison, Matthew's approval).
+- Every build now includes its two files (desktop 1.5 MB, phone 0.6 MB). The Explorer's Realistic button is on and loads them only when picked; the view falls back to Simple if loading fails.
+- The site test now checks that the button works and the model loads, with its own labels and flow marks. The on-screen colour check passes on the normal build. 74 tests pass.
+- **Not deployed:** publishing the live site needs Matthew's separate go-ahead.
+- **Next:** Matthew's go-ahead to deploy, or the next build step (Phase 3: sharing and research).
+
 ## 2026-11-04: Realistic model: minor items and third audit (Matthew approved)
 
 - **Third independent audit** (`docs/audits/2026-11-04-realistic-reaudit-3.md`): no High findings. Second-audit findings 1 to 4 fixed and 5 mostly fixed. One new Medium finding (crumpled tonsil surface) and a few Low ones. Verdict: nothing else blocks going public once the Medium one is fixed or accepted. The auditor could not open the source websites from this session (blocked by the network settings) and relied on earlier quotes.

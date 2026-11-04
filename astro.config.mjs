@@ -3,18 +3,16 @@ import { defineConfig } from 'astro/config';
 import { cpSync, existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
-// The realistic model (Phase 2) is not public until it passes the accuracy checks and Matthew approves it
-// (CLAUDE.md rule 1a). Its files are copied into the site, and its button switched on, only in a preview build:
-//   PUBLIC_REALISTIC_PREVIEW=1 npm run build   (or npm run dev)
-const preview = process.env.PUBLIC_REALISTIC_PREVIEW === '1';
+// The realistic model (Phase 2): Matthew approved it for the public site on 2026-11-04, after it passed the accuracy
+// checks (CLAUDE.md rule 1a; audits in docs/audits/). Its web files (model/realistic/web/, made by web.mjs) are
+// copied into every build and served by the dev server, so the Explorer can load them on request.
 const realisticDir = fileURLToPath(new URL('./model/realistic/web/', import.meta.url));
 
 /** @type {import('astro').AstroIntegration} */
-const realisticPreview = {
-  name: 'realistic-preview',
+const realisticModel = {
+  name: 'realistic-model',
   hooks: {
     'astro:server:setup': ({ server }) => {
-      if (!preview) return;
       server.middlewares.use((req, res, next) => {
         const m = req.url?.match(/^\/models\/realistic\/(realistic-(?:desktop|phone)\.glb)$/);
         if (!m || !existsSync(realisticDir + m[1])) return next();
@@ -23,7 +21,6 @@ const realisticPreview = {
       });
     },
     'astro:build:done': ({ dir }) => {
-      if (!preview) return;
       cpSync(realisticDir, fileURLToPath(new URL('./models/realistic/', dir)), { recursive: true });
     },
   },
@@ -39,5 +36,5 @@ export default defineConfig({
     locales: ['en', 'es'],
     routing: { prefixDefaultLocale: false },
   },
-  integrations: [realisticPreview],
+  integrations: [realisticModel],
 });

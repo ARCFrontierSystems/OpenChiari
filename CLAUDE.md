@@ -24,6 +24,8 @@ The mockups are also viewable as a live canvas (ask Matthew for the link). The `
 - If a screen needs medical text that isn't in COPY.md, **stop**. Draft it, find an authoritative source and actually open it (NINDS, MedlinePlus, StatPearls, a major medical center, or peer-reviewed research), add a row to `docs/EVIDENCE.md` with the source URL, and ask Matthew to approve it before it ships.
 - Never change a measurement, percentage, or anatomical position away from what EVIDENCE.md states.
 - Keep every required caption: "Illustration, not a medical image", "Fluid flow simplified", and the midline-simplification note on the tonsils.
+- Nothing on the site may read as medical advice. Keep "Not medical advice. Talk to your doctor about your own care." in every footer.
+- Never invent placeholder data that looks real (studies, counts, scores, names). Leave `[placeholder]` text until real data exists.
 
 ### 1a. Accuracy checks (instead of a medical reviewer)
 On 2026-11-04 Matthew decided the site will **not** use a medical reviewer. Instead, every medical sentence and every 3D view must pass all of these before it's public:
@@ -34,8 +36,6 @@ On 2026-11-04 Matthew decided the site will **not** use a medical reviewer. Inst
 5. **Matthew approves** the result.
 
 The site must say this honestly: it never claims a medical professional reviewed it. Use the "Accuracy checks" wording in COPY.md (About, Open model, Impact).
-- Nothing on the site may read as medical advice. Keep "Not medical advice. Talk to your doctor about your own care." in every footer.
-- Never invent placeholder data that looks real (studies, counts, scores, names). Leave `[placeholder]` text until real data exists.
 
 ### 2. Privacy (the site collects nothing personal)
 - No accounts, sign-ins, contact forms, tracking cookies, or health data. Ever.

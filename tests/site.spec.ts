@@ -140,7 +140,7 @@ test.describe('3D Explorer controls', () => {
     await page.goto('/explorer/');
     await page.locator('.x-cond-grid label', { hasText: 'After surgery' }).click();
     await expect(page.getByRole('radio', { name: 'After surgery' })).toBeChecked();
-    await expect(page.locator('[data-cond-note-short]')).toHaveText('Bone is removed at the back of the opening to make room. Most people improve or stabilize; results vary.');
+    await expect(page.locator('[data-cond-note-short]')).toHaveText('Bone is removed at the back of the opening to make room. Most people improve or stabilize, but results vary, some need another operation, and surgery isn\'t right for everyone.');
 
     const parts = page.getByRole('button', { name: /Parts list/ });
     await parts.click();
@@ -317,7 +317,7 @@ test.describe('Doctor visit prep', () => {
     page.on('request', (r) => requests.push(r.url()));
     const before = await page.evaluate(() => ({ local: { ...localStorage }, session: { ...sessionStorage }, cookies: document.cookie }));
 
-    await page.getByLabel('Which of my symptoms come from Chiari?').uncheck();
+    await page.getByLabel('Which of my symptoms do you think come from Chiari?').uncheck();
     await page.getByLabel('Add your own question').fill('A private question');
     await page.getByRole('button', { name: 'Add', exact: true }).click();
     await page.getByLabel('Things I want to mention').fill('Something private');

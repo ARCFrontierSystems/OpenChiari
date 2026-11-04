@@ -15,7 +15,8 @@ Matthew's preference: when a step is done, lay out what the next step will cover
   - Explain It: build now with approved text only, and draft the missing notes and explanations with sources for approval.
   - Go live now on Cloudflare Pages: openchiari.org was bought on Cloudflare.
 - **Hosting prep:** `.node-version` (22) so Cloudflare builds with the same Node version as here. The largest file is 8 MB (Pages allows 25 MiB). Everything the build needs is in the repository.
-- **To go live (Matthew):**
+- **Automatic publishing:** `.github/workflows/deploy.yml` builds the site and uploads it to Cloudflare Pages each time `main` changes. It needs two GitHub secrets: a Cloudflare API token (Account > Cloudflare Pages > Edit) and the account ID. On the first run it creates the project and asks Cloudflare to attach openchiari.org and www. This avoids the GitHub app access step that blocked connecting the repository in the dashboard.
+- **To go live (Matthew), before the automatic publishing was added:**
   - merge this work into `main`;
   - connect the repository to Cloudflare Pages: build command `npm run build`, output folder `dist`, production branch `main`;
   - add openchiari.org as a custom domain.

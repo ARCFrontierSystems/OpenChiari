@@ -17,6 +17,10 @@ export interface Layer {
   opacity: number;
 }
 
+/** Named camera directions; 'custom' once the visitor turns the model themselves. */
+export type CameraView = 'side' | 'back' | 'below' | 'front' | 'custom';
+export const CAMERA_PRESETS: Exclude<CameraView, 'custom'>[] = ['side', 'back', 'below', 'front'];
+
 export interface ViewState {
   condition: Condition;
   flow: boolean;
@@ -27,6 +31,7 @@ export interface ViewState {
   cut: number;
   model: 'simple' | 'realistic';
   part: string;
+  camera: CameraView;
 }
 
 // Starting view. Skin starts on, so the midline cut matches the figures; the mockup had it off.
@@ -47,6 +52,7 @@ export const initialState: ViewState = {
   // The realistic model is Phase 2 and stays hidden until its medical review.
   model: 'simple',
   part: 'tonsil',
+  camera: 'side',
 };
 
 type Listener = (state: ViewState) => void;

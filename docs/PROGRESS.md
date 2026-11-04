@@ -3,6 +3,22 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Phase 1, step 6: viewer tools
+
+- **Camera buttons:** Side, Back, Below, Front and Reset (top right of the view on desktop; in the Layers panel on phones). The camera glides to each view, or jumps in Calm mode. The current view is shown as pressed; turning the model yourself switches to "Turned view".
+- **Tap to identify:** tapping or clicking a structure in the model selects it, both on the outside of the model and on a cut face. It picks the innermost structure (e.g. the tonsil, not the cerebellum around it), and looks through the faded skin. On phones it opens the parts list so the info card shows. Clicking the skull only selects "Foramen magnum" near the opening.
+- **Highlight:** the selected structure glows in 3D and gets a blue outline on the midline cut face; its label is highlighted too.
+- **Labels in 3D:** a numbered column beside the model with lines to each structure, like the figure. They follow the model as it turns; clicking a label selects that structure. Labels hide with their layer. When labels are on, the model shifts and zooms slightly so the column doesn't cover it. Desktop only, as in the mockups.
+- **Keyboard:** the 3D view can be focused (visible outline). Arrow keys turn, Shift+arrows move, + and - zoom, 1 to 4 pick Side, Back, Below, Front, 0 resets. Screen readers get these instructions, and a description of the current view (condition, direction, cut), read out after changes.
+- **New text (non-medical UI only):** "Reset camera", view names ("Side view", "Back view", "View from below", "Front view", "Turned view"), cut names ("Whole model", "Cut at the midline", ...), and the keyboard instructions. Camera button names are from COPY.md.
+- **Checks:** 67 tests pass, including labels, tapping the brainstem on the cut face, camera buttons and keyboard.
+
+**Next: step 7, fluid flow and Measure in 3D.**
+- Fluid flow: a gentle pulse along the spinal fluid spaces, timed to a heartbeat (about once a second), with the restricted-flow marks in Chiari views. Labeled "Fluid flow simplified" (already on screen). No motion in Calm mode or with reduced motion: static arrows instead.
+- Measure in 3D: the McRae line from basion to opisthion and the bracket from the line to the lowest tonsil tip, drawn in the model (not only on the midline cut face), with the measured distance from the model.
+- Both stay accurate to EVIDENCE.md (flow wording "in many people, not all"; numbers from the model check).
+- Stop for Matthew's review.
+
 ## 2026-11-04: Phase 1, step 5: Simple model, Chiari I with syrinx and After decompression
 
 - **Chiari I with syrinx:** the beaded fluid cavity from the figure, in the center of the neck cord (5 mm wide inside the 12 mm cord), below the skull opening. It runs past the bottom of the view (50 mm visible), consistent with EVIDENCE.md's "about 5 vertebrae long on average". It's inside the cord, so it shows in the cut-away.

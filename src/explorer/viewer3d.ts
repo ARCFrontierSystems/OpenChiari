@@ -13,8 +13,10 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
-import type { Store, ViewState, LayerId } from './state';
+import type { Store, ViewState, LayerId, CameraView } from './state';
 import { anatomyFigureSvg, type FigureStrings, type FigureLayer } from '../lib/anatomy-figure';
+import { isCalm } from '../lib/calm';
+import shapes from '../lib/anatomy-shapes.json';
 
 const MODEL_URL = '/models/simple.glb';
 const FIGURE_UNITS_PER_MM = 2;
@@ -28,6 +30,9 @@ const TARGET = new THREE.Vector3(-40, 40, 0);
 
 interface Part {
   mesh: THREE.Mesh;
+  name: string;
+  /** Structure-list id (cerebrum, tonsil, ...) or null for parts not in the list. */
+  partId: string | null;
   layer: LayerId;
   conditions: string[] | null;
   baseOpacity: number;
@@ -41,6 +46,32 @@ interface Part {
   stencil: THREE.Group;
   cap: THREE.Mesh;
 }
+
+/** A label in the 3D view: anchored at a point on the midline (figure units), shown in a column. */
+export interface LabelDef {
+  part: string;
+  num: string;
+  name: string;
+  layer: LayerId;
+  anchor: [number, number];
+}
+
+/** Where each structure's label points, in figure units (the figure's own leader-line ends). */
+export function labelAnchor(part: string, condition: string): [number, number] {
+  const tonsilMid = condition === 'typical' ? 430 : condition === 'surgery' ? 444 : 448;
+  const anchors: Record<string, [number, number]> = {
+    cerebrum: [250, 170], callosum: [300, 214], cerebellum: [452, 372], ventricle: [364, 384], brainstem: [318, 372],
+    tonsil: [386, tonsilMid], foramen: [372, 445], cord: [350, 480], csf: [380, 620], c2: [318, 500],
+  };
+  return anchors[part] ?? [369, 444.5];
+}
+
+const PRESET_ANGLES: Record<Exclude<CameraView, 'custom'>, [number, number]> = {
+  side: [0, 0],
+  back: [90, 0],
+  below: [0, -80],
+  front: [-90, 0],
+};
 
 export function webglAvailable(): boolean {
   try {
@@ -57,7 +88,15 @@ function cutDepth(slider: number): number {
   return slider < 50 ? ((50 - slider) / 50) * 100 : -((slider - 50) / 50) * 60;
 }
 
-export async function createViewer(host: HTMLElement, store: Store, figureStrings: FigureStrings) {
+export interface ViewerOptions {
+  /** Container for the 3D labels (positioned over the view). */
+  labelsHost?: HTMLElement | null;
+  labels?: LabelDef[];
+  /** Called when the visitor taps a structure in the model. */
+  onPick?: (part: string) => void;
+}
+
+export async function createViewer(host: HTMLElement, store: Store, figureStrings: FigureStrings, options: ViewerOptions = {}) {
   const renderer = new THREE.WebGLRenderer({ antialias: true, stencil: true, powerPreference: 'low-power' });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.localClippingEnabled = true;
@@ -155,6 +194,8 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
 
     parts.push({
       mesh,
+      name: mesh.name,
+      partId: (extras.part as string | null) ?? null,
       layer: extras.layer as LayerId,
       conditions: (extras.conditions as string[] | null) ?? null,
       baseOpacity,
@@ -204,7 +245,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       const l = st.layers[id as LayerId];
       layers[id] = l.on ? l.opacity / 100 : 0;
     }
-    const key = JSON.stringify([st.condition, st.flow, st.measure, layers]);
+    const key = JSON.stringify([st.condition, st.flow, st.measure, layers, st.part]);
     if (key === sectionKey) return;
     sectionKey = key;
     const job = ++sectionJob;
@@ -217,8 +258,48 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     const ctx = sectionCanvas.getContext('2d')!;
     ctx.clearRect(0, 0, sectionCanvas.width, sectionCanvas.height);
     ctx.drawImage(img, 0, 0, sectionCanvas.width, sectionCanvas.height);
+    drawHighlight(ctx, st);
     sectionTexture.needsUpdate = true;
     requestRender();
+  }
+
+  /** Outline the selected structure on the midline cut face. */
+  function drawHighlight(ctx: CanvasRenderingContext2D, st: ViewState) {
+    const S = shapes as unknown as Record<string, unknown>;
+    const tonsil = (shapes.tonsil as Record<string, string>)[st.condition === 'syrinx' ? 'chiari' : st.condition];
+    const csfExtra = st.condition === 'typical' ? ['cisterna'] : st.condition === 'surgery' ? ['surgeryCsf'] : [];
+    const byPart: Record<string, unknown[]> = {
+      cerebrum: [S.cerebrum], callosum: [S.callosum], cerebellum: [S.cerebellum], ventricle: [S.fourthVentricle],
+      brainstem: [S.brainstem], tonsil: [tonsil], cord: [S.cord], c2: [S.dens, S.c2Body, S.spinous2],
+      csf: [S.csfAnterior, S.csfPosterior, ...csfExtra.map((k) => S[k])],
+    };
+    const scale = sectionCanvas.width / SECTION_BOX.w;
+    ctx.save();
+    ctx.setTransform(scale, 0, 0, scale, -SECTION_BOX.x * scale, -SECTION_BOX.y * scale);
+    ctx.strokeStyle = '#1F5F8B';
+    ctx.lineJoin = 'round';
+    ctx.lineWidth = 3;
+    if (st.part === 'foramen') {
+      const [bx, by] = shapes.mcrae.basion, [ox, oy] = shapes.mcrae.opisthion;
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(bx, by);
+      ctx.lineTo(ox, oy);
+      ctx.stroke();
+    }
+    for (const shape of byPart[st.part] ?? []) {
+      const path = new Path2D();
+      if (typeof shape === 'string') path.addPath(new Path2D(shape));
+      else if (shape && typeof shape === 'object' && 'ellipse' in shape) {
+        const [cx, cy, rx, ry] = (shape as { ellipse: number[] }).ellipse;
+        path.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+      } else if (shape && typeof shape === 'object' && 'rect' in shape) {
+        const [x, y, w, h, r] = (shape as { rect: number[] }).rect;
+        path.roundRect(x, y, w, h, r);
+      }
+      ctx.stroke(path);
+    }
+    ctx.restore();
   }
 
   // Controls: drag to rotate, scroll or pinch to zoom, right-drag / two fingers / Shift-drag to move.
@@ -227,7 +308,17 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   controls.enableDamping = false;
   controls.minDistance = 250;
   controls.maxDistance = 2000;
-  controls.addEventListener('change', () => requestRender());
+  // Only a real turn, zoom or move by the visitor counts as leaving a named camera view (a tap doesn't).
+  let userMoving = false;
+  controls.addEventListener('start', () => {
+    stopTween();
+    userMoving = true;
+  });
+  controls.addEventListener('end', () => (userMoving = false));
+  controls.addEventListener('change', () => {
+    if (userMoving && store.get().camera !== 'custom') store.set({ camera: 'custom' });
+    requestRender();
+  });
   // Shift-drag pans (as the Explorer hint says).
   renderer.domElement.addEventListener('pointerdown', (e) => {
     controls.mouseButtons.LEFT = e.shiftKey ? THREE.MOUSE.PAN : THREE.MOUSE.ROTATE;
@@ -268,7 +359,9 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       pending = false;
       if (visible && !document.hidden) {
         applyOpacity();
+        updateLabelSpace();
         renderer.render(scene, camera);
+        placeLabels();
       }
     });
   }
@@ -309,7 +402,235 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     }
   }
 
+  // ----- Highlight the selected structure in the model -----
+  const HIGHLIGHT = new THREE.Color('#1F5F8B');
+  function applyHighlight(part: string) {
+    for (const p of parts) {
+      const mat = p.mesh.material as THREE.MeshStandardMaterial;
+      const on = p.partId === part && p.name !== 'skull' && p.name !== 'skull-surgery';
+      mat.emissive.copy(on ? HIGHLIGHT : new THREE.Color(0x000000));
+      mat.emissiveIntensity = on ? 0.45 : 0;
+    }
+  }
+
+  // ----- Camera presets (glide, or jump in Calm mode) -----
+  let tween = 0;
+  let goal: [number, number] | null = null;
+  function stopTween() {
+    if (tween) cancelAnimationFrame(tween);
+    tween = 0;
+    goal = null;
+  }
+  /** Current direction, or where the camera is gliding to (so quick key presses add up). */
+  function anglesNow(): [number, number] {
+    if (goal) return goal;
+    toCamera.copy(camera.position).sub(controls.target);
+    const d = toCamera.length();
+    return [THREE.MathUtils.radToDeg(Math.atan2(toCamera.x, toCamera.z)), THREE.MathUtils.radToDeg(Math.asin(toCamera.y / d))];
+  }
+  /** Move the camera to a direction (and optionally a distance and target), gliding unless in Calm mode. */
+  function moveCamera(az: number, el: number, dist?: number, target?: THREE.Vector3) {
+    stopTween();
+    const [a0, e0] = anglesNow();
+    const d0 = camera.position.distanceTo(controls.target);
+    const t0 = controls.target.clone();
+    const d1 = dist ?? d0, t1 = target ?? t0;
+    goal = [az, el];
+    let da = az - a0;
+    da = ((da + 540) % 360) - 180; // shortest way round
+    const place = (k: number) => {
+      const a = THREE.MathUtils.degToRad(a0 + da * k), e = THREE.MathUtils.degToRad(e0 + (el - e0) * k);
+      const d = d0 + (d1 - d0) * k;
+      controls.target.lerpVectors(t0, t1, k);
+      camera.position.set(
+        controls.target.x + d * Math.sin(a) * Math.cos(e),
+        controls.target.y + d * Math.sin(e),
+        controls.target.z + d * Math.cos(a) * Math.cos(e),
+      );
+      controls.update();
+      requestRender();
+    };
+    if (isCalm()) {
+      place(1);
+      goal = null;
+      return;
+    }
+    const start = performance.now(), duration = 450;
+    const step = (now: number) => {
+      const k = Math.min(1, (now - start) / duration);
+      place(k < 0.5 ? 2 * k * k : 1 - (-2 * k + 2) ** 2 / 2);
+      tween = k < 1 ? requestAnimationFrame(step) : 0;
+      if (k >= 1) goal = null;
+    };
+    tween = requestAnimationFrame(step);
+  }
+  function defaultDistance() {
+    const w = host.clientWidth, h = host.clientHeight;
+    const t = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+    return Math.max(160 / t, 140 / (t * (w / Math.max(1, h))));
+  }
+  function goToPreset(view: CameraView) {
+    if (view === 'custom') return;
+    const [az, el] = PRESET_ANGLES[view];
+    moveCamera(az, el);
+  }
+  /** Back to the starting view: side, whole head in view. */
+  function resetCamera() {
+    moveCamera(0, 0, defaultDistance(), TARGET.clone());
+    if (store.get().camera !== 'side') store.set({ camera: 'side' });
+  }
+
+  // ----- Keyboard: arrows turn, Shift+arrows move, + and - zoom, 1 to 4 presets, 0 resets -----
+  host.tabIndex = 0;
+  host.addEventListener('keydown', (e) => {
+    const [az, el] = anglesNow();
+    const dist = camera.position.distanceTo(controls.target);
+    const custom = () => store.get().camera !== 'custom' && store.set({ camera: 'custom' });
+    const pan = (dx: number, dy: number) => {
+      const right = new THREE.Vector3().setFromMatrixColumn(camera.matrix, 0).multiplyScalar(dx);
+      const up = new THREE.Vector3().setFromMatrixColumn(camera.matrix, 1).multiplyScalar(dy);
+      const t = controls.target.clone().add(right).add(up);
+      moveCamera(az, el, dist, t);
+    };
+    let handled = true;
+    switch (e.key) {
+      case 'ArrowLeft': e.shiftKey ? pan(-12, 0) : moveCamera(az - 15, el); custom(); break;
+      case 'ArrowRight': e.shiftKey ? pan(12, 0) : moveCamera(az + 15, el); custom(); break;
+      case 'ArrowUp': e.shiftKey ? pan(0, 12) : moveCamera(az, Math.min(85, el + 15)); custom(); break;
+      case 'ArrowDown': e.shiftKey ? pan(0, -12) : moveCamera(az, Math.max(-85, el - 15)); custom(); break;
+      case '+': case '=': moveCamera(az, el, Math.max(controls.minDistance, dist * 0.85)); break;
+      case '-': case '_': moveCamera(az, el, Math.min(controls.maxDistance, dist / 0.85)); break;
+      case '1': store.set({ camera: 'side' }); break;
+      case '2': store.set({ camera: 'back' }); break;
+      case '3': store.set({ camera: 'below' }); break;
+      case '4': store.set({ camera: 'front' }); break;
+      case '0': case 'Home': resetCamera(); break;
+      default: handled = false;
+    }
+    if (handled) e.preventDefault();
+  });
+
+  // ----- Tap or click a structure to select it -----
+  const raycaster = new THREE.Raycaster();
+  const ndc = new THREE.Vector2();
+  // Inner structures first, so tapping the tonsil picks the tonsil rather than the cerebellum around it.
+  const PRIORITY = ['tonsil', 'ventricle', 'callosum', 'cord', 'brainstem', 'c2', 'cerebellum', 'cerebrum', 'csf', 'foramen'];
+  function contains(mesh: THREE.Mesh, point: THREE.Vector3): boolean {
+    const r = new THREE.Raycaster(point, new THREE.Vector3(1, 0.013, 0.007).normalize());
+    return r.intersectObject(mesh, false).length % 2 === 1;
+  }
+  function pick(clientX: number, clientY: number): string | null {
+    const rect = renderer.domElement.getBoundingClientRect();
+    ndc.set(((clientX - rect.left) / rect.width) * 2 - 1, -((clientY - rect.top) / rect.height) * 2 + 1);
+    raycaster.setFromCamera(ndc, camera);
+    const depth = plane.constant;
+    const shown = parts.filter((p) => p.mesh.visible);
+    const fade = skinFade();
+    const cutFace = new THREE.Vector3();
+    const facesCut = camera.position.z > depth && raycaster.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0, 0, 1), -depth), cutFace);
+    const cutDistance = facesCut ? raycaster.ray.origin.distanceTo(cutFace) : Infinity;
+    for (const hit of raycaster.intersectObjects(shown.map((p) => p.mesh), false)) {
+      if (hit.point.z > depth + 0.05) continue; // cut away
+      if (hit.distance > cutDistance) break; // the ray reached the cut face first
+      const p = parts.find((q) => q.mesh === hit.object)!;
+      const opacity = p.ghost ? p.opacity * fade : p.opacity;
+      if (opacity < 0.5) continue; // see-through: look past it
+      if (p.partId === 'foramen' && hit.point.length() > 25) return null; // skull, away from the opening
+      return p.partId;
+    }
+    if (!facesCut) return null;
+    // On a cut face: which structures contain that point? Pick the innermost.
+    cutFace.z = depth - 0.05;
+    const inside = new Set(shown.filter((p) => p.partId && contains(p.mesh, cutFace)).map((p) => p.partId!));
+    if (inside.has('foramen') && cutFace.length() > 25) inside.delete('foramen');
+    return PRIORITY.find((id) => inside.has(id)) ?? null;
+  }
+  let downAt: { x: number; y: number; t: number } | null = null;
+  renderer.domElement.addEventListener('pointerdown', (e) => (downAt = { x: e.clientX, y: e.clientY, t: performance.now() }));
+  renderer.domElement.addEventListener('pointerup', (e) => {
+    if (!downAt) return;
+    const tap = Math.hypot(e.clientX - downAt.x, e.clientY - downAt.y) < 6 && performance.now() - downAt.t < 600;
+    downAt = null;
+    if (!tap) return;
+    const part = pick(e.clientX, e.clientY);
+    if (part) options.onPick?.(part);
+  });
+
+  // ----- Labels: a column beside the model, with lines to each structure -----
+  const labelsHost = options.labelsHost ?? null;
+  const labelEls = new Map<string, { button: HTMLButtonElement; line: SVGLineElement; def: LabelDef }>();
+  let labelSvg: SVGSVGElement | null = null;
+  if (labelsHost && options.labels) {
+    labelSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    labelSvg.setAttribute('aria-hidden', 'true');
+    labelSvg.classList.add('x-label-lines');
+    labelsHost.appendChild(labelSvg);
+    for (const def of options.labels) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'x-label';
+      button.dataset.labelPart = def.part;
+      const num = document.createElement('span');
+      num.className = 'x-label-num';
+      num.textContent = def.num;
+      button.append(num, document.createTextNode(def.name));
+      button.addEventListener('click', () => options.onPick?.(def.part));
+      labelsHost.appendChild(button);
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      labelSvg.appendChild(line);
+      labelEls.set(def.part, { button, line, def });
+    }
+  }
+  const anchorV = new THREE.Vector3();
+  /** When labels are showing, shift the picture left so the label column doesn't cover the head. */
+  const LABEL_SPACE = 236; // px
+  function updateLabelSpace() {
+    const showing = !!labelsHost && !labelsHost.hidden && labelsHost.offsetParent !== null;
+    const w = host.clientWidth || 1;
+    // Shift the picture left by half the label column: film offset = 2 * shift / width * film width * tan(fov / 2) * aspect.
+    const tan = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+    const offset = showing ? ((2 * (LABEL_SPACE / 2)) / w) * camera.getFilmWidth() * tan * camera.aspect : 0;
+    // ...and zoom out just enough for the head to fit in the space that's left.
+    const zoom = showing ? Math.min(1, (w - LABEL_SPACE) / (w * 0.93)) : 1;
+    if (camera.filmOffset !== offset || camera.zoom !== zoom) {
+      camera.filmOffset = offset;
+      camera.zoom = zoom;
+      camera.updateProjectionMatrix();
+    }
+  }
+  function placeLabels() {
+    if (!labelsHost || !labelSvg || labelsHost.hidden) return;
+    const st = store.get();
+    const w = host.clientWidth, h = host.clientHeight;
+    labelSvg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+    const shownDefs = [...labelEls.values()].filter(({ def }) => st.layers[def.layer].on);
+    const top = 76, bottom = h - 56;
+    const gap = shownDefs.length > 1 ? Math.min(40, (bottom - top) / (shownDefs.length - 1)) : 0;
+    let row = 0;
+    for (const { button, line, def } of labelEls.values()) {
+      const on = shownDefs.some((d) => d.def === def);
+      button.hidden = !on;
+      line.style.display = on ? '' : 'none';
+      if (!on) continue;
+      const y = top + gap * row++;
+      button.style.top = `${y}px`;
+      button.classList.toggle('is-selected', def.part === st.part);
+      const [fx, fy] = def.part === 'tonsil' ? labelAnchor('tonsil', st.condition) : def.anchor;
+      anchorV.set((fx - ORIGIN.x) / FIGURE_UNITS_PER_MM, -(fy - ORIGIN.y) / FIGURE_UNITS_PER_MM, 0).project(camera);
+      const ax = ((anchorV.x + 1) / 2) * w, ay = ((1 - anchorV.y) / 2) * h;
+      const labelX = w - 216;
+      const visibleAnchor = anchorV.z < 1 && ax > 0 && ax < labelX && ay > 0 && ay < h;
+      line.style.display = visibleAnchor ? '' : 'none';
+      line.setAttribute('x1', String(labelX - 6));
+      line.setAttribute('y1', String(y + 14));
+      line.setAttribute('x2', String(ax));
+      line.setAttribute('y2', String(ay));
+    }
+  }
+
   // ----- Apply the view state -----
+  let lastCamera: CameraView = store.get().camera;
+  let lastPart = '';
   function apply(st: ViewState) {
     const depth = cutDepth(st.cut);
     plane.constant = depth;
@@ -328,6 +649,15 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     }
     section.visible = midline;
     if (midline) void drawSection(st);
+    if (st.part !== lastPart) {
+      lastPart = st.part;
+      applyHighlight(st.part);
+    }
+    if (st.camera !== lastCamera) {
+      lastCamera = st.camera;
+      goToPreset(st.camera);
+    }
+    if (labelsHost) labelsHost.hidden = !st.labels;
     requestRender();
   }
   store.subscribe(apply);
@@ -362,7 +692,8 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   return {
     renderer,
     look,
-    reset: frame,
+    reset: resetCamera,
+    pick,
     /** For tests and the screen reader text. */
     get partCount() {
       return parts.length;

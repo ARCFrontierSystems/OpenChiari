@@ -117,9 +117,10 @@ test.describe('3D Explorer controls', () => {
     await page.goto('/explorer/');
     const card = page.locator('.x-right .x-card');
     await expect(card).toContainText('the model shows them at their lowest point, where MRI measures them');
-    await page.getByRole('button', { name: 'Brainstem' }).click();
+    const list = page.locator('.x-right .x-parts');
+    await list.getByRole('button', { name: 'Brainstem' }).click();
     await expect(card.getByRole('heading')).toHaveText('Brainstem');
-    await expect(page.getByRole('button', { name: 'Brainstem' })).toHaveAttribute('aria-pressed', 'true');
+    await expect(list.getByRole('button', { name: 'Brainstem' })).toHaveAttribute('aria-pressed', 'true');
     await page.getByRole('searchbox').fill('spinal');
     await expect(page.locator('.x-right .x-parts li:visible')).toHaveCount(2);
   });
@@ -159,12 +160,12 @@ test.describe('3D Explorer controls', () => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto('/explorer/');
     await expect(page.locator('.x-view')).toHaveClass(/has-3d/, { timeout: 30000 });
-    const viewer = page.getByRole('img', { name: /Midline section of the head and neck, Chiari I/ });
+    const viewer = page.getByRole('application', { name: /Midline section of the head and neck, Chiari I/ });
     await expect(viewer).toBeVisible();
     await expect(page.locator('[data-figure="wide"]')).toBeHidden();
     await expect(page.getByText('Drag to rotate · Scroll to zoom · Shift-drag to move')).toBeVisible();
     await page.locator('.x-cond-list label', { hasText: 'Typical anatomy' }).click();
-    await expect(page.getByRole('img', { name: /typical anatomy: the cerebellar tonsils sit above/ })).toBeVisible();
+    await expect(page.getByRole('application', { name: /typical anatomy: the cerebellar tonsils sit above/ })).toBeVisible();
   });
 
   test('3D model shows the syrinx and after-decompression views', async ({ page }) => {
@@ -172,11 +173,48 @@ test.describe('3D Explorer controls', () => {
     await page.goto('/explorer/');
     await expect(page.locator('.x-view')).toHaveClass(/has-3d/, { timeout: 30000 });
     await page.locator('.x-cond-list label', { hasText: 'Chiari I with syrinx' }).click();
-    await expect(page.getByRole('img', { name: /Chiari I with a syrinx, a fluid-filled cavity inside the spinal cord/ })).toBeVisible();
+    await expect(page.getByRole('application', { name: /Chiari I with a syrinx, a fluid-filled cavity inside the spinal cord/ })).toBeVisible();
     await expect(page.locator('[data-cond-note]')).toContainText('A syrinx is a fluid-filled cavity inside the spinal cord.');
     await page.locator('.x-cond-list label', { hasText: 'After decompression' }).click();
-    await expect(page.getByRole('img', { name: /after decompression surgery: bone at the back of the skull opening/ })).toBeVisible();
+    await expect(page.getByRole('application', { name: /after decompression surgery: bone at the back of the skull opening/ })).toBeVisible();
     await expect(page.locator('[data-cond-note]')).toContainText("Results vary, and surgery isn't right for everyone.");
+  });
+
+  test('3D tools: labels, tapping a structure, camera buttons and keyboard', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/explorer/');
+    await expect(page.locator('.x-view')).toHaveClass(/has-3d/, { timeout: 30000 });
+    const card = page.locator('.x-right [data-part-name]');
+
+    // Labels select a structure
+    await page.locator('.x-labels').getByRole('button', { name: /Cerebellum/ }).click();
+    await expect(card).toHaveText('Cerebellum');
+
+    // Tapping the brainstem on the cut face selects it (its label line ends on it)
+    const point = await page.evaluate(() => {
+      const labels = [...document.querySelectorAll('.x-label')];
+      const i = labels.findIndex((l) => (l as HTMLElement).dataset.labelPart === 'brainstem');
+      const line = document.querySelectorAll('.x-label-lines line')[i];
+      const box = (line as SVGLineElement).ownerSVGElement!.getBoundingClientRect();
+      return { x: box.left + Number(line.getAttribute('x2')), y: box.top + Number(line.getAttribute('y2')) };
+    });
+    await page.mouse.click(point.x, point.y);
+    await expect(card).toHaveText('Brainstem');
+
+    // Camera buttons and the description for screen readers
+    const back = page.locator('.x-view .x-camera').getByRole('button', { name: 'Back', exact: true });
+    await back.click();
+    await expect(back).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.getByRole('application')).toHaveAccessibleName(/Back view\. Cut at the midline\./);
+
+    // Keyboard: 3 = below, 0 = reset to the side view
+    await page.getByRole('application').focus();
+    await page.keyboard.press('3');
+    await expect(page.locator('.x-view .x-camera').getByRole('button', { name: 'Below', exact: true })).toHaveAttribute('aria-pressed', 'true');
+    await page.keyboard.press('0');
+    await expect(page.locator('.x-view .x-camera').getByRole('button', { name: 'Side', exact: true })).toHaveAttribute('aria-pressed', 'true');
+    await page.keyboard.press('ArrowLeft');
+    await expect(page.getByRole('application')).toHaveAccessibleName(/Turned view/);
   });
 
   test('required captions and credits are on the page', async ({ page }) => {

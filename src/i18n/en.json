@@ -352,6 +352,29 @@
       }
     ],
     "viewOptions": "View and layers",
-    "hint": "Drag to rotate · Scroll to zoom · Shift-drag to move"
+    "hint": "Drag to rotate · Scroll to zoom · Shift-drag to move",
+    "camera": "Camera",
+    "cameraViews": {
+      "side": "Side",
+      "back": "Back",
+      "below": "Below",
+      "front": "Front"
+    },
+    "resetCamera": "Reset camera",
+    "viewerRole": "3D model",
+    "keysHelp": "Arrow keys turn the model. Shift and arrow keys move it. Plus and minus zoom. Press 1 for side, 2 for back, 3 for below, 4 for front, and 0 to reset.",
+    "viewNames": {
+      "side": "Side view",
+      "back": "Back view",
+      "below": "View from below",
+      "front": "Front view",
+      "custom": "Turned view"
+    },
+    "cutNames": {
+      "whole": "Whole model",
+      "near": "Cut part way, near side removed",
+      "midline": "Cut at the midline",
+      "far": "Cut past the midline, toward the far side"
+    }
   }
 }

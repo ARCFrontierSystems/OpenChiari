@@ -9,7 +9,8 @@
 import Head from '../components/Head.astro';
 import Footer from '../components/Footer.astro';
 import { anatomyFigureSvg, CONDITIONS } from '../lib/anatomy-figure';
-import { initialState, LAYERS, SIMPLE_LAYERS } from '../explorer/state';
+import { initialState, LAYERS, SIMPLE_LAYERS, CAMERA_PRESETS } from '../explorer/state';
+const RESET_ICON = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v4h4"></path></svg>';
 import { getStrings, routes } from '../i18n';
 
 const s = getStrings();
@@ -94,18 +95,45 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
           </div>
         </section>
 
+        <section class="x-section only-narrow-x" aria-labelledby="camera-heading" data-3d-only>
+          <h2 class="x-h" id="camera-heading">{x.camera}</h2>
+          <div class="x-camera x-camera-inline" role="group" aria-labelledby="camera-heading">
+            {CAMERA_PRESETS.map((v) => (
+            <button type="button" data-camera={v} aria-pressed={v === st.camera ? 'true' : 'false'}>{x.cameraViews[v]}</button>
+          ))}
+          <button type="button" class="x-camera-reset" data-camera-reset aria-label={x.resetCamera} set:html={RESET_ICON} />
+          </div>
+        </section>
+
         <button type="button" class="x-tool x-close only-narrow-x" data-layers-close>{x.close}</button>
       </aside>
 
       <main class="x-view" id="viewer" aria-label={x.viewerLabel}>
-        <div class="x-3d" data-viewer role="img" aria-label={s.figure.ariaPrefix + s.figure.aria[st.condition]} hidden></div>
+        <div
+          class="x-3d"
+          data-viewer
+          role="application"
+          aria-roledescription={x.viewerRole}
+          aria-label={s.figure.ariaPrefix + s.figure.aria[st.condition]}
+          aria-describedby="viewer-keys"
+          hidden
+        ></div>
+        <p id="viewer-keys" class="visually-hidden">{x.keysHelp}</p>
+        <p class="visually-hidden" aria-live="polite" data-view-description></p>
+        <div class="x-labels only-wide-x" data-labels hidden></div>
         <div class="x-figure only-wide-x" data-figure="wide" set:html={figureWide} />
         <div class="x-figure x-figure-narrow only-narrow-x" data-figure="narrow" set:html={figureNarrow} />
 
         <div class="x-toolbar only-wide-x" role="group" aria-label={x.viewTools}>
           <button type="button" class="x-tool" data-toggle="flow" aria-pressed={(st.flow) ? 'true' : 'false'}>{x.flow}</button>
-          <button type="button" class="x-tool" data-toggle="labels" data-2d-only aria-pressed={(st.labels) ? 'true' : 'false'}>{x.labels}</button>
+          <button type="button" class="x-tool" data-toggle="labels" aria-pressed={(st.labels) ? 'true' : 'false'}>{x.labels}</button>
           <button type="button" class="x-tool" data-toggle="measure" aria-pressed={(st.measure) ? 'true' : 'false'}>{x.measure}</button>
+        </div>
+        <div class="x-camera only-wide-x" role="group" aria-label={x.camera} data-3d-only>
+          {CAMERA_PRESETS.map((v) => (
+            <button type="button" data-camera={v} aria-pressed={v === st.camera ? 'true' : 'false'}>{x.cameraViews[v]}</button>
+          ))}
+          <button type="button" class="x-camera-reset" data-camera-reset aria-label={x.resetCamera} set:html={RESET_ICON} />
         </div>
         <div class="x-tools-narrow only-narrow-x" role="group" aria-label={x.viewTools}>
           <button type="button" class="x-tool" data-toggle="flow" aria-pressed={(st.flow) ? 'true' : 'false'}>{x.flowShort}</button>
@@ -255,13 +283,46 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
       // ----- 3D view (falls back to the 2D figure if WebGL is missing or loading fails) -----
       const view = document.querySelector<HTMLElement>('.x-view')!;
       const viewerHost = document.querySelector<HTMLElement>('[data-viewer]')!;
-      import('../explorer/viewer3d').then(async ({ webglAvailable, createViewer }) => {
+      const labelsHost = document.querySelector<HTMLElement>('[data-labels]');
+      const descriptionEl = document.querySelector<HTMLElement>('[data-view-description]')!;
+      const LABEL_LAYERS: Record<string, (typeof LAYERS)[number]> = {
+        cerebrum: 'brain', callosum: 'brain', cerebellum: 'brain', brainstem: 'brain', tonsil: 'brain', cord: 'brain',
+        ventricle: 'csf', csf: 'csf', foramen: 'bone', c2: 'bone',
+      };
+      /** Text description of the current 3D view: condition, direction and cut. */
+      const describe = (st: ViewState) => {
+        const cut = st.cut === 50 ? 'midline' : st.cut === 0 ? 'whole' : st.cut < 50 ? 'near' : 'far';
+        return `${strings.figure.ariaPrefix}${strings.figure.aria[st.condition]}. ${x.viewNames[st.camera]}. ${x.cutNames[cut]}.`;
+      };
+      import('../explorer/viewer3d').then(async ({ webglAvailable, createViewer, labelAnchor }) => {
         if (!webglAvailable()) return;
         viewerHost.hidden = false;
         try {
-          await createViewer(viewerHost, store, strings.figure);
+          const viewer = await createViewer(viewerHost, store, strings.figure, {
+            labelsHost,
+            labels: x.parts.map((p) => ({ part: p.id, num: p.num, name: p.name, layer: LABEL_LAYERS[p.id], anchor: labelAnchor(p.id, store.get().condition) })),
+            onPick: (part) => {
+              store.set({ part });
+              // On phones, open the parts list so the info card shows.
+              if (partsToggle.offsetParent !== null && partsToggle.getAttribute('aria-expanded') !== 'true') partsToggle.click();
+            },
+          });
           view.classList.add('has-3d');
-          store.subscribe((st) => viewerHost.setAttribute('aria-label', strings.figure.ariaPrefix + strings.figure.aria[st.condition]));
+          document.body.classList.add('has-3d');
+          $$<HTMLButtonElement>('[data-camera]').forEach((b) => b.addEventListener('click', () => store.set({ camera: b.dataset.camera as ViewState['camera'] })));
+          $$<HTMLButtonElement>('[data-camera-reset]').forEach((b) => b.addEventListener('click', () => viewer.reset()));
+          let spoken = '';
+          let timer = 0;
+          store.subscribe((st) => {
+            const text = describe(st);
+            viewerHost.setAttribute('aria-label', text);
+            $$('[data-camera]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.camera === st.camera)));
+            // Read the new view out after the visitor stops changing things.
+            clearTimeout(timer);
+            timer = window.setTimeout(() => {
+              if (text !== spoken) descriptionEl.textContent = spoken = text;
+            }, 600);
+          });
         } catch (error) {
           console.warn('3D view unavailable, showing the figure instead.', error);
           viewerHost.hidden = true;
@@ -595,7 +656,7 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
   }
   .has-3d .x-figure,
   .has-3d [data-2d-only],
-  .x-view:not(.has-3d) [data-3d-only] {
+  :global(body:not(.has-3d)) [data-3d-only] {
     display: none;
   }
   .x-footnotes {
@@ -621,6 +682,91 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
   .x-layers input:disabled + label {
     color: var(--x-faint);
     cursor: default;
+  }
+  .x-3d:focus-visible {
+    outline: 2px solid var(--x-accent);
+    outline-offset: -2px;
+  }
+  /* Camera buttons (segmented, like the mockup) */
+  .x-camera {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    border: 1px solid var(--x-control-border);
+    border-radius: var(--radius);
+    background: var(--x-panel);
+  }
+  .x-camera-inline {
+    position: static;
+    align-self: flex-start;
+    flex-wrap: wrap;
+  }
+  .x-camera button {
+    min-height: var(--touch);
+    padding: 0 12px;
+    border: 0;
+    background: transparent;
+    color: var(--x-muted);
+    font: 500 var(--x-size-small) var(--font-sans);
+    cursor: pointer;
+  }
+  .x-camera button[aria-pressed='true'] {
+    background: var(--x-border);
+    color: var(--x-text);
+  }
+  .x-camera .x-camera-reset {
+    width: var(--touch);
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid var(--x-control-border);
+    color: var(--x-text);
+  }
+  /* 3D labels: a column on the right, with lines to the structures */
+  .x-labels {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .x-labels :global(.x-label-lines) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .x-labels :global(.x-label-lines line) {
+    stroke: var(--x-faint);
+    stroke-width: 0.75;
+  }
+  .x-labels :global(.x-label) {
+    position: absolute;
+    right: 16px;
+    width: 200px;
+    min-height: var(--touch);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 8px;
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    background: var(--x-viewport);
+    color: var(--x-text);
+    font: 400 var(--x-size-small) var(--font-sans);
+    text-align: left;
+    cursor: pointer;
+    pointer-events: auto;
+  }
+  .x-labels :global(.x-label:hover),
+  .x-labels :global(.x-label.is-selected) {
+    border-color: var(--x-accent);
+    background: var(--x-accent-tint);
+  }
+  .x-labels :global(.x-label-num) {
+    font-family: var(--font-mono);
+    font-size: var(--x-size-caption);
+    color: var(--x-muted);
   }
   .x-toolbar {
     position: absolute;

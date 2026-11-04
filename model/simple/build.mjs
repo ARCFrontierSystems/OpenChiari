@@ -337,7 +337,14 @@ const skullField = (x, y, z) => {
 // (about 31 mm along the skull from the opisthion), about 30 mm across (EVIDENCE.md: about 3x3 to
 // 3x4 cm in published series). And the middle of the C1 back arch, about 30 mm across.
 const removedSkullLine = distanceGrid(S.boneRemovedSkull.d, { unsigned: true, margin: 30 });
-const skullRemoval = (x, y, z) => Math.min((S.boneRemovedSkull.halfWidth + 6) - removedSkullLine.sample(x, y), 30 - Math.abs(z));
+// Only between the two ends of the figure's red dashed line (opisthion end to the far end), no further.
+const [rx0, ry0, rx1, ry1] = [398, 448, 454, 420];
+const removedLength = Math.hypot(rx1 - rx0, ry1 - ry0);
+const alongRemoved = (x, y) => ((x - rx0) * (rx1 - rx0) + (y - ry0) * (ry1 - ry0)) / removedLength;
+const skullRemoval = (x, y, z) => {
+  const t = alongRemoved(x, y);
+  return Math.min((S.boneRemovedSkull.halfWidth + 6) - removedSkullLine.sample(x, y), 30 - Math.abs(z), t + 2, removedLength - t);
+};
 const c1Removal = (x, y, z) => Math.min(x - 394, 30 - Math.abs(z));
 const skullAfterSurgery = (x, y, z) => Math.min(skullField(x, y, z), -skullRemoval(x, y, z));
 const skullRemovedPiece = (x, y, z) => Math.min(skullField(x, y, z), skullRemoval(x, y, z));

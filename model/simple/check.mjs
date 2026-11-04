@@ -93,6 +93,43 @@ if (syrinx.length && cord.length) {
   if (!(halfWidth < cordHalfWidth)) problems.push('the syrinx should be inside the spinal cord');
 } else problems.push('the syrinx or spinal cord is missing');
 
+// ---- Shapes and positions described in docs/EVIDENCE.md ("3D model shapes", "After decompression") ----
+const midline = (vs, slab = 2.5) => vs.filter((v) => Math.abs(v[2]) < slab);
+const tipWidth = (name) => {
+  // Front-to-back width of the tonsil 3 mm above its lowest point, on the midline: rounded tips are wide, pointed tips narrow.
+  const vs = midline(vertices(name));
+  const tip = Math.min(...vs.map((v) => v[1]));
+  const band = vs.filter((v) => Math.abs(v[1] - (tip + 3)) < 1.2);
+  return band.length ? Math.max(...band.map((v) => v[0])) - Math.min(...band.map((v) => v[0])) : NaN;
+};
+const wTyp = tipWidth('tonsil-typical'), wChi = tipWidth('tonsil-chiari');
+console.log(`Tonsil tip shape (width 3 mm above the tip): typical ${wTyp.toFixed(1)} mm, Chiari I ${wChi.toFixed(1)} mm (EVIDENCE.md: rounded vs often pointed or peg-shaped)`);
+if (!(wChi < wTyp)) problems.push('the Chiari I tonsil tip should be more pointed (narrower) than the typical one');
+
+const c2 = vertices('c2');
+const denTip = c2.reduce((a, v) => (v[1] > a[1] ? v : a), c2[0]);
+const cordFront = Math.min(...midline(vertices('cord')).map((v) => v[0]));
+console.log(`Dens of C2: tip ${(-above([denTip[0], denTip[1]])).toFixed(1)} mm below the McRae line at the basion end; ${(cordFront - denTip[0]).toFixed(1)} mm in front of the cord (EVIDENCE.md: tip below the basion, in front of the cord)`);
+if (!(denTip[1] < B[1])) problems.push('the dens tip should sit below the basion');
+if (!(denTip[0] < cordFront)) problems.push('the dens should sit in front of the spinal cord');
+
+const v4 = vertices('ventricle-fourth');
+const v4low = Math.min(...v4.map((v) => above([v[0], v[1]])));
+console.log(`Fourth ventricle: lowest point ${v4low.toFixed(1)} mm above the McRae line in every condition (EVIDENCE.md: normal position in Chiari I)`);
+if (!(v4low > 0)) problems.push('the fourth ventricle should stay above the foramen magnum');
+
+const removed = vertices('bone-removed');
+if (removed.length) {
+  const across = Math.max(...removed.map((v) => v[2])) - Math.min(...removed.map((v) => v[2]));
+  const skullPart = removed.filter((v) => above([v[0], v[1]]) > -1);
+  let along = 0;
+  for (let i = 0; i < skullPart.length; i += 7)
+    for (let j = i + 7; j < skullPart.length; j += 7)
+      along = Math.max(along, Math.hypot(skullPart[i][0] - skullPart[j][0], skullPart[i][1] - skullPart[j][1]));
+  console.log(`Bone removed at the back of the foramen magnum: about ${along.toFixed(0)} mm by ${across.toFixed(0)} mm (EVIDENCE.md: about 3x3 to 3x4 cm in published series)`);
+  if (!(across >= 25 && across <= 45 && along >= 25 && along <= 45)) problems.push('the bone removed should be about 3 to 4 cm across');
+} else problems.push('the removed bone is missing');
+
 if (problems.length) {
   console.error('\nFAILED: the model no longer matches docs/EVIDENCE.md:\n- ' + problems.join('\n- '));
   process.exit(1);

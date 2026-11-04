@@ -2,7 +2,7 @@
 
 Built from the Z-Anatomy atlas (CC BY-SA 4.0), which is derived from BodyParts3D
 (© The Database Center for Life Science, CC BY-SA 2.1 JP). Every change is a script here, so it can be re-run and reviewed.
-The realistic model is **not shown publicly until its views have had a medical review** (CLAUDE.md).
+The realistic model is **not shown publicly until its views pass the accuracy checks and Matthew approves them** (CLAUDE.md rule 1a). There is no medical reviewer (Matthew's decision, 2026-11-04).
 
 ## Setup (once per machine)
 

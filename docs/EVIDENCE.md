@@ -103,7 +103,8 @@ The Washington University study "Redefining Chiari Malformations Type I" is NIH-
 
 ## Still open (only people can close these)
 
-- [ ] A person with medical training looks at each finished 3D view once.
+- [x] ~~A person with medical training looks at each finished 3D view once.~~ Matthew decided on 2026-11-04 not to use a medical reviewer. Replaced by the accuracy checks in CLAUDE.md rule 1a; reports in `docs/audits/`.
+- [ ] Open the blocked medical sources directly (NINDS, StatPearls/PubMed Central, Mayo Clinic, Cleveland Clinic, MedlinePlus, Radiopaedia are blocked by this environment's network settings; allow them under the environment's Allowed domains).
 - [ ] A medical translator signs off on the Spanish.
 - [ ] Confirm the Bobby Jones CSF registry status with them (their page says paused, last updated 2024).
 - [ ] Before Explain It launches: confirm in the browser network tab that analytics requests don't contain the note.

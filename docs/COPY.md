@@ -559,8 +559,9 @@ Mockup: `design/mockups/OpenModel.dc.html`
 - (CC BY-SA 4.0) and BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 JP)
 - Views included
 - Typical, Chiari I, Chiari I with syrinx, after decompression
-- Reviewed by
-- [Medical reviewer name and credentials]
+- Accuracy checks
+- Measured against published sources; not reviewed by a medical professional
+<!-- Changed 2026-11-04: Matthew decided not to use a medical reviewer (was "Reviewed by / [Medical reviewer name and credentials]"). -->
 - Fig. 2
 - Chiari I with syrinx, one of four included views.
 - Embed the viewer
@@ -730,9 +731,11 @@ Mockup: `design/mockups/Impact.dc.html`
 - Accessibility standard
 - WCAG 2.2 AA · [result]
 - The current W3C standard; also covers WCAG 2.1 AA, the level in U.S. ADA rules
-- Medical review
-- [date] · [reviewer]
-- Text and 3D views checked by a medical professional
+- Accuracy checks
+- [date] · [result]
+<!-- Changed 2026-11-04: Matthew decided not to use a medical reviewer (was "Medical review / [date] · [reviewer]"). -->
+- Text and 3D views checked against published sources; not reviewed by a medical professional
+<!-- Changed 2026-11-04: was "Text and 3D views checked by a medical professional". -->
 - Open source: nothing gets stranded
 - Every line of code and every model file is public: code under the MIT License, the 3D model under CC BY-SA 4.0. Any organization can run its own copy, change it, or take it over, with no fees and no dependence on one person or company.
 - Code
@@ -771,7 +774,8 @@ Mockup: `design/mockups/About.dc.html`
 - The 3D model is built from
 - Z-Anatomy
 - and BodyParts3D, open anatomy data.
-- Text and every 3D view are checked by [reviewer name, credentials] before they're published. Last review: [date].
+- Text and every 3D view are checked against the published sources listed in the evidence notes, by automatic measurements and independent audits, before they're published. They have not been reviewed by a medical professional. Last check: [date].
+<!-- Changed 2026-11-04: Matthew decided not to use a medical reviewer (was "Text and every 3D view are checked by [reviewer name, credentials] before they're published. Last review: [date]."). -->
 - AI tools helped write the code and first drafts; every page is checked by a person.
 - Principles
 - Free, always

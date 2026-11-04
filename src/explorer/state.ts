@@ -49,7 +49,7 @@ export const initialState: ViewState = {
     vessels: { on: false, opacity: 100 },
   },
   cut: 50,
-  // The realistic model is Phase 2 and stays hidden until its medical review.
+  // The realistic model is Phase 2 and stays hidden until it passes the accuracy checks (CLAUDE.md rule 1a).
   model: 'simple',
   part: 'tonsil',
   camera: 'side',

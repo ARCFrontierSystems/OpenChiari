@@ -71,7 +71,7 @@ The main model is realistic (from Z-Anatomy); a light Simple model is the fallba
 | Open model | Embed builder (starting view, show condition switch, show labels, start in Calm mode) producing an iframe snippet; downloads (glTF web model, Blender source, labeled figure set) |
 | Support | Bobby Jones Chiari & Syringomyelia Foundation, Conquer Chiari, ASAP: description and a link to each one's own donate page. Open Chiari never handles money |
 | Awareness kit | Square social post, quote card, Explain It wallet card with QR code, event poster and handout with logo space. Hashtag `#ChiariAwarenessMonth` |
-| Impact | Totals since launch (visits, models explored, Explain It links made, study listings opened, sites embedding the model), quality report (accessibility and speed scores, WCAG result, last medical review), open-source details |
+| Impact | Totals since launch (visits, models explored, Explain It links made, study listings opened, sites embedding the model), quality report (accessibility and speed scores, WCAG result, last accuracy check), open-source details |
 
 ## Tech approach
 
@@ -93,14 +93,14 @@ The main model is realistic (from Z-Anatomy); a light Simple model is the fallba
 4. **Syrinx:** long, beaded cavity in the center of the neck cord.
 5. **After decompression:** bone a few centimeters across removed at the back of the foramen magnum, back arch of C1 removed, dural patch added, fluid space re-formed, tonsils partly risen.
 6. Compress to web files in desktop and phone detail levels.
-7. Medical reviewer checks each view before it's public.
+7. Each view passes the accuracy checks (opened sources, automatic measurements, independent audit, MRI comparison; CLAUDE.md rule 1a) and Matthew approves it before it's public. There is no medical reviewer (Matthew's decision, 2026-11-04).
 
 ## Risks
 
 | Risk | Mitigation |
 | --- | --- |
-| Reshaping anatomy by script is hard and can look wrong | Build Chiari I alone first and get it reviewed; budget for a freelance medical 3D artist if needed |
-| Medically wrong shapes or text | EVIDENCE.md and COPY.md are the only sources; medical review of the 3D views; keep the illustration captions |
+| Reshaping anatomy by script is hard and can look wrong | Build Chiari I alone first and check it (accuracy checks, MRI comparison, Matthew); budget for a freelance medical 3D artist if needed |
+| Medically wrong shapes or text (no medical reviewer) | EVIDENCE.md and COPY.md are the only sources; accuracy checks on every view and sentence (opened sources, automatic measurements, independent audits, MRI comparison); keep the illustration captions; say honestly on the site that it isn't reviewed by a medical professional; corrections email |
 | Large scope | Build in phase order; each phase usable on its own |
 | Slow on phones | Phone-sized model files, load on demand, Simple fallback, pause when off screen |
 | Studies list goes stale or breaks | Daily refresh, processed date shown, fallback link to ClinicalTrials.gov search |

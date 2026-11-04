@@ -3,6 +3,17 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: No medical reviewer; accuracy checks instead
+
+- **Matthew's decision:** the site will not use a medical reviewer. Updated throughout: CLAUDE.md (new rule 1a "Accuracy checks", Phase 2 description, the "Don't" list, open items), SPEC.md (pipeline, risks, Impact), EVIDENCE.md (open items), COPY.md (honest wording for About, Open model and Impact: "not reviewed by a medical professional"; old wording kept in comments), `model/realistic/README.md`, code comments. Earlier progress entries are left as history.
+- **Accuracy checks (rule 1a):** opened sources; automatic measurements; independent audit by a fresh agent; MRI comparison; Matthew approves. Reports go in `docs/audits/`.
+- **Done so far:**
+  - Text audit: 82 medical sentences, 13 flagged (`docs/audits/2026-11-04-text-audit.md`). **Waiting for Matthew's decisions;** nothing changed.
+  - 3D audit: running.
+  - New automatic checks: tonsil tip shape, dens position, fourth ventricle position, size of removed bone. The removed bone was 44 mm long (too big); fixed to 34 by 30 mm (EVIDENCE.md: about 3x3 to 3x4 cm).
+- **Blocked:** NINDS, StatPearls/PubMed Central, Mayo Clinic, Cleveland Clinic, MedlinePlus and Radiopaedia can't be opened from this environment (network settings). Matthew can allow them under the environment's Allowed domains.
+- **MRI comparison:** OpenNeuro's public scans (download server) and the MNI152 average head are reachable here; no public Chiari MRI collection is known. Plan in the next entry.
+
 ## 2026-11-04: Phase 2, step 2: extraction (Typical anatomy, first version)
 
 - **Script:** `model/realistic/extract.py` (about 2 minutes per run). It picks structures by the atlas's own family tree (e.g. everything under "Cerebellum"), groups them into the site's structures and layers with the DESIGN.md palette, and saves glTF in the same model space as the Simple model (mm, origin at the middle of the foramen magnum).

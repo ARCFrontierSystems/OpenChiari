@@ -3,6 +3,24 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Phase 1, step 9: Doctor visit prep
+
+- **Page** `/prep/` (`src/pages/prep.astro`), from the `Prep`, `PrepPhone` and `PrepSheet` mockups. All 37 text items checked word for word against COPY.md.
+  - Desktop: the five question groups with checkboxes (same 6 ticked to start as in the mockup), "Add your own question" (Add button or Enter), "Things I want to mention", and a live "Your sheet" preview with the count, Print sheet, Save as PDF, and "Include a small diagram of Chiari".
+  - Phone: the shorter question wording from PrepPhone; the first two groups open and the rest collapsed with their counts ("Tests and monitoring · 2"); a bar fixed to the bottom of the screen with "[N] questions selected", Preview and print, and Save as PDF. The phone also gets the notes field and diagram option (the phone mockup didn't show them).
+- **Printed sheet:** title, "Chiari malformation · Date · Doctor" line, the small diagram (Chiari I, with the "Illustration, not a medical image" caption), numbered questions with answer space, your notes plus two lines, and "Made with Open Chiari · openchiari.org · Not medical advice". The answer space shrinks as the list grows, so it stays on one page: checked with all 13 questions on both Letter and A4.
+- **Print and Save as PDF** both open the browser's print window, which shows a preview and offers "Save as PDF" (no extra service or library).
+- **Privacy:** nothing is stored and nothing is sent. No storage, no cookies, no network requests, no form submission (checked by a test that types and ticks things). The visitor's own text is always treated as plain text.
+- **New wording (non-medical, grammar only):** singular forms "Your sheet · 1 question" and "1 question selected".
+- **Left out, needs Matthew:** the mockup's example text inside the notes box, "For example: when your symptoms started, what makes them worse". It isn't in COPY.md. Add it?
+- **Checks:** 72 tests pass (accessibility on the real prep page at both sizes and both Calm settings, sheet updates, one-page printing, privacy).
+
+**Next: step 10, Phase 1 wrap-up.**
+- Run every check (type check, model check, 72+ tests, Lighthouse) and confirm GitHub is green.
+- Full set of screenshots of everything in Phase 1 (Home, Calm mode, Explorer in all four conditions and its tools, Doctor visit prep and the printed sheet) on desktop and phone, in one review page.
+- Tidy the open questions into one list for Matthew (measurement wording, notes example text, Simple model widths for EVIDENCE.md, real-phone testing).
+- Nothing is deployed: a preview link needs Matthew's go-ahead.
+
 ## 2026-11-04: Phase 1, step 8: phone check
 
 Measured on a simulated mid-range phone (Chrome with a 4x slower processor; "slow 4G" for load times). This machine has no graphics chip, so real frame rates can't be measured here; the workload per frame is reported instead.

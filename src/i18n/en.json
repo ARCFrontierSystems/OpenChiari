@@ -215,7 +215,6 @@
     "pages": {
       "explain": "Explain It",
       "studies": "Research studies",
-      "prep": "Doctor visit prep",
       "model": "Open model",
       "support": "Support",
       "kit": "Awareness kit",
@@ -376,5 +375,128 @@
       "midline": "Cut at the midline",
       "far": "Cut past the midline, toward the far side"
     }
+  },
+  "prep": {
+    "title": "Prepare for your next appointment",
+    "intro": {
+      "wide": "Tick the questions you want to ask, add your own, and print a one-page sheet. Everything stays on your device; nothing is saved or sent.",
+      "narrow": "Tick what you want to ask. Nothing is saved or sent."
+    },
+    "formLabel": "Choose questions",
+    "groups": [
+      {
+        "id": "diagnosis",
+        "title": "About my diagnosis",
+        "questions": [
+          {
+            "id": "type",
+            "text": "Which type of Chiari do I have?",
+            "checked": true
+          },
+          {
+            "id": "mri",
+            "text": "Can I have a copy of my MRI report and images?",
+            "checked": true
+          },
+          {
+            "id": "syrinx",
+            "text": "Do I have a syrinx?",
+            "checked": false
+          }
+        ]
+      },
+      {
+        "id": "symptoms",
+        "title": "My symptoms",
+        "questions": [
+          {
+            "id": "which",
+            "text": "Which of my symptoms do you think come from Chiari?",
+            "narrow": "Which of my symptoms come from Chiari?",
+            "checked": true
+          },
+          {
+            "id": "er",
+            "text": "What changes should make me call you or go to the ER?",
+            "narrow": "What should make me call you or go to the ER?",
+            "checked": true
+          }
+        ]
+      },
+      {
+        "id": "tests",
+        "title": "Tests and monitoring",
+        "questions": [
+          {
+            "id": "cine",
+            "text": "Do I need a fluid-flow MRI (cine MRI) or other tests?",
+            "checked": false
+          },
+          {
+            "id": "followup",
+            "text": "Do I need follow-up scans, and if so, how often?",
+            "checked": false
+          }
+        ]
+      },
+      {
+        "id": "treatment",
+        "title": "Treatment",
+        "questions": [
+          {
+            "id": "options",
+            "text": "What are my options besides surgery?",
+            "checked": true
+          },
+          {
+            "id": "candidate",
+            "text": "Am I a candidate for decompression surgery? Why or why not?",
+            "checked": false
+          },
+          {
+            "id": "experience",
+            "text": "How many of these surgeries have you done, and what is recovery like?",
+            "checked": false
+          }
+        ]
+      },
+      {
+        "id": "daily",
+        "title": "Daily life and research",
+        "questions": [
+          {
+            "id": "avoid",
+            "text": "Are there activities I should avoid?",
+            "checked": false
+          },
+          {
+            "id": "studies",
+            "text": "Are there research studies I could join?",
+            "checked": true
+          }
+        ]
+      }
+    ],
+    "addOwn": "Add your own question",
+    "add": "Add",
+    "mention": "Things I want to mention",
+    "sheetCount": {
+      "one": "Your sheet · 1 question",
+      "other": "Your sheet · {n} questions"
+    },
+    "selectedCount": {
+      "one": "1 question selected",
+      "other": "{n} questions selected"
+    },
+    "sheetTitle": "Questions for my doctor",
+    "answerSpace": "Space for answers is added under each question when printed.",
+    "print": "Print sheet",
+    "previewPrint": "Preview and print",
+    "pdf": "Save as PDF",
+    "diagram": "Include a small diagram of Chiari",
+    "pageNote": "Not medical advice. Your choices on this page are never stored or sent.",
+    "sheetMeta": "Chiari malformation · Date: ____________ · Doctor: ______________________",
+    "sheetFooter": "Made with Open Chiari · openchiari.org · Not medical advice",
+    "diagramCaption": "Illustration, not a medical image"
   }
 }

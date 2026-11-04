@@ -277,3 +277,56 @@ test.describe('3D Explorer controls', () => {
     await expect(page.locator('footer')).toContainText('3D model by Open Chiari, CC BY-SA 4.0, adapted from Z-Anatomy (CC BY-SA 4.0) and BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 JP).');
   });
 });
+
+test.describe('Doctor visit prep', () => {
+  test('ticking and adding questions updates the sheet, and the printed sheet fits on one page', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/prep/');
+    const preview = page.locator('[data-preview-list] li');
+    await expect(page.locator('[data-sheet-count]')).toHaveText('Your sheet · 6 questions');
+    await expect(preview).toHaveCount(6);
+
+    await page.getByLabel('Do I have a syrinx?').check();
+    await page.getByLabel('Add your own question').fill('<b>Is my headache normal?</b>');
+    await page.getByLabel('Add your own question').press('Enter');
+    await expect(page.locator('[data-sheet-count]')).toHaveText('Your sheet · 8 questions');
+    // The visitor's text is shown as text, never as HTML.
+    await expect(preview.last()).toHaveText('<b>Is my headache normal?</b>');
+
+    await page.getByLabel('Things I want to mention').fill('Started in March.');
+    await page.getByLabel('Include a small diagram of Chiari').uncheck();
+
+    // Tick everything, then check the printed sheet is still one page on Letter and A4.
+    for (const box of await page.locator('[data-prep-form] input[type="checkbox"]').all()) await box.check();
+    await page.emulateMedia({ media: 'print' });
+    await expect(page.locator('[data-print-sheet]')).toBeVisible();
+    await expect(page.locator('[data-sheet-list] li')).toHaveCount(13);
+    await expect(page.locator('[data-sheet-mention]')).toHaveText('Started in March.');
+    await expect(page.locator('[data-sheet-diagram]')).toBeHidden();
+    await expect(page.locator('.prep-form')).toBeHidden();
+    for (const format of ['Letter', 'A4'] as const) {
+      const pdf = (await page.pdf({ format })).toString('latin1');
+      expect(pdf.match(/\/Type\s*\/Page[^s]/g)?.length, `${format} pages`).toBe(1);
+    }
+  });
+
+  test('nothing is stored or sent', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    const requests: string[] = [];
+    await page.goto('/prep/', { waitUntil: 'networkidle' });
+    page.on('request', (r) => requests.push(r.url()));
+    const before = await page.evaluate(() => ({ local: { ...localStorage }, session: { ...sessionStorage }, cookies: document.cookie }));
+
+    await page.getByLabel('Which of my symptoms come from Chiari?').uncheck();
+    await page.getByLabel('Add your own question').fill('A private question');
+    await page.getByRole('button', { name: 'Add', exact: true }).click();
+    await page.getByLabel('Things I want to mention').fill('Something private');
+    await page.getByLabel('Things I want to mention').press('Enter');
+    await page.locator('summary', { hasText: 'Treatment' }).click();
+
+    const after = await page.evaluate(() => ({ local: { ...localStorage }, session: { ...sessionStorage }, cookies: document.cookie }));
+    expect(after).toEqual(before);
+    expect(requests).toEqual([]);
+    await expect(page).toHaveURL(/\/prep\/$/);
+  });
+});

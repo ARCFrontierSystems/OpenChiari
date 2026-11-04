@@ -1,0 +1,225 @@
+---
+/**
+ * Site header. Desktop: brand, main nav, Español, Calm mode switch.
+ * Phone and narrow screens: brand, Calm mode, and a Menu button that opens the nav.
+ * The Calm mode switch is wired up in step 2.
+ */
+import { getStrings, routes } from '../i18n';
+
+const t = getStrings().header;
+const navItems = [
+  { href: routes.explorer, label: t.nav.explorer },
+  { href: routes.explain, label: t.nav.explain },
+  { href: routes.studies, label: t.nav.studies },
+  { href: routes.prep, label: t.nav.prep },
+  { href: routes.model, label: t.nav.model },
+  { href: routes.support, label: t.nav.support },
+];
+const current = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="bar container">
+    <a class="brand" href={routes.home}>
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">{getStrings().siteName}</span>
+    </a>
+
+    <nav class="nav-wide" aria-label={t.mainNavLabel}>
+      {navItems.map((item) => (
+        <a href={item.href} aria-current={current === item.href ? 'page' : undefined}>{item.label}</a>
+      ))}
+    </nav>
+
+    <a class="lang nav-wide-only" href={routes.es} lang="es" hreflang="es">{t.espanol}</a>
+
+    <label class="calm-toggle">
+      <input type="checkbox" role="switch" id="calm-switch" />
+      <span>{t.calm}</span>
+    </label>
+
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="M4 7h16M4 12h16M4 17h16"></path>
+      </svg>
+      <span class="visually-hidden">{t.menu}</span>
+    </button>
+  </div>
+
+  <nav class="menu" id="site-menu" aria-label={t.mainNavLabel} hidden>
+    {navItems.map((item) => (
+      <a href={item.href} aria-current={current === item.href ? 'page' : undefined}>{item.label}</a>
+    ))}
+    <a href={routes.es} lang="es" hreflang="es">{t.espanol}</a>
+  </nav>
+</header>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('.menu-button');
+  const menu = document.getElementById('site-menu');
+  if (button && menu) {
+    button.addEventListener('click', () => {
+      const open = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!open));
+      menu.hidden = open;
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') {
+        button.setAttribute('aria-expanded', 'false');
+        menu.hidden = true;
+        button.focus();
+      }
+    });
+  }
+</script>
+
+<style>
+  .site-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--rule);
+  }
+  .bar {
+    min-height: 64px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-24);
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: var(--touch);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .brand-mark {
+    width: 10px;
+    height: 10px;
+    background: var(--awareness);
+  }
+  .brand-name {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 20px;
+  }
+  .nav-wide {
+    flex: 1 1 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-24);
+    font-size: 15px;
+  }
+  .nav-wide a,
+  .lang {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-wide a:hover,
+  .lang:hover {
+    color: var(--accent);
+  }
+  .nav-wide a[aria-current='page'] {
+    color: var(--accent);
+  }
+  .lang {
+    font-size: 14px;
+  }
+  .calm-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: var(--touch);
+    font-size: 14px;
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+  .calm-toggle input {
+    width: 36px;
+    height: 20px;
+    margin: 0;
+    accent-color: var(--accent);
+    cursor: pointer;
+  }
+  .menu-button {
+    display: none;
+    width: var(--touch);
+    height: var(--touch);
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: var(--radius);
+  }
+  .menu {
+    display: none;
+    border-top: 1px solid var(--rule);
+    padding: 0 var(--gutter) var(--s-8);
+    flex-direction: column;
+  }
+  .menu a {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .menu a:last-child {
+    border-bottom: 0;
+  }
+
+  /* Narrow screens: the nav moves into the menu. */
+  @media (max-width: 960px) {
+    .bar {
+      min-height: 56px;
+      gap: var(--s-4);
+      flex-wrap: nowrap;
+      padding-right: 8px;
+    }
+    .brand {
+      flex: 1 1 auto;
+    }
+    .brand-mark {
+      width: 9px;
+      height: 9px;
+    }
+    .brand-name {
+      font-size: 18px;
+    }
+    .nav-wide,
+    .nav-wide-only {
+      display: none;
+    }
+    .menu-button {
+      display: inline-flex;
+    }
+    .menu:not([hidden]) {
+      display: flex;
+    }
+    /* On phones Calm mode is a small outlined button, as in the phone mockup. */
+    .calm-toggle {
+      padding: 0 10px;
+      border: 1px solid var(--input-border);
+      border-radius: var(--radius);
+      color: var(--ink);
+      font-size: 13px;
+    }
+    .calm-toggle input {
+      position: absolute;
+      opacity: 0;
+      width: 1px;
+      height: 1px;
+    }
+    .calm-toggle:has(input:focus-visible) {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+  }
+</style>

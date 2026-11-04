@@ -2,7 +2,7 @@
 
 A free, independent website that helps people see and understand Chiari malformation type I, with an interactive 3D anatomy explorer, plain-language explanations, tools for doctor visits and for explaining the condition to others, and a live list of research studies.
 
-**Status:** planning complete; build starting with Phase 1.
+**Status:** Phase 1 in progress (see `docs/PROGRESS.md`).
 
 ## What's in this repository
 
@@ -15,6 +15,17 @@ A free, independent website that helps people see and understand Chiari malforma
 | `docs/DESIGN.md` | Colors, type and components |
 | `design/mockups/` | Mockups of all 22 screens |
 | `design/figures/` | The anatomy figure in four conditions |
+
+## Running it locally
+
+Needs Node.js 22 or newer.
+
+```bash
+npm install
+npm run dev
+```
+
+Then open http://localhost:4321. `npm run build` makes the static site in `dist/`; `npm run check` runs the type check.
 
 ## Not medical advice
 

@@ -1,0 +1,199 @@
+{
+  "_note": "All English UI text. Medical text is copied word for word from docs/COPY.md; do not edit it here without updating COPY.md and EVIDENCE.md first. 'wide' = desktop wording, 'narrow' = phone wording.",
+  "siteName": "Open Chiari",
+  "metaDescription": "The lowest part of the cerebellum sits below the opening where the brain meets the spinal cord. Explore it in 3D, free.",
+  "skipLink": "Skip to content",
+  "header": {
+    "mainNavLabel": "Main",
+    "menu": "Menu",
+    "nav": {
+      "explorer": "3D Explorer",
+      "explain": "Explain It",
+      "studies": "Research studies",
+      "prep": "Visit prep",
+      "model": "Open model",
+      "support": "Support"
+    },
+    "espanol": "Español",
+    "calm": "Calm mode"
+  },
+  "home": {
+    "eyebrow": "Chiari malformation, Type I",
+    "title": "See what's happening at the base of the skull.",
+    "lede": {
+      "wide": "In Chiari malformation, the lowest part of the cerebellum sits below the opening where the brain meets the spinal cord. Explore it in 3D, free, in plain language.",
+      "narrow": "The lowest part of the cerebellum sits below the opening where the brain meets the spinal cord. Explore it in 3D, free."
+    },
+    "openExplorer": "Open the 3D Explorer",
+    "tour": "Take the 2-minute tour",
+    "figNumber": "Fig. 1",
+    "figCaption": {
+      "wide": "Midline view of Chiari I. The tonsil (06) extends below the dashed line across the skull opening. The tonsils really sit just to either side of the midline; they're shown here where MRI measures them, at their lowest point. Illustration, not to scale.",
+      "narrow": "Chiari I. The tonsil extends below the dashed line. Illustration."
+    },
+    "whatIs": {
+      "title": "What is Chiari malformation?",
+      "whatItIs": {
+        "title": "What it is",
+        "wide": "The lowest part of the cerebellum, the tonsils, extends below the foramen magnum, the opening at the base of the skull. The cerebellum helps control balance and coordination. It's often linked to a lower back part of the skull that is smaller or shaped differently than usual, which crowds the brain. Less often, it develops later in life for other reasons.",
+        "narrow": "The lowest part of the cerebellum, the tonsils, extends below the opening at the base of the skull. It's often linked to a lower back part of the skull that is smaller or shaped differently than usual, which crowds the brain. Less often, it develops later in life for other reasons."
+      },
+      "whoHasIt": {
+        "title": "Who has it",
+        "wide": "Most people are born with the skull differences that lead to it. Some never have symptoms; others first notice them as teens or adults.",
+        "narrow": "Most people are born with the skull differences that lead to it. Some never have symptoms; others first notice them as teens or adults."
+      },
+      "howFound": {
+        "title": "How it's found",
+        "wide": "Usually with an MRI scan and a doctor's exam, sometimes by chance during a scan for something else. A neurologist or neurosurgeon looks at the scan together with your symptoms.",
+        "narrow": "Usually with an MRI scan and a doctor's exam, sometimes by chance."
+      }
+    },
+    "feel": {
+      "title": "What it can feel like",
+      "intro": "Chiari looks different for everyone, and many people with Type I have no symptoms at all.",
+      "classic": {
+        "wide": "The classic sign is a headache at the back of the head that comes on after coughing, sneezing or straining.",
+        "narrow": "The classic sign is a headache at the back of the head after coughing, sneezing or straining."
+      },
+      "listLabel": "Other symptoms people report",
+      "symptoms": [
+        { "wide": "Neck pain", "narrow": "Neck pain" },
+        { "wide": "Dizziness and trouble with balance", "narrow": "Dizziness and trouble with balance" },
+        { "wide": "Numbness or tingling in the hands and feet", "narrow": "Numbness or tingling in hands and feet" },
+        { "wide": "Weakness or trouble with fine hand movements", "narrow": "Weakness or trouble with fine hand movements" },
+        { "wide": "Trouble swallowing, or voice changes", "narrow": "Trouble swallowing, or voice changes" },
+        { "wide": "Breathing or sleep problems, such as sleep apnea", "narrow": "Breathing or sleep problems" },
+        { "wide": "Ringing in the ears", "narrow": "Ringing in the ears" }
+      ],
+      "lessOften": "Less often: blurry or shaky vision",
+      "noSymptoms": "Many people with Type I have no symptoms at all."
+    },
+    "myths": {
+      "title": "Common misunderstandings",
+      "items": [
+        {
+          "myth": "\"It's just a bad headache.\"",
+          "wide": "Chiari is a structural difference that can affect balance, nerves and the flow of spinal fluid, not only headaches.",
+          "narrow": "It can affect balance, nerves and the flow of spinal fluid too."
+        },
+        {
+          "myth": "\"The measurement tells the whole story.\"",
+          "wide": "Doctors traditionally use about 5 mm below the opening as a cutoff. Lower tonsils make symptoms somewhat more likely, but the measurement alone doesn't reliably predict how someone will feel. Some people with a clear descent have no symptoms, and some with less than 5 mm do. Doctors also look at the shape of the tonsils, spinal fluid flow, and whether a syrinx is present.",
+          "narrow": "Lower tonsils make symptoms somewhat more likely, but the measurement alone doesn't reliably predict how someone will feel. Doctors also look at tonsil shape, fluid flow, and whether a syrinx is present."
+        }
+      ]
+    },
+    "tools": {
+      "title": "Tools",
+      "items": [
+        {
+          "num": "01",
+          "page": "explorer",
+          "title": "3D Explorer",
+          "wide": "Compare typical anatomy, Chiari, syrinx and after surgery. Peel back layers and cut through the model.",
+          "narrow": "Compare typical, Chiari, syrinx and after surgery."
+        },
+        {
+          "num": "02",
+          "page": "explain",
+          "title": "Explain It",
+          "wide": "Send family, teachers or your employer a link that shows exactly what you have.",
+          "narrow": "Send a link that shows exactly what you have."
+        },
+        {
+          "num": "03",
+          "page": "studies",
+          "title": "Research studies",
+          "wide": "Chiari and syringomyelia studies looking for participants, updated daily.",
+          "narrow": "Studies looking for participants, updated daily."
+        },
+        {
+          "num": "04",
+          "page": "prep",
+          "title": "Doctor visit prep",
+          "wide": "Build a one-page list of questions for your next appointment. Nothing is saved.",
+          "narrow": "A printable list of questions. Nothing saved."
+        },
+        {
+          "num": "05",
+          "page": "model",
+          "title": "Open model",
+          "wide": "Free to download and embed for foundations, nurses and teachers.",
+          "narrow": "Free to download and embed."
+        },
+        {
+          "num": "06",
+          "page": "support",
+          "title": "Support Chiari organizations",
+          "wide": "Donate to or volunteer with the groups funding research and running registries.",
+          "narrow": "Donate or volunteer on their own sites."
+        }
+      ]
+    }
+  },
+  "footer": {
+    "notAdvice": "Not medical advice.",
+    "notAdviceRest": {
+      "wide": "This site is for education. Talk to your doctor about your own diagnosis and care.",
+      "narrow": "Talk to your doctor about your own care."
+    },
+    "factsBefore": "Facts adapted from the",
+    "ninds": "NINDS fact sheet",
+    "modelBefore": ". 3D model by Open Chiari, CC BY-SA 4.0, adapted from",
+    "zAnatomy": "Z-Anatomy",
+    "modelAfter": "(CC BY-SA 4.0) and BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 JP).",
+    "personalProject": "A personal project by Matthew Borgfeld.",
+    "moreNavLabel": "More",
+    "links": {
+      "support": "Support",
+      "kit": "Awareness kit",
+      "impact": "Impact",
+      "openSource": "Open source",
+      "about": "About and contact",
+      "privacy": "Privacy"
+    }
+  },
+  "figure": {
+    "ariaPrefix": "Midline section of the head and neck, ",
+    "aria": {
+      "typical": "typical anatomy: the cerebellar tonsils sit above the opening at the base of the skull",
+      "chiari": "Chiari I: the cerebellar tonsils extend below the opening at the base of the skull and crowd the spinal fluid space",
+      "syrinx": "Chiari I with a syrinx, a fluid-filled cavity inside the spinal cord",
+      "surgery": "after decompression surgery: bone at the back of the skull opening and the back of the first vertebra are removed, opening the fluid space"
+    },
+    "labels": {
+      "cerebrum": "Cerebrum",
+      "callosum": "Corpus callosum",
+      "cerebellum": "Cerebellum",
+      "fourthVentricle": "Fourth ventricle",
+      "brainstem": "Brainstem",
+      "tonsil": "Cerebellar tonsil",
+      "foramen": "Foramen magnum",
+      "foramenNote": "opening at the skull base",
+      "cord": "Spinal cord",
+      "csf": "Spinal fluid (CSF)",
+      "c2": "C2 vertebra",
+      "syrinx": "Syrinx",
+      "syrinxNote": "fluid cavity in the cord",
+      "boneRemoved": "Bone removed",
+      "boneRemovedNote": "skull edge and C1 arch"
+    }
+  },
+  "stub": {
+    "notBuilt": "Not built yet. This page comes in a later step of the build.",
+    "backHome": "Back to home",
+    "pages": {
+      "explorer": "3D Explorer",
+      "explain": "Explain It",
+      "studies": "Research studies",
+      "prep": "Doctor visit prep",
+      "model": "Open model",
+      "support": "Support",
+      "kit": "Awareness kit",
+      "impact": "Impact",
+      "about": "About and contact",
+      "privacy": "Privacy"
+    }
+  }
+}

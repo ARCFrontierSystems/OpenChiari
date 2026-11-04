@@ -1,0 +1,125 @@
+/*
+ * Open Chiari design tokens.
+ * Every value here comes from docs/DESIGN.md. Use only these; don't add new colors or sizes.
+ */
+
+:root {
+  /* Type families (self-hosted, see src/styles/fonts.css) */
+  --font-serif: 'Source Serif 4', Georgia, serif;
+  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Site colors (light) */
+  --paper: #F5F5F3;
+  --surface: #FFFFFF;
+  --ink: #1C1D21;
+  --ink-2: #3B3C42;
+  --muted: #5E5F66;
+  --rule: #DCDBD6;
+  --input-border: #A9A8A2;
+  --accent: #1F5F8B;
+  --accent-hover: #123E5C;
+  --awareness: #6B4FA0;
+  --status-good: #1D6B3A;
+  --status-warn-text: #8A3B12;
+
+  /* 3D Explorer colors (dark) */
+  --x-bg: #111215;
+  --x-panel: #17181C;
+  --x-viewport: #1A1C20;
+  --x-border: #2A2C31;
+  --x-control-border: #3A3C42;
+  --x-text: #ECEAE4;
+  --x-text-2: #D2D0CA;
+  --x-muted: #A3A1A9;
+  --x-faint: #8A8890;
+  --x-accent: #7FB3D3;
+  --x-accent-tint: #1F3A4D;
+  --x-brand-mark: #8F74C6;
+  --x-button-bg: #E8E6E0;
+  --x-button-text: #111215;
+
+  /* Anatomy palette (Simple model materials and 2D figures) */
+  --an-skin: #EFE3D8;
+  --an-skin-line: #C9B2A2;
+  --an-bone: #E7DFCF;
+  --an-bone-line: #A69B85;
+  --an-disc: #D9C3A4;
+  --an-cerebrum: #E9CFC6;
+  --an-cerebrum-line: #B38D82;
+  --an-gyri: #CFA79B;
+  --an-callosum: #F4E6E1;
+  --an-callosum-line: #C39C90;
+  --an-thalamus: #E3BFB3;
+  --an-brainstem: #E3C2B6;
+  --an-cerebellum: #DDBDB3;
+  --an-cerebellum-white: #F6E9E4;
+  --an-folia: #C79E92;
+  --an-tonsil-chiari: #D2A79B;
+  --an-cord: #EAD9B9;
+  --an-cord-line: #B59E73;
+  --an-csf: #9CC3DA;
+  --an-ventricle: #A9CBE0;
+  --an-ventricle-line: #7FA6BF;
+  --an-syrinx: #7FB3D3;
+  --an-syrinx-line: #3F6F90;
+  --an-flow: #1F5F8B;
+  --an-restricted: #9A3412;
+  --an-patch: #7D6F58;
+
+  /* Type sizes */
+  --text-base: 17px;
+  --text-small: 14px;
+  --text-mono: 13px;
+  --leading: 1.6;
+  --h1: 54px;
+  --h2: 36px;
+
+  /* Spacing scale */
+  --s-4: 4px;
+  --s-8: 8px;
+  --s-12: 12px;
+  --s-16: 16px;
+  --s-20: 20px;
+  --s-24: 24px;
+  --s-32: 32px;
+  --s-40: 40px;
+  --s-48: 48px;
+  --s-56: 56px;
+  --s-72: 72px;
+
+  /* Shape and layout */
+  --radius: 4px;
+  --content-max: 1200px;
+  --gutter: 32px;
+  --touch: 44px;
+  --button-height: 48px;
+}
+
+/* Phone sizes */
+@media (max-width: 720px) {
+  :root {
+    --text-base: 16px;
+    --text-small: 13px;
+    --text-mono: 12px;
+    --leading: 1.55;
+    --h1: 34px;
+    --h2: 26px;
+    --gutter: 20px;
+    --button-height: 52px;
+  }
+}
+
+/*
+ * Calm mode colors and sizes (from DESIGN.md). Switching it on is built in step 2;
+ * the tokens live here so the whole design system is in one place.
+ */
+:root[data-calm='on'] {
+  --paper: #EEEDE9;
+  --surface: #F7F6F2;
+  --ink: #141518;
+  --rule: #C9C8C2;
+  --accent: #174A6D;
+  --text-base: 19px;
+  --button-height: 56px;
+}

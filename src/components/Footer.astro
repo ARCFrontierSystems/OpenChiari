@@ -1,0 +1,91 @@
+---
+/**
+ * Site footer: medical disclaimer, sources and model credit, more links.
+ * The disclaimer and credit must appear on every page (CLAUDE.md rules 1 and 3).
+ */
+import { getStrings, routes, externalLinks } from '../i18n';
+
+const t = getStrings().footer;
+const links = [
+  { href: routes.support, label: t.links.support },
+  { href: routes.kit, label: t.links.kit },
+  { href: routes.impact, label: t.links.impact },
+  { href: routes.openSource, label: t.links.openSource },
+  { href: routes.about, label: t.links.about },
+  { href: routes.privacy, label: t.links.privacy },
+];
+const espanol = getStrings().header.espanol;
+---
+
+<footer class="site-footer">
+  <div class="inner container">
+    <p class="advice">
+      <strong>{t.notAdvice}</strong>{' '}<span class="only-wide">{t.notAdviceRest.wide}</span><span class="only-narrow">{t.notAdviceRest.narrow}</span>
+    </p>
+    <p class="credit">
+      {t.factsBefore} <a href={externalLinks.ninds}>{t.ninds}</a>{t.modelBefore} <a href={externalLinks.zAnatomy}>{t.zAnatomy}</a> {t.modelAfter}<span class="only-wide"> {t.personalProject}</span>
+    </p>
+    <nav class="more" aria-label={t.moreNavLabel}>
+      {links.map((link) => <a href={link.href}>{link.label}</a>)}
+      <a href={routes.es} lang="es" hreflang="es">{espanol}</a>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--surface);
+    border-top: 1px solid var(--rule);
+  }
+  .inner {
+    padding-top: var(--s-40);
+    padding-bottom: var(--s-40);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-32);
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .advice,
+  .credit {
+    flex: 1 1 340px;
+  }
+  .advice strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .more {
+    flex: 1 1 100%;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: var(--s-24);
+  }
+  .more a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch);
+  }
+
+  @media (max-width: 720px) {
+    .inner {
+      padding-top: var(--s-24);
+      padding-bottom: var(--s-24);
+      flex-direction: column;
+      flex-wrap: nowrap;
+      gap: var(--s-8);
+      font-size: 13px;
+    }
+    .advice,
+    .credit {
+      flex: none;
+    }
+    .more {
+      flex: none;
+      order: 1;
+      column-gap: var(--s-16);
+    }
+    .credit {
+      order: 2;
+    }
+  }
+</style>

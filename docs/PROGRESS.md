@@ -3,6 +3,25 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: More natural head (2D and Simple 3D); re-audit results
+
+- **Matthew's request:** the head still looked a little off; make it a more natural head shape.
+- **Done:** re-sculpted the face, jaw and neck (`model/simple/build.mjs`) against standard adult profile proportions. The 2D outline is traced from the same sculpt, so both match. Changes:
+  - forehead more upright, with a soft brow and a dip at the bridge of the nose;
+  - a longer nose with a defined tip and base;
+  - lips with a natural fold below them, and a defined chin;
+  - a jawline without the round knob;
+  - a soft slope from chin to throat instead of a right angle;
+  - a smoother back of the neck;
+  - ears tilted back slightly.
+  The palate line moved down with the mouth (it had ended up at nose height). Inner anatomy is unchanged: `model:check` passes, and the skin covers the skull everywhere. `HEAD_ONLY=1 node model/simple/build.mjs` gives a 5-second preview of the outline.
+- **Fixes:**
+  - The 3D Measure bracket after surgery still used the old tonsil tip (an audit finding); fixed.
+  - Both brackets now start exactly on the dashed line.
+  - Turning off fluid flow now stops the animation at once (this fixed an intermittent test). 73 tests pass.
+- **Re-audits** (`docs/audits/2026-11-04-text-reaudit.md`, `docs/audits/2026-11-04-3d-reaudit.md`): no High findings. The findings that change medical text or figure shapes wait for Matthew.
+- **Next:** Matthew's decisions on the re-audit findings; then Phase 2 step 3.
+
 ## 2026-11-04: Audit fixes applied (Matthew approved all)
 
 - **Sources opened:** NINDS, Cleveland Clinic (Chiari page and six anatomy pages), MedlinePlus and nine PubMed Central articles were opened and read. EVIDENCE.md marks each one "opened". Still blocked here: StatPearls, Mayo Clinic, Radiopaedia, PubMed abstracts, Frontiers, AJNR, QxMD. Nothing on the site rests on those alone.

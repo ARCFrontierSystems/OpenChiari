@@ -780,9 +780,10 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       dot.position.copy(p);
       measureGroup.add(dot);
     }
-    const tip = condition === 'typical' ? null : condition === 'surgery' ? 463 : 471;
+    const tip = condition === 'typical' ? null : condition === 'surgery' ? 467 : 471;
     if (tip !== null) {
-      measureGroup.add(bar(fig(368, 447, 0.5), fig(368, tip, 0.5), 0.75, bracketMat));
+      // Starts on the McRae line at x = 368 (y 444.4), ends at the tonsil tip.
+      measureGroup.add(bar(fig(368, 444.4, 0.5), fig(368, tip, 0.5), 0.75, bracketMat));
       measureGroup.add(bar(fig(362, tip, 0.5), fig(374, tip, 0.5), 0.75, bracketMat));
     }
     measureGroup.traverse((m) => (m.renderOrder = 3000));
@@ -821,9 +822,12 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     overlayPlane.constant = cutDepth(st.cut) + 1;
     buildFlow(st.condition);
     flowGroup.visible = st.flow && st.layers.csf.on;
-    if (flowGroup.visible) {
-      if (stillOnly()) placeFlow(null);
-      else startFlowLoop();
+    if (flowGroup.visible && !stillOnly()) startFlowLoop();
+    else {
+      // Stop right away (not on the next frame), so turning flow off or Calm mode on takes effect at once.
+      if (flowLoop) cancelAnimationFrame(flowLoop);
+      flowLoop = 0;
+      placeFlow(null);
     }
     buildMeasure(st.condition);
     measureGroup.visible = st.measure;

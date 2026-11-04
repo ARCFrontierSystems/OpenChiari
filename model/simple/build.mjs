@@ -391,34 +391,41 @@ function headSdf(x, y, z) {
   d = smin(d, -cavityOffset(x, y, z, 16) / S.unitsPerMm, 8);
   // Sides of the head: full and rounded from the temples down to the ears.
   d = smin(d, sdEllipsoid(X + 22, Y - 56, Z, 94, 72, 72), 40);
-  // Neck: an oval column (about 120 mm front to back, 105 mm across) rising well into the head,
-  // plus the muscles at the back of the neck that fill up to the skull.
-  const nx = X + 8, k0 = Math.hypot(nx / 62, Z / 53), k1 = Math.hypot(nx / (62 * 62), Z / (53 * 53));
-  const neck = Math.max(k1 === 0 ? -53 : (k0 * (k0 - 1)) / k1, Y - 70);
-  d = smin(d, neck, 34);
-  d = smin(d, sdEllipsoid(X - 38, Y - 4, Z, 30, 42, 48), 30);
-  // Face: one oval mass from the brow down, about 135 mm across the cheekbones,
-  // blended widely into the skull at the temples and brow.
-  d = smin(d, sdEllipsoid(X + 100, Y - 30, Z, 44, 54, 66), 48);
-  // Lower jaw: a U from the chin back to the angles of the jaw (about 100 mm apart).
-  // Left and right halves are blended across the middle so there's no crease at the centerline.
+  // Neck: an oval column (about 130 mm front to back, 110 mm across) rising well into the head,
+  // plus the muscles at the back of the neck, filling up to the skull.
+  const nx = X + 10, k0 = Math.hypot(nx / 66, Z / 55), k1 = Math.hypot(nx / (66 * 66), Z / (55 * 55));
+  const neck = Math.max(k1 === 0 ? -55 : (k0 * (k0 - 1)) / k1, Y - 70);
+  d = smin(d, neck, 30);
+  d = smin(d, sdEllipsoid(X - 33, Y - 2, Z, 30, 40, 48), 30);
+  d = smin(d, sdEllipsoid(X - 40, Y + 75, Z, 20, 30, 44), 30);
+  // Face, built on standard adult profile proportions (brow, nose, lips and chin about evenly spaced):
+  // brow ridge, mid-face (upper jaw and cheeks), and the soft tissue under the chin.
   const both = (f, k) => smin(f(Z), f(-Z), k);
-  d = smin(d, both((zz) => sdCone(X, Y, zz, [-120, -8, 6], [-74, -8, 42], 16, 12), 20), 26);
-  d = smin(d, sdEllipsoid(X + 128, Y + 8, Z, 13, 12, 26), 18);
-  // Cheekbones and brow.
-  d = smin(d, sdEllipsoid(X + 110, Y - 48, az - 42, 16, 10, 15), 16);
-  d = smin(d, both((zz) => sdCone(X, Y, zz, [-134, 74, 0], [-125, 76, 34], 7.5, 6.5), 10), 10);
-  // Eyes: closed lids, a gentle curve under the brow (no hollows).
-  d = smin(d, sdEllipsoid(X + 128, Y - 60, az - 31, 6, 7, 12), 8);
-  // Nose: a clear bridge and tip, with the nostril wings.
-  d = smin(d, sdCone(X, Y, Z, [-134, 68, 0], [-151, 43, 0], 6, 9), 6);
-  d = smin(d, both((zz) => sdEllipsoid(X + 138, Y - 38, zz - 10, 8, 6.5, 7), 6), 6);
+  d = smin(d, both((zz) => sdCone(X, Y, zz, [-128, 81, 0], [-118, 82, 40], 7, 5.5), 10), 10);
+  d = smin(d, sdEllipsoid(X + 100, Y - 30, Z, 38, 40, 60), 20);
+  d = smin(d, sdEllipsoid(X + 92, Y - 6, Z, 42, 36, 56), 28);
+  // Lower jaw: a U from the chin back to the angles of the jaw (about 100 mm apart), then up toward the ears.
+  d = smin(d, both((zz) => sdCone(X, Y, zz, [-126, -26, 8], [-54, -18, 44], 13, 8), 20), 24);
+  d = smin(d, both((zz) => sdCone(X, Y, zz, [-54, -18, 44], [-46, 26, 48], 8, 7), 10), 24);
+  // Under the chin: sloping gently down toward the throat, with a rounded angle where it meets the neck.
+  d = smin(d, both((zz) => sdCone(X, Y, zz, [-116, -30, 12], [-80, -40, 26], 9, 9), 16), 20);
+  d = smin(d, sdCone(X, Y, Z, [-118, -28, 0], [-80, -44, 0], 9, 9), 20);
+  // Chin.
+  d = smin(d, sdEllipsoid(X + 131, Y + 18, Z, 12, 14, 22), 10);
+  // Cheekbones and closed eyelids (no hollows).
+  d = smin(d, sdEllipsoid(X + 108, Y - 46, az - 44, 16, 9, 14), 14);
+  d = smin(d, sdEllipsoid(X + 126, Y - 58, az - 31, 6, 7, 12), 8);
+  // Nose: bridge from a slight dip below the brow down to the tip, the base, and the nostril wings.
+  d = smin(d, sdCone(X, Y, Z, [-129, 70, 0], [-152, 39, 0], 4, 6.5), 6);
+  d = smin(d, sdEllipsoid(X + 142, Y - 31, Z, 8, 5, 8), 6);
+  d = smin(d, both((zz) => sdEllipsoid(X + 137, Y - 31, zz - 11, 7, 6, 6), 6), 6);
   // Lips: soft and closed.
-  d = smin(d, sdEllipsoid(X + 139, Y - 21, Z, 6, 5, 22), 7);
-  d = smin(d, sdEllipsoid(X + 138, Y - 11, Z, 6, 5.5, 20), 7);
-  d = ssub(d, sdEllipsoid(X + 145, Y - 16, Z, 5, 0.8, 19), 2.5);
-  // Ears.
-  d = smin(d, sdEllipsoid(X + 4, Y - 52, az - 79, 12, 29, 7), 6);
+  d = smin(d, sdEllipsoid(X + 141, Y - 17, Z, 8, 6, 22), 8);
+  d = smin(d, sdEllipsoid(X + 140, Y - 4, Z, 8, 5.5, 19), 8);
+  d = ssub(d, sdEllipsoid(X + 150, Y - 10.5, Z, 6, 0.8, 18), 2.5);
+  // Ears, tilted back slightly.
+  const ex = X + 2, ey = Y - 50, ca = Math.cos(0.26), sa = Math.sin(0.26);
+  d = smin(d, sdEllipsoid(ex * ca - ey * sa, ex * sa + ey * ca, az - 79, 12, 29, 7), 6);
   const bottom = -(640 - fmCenter[1]) / S.unitsPerMm; // the figure's bottom edge
   return Math.max(d, bottom - Y);
 }
@@ -519,6 +526,8 @@ if (skinOutline !== S.skin) {
   writeFileSync(new URL('../../src/lib/anatomy-shapes.json', import.meta.url), JSON.stringify(S, null, 2) + '\n');
   console.log('Updated the head outline in src/lib/anatomy-shapes.json (the 2D figure uses it).');
 }
+// HEAD_ONLY=1: stop after the head outline (quick preview while sculpting the head).
+if (process.env.HEAD_ONLY) process.exit(0);
 
 /** A ring (vertebral arch) around the spinal canal. */
 function ring({ xc, yc, tilt = 0, a, b, tube, tubeSide = tube, tall = tube, tallSide = tall }) {

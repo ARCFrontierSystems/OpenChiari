@@ -89,8 +89,8 @@ export function anatomyFigureSvg(options: FigureOptions, t: FigureStrings): stri
   };
 
   add(true, `<path class="fig-skin" d="${SKIN}" fill="#EFE3D8" stroke="#C9B2A2" stroke-width="1.5"/>`, 'skin');
-  add(true, `<path d="M112 362 L246 374" fill="none" stroke="#D2BBAA" stroke-width="5" stroke-linecap="round"/>`, 'skin');
-  add(true, `<path d="M252 378 C268 392 276 430 280 480 L286 640" fill="none" stroke="#E2CFC2" stroke-width="16" stroke-linecap="round"/>`, 'skin');
+  add(true, `<path d="${shapes.palate.d}" fill="none" stroke="#D2BBAA" stroke-width="5" stroke-linecap="round"/>`, 'skin');
+  add(true, `<path d="${shapes.pharynx.d}" fill="none" stroke="#E2CFC2" stroke-width="16" stroke-linecap="round"/>`, 'skin');
   // Spinal fluid: in front of the cord, and behind it. In Typical and after surgery the space behind is one
   // continuous path from the fourth ventricle outlet to the neck; in Chiari I the tonsil fills it.
   add(true, CSF(shapes.csfFront), 'csf');
@@ -131,7 +131,7 @@ export function anatomyFigureSvg(options: FigureOptions, t: FigureStrings): stri
     // The McRae line sits on the anatomy, not the page background, so it is always dark ink
     // (on the dark Explorer a light line nearly disappeared against the light anatomy).
     parts.push(`<line x1="334" y1="440" x2="404" y2="449" stroke="#1C1D21" stroke-width="1.25" stroke-dasharray="4 3"/><circle cx="334" cy="440" r="2.5" fill="#1C1D21"/><circle cx="404" cy="449" r="2.5" fill="#1C1D21"/>`);
-    add(low || surgery, `<line x1="368" y1="447" x2="368" y2="${tonsilTip}" stroke="#1F5F8B" stroke-width="1.5"/><line x1="362" y1="${tonsilTip}" x2="374" y2="${tonsilTip}" stroke="#1F5F8B" stroke-width="1.5"/>`);
+    add(low || surgery, `<line x1="368" y1="444.4" x2="368" y2="${tonsilTip}" stroke="#1F5F8B" stroke-width="1.5"/><line x1="362" y1="${tonsilTip}" x2="374" y2="${tonsilTip}" stroke="#1F5F8B" stroke-width="1.5"/>`);
   }
   if (labels) {
     const leaders = ['M250 170 L548 116', 'M300 214 L548 156', 'M452 372 L548 196', 'M364 384 L548 236', 'M318 372 L548 276', `M386 ${tonsilMid} L548 316`, 'M372 445 L548 356', 'M342 480 L548 396', 'M351 620 L548 436', 'M318 500 L548 476'];

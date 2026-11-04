@@ -3,6 +3,22 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Phase 1, step 10: wrap-up — Phase 1 complete, awaiting Matthew's review
+
+- **All checks pass**, from a clean install and on GitHub: type check, 3D model vs EVIDENCE.md, build (13 pages), 72 automated tests (including accessibility on every page at desktop and phone width with Calm mode on and off), and Lighthouse (Home 100/100/100/100; Explorer accessibility, best practices and SEO 100, speed 67 for the reason explained in step 8).
+- **Review page** with screenshots of everything in Phase 1, the check results and the open decisions: https://claude.ai/artifact/2ETBYn57vnFUfoRQLmM3oW (private to Matthew).
+- **Phase 1 contains:** Home (desktop, phone, Calm mode); 3D Explorer with the Simple model in all four conditions and all viewer tools (condition switch, layers, cut-away, structure list and info cards, tap to identify, labels, fluid flow, Measure, camera presets, keyboard control, screen reader descriptions); Doctor visit prep with the one-page printed sheet.
+- **Nothing deployed.**
+
+**Open decisions for Matthew** (also on the review page):
+1. Show the measured distance next to the bracket? Proposed: "In this model, the tonsil tip sits about 12 mm below the line." (Typical: "about 1 mm above the line"; After decompression: "about 9 mm below the line, about 4 mm higher than before surgery".)
+2. Add the mockup's example text in the notes box ("For example: when your symptoms started, what makes them worse")? Not in COPY.md.
+3. Record the Simple model's side-to-side widths in EVIDENCE.md, with sources, for approval?
+4. Publish a private preview on Cloudflare Pages to test on real phones (iPhone and Android)?
+5. Open a pull request to merge Phase 1 into the main branch?
+
+**Next: Phase 2 (realistic model from Z-Anatomy)**, once Phase 1 is reviewed: extract the head and upper neck, build Chiari I alone first to the EVIDENCE.md numbers, render its views for medical review, and stop. A medical reviewer should also look at the Simple model's four views before then.
+
 ## 2026-11-04: Phase 1, step 9: Doctor visit prep
 
 - **Page** `/prep/` (`src/pages/prep.astro`), from the `Prep`, `PrepPhone` and `PrepSheet` mockups. All 37 text items checked word for word against COPY.md.

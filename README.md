@@ -2,7 +2,7 @@
 
 A free, independent website that helps people see and understand Chiari malformation type I, with an interactive 3D anatomy explorer, plain-language explanations, tools for doctor visits and for explaining the condition to others, and a live list of research studies.
 
-**Status:** Phase 1 in progress (see `docs/PROGRESS.md`).
+**Status:** Phase 1 built (Home, 3D Explorer with the Simple model, Doctor visit prep), awaiting review. See `docs/PROGRESS.md`.
 
 ## What's in this repository
 
@@ -25,7 +25,7 @@ npm install
 npm run dev
 ```
 
-Then open http://localhost:4321. `npm run build` makes the static site in `dist/`; `npm run check` runs the type check; `npm test` runs the accessibility and behavior tests on the built site (run `npx playwright install chromium` once first).
+Then open http://localhost:4321. `npm run build` makes the static site in `dist/`; `npm run check` runs the type check; `npm test` runs the accessibility and behavior tests on the built site (run `npx playwright install chromium` once first). `npm run model:simple` rebuilds the Simple 3D model and `npm run model:check` checks it against EVIDENCE.md.
 
 ## Not medical advice
 

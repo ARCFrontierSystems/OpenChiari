@@ -2,6 +2,13 @@
 
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 
+## 2026-11-04: Step 1 follow-up: realistic head outline in Fig. 1
+
+- **Matthew's feedback:** the head in the figure looked off; it should look like a real head. The mockups are reference ideas, not exact designs.
+- **Done:** redrew only the outer skin outline in `src/components/AnatomyFigure.astro`. The top and back of the head now follow the skull with an even scalp. The face is a realistic adult profile (upright forehead, brow, bridge of the nose, nose, lips, chin, jaw line, neck).
+- **Unchanged:** every inner structure (skull, brain, tonsils, McRae line, descent bracket, spine, cord, spinal fluid), so nothing in EVIDENCE.md is affected.
+- **Open question:** `design/figures/` (the 3D reference renders) still show the old head. Update them to match? The Simple 3D model in step 4 should follow the new outline either way.
+
 ## 2026-11-04: Phase 1, step 1: project setup and Home page
 
 - **Done:** Astro project (static site, TypeScript, built-in i18n set up for English and Spanish). All DESIGN.md tokens in `src/styles/tokens.css`, including the Calm mode and anatomy colors. The three fonts (Source Serif 4, IBM Plex Sans, IBM Plex Mono) are bundled with the site; the browser makes no requests to Google or anyone else (checked).

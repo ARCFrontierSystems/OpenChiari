@@ -20,7 +20,7 @@ Matthew's preference: when a step is done, lay out what the next step will cover
 - **Small additions:**
   - a "Copied" message after "Copy embed code" (interface wording, not medical);
   - label rows in the 3D view are now spaced at least 46 px, so the 44 px label buttons no longer overlap (in the Explorer too).
-- **Checks:** new tests cover the embed builder's code, the three downloads, and the embed following its settings while always showing the captions, credit and disclaimer and never saving Calm mode. Accessibility scans pass on both pages. 77 tests pass.
+- **Checks:** new tests cover the embed builder's code, the three downloads, and the embed following its settings while always showing the captions, credit and disclaimer and never saving Calm mode. Accessibility scans pass on both pages. 81 tests pass.
 - **Next (step 3):** Explain It, the create page and the recipient view.
 
 ## 2026-11-04: Phase 3, step 1: About, Privacy and Support pages

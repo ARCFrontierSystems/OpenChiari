@@ -3,6 +3,42 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Phase 1, step 8: phone check
+
+Measured on a simulated mid-range phone (Chrome with a 4x slower processor; "slow 4G" for load times). This machine has no graphics chip, so real frame rates can't be measured here; the workload per frame is reported instead.
+
+| | Before | After |
+| --- | --- | --- |
+| 3D model download (compressed) | 628 KB | 414 KB |
+| 3D code download (compressed) | 166 KB | 166 KB |
+| Triangles drawn per frame | 166,000 | 117,000 |
+| Draw calls per frame | 49 | 49 |
+| 3D view ready on slow 4G | 7.7 s | 6.3 s |
+| Flat figure on screen (Lighthouse, mobile) | 0.9 s | 0.9 s |
+
+- **Model slimmed** (`model/simple/build.mjs`): simplified further and stored more compactly. Close-up views checked; all EVIDENCE.md numbers unchanged (`npm run model:check`).
+- **Smoother loading:** the model is unpacked on a background thread, its parts are set up a few at a time, and graphics programs are prepared in the background where the phone supports it, so the page stays responsive while 3D loads. The flat figure shows first (0.9 s) and the 3D view replaces it when ready.
+- **Measure marks no longer show through a solid, uncut head** (they did after step 7). They show when the midline is exposed or the skin is faded or off.
+- **Cosmetic:** the skull's thickness change is now gradual (softer shading line at the back of the skull). Labels for hidden layers no longer leave gaps.
+- **Touch:** new automated test for pinch to zoom and two-finger move on a phone; tap to identify, the Layers panel and the parts list were already tested.
+- **Lighthouse (mobile) now runs on every update** (`npm run lighthouse`, also on GitHub):
+
+| Page | Speed | Accessibility | Best practices | SEO | Largest paint |
+| --- | --- | --- | --- | --- | --- |
+| Home | 100 | 100 | 100 | 100 | 0.9 s |
+| 3D Explorer | 67 | 100 | 100 | 100 | 0.9 s |
+
+  Home must stay at 90+ for speed. The Explorer's speed score is reported but not enforced: on machines without a graphics chip, preparing the 3D graphics takes about 1.6 s of processor time (measured), which Lighthouse counts as "blocking". On a phone with a graphics chip this is a small fraction of that. Everything visitors read and tap (figure, text, controls) is on screen at 0.9 s.
+
+- **Still to verify by a person:** open the Explorer on a real mid-range phone (Android and iPhone) once the preview is deployed, to confirm smoothness while turning and with fluid flow. If it stutters, the next lever is a lighter phone version of the model (fewer triangles for skin and skull).
+
+**Next: step 9, Doctor visit prep.**
+- Desktop page (`Prep` mockup): the grouped questions from COPY.md with checkboxes, "Add your own question", a notes field ("Things I want to mention"), the live sheet preview with its question count, Print sheet and Save as PDF, and "Include a small diagram of Chiari".
+- Phone page (`PrepPhone`): collapsible groups with counts, a sticky bar with "[N] questions selected", Preview and print, Save as PDF.
+- Printed sheet (`PrepSheet`): one page, space for answers under each question, date and doctor lines, the optional small diagram, and "Made with Open Chiari · openchiari.org · Not medical advice".
+- Nothing is stored or sent: everything stays in the page (checked by a test).
+- Stop for Matthew's review.
+
 ## 2026-11-04: Phase 1, step 7: fluid flow and Measure in 3D
 
 - **Fluid flow** is now part of the 3D scene: blue chevrons in the spinal fluid spaces, at the figure's positions, pulse down and back with each heartbeat (about 72 beats a minute), fading slightly with the pulse.

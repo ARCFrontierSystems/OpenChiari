@@ -242,6 +242,33 @@ test.describe('3D Explorer controls', () => {
     expect(animating).toBe(false);
   });
 
+  test('phone: pinch zooms and two fingers move the model', async ({ browser }) => {
+    const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
+    const page = await context.newPage();
+    await page.goto('/explorer/');
+    await expect(page.locator('.x-view')).toHaveClass(/has-3d/, { timeout: 30000 });
+    const state = () => page.evaluate(() => (document.querySelector('[data-viewer]') as HTMLElement & { viewer: { cameraState(): { distance: number; target: number[] } } }).viewer.cameraState());
+    const box = (await page.locator('.x-3d').boundingBox())!;
+    const cx = box.x + box.width / 2, cy = box.y + box.height / 2;
+    const cdp = await context.newCDPSession(page);
+    const touch = (type: 'touchStart' | 'touchMove' | 'touchEnd', points: [number, number][]) =>
+      cdp.send('Input.dispatchTouchEvent', { type, touchPoints: points.map(([x, y], id) => ({ x, y, id })) });
+    const before = await state();
+    // Pinch out: fingers move apart, the model gets closer.
+    await touch('touchStart', [[cx - 30, cy], [cx + 30, cy]]);
+    for (let k = 1; k <= 8; k++) await touch('touchMove', [[cx - 30 - k * 12, cy], [cx + 30 + k * 12, cy]]);
+    await touch('touchEnd', []);
+    const zoomed = await state();
+    expect(zoomed.distance).toBeLessThan(before.distance * 0.9);
+    // Two fingers moving together: the model moves.
+    await touch('touchStart', [[cx - 40, cy], [cx + 40, cy]]);
+    for (let k = 1; k <= 8; k++) await touch('touchMove', [[cx - 40, cy + k * 10], [cx + 40, cy + k * 10]]);
+    await touch('touchEnd', []);
+    const moved = await state();
+    expect(Math.abs(moved.target[1] - zoomed.target[1])).toBeGreaterThan(2);
+    await context.close();
+  });
+
   test('required captions and credits are on the page', async ({ page }) => {
     await page.goto('/explorer/');
     await expect(page.getByText('Illustration, not a medical image').first()).toBeVisible();

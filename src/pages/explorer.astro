@@ -758,6 +758,9 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
     cursor: pointer;
     pointer-events: auto;
   }
+  .x-labels :global(.x-label[hidden]) {
+    display: none;
+  }
   .x-labels :global(.x-label:hover),
   .x-labels :global(.x-label.is-selected) {
     border-color: var(--x-accent);

@@ -9,3 +9,4 @@ model/source/
 *.blend1
 test-results/
 playwright-report/
+lighthouse-*.json

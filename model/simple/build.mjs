@@ -315,7 +315,7 @@ const vaultLine = distanceGrid(S.skull.d, { unsigned: true, margin: 40 });
 const baseLine = distanceGrid('M128 300 C170 305 220 310 252 322 C255 338 272 340 278 330 L282 354 L290 356 C292 390 304 420 334 440 L404 449', { unsigned: true, margin: 40 });
 function skullHalfThickness(x, y) {
   const dv = vaultLine.sample(x, y), db = baseLine.sample(x, y);
-  return lerp(8, 3.5, smoothstep(14, -14, db - dv));
+  return lerp(8, 3.5, smoothstep(30, -30, db - dv));
 }
 const clivus = inflate(distanceGrid(S.clivus), 22);
 const [bx, by] = S.mcrae.basion, [ox, oy] = S.mcrae.opisthion;
@@ -679,8 +679,8 @@ await MeshoptSimplifier.ready;
 await doc.transform(
   dedup(),
   weld(),
-  simplify({ simplifier: MeshoptSimplifier, ratio: 0.1, error: 0.002 }),
-  quantize({ quantizePosition: 14 }),
+  simplify({ simplifier: MeshoptSimplifier, ratio: 0.07, error: 0.0028 }),
+  quantize({ quantizePosition: 12 }),
   meshopt({ encoder: MeshoptEncoder, level: 'high' }),
 );
 let after = 0;

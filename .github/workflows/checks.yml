@@ -30,3 +30,15 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Accessibility and behavior tests
         run: npm test
+      - name: Lighthouse (mobile) on Home and 3D Explorer
+        run: |
+          npx astro preview --port 4323 &
+          for i in $(seq 1 30); do curl -sf http://localhost:4323/ >/dev/null && break; sleep 2; done
+          CHROME_PATH=$(node -e "console.log(require('playwright').chromium.executablePath())") npm run lighthouse -- http://localhost:4323
+      - name: Keep the Lighthouse results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-results
+          path: lighthouse-results.json
+          if-no-files-found: ignore

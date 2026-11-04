@@ -117,15 +117,30 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   // Keeps z <= depth. The plane faces the default (side) camera.
   const plane = new THREE.Plane(new THREE.Vector3(0, 0, -1), 0);
 
+  const timing: Record<string, number> = {};
+  let mark = performance.now();
+  const lap = (name: string) => {
+    const now = performance.now();
+    timing[name] = Math.round(now - mark);
+    mark = now;
+  };
+  // Unpack the compressed model on a background thread, so the page stays responsive.
+  if (MeshoptDecoder.supported && 'useWorkers' in MeshoptDecoder) MeshoptDecoder.useWorkers(2);
   const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
   const gltf = await loader.loadAsync(MODEL_URL);
+  lap('download and decode');
 
   const parts: Part[] = [];
   let order = 1;
   const capGeometry = new THREE.PlaneGeometry(400, 400);
+  const meshes: THREE.Mesh[] = [];
   gltf.scene.traverse((obj) => {
-    if (!(obj as THREE.Mesh).isMesh) return;
-    const mesh = obj as THREE.Mesh;
+    if ((obj as THREE.Mesh).isMesh) meshes.push(obj as THREE.Mesh);
+  });
+  // Set up a few structures at a time and let the page breathe in between (no long freezes).
+  const breathe = () => new Promise<void>((resolve) => setTimeout(resolve, 0));
+  for (const [i, mesh] of meshes.entries()) {
+    if (i % 4 === 3) await breathe();
     const extras = (mesh.userData.layer ? mesh.userData : mesh.parent?.userData) as Record<string, unknown>;
     const color = new THREE.Color(String(extras.color));
     const baseOpacity = Number(extras.opacity ?? 1);
@@ -206,7 +221,8 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       stencil,
       cap,
     });
-  });
+  }
+  lap('materials and normals');
   scene.add(gltf.scene);
   for (const p of parts) {
     // Stencil meshes follow the model's transform.
@@ -251,13 +267,17 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     const job = ++sectionJob;
     const svg = anatomyFigureSvg({ condition: st.condition, flow: false, measure: false, labels: false, layers }, figureStrings)
       .replace('<svg ', `<svg width="${sectionCanvas.width}" height="${sectionCanvas.height}" `);
+    const t0 = performance.now();
     const img = new Image();
     img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
     await img.decode();
+    const t1 = performance.now();
     if (job !== sectionJob) return;
     const ctx = sectionCanvas.getContext('2d')!;
     ctx.clearRect(0, 0, sectionCanvas.width, sectionCanvas.height);
     ctx.drawImage(img, 0, 0, sectionCanvas.width, sectionCanvas.height);
+    timing.sectionDecode = Math.round(t1 - t0);
+    timing.sectionDraw = Math.round(performance.now() - t1);
     drawHighlight(ctx, st);
     sectionTexture.needsUpdate = true;
     requestRender();
@@ -385,6 +405,13 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   }
   function applyOpacity() {
     const fade = skinFade();
+    // The measure marks show through the model only when the midline is exposed (cut there or
+    // further) or the skin is faded or off; otherwise they stay inside the head with the anatomy.
+    const st = store.get();
+    const skin = st.layers.skin;
+    const skinOpacity = skin.on ? (skin.opacity / 100) * fade : 0;
+    const showThrough = cutDepth(st.cut) <= 0.01 || skinOpacity < 0.6;
+    for (const m of measureMats) m.depthTest = !showThrough;
     for (const p of parts) {
       const opacity = p.ghost ? p.opacity * fade : p.opacity;
       const see = opacity < 1;
@@ -729,6 +756,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   scene.add(measureGroup);
   const inkMat = new THREE.MeshBasicMaterial({ color: '#1C1D21', depthTest: false, depthWrite: false, transparent: true });
   const bracketMat = new THREE.MeshBasicMaterial({ color: FLOW_BLUE, depthTest: false, depthWrite: false, transparent: true });
+  const measureMats = [inkMat, bracketMat];
   let measureCondition = '';
   function buildMeasure(condition: string) {
     if (condition === measureCondition) return;
@@ -803,6 +831,14 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
 
   resize();
   frame();
+  lap('set up');
+  // Prepare the graphics programs in the background where the browser supports it.
+  section.visible = true;
+  await renderer.compileAsync(scene, camera);
+  lap('prepare graphics');
+  apply(store.get());
+  renderer.render(scene, camera);
+  lap('first frame');
   requestRender();
 
   /** Look from a direction: azimuth 0 = side (default), 90 = back, -90 = front; elevation in degrees. */
@@ -821,6 +857,17 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   (host as HTMLElement & { viewer?: unknown }).viewer = {
     look,
     reset: frame,
+    /** For tests: camera distance from its target, and the target itself (mm). */
+    cameraState() {
+      return { distance: camera.position.distanceTo(controls.target), target: controls.target.toArray() };
+    },
+    /** For performance checks: how long each setup stage took (ms). */
+    timing,
+    /** For performance checks: what the last frame drew. */
+    stats() {
+      const r = renderer.info.render;
+      return { triangles: r.triangles, drawCalls: r.calls, geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures };
+    },
     /** For tests: whether the fluid flow is animating right now. */
     get flowAnimating() {
       return flowLoop !== 0;

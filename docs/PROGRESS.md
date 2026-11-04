@@ -3,6 +3,28 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Phase 2, step 2: extraction (Typical anatomy, first version)
+
+- **Script:** `model/realistic/extract.py` (about 2 minutes per run). It picks structures by the atlas's own family tree (e.g. everything under "Cerebellum"), groups them into the site's structures and layers with the DESIGN.md palette, and saves glTF in the same model space as the Simple model (mm, origin at the middle of the foramen magnum).
+- **Groups:** skin, skull, occipital bone, C1, C2, C3 to C5, discs, tentorium, cerebrum, corpus callosum, diencephalon, brainstem, cerebellum, tonsils, spinal cord, spinal dura (fluid), ventricles, fourth ventricle, and the fluid space in the posterior fossa.
+- **Built where the atlas has nothing:**
+  - Spinal cord: follows the middle of the spinal dura, starting at the size of the medulla's lower end (13.7 by 15.1 mm), narrowing slightly down the neck.
+  - Fluid space around the brain in the posterior fossa: computed as the space inside the skull that isn't brain or bone (about 28 ml). Because it is computed, lowering the tonsils for Chiari I will shrink it automatically.
+  - Skin: the atlas's 66 face, head and neck surface pieces joined and smoothed; the eye and mouth openings closed with gently rounded fills (calm, closed-eye look).
+- **Brainstem cut at the McRae line:** the atlas's medulla runs about 19 mm into the spinal canal. The approved text says the foramen magnum is "where the brainstem becomes the spinal cord", so the part below the line is now spinal cord.
+- **Measured (unchanged from the atlas):** tonsil tip 2.8 mm above the McRae line; McRae line 38.5 mm (rough method, refined in step 3).
+- **Not done yet, known:**
+  - A few blue spots remain at the centre of the cerebellum (gaps between the atlas's vermis pieces); to clean up in step 3, since it is the region that matters most for Chiari.
+  - The model is about 1.1 million triangles (35 MB); slimming to desktop and phone sizes is step 5.
+  - Several surfaces are not fully closed (cerebrum, skull, brainstem), which matters for how cut faces are filled in the Explorer; handled with the viewer work in step 5.
+- **Not used by the site yet**, and not shown to visitors (the "Realistic" switch stays off until medical review).
+
+**Next: step 3, Typical anatomy checked against EVIDENCE.md.**
+- Refine the foramen magnum measurement (basion and opisthion found on the bone's edge, not the rough midline gap) and add the realistic model to the automatic measurement check.
+- Clean up the fluid spots at the centre of the cerebellum.
+- Matthew decides: keep the atlas's tonsils at 2.8 mm above the line (within the normal range in EVIDENCE.md) or move them to about 1 mm above.
+- Then stop for review, before Chiari I.
+
 ## 2026-11-04: Phase 2, step 1: feasibility check of the Z-Anatomy atlas
 
 Matthew said "Proceed" after the Phase 1 review page; taken as the go-ahead for Phase 2. The five open Phase 1 decisions stay open (nothing changed for them).

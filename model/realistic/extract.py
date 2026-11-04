@@ -202,12 +202,31 @@ def close_small_openings(bm, max_edges=120, lift=1.5):
                           use_axis_x=True, use_axis_y=True, use_axis_z=True)
     return len(faces)
 
+def smoothed(bm, levels=1):
+    """Catmull-Clark subdivision: rounds off the atlas's low-detail surfaces."""
+    me = D.meshes.new('smooth-tmp')
+    bm.to_mesh(me)
+    bm.free()
+    tmp = D.objects.new('smooth-tmp', me)
+    bpy.context.scene.collection.objects.link(tmp)
+    mod = tmp.modifiers.new('subsurf', 'SUBSURF')
+    mod.levels = levels
+    mod.render_levels = levels
+    dg = bpy.context.evaluated_depsgraph_get()
+    ev = tmp.evaluated_get(dg)
+    out = bmesh.new()
+    out.from_mesh(ev.to_mesh())
+    ev.to_mesh_clear()
+    D.objects.remove(tmp)
+    return out
+
 def finish(name, bm):
     weld = 0.3 if name == 'skin' else 0.05
     bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=weld)  # weld matching edges of neighbouring pieces (mm)
     if name == 'skin':
         bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
         print('skin: closed', close_small_openings(bm), 'small openings (eyes, mouth)')
+        bm = smoothed(bm, levels=1)
     bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
     info = GROUPS[name]
     me = D.meshes.new(name)
@@ -229,15 +248,39 @@ def finish(name, bm):
     ob['part'] = info['part'] or ''
     ob['color'] = info['color']
     ob['opacity'] = info.get('opacity', 1)
-    print(f'{name:18} {len(members.get(name, [])):4} atlas parts  {tris:8} triangles  open edges {oe}')
+    print(f'{name:18} {len(members.get(name, [])):4} atlas parts  {tris:8} triangles  open edges {oe}', flush=True)
     return ob
 
+# The brainstem becomes the spinal cord at the foramen magnum (COPY.md, Foramen magnum card; the figures).
+# The atlas lets its medulla run on into the spinal canal, so cut it along the McRae line: the part below is cord.
+bas0 = TO_MODEL @ basion
+opi0 = TO_MODEL @ opisthion
+mcrae_dir = Vector((opi0.x - bas0.x, 0, opi0.z - bas0.z)).normalized()
+mcrae_n = Vector((-mcrae_dir.z, 0, mcrae_dir.x))
+if mcrae_n.z < 0:
+    mcrae_n = -mcrae_n
+
+def split_at_mcrae(bm):
+    """Cuts a surface along the McRae line plane. Returns the part below as a new closed surface; keeps the part above."""
+    below = bm.copy()
+    for target, keep_above in ((bm, True), (below, False)):
+        geom = target.verts[:] + target.edges[:] + target.faces[:]
+        res = bmesh.ops.bisect_plane(target, geom=geom, plane_co=bas0, plane_no=mcrae_n,
+                                     clear_inner=keep_above, clear_outer=not keep_above)
+        edges = [e for e in res['geom_cut'] if isinstance(e, bmesh.types.BMEdge)]
+        if edges:
+            bmesh.ops.holes_fill(target, edges=edges, sides=0)
+    return below
+
 built = []
+cord_top_piece = None
 for name, objs in members.items():
     if name == 'cord' or not objs:
         continue
     bm = bm_from(objs)
     cut_bottom(bm, fill=(name in ('dura', 'skin')))
+    if name == 'brainstem':
+        cord_top_piece = split_at_mcrae(bm)
     built.append(finish(name, bm))
 
 # ---------------------------------------------------------------- spinal cord (not in the atlas)
@@ -270,6 +313,12 @@ for r0, r1 in zip(rings, rings[1:]):
         bm.faces.new((r0[j], r0[(j + 1) % ring_n], r1[(j + 1) % ring_n], r1[j]))
 bm.faces.new(list(reversed(rings[0])))
 bm.faces.new(rings[-1])
+if cord_top_piece is not None:
+    me_tmp = D.meshes.new('cord-top')
+    cord_top_piece.to_mesh(me_tmp)
+    cord_top_piece.free()
+    bm.from_mesh(me_tmp)
+    D.meshes.remove(me_tmp)
 members['cord'] = []
 print(f'cord built: {2 * rx:.1f} mm front to back, {2 * ry:.1f} mm across at the top')
 built.append(finish('cord', bm))
@@ -291,7 +340,9 @@ def bvh_of(names):
     bm.free()
     return t
 
-brain_tree = bvh_of(['cerebellum', 'tonsil', 'brainstem', 'ventricle-fourth', 'cord', 'cerebrum', 'diencephalon'])
+import time
+t_fluid = time.time()
+brain_tree = bvh_of(['cerebellum', 'tonsil', 'brainstem', 'ventricle-fourth', 'cord'])
 bone_tree = bvh_of(['occipital', 'skull', 'c1', 'c2'])
 roof_tree = bvh_of(['tentorium', 'cerebrum', 'cerebellum'])
 
@@ -310,15 +361,19 @@ def inside(tree, p):
     return loc is not None and (p - loc).dot(nrm) < 0, (dist if loc is not None else 1e9)
 
 STEP = 1.0
+BRAIN_CLEAR = 3.6  # mm: gaps between the atlas's cerebellar pieces (up to about 7 mm) do not count as fluid
+POINT_RADIUS = 3.4  # mm: each fluid point grows back by this much, so the fluid still reaches the brain surface
 fluid = []
-for ix in range(-10, 80):
-    for iz in range(-6, 50):
-        for iy in range(-32, 33):
+for ix in range(-8, 75):
+    if ix % 20 == 0:
+        print(f'  fluid scan {ix}/75, {len(fluid)} points so far, {time.time() - t_fluid:.0f} s', flush=True)
+    for iz in range(-6, 45):
+        for iy in range(-30, 31):
             p = Vector((ix * STEP, iy * STEP, iz * STEP))
             if above_mcrae(p) < -1.0:
                 continue
             b_in, b_d = inside(brain_tree, p)
-            if b_in or b_d < 0.6:
+            if b_in or b_d < BRAIN_CLEAR:
                 continue
             o_in, o_d = inside(bone_tree, p)
             if o_in or o_d < 0.6:
@@ -331,23 +386,35 @@ for ix in range(-10, 80):
             if roof_tree.ray_cast(p, Vector((0, 0, 1)), 150)[0] is None:
                 continue
             fluid.append(p)
-print(f'posterior fossa fluid: {len(fluid)} cubic millimetres sampled')
+print(f'posterior fossa fluid: {len(fluid)} points ({len(fluid) * STEP ** 3 / 1000:.1f} ml), {time.time() - t_fluid:.0f} s', flush=True)
 
-bm = bmesh.new()
-half = STEP * 0.55
-for p in fluid:
-    bmesh.ops.create_cube(bm, size=STEP * 1.1, matrix=Matrix.Translation(p))
-me = D.meshes.new('csf-tmp')
-bm.to_mesh(me)
-bm.free()
-tmp = D.objects.new('csf-tmp', me)
-out_col.objects.link(tmp)
-rm = tmp.modifiers.new('remesh', 'REMESH')
-rm.mode = 'VOXEL'
-rm.voxel_size = 0.8
-rm.use_smooth_shade = True
+# Fluid points -> a smooth closed surface: geometry nodes turn points into a volume and the volume into a mesh.
+me = D.meshes.new('csf-points')
+me.from_pydata([tuple(p) for p in fluid], [], [])
+tmp = D.objects.new('csf-points', me)
+bpy.context.scene.collection.objects.link(tmp)
+ng = D.node_groups.new('points-to-surface', 'GeometryNodeTree')
+ng.interface.new_socket('Geometry', in_out='INPUT', socket_type='NodeSocketGeometry')
+ng.interface.new_socket('Geometry', in_out='OUTPUT', socket_type='NodeSocketGeometry')
+gi = ng.nodes.new('NodeGroupInput')
+go = ng.nodes.new('NodeGroupOutput')
+m2p = ng.nodes.new('GeometryNodeMeshToPoints')
+m2p.inputs['Radius'].default_value = POINT_RADIUS
+p2v = ng.nodes.new('GeometryNodePointsToVolume')
+p2v.inputs['Resolution Mode'].default_value = 'Size'
+p2v.inputs['Voxel Size'].default_value = 0.6
+p2v.inputs['Radius'].default_value = POINT_RADIUS
+v2m = ng.nodes.new('GeometryNodeVolumeToMesh')
+v2m.inputs['Resolution Mode'].default_value = 'Size'
+v2m.inputs['Voxel Size'].default_value = 0.6
+ng.links.new(gi.outputs[0], m2p.inputs['Mesh'])
+ng.links.new(m2p.outputs['Points'], p2v.inputs['Points'])
+ng.links.new(p2v.outputs['Volume'], v2m.inputs['Volume'])
+ng.links.new(v2m.outputs['Mesh'], go.inputs[0])
+gn = tmp.modifiers.new('surface', 'NODES')
+gn.node_group = ng
 sm = tmp.modifiers.new('smooth', 'SMOOTH')
-sm.iterations = 6
+sm.iterations = 8
 sm.factor = 0.6
 dg = bpy.context.evaluated_depsgraph_get()
 ev = tmp.evaluated_get(dg)
@@ -357,6 +424,7 @@ ev.to_mesh_clear()
 D.objects.remove(tmp)
 GROUPS['csf-cranial'] = dict(layer='csf', part='csf', color='#9CC3DA', opacity=0.75)
 built.append(finish('csf-cranial', bm))
+print(f'fluid surface done, {time.time() - t_fluid:.0f} s', flush=True)
 
 # ---------------------------------------------------------------- measurements (model mm)
 bas = TO_MODEL @ basion

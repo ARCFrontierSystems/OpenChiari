@@ -49,3 +49,7 @@
 **Footer and advice check:** every page carries "Not medical advice. Talk to your doctor about your own care." (`Base.astro`, `explorer.astro`), plus "Facts adapted from the NINDS fact sheet". No sentence promises a result. All surgery wording is hedged ("most", "often", "results vary").
 
 **Noted, outside this audit's scope (not medical):** "groups ... running registries" (one registry is paused and one closed, per EVIDENCE.md); the printed sheet shows the figure without the model credit line (CLAUDE.md rule 3, if that figure counts as a model-derived graphic). Matthew may want to check both.
+
+## Outcome
+
+Matthew approved all seven items on 2026-11-04. All applied as suggested: printed-sheet caption (1), "often" for the C1 arch (2), "Trouble swallowing or speaking" (3), "A doctor looks at the scan" (4), screen-reader descriptions added to COPY.md with "often" (5), and the EVIDENCE.md citations (6, 7). The Explorer's part 11 cards were also added to COPY.md, where they had been missing.

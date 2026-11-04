@@ -3,6 +3,17 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Text re-audit items applied (Matthew approved)
+
+- Printed visit-prep sheet: the figure caption now carries the required tonsil note ("Chiari I. Tonsils shown at their lowest point, where MRI measures them. Illustration, not a medical image."); added to COPY.md.
+- "Usually the back of the first vertebra" changed to "often" (After decompression note and the Bone removed card).
+- Symptom list: "Trouble swallowing or speaking" (was "voice changes").
+- How it's found: "A doctor looks at the scan together with your symptoms."
+- The four screen-reader descriptions of the figure are now in COPY.md; the Chiari I one says "often crowd".
+- EVIDENCE.md: corrected the MedlinePlus citation (it is the syringomyelia page) and added opened sources for the tonsil shape, the midline simplification and the heartbeat pulse.
+- The Explorer's part 11 cards were missing from COPY.md; now added.
+- Spanish Home note updated to list "How it's found" among the lines to translate. 73 tests pass.
+
 ## 2026-11-04: Real head for the Simple figure and 3D model
 
 - **Matthew's feedback:** the smooth head looked like it was wearing a helmet. He asked for it to be based on a real model.

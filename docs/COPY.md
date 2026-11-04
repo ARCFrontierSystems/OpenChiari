@@ -34,7 +34,8 @@ Mockup: `design/mockups/Main.dc.html`
 - Who has it
 - Most people are born with the skull differences that lead to it. Some never have symptoms; others first notice them as teens or adults.
 - How it's found
-- Usually with an MRI scan and a doctor's exam, sometimes by chance during a scan for something else. A neurologist or neurosurgeon looks at the scan together with your symptoms.
+- Usually with an MRI scan and a doctor's exam, sometimes by chance during a scan for something else. A doctor looks at the scan together with your symptoms.
+<!-- 2026-11-04 text re-audit (approved): was "Usually with an MRI scan and a doctor's exam, sometimes by chance during a scan for something else. A neurologist or neurosurgeon looks at the scan together with your symptoms." -->
 - What it can feel like
 - Chiari looks different for everyone, and many people with Type I have no symptoms at all.
 - The classic sign is a headache at the back of the head that comes on after coughing, sneezing or straining.
@@ -43,7 +44,8 @@ Mockup: `design/mockups/Main.dc.html`
 - Dizziness and trouble with balance
 - Numbness or tingling in the hands and feet
 - Weakness or trouble with fine hand movements
-- Trouble swallowing, or voice changes
+- Trouble swallowing or speaking
+<!-- 2026-11-04 text re-audit (approved): was "Trouble swallowing, or voice changes" -->
 - Breathing or sleep problems, such as sleep apnea
 - Ringing in the ears
 - Blurry or double vision
@@ -113,7 +115,8 @@ Mockup: `design/mockups/HomePhone.dc.html`
 - Dizziness and trouble with balance
 - Numbness or tingling in hands and feet
 - Weakness or trouble with fine hand movements
-- Trouble swallowing, or voice changes
+- Trouble swallowing or speaking
+<!-- 2026-11-04 text re-audit (approved): was "Trouble swallowing, or voice changes" -->
 - Breathing or sleep problems
 - Ringing in the ears
 - Blurry or double vision
@@ -175,7 +178,7 @@ Mockup: `design/mockups/HomeCalm.dc.html`
 
 Mockup: `design/mockups/HomeES.dc.html`
 
-> **Needs a matching update (2026-11-04).** The English Home text changed after the accuracy audit (symptom list, the measurement myth, the Explain It line, the caption and the footer). This Spanish text has not been changed to match yet; the medical translator should translate the new English lines. Still pending medical-translator review.
+> **Needs a matching update (2026-11-04).** The English Home text changed after the accuracy audit (symptom list, "How it's found", the measurement myth, the Explain It line, the caption and the footer). This Spanish text has not been changed to match yet; the medical translator should translate the new English lines. Still pending medical-translator review.
 
 - Open Chiari
 - Modo tranquilo
@@ -279,7 +282,8 @@ Mockup: `design/mockups/Explorer.dc.html`
 - Chiari I with syrinx
 - A syrinx is a fluid-filled cavity inside the spinal cord. It often develops alongside Chiari, most often in the neck part of the spinal cord.
 - After decompression
-- Surgeons remove a small piece of bone at the back of the skull opening and usually the back of the first vertebra. Often they also open and patch the brain's covering to make more room for spinal fluid. The tonsils often rise only partly. Surgery improves or stabilizes symptoms in most people, though damage that has already happened may not fully reverse, and some people need more than one operation. Results vary, and surgery isn't right for everyone.
+- Surgeons remove a small piece of bone at the back of the skull opening and often the back of the first vertebra. Often they also open and patch the brain's covering to make more room for spinal fluid. The tonsils often rise only partly. Surgery improves or stabilizes symptoms in most people, though damage that has already happened may not fully reverse, and some people need more than one operation. Results vary, and surgery isn't right for everyone.
+<!-- 2026-11-04 text re-audit (approved): was "Surgeons remove a small piece of bone at the back of the skull opening and usually the back of the first vertebra. Often they also open and patch the brain's covering to make more room for spinal fluid. The tonsils often rise only partly. Surgery improves or stabilizes symptoms in most people, though damage that has already happened may not fully reverse, and some people need more than one operation. Results vary, and surgery isn't right for everyone." -->
 - Cerebrum
 - The largest part of the brain, responsible for thinking, movement and the senses.
 - Corpus callosum
@@ -300,6 +304,13 @@ Mockup: `design/mockups/Explorer.dc.html`
 - Cerebrospinal fluid: clear fluid that cushions the brain and spinal cord. With each heartbeat it pulses back and forth between the skull and the spinal canal.
 - C2 vertebra
 - The second bone of the neck. Its upward peg, the dens, sits just in front of the spinal cord.
+- 11 (Chiari I with syrinx view only)
+- Syrinx
+- A fluid-filled cavity inside the spinal cord. It often develops alongside Chiari, most often in the neck part of the spinal cord.
+- 11 (After decompression view only)
+- Bone removed
+- Surgeons remove a small piece of bone at the back of the skull opening and often the back of the first vertebra.
+<!-- 2026-11-04: part 11 cards (3D audit item 5); text reuses the approved Syrinx and After decompression notes. -->
 
 ## 3D Explorer, side by side
 
@@ -557,6 +568,8 @@ Mockup: `design/mockups/PrepSheet.dc.html`
 <!-- 2026-11-04 accuracy audit: was "What are my options besides surgery?" -->
 - Are there research studies I could join?
 - Things I want to mention
+- Chiari I. Tonsils shown at their lowest point, where MRI measures them. Illustration, not a medical image.
+<!-- 2026-11-04 text re-audit item 1 (approved): caption under the figure on the printed sheet; was "Illustration, not a medical image" (not listed here before). -->
 - Made with Open Chiari · openchiari.org · Not medical advice
 
 ## Open model
@@ -881,6 +894,16 @@ Mockup: `design/mockups/Privacy.dc.html`
 ## Anatomy figure labels
 
 Mockup: `design/mockups/Anatomy.dc.html`
+
+Screen-reader descriptions of the figure and 3D view (one per condition):
+
+- Midline section of the head and neck, typical anatomy: the cerebellar tonsils sit above the opening at the base of the skull
+- Midline section of the head and neck, Chiari I: the cerebellar tonsils extend below the opening at the base of the skull and often crowd the spinal fluid space
+- Midline section of the head and neck, Chiari I with a syrinx, a fluid-filled cavity inside the spinal cord
+- Midline section of the head and neck, after decompression surgery: bone at the back of the skull opening and the back of the first vertebra are removed, opening the fluid space
+<!-- 2026-11-04 text re-audit item 5 (approved): added to COPY.md; the Chiari I one gained "often". -->
+
+Visible labels:
 
 - 01
 - Cerebrum

@@ -12,7 +12,9 @@ test('every 3D source shape is drawn exactly in the figure', () => {
   const missing: string[] = [];
   for (const [name, value] of Object.entries(shapes)) {
     if (name.startsWith('_') || name === 'unitsPerMm' || name === 'mcrae') continue;
-    const items: ShapeItem[] = name === 'tonsil' ? Object.values(value as Record<string, string>) : [value as ShapeItem];
+    // Shapes that differ by condition (tonsil, fluid behind the cord) are a map of condition to path.
+    const byCondition = typeof value === 'object' && !('d' in value) && !('ellipse' in value) && !('rect' in value);
+    const items: ShapeItem[] = byCondition ? Object.values(value as Record<string, string>) : [value as ShapeItem];
     for (const item of items) {
       let needle: string;
       if (typeof item === 'string') needle = `d="${item}"`;

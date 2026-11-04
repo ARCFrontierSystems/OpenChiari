@@ -34,7 +34,7 @@ export interface FigureStrings {
   labels: {
     cerebrum: string; callosum: string; cerebellum: string; fourthVentricle: string; brainstem: string;
     tonsil: string; foramen: string; foramenNote: string; cord: string; csf: string; c2: string;
-    syrinx: string; syrinxNote: string; boneRemoved: string; boneRemovedNote: string;
+    syrinx: string; syrinxNote: string; boneRemoved: string; boneRemovedNote: string; foramenNoteSurgery: string;
   };
 }
 
@@ -43,10 +43,20 @@ const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 // The head outline comes from the sculpted 3D head (model/simple/build.mjs writes it).
 const SKIN = shapes.skin;
 
-const TONSIL = {
-  typical: 'M372 412 C382 416 391 426 390 434 C389 442 380 446 374 442 C368 437 366 422 372 412 Z',
-  low: 'M372 412 C384 418 392 430 390 446 C388 458 382 466 377 471 C371 464 366 454 366 442 C366 428 366 420 372 412 Z',
-  surgery: 'M372 412 C384 418 392 428 390 442 C388 452 382 459 377 463 C371 458 366 450 366 440 C366 428 366 420 372 412 Z',
+const TONSIL = { typical: shapes.tonsil.typical, low: shapes.tonsil.chiari, surgery: shapes.tonsil.surgery };
+
+type Rect = { rect: number[] };
+const rect = ({ rect: [x, y, w, h, r] }: Rect, fill: string, stroke = '') =>
+  `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" fill="${fill}"${stroke ? ` stroke="${stroke}" stroke-width="1.5"` : ''}/>`;
+const bonePath = (d: string) => `<path d="${d}" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"/>`;
+const CSF = (d: string) => `<path d="${d}" fill="#9CC3DA" fill-opacity="0.75"/>`;
+const chevron = (x: number, y: number, w = 5) => `M${x - w} ${y - 3} L${x} ${y + 3} L${x + w} ${y - 3}`;
+
+/** Flow chevrons (figure units): in front of the cord, and behind it ([x, y, half-width]). Shared with the 3D view. */
+export const FLOW = {
+  front: [[330.5, 478], [328.1, 528], [326, 578]] as [number, number][],
+  backOpen: [[374, 478, 5], [351.6, 528, 2.5], [349.5, 578, 2.5], [416, 425, 5], [361, 410, 2.5]] as [number, number, number][],
+  backBlocked: [[350.9, 551, 2.5]] as [number, number, number][],
 };
 
 export function anatomyFigureSvg(options: FigureOptions, t: FigureStrings): string {
@@ -57,8 +67,8 @@ export function anatomyFigureSvg(options: FigureOptions, t: FigureStrings): stri
   // Without labels the frame is just the head and neck (widened 2026-11-04 so the back of the head isn't clipped).
   const viewBox = labels ? '40 62 720 578' : '36 62 522 578';
   const tonsilPath = low ? TONSIL.low : surgery ? TONSIL.surgery : TONSIL.typical;
-  const tonsilTip = low ? 471 : 463;
-  const tonsilMid = low ? 448 : surgery ? 444 : 430;
+  const tonsilTip = low ? 471 : 467;
+  const tonsilMid = low ? 448 : surgery ? 446 : 430;
   const tonsilFill = low ? '#D2A79B' : '#DDBDB3';
   const tonsilStroke = low ? '#1F5F8B' : '#B38D82';
   const tonsilWidth = low ? 2.25 : 1.5;
@@ -81,13 +91,15 @@ export function anatomyFigureSvg(options: FigureOptions, t: FigureStrings): stri
   add(true, `<path class="fig-skin" d="${SKIN}" fill="#EFE3D8" stroke="#C9B2A2" stroke-width="1.5"/>`, 'skin');
   add(true, `<path d="M112 362 L246 374" fill="none" stroke="#D2BBAA" stroke-width="5" stroke-linecap="round"/>`, 'skin');
   add(true, `<path d="M252 378 C268 392 276 430 280 480 L286 640" fill="none" stroke="#E2CFC2" stroke-width="16" stroke-linecap="round"/>`, 'skin');
-  add(true, `<path d="M326 446 L336 446 L342 640 L330 640 Z" fill="#9CC3DA" fill-opacity="0.75"/>`, 'csf');
-  add(true, `<path d="M358 446 L386 450 C388 510 390 580 392 640 L364 640 C362 580 360 510 358 446 Z" fill="#9CC3DA" fill-opacity="0.75"/>`, 'csf');
-  add(!low && !surgery, `<path d="M402 428 C430 422 452 412 466 400 C456 414 434 426 402 436 Z" fill="#9CC3DA" fill-opacity="0.75"/>`, 'csf');
-  add(surgery, `<path d="M398 446 C420 440 444 428 452 420 C462 444 448 478 396 486 Z" fill="#9CC3DA" fill-opacity="0.75"/><path d="M452 414 C470 440 456 486 394 494" fill="none" stroke="#7D6F58" stroke-width="1.5" stroke-dasharray="5 4"/>`, 'csf');
+  // Spinal fluid: in front of the cord, and behind it. In Typical and after surgery the space behind is one
+  // continuous path from the fourth ventricle outlet to the neck; in Chiari I the tonsil fills it.
+  add(true, CSF(shapes.csfFront), 'csf');
+  add(true, CSF(shapes.csfBack[low ? 'chiari' : surgery ? 'surgery' : 'typical']), 'csf');
+  add(surgery, `<path d="${shapes.surgeryPatch}" fill="none" stroke="#7D6F58" stroke-width="1.5" stroke-dasharray="5 4"/>`, 'csf');
   const skull = 'M120 300 C112 230 130 170 170 135 C230 95 330 92 400 115 C470 140 515 200 518 275 C520 330 505 380 470 412 C450 430 425 442 398 448';
   add(true, `<path d="${skull}" fill="none" stroke="#A69B85" stroke-width="16" stroke-linecap="round"/><path d="${skull}" fill="none" stroke="#E7DFCF" stroke-width="12" stroke-linecap="round"/><path d="${skull}" fill="none" stroke="#D3C8B2" stroke-width="2" stroke-dasharray="2 5"/>`, 'bone');
-  add(surgery, `<path d="M398 448 C420 442 440 432 454 420" fill="none" stroke="#EFE3D8" stroke-width="18" stroke-linecap="butt"/><path d="M398 448 C420 442 440 432 454 420" fill="none" stroke="#9A3412" stroke-width="1.75" stroke-dasharray="5 4"/>`, 'bone');
+  const removed = shapes.boneRemovedSkull.d;
+  add(surgery, `<path d="${removed}" fill="none" stroke="#EFE3D8" stroke-width="18" stroke-linecap="butt"/><path d="${removed}" fill="none" stroke="#9A3412" stroke-width="1.75" stroke-dasharray="5 4"/>`, 'bone');
   add(true, `<path d="M128 300 C170 305 220 310 252 322 C255 338 272 340 278 330 L282 354" fill="none" stroke="#A69B85" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>`, 'bone');
   add(true, `<path d="M276 354 L290 356 C292 390 304 420 334 440 L328 446 C298 432 278 400 276 354 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"/>`, 'bone');
   add(true, `<path d="M140 292 C134 232 150 185 188 156 C240 120 330 118 392 138 C452 160 490 210 492 272 C494 305 488 330 476 345 C440 340 400 338 360 338 C340 336 322 332 305 322 C295 318 285 312 272 312 C240 306 190 300 140 292 Z" fill="#E9CFC6" stroke="#B38D82" stroke-width="1.5"/>`, 'brain');
@@ -102,14 +114,19 @@ export function anatomyFigureSvg(options: FigureOptions, t: FigureStrings): stri
   add(true, `<path d="M374 360 C402 352 442 352 468 362 M474 372 C478 380 477 388 470 394 M446 412 C430 418 416 420 404 422" fill="none" stroke="#C79E92" stroke-width="1" stroke-linecap="round"/>`, 'brain');
   add(true, `<path d="M378 386 C400 378 422 370 452 364 M402 378 C412 366 426 360 442 356 M378 388 C404 392 430 396 464 396 M410 392 C426 404 442 412 458 418 M394 390 C404 404 412 416 420 428" fill="none" stroke="#F6E9E4" stroke-width="3" stroke-linecap="round"/>`, 'brain');
   add(true, `<path d="${tonsilPath}" fill="${tonsilFill}" stroke="${tonsilStroke}" stroke-width="${tonsilWidth}" stroke-linejoin="round"/>`, 'brain');
-  add(true, `<path d="M336 446 L358 446 C360 510 362 580 364 640 L342 640 C340 580 338 510 336 446 Z" fill="#EAD9B9" stroke="#B59E73" stroke-width="1.5"/>`, 'brain');
-  add(c === 'syrinx', `<path d="M347 540 C352 538 355 546 354 556 C353 564 356 570 355 580 C354 590 357 598 356 608 L356 640 L345 640 L345 608 C344 598 347 590 346 580 C345 570 348 564 347 556 C346 548 344 542 347 540 Z" fill="#7FB3D3" stroke="#3F6F90" stroke-width="1.25"/>`, 'brain');
-  add(true, `<ellipse cx="298" cy="462" rx="9" ry="7" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"/><path d="M312 456 C314 448 322 448 324 456 L326 472 L312 472 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"/><rect x="300" y="472" width="28" height="46" rx="4" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"/><rect x="300" y="519" width="27" height="6" rx="2" fill="#D9C3A4"/><rect x="296" y="526" width="29" height="38" rx="4" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"/><rect x="295" y="565" width="28" height="6" rx="2" fill="#D9C3A4"/><rect x="292" y="572" width="29" height="40" rx="4" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"/><rect x="291" y="613" width="28" height="6" rx="2" fill="#D9C3A4"/>`, 'bone');
+  add(true, `<path d="${shapes.cord}" fill="#EAD9B9" stroke="#B59E73" stroke-width="1.5"/>`, 'brain');
+  add(c === 'syrinx', `<path d="${shapes.syrinx}" fill="#7FB3D3" stroke="#3F6F90" stroke-width="1.25"/>`, 'brain');
+  const BONE = '#E7DFCF', BONE_EDGE = '#A69B85', DISC = '#D9C3A4';
+  add(true, `<ellipse cx="298" cy="462" rx="9" ry="7" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"/>${bonePath(shapes.dens)}${rect(shapes.c2Body, BONE, BONE_EDGE)}${rect(shapes.disc23, DISC)}${rect(shapes.c3Body, BONE, BONE_EDGE)}${rect(shapes.disc34, DISC)}${rect(shapes.c4Body, BONE, BONE_EDGE)}${rect(shapes.disc45, DISC)}${rect(shapes.c5Body, BONE, BONE_EDGE)}`, 'bone');
   add(!surgery, `<ellipse cx="414" cy="470" rx="12" ry="8" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"/>`, 'bone');
   add(surgery, `<ellipse cx="414" cy="470" rx="12" ry="8" fill="none" stroke="#9A3412" stroke-width="1.75" stroke-dasharray="4 3"/>`, 'bone');
-  add(true, `<path d="M394 500 L446 506 C452 510 452 520 446 522 L394 524 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"/><path d="M396 548 L438 554 C444 558 444 566 438 568 L396 570 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"/><path d="M398 594 L434 598 C440 602 440 610 434 612 L398 614 Z" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"/>`, 'bone');
-  add(flow && !low, `<path d="M326 478 L331 484 L336 478 M327 528 L332 534 L337 528 M328 578 L333 584 L338 578 M369 478 L374 484 L379 478 M370 528 L375 534 L380 528 M371 578 L376 584 L381 578 M410 422 L416 429 L422 422" fill="none" stroke="#1F5F8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`);
-  add(flow && low, `<path d="M326 478 L331 484 L336 478 M327 528 L332 534 L337 528 M328 578 L333 584 L338 578 M370 548 L375 554 L380 548" fill="none" stroke="#1F5F8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M390 440 L398 434 M390 448 L398 442 M390 456 L398 450" fill="none" stroke="#9A3412" stroke-width="2" stroke-linecap="round"/>`);
+  // Back of each vertebra (lamina and spinous process), closing the spinal canal.
+  add(true, [shapes.spinous2, shapes.spinous3, shapes.spinous4, shapes.spinous5].map(bonePath).join(''), 'bone');
+  // Flow marks sit in the fluid: the neck canal is narrow (about 2 mm in front of the cord, 3 mm behind).
+  const front = FLOW.front.map(([x, y]) => chevron(x, y, 2.5));
+  const flowPath = (marks: string[]) => `<path d="${marks.join(' ')}" fill="none" stroke="#1F5F8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
+  add(flow && !low, flowPath([...front, ...FLOW.backOpen.map(([x, y, w]) => chevron(x, y, w))]));
+  add(flow && low, `${flowPath([...front, ...FLOW.backBlocked.map(([x, y, w]) => chevron(x, y, w))])}<path d="M390 440 L398 434 M390 448 L398 442 M390 456 L398 450" fill="none" stroke="#9A3412" stroke-width="2" stroke-linecap="round"/>`);
   if (measure) {
     // The McRae line sits on the anatomy, not the page background, so it is always dark ink
     // (on the dark Explorer a light line nearly disappeared against the light anatomy).
@@ -117,11 +134,11 @@ export function anatomyFigureSvg(options: FigureOptions, t: FigureStrings): stri
     add(low || surgery, `<line x1="368" y1="447" x2="368" y2="${tonsilTip}" stroke="#1F5F8B" stroke-width="1.5"/><line x1="362" y1="${tonsilTip}" x2="374" y2="${tonsilTip}" stroke="#1F5F8B" stroke-width="1.5"/>`);
   }
   if (labels) {
-    const leaders = ['M250 170 L548 116', 'M300 214 L548 156', 'M452 372 L548 196', 'M364 384 L548 236', 'M318 372 L548 276', `M386 ${tonsilMid} L548 316`, 'M372 445 L548 356', 'M350 480 L548 396', 'M380 620 L548 436', 'M318 500 L548 476'];
+    const leaders = ['M250 170 L548 116', 'M300 214 L548 156', 'M452 372 L548 196', 'M364 384 L548 236', 'M318 372 L548 276', `M386 ${tonsilMid} L548 316`, 'M372 445 L548 356', 'M342 480 L548 396', 'M351 620 L548 436', 'M318 500 L548 476'];
     parts.push(`<g font-size="12.5" fill="${ink}" aria-hidden="true"><g stroke="${leader}" stroke-width="0.75" fill="none">${leaders.map((d) => `<path d="${d}"/>`).join('')}</g>`);
-    parts.push(lbl(120, '01', L.cerebrum), lbl(160, '02', L.callosum), lbl(200, '03', L.cerebellum), lbl(240, '04', L.fourthVentricle), lbl(280, '05', L.brainstem), lbl(320, '06', L.tonsil, true), lbl(360, '07', L.foramen), note(376, L.foramenNote), lbl(400, '08', L.cord), lbl(440, '09', L.csf), lbl(480, '10', L.c2));
-    add(c === 'syrinx', `<path d="M350 585 L548 516" stroke="${leader}" stroke-width="0.75" fill="none"/>${lbl(520, '11', L.syrinx, true)}${note(536, L.syrinxNote)}`);
-    add(surgery, `<path d="M434 434 L548 516" stroke="${leader}" stroke-width="0.75" fill="none"/><text x="556" y="520" font-weight="600" fill="#9A3412"><tspan class="fig-mono" font-weight="400">11${sp}</tspan>${esc(L.boneRemoved)}</text>${note(536, L.boneRemovedNote)}`);
+    parts.push(lbl(120, '01', L.cerebrum), lbl(160, '02', L.callosum), lbl(200, '03', L.cerebellum), lbl(240, '04', L.fourthVentricle), lbl(280, '05', L.brainstem), lbl(320, '06', L.tonsil, true), lbl(360, '07', L.foramen), note(376, surgery ? L.foramenNoteSurgery : L.foramenNote), lbl(400, '08', L.cord), lbl(440, '09', L.csf), lbl(480, '10', L.c2));
+    add(c === 'syrinx', `<path d="M337 585 L548 516" stroke="${leader}" stroke-width="0.75" fill="none"/>${lbl(520, '11', L.syrinx, true)}${note(536, L.syrinxNote)}`);
+    add(surgery, `<path d="M420 440 L548 516" stroke="${leader}" stroke-width="0.75" fill="none"/><text x="556" y="520" font-weight="600" fill="#9A3412"><tspan class="fig-mono" font-weight="400">11${sp}</tspan>${esc(L.boneRemoved)}</text>${note(536, L.boneRemovedNote)}`);
     parts.push('</g>');
   }
   const aria = esc(t.ariaPrefix + t.aria[c]);

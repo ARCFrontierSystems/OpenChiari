@@ -3,6 +3,30 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Audit fixes applied (Matthew approved all)
+
+- **Sources opened:** NINDS, Cleveland Clinic (Chiari page and six anatomy pages), MedlinePlus and nine PubMed Central articles were opened and read. EVIDENCE.md marks each one "opened". Still blocked here: StatPearls, Mayo Clinic, Radiopaedia, PubMed abstracts, Frontiers, AJNR, QxMD. Nothing on the site rests on those alone.
+- **Text (13 items):**
+  - Phone surgery note keeps all its caveats.
+  - Phone and Calm captions carry the midline note and "Illustration, not a medical image".
+  - Chiari I note now cites one opened study: 160 people, average about 12 mm, range 5 to 25 mm.
+  - Measurement myth: "How far the tonsils extend doesn't always match how someone feels."
+  - Symptoms: "Blurry or double vision" moved into the main list; scoliosis added.
+  - Also updated: the Explain It line, the Calm intro, the phone Chiari note, two visit-prep questions and the footer.
+  - The Spanish Home is marked as needing a matching translation.
+- **3D model and figures (11 items):**
+  - The fluid path is continuous in Typical and after surgery; in Chiari I the tonsil fills it.
+  - Cord is 9.2 mm and the canal 14.8 mm, with the back of each vertebra closing the canal.
+  - Vertebral bodies are 15 mm tall; C5 added.
+  - Tonsils rise 1.9 mm after surgery (was 3.8).
+  - Bone removed is about 30 by 25 mm, and 25 mm of the C1 arch.
+  - Part 11 (Syrinx, Bone removed) added to the Explorer.
+  - A note that the dashed line shows where the opening's edges were.
+  - The realistic model's cord is now 8.8 by 12.4 mm.
+- **Checks:** `model:check` adds cord, canal and fluid-continuity checks; all pass. 73 tests pass.
+- **Not fixed (needs Matthew):** the clivus. The Simple figure's skull base and brainstem are drawn taller than real, so the clivus can't be shortened without redrawing that whole region. Marked "not to scale in the Simple model".
+- **Next:** re-run both independent audits with the sources open. Then Phase 2 step 3.
+
 ## 2026-11-04: No medical reviewer; accuracy checks instead
 
 - **Matthew's decision:** the site will not use a medical reviewer. Updated throughout: CLAUDE.md (new rule 1a "Accuracy checks", Phase 2 description, the "Don't" list, open items), SPEC.md (pipeline, risks, Impact), EVIDENCE.md (open items), COPY.md (honest wording for About, Open model and Impact: "not reviewed by a medical professional"; old wording kept in comments), `model/realistic/README.md`, code comments. Earlier progress entries are left as history.

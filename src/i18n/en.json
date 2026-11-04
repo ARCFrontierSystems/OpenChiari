@@ -207,6 +207,7 @@
       "tonsil": "Cerebellar tonsil",
       "foramen": "Foramen magnum",
       "foramenNote": "opening at the skull base",
+      "foramenNoteSurgery": "dashed line: where its edges were",
       "cord": "Spinal cord",
       "csf": "Spinal fluid (CSF)",
       "c2": "C2 vertebra",
@@ -355,6 +356,24 @@
         "num": "10",
         "name": "C2 vertebra",
         "text": "The second bone of the neck. Its upward peg, the dens, sits just in front of the spinal cord."
+      },
+      {
+        "id": "syrinx",
+        "num": "11",
+        "name": "Syrinx",
+        "conditions": [
+          "syrinx"
+        ],
+        "text": "A fluid-filled cavity inside the spinal cord. It often develops alongside Chiari, most often in the neck part of the spinal cord."
+      },
+      {
+        "id": "removed",
+        "num": "11",
+        "name": "Bone removed",
+        "conditions": [
+          "surgery"
+        ],
+        "text": "Surgeons remove a small piece of bone at the back of the skull opening and usually the back of the first vertebra."
       }
     ],
     "viewOptions": "View and layers",

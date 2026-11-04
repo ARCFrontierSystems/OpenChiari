@@ -334,18 +334,18 @@ const skullField = (x, y, z) => {
 
 // ---------------------------------------------------------------- after decompression
 // Bone removed at the back of the foramen magnum: the stretch of skull the figure marks in red
-// (about 31 mm along the skull from the opisthion), about 30 mm across (EVIDENCE.md: about 3x3 to
-// 3x4 cm in published series). And the middle of the C1 back arch, about 30 mm across.
+// (about 25 mm along the skull from the opisthion), about 30 mm across (EVIDENCE.md: a window of
+// about 3 x 2.5 cm in published series). And the middle of the C1 back arch, about 25 mm across.
 const removedSkullLine = distanceGrid(S.boneRemovedSkull.d, { unsigned: true, margin: 30 });
 // Only between the two ends of the figure's red dashed line (opisthion end to the far end), no further.
-const [rx0, ry0, rx1, ry1] = [398, 448, 454, 420];
+const [rx0, ry0, rx1, ry1] = [398, 448, 442, 427];
 const removedLength = Math.hypot(rx1 - rx0, ry1 - ry0);
 const alongRemoved = (x, y) => ((x - rx0) * (rx1 - rx0) + (y - ry0) * (ry1 - ry0)) / removedLength;
 const skullRemoval = (x, y, z) => {
   const t = alongRemoved(x, y);
   return Math.min((S.boneRemovedSkull.halfWidth + 6) - removedSkullLine.sample(x, y), 30 - Math.abs(z), t + 2, removedLength - t);
 };
-const c1Removal = (x, y, z) => Math.min(x - 394, 30 - Math.abs(z));
+const c1Removal = (x, y, z) => Math.min(x - 394, 25 - Math.abs(z));
 const skullAfterSurgery = (x, y, z) => Math.min(skullField(x, y, z), -skullRemoval(x, y, z));
 const skullRemovedPiece = (x, y, z) => Math.min(skullField(x, y, z), skullRemoval(x, y, z));
 
@@ -559,7 +559,7 @@ const structures = [
   { name: 'c1-surgery', layer: 'bone', part: null, conditions: ['surgery'], color: '#E7DFCF', step: 1, box: [270, 440, -80, 440, 495, 80], field: (x, y, z) => Math.min(c1Field(x, y, z), -c1Removal(x, y, z)) },
   { name: 'skull-surgery', layer: 'bone', part: 'foramen', conditions: ['surgery'], color: '#E7DFCF', step: 2, field: skullAfterSurgery, box: [90, 65, -150, 550, 480, 150] },
   {
-    name: 'bone-removed', layer: 'bone', part: null, conditions: ['surgery'], color: '#9A3412', opacity: 0.45, step: 1, box: [370, 400, -45, 470, 495, 45],
+    name: 'bone-removed', layer: 'bone', part: 'removed', conditions: ['surgery'], color: '#9A3412', opacity: 0.45, step: 1, box: [370, 400, -45, 470, 495, 45],
     field: (x, y, z) => Math.max(skullRemovedPiece(x, y, z), Math.min(c1Field(x, y, z), c1Removal(x, y, z))),
   },
   {
@@ -568,18 +568,22 @@ const structures = [
       inflate(distanceGrid(S.dens), 9, 6).f,
       inflate(distanceGrid(S.c2Body), 18, 6).f,
       inflate(distanceGrid(S.spinous2), 8, 4).f,
-      ring({ xc: 361, yc: 506, tilt: 0.05, a: 33, b: 34, tube: 6, tubeSide: 8, tall: 7 }),
+      ring({ xc: 341.4, yc: 506, tilt: 0.05, a: 20.5, b: 34, tube: 6, tubeSide: 8, tall: 7 }),
     ),
   },
   {
-    name: 'c3', layer: 'bone', part: null, color: '#E7DFCF', step: 1, box: [280, 515, -60, 470, 585, 60],
-    field: union(inflate(distanceGrid(S.c3Body), 18, 6).f, inflate(distanceGrid(S.spinous3), 8, 4).f, ring({ xc: 361, yc: 556, tilt: 0.05, a: 35, b: 34, tube: 6, tubeSide: 8, tall: 7 })),
+    name: 'c3', layer: 'bone', part: null, color: '#E7DFCF', step: 1, box: [280, 520, -60, 450, 572, 60],
+    field: union(inflate(distanceGrid(S.c3Body), 18, 6).f, inflate(distanceGrid(S.spinous3), 8, 4).f, ring({ xc: 339.6, yc: 546, tilt: 0.05, a: 20.5, b: 34, tube: 6, tubeSide: 8, tall: 7 })),
   },
   {
-    name: 'c4', layer: 'bone', part: null, color: '#E7DFCF', step: 1, box: [280, 560, -60, 470, 630, 60],
-    field: union(inflate(distanceGrid(S.c4Body), 18, 6).f, inflate(distanceGrid(S.spinous4), 8, 4).f, ring({ xc: 360, yc: 600, tilt: 0.05, a: 38, b: 34, tube: 6, tubeSide: 8, tall: 7 })),
+    name: 'c4', layer: 'bone', part: null, color: '#E7DFCF', step: 1, box: [280, 562, -60, 450, 612, 60],
+    field: union(inflate(distanceGrid(S.c4Body), 18, 6).f, inflate(distanceGrid(S.spinous4), 8, 4).f, ring({ xc: 337.8, yc: 587, tilt: 0.05, a: 20.5, b: 34, tube: 6, tubeSide: 8, tall: 7 })),
   },
-  { name: 'discs', layer: 'bone', part: null, color: '#D9C3A4', step: 1, box: [280, 510, -25, 335, 625, 25], field: union(inflate(distanceGrid(S.disc23), 17, 3).f, inflate(distanceGrid(S.disc34), 17, 3).f, inflate(distanceGrid(S.disc45), 17, 3).f) },
+  {
+    name: 'c5', layer: 'bone', part: null, color: '#E7DFCF', step: 1, box: [280, 603, -60, 450, 640, 60],
+    field: union(inflate(distanceGrid(S.c5Body), 18, 6).f, inflate(distanceGrid(S.spinous5), 8, 4).f, ring({ xc: 336, yc: 626, tilt: 0.05, a: 20.5, b: 34, tube: 6, tubeSide: 8, tall: 7 })),
+  },
+  { name: 'discs', layer: 'bone', part: null, color: '#D9C3A4', step: 1, box: [280, 512, -25, 335, 616, 25], field: union(inflate(distanceGrid(S.disc23), 17, 3).f, inflate(distanceGrid(S.disc34), 17, 3).f, inflate(distanceGrid(S.disc45), 17, 3).f) },
 
   // Brain and spinal cord
   { name: 'cerebrum', layer: 'brain', part: 'cerebrum', color: '#E9CFC6', step: 2.5, ...inflateBox(distanceGrid(S.cerebrum, { step: 1.5 }), 128, 'auto', insideSkull) },
@@ -592,17 +596,32 @@ const structures = [
   { name: 'tonsil-surgery', layer: 'brain', part: 'tonsil', conditions: ['surgery'], color: '#DDBDB3', step: 1, ...inflateBox(distanceGrid(S.tonsil.surgery), 22) },
   { name: 'cord', layer: 'brain', part: 'cord', color: '#EAD9B9', step: 1, ...inflateBox(distanceGrid(S.cord), 12) },
   // Syrinx: the beaded fluid cavity in the center of the neck cord, from the figure (about 2.5 mm to either side).
-  { name: 'syrinx', layer: 'brain', part: null, conditions: ['syrinx'], color: '#7FB3D3', step: 0.75, ...inflateBox(distanceGrid(S.syrinx, { step: 0.5 }), 5) },
+  { name: 'syrinx', layer: 'brain', part: 'syrinx', conditions: ['syrinx'], color: '#7FB3D3', step: 0.75, ...inflateBox(distanceGrid(S.syrinx, { step: 0.5 }), 5) },
 
   // Spinal fluid
-  { name: 'csf-spinal', layer: 'csf', part: 'csf', color: '#9CC3DA', opacity: 0.75, step: 1.5, ...inflateBox(distanceGrid('M326 446 L386 450 C388 510 390 580 392 640 L330 640 Z'), 26) },
-  { name: 'cisterna', layer: 'csf', part: 'csf', conditions: ['typical'], color: '#9CC3DA', opacity: 0.75, step: 1, ...inflateBox(distanceGrid(S.cisterna), 40, 4, insideSkull) },
-  // After decompression: the re-formed fluid space behind the cerebellum, and the dural patch.
-  { name: 'csf-surgery', layer: 'csf', part: 'csf', conditions: ['surgery'], color: '#9CC3DA', opacity: 0.75, step: 1, ...inflateBox(distanceGrid(S.surgeryCsf), 30) },
+  // One fluid volume per condition: in front of the cord, around it, and behind it (EVIDENCE.md "Fluid pathway").
+  // Typical and after surgery: continuous from the fourth ventricle outlet to the neck; Chiari I: the tonsil fills it.
+  csfStructure('csf-typical', ['typical'], S.csfBack.typical),
+  csfStructure('csf-chiari', ['chiari', 'syrinx'], S.csfBack.chiari),
+  csfStructure('csf-surgery', ['surgery'], S.csfBack.surgery),
+  // After decompression: the dural patch.
   { name: 'dural-patch', layer: 'csf', part: null, conditions: ['surgery'], color: '#7D6F58', opacity: 0.55, step: 1, ...inflateBox(distanceGrid(S.surgeryPatch, { band: 1.5 }), 32, 1.5) },
   { name: 'ventricle-lateral', layer: 'csf', part: null, color: '#A9CBE0', step: 1, ...inflateBox(distanceGrid(S.lateralVentricle), 22, 4) },
   { name: 'ventricle-fourth', layer: 'csf', part: 'ventricle', color: '#A9CBE0', step: 1, ...inflateBox(distanceGrid(S.fourthVentricle), 14, 6) },
 ];
+
+/** Spinal fluid for one condition: the midline fluid outlines, given width to the sides (about 12.5 mm
+ *  to either side in the neck canal, wider inside the skull but kept within it). */
+function csfStructure(name, conditions, back) {
+  const front = distanceGrid(S.csfFront), behind = distanceGrid(back), sac = distanceGrid(S.cord);
+  const W = (x, y) => lerp(25, 40, smoothstep(448, 436, y));
+  const inSkull = (x, y, z) => (y > 432 ? 1e3 : insideSkull(x, y, z)); // open through the foramen magnum
+  const parts = [inflate(front, 25, 4).f, inflate(behind, W, 4).f, inflate(sac, 25, 4).f];
+  const field = (x, y, z) => Math.min(Math.max(parts[0](x, y, z), parts[1](x, y, z), parts[2](x, y, z)), inSkull(x, y, z));
+  const [x0, y0] = [Math.min(front.bbox[0], behind.bbox[0]), Math.min(front.bbox[1], behind.bbox[1])];
+  const [x1, y1] = [Math.max(front.bbox[2], behind.bbox[2]), Math.max(front.bbox[3], behind.bbox[3])];
+  return { name, layer: 'csf', part: 'csf', conditions, color: '#9CC3DA', opacity: 0.75, step: 1.5, field, box: [x0, y0, -44, x1, y1, 44] };
+}
 
 /** Helper: inflate a grid and give it a build box. `clamp` keeps it inside another field. */
 function inflateBox(grid, W, r = 'auto', clamp = null, zMax = null) {

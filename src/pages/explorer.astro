@@ -156,7 +156,7 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
         </div>
         <ul class="x-parts">
           {x.parts.map((p) => (
-            <li>
+            <li data-part-conditions={p.conditions?.join(' ')} hidden={!!p.conditions && !p.conditions.includes(st.condition)}>
               <button type="button" data-part={p.id} aria-pressed={(p.id === st.part) ? 'true' : 'false'}>
                 <span class="x-num">{p.num}</span>{p.name}
               </button>
@@ -192,7 +192,7 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
         <div id="parts-narrow" class="x-parts-narrow" hidden>
           <ul class="x-parts">
             {x.parts.map((p) => (
-              <li>
+              <li data-part-conditions={p.conditions?.join(' ')} hidden={!!p.conditions && !p.conditions.includes(st.condition)}>
                 <button type="button" data-part={p.id} aria-pressed={(p.id === st.part) ? 'true' : 'false'}>
                   <span class="x-num">{p.num}</span>{p.name}
                 </button>
@@ -252,7 +252,8 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
       search?.addEventListener('input', () => {
         const q = search.value.trim().toLowerCase();
         search.closest('aside')!.querySelectorAll<HTMLLIElement>('.x-parts li').forEach((li) => {
-          li.hidden = q !== '' && !li.textContent!.toLowerCase().includes(q);
+          const elsewhere = !!li.dataset.partConditions && !li.dataset.partConditions.split(' ').includes(store.get().condition);
+          li.hidden = elsewhere || (q !== '' && !li.textContent!.toLowerCase().includes(q));
         });
       });
 
@@ -287,7 +288,7 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
       const descriptionEl = document.querySelector<HTMLElement>('[data-view-description]')!;
       const LABEL_LAYERS: Record<string, (typeof LAYERS)[number]> = {
         cerebrum: 'brain', callosum: 'brain', cerebellum: 'brain', brainstem: 'brain', tonsil: 'brain', cord: 'brain',
-        ventricle: 'csf', csf: 'csf', foramen: 'bone', c2: 'bone',
+        ventricle: 'csf', csf: 'csf', foramen: 'bone', c2: 'bone', syrinx: 'brain', removed: 'bone',
       };
       /** Text description of the current 3D view: condition, direction and cut. */
       const describe = (st: ViewState) => {
@@ -300,7 +301,7 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
         try {
           const viewer = await createViewer(viewerHost, store, strings.figure, {
             labelsHost,
-            labels: x.parts.map((p) => ({ part: p.id, num: p.num, name: p.name, layer: LABEL_LAYERS[p.id], anchor: labelAnchor(p.id, store.get().condition) })),
+            labels: x.parts.map((p) => ({ part: p.id, num: p.num, name: p.name, layer: LABEL_LAYERS[p.id], anchor: labelAnchor(p.id, store.get().condition), conditions: p.conditions })),
             onPick: (part) => {
               store.set({ part });
               // On phones, open the parts list so the info card shows.
@@ -353,6 +354,13 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
         $$('[data-model]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.model === st.model)));
         $$('[data-part]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.part === st.part)));
 
+        // Part 11 (syrinx, bone removed) only exists in its own view; elsewhere go back to the tonsil.
+        const partHere = (p: (typeof x.parts)[number]) => !p.conditions || p.conditions.includes(st.condition);
+        $$<HTMLLIElement>('li[data-part-conditions]').forEach((li) => (li.hidden = !li.dataset.partConditions!.split(' ').includes(st.condition)));
+        if (!partHere(x.parts.find((p) => p.id === st.part)!)) {
+          store.set({ part: 'tonsil' });
+          return;
+        }
         const part = x.parts.find((p) => p.id === st.part)!;
         const cond = x.conditions[st.condition];
         const setText = (sel: string, text: string) => $$(sel).forEach((el) => el.textContent !== text && (el.textContent = text));

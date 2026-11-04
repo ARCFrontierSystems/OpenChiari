@@ -897,6 +897,8 @@ Mockup: `design/mockups/Anatomy.dc.html`
 - 07
 - Foramen magnum
 - opening at the skull base
+- dashed line: where its edges were
+<!-- 2026-11-04 3D audit item 10: shown under 07 in the After decompression view only, because the McRae line is still drawn after that bone is removed. -->
 - 08
 - Spinal cord
 - 09

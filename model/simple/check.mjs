@@ -74,11 +74,11 @@ for (const node of doc.getRoot().listNodes()) {
 }
 console.log('EVIDENCE.md: typical about 1 mm above; Chiari I model about 12 mm below (at least about 5 mm by definition).');
 
-// After decompression: tonsils rise only partly (about 4 mm on average in one series) and may stay below the line.
+// After decompression: tonsils rise only partly (about 2 mm on average in one study, PMC10549945) and may stay below the line.
 if (tips['tonsil-surgery'] !== undefined) {
   const rise = tips['tonsil-surgery'] - tips['tonsil-chiari'];
-  console.log(`After decompression: tonsils risen ${rise.toFixed(1)} mm from Chiari I, still ${(-tips['tonsil-surgery']).toFixed(1)} mm below the line (EVIDENCE.md: rise only partly, about 4 mm on average; may stay below)`);
-  if (!(tips['tonsil-surgery'] < 0 && rise >= 2 && rise <= 6)) problems.push('after decompression the tonsils should be partly risen (2 to 6 mm) and still below the line');
+  console.log(`After decompression: tonsils risen ${rise.toFixed(1)} mm from Chiari I, still ${(-tips['tonsil-surgery']).toFixed(1)} mm below the line (EVIDENCE.md: rise only partly, about 2 mm on average; may stay below)`);
+  if (!(tips['tonsil-surgery'] < 0 && rise >= 1 && rise <= 3)) problems.push('after decompression the tonsils should be partly risen (about 2 mm, 1 to 3) and still below the line');
 } else problems.push('the after-decompression tonsils are missing');
 
 // Syrinx: in the neck part of the spinal cord, inside the cord.
@@ -126,9 +126,74 @@ if (removed.length) {
   for (let i = 0; i < skullPart.length; i += 7)
     for (let j = i + 7; j < skullPart.length; j += 7)
       along = Math.max(along, Math.hypot(skullPart[i][0] - skullPart[j][0], skullPart[i][1] - skullPart[j][1]));
-  console.log(`Bone removed at the back of the foramen magnum: about ${along.toFixed(0)} mm by ${across.toFixed(0)} mm (EVIDENCE.md: about 3x3 to 3x4 cm in published series)`);
-  if (!(across >= 25 && across <= 45 && along >= 25 && along <= 45)) problems.push('the bone removed should be about 3 to 4 cm across');
+  console.log(`Bone removed at the back of the foramen magnum: about ${along.toFixed(0)} mm by ${across.toFixed(0)} mm (EVIDENCE.md: a window about 3 cm across by 2.5 cm, model about 30 x 25 mm)`);
+  if (!(across >= 27 && across <= 33 && along >= 22 && along <= 29)) problems.push('the bone removed should be about 30 mm across and 25 mm along the skull');
 } else problems.push('the removed bone is missing');
+
+// Spinal cord and canal in the neck (EVIDENCE.md "Spinal cord, upper neck" and "Spinal canal, neck").
+// Measured on the midline, front to back, at C2 (cord) and C3 (fluid space, wall to wall).
+/** Front-to-back width of a structure where the midline cut meets the level figY (figure units): the
+ *  mesh's triangles are cut by the horizontal plane there and the points near the midline kept. */
+function atLevel(name, figY) {
+  const node = doc.getRoot().listNodes().find((n) => n.getName() === name);
+  const idx = node.getMesh().listPrimitives()[0].getIndices().getArray();
+  const vs = vertices(name), y0 = -(figY - 444.5) / shapes.unitsPerMm, xs = [];
+  for (let t = 0; t < idx.length; t += 3)
+    for (let e = 0; e < 3; e++) {
+      const p = vs[idx[t + e]], q = vs[idx[t + (e + 1) % 3]];
+      if ((p[1] - y0) * (q[1] - y0) > 0 || p[1] === q[1]) continue;
+      const k = (y0 - p[1]) / (q[1] - p[1]);
+      if (Math.abs(p[2] + k * (q[2] - p[2])) < 1.5) xs.push(p[0] + k * (q[0] - p[0]));
+    }
+  return xs.length ? Math.max(...xs) - Math.min(...xs) : NaN;
+}
+const cordAP = atLevel('cord', 500);
+console.log(`Spinal cord at C2: ${cordAP.toFixed(1)} mm front to back (EVIDENCE.md: about 9 mm; 8.8 mm at C2)`);
+if (!(cordAP >= 8 && cordAP <= 10)) problems.push('the spinal cord should be about 9 mm front to back at C2');
+for (const name of ['csf-typical', 'csf-chiari', 'csf-surgery']) {
+  const canal = atLevel(name, 546);
+  console.log(`Spinal canal at C3 (${name}): ${canal.toFixed(1)} mm front to back (EVIDENCE.md: about 13 to 15 mm)`);
+  if (!(canal >= 13 && canal <= 16)) problems.push(`the neck canal (${name}) should be about 13 to 16 mm front to back`);
+}
+
+// Fluid pathway (EVIDENCE.md "Fluid pathway"): one continuous piece. Typical and after surgery reach from inside
+// the skull (behind the cerebellum) down into the neck; in Chiari I nothing passes the tonsil into the skull.
+function pieces(name) {
+  const node = doc.getRoot().listNodes().find((n) => n.getName() === name);
+  const prim = node.getMesh().listPrimitives()[0];
+  const idx = prim.getIndices().getArray(), pos = prim.getAttribute('POSITION');
+  // Vertices may be split at the same position: join them by position first.
+  const key = new Map(), id = new Int32Array(pos.getCount()), el = [0, 0, 0];
+  for (let i = 0; i < pos.getCount(); i++) {
+    pos.getElement(i, el);
+    const k = el.map((v) => v.toFixed(4)).join(',');
+    if (!key.has(k)) key.set(k, key.size);
+    id[i] = key.get(k);
+  }
+  const parent = Array.from({ length: key.size }, (_, i) => i);
+  const find = (a) => (parent[a] === a ? a : (parent[a] = find(parent[a])));
+  for (let t = 0; t < idx.length; t += 3) {
+    const a = find(id[idx[t]]), b = find(id[idx[t + 1]]), c = find(id[idx[t + 2]]);
+    parent[b] = a; parent[find(c)] = a;
+  }
+  const sizes = new Map();
+  for (let i = 0; i < key.size; i++) sizes.set(find(i), (sizes.get(find(i)) ?? 0) + 1);
+  if (process.env.DEBUG_PIECES) {
+    const ext = new Map();
+    const wv = vertices(name); for (let i = 0; i < pos.getCount(); i++) { const el2 = wv[i]; el[0] = el2[0]; el[1] = el2[1]; const r = find(id[i]); const e = ext.get(r) ?? [1e9, -1e9, 1e9, -1e9]; e[0] = Math.min(e[0], el[0]); e[1] = Math.max(e[1], el[0]); e[2] = Math.min(e[2], el[1]); e[3] = Math.max(e[3], el[1]); ext.set(r, e); }
+    console.log(name, [...sizes.entries()].map(([r, n]) => `${n} verts x ${ext.get(r).map((v) => v.toFixed(0))}`));
+  }
+  return sizes.size;
+}
+for (const name of ['csf-typical', 'csf-chiari', 'csf-surgery']) {
+  const vs = vertices(name);
+  const top = Math.max(...vs.map((v) => above([v[0], v[1]]))), bottom = Math.min(...vs.map((v) => v[1]));
+  const n = pieces(name);
+  console.log(`Fluid (${name}): ${n} piece(s), from ${top.toFixed(1)} mm above the McRae line down to ${(-bottom).toFixed(0)} mm below the foramen magnum`);
+  if (n !== 1) problems.push(`the spinal fluid (${name}) should be one continuous space`);
+  if (name !== 'csf-chiari' && !(top > 10)) problems.push(`the fluid (${name}) should continue up behind the cerebellum`);
+  if (name === 'csf-chiari' && !(top < 2)) problems.push('in Chiari I the tonsil should fill the fluid space behind it (no fluid continuing up into the skull)');
+}
 
 if (problems.length) {
   console.error('\nFAILED: the model no longer matches docs/EVIDENCE.md:\n- ' + problems.join('\n- '));

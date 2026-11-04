@@ -14,7 +14,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import type { Store, ViewState, LayerId, CameraView } from './state';
-import { anatomyFigureSvg, type FigureStrings, type FigureLayer } from '../lib/anatomy-figure';
+import { anatomyFigureSvg, FLOW, type FigureStrings, type FigureLayer } from '../lib/anatomy-figure';
 import { isCalm, onCalmChange } from '../lib/calm';
 import shapes from '../lib/anatomy-shapes.json';
 
@@ -54,14 +54,17 @@ export interface LabelDef {
   name: string;
   layer: LayerId;
   anchor: [number, number];
+  /** Only shown in these conditions (part 11: the syrinx, or the bone removed). */
+  conditions?: string[];
 }
 
 /** Where each structure's label points, in figure units (the figure's own leader-line ends). */
 export function labelAnchor(part: string, condition: string): [number, number] {
-  const tonsilMid = condition === 'typical' ? 430 : condition === 'surgery' ? 444 : 448;
+  const tonsilMid = condition === 'typical' ? 430 : condition === 'surgery' ? 446 : 448;
   const anchors: Record<string, [number, number]> = {
     cerebrum: [250, 170], callosum: [300, 214], cerebellum: [452, 372], ventricle: [364, 384], brainstem: [318, 372],
-    tonsil: [386, tonsilMid], foramen: [372, 445], cord: [350, 480], csf: [380, 620], c2: [318, 500],
+    tonsil: [386, tonsilMid], foramen: [372, 445], cord: [342, 480], csf: [351, 620], c2: [318, 500],
+    syrinx: [337, 585], removed: [420, 440],
   };
   return anchors[part] ?? [369, 444.5];
 }
@@ -287,11 +290,11 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   function drawHighlight(ctx: CanvasRenderingContext2D, st: ViewState) {
     const S = shapes as unknown as Record<string, unknown>;
     const tonsil = (shapes.tonsil as Record<string, string>)[st.condition === 'syrinx' ? 'chiari' : st.condition];
-    const csfExtra = st.condition === 'typical' ? ['cisterna'] : st.condition === 'surgery' ? ['surgeryCsf'] : [];
+    const back = shapes.csfBack[st.condition === 'syrinx' ? 'chiari' : st.condition];
     const byPart: Record<string, unknown[]> = {
       cerebrum: [S.cerebrum], callosum: [S.callosum], cerebellum: [S.cerebellum], ventricle: [S.fourthVentricle],
       brainstem: [S.brainstem], tonsil: [tonsil], cord: [S.cord], c2: [S.dens, S.c2Body, S.spinous2],
-      csf: [S.csfAnterior, S.csfPosterior, ...csfExtra.map((k) => S[k])],
+      csf: [S.csfFront, back], syrinx: [S.syrinx], removed: [shapes.boneRemovedSkull.d, S.boneRemovedC1],
     };
     const scale = sectionCanvas.width / SECTION_BOX.w;
     ctx.save();
@@ -630,7 +633,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     const st = store.get();
     const w = host.clientWidth, h = host.clientHeight;
     labelSvg.setAttribute('viewBox', `0 0 ${w} ${h}`);
-    const shownDefs = [...labelEls.values()].filter(({ def }) => st.layers[def.layer].on);
+    const shownDefs = [...labelEls.values()].filter(({ def }) => st.layers[def.layer].on && (!def.conditions || def.conditions.includes(st.condition)));
     const top = 76, bottom = h - 56;
     const gap = shownDefs.length > 1 ? Math.min(40, (bottom - top) / (shownDefs.length - 1)) : 0;
     let row = 0;
@@ -642,7 +645,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       const y = top + gap * row++;
       button.style.top = `${y}px`;
       button.classList.toggle('is-selected', def.part === st.part);
-      const [fx, fy] = def.part === 'tonsil' ? labelAnchor('tonsil', st.condition) : def.anchor;
+      const [fx, fy] = labelAnchor(def.part, st.condition);
       anchorV.set((fx - ORIGIN.x) / FIGURE_UNITS_PER_MM, -(fy - ORIGIN.y) / FIGURE_UNITS_PER_MM, 0).project(camera);
       const ax = ((anchorV.x + 1) / 2) * w, ay = ((1 - anchorV.y) / 2) * h;
       const labelX = w - 216;
@@ -682,8 +685,8 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     return g;
   }
   // Chevron positions and the restricted-flow marks are the figure's own (src/lib/anatomy-figure.ts).
-  const FLOW_OPEN: [number, number][] = [[331, 481], [332, 531], [333, 581], [374, 481], [375, 531], [376, 581], [416, 425]];
-  const FLOW_BLOCKED: [number, number][] = [[331, 481], [332, 531], [333, 581], [375, 551]];
+  const FLOW_OPEN: [number, number, number][] = [...FLOW.front.map(([x, y]): [number, number, number] => [x, y, 2.5]), ...FLOW.backOpen];
+  const FLOW_BLOCKED: [number, number, number][] = [...FLOW.front.map(([x, y]): [number, number, number] => [x, y, 2.5]), ...FLOW.backBlocked];
   const RESTRICTED_MARKS: [number, number, number, number][] = [[390, 440, 398, 434], [390, 448, 398, 442], [390, 456, 398, 450]];
   const flowGroup = new THREE.Group();
   flowGroup.renderOrder = 2500;
@@ -697,12 +700,14 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     flowGroup.clear();
     chevrons = [];
     const blocked = condition === 'chiari' || condition === 'syrinx';
-    for (const [x, y] of blocked ? FLOW_BLOCKED : FLOW_OPEN) {
+    for (const [x, y, w] of blocked ? FLOW_BLOCKED : FLOW_OPEN) {
       const obj = chevron();
+      // Narrow chevrons where the neck canal is narrow (the figure's half-width, in figure units).
+      obj.scale.setScalar(w / 5);
       const base = fig(x, y);
       obj.position.copy(base);
-      // Behind the tonsils in Chiari views, fluid barely moves (restricted); elsewhere it moves freely.
-      const restrictedHere = blocked && x > 360;
+      // Behind the cord in Chiari views, below the tonsils, fluid barely moves (restricted); elsewhere it moves freely.
+      const restrictedHere = blocked && x > 345;
       chevrons.push({ obj, base, amp: restrictedHere ? 0.8 : 3 });
       obj.traverse((m) => (m.renderOrder = 2500));
       flowGroup.add(obj);

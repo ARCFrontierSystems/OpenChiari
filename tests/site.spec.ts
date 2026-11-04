@@ -135,6 +135,22 @@ test.describe('3D Explorer controls', () => {
     await expect(page.locator('[data-figure="wide"] svg')).toHaveAttribute('viewBox', '36 62 522 578');
   });
 
+  test('part 11 (syrinx, bone removed) is listed only in its own view', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/explorer/');
+    const list = page.locator('aside.x-right');
+    await expect(list.getByRole('button', { name: 'Syrinx' })).toBeHidden();
+    await expect(list.getByRole('button', { name: 'Bone removed' })).toBeHidden();
+    await page.locator('label', { hasText: 'Chiari I with syrinx' }).first().click();
+    await list.getByRole('button', { name: 'Syrinx' }).click();
+    await expect(list.locator('[data-part-name]')).toHaveText('Syrinx');
+    await page.locator('label', { hasText: 'After decompression' }).first().click();
+    await expect(list.getByRole('button', { name: 'Syrinx' })).toBeHidden();
+    await expect(list.locator('[data-part-name]')).toHaveText('Cerebellar tonsil');
+    await list.getByRole('button', { name: 'Bone removed' }).click();
+    await expect(list.locator('[data-part-name]')).toHaveText('Bone removed');
+  });
+
   test('phone: condition grid, parts list and Layers panel', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto('/explorer/');

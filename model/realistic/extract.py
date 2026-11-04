@@ -284,8 +284,9 @@ for name, objs in members.items():
     built.append(finish(name, bm))
 
 # ---------------------------------------------------------------- spinal cord (not in the atlas)
-# Follow the middle of the spinal dura downward from the bottom of the medulla, with the medulla's own
-# bottom cross-section size, narrowing slightly toward the neck.
+# Follow the middle of the spinal dura downward from the bottom of the medulla. Starts at the medulla's own
+# bottom cross-section and within 15 mm reaches the measured adult cord size (EVIDENCE.md "Spinal cord, upper
+# neck": 8.8 x 12.4 mm at C2, 8.7 x 14 mm at C4; PMC8334714).
 dura = D.objects['dura']
 dv = [v.co for v in dura.data.vertices]
 medulla = [TO_MODEL @ (o.matrix_world @ v.co) for o in members['brainstem'] if 'Medulla' in o.name for v in o.data.vertices]
@@ -304,9 +305,13 @@ for k in range(steps + 1):
     if slab:
         cx = sum(v.x for v in slab) / len(slab)
         cy = sum(v.y for v in slab) / len(slab)
-    shrink = 1 - 0.12 * (k / steps)
-    ring = [bm.verts.new((cx + rx * shrink * math.cos(2 * math.pi * j / ring_n),
-                          cy + ry * shrink * math.sin(2 * math.pi * j / ring_n), z)) for j in range(ring_n)]
+    below = top_z - z
+    t = min(1.0, below / 15.0)
+    deep = min(1.0, max(0.0, (below - 15.0) / max(1.0, top_z - BOTTOM_MM - 15.0)))
+    ax = (1 - t) * rx + t * (4.4 + (4.35 - 4.4) * deep)   # half of 8.8 mm, toward 8.7 mm
+    ay = (1 - t) * ry + t * (6.2 + (7.0 - 6.2) * deep)    # half of 12.4 mm, toward 14 mm
+    ring = [bm.verts.new((cx + ax * math.cos(2 * math.pi * j / ring_n),
+                          cy + ay * math.sin(2 * math.pi * j / ring_n), z)) for j in range(ring_n)]
     rings.append(ring)
 for r0, r1 in zip(rings, rings[1:]):
     for j in range(ring_n):
@@ -320,7 +325,7 @@ if cord_top_piece is not None:
     bm.from_mesh(me_tmp)
     D.meshes.remove(me_tmp)
 members['cord'] = []
-print(f'cord built: {2 * rx:.1f} mm front to back, {2 * ry:.1f} mm across at the top')
+print(f'cord built: {2 * rx:.1f} x {2 * ry:.1f} mm at the medulla, 8.8 x 12.4 mm from 15 mm below it')
 built.append(finish('cord', bm))
 
 # ---------------------------------------------------------------- fluid space around the brain in the posterior fossa

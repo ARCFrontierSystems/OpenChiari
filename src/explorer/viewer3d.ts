@@ -396,15 +396,13 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   new ResizeObserver(resize).observe(host);
 
   // ----- Opacity, including the skin fading when the model is turned -----
-  const SIDE_VIEW = new THREE.Vector3(0, 0, 1);
   const toCamera = new THREE.Vector3();
-  /** 1 within 15 degrees of the side view, fading to 0.3 by 35 degrees. */
+  /** The skin's surface is always see-through in 3D (Matthew, 2026-11-04): a plain, smooth head that shows
+   *  where everything sits without hiding it. Its midline cut face stays solid, like the figure. */
+  const SKIN_SEE_THROUGH = 0.35;
   let fadeEnabled = true;
   function skinFade(): number {
-    if (!fadeEnabled) return 1;
-    toCamera.copy(camera.position).sub(controls.target).normalize();
-    const angle = THREE.MathUtils.radToDeg(toCamera.angleTo(SIDE_VIEW));
-    return 1 - 0.7 * THREE.MathUtils.clamp((angle - 15) / 20, 0, 1);
+    return fadeEnabled ? SKIN_SEE_THROUGH : 1;
   }
   function applyOpacity() {
     const fade = skinFade();
@@ -426,9 +424,11 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       // A see-through skin shows only its outside, so it doesn't look muddy.
       mat.side = see && p.ghost ? THREE.FrontSide : THREE.DoubleSide;
       const capMat = p.cap.material as THREE.MeshBasicMaterial;
-      if (capMat.transparent !== see) capMat.needsUpdate = true;
-      capMat.opacity = opacity;
-      capMat.transparent = see;
+      const capOpacity = p.ghost ? p.opacity : opacity;
+      const capSee = capOpacity < 1;
+      if (capMat.transparent !== capSee) capMat.needsUpdate = true;
+      capMat.opacity = capOpacity;
+      capMat.transparent = capSee;
     }
   }
 

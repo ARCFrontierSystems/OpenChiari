@@ -4,8 +4,9 @@
  *
  * Inner structures (skull, brain, tonsils, McRae line, spine, cord, CSF) are ported shape for
  * shape from design/mockups/Anatomy.dc.html and match design/figures/. The outer skin outline
- * was redrawn on 2026-11-04 at Matthew's request for a realistic head shape (not a measured structure),
- * and is now traced from the sculpted 3D head so the figure and the 3D model match.
+ * was redrawn on 2026-11-04 at Matthew's request for a natural head shape (not a measured structure).
+ * It is the source for the 3D skin: model/simple/build.mjs builds a smooth, plain head from it, so the
+ * figure and the 3D model match.
  * Do not change any inner shape or position without updating docs/EVIDENCE.md and getting Matthew's OK.
  * Colors are the anatomy palette in docs/DESIGN.md.
  */

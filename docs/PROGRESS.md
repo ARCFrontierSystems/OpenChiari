@@ -3,6 +3,14 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Smooth, plain 3D skin (option 1)
+
+- **Matthew's question:** why does the 3D face still have bumps, and do we need the skin? The bumps came from building the face out of about twenty blended rounded shapes; their joins show as lumps when turned. Without skin, the Simple model's skull (braincase only, no face bones) looks like a bare dome, so the skin stays.
+- **Done (Matthew chose option 1):** the 3D skin is now built from the approved 2D head outline, rounded off to the sides. Near the middle of the face it follows the exact profile, so the side view matches the figure. Toward the sides it follows a smoothed face outline, so the nose, lips and chin stay narrow. The surface has no lumps, ridges or creases when turned. It is a plain face with no modelled cheeks, eyes or ears.
+- **In the Explorer the skin's surface is always see-through** (35%), and it can still be switched off. Its midline cut face stays solid, like the figure.
+- The 2D figure is unchanged. `model:check` passes; 73 tests pass.
+- A natural face comes with the realistic model (Z-Anatomy's own skin), in Phase 2.
+
 ## 2026-11-04: More natural head (2D and Simple 3D); re-audit results
 
 - **Matthew's request:** the head still looked a little off; make it a more natural head shape.

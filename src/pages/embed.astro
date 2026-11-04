@@ -1,0 +1,301 @@
+---
+/**
+ * Embeddable viewer, for other sites to show in an <iframe> (the Open model page builds the code).
+ * Settings come only from the link after the #, which browsers don't send to the server:
+ *   v=typ | c1 | syr | dec   starting view (Typical, Chiari I, Chiari I with syrinx, After decompression)
+ *   switch=1                 show the condition switch
+ *   labels=1                 show the labels
+ *   calm=1                   start in Calm mode (for this view only; the visitor's own setting isn't changed)
+ * Always shown: the illustration and flow captions, "Not medical advice", the model credit (CLAUDE.md rules 1 and 3)
+ * and a link to the full Explorer. Without WebGL the 2D figure is shown instead.
+ * All text from src/i18n/en.json (approved text from docs/COPY.md).
+ */
+import Head from '../components/Head.astro';
+import { anatomyFigureSvg, CONDITIONS } from '../lib/anatomy-figure';
+import { getStrings, routes, externalLinks } from '../i18n';
+
+const s = getStrings();
+const x = s.explorer;
+const f = s.footer;
+const figure = anatomyFigureSvg({ condition: 'chiari', flow: true, labels: false, measure: true, dark: true }, s.figure);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head title={s.model.iframeTitle} themeColor="#17181C" />
+    <meta name="robots" content="noindex" />
+  </head>
+  <body class="e">
+    <header>
+      <h1 class="visually-hidden">{s.model.iframeTitle}</h1>
+      <fieldset class="e-switch" data-switch hidden>
+        <legend class="visually-hidden">{x.condition}</legend>
+        {CONDITIONS.map((c) => (
+          <label>
+            <input type="radio" name="condition" value={c} />
+            <span>{x.conditions[c].label}</span>
+          </label>
+        ))}
+      </fieldset>
+    </header>
+
+    <main class="e-view" aria-label={x.viewerLabel}>
+      <div
+        class="e-3d"
+        data-viewer
+        role="application"
+        aria-roledescription={x.viewerRole}
+        aria-label={s.figure.ariaPrefix + s.figure.aria.chiari}
+        aria-describedby="viewer-keys"
+        hidden
+      ></div>
+      <p id="viewer-keys" class="visually-hidden">{x.keysHelp}</p>
+      <div class="e-labels" data-labels hidden></div>
+      <div class="e-figure" data-figure set:html={figure} />
+    </main>
+
+    <footer class="e-foot">
+      <p>{x.captionIllustration} · {x.captionFlow}</p>
+      <p>
+        <strong>{f.notAdvice}</strong> {f.factsBefore} <a href={externalLinks.ninds} target="_blank" rel="noopener">{f.ninds}</a>{f.modelBefore}{' '}
+        <a href={externalLinks.zAnatomy} target="_blank" rel="noopener">{f.zAnatomy}</a> {f.modelAfter}
+      </p>
+      <p><a class="e-full" href={'https://openchiari.org' + routes.explorer} target="_blank" rel="noopener" data-full>{s.embed.exploreFull}</a></p>
+    </footer>
+
+    <script>
+      import { createStore, initialState } from '../explorer/state';
+      import { anatomyFigureSvg, CONDITIONS, type Condition } from '../lib/anatomy-figure';
+      import { showCalmForThisPage } from '../lib/calm';
+      import strings from '../i18n/en.json';
+
+      const CODES: Record<string, Condition> = { typ: 'typical', c1: 'chiari', syr: 'syrinx', dec: 'surgery' };
+      // A new set of settings after the # (without a page load) starts the view afresh.
+      window.addEventListener('hashchange', () => location.reload());
+      const params = new URLSearchParams(location.hash.slice(1));
+      const condition = CODES[params.get('v') ?? ''] ?? 'chiari';
+      const labels = params.get('labels') === '1';
+      if (params.get('calm') === '1') showCalmForThisPage(true);
+
+      const store = createStore({ ...initialState, condition, labels });
+      const x = strings.explorer;
+
+      // The link to the full Explorer opens on this site's own address when served from it.
+      const full = document.querySelector<HTMLAnchorElement>('[data-full]')!;
+      if (location.hostname !== 'openchiari.org') full.href = new URL('/explorer/', location.origin).href;
+
+      // Condition switch
+      const sw = document.querySelector<HTMLFieldSetElement>('[data-switch]')!;
+      sw.hidden = params.get('switch') !== '1';
+      sw.querySelectorAll<HTMLInputElement>('input').forEach((r) => {
+        r.checked = r.value === condition;
+        r.addEventListener('change', () => r.checked && store.set({ condition: r.value as Condition }));
+      });
+
+      // 2D figure (shown until the 3D view is ready, or if it can't run)
+      const fig = document.querySelector<HTMLElement>('[data-figure]')!;
+      let shown = '';
+      store.subscribe((st) => {
+        if (st.condition !== shown) {
+          shown = st.condition;
+          fig.innerHTML = anatomyFigureSvg({ condition: st.condition, flow: st.flow, labels: false, measure: st.measure, dark: true }, strings.figure);
+        }
+      });
+
+      const host = document.querySelector<HTMLElement>('[data-viewer]')!;
+      const labelsHost = document.querySelector<HTMLElement>('[data-labels]');
+      const LABEL_LAYERS: Record<string, 'brain' | 'csf' | 'bone'> = {
+        cerebrum: 'brain', callosum: 'brain', cerebellum: 'brain', brainstem: 'brain', tonsil: 'brain', cord: 'brain',
+        ventricle: 'csf', csf: 'csf', foramen: 'bone', c2: 'bone', syrinx: 'brain', removed: 'bone',
+      };
+      import('../explorer/viewer3d').then(async ({ webglAvailable, createViewer, labelAnchor }) => {
+        if (!webglAvailable()) return;
+        host.hidden = false;
+        try {
+          await createViewer(host, store, strings.figure, {
+            labelsHost,
+            labelMargins: { top: 12, bottom: 12 },
+            labels: x.parts.map((p) => ({ part: p.id, num: p.num, name: p.name, layer: LABEL_LAYERS[p.id], anchor: labelAnchor(p.id, condition), conditions: p.conditions })),
+          });
+          document.body.classList.add('has-3d');
+          store.subscribe((st) => host.setAttribute('aria-label', `${strings.figure.ariaPrefix}${strings.figure.aria[st.condition]}.`));
+        } catch (error) {
+          console.warn('3D view unavailable, showing the figure instead.', error);
+          host.hidden = true;
+          host.replaceChildren();
+        }
+      });
+      void CONDITIONS;
+    </script>
+  </body>
+</html>
+
+<style>
+  .e {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--x-viewport);
+    color: var(--x-text);
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  :global(:root[data-calm='on']) .e {
+    font-size: 15px;
+  }
+  .e :focus-visible {
+    outline: 2px solid var(--x-accent);
+    outline-offset: 2px;
+  }
+  .e a {
+    color: var(--x-text);
+  }
+  .e-switch {
+    margin: 0;
+    padding: 8px 12px;
+    border: 0;
+    border-bottom: 1px solid var(--x-border);
+    background: var(--x-panel);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+  }
+  .e-switch[hidden] {
+    display: none;
+  }
+  .e-switch label {
+    position: relative;
+    min-height: var(--touch);
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  .e-switch input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+  }
+  .e-switch span {
+    padding: 6px 12px;
+    border: 1px solid var(--x-control-border);
+    border-radius: var(--radius);
+    color: var(--x-muted);
+  }
+  .e-switch input:checked + span {
+    border-color: var(--x-accent);
+    background: var(--x-accent-tint);
+    color: var(--x-text);
+  }
+  .e-switch input:focus-visible + span {
+    outline: 2px solid var(--x-accent);
+    outline-offset: 2px;
+  }
+  .e-view {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 240px;
+    overflow: hidden;
+  }
+  .e-3d {
+    position: absolute;
+    inset: 0;
+  }
+  .e-3d :global(canvas) {
+    display: block;
+    cursor: grab;
+  }
+  .e-figure {
+    position: absolute;
+    inset: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .e-figure :global(.anatomy-figure) {
+    width: 100%;
+    height: 100%;
+  }
+  :global(.has-3d) .e-figure {
+    display: none;
+  }
+  /* Labels: a column on the right, as in the Explorer; only where there's room for it */
+  .e-labels {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  @media (max-width: 599px) {
+    .e-labels {
+      display: none !important;
+    }
+  }
+  .e-labels :global(.x-label-lines) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .e-labels :global(.x-label-lines line) {
+    stroke: var(--x-faint);
+    stroke-width: 0.75;
+  }
+  .e-labels :global(.x-label) {
+    position: absolute;
+    right: 16px;
+    width: 200px;
+    min-height: var(--touch);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 8px;
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    background: var(--x-viewport);
+    color: var(--x-text);
+    font: 400 13px var(--font-sans);
+    text-align: left;
+    cursor: pointer;
+    pointer-events: auto;
+  }
+  .e-labels :global(.x-label[hidden]) {
+    display: none;
+  }
+  .e-labels :global(.x-label:hover),
+  .e-labels :global(.x-label.is-selected) {
+    border-color: var(--x-accent);
+    background: var(--x-accent-tint);
+  }
+  .e-labels :global(.x-label-num) {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--x-muted);
+  }
+  .e-foot {
+    padding: 8px 12px;
+    border-top: 1px solid var(--x-border);
+    background: var(--x-panel);
+    color: var(--x-muted);
+    font-size: 11px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  :global(:root[data-calm='on']) .e-foot {
+    font-size: 13px;
+  }
+  .e-foot p {
+    margin: 0;
+  }
+  .e-foot strong {
+    color: var(--x-text);
+  }
+  .e-full {
+    display: inline-flex;
+    min-height: var(--touch);
+    align-items: center;
+    font-weight: 500;
+  }
+</style>

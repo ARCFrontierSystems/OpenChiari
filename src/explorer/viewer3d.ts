@@ -99,6 +99,8 @@ function cutDepth(slider: number): number {
 export interface ViewerOptions {
   /** Container for the 3D labels (positioned over the view). */
   labelsHost?: HTMLElement | null;
+  /** Space kept clear above and below the label column (px). The Explorer keeps room for its toolbar and captions. */
+  labelMargins?: { top: number; bottom: number };
   labels?: LabelDef[];
   /** Called when the visitor taps a structure in the model. */
   onPick?: (part: string) => void;
@@ -725,8 +727,8 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     const w = host.clientWidth, h = host.clientHeight;
     labelSvg.setAttribute('viewBox', `0 0 ${w} ${h}`);
     const shownDefs = [...labelEls.values()].filter(({ def }) => st.layers[def.layer].on && (!def.conditions || def.conditions.includes(st.condition)));
-    const top = 76, bottom = h - 56;
-    const gap = shownDefs.length > 1 ? Math.min(40, (bottom - top) / (shownDefs.length - 1)) : 0;
+    const top = options.labelMargins?.top ?? 76, bottom = h - (options.labelMargins?.bottom ?? 56);
+    const gap = shownDefs.length > 1 ? Math.min(46, (bottom - top) / (shownDefs.length - 1)) : 0;
     let row = 0;
     for (const { button, line, def } of labelEls.values()) {
       const on = shownDefs.some((d) => d.def === def);

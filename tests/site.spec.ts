@@ -2,7 +2,7 @@ import { test, expect, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
 // Every page that exists so far. Add new pages here as they're built.
-const pages = ['/', '/explorer/', '/evidence/', '/explain/', '/studies/', '/prep/', '/model/', '/support/', '/kit/', '/impact/', '/about/', '/privacy/', '/es/'];
+const pages = ['/', '/explorer/', '/evidence/', '/explain/', '/studies/', '/prep/', '/model/', '/embed/', '/support/', '/kit/', '/impact/', '/about/', '/privacy/', '/es/'];
 const sizes = [
   { name: 'desktop', width: 1440, height: 900 },
   { name: 'phone', width: 390, height: 844 },
@@ -375,4 +375,35 @@ test('Support links only to the organizations themselves; About says how content
   await expect(page.locator('main form')).toHaveCount(0);
   await page.goto('/about/');
   await expect(page.getByText('They have not been reviewed by a medical professional.', { exact: false })).toBeVisible();
+});
+
+test('Open model: the embed builder writes the code, and the downloads are there', async ({ page, request }) => {
+  await page.goto('/model/');
+  const code = page.locator('[data-embed-code]');
+  await expect(code).toContainText('embed/#v=c1&switch=1&labels=1"');
+  await page.getByLabel('Starting view').selectOption('surgery');
+  await page.getByLabel('Show labels').uncheck();
+  await page.getByLabel('Start in Calm mode').check();
+  await expect(code).toContainText('embed/#v=dec&switch=1&calm=1"');
+  await expect(code).toContainText('title="Chiari malformation 3D model"');
+  for (const href of await page.locator('a[download]').evaluateAll((as) => as.map((a) => (a as HTMLAnchorElement).getAttribute('href')))) {
+    const res = await request.get(href!);
+    expect(res.status(), href!).toBe(200);
+    expect((await res.body()).length).toBeGreaterThan(100_000);
+  }
+});
+
+test('embed: follows its settings, and always shows the captions, credit and disclaimer', async ({ page }) => {
+  await page.goto('/embed/#v=syr&switch=1&calm=1');
+  await expect(page.locator('html')).toHaveAttribute('data-calm', 'on');
+  await expect(page.locator('[data-switch]')).toBeVisible();
+  await expect(page.locator('input[name="condition"][value="syrinx"]')).toBeChecked();
+  await expect(page.getByText('Illustration, not a medical image')).toBeVisible();
+  await expect(page.getByText('Not medical advice.')).toBeVisible();
+  await expect(page.getByText('BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 JP)', { exact: false })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Explore the full 3D model' })).toBeVisible();
+  // calm=1 is for this view only: the visitor's own saved choice isn't changed
+  expect(await page.evaluate(() => localStorage.getItem('openchiari-calm'))).toBeNull();
+  await page.goto('/embed/#v=typ');
+  await expect(page.locator('[data-switch]')).toBeHidden();
 });

@@ -48,6 +48,11 @@ export function setCalm(on: boolean): void {
   apply(on);
 }
 
+/** Turn Calm mode on for this page view only, without saving it (used by the embed's "Start in Calm mode"). */
+export function showCalmForThisPage(on: boolean): void {
+  apply(on);
+}
+
 export function onCalmChange(callback: (on: boolean) => void): void {
   document.addEventListener(CALM_EVENT, (event) => callback((event as CustomEvent<{ on: boolean }>).detail.on));
 }

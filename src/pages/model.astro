@@ -1,0 +1,348 @@
+---
+/**
+ * Open model. Layout from design/mockups/OpenModel.dc.html. All text from src/i18n/en.json, word for word from
+ * docs/COPY.md ("Accuracy checks" row instead of a reviewer: CLAUDE.md rule 1a).
+ * - The embed builder writes an <iframe> for /embed/, with the settings after the # (see src/pages/embed.astro).
+ * - Downloads are made by scripts/make-downloads.mjs into public/downloads/; their sizes are read at build time.
+ */
+import { statSync } from 'node:fs';
+import { join } from 'node:path';
+import Base from '../layouts/Base.astro';
+import AnatomyFigure from '../components/AnatomyFigure.astro';
+import { getStrings, externalLinks } from '../i18n';
+
+const t = getStrings().model;
+const files: Record<string, string> = {
+  gltf: '/downloads/openchiari-model-gltf.zip',
+  blender: '/downloads/openchiari-model-blender.zip',
+  figures: '/downloads/openchiari-figures.zip',
+};
+const size = (href: string) => {
+  // (the build runs from the project folder)
+  const bytes = statSync(join(process.cwd(), 'public', href)).size;
+  return bytes >= 1e6 ? `${(bytes / 1e6).toFixed(1)} MB` : `${Math.round(bytes / 1e3)} KB`;
+};
+const viewOrder = ['chiari', 'typical', 'syrinx', 'surgery'] as const;
+const embedCode = `<iframe src="https://openchiari.org/embed/#v=c1&switch=1&labels=1"\n  width="100%" height="640" title="${t.iframeTitle}"\n  loading="lazy"></iframe>`;
+---
+
+<Base title={t.title}>
+  <div class="model container">
+    <div class="model-top">
+      <div class="page-intro">
+        <h1 class="serif">{t.title}</h1>
+        <p class="lead">{t.intro}</p>
+        <dl class="facts">
+          <div><dt>{t.licenseLabel}</dt><dd><a href="https://creativecommons.org/licenses/by-sa/4.0/">{t.license}</a></dd></div>
+          <div><dt>{t.basedOnLabel}</dt><dd><a href={externalLinks.zAnatomy}>{t.zAnatomy}</a> {t.basedOnRest}</dd></div>
+          <div><dt>{t.viewsLabel}</dt><dd>{t.views}</dd></div>
+          <div><dt>{t.checksLabel}</dt><dd>{t.checks}</dd></div>
+        </dl>
+      </div>
+      <figure class="fig">
+        <AnatomyFigure condition="syrinx" flow={true} labels={false} measure={false} />
+        <figcaption><span class="mono">{t.figNum}</span> {t.figCaption}</figcaption>
+      </figure>
+    </div>
+
+    <section aria-labelledby="embed-title">
+      <h2 id="embed-title" class="serif">{t.embedTitle}</h2>
+      <div class="embed">
+        <form class="embed-options" data-embed-form>
+          <label class="field-label" for="embed-view">{t.startingView}</label>
+          <select id="embed-view" data-embed-view>
+            {viewOrder.map((v) => <option value={v}>{t.viewOptions[v]}</option>)}
+          </select>
+          <label class="check"><input type="checkbox" data-embed-switch checked /> {t.showSwitch}</label>
+          <label class="check"><input type="checkbox" data-embed-labels checked /> {t.showLabels}</label>
+          <label class="check"><input type="checkbox" data-embed-calm /> {t.startCalm}</label>
+        </form>
+        <div class="embed-code">
+          <pre class="mono" tabindex="0" aria-label={t.embedTitle}><code data-embed-code>{embedCode}</code></pre>
+          <div class="copy-row">
+            <button type="button" class="button button-primary" data-embed-copy>{t.copyEmbed}</button>
+            <span class="copied" role="status" data-embed-status></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="download-title">
+      <h2 id="download-title" class="serif">{t.downloadTitle}</h2>
+      <table class="downloads">
+        <thead>
+          <tr>
+            <th scope="col">{t.columns.file}</th>
+            <th scope="col">{t.columns.format}</th>
+            <th scope="col" class="hide-narrow">{t.columns.bestFor}</th>
+            <th scope="col">{t.columns.size}</th>
+            <td class="head-blank"></td>
+          </tr>
+        </thead>
+        <tbody>
+          {t.downloads.map((d) => (
+            <tr>
+              <th scope="row">{d.file}</th>
+              <td>{d.format}</td>
+              <td class="hide-narrow">{d.bestFor}</td>
+              <td class="mono">{size(files[d.id])}</td>
+              <td class="dl"><a href={files[d.id]} download aria-label={`${t.download}: ${d.file}`}>{t.download}</a></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+
+    <section class="credit" aria-labelledby="credit-title">
+      <h2 id="credit-title">{t.creditTitle}</h2>
+      <p>{t.creditIntro}</p>
+      <p class="credit-line mono">{t.creditLine}</p>
+    </section>
+
+    <p class="footnote">{t.footnote}</p>
+  </div>
+</Base>
+
+<script>
+  import strings from '../i18n/en.json';
+
+  const CODES: Record<string, string> = { typical: 'typ', chiari: 'c1', syrinx: 'syr', surgery: 'dec' };
+  const view = document.querySelector<HTMLSelectElement>('[data-embed-view]')!;
+  const boxes = {
+    switch: document.querySelector<HTMLInputElement>('[data-embed-switch]')!,
+    labels: document.querySelector<HTMLInputElement>('[data-embed-labels]')!,
+    calm: document.querySelector<HTMLInputElement>('[data-embed-calm]')!,
+  };
+  const code = document.querySelector<HTMLElement>('[data-embed-code]')!;
+  const status = document.querySelector<HTMLElement>('[data-embed-status]')!;
+  const write = () => {
+    const parts = [`v=${CODES[view.value]}`];
+    for (const [key, box] of Object.entries(boxes)) if (box.checked) parts.push(`${key}=1`);
+    code.textContent = `<iframe src="https://openchiari.org/embed/#${parts.join('&')}"\n  width="100%" height="640" title="${strings.model.iframeTitle}"\n  loading="lazy"></iframe>`;
+    status.textContent = '';
+  };
+  view.addEventListener('change', write);
+  Object.values(boxes).forEach((box) => box.addEventListener('change', write));
+  write();
+  document.querySelector('[data-embed-copy]')!.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(code.textContent ?? '');
+      status.textContent = strings.model.copied;
+    } catch {
+      // Clipboard blocked: select the code so it can be copied by hand.
+      const range = document.createRange();
+      range.selectNodeContents(code);
+      const sel = window.getSelection();
+      sel?.removeAllRanges();
+      sel?.addRange(range);
+    }
+  });
+</script>
+
+<style>
+  .model {
+    padding-top: var(--s-56);
+    padding-bottom: var(--s-72);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-56);
+  }
+  .model-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-48);
+    align-items: flex-start;
+  }
+  .page-intro {
+    flex: 1 1 480px;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-16);
+  }
+  .page-intro h1 {
+    font-size: 42px;
+    line-height: 1.1;
+  }
+  .lead {
+    color: var(--ink-2);
+  }
+  .facts {
+    border-top: 1px solid var(--rule);
+    padding-top: var(--s-16);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-8);
+  }
+  .facts div {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: var(--s-16);
+  }
+  .facts dt {
+    color: var(--muted);
+  }
+  .fig {
+    flex: 1 1 380px;
+    margin: 0;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+  }
+  .fig :global(.anatomy-figure) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .fig figcaption {
+    padding: var(--s-12) var(--s-16);
+    border-top: 1px solid var(--rule);
+    font-size: var(--text-small);
+    color: var(--muted);
+  }
+  section h2.serif {
+    font-size: 28px;
+    margin-bottom: var(--s-24);
+  }
+  .embed {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-32);
+    align-items: flex-start;
+  }
+  .embed-options {
+    flex: 0 1 280px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-8);
+  }
+  .field-label {
+    font-weight: 600;
+  }
+  .embed-options select {
+    min-height: var(--touch);
+    padding: 0 var(--s-12);
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    font: inherit;
+    color: var(--ink);
+    margin-bottom: var(--s-8);
+  }
+  .check {
+    min-height: var(--touch);
+    display: flex;
+    align-items: center;
+    gap: var(--s-12);
+    cursor: pointer;
+  }
+  .check input {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--accent);
+  }
+  .embed-code {
+    flex: 1 1 420px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-12);
+  }
+  .embed-code pre {
+    margin: 0;
+    padding: var(--s-16) var(--s-20);
+    background: var(--x-bg);
+    color: var(--x-text);
+    border-radius: var(--radius);
+    font-size: var(--text-mono);
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  .copy-row {
+    display: flex;
+    align-items: center;
+    gap: var(--s-16);
+  }
+  .copied {
+    color: var(--status-good);
+    font-size: var(--text-small);
+  }
+  .downloads {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .downloads thead th {
+    text-align: left;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: var(--text-mono);
+    color: var(--muted);
+    padding: 0 var(--s-12) var(--s-12) 0;
+    border-bottom: 2px solid var(--ink);
+  }
+  .downloads .head-blank {
+    border-bottom: 2px solid var(--ink);
+  }
+  .downloads tbody th,
+  .downloads tbody td {
+    text-align: left;
+    padding: var(--s-12) var(--s-12) var(--s-12) 0;
+    border-bottom: 1px solid var(--rule);
+    font-weight: 400;
+  }
+  .downloads tbody th {
+    font-weight: 500;
+  }
+  .downloads .dl {
+    text-align: right;
+    padding-right: 0;
+  }
+  .downloads .dl a {
+    display: inline-flex;
+    min-height: var(--touch);
+    align-items: center;
+  }
+  .credit {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    padding: var(--s-24) var(--s-32);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-12);
+  }
+  .credit h2 {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .credit p {
+    color: var(--ink-2);
+  }
+  .credit-line {
+    background: var(--paper);
+    padding: var(--s-12) var(--s-16);
+    font-size: var(--text-mono);
+  }
+  .footnote {
+    font-size: var(--text-small);
+    color: var(--muted);
+  }
+  @media (max-width: 720px) {
+    .model {
+      padding-top: var(--s-32);
+      gap: var(--s-40);
+    }
+    .page-intro h1 {
+      font-size: 32px;
+    }
+    .facts div {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .hide-narrow {
+      display: none;
+    }
+    .credit {
+      padding: var(--s-20);
+    }
+  }
+</style>

@@ -3,6 +3,26 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-04: Phase 3, step 2: Open model page, downloads and embed
+
+- **Open model page:** the license box with Fig. 2 (Chiari I with syrinx), the embed builder, the downloads table and "How to credit it". All text word for word from COPY.md, with the "Accuracy checks" row (no reviewer).
+- **Embed:** a new page, /embed/, for other sites to show in a frame.
+  - It shows the 3D viewer with an optional condition switch and labels, and can start in Calm mode for that view only (the visitor's own setting isn't changed).
+  - Its settings are after the # in the link, so they're never sent to a server.
+  - It always shows the captions, "Not medical advice", the model credit and a link to the full Explorer ("Explore the full 3D model", from the approved Explain It text).
+  - Without 3D support it shows the 2D figure.
+  - The builder writes the code, for example `<iframe src="https://openchiari.org/embed/#v=c1&switch=1&labels=1" width="100%" height="640" ...>`. The mockup had height 560; 640 leaves room for the labels at full tap size.
+- **Downloads** (made by `scripts/make-downloads.mjs`). Each is a zip with CREDIT.txt (the approved credit line) and LICENSE.md:
+  - the web model (glTF, all four views, 1.1 MB);
+  - the same model in Blender, one collection per view (8.0 MB);
+  - the labeled figure set: 4 PNG images and a 4-page PDF, each page with the condition name, captions, credit and disclaimer (1.7 MB).
+  - The full-detail builds (about 42 MB per view) are too big to offer; Cloudflare Pages allows 25 MB per file.
+- **Small additions:**
+  - a "Copied" message after "Copy embed code" (interface wording, not medical);
+  - label rows in the 3D view are now spaced at least 46 px, so the 44 px label buttons no longer overlap (in the Explorer too).
+- **Checks:** new tests cover the embed builder's code, the three downloads, and the embed following its settings while always showing the captions, credit and disclaimer and never saving Calm mode. Accessibility scans pass on both pages. 77 tests pass.
+- **Next (step 3):** Explain It, the create page and the recipient view.
+
 ## 2026-11-04: Phase 3, step 1: About, Privacy and Support pages
 
 - **Built:** About, Privacy and Support, for desktop and phone (Support uses the phone mockup's shorter wording). All text is word for word from COPY.md, laid out from the mockups. Each page has the shared header and the footer with the disclaimer and model credit.

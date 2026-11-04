@@ -223,7 +223,6 @@
     "pages": {
       "explain": "Explain It",
       "studies": "Research studies",
-      "model": "Open model",
       "kit": "Awareness kit",
       "impact": "Impact",
       "evidence": "Evidence notes"
@@ -695,5 +694,69 @@
     },
     "changesTitle": "Changes",
     "changes": "If this policy changes, the date at the top changes too, and anything significant is noted on the home page for 30 days."
+  },
+  "model": {
+    "title": "Use the model on your own site",
+    "intro": "The Chiari model is free for foundations, clinics, teachers and anyone explaining Chiari. Embed the viewer, or download the files for your own projects.",
+    "licenseLabel": "License",
+    "license": "CC BY-SA 4.0",
+    "basedOnLabel": "Based on",
+    "zAnatomy": "Z-Anatomy",
+    "basedOnRest": "(CC BY-SA 4.0) and BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 JP)",
+    "viewsLabel": "Views included",
+    "views": "Typical, Chiari I, Chiari I with syrinx, after decompression",
+    "checksLabel": "Accuracy checks",
+    "checks": "Measured against published sources; not reviewed by a medical professional",
+    "figNum": "Fig. 2",
+    "figCaption": "Chiari I with syrinx, one of four included views.",
+    "embedTitle": "Embed the viewer",
+    "startingView": "Starting view",
+    "viewOptions": {
+      "chiari": "Chiari I",
+      "typical": "Typical anatomy",
+      "syrinx": "Chiari I with syrinx",
+      "surgery": "After decompression"
+    },
+    "showSwitch": "Show condition switch",
+    "showLabels": "Show labels",
+    "startCalm": "Start in Calm mode",
+    "iframeTitle": "Chiari malformation 3D model",
+    "copyEmbed": "Copy embed code",
+    "downloadTitle": "Download",
+    "columns": {
+      "file": "File",
+      "format": "Format",
+      "bestFor": "Best for",
+      "size": "Size"
+    },
+    "downloads": [
+      {
+        "id": "gltf",
+        "file": "Web model, all four views",
+        "format": "glTF",
+        "bestFor": "Websites and apps"
+      },
+      {
+        "id": "blender",
+        "file": "Editable source",
+        "format": "Blender",
+        "bestFor": "Changing the model"
+      },
+      {
+        "id": "figures",
+        "file": "Figure set, labeled",
+        "format": "PNG and PDF",
+        "bestFor": "Handouts and slides"
+      }
+    ],
+    "download": "Download",
+    "creditTitle": "How to credit it",
+    "creditIntro": "Keep this line wherever you use the model, and share any changed version under the same license.",
+    "creditLine": "Chiari model by Open Chiari (openchiari.org), CC BY-SA 4.0, adapted from Z-Anatomy (CC BY-SA 4.0) and BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 JP)",
+    "footnote": "Not medical advice. Illustrations for education, not medical images.",
+    "copied": "Copied"
+  },
+  "embed": {
+    "exploreFull": "Explore the full 3D model"
   }
 }

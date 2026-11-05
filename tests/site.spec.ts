@@ -830,3 +830,94 @@ test('Spanish site: the kit offers the Spanish files, and the studies show Spani
   const first = page.locator('[data-study]').first();
   if (await first.count()) await expect(first.locator('.summary')).toContainText(/Los investigadores|De la ficha oficial|Resumen en inglés/);
 });
+
+test('Dim mode: follows the system dark setting, has its own switch that is remembered, and passes the accessibility scan', async ({ browser }) => {
+  const ctx = await browser.newContext({ colorScheme: 'dark', viewport: { width: 1440, height: 900 } });
+  const page = await ctx.newPage();
+  await page.goto('/');
+  await expect(page.locator('html')).toHaveAttribute('data-dim', 'on');
+  for (const path of ['/', '/studies/', '/prep/', '/about/', '/es/']) {
+    await page.goto(path);
+    const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze();
+    expect(results.violations.map((v) => `${path} ${v.id}: ${v.help} (${v.nodes.length})`)).toEqual([]);
+  }
+  const dim = page.getByRole('switch', { name: /^Modo oscuro/ });
+  await expect(dim).toBeChecked();
+  await dim.uncheck();
+  await page.reload();
+  await expect(page.locator('html')).not.toHaveAttribute('data-dim', 'on');
+  await ctx.close();
+  // Light system setting: off until switched on.
+  const light = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  await light.goto('/');
+  await expect(light.locator('html')).not.toHaveAttribute('data-dim', 'on');
+  await light.getByRole('switch', { name: /^Dim mode/ }).check();
+  await light.goto('/prep/');
+  await expect(light.locator('html')).toHaveAttribute('data-dim', 'on');
+});
+
+test('Read aloud: Listen buttons appear where the browser can speak, and switch to Stop while reading', async ({ page }) => {
+  await page.addInitScript(() => {
+    // A stand-in voice, so the test doesn't depend on the machine's speech engine.
+    const spoken: string[] = [];
+    (window as unknown as { spoken: string[] }).spoken = spoken;
+    Object.defineProperty(window, 'speechSynthesis', {
+      value: { speak: (u: SpeechSynthesisUtterance) => spoken.push(u.text), cancel: () => {}, getVoices: () => [] },
+    });
+  });
+  await page.goto('/');
+  const listen = page.locator('button[data-listen]').first(); // the same button while it reads "Stop"
+  await expect(listen).toBeVisible();
+  await expect(listen).toHaveText(/Listen/);
+  await listen.click();
+  await expect(listen).toHaveAttribute('aria-pressed', 'true');
+  await expect(listen).toHaveText(/Stop/);
+  const spoken = await page.evaluate(() => (window as unknown as { spoken: string[] }).spoken);
+  expect(spoken[0]).toBe('What is Chiari malformation?');
+  expect(spoken.join(' ')).toContain('The cerebellum helps control balance and coordination.');
+  // Desktop wording only, not both versions.
+  expect(spoken.filter((s) => s.startsWith('The lowest part of the cerebellum')).length).toBe(1);
+  await listen.click();
+  await expect(listen).toHaveAttribute('aria-pressed', 'false');
+  await page.goto('/es/tour/');
+  await expect(page.getByRole('button', { name: 'Escuchar' })).toBeVisible();
+});
+
+test('Explain It picture: makes a picture of the view with its captions, without the note', async ({ page }) => {
+  await page.goto('/explain/#c1.side.f.m');
+  await page.getByLabel('Your note').fill('Private note 4K');
+  const download = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Picture' }).click();
+  const file = await download;
+  expect(file.suggestedFilename()).toBe('open-chiari-chiari.png');
+  const buf = readFileSync((await file.path())!);
+  expect(buf.subarray(1, 4).toString()).toBe('PNG');
+  expect(buf.length).toBeGreaterThan(20000);
+  await expect(page.locator('[data-status]')).toHaveText('The picture was saved to your downloads.');
+});
+
+test('offline: the offline helper saves the site and opens pages without a connection', async ({ browser }) => {
+  // On openchiari.org the site starts the helper itself (Head.astro); here the test starts it, on the test server's
+  // own address (which browsers treat as secure, as service workers need).
+  const ctx = await browser.newContext();
+  const page = await ctx.newPage();
+  await page.goto('/');
+  await page.evaluate(async () => {
+    await navigator.serviceWorker.register('/sw.js');
+    await navigator.serviceWorker.ready;
+  });
+  await expect.poll(() => page.evaluate(async () => (await caches.keys()).some((k) => k.startsWith('openchiari-'))), { timeout: 20000 }).toBe(true);
+  // Every page is saved up front; the visitor counter never is.
+  const saved = await page.evaluate(async () => {
+    const cache = await caches.open((await caches.keys()).find((k) => k.startsWith('openchiari-'))!);
+    return (await cache.keys()).map((r) => new URL(r.url).pathname);
+  });
+  expect(saved).toEqual(expect.arrayContaining(['/', '/prep/', '/explorer/', '/es/', '/es/tour/']));
+  expect(saved.some((p) => p.startsWith('/api/'))).toBe(false);
+  await ctx.setOffline(true);
+  await page.goto('/prep/');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Prepare for your next appointment');
+  await page.goto('/es/');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Vea lo que pasa en la base del cráneo.');
+  await ctx.close();
+});

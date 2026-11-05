@@ -59,6 +59,18 @@ const calm = getStrings(Astro.currentLocale).calm;
           </div>
         ))}
       </div>
+      <aside class="say" aria-labelledby="say-title">
+        <h3 id="say-title">{h.say.title}</h3>
+        <dl>
+          {h.say.items.map((item) => (
+            <div>
+              <dt>{item.term}</dt>
+              <dd class="mono" lang="en">{item.say}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="say-note">{h.say.key} {h.say.history}</p>
+      </aside>
     </div>
   </section>
 
@@ -578,5 +590,36 @@ const calm = getStrings(Astro.currentLocale).calm;
     :global(:root[data-calm='on']) .tool-desc {
       font-size: 17px;
     }
+  }
+  /* How do you say it? (approved 2026-11-05; EVIDENCE.md "Pronunciation") */
+  .say {
+    margin-top: var(--s-32);
+    padding: var(--s-20) var(--s-24);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--paper);
+  }
+  .say h3 {
+    margin: 0 0 var(--s-12);
+    font-size: 17px;
+  }
+  .say dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--s-12) var(--s-24);
+  }
+  .say dt {
+    font-weight: 600;
+  }
+  .say dd {
+    margin: 2px 0 0;
+    font-size: 15px;
+    color: var(--ink-2);
+  }
+  .say-note {
+    margin: var(--s-16) 0 0;
+    font-size: var(--text-small);
+    color: var(--muted);
   }
 </style>

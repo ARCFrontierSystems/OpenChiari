@@ -1035,9 +1035,28 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   }
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const stillOnly = () => isCalm() || reducedMotion.matches;
-  function placeFlow(seconds: number | null) {
+  /** The cough (Matthew approved, 2026-11-05; EVIDENCE.md "Coughing"): the spinal fluid marks move up through the
+   *  opening into the head, then ease back to the heartbeat pulse, the same in every view. Nothing else moves. The
+   *  size of the movement is drawn to be easy to see, not measured ("Animation simplified"). */
+  const COUGH_SECONDS = 2.6, COUGH_UP = 6; // mm
+  let coughStart = -1;
+  /** 0 at rest, 1 at the top of the cough's push. */
+  function coughLift(now: number): number {
+    if (coughStart < 0) return 0;
+    const t = (now - coughStart) / COUGH_SECONDS;
+    if (t >= 1) {
+      coughStart = -1;
+      return 0;
+    }
+    return t < 0.25 ? Math.sin((t / 0.25) * (Math.PI / 2)) : 0.5 + 0.5 * Math.cos(((t - 0.25) / 0.75) * Math.PI);
+  }
+  function placeFlow(seconds: number | null, lift = 0) {
     const w = seconds === null ? 0.5 : heartbeat(seconds);
-    for (const c of chevrons) c.obj.position.set(c.base.x, c.base.y - c.amp * (w - 0.5), c.base.z);
+    for (const c of chevrons) {
+      c.obj.position.set(c.base.x, c.base.y - c.amp * (w - 0.5) * (1 - lift) + COUGH_UP * lift, c.base.z);
+      // Pointing up while the fluid is pushed up, as in the figure's arrows.
+      c.obj.rotation.z = lift > 0.5 ? Math.PI : 0;
+    }
     flowMat.opacity = seconds === null ? 1 : 0.65 + 0.35 * w;
   }
   let flowLoop = 0;
@@ -1058,7 +1077,9 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       // still while the page is scrolling, so the phone can give scrolling its full attention.
       if (visible && !document.hidden && now - lastFlowFrame > 30 && now - lastPageScroll > 250) {
         lastFlowFrame = now;
-        placeFlow(now / 1000);
+        const lift = coughLift(now / 1000);
+        placeFlow(now / 1000, lift);
+        measureGroup.visible = store.get().measure && coughStart < 0; // the bracket is hidden while the cough plays
         requestRender();
       }
       flowLoop = requestAnimationFrame(tick);
@@ -1240,6 +1261,33 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   (host as HTMLElement & { viewer?: unknown }).viewer = {
     look,
     reset: frame,
+    /** One cough: the fluid marks move up into the head and ease back (about 2.6 seconds). In Calm mode, or with
+     *  reduced motion, nothing moves: the "pushed up" still frame is shown for the same time, then the rest frame. */
+    async cough(onPhase?: (phase: 'up' | 'back' | 'done') => void): Promise<void> {
+      if (!store.get().flow) store.set({ flow: true });
+      onPhase?.('up');
+      if (stillOnly()) {
+        placeFlow(null, 1);
+        measureGroup.visible = false;
+        requestRender();
+        await new Promise((r) => setTimeout(r, COUGH_SECONDS * 400));
+        onPhase?.('back');
+        await new Promise((r) => setTimeout(r, COUGH_SECONDS * 600));
+        placeFlow(null, 0);
+        measureGroup.visible = store.get().measure;
+        requestRender();
+        onPhase?.('done');
+        return;
+      }
+      coughStart = performance.now() / 1000;
+      startFlowLoop();
+      await new Promise((r) => setTimeout(r, COUGH_SECONDS * 250));
+      onPhase?.('back');
+      await new Promise((r) => setTimeout(r, COUGH_SECONDS * 750 + 100));
+      measureGroup.visible = store.get().measure;
+      requestRender();
+      onPhase?.('done');
+    },
     /** "See it in your room": the Simple model as now shown (condition and layers), cut at the midline with the
      *  figure on the cut face, in millimetres. Used for the phone's augmented-reality view (src/explorer/ar.ts). */
     async arModel(): Promise<THREE.Group> {

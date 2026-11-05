@@ -3,7 +3,18 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
-## 2026-11-05: New features, releases 1 and 2 (PR #8, waiting for Matthew's approval)
+## 2026-11-05: New features, release 3 (medical text)
+
+- **Approved by Matthew** ("All three approved"), after the independent audit (`docs/audits/2026-11-05-new-features-audit.md`) and its fixes.
+- **How do you say it?** on Home: Chiari, Chiari malformation, syringomyelia and syrinx, with sources (Mayfield, KidsHealth, Merriam-Webster). On the Spanish site it is marked "(en inglés)"; the translator is asked for a Spanish respelling.
+- **Real-world size** line in the Explorer's Chiari I and syrinx views, with Measure on (centimeters). The coin comparison waits for the U.S. Mint page.
+- **Why can coughing bring on a headache?** in the Explorer, Typical and Chiari I views:
+  - three hedged sentences;
+  - a "Cough" button: the fluid marks move up into the head and ease back, and nothing else moves;
+  - Calm mode shows still frames, and screen readers hear each step.
+- **Records:** EVIDENCE.md rows 18 to 22 plus the pronunciation rows; COPY.md records the approval.
+
+## 2026-11-05: New features, releases 1 and 2 (PR #8, approved by Matthew and published)
 
 - **Matthew asked for all the suggested features.** Decisions: AR inside the browser on Android; two printable halves; Dim mode with its own switch that follows the phone's dark mode.
 - **Release 1:**

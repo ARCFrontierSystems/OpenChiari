@@ -70,6 +70,29 @@
         "narrow": "Por lo general, con una resonancia magnética y un examen médico; a veces, por casualidad."
       }
     },
+    "say": {
+      "title": "¿Cómo se dice? (en inglés)",
+      "items": [
+        {
+          "term": "Chiari",
+          "say": "key-AR-ee"
+        },
+        {
+          "term": "Chiari malformation",
+          "say": "key-AR-ee mal-fore-MAY-shun"
+        },
+        {
+          "term": "Syringomyelia",
+          "say": "suh-ring-go-my-EE-lee-uh"
+        },
+        {
+          "term": "Syrinx",
+          "say": "SEER-inks"
+        }
+      ],
+      "key": "Así se pronuncia en inglés; las mayúsculas muestran la parte que se dice más fuerte.",
+      "history": "Hans Chiari describió por primera vez las malformaciones de Chiari a finales del siglo XIX."
+    },
     "feel": {
       "title": "Qué se puede sentir",
       "intro": "Chiari es diferente en cada persona, y muchas personas con el tipo I no tienen ningún síntoma.",
@@ -403,7 +426,20 @@
       "far": "Corte pasada la línea media, hacia el lado opuesto"
     },
     "evidencePage": "Notas de evidencia",
-    "notInModel": "Aún no están en este modelo"
+    "notInModel": "Aún no están en este modelo",
+    "cough": {
+      "title": "¿Por qué toser puede provocar un dolor de cabeza?",
+      "text": [
+        "Al toser, la presión en el pecho sube por un momento, y eso empuja algo de líquido cefalorraquídeo desde la columna hacia la cabeza. Normalmente, después vuelve a bajar.",
+        "Una explicación es que, en algunas personas con Chiari I, las amígdalas cerebelosas bajas estorban el paso del líquido cuando vuelve a bajar, y justo después de toser son empujadas más hacia abajo, dentro de la abertura.",
+        "Los investigadores no están de acuerdo en cómo funciona esto, ni en si es la razón por la que toser puede provocar el dolor de cabeza clásico. No todas las personas con Chiari tienen estos dolores de cabeza."
+      ],
+      "button": "Toser",
+      "caption": "Animación simplificada.",
+      "up": "Al toser: algo de líquido cefalorraquídeo sube desde la columna hacia la cabeza.",
+      "back": "Después vuelve a bajar."
+    },
+    "sizeNote": "El límite habitual, unos 5 mm, es medio centímetro. El modelo muestra unos 12 mm, algo más de 1 centímetro. Lo que bajan las amígdalas cerebelosas no siempre coincide con cómo se siente una persona."
   },
   "evidence": {
     "inEnglish": "Estas notas están en inglés, igual que las fuentes que citan.",

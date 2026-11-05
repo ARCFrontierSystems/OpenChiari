@@ -3,6 +3,15 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: Published: navigation (PR #13)
+
+Checked on openchiari.org:
+- the top menu reads 3D Explorer · Explain It · Visit prep · Research studies, and "More" opens the five other tools;
+- More closes with Escape;
+- the Spanish menu shows "Más";
+- the 9 tools sit in a compact band right after the opening picture;
+- no requests to other addresses and no errors.
+
 ## 2026-11-05: Published: kit additions, Home tools, Explorer Home button, new-tab links, layers removed (PR #12)
 
 Checked on openchiari.org:

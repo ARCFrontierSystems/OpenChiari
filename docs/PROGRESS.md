@@ -3,6 +3,19 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: Realistic model smoother on phones
+
+- **Matthew:** the Simple model no longer stutters on his phone, but the realistic one still does.
+- **Measured** (phone-sized screen, software graphics):
+  - Both models draw about the same number of triangles (about 110,000 to 120,000) in about 50 draw calls.
+  - The realistic model takes about 3 times longer per frame, so the extra cost is in shading pixels, not in geometry.
+- **Done (src/explorer/viewer3d.ts):**
+  - **Matte shading** (Lambert) for the realistic model. It is cheaper per pixel and looks the same on these non-shiny surfaces (compared side by side). The Simple model is unchanged.
+  - **Lower resolution on touch screens:** the realistic model is drawn at 1.5 at rest and 0.75 while a finger moves it.
+  - **Stricter speed guard** for the realistic model: about 25 frames a second.
+- **Checks:** all 97 tests pass, and the realistic view check passes (fluid shows at every flow-mark place, in all four views).
+- **If it still stutters:** a lighter phone model, with fewer triangles. `model/realistic/web.mjs` re-checks the tonsil landmark and parts after simplifying.
+
 ## 2026-11-05: Phase 3, step 5: visitor counts and the Impact page
 
 - **Matthew's choice:** Open Chiari's own counters, instead of Cloudflare Web Analytics, which can't count actions and loads a script from another address.

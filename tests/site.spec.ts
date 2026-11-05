@@ -42,6 +42,8 @@ for (const path of pages) {
 }
 
 test('no third-party requests from the browser', async ({ page }) => {
+  // Visits every page in one test, so allow about 6 seconds a page rather than 30 seconds for all of them.
+  test.setTimeout(pages.length * 6000);
   const outside: string[] = [];
   page.on('request', (request) => {
     const url = new URL(request.url());

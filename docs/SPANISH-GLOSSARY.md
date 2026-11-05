@@ -69,8 +69,16 @@ stay in English; "Explain It" is followed by "(Explíquelo)" where it is introdu
 | Doctor visit prep | Prepare su cita médica | COPY.md |
 | Open model | Modelo abierto | COPY.md |
 | Awareness kit | Kit de concientización | COPY.md |
+| Chiari Awareness | Concientización sobre Chiari | Make your own label (Nov 5) |
+| Chiari Awareness Month | Mes de Concientización sobre Chiari | Kit eyebrow |
+| Poster | Póster (plural pósteres) | Kit; not "cartel" (back-translation check 5) |
+| Sticker | Calcomanía | Kit |
+| Logo | Logotipo | Kit |
+| Graphic (a post, story or poster) | Gráfico | Kit; "imagen" is kept for the picture of Chiari |
 
 Words that sound alike but must not be used: *amígdalas* alone (throat tonsils); *médula* alone (could mean bone
 marrow); *quiste* for syrinx (the site doesn't call it a cyst).
 
 Sticker phrases (Awareness kit) speak to the reader with "tú", like the children's story, and avoid masculine-only words where a neutral one exists (for example "Súper valiente" for "Brave kid"). Back-translation check 4.
+
+"Malformación de Chiari" takes "la" when it is the subject or follows "de" ("La malformación de Chiari es…", "el síntoma clásico de la malformación de Chiari"), and no article after "tengo" or "con" ("Tengo malformación de Chiari", "personas con malformación de Chiari"). Make-your-own audit, Nov 5.

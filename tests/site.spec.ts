@@ -1233,6 +1233,30 @@ test('Reading your MRI report: a real side-view MRI with numbered markers that m
   await expect(page.locator('.x-caption a', { hasText: 'Compare with a real MRI' })).toHaveAttribute('href', '/mri/#mri-view');
 });
 
+test('Explorer: cut front to back (coronal) or across (axial), on the realistic model, described, and kept in links', async ({ page }) => {
+  test.setTimeout(120000); // loads the realistic model
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/explorer/');
+  await expect(page.locator('body')).toHaveClass(/has-3d/, { timeout: 30000 });
+  const left = page.locator('.x-left');
+  await left.locator('[data-plane="coronal"]').click();
+  await expect(left.locator('[data-plane="coronal"]')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('[data-model="realistic"]').first()).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('.x-view [data-camera="back"]').first()).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('[data-viewer]')).toHaveAttribute('aria-label', /Cut front to back \(coronal\), seen from behind/);
+  await expect(left.locator('[data-cut-scale] span')).toHaveText(['Front', 'Skull opening', 'Back']);
+  await left.locator('[data-plane="axial"]').click();
+  await expect(page.locator('.x-view [data-camera="below"]').first()).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('[data-viewer]')).toHaveAttribute('aria-label', /Cut across \(axial\), seen from below/);
+  // Back to the Simple model means back to the side cut.
+  await page.locator('[data-model="simple"]').first().click();
+  await expect(left.locator('[data-plane="sagittal"]')).toHaveAttribute('aria-pressed', 'true');
+  // A link keeps the direction.
+  await page.goto('about:blank');
+  await page.goto('/explorer/#c1.back.kc');
+  await expect(page.locator('.x-left [data-plane="coronal"]')).toHaveAttribute('aria-pressed', 'true');
+});
+
 test('Awareness kit: every graphic and printable downloads, and the ZIP carries the credit', async ({ page, request }) => {
   await page.goto('/kit/');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Awareness kit');

@@ -20,7 +20,7 @@ import { LineSegmentsGeometry } from 'three/examples/jsm/lines/LineSegmentsGeome
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
-import type { Store, ViewState, LayerId, CameraView } from './state';
+import type { Store, ViewState, LayerId, CameraView, CutPlane } from './state';
 import { anatomyFigureSvg, FLOW, type FigureStrings, type FigureLayer } from '../lib/anatomy-figure';
 import { isCalm, onCalmChange } from '../lib/calm';
 import shapes from '../lib/anatomy-shapes.json';
@@ -52,6 +52,7 @@ interface Part {
   /** Side-to-side extent (mm); a cut outside it doesn't touch this structure. */
   zMin: number;
   zMax: number;
+  box: THREE.Box3;
   stencil: THREE.Group;
   cap: THREE.Mesh;
 }
@@ -198,6 +199,32 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
 
   // Keeps z <= depth. The plane faces the default (side) camera.
   const plane = new THREE.Plane(new THREE.Vector3(0, 0, -1), 0);
+  // The cut frame (Nov 5, coronal and axial cuts): the axis points toward the part that is cut away; points with
+  // axis . p <= cutD are kept. Side to side: +z (the near half). Front to back: +x (the back of the head is removed and
+  // the view is from behind). Across: -y (everything below is removed and the view is from below, as MRI shows it).
+  const cutAxis = new THREE.Vector3(0, 0, 1);
+  let cutD = 0;
+  const AXES: Record<CutPlane, THREE.Vector3> = { sagittal: new THREE.Vector3(0, 0, 1), coronal: new THREE.Vector3(1, 0, 0), axial: new THREE.Vector3(0, -1, 0) };
+  /** Where the cut sits for a plane and slider value: side to side as before; front to back and across, 0 to 100
+   *  runs through the head with 50 at the skull opening. */
+  function cutFor(planeId: CutPlane, slider: number, condition: string): number {
+    if (planeId === 'sagittal') return cutDepth(slider);
+    const [fx, fy] = labelAnchor('foramen', condition);
+    const x0 = (fx - ORIGIN.x) / FIGURE_UNITS_PER_MM, y0 = -(fy - ORIGIN.y) / FIGURE_UNITS_PER_MM;
+    if (planeId === 'coronal') return x0 + (slider - 50) * 1.4;
+    return -(y0 + (slider - 50) * 1.6);
+  }
+  /** The range of axis . p over a box's corners. */
+  function axisRange(box: THREE.Box3): [number, number] {
+    let lo = Infinity, hi = -Infinity;
+    for (const x of [box.min.x, box.max.x]) for (const y of [box.min.y, box.max.y]) for (const z of [box.min.z, box.max.z]) {
+      const v = cutAxis.x * x + cutAxis.y * y + cutAxis.z * z;
+      lo = Math.min(lo, v);
+      hi = Math.max(hi, v);
+    }
+    return [lo, hi];
+  }
+  const Z_UP = new THREE.Vector3(0, 0, 1);
 
   const timing: Record<string, number> = {};
   let mark = performance.now();
@@ -331,6 +358,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       opacity: baseOpacity,
       zMin: 0,
       zMax: 0,
+      box: new THREE.Box3(),
       stencil,
       cap,
     });
@@ -343,6 +371,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     const box = new THREE.Box3().setFromObject(p.mesh);
     p.zMin = box.min.z;
     p.zMax = box.max.z;
+    p.box.copy(box);
     modelBox.union(box);
     p.stencil.children.forEach((c) => c.matrix.copy(p.mesh.matrixWorld));
     // The realistic model paints its own cut faces (see above), so it needs no stencil caps.
@@ -694,7 +723,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     const st = store.get();
     const skin = st.layers.skin;
     const skinOpacity = skin.on ? (skin.opacity / 100) * fade : 0;
-    const showThrough = cutDepth(st.cut) <= 0.01 || skinOpacity < 0.6;
+    const showThrough = (st.plane === 'sagittal' && cutDepth(st.cut) <= 0.01) || skinOpacity < 0.6;
     for (const m of measureMats) m.depthTest = !showThrough;
     for (const p of parts) {
       const opacity = drawnOpacity(p, fade, bone) * stageMix(p.name);
@@ -771,7 +800,8 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   const triA = new THREE.Vector3(), triB = new THREE.Vector3(), triC = new THREE.Vector3();
   function updateOutline() {
     const st = store.get();
-    const depth = cutDepth(st.cut);
+    const depth = cutD;
+    void st;
     const points: number[] = [];
     if (realisticShown()) {
       for (const p of parts) {
@@ -786,13 +816,14 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
           vert(i, triA);
           vert(i + 1, triB);
           vert(i + 2, triC);
-          // Where the triangle crosses the plane z = depth, the crossing is one piece of the outline.
+          // Where the triangle crosses the cut plane, the crossing is one piece of the outline (lifted 0.2 mm toward
+          // the camera so it draws on top of the cut face).
           const cross: THREE.Vector3[] = [];
           for (const [a, b] of [[triA, triB], [triB, triC], [triC, triA]] as const) {
-            const da = a.z - depth, db = b.z - depth;
-            if ((da < 0) !== (db < 0)) cross.push(a.clone().lerp(b, da / (da - db)));
+            const da = cutAxis.dot(a) - depth, db = cutAxis.dot(b) - depth;
+            if ((da < 0) !== (db < 0)) cross.push(a.clone().lerp(b, da / (da - db)).addScaledVector(cutAxis, 0.2));
           }
-          if (cross.length === 2) points.push(cross[0].x, cross[0].y, depth + 0.2, cross[1].x, cross[1].y, depth + 0.2);
+          if (cross.length === 2) points.push(cross[0].x, cross[0].y, cross[0].z, cross[1].x, cross[1].y, cross[1].z);
         }
       }
     }
@@ -928,15 +959,15 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     const rect = renderer.domElement.getBoundingClientRect();
     ndc.set(((clientX - rect.left) / rect.width) * 2 - 1, -((clientY - rect.top) / rect.height) * 2 + 1);
     raycaster.setFromCamera(ndc, camera);
-    const depth = plane.constant;
+    const depth = cutD;
     const shown = parts.filter((p) => p.mesh.visible);
     const fade = skinFade();
     const bone = boneFade();
     const cutFace = new THREE.Vector3();
-    const facesCut = camera.position.z > depth && raycaster.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0, 0, 1), -depth), cutFace);
+    const facesCut = cutAxis.dot(camera.position) > depth && raycaster.ray.intersectPlane(new THREE.Plane(cutAxis.clone(), -depth), cutFace);
     const cutDistance = facesCut ? raycaster.ray.origin.distanceTo(cutFace) : Infinity;
     for (const hit of raycaster.intersectObjects(shown.map((p) => p.mesh), false)) {
-      if (hit.point.z > depth + 0.05) continue; // cut away
+      if (cutAxis.dot(hit.point) > depth + 0.05) continue; // cut away
       if (hit.distance > cutDistance) break; // the ray reached the cut face first
       const p = parts.find((q) => q.mesh === hit.object)!;
       const opacity = drawnOpacity(p, fade, bone);
@@ -946,7 +977,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     }
     if (!facesCut) return null;
     // On a cut face: which structures contain that point? Pick the innermost.
-    cutFace.z = depth - 0.05;
+    cutFace.addScaledVector(cutAxis, -0.05);
     const inside = new Set(shown.filter((p) => p.partId && contains(p.mesh, cutFace)).map((p) => p.partId!));
     if (inside.has('foramen') && cutFace.length() > 25) inside.delete('foramen');
     return PRIORITY.find((id) => inside.has(id)) ?? null;
@@ -1266,23 +1297,31 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       fadeCondition(lastCondition, st.condition);
       lastCondition = st.condition;
     }
-    const depth = cutDepth(st.cut);
+    cutAxis.copy(AXES[st.plane]);
+    cutD = cutFor(st.plane, st.cut, st.condition);
+    const depth = cutD;
+    plane.normal.copy(cutAxis).negate();
     plane.constant = depth;
-    const midline = depth === 0;
+    const midline = st.plane === 'sagittal' && depth === 0;
     for (const p of parts) {
       const layer = st.layers[p.layer];
       const model = st.model === 'realistic' && realistic === 'ready' ? 'realistic' : 'simple';
       // Show only / hide the selected structure (the skull counts as bone, never as the selected part).
       const focusOk = st.focus === 'all' || (st.focus === 'only' ? isSelected(p, st.part) : !isSelected(p, st.part));
-      const shown = p.model === model && layer.on && focusOk && (inView(p, st.condition) || !!stageFade?.fadeOut.has(p.name));
+      // Front and across cuts are for the realistic model only; while it loads, the Simple model isn't shown cut that way.
+      const planeOk = st.plane === 'sagittal' || p.model === 'realistic';
+      const shown = p.model === model && layer.on && focusOk && planeOk && (inView(p, st.condition) || !!stageFade?.fadeOut.has(p.name));
       const opacity = p.baseOpacity * (layer.opacity / 100);
       p.opacity = opacity;
       p.mesh.visible = shown && opacity > 0;
       // Cut faces are only needed where the cut actually passes through this structure.
-      const cutsThrough = p.model === 'simple' && !midline && depth > p.zMin && depth < p.zMax;
+      const [lo, hi] = axisRange(p.box);
+      const cutsThrough = p.model === 'simple' && !midline && depth > lo && depth < hi;
       p.stencil.visible = p.mesh.visible && cutsThrough;
       p.cap.visible = p.mesh.visible && cutsThrough;
-      p.cap.position.set(TARGET.x, TARGET.y, depth);
+      // The cap lies in the cut plane, facing the camera side.
+      p.cap.quaternion.setFromUnitVectors(Z_UP, cutAxis);
+      p.cap.position.set(TARGET.x, TARGET.y, 0).addScaledVector(cutAxis, depth - cutAxis.dot(new THREE.Vector3(TARGET.x, TARGET.y, 0)));
     }
     // The figure on the midline cut face belongs to the Simple model.
     const simpleShown = !(st.model === 'realistic' && realistic === 'ready');
@@ -1299,7 +1338,8 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       goToPreset(st.camera);
     }
     if (labelsHost) labelsHost.hidden = !st.labels;
-    overlayPlane.constant = cutDepth(st.cut) + 1;
+    overlayPlane.normal.copy(cutAxis).negate();
+    overlayPlane.constant = cutD + 1;
     buildFlow(st.condition, simpleShown ? null : realisticLandmarks);
     updateOutline();
     // Flow marks follow the fluid spaces of the model on show (the figure's, or the realistic model's own).

@@ -55,6 +55,8 @@ export function encodeView(view: { state: ViewState; orbit: Orbit | null; explor
   // The selected structure, and whether it's shown alone or hidden (3D roadmap step 2).
   if (st.part !== initialState.part) parts.push('p' + st.part);
   if (st.focus !== 'all') parts.push('i' + (st.focus === 'only' ? 'o' : 'h'));
+  // The cut direction (Nov 5): kc = front to back (coronal), ka = across (axial); side to side is the default.
+  if (st.plane !== 'sagittal') parts.push('k' + (st.plane === 'coronal' ? 'c' : 'a'));
   return parts.join('.');
 }
 
@@ -107,6 +109,9 @@ export function decodeView(hash: string): SharedView | null {
   if (o.length === 3) o[2] /= 100;
   const part = value('p');
   if (part && /^[a-z0-9]+$/.test(part)) state.part = part;
+  const k = value('k');
+  // Front and across cuts are shown on the realistic model only.
+  if (k === 'c' || k === 'a') Object.assign(state, { plane: k === 'c' ? 'coronal' : 'axial', model: 'realistic', flow: false, measure: false, labels: false });
   const focus = value('i');
   if (focus === 'o' || focus === 'h') state.focus = focus === 'o' ? 'only' : 'hide';
   const view = finish(state, camera, o, value('c'), value('h') ?? '');

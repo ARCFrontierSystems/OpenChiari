@@ -628,7 +628,30 @@
         ]
       }
     },
-    "mriLink": "Comparar con una resonancia real"
+    "mriLink": "Comparar con una resonancia real",
+    "cutPlanes": {
+      "label": "Dirección del corte",
+      "sagittal": "De lado",
+      "coronal": "De frente",
+      "axial": "Transversal",
+      "hint": "La resonancia usa las mismas tres direcciones: sagital (de lado), coronal (de frente) y axial (transversal).",
+      "ends": {
+        "coronal": [
+          "Adelante",
+          "Abertura del cráneo",
+          "Atrás"
+        ],
+        "axial": [
+          "Más abajo",
+          "Abertura del cráneo",
+          "Más arriba"
+        ]
+      },
+      "describe": {
+        "coronal": "Corte de adelante hacia atrás (coronal), visto desde atrás",
+        "axial": "Corte transversal (axial), visto desde abajo"
+      }
+    }
   },
   "evidence": {
     "inEnglish": "Estas notas están en inglés, igual que las fuentes que citan.",

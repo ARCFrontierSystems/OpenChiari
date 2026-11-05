@@ -628,7 +628,30 @@
         ]
       }
     },
-    "mriLink": "Compare with a real MRI"
+    "mriLink": "Compare with a real MRI",
+    "cutPlanes": {
+      "label": "Cut direction",
+      "sagittal": "Side",
+      "coronal": "Front",
+      "axial": "Across",
+      "hint": "MRI uses the same three directions: sagittal (side), coronal (front) and axial (across).",
+      "ends": {
+        "coronal": [
+          "Front",
+          "Skull opening",
+          "Back"
+        ],
+        "axial": [
+          "Lower",
+          "Skull opening",
+          "Higher"
+        ]
+      },
+      "describe": {
+        "coronal": "Cut front to back (coronal), seen from behind",
+        "axial": "Cut across (axial), seen from below"
+      }
+    }
   },
   "evidence": {
     "inEnglish": "These notes are in English, like the sources they cite.",

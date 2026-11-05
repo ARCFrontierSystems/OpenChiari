@@ -8,6 +8,10 @@ const executablePath = process.env.PLAYWRIGHT_CHROMIUM_PATH || undefined;
 export default defineConfig({
   testDir: 'tests',
   fullyParallel: true,
+  // GitHub's test machines are small and draw 3D in software: two 3D pages at once starve each other, so tests there
+  // run one at a time, with a little longer to wait for each check.
+  workers: process.env.CI ? 1 : undefined,
+  expect: { timeout: process.env.CI ? 10000 : 5000 },
   reporter: process.env.CI ? 'github' : 'list',
   use: {
     // A fixed IPv4 address, so the counter tests can point the name openchiari.org at the same server.

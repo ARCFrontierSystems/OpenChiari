@@ -710,7 +710,7 @@
       },
       {
         "term": "Su cámara",
-        "text": "\"Véalo en su habitación\" usa la cámara de su teléfono solo en el propio teléfono. La imagen nunca sale de su dispositivo y el sitio nunca la ve."
+        "text": "El sitio nunca recibe la imagen de la cámara de \"Véalo en su habitación\"; la función de realidad aumentada de su propio teléfono se encarga de ella."
       },
       {
         "term": "Información de salud",
@@ -718,7 +718,7 @@
       }
     ],
     "savedTitle": "Lo que se guarda en su dispositivo",
-    "saved": "El modo tranquilo, el modo oscuro y el idioma que elija se recuerdan en su propio navegador, para que sigan así la próxima vez. Para que el sitio también funcione sin señal, su navegador guarda una copia de sus páginas y archivos; no contiene nada de lo que usted escriba o elija. Si borra los datos de su navegador, todo esto se elimina. Nada de esto se envía nunca al sitio.",
+    "saved": "El modo tranquilo y el modo oscuro se recuerdan en su propio navegador, para que sigan así la próxima vez. Para que el sitio también funcione sin señal, su navegador guarda una copia de sus páginas y archivos; no contiene nada de lo que usted escriba o elija. Si borra los datos de su navegador, todo esto se elimina. Nada de esto se envía nunca al sitio.",
     "outsideTitle": "Servicios externos",
     "outside": [
       {

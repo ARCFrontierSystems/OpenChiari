@@ -1030,3 +1030,9 @@ After the independent audit (`docs/audits/2026-11-05-new-features-audit.md`) and
 
 Releases 1 and 2 wording above: approved by Matthew on 2026-11-05 ("Approved").
 
+## Accuracy audit 2 follow-ups (2026-11-05): approved by Matthew ("Go with your recommendations for all 3")
+
+- Privacy, "Saved on your device": now begins "Calm mode and Dim mode are remembered in your own browser…" (the language is not stored; it comes from the page address). Spanish: "El modo tranquilo y el modo oscuro se recuerdan en su propio navegador…"
+- Privacy, "Your camera": The site never receives the camera picture from "See it in your room"; your phone's own AR feature handles it.
+- 3D-printable plaques: raised lettering on a strip along the bottom edge: "Illustration, not a medical image" and "openchiari.org".
+

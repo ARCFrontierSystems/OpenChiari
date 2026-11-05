@@ -3,6 +3,21 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: Published (PR #10, Matthew: "Go ahead")
+
+Live and checked on openchiari.org:
+- surgery questions and the packing list in Visit prep;
+- Helping your child (English and Spanish), with the six-page story;
+- Connect with others;
+- the Zenodo citation on Open model;
+- "What happens in surgery, step by step" in the 3D Explorer (stepped through to "Bone removed").
+
+The new privacy rule is in force. Pages make no requests to any other address and show no page errors.
+
+- **Zenodo:** 1.0.0 and 1.0.1 published by Matthew. 1.0.1 removes a stray test file. The DOI for all versions, 10.5281/zenodo.23983232, is cited on the site.
+- **Next ideas:** the research-group introduction pack, which can now cite the DOI.
+- **Open items:** the medical translator, who now also has the newest Spanish text (docs/SPANISH-REVIEW.md).
+
 ## 2026-11-05: Second check-up, site walk-through (`docs/audits/2026-11-05-site-checkup-2.md`)
 
 32 pages were checked, each on desktop and phone, in light and Dim mode: 0 accessibility problems, no errors, no broken links. Today's features all work.

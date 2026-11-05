@@ -6,6 +6,7 @@
  * It explains words; it never interprets anyone's scan (CLAUDE.md: no diagnosis).
  */
 import Base from '../layouts/Base.astro';
+import NextStep from '../components/NextStep.astro';
 import ListenButton from '../components/ListenButton.astro';
 import { getStrings, getRoutes } from '../i18n';
 
@@ -45,6 +46,7 @@ const routes = getRoutes(Astro.currentLocale);
       <p>{t.nextBefore} <a href={routes.prep}>{t.nextLink}</a>{t.nextAfter}</p>
       <p class="sources">{t.sourcesBefore} <a href={routes.evidence}>{t.sourcesLink}</a>.</p>
     </aside>
+    <NextStep from="mri" />
   </div>
 </Base>
 

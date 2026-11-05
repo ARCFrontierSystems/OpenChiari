@@ -150,7 +150,7 @@ test.describe('3D Explorer controls', () => {
     await page.locator('label', { hasText: 'Chiari I with syrinx' }).first().click();
     await list.getByRole('button', { name: 'Syrinx' }).click();
     await expect(list.locator('[data-part-name]')).toHaveText('Syrinx');
-    await page.locator('label', { hasText: 'After decompression' }).first().click();
+    await page.locator('label', { hasText: 'After surgery' }).first().click();
     await expect(list.getByRole('button', { name: 'Syrinx' })).toBeHidden();
     await expect(list.locator('[data-part-name]')).toHaveText('Cerebellar tonsil');
     await list.getByRole('button', { name: 'Bone removed' }).click();
@@ -197,7 +197,7 @@ test.describe('3D Explorer controls', () => {
     await page.locator('.x-cond-list label', { hasText: 'Chiari I with syrinx' }).click();
     await expect(page.getByRole('application', { name: /Chiari I with a syrinx, a fluid-filled cavity inside the spinal cord/ })).toBeVisible();
     await expect(page.locator('[data-cond-note]')).toContainText('A syrinx is a fluid-filled cavity inside the spinal cord.');
-    await page.locator('.x-cond-list label', { hasText: 'After decompression' }).click();
+    await page.locator('.x-cond-list label', { hasText: 'After surgery' }).click();
     await expect(page.getByRole('application', { name: /after decompression surgery: bone at the back of the skull opening/ })).toBeVisible();
     await expect(page.locator('[data-cond-note]')).toContainText("Results vary, and surgery isn't right for everyone.");
   });

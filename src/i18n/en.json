@@ -192,13 +192,13 @@
           "num": "02",
           "page": "mri",
           "title": "Reading your MRI report",
-          "wide": "Words you might see on an MRI report about Chiari, in plain language, each linked to the 3D model.",
+          "wide": "Words you might see on an MRI report about Chiari, in plain language, most linked to the 3D model.",
           "narrow": "What the words on your MRI report mean."
         },
         {
           "num": "03",
           "page": "prep",
-          "title": "Doctor visit prep",
+          "title": "Visit prep",
           "wide": "Build a one-page list of questions for your next appointment. Nothing is saved.",
           "narrow": "A printable list of questions. Nothing saved."
         },
@@ -297,7 +297,7 @@
     "links": {
       "children": "Helping your child",
       "model": "Open model",
-      "support": "Support",
+      "support": "Support Chiari organizations",
       "kit": "Awareness kit",
       "impact": "Impact",
       "openSource": "Open source",
@@ -358,7 +358,7 @@
         "noteShort": "A fluid-filled cavity has formed inside the spinal cord."
       },
       "surgery": {
-        "label": "After decompression",
+        "label": "After surgery",
         "short": "After surgery",
         "note": "Surgeons remove a small piece of bone at the back of the skull opening and often the back of the first vertebra. Often they also open and patch the brain's covering to make more room for spinal fluid. The tonsils often rise only partly. Surgery improves or stabilizes symptoms in most people, though damage that has already happened may not fully reverse, and some people need more than one operation. Results vary, and surgery isn't right for everyone.",
         "noteShort": "Bone is removed at the back of the opening to make room. Most people improve or stabilize, but results vary, some need another operation, and surgery isn't right for everyone."
@@ -874,7 +874,7 @@
     "previewPrint": "Preview and print",
     "pdf": "Save as PDF",
     "diagram": "Include a small diagram of Chiari",
-    "pageNote": "Not medical advice. Your choices on this page are never stored or sent.",
+    "pageNote": "Your choices on this page are never stored or sent.",
     "sheetMeta": "Chiari malformation · Date: ____________ · Doctor: ______________________",
     "sheetFooter": "Made with Open Chiari · openchiari.org · Not medical advice",
     "diagramCaption": "Chiari I. Tonsils shown at their lowest point, where MRI measures them. Illustration, not a medical image.",
@@ -1087,7 +1087,7 @@
         "text": "Your note goes in the message you send, not in the link. The link holds only the chosen view, after the #. Browsers don't send that part to our server, and the counter never receives it."
       },
       {
-        "term": "Visit prep questions",
+        "term": "Visit prep",
         "text": "Built and printed entirely in your browser. Nothing you tick or type leaves your device."
       },
       {
@@ -1146,7 +1146,7 @@
     "views": "Typical, Chiari I, Chiari I with syrinx, after decompression",
     "checksLabel": "Accuracy checks",
     "checks": "Measured against published sources; not reviewed by a medical professional",
-    "figNum": "Fig. 2",
+    "figNum": "Fig. 1",
     "figCaption": "Chiari I with syrinx, one of four included views.",
     "embedTitle": "Embed the viewer",
     "startingView": "Starting view",
@@ -1154,7 +1154,7 @@
       "chiari": "Chiari I",
       "typical": "Typical anatomy",
       "syrinx": "Chiari I with syrinx",
-      "surgery": "After decompression"
+      "surgery": "After surgery"
     },
     "showSwitch": "Show condition switch",
     "showLabels": "Show labels",
@@ -1198,7 +1198,7 @@
     "creditTitle": "How to credit it",
     "creditIntro": "Keep this line wherever you use the model, and share any changed version under the same license.",
     "creditLine": "Chiari model by Open Chiari (openchiari.org), CC BY-SA 4.0, adapted from Z-Anatomy (CC BY-SA 4.0) and BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 JP)",
-    "footnote": "Not medical advice. Illustrations for education, not medical images.",
+    "footnote": "Illustrations for education, not medical images.",
     "copied": "Copied",
     "citeLabel": "Cite",
     "cite": "Borgfeld M. Open Chiari: an open 3D anatomy model of Chiari malformation type I. Zenodo. doi:"
@@ -1294,7 +1294,7 @@
     "registryBefore": "Also see the",
     "registry": "Bobby Jones Chiari & Syringomyelia Foundation patient registry",
     "registryAfter": "(enrollment currently paused).",
-    "creditBefore": "Not medical advice. Study data from",
+    "creditBefore": "Study data from",
     "creditSource": "ClinicalTrials.gov",
     "creditAfter": ", processed {date}. Summaries simplified by Open Chiari."
   },
@@ -1706,15 +1706,16 @@
       "print": "Print the school sheet",
       "callIf": "Please call me right away if"
     },
-    "pageNote": "Not medical advice. Nothing you type on this page is stored or sent.",
+    "pageNote": "Nothing you type on this page is stored or sent.",
     "stickers": {
       "before": "For after surgery, there are printable stickers too:",
       "link": "stickers for after surgery",
       "after": "."
-    }
+    },
+    "onPage": "On this page"
   },
   "mri": {
-    "_note": "Pending Matthew's approval. Draft and sources: docs/drafts/2026-11-05-mri-report-and-warning-signs.md; check: docs/audits/2026-11-05-mri-and-warning-signs-audit.md.",
+    "_note": "Approved by Matthew on Nov 5, 2026. Draft and sources: docs/drafts/2026-11-05-mri-report-and-warning-signs.md; checks: docs/audits/2026-11-05-mri-and-warning-signs-*.md; EVIDENCE rows 29-30.",
     "title": "Reading your MRI report",
     "metaDescription": "Words you might see on an MRI report about Chiari malformation, in plain language, most linked to the 3D model.",
     "intro": "Words you might see on an MRI report about Chiari, in plain language, most with a link to see it in the 3D model. This page can't tell you what your scan means. A doctor looks at the scan together with your symptoms.",
@@ -1850,5 +1851,32 @@
     "nextAfter": ".",
     "sourcesBefore": "Every sentence on this page comes from a published source, listed in the",
     "sourcesLink": "evidence notes"
+  },
+  "next": {
+    "label": "Next",
+    "prep": {
+      "page": "explain",
+      "text": "Explain it to family and friends with Explain It"
+    },
+    "children": {
+      "page": "prepSurgery",
+      "text": "Get questions ready for the surgery visit"
+    },
+    "model": {
+      "page": "kit",
+      "text": "Free awareness kit for your organization"
+    },
+    "privacy": {
+      "page": "explorer",
+      "text": "Open the 3D Explorer"
+    },
+    "evidence": {
+      "page": "explorer",
+      "text": "See these views in the 3D Explorer"
+    },
+    "mri": {
+      "page": "tour",
+      "text": "Take the 2-minute tour"
+    }
   }
 }

@@ -7,6 +7,7 @@
  * or sent (no form submission, no network request). tests/site.spec.ts checks this.
  */
 import Base from '../layouts/Base.astro';
+import NextStep from '../components/NextStep.astro';
 import AnatomyFigure from '../components/AnatomyFigure.astro';
 import ListenButton from '../components/ListenButton.astro';
 import { getStrings } from '../i18n';
@@ -33,6 +34,16 @@ const pages = t.story.pages.map((p, i) => ({ ...p, n: t.story.pageLabel.replace(
       <h1 class="serif">{t.title}</h1>
       <p>{t.intro}</p>
     </div>
+
+    <nav class="on-page" aria-labelledby="on-page-title">
+      <p id="on-page-title" class="mono">{t.onPage}</p>
+      <ul>
+        <li><a href="#ready-title">{t.ready.title}</a></li>
+        <li><a href="#story-title">{t.story.title}</a></li>
+        <li><a href="#color-title">{t.color.title}</a></li>
+        <li><a href="#school-title">{t.school.title}</a></li>
+      </ul>
+    </nav>
 
     <section class="ready" aria-labelledby="ready-title">
       <h2 id="ready-title" class="serif">{t.ready.title}</h2>
@@ -133,6 +144,7 @@ const pages = t.story.pages.map((p, i) => ({ ...p, n: t.story.pageLabel.replace(
     </section>
 
     <p class="page-note">{t.pageNote}</p>
+    <NextStep from="children" />
   </div>
 
   <!-- Printed versions: each prints only from its own button (the page sets data-printing on <html>). -->
@@ -238,6 +250,30 @@ const pages = t.story.pages.map((p, i) => ({ ...p, n: t.story.pageLabel.replace(
     display: flex;
     flex-direction: column;
     gap: 10px;
+  }
+  .on-page {
+    margin: 0 0 var(--s-32);
+  }
+  .on-page p {
+    font-size: var(--text-mono);
+    color: var(--muted);
+    margin: 0 0 var(--s-4);
+  }
+  .on-page ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--s-24);
+  }
+  .on-page a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch);
+  }
+  section :global(h2[id]) {
+    scroll-margin-top: var(--s-16);
   }
   .page-intro h1 {
     font-size: var(--h1-page);

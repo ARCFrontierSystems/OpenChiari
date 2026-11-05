@@ -8,6 +8,7 @@
  *   Typical and Chiari I -> #3d-model-shapes, Chiari I with syrinx -> #syrinx, After decompression -> #after-decompression
  */
 import Base from '../layouts/Base.astro';
+import NextStep from '../components/NextStep.astro';
 import { getStrings } from '../i18n';
 import { Content } from '../../docs/EVIDENCE.md';
 
@@ -25,6 +26,7 @@ const spanish = Astro.currentLocale === 'es';
     <div class="md" lang={spanish ? 'en' : undefined}>
       <Content />
     </div>
+    <NextStep from="evidence" />
   </div>
 </Base>
 
@@ -75,6 +77,14 @@ const spanish = Astro.currentLocale === 'es';
     font-size: 19px;
     margin: var(--s-32) 0 var(--s-12);
     scroll-margin-top: var(--s-24);
+  }
+  /* Scroll cue: a shadow shows on the side that has more table (the classic background-attachment trick). */
+  .md :global(.table-scroll) {
+    background:
+      linear-gradient(to right, var(--paper) 30%, transparent) left / 24px 100% no-repeat local,
+      linear-gradient(to left, var(--paper) 30%, transparent) right / 24px 100% no-repeat local,
+      radial-gradient(farthest-side at 0 50%, rgba(0, 0, 0, 0.18), transparent) left / 10px 100% no-repeat scroll,
+      radial-gradient(farthest-side at 100% 50%, rgba(0, 0, 0, 0.18), transparent) right / 10px 100% no-repeat scroll;
   }
   .md :global(.table-scroll:focus-visible) {
     outline: 2px solid var(--accent);

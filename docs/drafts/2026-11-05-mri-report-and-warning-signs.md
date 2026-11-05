@@ -1,6 +1,6 @@
 # Reading your MRI report, and warning signs after surgery: wording for Matthew's approval (November 5, 2026)
 
-**Status: checked twice, waiting for Matthew's approval.** Second check: `docs/audits/2026-11-05-mri-and-warning-signs-recheck.md`; evidence rows 29 and 30. Part of Phase B, "a path for the newly diagnosed", which Matthew approved on Nov 5 ("implement your refined recommendations… I agree with the order").
+**Status: approved by Matthew on Nov 5 ("Approved"); recorded in COPY.md. Checked twice.** Second check: `docs/audits/2026-11-05-mri-and-warning-signs-recheck.md`; evidence rows 29 and 30. Part of Phase B, "a path for the newly diagnosed", which Matthew approved on Nov 5 ("implement your refined recommendations… I agree with the order").
 
 Both pieces are **new medical text**. The first draft was checked with the sources open (`docs/audits/2026-11-05-mri-and-warning-signs-audit.md`, text copies of the sources in `docs/audits/sources/2026-11-05-mri/`).
 

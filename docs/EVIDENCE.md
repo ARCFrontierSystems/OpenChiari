@@ -1,10 +1,12 @@
 # Evidence
 
-Checked November 3, 2026; accuracy-audit fixes added November 4, 2026. Mirrors the "Evidence" tab of the planning doc.
+Checked November 3, 2026, and updated with every change since (latest: November 5, 2026).
 
-**Opened** means the source page itself was opened and read during the November 4 accuracy checks (CLAUDE.md rule 1a, check 1), not just a search summary. Quotes for opened sources are in the audit reports in `docs/audits/`.
+Every medical sentence on the site and every shape in the 3D model is listed here with the source it rests on. **Nothing medical is published without a row here.**
 
-Every medical sentence on the site and every shape in the 3D model is listed here with the source it rests on. **Nothing medical ships without a row in this file.** The exact site wording lives in `docs/COPY.md`.
+**Opened** means the source itself was opened and read, not just a search summary.
+
+*For the people who maintain the site:* this file mirrors the "Evidence" tab of the planning doc. Quotes from opened sources are in the audit reports in `docs/audits/`, the exact site wording is in `docs/COPY.md`, and the checks follow CLAUDE.md rule 1a.
 
 | Verdict | Meaning |
 | --- | --- |

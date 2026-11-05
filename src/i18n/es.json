@@ -192,13 +192,13 @@
           "num": "02",
           "page": "mri",
           "title": "Cómo leer el informe de su resonancia",
-          "wide": "Palabras que puede ver en un informe de resonancia sobre Chiari, en lenguaje sencillo y enlazadas al modelo 3D.",
+          "wide": "Palabras que puede ver en un informe de resonancia sobre Chiari, en lenguaje sencillo, la mayoría enlazadas al modelo 3D.",
           "narrow": "Qué significan las palabras de su informe de resonancia."
         },
         {
           "num": "03",
           "page": "prep",
-          "title": "Prepare su cita médica",
+          "title": "Prepare su cita",
           "wide": "Haga una lista de preguntas de una página para su próxima cita. No se guarda nada.",
           "narrow": "Una lista de preguntas para imprimir. No se guarda nada."
         },
@@ -212,7 +212,7 @@
         {
           "num": "05",
           "page": "explain",
-          "title": "Explain It (Explíquelo)",
+          "title": "Explain It",
           "wide": "Envíe a su familia, a los maestros o a su empleador un enlace a la vista que corresponde a su diagnóstico.",
           "narrow": "Envíe un enlace a la vista que corresponde a su diagnóstico."
         },
@@ -297,7 +297,7 @@
     "links": {
       "children": "Cómo ayudar a su hijo",
       "model": "Modelo abierto",
-      "support": "Apoyo",
+      "support": "Apoye a las organizaciones de Chiari",
       "kit": "Kit de concientización",
       "impact": "Impacto",
       "openSource": "Código abierto",
@@ -358,7 +358,7 @@
         "noteShort": "Se formó una cavidad llena de líquido dentro de la médula espinal."
       },
       "surgery": {
-        "label": "Después de la descompresión",
+        "label": "Después de la cirugía",
         "short": "Después de la cirugía",
         "note": "Los cirujanos retiran un pequeño trozo de hueso de la parte de atrás de la abertura del cráneo y, a menudo, la parte de atrás de la primera vértebra. A menudo también abren la membrana que cubre el cerebro y le colocan un parche para dar más espacio al líquido cefalorraquídeo. Las amígdalas cerebelosas a menudo suben solo en parte. La cirugía mejora o estabiliza los síntomas en la mayoría de las personas, aunque el daño que ya ocurrió puede no revertirse por completo, y algunas personas necesitan más de una operación. Los resultados varían, y la cirugía no es adecuada para todos.",
         "noteShort": "Se retira hueso de la parte de atrás de la abertura para dar espacio. La mayoría de las personas mejoran o se estabilizan, pero los resultados varían, algunas necesitan otra operación y la cirugía no es adecuada para todos."
@@ -874,7 +874,7 @@
     "previewPrint": "Ver e imprimir",
     "pdf": "Guardar como PDF",
     "diagram": "Incluir un pequeño diagrama de Chiari",
-    "pageNote": "No es consejo médico. Lo que elija en esta página nunca se guarda ni se envía.",
+    "pageNote": "Lo que elija en esta página nunca se guarda ni se envía.",
     "sheetMeta": "Malformación de Chiari · Fecha: ____________ · Médico: ______________________",
     "sheetFooter": "Hecho con Open Chiari · openchiari.org · No es consejo médico",
     "diagramCaption": "Chiari I. Las amígdalas cerebelosas se muestran en su punto más bajo, donde se miden en la resonancia magnética. Ilustración, no es una imagen médica.",
@@ -1146,7 +1146,7 @@
     "views": "Típica, Chiari I, Chiari I con siringe, después de la descompresión",
     "checksLabel": "Comprobaciones de exactitud",
     "checks": "Medido según fuentes publicadas; no revisado por un profesional médico",
-    "figNum": "Fig. 2",
+    "figNum": "Fig. 1",
     "figCaption": "Chiari I con siringe, una de las cuatro vistas incluidas.",
     "embedTitle": "Inserte el visor",
     "startingView": "Vista inicial",
@@ -1154,7 +1154,7 @@
       "chiari": "Chiari I",
       "typical": "Anatomía típica",
       "syrinx": "Chiari I con siringe",
-      "surgery": "Después de la descompresión"
+      "surgery": "Después de la cirugía"
     },
     "showSwitch": "Mostrar el selector de afección",
     "showLabels": "Mostrar los nombres",
@@ -1198,7 +1198,7 @@
     "creditTitle": "Cómo dar crédito",
     "creditIntro": "Mantenga esta línea dondequiera que use el modelo, y comparta cualquier versión modificada con la misma licencia.",
     "creditLine": "Modelo de Chiari de Open Chiari (openchiari.org), CC BY-SA 4.0, adaptado de Z-Anatomy (CC BY-SA 4.0) y BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 JP)",
-    "footnote": "No es consejo médico. Ilustraciones con fines educativos, no son imágenes médicas.",
+    "footnote": "Ilustraciones con fines educativos, no son imágenes médicas.",
     "copied": "Copiado",
     "citeLabel": "Cómo citarlo",
     "cite": "Borgfeld M. Open Chiari: an open 3D anatomy model of Chiari malformation type I. Zenodo. doi:"
@@ -1294,7 +1294,7 @@
     "registryBefore": "Vea también el",
     "registry": "registro de pacientes de la Bobby Jones Chiari & Syringomyelia Foundation",
     "registryAfter": "(las inscripciones están en pausa por ahora).",
-    "creditBefore": "No es consejo médico. Datos de los estudios de",
+    "creditBefore": "Datos de los estudios de",
     "creditSource": "ClinicalTrials.gov",
     "creditAfter": ", procesados el {date}. Resúmenes simplificados por Open Chiari."
   },
@@ -1706,15 +1706,16 @@
       "print": "Imprimir la hoja para la escuela",
       "callIf": "Por favor llámeme de inmediato si"
     },
-    "pageNote": "No es consejo médico. Nada de lo que escriba en esta página se guarda ni se envía.",
+    "pageNote": "Nada de lo que escriba en esta página se guarda ni se envía.",
     "stickers": {
       "before": "Para después de la cirugía, también hay calcomanías para imprimir:",
       "link": "calcomanías para después de la cirugía",
       "after": "."
-    }
+    },
+    "onPage": "En esta página"
   },
   "mri": {
-    "_note": "Pendiente de la aprobación de Matthew y de la revisión de un traductor médico.",
+    "_note": "Approved by Matthew on Nov 5, 2026. Draft and sources: docs/drafts/2026-11-05-mri-report-and-warning-signs.md; checks: docs/audits/2026-11-05-mri-and-warning-signs-*.md; EVIDENCE rows 29-30. Spanish: pending medical-translator review.",
     "title": "Cómo leer el informe de su resonancia",
     "metaDescription": "Palabras que puede ver en un informe de resonancia magnética sobre la malformación de Chiari, en lenguaje sencillo, la mayoría enlazadas al modelo 3D.",
     "intro": "Palabras que puede ver en un informe de resonancia magnética sobre Chiari, en lenguaje sencillo, la mayoría con un enlace para verla en el modelo 3D. Esta página no puede decirle qué significa su estudio. El médico revisa las imágenes junto con los síntomas que usted tiene.",
@@ -1850,5 +1851,32 @@
     "nextAfter": ".",
     "sourcesBefore": "Cada oración de esta página viene de una fuente publicada, que aparece en las",
     "sourcesLink": "notas de evidencia"
+  },
+  "next": {
+    "label": "Siguiente",
+    "prep": {
+      "page": "explain",
+      "text": "Explíqueselo a su familia y amigos con Explain It"
+    },
+    "children": {
+      "page": "prepSurgery",
+      "text": "Prepare preguntas para la consulta de cirugía"
+    },
+    "model": {
+      "page": "kit",
+      "text": "Kit de concientización gratis para su organización"
+    },
+    "privacy": {
+      "page": "explorer",
+      "text": "Abrir el explorador 3D"
+    },
+    "evidence": {
+      "page": "explorer",
+      "text": "Ver estas vistas en el explorador 3D"
+    },
+    "mri": {
+      "page": "tour",
+      "text": "Hacer el recorrido de 2 minutos"
+    }
   }
 }

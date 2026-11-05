@@ -136,6 +136,7 @@ const t = s.explain;
     host.hidden = false;
     try {
       const v = await createViewer(host, store, strings.figure, {
+        pageScroll: true,
         labelsHost: section.querySelector<HTMLElement>('[data-labels]'),
         labelMargins: { top: 12, bottom: 12 },
         labels: x.parts.map((p) => ({ part: p.id, num: p.num, name: p.name, layer: LABEL_LAYERS[p.id], anchor: labelAnchor(p.id, store.get().condition), conditions: p.conditions })),

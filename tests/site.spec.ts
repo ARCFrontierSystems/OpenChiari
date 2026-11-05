@@ -310,6 +310,11 @@ test.describe('Doctor visit prep', () => {
     await expect(preview.last()).toHaveText('<b>Is my headache normal?</b>');
 
     await page.getByLabel('Things I want to mention').fill('Started in March.');
+    await page.getByLabel('Things I want to mention').press('Enter');
+    await page.getByLabel('Things I want to mention').fill('<i>Worse when I cough</i>');
+    await page.locator('[data-mention-add]').click();
+    await expect(page.locator('[data-mention-list] input:checked')).toHaveCount(2);
+    await expect(page.getByLabel('Things I want to mention')).toHaveValue('');
     await page.getByLabel('Include a small diagram of Chiari').uncheck();
 
     // Tick everything, then check the printed sheet is still one page on Letter and A4.
@@ -317,7 +322,7 @@ test.describe('Doctor visit prep', () => {
     await page.emulateMedia({ media: 'print' });
     await expect(page.locator('[data-print-sheet]')).toBeVisible();
     await expect(page.locator('[data-sheet-list] li')).toHaveCount(13);
-    await expect(page.locator('[data-sheet-mention]')).toHaveText('Started in March.');
+    await expect(page.locator('[data-sheet-mention] li')).toHaveText(['Started in March.', '<i>Worse when I cough</i>']);
     await expect(page.locator('[data-sheet-diagram]')).toBeHidden();
     await expect(page.locator('.prep-form')).toBeHidden();
     for (const format of ['Letter', 'A4'] as const) {
@@ -335,7 +340,7 @@ test.describe('Doctor visit prep', () => {
 
     await page.getByLabel('Which of my symptoms do you think come from Chiari?').uncheck();
     await page.getByLabel('Add your own question').fill('A private question');
-    await page.getByRole('button', { name: 'Add', exact: true }).click();
+    await page.locator('[data-own-add]').click();
     await page.getByLabel('Things I want to mention').fill('Something private');
     await page.getByLabel('Things I want to mention').press('Enter');
     await page.locator('summary', { hasText: 'Treatment' }).click();
@@ -440,6 +445,9 @@ test('Explain It: carries the view from the Explorer; the link is short and hold
   await expect(page.locator('[data-shared-note]')).toBeHidden();
   await expect(page.locator('[data-caption]')).toHaveText('Typical anatomy, back view. Illustration, not a medical image. Fluid flow simplified.');
   await expect(page.getByRole('link', { name: 'Explore the full 3D model' })).toHaveAttribute('href', /\/explorer\/#typ\.back/);
+  // In a page that scrolls, swiping up or down over the model scrolls the page; sideways turns it.
+  await page.goto(link.replace('#typ.back', '#typ.back.x'));
+  await expect(page.locator('[data-recipient] canvas')).toHaveCSS('touch-action', 'pan-y', { timeout: 30000 });
   for (const s of sent) expect(s).not.toContain('7Q2');
 });
 
@@ -461,5 +469,7 @@ test('Explain It: the note is shown as text, the note is limited to 280 characte
   await page.goto('/v/#syr.custom.m.o-30,12,150.c35.hskin+bone');
   await expect(page.locator('[data-caption]')).toHaveText(/^Chiari I with syrinx, /);
   await expect(page.locator('[data-caption]')).not.toContainText('Drag to turn the model.');
+  // A look-only model never takes the finger from the page, so swiping over it scrolls.
+  await expect(page.locator('[data-recipient] canvas')).toHaveCSS('touch-action', 'auto', { timeout: 30000 });
   await expect(page.getByRole('link', { name: 'Explore the full 3D model' })).toHaveAttribute('href', /#syr\.custom\.m\.x\.o-30,12,150\.c35\.hskin\+bone$/);
 });

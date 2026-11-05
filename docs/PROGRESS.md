@@ -3,6 +3,19 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: Visit prep mention list; smoother scrolling on phones
+
+- **Visit prep (Matthew):** "Things I want to mention" had no Add button.
+  - It is now a type-and-Add list, like "Add your own question".
+  - Each item has a tick box, so it can be left off the sheet.
+  - The items print as a list on the sheet.
+  - No new text.
+- **3D stutter while scrolling on phones (Matthew).** I couldn't reproduce this on a real phone here. Three likely causes are fixed:
+  - **Resizing on every scroll step.** The Explorer's height followed the phone's address bar (`dvh`), so the 3D view was resized and redrawn on every scroll step. It now uses `svh`, which stays fixed.
+  - **The flow pulse kept animating.** It now pauses while the page scrolls.
+  - **Swipes over the model didn't scroll the page.** On Explain It and embeds, an up-or-down swipe over the model now scrolls the page and a sideways swipe turns it. A look-only shared model no longer stops the page from scrolling at all.
+- **Two-minute tour:** still opens the Explorer (the approved stand-in). Only step 3 of the five tour steps has approved text; the tour is Phase 4. Asked Matthew whether to hide the button until then.
+
 ## 2026-11-05: Explain It: short links, note in the message
 
 - **Matthew's request:**

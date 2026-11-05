@@ -112,6 +112,9 @@ export interface ViewerOptions {
   startOrbit?: { az: number; el: number; zoom: number } | null;
   /** false: look only (no turning, zooming, moving or camera keys), for a shared view the sender fixed. */
   interactive?: boolean;
+  /** true when the viewer sits inside a page that scrolls (Explain It, embeds): an up-or-down swipe on the model
+   *  scrolls the page, and a sideways swipe turns the model. */
+  pageScroll?: boolean;
 }
 
 export async function createViewer(host: HTMLElement, store: Store, figureStrings: FigureStrings, options: ViewerOptions = {}) {
@@ -428,6 +431,9 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   controls.maxDistance = 2000;
   const interactive = options.interactive !== false;
   controls.enabled = interactive;
+  // Phones: a look-only model never takes the finger from the page; in a scrolling page, swiping up or down scrolls.
+  // (Set after OrbitControls, which sets its own.)
+  renderer.domElement.style.touchAction = !interactive ? 'auto' : options.pageScroll ? 'pan-y' : 'none';
   // Only a real turn, zoom or move by the visitor counts as leaving a named camera view (a tap doesn't).
   let userMoving = false;
   controls.addEventListener('start', () => {
@@ -860,6 +866,8 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   }
   let flowLoop = 0;
   let lastFlowFrame = 0;
+  let lastPageScroll = -Infinity;
+  window.addEventListener('scroll', () => (lastPageScroll = performance.now()), { passive: true, capture: true });
   function startFlowLoop() {
     if (flowLoop) return;
     const tick = (now: number) => {
@@ -870,8 +878,9 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
         requestRender();
         return;
       }
-      // About 30 frames a second is plenty for a gentle pulse, and easier on phone batteries.
-      if (visible && !document.hidden && now - lastFlowFrame > 30) {
+      // About 30 frames a second is plenty for a gentle pulse, and easier on phone batteries. The pulse holds
+      // still while the page is scrolling, so the phone can give scrolling its full attention.
+      if (visible && !document.hidden && now - lastFlowFrame > 30 && now - lastPageScroll > 250) {
         lastFlowFrame = now;
         placeFlow(now / 1000);
         requestRender();

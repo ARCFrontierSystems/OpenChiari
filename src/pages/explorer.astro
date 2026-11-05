@@ -1254,13 +1254,14 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
       color: var(--x-text);
     }
 
+    /* Phones: the model takes most of the first screen, and the panel under it flows with the page (no box that
+       scrolls inside the page, which cut off the surgery steps and, in Calm mode, the cough question). */
     .workspace {
       position: relative;
       grid-template-columns: minmax(0, 1fr);
-      grid-template-rows: minmax(0, 1fr) auto;
-      height: calc(100vh - 57px);
-      height: calc(100svh - 57px);
-      min-height: 560px;
+      grid-template-rows: auto auto;
+      height: auto;
+      min-height: 0;
     }
     /* The left panel becomes the "Layers" panel, opened from the viewport. */
     .x-left {
@@ -1285,6 +1286,9 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
     }
     .x-view {
       grid-row: 1;
+      height: 62vh;
+      height: 62svh;
+      min-height: 340px;
     }
     .x-figure {
       inset: 8px 8px 8px 8px;
@@ -1312,9 +1316,6 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
       display: flex;
       flex-direction: column;
       gap: var(--s-12);
-      max-height: 50vh;
-      max-height: 50svh;
-      overflow-y: auto;
     }
     .x-cond-grid {
       margin: 0;

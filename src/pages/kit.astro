@@ -93,6 +93,14 @@ const items = [
       ))}
     </ul>
 
+    <section class="orgs" aria-labelledby="orgs-title">
+      <div>
+        <h2 id="orgs-title" class="serif">{k.orgsTitle}</h2>
+        <p>{k.orgsText}</p>
+      </div>
+      <a class="button button-secondary" href="#make">{b.title}</a>
+    </section>
+
     <section class="builder" id="make" aria-labelledby="make-title">
       <h2 id="make-title" class="serif">{b.title}</h2>
       <p class="builder-intro">{b.intro}</p>
@@ -237,13 +245,6 @@ const items = [
       </div>
     </section>
 
-    <section class="orgs" aria-labelledby="orgs-title">
-      <div>
-        <h2 id="orgs-title" class="serif">{k.orgsTitle}</h2>
-        <p>{k.orgsText}</p>
-      </div>
-      <a class="button button-secondary" href="#make">{b.title}</a>
-    </section>
 
     <p class="license">{k.license}</p>
   </div>

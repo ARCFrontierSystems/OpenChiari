@@ -480,6 +480,49 @@ test('the hosting rules let browsers run only the site\'s own scripts, and the 3
   await context.close();
 });
 
+test('Awareness kit, Make your own: messages only from the approved list, downloads a PNG, prints as text, sends and stores nothing', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/kit/', { waitUntil: 'networkidle' });
+  const requests: string[] = [];
+  page.on('request', (r) => requests.push(r.url()));
+  const before = await page.evaluate(() => ({ local: { ...localStorage }, session: { ...sessionStorage }, cookies: document.cookie }));
+
+  // The main message can only be one of the approved lines (a list, not a text box).
+  await expect(page.locator('select[data-field="message"] option')).toHaveCount(6);
+  await page.locator('[data-field="own"]').fill('<b>Walking for Emma</b>');
+  await page.locator('[data-field="name"]').fill('Sample group');
+  const [download] = await Promise.all([page.waitForEvent('download'), page.locator('[data-builder-download]').click()]);
+  expect(download.suggestedFilename()).toBe('open-chiari-square.png');
+
+  await page.locator('input[name="design"][value="poster"]').check();
+  await expect(page.locator('[data-out="own"]')).toHaveText('<b>Walking for Emma</b>');
+  await expect(page.locator('[data-poster]')).toContainText('3D model by Open Chiari');
+  await expect(page.locator('[data-poster]')).toContainText('Not medical advice.');
+  await page.evaluate(() => (window.print = () => {}));
+  await page.locator('[data-builder-print]').click();
+  await page.emulateMedia({ media: 'print' });
+  await expect(page.locator('[data-poster]')).toBeVisible();
+  await expect(page.locator('.builder-form')).toBeHidden();
+  const pdf = (await page.pdf({ format: 'Letter', printBackground: true })).toString('latin1');
+  expect(pdf.match(/\/Type\s*\/Page[^s]/g)?.length).toBe(1);
+  await page.emulateMedia({ media: 'screen' });
+
+  await page.locator('input[name="design"][value="stickers"]').check();
+  await page.locator('[data-field="sticker"]').fill('Team Emma');
+  await expect(page.locator('[data-sticker-text]')).toHaveCount(12);
+  await expect(page.locator('[data-sticker-text]').first()).toHaveText('Team Emma');
+
+  const after = await page.evaluate(() => ({ local: { ...localStorage }, session: { ...sessionStorage }, cookies: document.cookie }));
+  expect(after).toEqual(before);
+  expect(requests.filter((u) => !u.startsWith('blob:'))).toEqual([]);
+});
+
+test('Home: the tools include Helping your child, the Awareness kit and Connect with others', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('.tools li')).toHaveCount(9);
+  for (const href of ['/children/', '/kit/', '/support/#connect']) await expect(page.locator(`.tools a[href="${href}"]`)).toHaveCount(1);
+});
+
 test.describe('Helping your child', () => {
   test('the school sheet prints what was typed, as text only, and nothing is stored or sent', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });

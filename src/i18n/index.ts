@@ -27,6 +27,7 @@ export const routes = {
   studies: '/studies/',
   prep: '/prep/',
   children: '/children/',
+  connect: '/support/#connect',
   model: '/model/',
   support: '/support/',
   kit: '/kit/',

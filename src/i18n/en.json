@@ -200,6 +200,27 @@
           "title": "Support Chiari organizations",
           "wide": "Donate to or volunteer with the groups funding research and supporting families.",
           "narrow": "Donate or volunteer on their own sites."
+        },
+        {
+          "num": "07",
+          "page": "children",
+          "title": "Helping your child",
+          "wide": "Getting a child ready for Chiari surgery: tips, a picture story, coloring pages and a sheet for school.",
+          "narrow": "Tips, a picture story and a sheet for school."
+        },
+        {
+          "num": "08",
+          "page": "kit",
+          "title": "Awareness kit",
+          "wide": "Free posts, posters and stickers to share, or make your own with your words and logo.",
+          "narrow": "Free posts, posters and stickers to share."
+        },
+        {
+          "num": "09",
+          "page": "connect",
+          "title": "Connect with others",
+          "wide": "Forums and support groups for people with Chiari and their families.",
+          "narrow": "Forums and support groups."
         }
       ]
     }
@@ -1258,7 +1279,7 @@
     "logoSpace": "your logo",
     "items": {
       "social": {
-        "title": "Square social post",
+        "title": "Square social post: what Chiari is",
         "format": "1080 × 1080 · PNG"
       },
       "quote": {
@@ -1272,14 +1293,88 @@
       "poster": {
         "title": "Event poster and handout",
         "format": "Letter and A4 · PDF, with logo space"
+      },
+      "stickers": {
+        "title": "Stickers",
+        "format": "Letter and A4 · PDF, for full-sheet sticker paper"
       }
     },
     "download": "Download",
     "letter": "Letter",
     "orgsTitle": "For organizations",
-    "orgsText": "Need the kit in your colors, or a version for a specific event? Get in touch and it's made for you, free.",
+    "orgsText": "Want your own version? Use \"Make your own\" below to add your words, logo and colors. Nothing you add is sent anywhere.",
     "contact": "Contact Open Chiari",
-    "license": "Kit graphics are free to use and share, CC BY-SA 4.0. Graphics showing the 3D model also carry the Z-Anatomy and BodyParts3D credit."
+    "license": "Kit graphics are free to use and share, CC BY-SA 4.0. Graphics showing the 3D model also carry the Z-Anatomy and BodyParts3D credit.",
+    "explain": {
+      "headline": "What is Chiari malformation?",
+      "lines": [
+        "The lowest part of the back of the brain extends below the opening at the base of the skull.",
+        "Most people are born with the skull differences that lead to it. Some never have symptoms; others first notice them as teens or adults.",
+        "The classic sign is a headache at the back of the head after coughing, sneezing or straining.",
+        "Chiari symptoms often have few outward signs. Ask how you can help."
+      ],
+      "footer": "See it in 3D at openchiari.org · #ChiariAwareness"
+    },
+    "stickers": {
+      "title": "Stickers",
+      "format": "Letter and A4 · PDF, for full-sheet sticker paper",
+      "how": "Print on full-sheet sticker paper at 100% size, then cut along the dashed circles.",
+      "messages": [
+        "Chiari warrior",
+        "Brave brain",
+        "Zipper club",
+        "One day at a time",
+        "Rest is strength",
+        "Still me",
+        "Ask me about Chiari",
+        "I did a hard thing",
+        "Brave kid",
+        "You are not alone"
+      ],
+      "blank": "Write your own",
+      "site": "openchiari.org"
+    },
+    "builder": {
+      "title": "Make your own",
+      "intro": "Choose a design and message, add your own words, a logo or photo, and download it. Everything happens on your device: nothing you add is sent or saved.",
+      "design": "Design",
+      "designs": {
+        "square": "Square post",
+        "story": "Story",
+        "poster": "Poster",
+        "stickers": "Sticker sheet"
+      },
+      "message": "Message",
+      "messageHint": "Medical facts come only from this list, so every graphic stays accurate.",
+      "messages": [
+        "What is Chiari malformation?",
+        "Chiari symptoms often have few outward signs. Ask how you can help.",
+        "I have Chiari malformation.",
+        "Chiari looks different for everyone, and many people with Type I have no symptoms at all.",
+        "Most people are born with the skull differences that lead to it. Some never have symptoms; others first notice them as teens or adults.",
+        "The classic sign is a headache at the back of the head after coughing, sneezing or straining."
+      ],
+      "own": "Your own line (optional)",
+      "ownHint": "For example: Walking for my daughter Emma",
+      "name": "Name, group or event (optional)",
+      "when": "Date and place (optional)",
+      "stickerText": "Your sticker words",
+      "stickerHint": "Up to 3 short lines. Shown on all 12 stickers.",
+      "image": "Logo or photo (optional)",
+      "imageHint": "It stays on your device.",
+      "removeImage": "Remove",
+      "color": "Colors",
+      "colors": {
+        "purple": "Purple",
+        "light": "Light",
+        "dark": "Dark"
+      },
+      "size": "Paper size",
+      "download": "Download image",
+      "print": "Print or save as PDF",
+      "preview": "Preview",
+      "yours": "Your own words appear in a separate box, so it is clear they are yours."
+    }
   },
   "children": {
     "title": "Helping your child through Chiari surgery",

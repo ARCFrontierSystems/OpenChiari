@@ -49,6 +49,7 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
         <span class="x-calm-off" aria-hidden="true">{s.header.calm}</span>
         <span class="x-calm-on" aria-hidden="true">{s.calm.on}</span>
       </label>
+      <a class="x-compare only-wide-x" href={routes.compare}>{s.compare.title}</a>
       <a class="x-explain" href={routes.explain} aria-label={x.explainAria}>
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={linkIcon}></path></svg>
         <span class="only-wide-x">{x.explain}</span>
@@ -508,6 +509,16 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
   }
   .x-calm-on {
     display: none;
+  }
+  .x-compare {
+    min-height: var(--touch);
+    display: inline-flex;
+    align-items: center;
+    padding: 0 12px;
+    color: var(--x-text);
+    text-decoration: none;
+    border: 1px solid var(--x-control-border);
+    border-radius: var(--radius);
   }
   .x-explain {
     display: inline-flex;

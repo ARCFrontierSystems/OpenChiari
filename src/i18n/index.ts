@@ -13,6 +13,7 @@ export const routes = {
   home: '/',
   explorer: '/explorer/',
   explain: '/explain/',
+  compare: '/explorer/compare/',
   studies: '/studies/',
   prep: '/prep/',
   model: '/model/',

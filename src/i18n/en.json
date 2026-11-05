@@ -898,5 +898,17 @@
     "orgsText": "Want Open Chiari on your own site, in your colors, or a tool built around your needs? Let's talk.",
     "contact": "Contact Open Chiari",
     "footer": "A personal project by Matthew Borgfeld. Not medical advice."
+  },
+  "compare": {
+    "_note": "Text from docs/COPY.md '3D Explorer, side by side'. The notes for the syrinx and after-surgery views are the Explorer's own approved short notes (explorer.conditions.*.noteShort).",
+    "title": "Side by side",
+    "rotateTogether": "Rotate together",
+    "back": "Back to single view",
+    "left": "Left view condition",
+    "right": "Right view condition",
+    "notes": {
+      "typical": "Tonsils usually sit at or above the dashed line (a few millimeters below can be normal). The fluid space behind them is open.",
+      "chiari": "Tonsils extend below the line (blue bracket) and fill the space where fluid should pass. Red marks show where flow is often restricted."
+    }
   }
 }

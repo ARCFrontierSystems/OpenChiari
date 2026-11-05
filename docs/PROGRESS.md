@@ -3,6 +3,30 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: Evidence notes page; Phase 4 begins with side by side
+
+- **Evidence notes (`/evidence/`):**
+  - publishes `docs/EVIDENCE.md` itself;
+  - each Explorer view's "Evidence notes for this view" opens its own section: Typical and Chiari I go to "3D model shapes", the syrinx view to "Syrinx", After surgery to "After decompression";
+  - the to-do items in the file read "Done:" and "Still open:" (check boxes failed the accessibility scan).
+- **Quality report fix:**
+  - The scan filter matched no tests, so the Impact page briefly said "issues found".
+  - It now runs all 64 page checks (all pass), and reports "not measured" if none run.
+- **Counting:** still off. Cloudflare answered "authentication error" when creating the counter database, so the token needs Account > D1 > Edit. Matthew is checking.
+- **Source for "Symptoms can come and go and are often invisible":** still open.
+  - NINDS and StatPearls block automated readers with a robot check, and getting around a robot check isn't appropriate.
+  - A suitable 2026 qualitative study ("Living with Arnold-Chiari malformation...") is on pubmed.ncbi.nlm.nih.gov, which isn't allowed yet.
+  - Options for Matthew: paste the NINDS sentence himself, or allow pubmed and pmc.
+- **Phase 4, step 1: side by side (`/explorer/compare/`):**
+  - built from the Compare mockup, with text from COPY.md;
+  - two Simple models, each with its own condition and note (the syrinx and after-surgery notes are the Explorer's approved short notes);
+  - "Rotate together" (on by default) makes either view follow the other's camera exactly;
+  - the 2D figure appears where 3D can't run;
+  - captions, the evidence link, "Not medical advice" and the model credit are always shown;
+  - stacked on phones, where up-or-down swipes scroll the page;
+  - the Explorer header links to it ("Side by side", desktop);
+  - tests: the notes follow the condition, together moves both views, apart moves only one; accessibility scans pass. 103 tests pass.
+
 ## 2026-11-05: Realistic model smoother on phones
 
 - **Matthew:** the Simple model no longer stutters on his phone, but the realistic one still does.

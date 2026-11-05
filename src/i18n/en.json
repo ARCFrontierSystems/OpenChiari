@@ -400,9 +400,6 @@
     "inEnglish": "These notes are in English, like the sources they cite.",
     "intro": "The evidence notes list every medical sentence and every 3D shape on the site with the source it rests on. They are the working file the site is built from, so they also name files and checks used by the people who maintain it."
   },
-  "evidence": {
-    "inEnglish": "These notes are in English, like the sources they cite."
-  },
   "prep": {
     "title": "Prepare for your next appointment",
     "intro": {

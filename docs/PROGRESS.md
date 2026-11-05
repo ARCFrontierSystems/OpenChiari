@@ -25,6 +25,7 @@ Matthew's preference: when a step is done, lay out what the next step will cover
 - **For Matthew, in the Cloudflare dashboard:**
   - Cloudflare Web Analytics is switched on for the live site and loads a script from Cloudflare's address in every visitor's browser. Matthew chose Open Chiari's own counters instead, and CLAUDE.md rule 2 forbids third-party requests, so it should be turned off.
   - Email Address Obfuscation can stay on now that the address is marked.
+  - **Done Nov 5:** Matthew turned off Real user monitoring (RUM) for openchiari.org. The live site was checked afterward (Home, About, Explorer, Spanish Home, Visit prep): no analytics script, and no requests to any other address.
   - Safety net (not yet published): `public/_headers` tells browsers to run only the site's own scripts, so Cloudflare's analytics script is refused even if it is switched on. Tested on the Explorer, Visit prep and Helping your child pages. Matthew couldn't find openchiari.org in the Web Analytics list. It is probably switched on from the Pages project (Metrics tab), or listed under the pages.dev name.
 - **Left as is:**
   - The 3D model is saved for offline use only after the 3D Explorer has been opened once. This keeps the first visit light.

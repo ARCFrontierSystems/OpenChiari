@@ -17,8 +17,11 @@ export interface Layer {
 }
 
 /** Named camera directions; 'custom' once the visitor turns the model themselves. */
-export type CameraView = 'side' | 'back' | 'below' | 'front' | 'custom';
-export const CAMERA_PRESETS: Exclude<CameraView, 'custom'>[] = ['side', 'back', 'below', 'front'];
+export type CameraView = 'side' | 'back' | 'below' | 'front' | 'close' | 'custom';
+// 'close': a close-up of the skull opening, where Chiari happens (3D roadmap step 2, Nov 5).
+export const CAMERA_PRESETS: Exclude<CameraView, 'custom'>[] = ['side', 'back', 'below', 'front', 'close'];
+/** Which structures show: all, only the selected one, or all but the selected one. */
+export type Focus = 'all' | 'only' | 'hide';
 
 export interface ViewState {
   condition: Condition;
@@ -31,6 +34,7 @@ export interface ViewState {
   model: 'simple' | 'realistic';
   part: string;
   camera: CameraView;
+  focus: Focus;
 }
 
 // Starting view. Skin starts on, so the midline cut matches the figures; the mockup had it off.
@@ -50,6 +54,7 @@ export const initialState: ViewState = {
   model: 'simple',
   part: 'tonsil',
   camera: 'side',
+  focus: 'all',
 };
 
 type Listener = (state: ViewState) => void;

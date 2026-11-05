@@ -7,6 +7,8 @@ import '../styles/fonts.css';
 import '../styles/tokens.css';
 import '../styles/global.css';
 import { getStrings, otherLanguagePath } from '../i18n';
+// The headline font is fetched first: page titles are the largest thing drawn, so they decide how fast a page feels.
+import serifHeadline from '@fontsource/source-serif-4/files/source-serif-4-latin-600-normal.woff2?url';
 
 interface Props {
   title?: string;
@@ -33,6 +35,7 @@ const noindex = /^\/(es\/)?(embed|v)\//.test(here.endsWith('/') ? here : here + 
 <title>{pageTitle}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
+<link rel="preload" href={serifHeadline} as="font" type="font/woff2" crossorigin />
 {noindex && <meta name="robots" content="noindex" />}
 <meta name="theme-color" content={themeColor} />
 <link rel="icon" href="/brand/icon-32.png" type="image/png" sizes="32x32" />

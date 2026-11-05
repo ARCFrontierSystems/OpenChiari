@@ -19,6 +19,7 @@ import { LineSegments2 } from 'three/examples/jsm/lines/LineSegments2.js';
 import { LineSegmentsGeometry } from 'three/examples/jsm/lines/LineSegmentsGeometry.js';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import type { Store, ViewState, LayerId, CameraView } from './state';
 import { anatomyFigureSvg, FLOW, type FigureStrings, type FigureLayer } from '../lib/anatomy-figure';
 import { isCalm, onCalmChange } from '../lib/calm';
@@ -82,6 +83,7 @@ const PRESET_ANGLES: Record<Exclude<CameraView, 'custom'>, [number, number]> = {
   back: [90, 0],
   below: [0, -80],
   front: [-90, 0],
+  close: [28, -12],
 };
 
 export function webglAvailable(): boolean {
@@ -159,6 +161,23 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   camera.add(keyLight);
   scene.add(camera);
 
+  // Studio quality (3D roadmap step 1, Nov 5): on computers, the realistic model gets physically based materials lit
+  // by a soft studio environment made in the browser (no download), plus a rim light from behind that separates
+  // structures from the background and from each other. Phones and tablets keep the lighter matte shading.
+  // Only the shading changes: the shapes, and so every measurement, stay exactly the same.
+  const studio = !touchScreen;
+  let studioEnv: THREE.Texture | null = null;
+  if (studio) {
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    studioEnv = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    pmrem.dispose();
+    const rimLight = new THREE.DirectionalLight(0xfff4ea, 0.55);
+    rimLight.position.set(0.5, 0.35, -1);
+    camera.add(rimLight);
+  }
+  /** How shiny each tissue looks (1 = fully matte). Bone and skin are dry; brain is soft; fluid is wet. */
+  const ROUGHNESS: Record<string, number> = { skin: 0.9, bone: 0.78, brain: 0.62, csf: 0.3 };
+
   // Depth range: the camera's near and far limits hug the model (its bounding sphere), so the depth buffer can tell
   // apart surfaces about 1 mm apart, such as the tonsils and the fluid around them, even on devices with a coarse
   // (16-bit) depth buffer. A fixed 10 mm to 3 m range could not.
@@ -211,9 +230,15 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     mesh.geometry.computeVertexNormals();
     // The realistic model uses simpler (matte) shading, which costs a phone much less per pixel and looks the same
     // on these non-shiny surfaces; the Simple model keeps its original shading.
-    mesh.material = new (model === 'realistic' ? THREE.MeshLambertMaterial : THREE.MeshStandardMaterial)({
-      color,
-      ...(model === 'realistic' ? {} : { roughness: 0.85, metalness: 0 }),
+    const studioMaterial = model === 'realistic' && studio && studioEnv;
+    mesh.material = new (model === 'realistic' && !studioMaterial ? THREE.MeshLambertMaterial : THREE.MeshStandardMaterial)({
+      // Studio shading reflects more light than the matte one, so its base colors are a little deeper to look the same.
+      color: studioMaterial ? color.clone().multiplyScalar(0.8) : color,
+      ...(model === 'realistic'
+        ? studioMaterial
+          ? { roughness: ROUGHNESS[String(extras.layer)] ?? 0.7, metalness: 0, envMap: studioEnv, envMapIntensity: 0.12 }
+          : {}
+        : { roughness: 0.85, metalness: 0 }),
       side: THREE.DoubleSide,
       clippingPlanes: [plane],
       transparent: baseOpacity < 1,
@@ -834,10 +859,23 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     const t = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
     return Math.max(160 / t, 140 / (t * (w / Math.max(1, h))));
   }
+  /** A structure's anchor point (its label's point on the midline), in model mm. */
+  function anchorPoint(part: string) {
+    const [fx, fy] = labelAnchor(part, store.get().condition);
+    return new THREE.Vector3((fx - ORIGIN.x) / FIGURE_UNITS_PER_MM, -(fy - ORIGIN.y) / FIGURE_UNITS_PER_MM, 0);
+  }
   function goToPreset(view: CameraView) {
     if (view === 'custom') return;
     const [az, el] = PRESET_ANGLES[view];
-    moveCamera(az, el);
+    // The close-up looks at the skull opening from a little behind and below, near enough to see the tonsils clearly.
+    if (view === 'close') moveCamera(az, el, defaultDistance() * 0.42, anchorPoint('foramen'));
+    else moveCamera(az, el);
+  }
+  /** Glide to the selected structure and bring it close (or jump, in Calm mode). */
+  function focusPart(part: string) {
+    const [az, el] = anglesNow();
+    moveCamera(az, el, defaultDistance() * 0.5, anchorPoint(part));
+    if (store.get().camera !== 'custom') store.set({ camera: 'custom' });
   }
   /** Back to the starting view: side, whole head in view. */
   function resetCamera() {
@@ -870,6 +908,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       case '2': store.set({ camera: 'back' }); break;
       case '3': store.set({ camera: 'below' }); break;
       case '4': store.set({ camera: 'front' }); break;
+      case '5': store.set({ camera: 'close' }); break;
       case '0': case 'Home': resetCamera(); break;
       default: handled = false;
     }
@@ -1118,6 +1157,9 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     flowMat.opacity = seconds === null ? 1 : 0.65 + 0.35 * w;
   }
   let flowLoop = 0;
+  /** 1 = normal, 0.4 = slow, 0 = paused. */
+  let flowSpeed = 1;
+  let flowClock = performance.now() / 1000;
   let lastFlowFrame = 0;
   let lastPageScroll = -Infinity;
   window.addEventListener('scroll', () => (lastPageScroll = performance.now()), { passive: true, capture: true });
@@ -1134,9 +1176,11 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       // About 30 frames a second is plenty for a gentle pulse, and easier on phone batteries. The pulse holds
       // still while the page is scrolling, so the phone can give scrolling its full attention.
       if (visible && !document.hidden && now - lastFlowFrame > 30 && now - lastPageScroll > 250) {
+        // Flow time runs at the chosen speed (paused = 0), so pausing keeps the marks where they are.
+        flowClock += (Math.min(100, now - (lastFlowFrame || now)) / 1000) * flowSpeed;
         lastFlowFrame = now;
         const lift = coughLift(now / 1000);
-        placeFlow(now / 1000, lift);
+        placeFlow(flowClock, lift);
         measureGroup.visible = store.get().measure && coughStart < 0; // the bracket is hidden while the cough plays
         requestRender();
       }
@@ -1194,15 +1238,43 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   // ----- Apply the view state -----
   let lastCamera: CameraView = store.get().camera;
   let lastPart = '';
+  let lastCondition = '';
+  /** Switching between conditions: the structures that differ (the tonsils, the fluid behind them, the syrinx) fade
+   *  over FADE_MS, so the change reads in place. None in Calm mode or during the surgery play-through. */
+  function fadeCondition(before: string, after: string) {
+    if (!before || before === after || surgeryStage !== null || stillOnly()) return;
+    const was = new Set(parts.filter((p) => inView(p, before)).map((p) => p.name));
+    const now = new Set(parts.filter((p) => inView(p, after)).map((p) => p.name));
+    stageFade = {
+      start: performance.now(),
+      fadeIn: new Set([...now].filter((n) => !was.has(n))),
+      fadeOut: new Set([...was].filter((n) => !now.has(n))),
+    };
+    const tick = () => {
+      requestRender();
+      if (fadeProgress() < 1) requestAnimationFrame(tick);
+      else {
+        stageFade = null;
+        apply(store.get());
+      }
+    };
+    requestAnimationFrame(tick);
+  }
   function apply(st: ViewState) {
     setMoving(userMoving); // the resting sharpness depends on which model is showing
+    if (st.condition !== lastCondition) {
+      fadeCondition(lastCondition, st.condition);
+      lastCondition = st.condition;
+    }
     const depth = cutDepth(st.cut);
     plane.constant = depth;
     const midline = depth === 0;
     for (const p of parts) {
       const layer = st.layers[p.layer];
       const model = st.model === 'realistic' && realistic === 'ready' ? 'realistic' : 'simple';
-      const shown = p.model === model && layer.on && (inView(p, st.condition) || !!stageFade?.fadeOut.has(p.name));
+      // Show only / hide the selected structure (the skull counts as bone, never as the selected part).
+      const focusOk = st.focus === 'all' || (st.focus === 'only' ? isSelected(p, st.part) : !isSelected(p, st.part));
+      const shown = p.model === model && layer.on && focusOk && (inView(p, st.condition) || !!stageFade?.fadeOut.has(p.name));
       const opacity = p.baseOpacity * (layer.opacity / 100);
       p.opacity = opacity;
       p.mesh.visible = shown && opacity > 0;
@@ -1215,7 +1287,8 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     // The figure on the midline cut face belongs to the Simple model.
     const simpleShown = !(st.model === 'realistic' && realistic === 'ready');
     if (st.model === 'realistic') void loadRealistic();
-    section.visible = midline && simpleShown;
+    // The flat midline picture shows every structure, so it steps aside while one structure is shown alone or hidden.
+    section.visible = midline && simpleShown && st.focus === 'all';
     if (section.visible) void drawSection(st);
     if (st.part !== lastPart) {
       lastPart = st.part;
@@ -1467,6 +1540,13 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     look,
     reset: resetCamera,
     pick,
+    /** Glide to a structure and bring it close. */
+    focusPart,
+    /** Flow speed: 1 normal, 0.4 slow, 0 paused. */
+    setFlowSpeed(speed: number) {
+      flowSpeed = speed;
+      requestRender();
+    },
     /** For tests and the screen reader text. */
     get partCount() {
       return parts.length;

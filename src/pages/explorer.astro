@@ -134,6 +134,12 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
           <button type="button" class="x-tool" data-toggle="flow" aria-pressed={(st.flow) ? 'true' : 'false'}>{x.flow}</button>
           <button type="button" class="x-tool" data-toggle="labels" aria-pressed={(st.labels) ? 'true' : 'false'}>{x.labels}</button>
           <button type="button" class="x-tool" data-toggle="measure" aria-pressed={(st.measure) ? 'true' : 'false'}>{x.measure}</button>
+        </div>
+        <!-- Lower bar: compare with typical in one tap, and the flow's pace (3D roadmap step 3). -->
+        <div class="x-toolbar x-toolbar-low only-wide-x" role="group" aria-label={x.viewTools}>
+          <button type="button" class="x-tool x-switcher" data-switcher>{x.switcher.toTypical}</button>
+          <button type="button" class="x-tool" data-flow-pause aria-pressed="false" data-3d-only>{x.switcher.pause}</button>
+          <button type="button" class="x-tool" data-flow-slow aria-pressed="false" data-3d-only>{x.switcher.slow}</button>
           <button type="button" class="x-tool" data-ar hidden>{x.ar}</button>
         </div>
         <div class="x-camera only-wide-x" role="group" aria-label={x.camera} data-3d-only>
@@ -178,9 +184,29 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
           <p class="x-h"><span data-part-num>{part.num}</span> · {x.selected}</p>
           <h2 class="x-card-title" data-part-name>{part.name}</h2>
           <p class="x-card-text" data-part-text>{part.text}</p>
+          <div class="x-part-actions" role="group" aria-label={x.partActions.partTools}>
+            <button type="button" class="x-tool" data-part-zoom data-3d-only>{x.partActions.zoom}</button>
+            <button type="button" class="x-tool" data-focus="only" aria-pressed={st.focus === 'only' ? 'true' : 'false'} data-3d-only>{x.partActions.only}</button>
+            <button type="button" class="x-tool" data-focus="hide" aria-pressed={st.focus === 'hide' ? 'true' : 'false'} data-3d-only>{x.partActions.hide}</button>
+            <button type="button" class="x-tool" data-focus="all" hidden={st.focus === 'all'} data-3d-only>{x.partActions.all}</button>
+          </div>
           <p class="x-card-note" data-cond-note>{cond.note}</p>
           <p class="x-size-note" data-size-note hidden={!(['chiari', 'syrinx'].includes(st.condition) && st.measure)}>{x.sizeNote}</p>
         </div>
+<details class="x-cough x-accuracy" data-accuracy>
+          <summary>{x.accuracy.title}</summary>
+          <p>{x.accuracy.intro}</p>
+          <dl class="x-accuracy-list" data-accuracy-rows>
+            {x.accuracy.rows[st.condition].map((r) => (
+              <div class="x-acc-row">
+                <dt>{r.feature}</dt>
+                <dd><span class="x-acc-key">{x.accuracy.model}:</span> {r.model}</dd>
+                <dd><span class="x-acc-key">{x.accuracy.published}:</span> {r.published}</dd>
+              </div>
+            ))}
+          </dl>
+          <a href={routes.evidence + '#3d-model-shapes'} data-evidence>{x.accuracy.more}</a>
+        </details>
         <details class="x-cough x-cough-wide" data-cough-panel hidden={!['typical', 'chiari'].includes(st.condition)}>
           <summary>{x.cough.title}</summary>
           {x.cough.text.map((line) => <p>{line}</p>)}
@@ -222,6 +248,20 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
           <p class="x-size-note" data-size-note hidden={!(['chiari', 'syrinx'].includes(st.condition) && st.measure)}>{x.sizeNote}</p>
         </div>
         <button type="button" class="x-tool x-ar-narrow" data-ar hidden>{x.ar}</button>
+<details class="x-cough x-accuracy" data-accuracy>
+          <summary>{x.accuracy.title}</summary>
+          <p>{x.accuracy.intro}</p>
+          <dl class="x-accuracy-list" data-accuracy-rows>
+            {x.accuracy.rows[st.condition].map((r) => (
+              <div class="x-acc-row">
+                <dt>{r.feature}</dt>
+                <dd><span class="x-acc-key">{x.accuracy.model}:</span> {r.model}</dd>
+                <dd><span class="x-acc-key">{x.accuracy.published}:</span> {r.published}</dd>
+              </div>
+            ))}
+          </dl>
+          <a href={routes.evidence + '#3d-model-shapes'} data-evidence>{x.accuracy.more}</a>
+        </details>
         <details class="x-cough x-cough-narrow" data-cough-panel hidden={!['typical', 'chiari'].includes(st.condition)}>
           <summary>{x.cough.title}</summary>
           {x.cough.text.map((line) => <p>{line}</p>)}
@@ -253,6 +293,12 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
             <p class="x-h"><span data-part-num>{part.num}</span> · {x.selected}</p>
             <h2 class="x-card-title" data-part-name>{part.name}</h2>
             <p class="x-card-text" data-part-text>{part.text}</p>
+            <div class="x-part-actions" role="group" aria-label={x.partActions.partTools}>
+              <button type="button" class="x-tool" data-part-zoom data-3d-only>{x.partActions.zoom}</button>
+              <button type="button" class="x-tool" data-focus="only" aria-pressed={st.focus === 'only' ? 'true' : 'false'} data-3d-only>{x.partActions.only}</button>
+              <button type="button" class="x-tool" data-focus="hide" aria-pressed={st.focus === 'hide' ? 'true' : 'false'} data-3d-only>{x.partActions.hide}</button>
+              <button type="button" class="x-tool" data-focus="all" hidden={st.focus === 'all'} data-3d-only>{x.partActions.all}</button>
+            </div>
           </div>
           <ul class="x-parts">
             {x.parts.map((p) => (
@@ -293,6 +339,51 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
       $$<HTMLInputElement>('input[name^="condition-"]').forEach((radio) =>
         radio.addEventListener('change', () => radio.checked && store.set({ condition: radio.value as Condition })),
       );
+      // Typical <-> the condition you were looking at, in one tap (the model fades between them).
+      let lastNotTypical: Condition = store.get().condition === 'typical' ? 'chiari' : store.get().condition;
+      $$<HTMLButtonElement>('[data-switcher]').forEach((button) =>
+        button.addEventListener('click', () => store.set({ condition: store.get().condition === 'typical' ? lastNotTypical : 'typical' })),
+      );
+      store.subscribe((st) => {
+        if (st.condition !== 'typical') lastNotTypical = st.condition;
+        // "Show Chiari I", "Show Chiari I with syrinx", "Show after surgery": the full name, lower-cased unless it starts with Chiari.
+        const full = x.conditions[lastNotTypical].label;
+        const name = full.startsWith('Chiari') ? full : full.charAt(0).toLowerCase() + full.slice(1);
+        const label = st.condition === 'typical' ? x.switcher.toCondition.replace('{name}', name) : x.switcher.toTypical;
+        $$<HTMLButtonElement>('[data-switcher]').forEach((b) => b.textContent !== label && (b.textContent = label));
+        // Pause and Slow only mean something while the flow shows.
+        $$<HTMLButtonElement>('[data-flow-pause], [data-flow-slow]').forEach((b) => (b.hidden = !st.flow));
+      });
+      // Accuracy panel: the rows for the condition on show.
+      store.subscribe((st) => {
+        $$<HTMLElement>('[data-accuracy-rows]').forEach((body) => {
+          if (body.dataset.condition === st.condition) return;
+          body.dataset.condition = st.condition;
+          body.replaceChildren(
+            ...x.accuracy.rows[st.condition].map((r) => {
+              const row = Object.assign(document.createElement('div'), { className: 'x-acc-row' });
+              const dd = (key: string, text: string) => {
+                const el = document.createElement('dd');
+                el.append(Object.assign(document.createElement('span'), { className: 'x-acc-key', textContent: key + ':' }), ' ' + text);
+                return el;
+              };
+              row.append(Object.assign(document.createElement('dt'), { textContent: r.feature }), dd(x.accuracy.model, r.model), dd(x.accuracy.published, r.published));
+              return row;
+            }),
+          );
+        });
+      });
+      // Show only / hide the selected part, and show everything again.
+      $$<HTMLButtonElement>('[data-focus]').forEach((button) =>
+        button.addEventListener('click', () => {
+          const want = button.dataset.focus as ViewState['focus'];
+          store.set({ focus: store.get().focus === want ? 'all' : want });
+        }),
+      );
+      store.subscribe((st) => {
+        $$<HTMLButtonElement>('[data-focus="only"], [data-focus="hide"]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.focus === st.focus)));
+        $$<HTMLButtonElement>('[data-focus="all"]').forEach((b) => (b.hidden = st.focus === 'all'));
+      });
       $$<HTMLButtonElement>('[data-toggle]').forEach((button) =>
         button.addEventListener('click', () => {
           const key = button.dataset.toggle as 'flow' | 'labels' | 'measure';
@@ -521,6 +612,21 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
           });
           $$<HTMLButtonElement>('[data-camera]').forEach((b) => b.addEventListener('click', () => store.set({ camera: b.dataset.camera as ViewState['camera'] })));
           $$<HTMLButtonElement>('[data-camera-reset]').forEach((b) => b.addEventListener('click', () => viewer.reset()));
+          $$<HTMLButtonElement>('[data-part-zoom]').forEach((b) => b.addEventListener('click', () => viewer.focusPart(store.get().part)));
+          // Flow: pause keeps the marks where they are; slow runs them at 40%.
+          const pause = $$<HTMLButtonElement>('[data-flow-pause]');
+          const slow = $$<HTMLButtonElement>('[data-flow-slow]');
+          const flowSpeed = () => {
+            const paused = pause[0]?.getAttribute('aria-pressed') === 'true';
+            const slowed = slow[0]?.getAttribute('aria-pressed') === 'true';
+            viewer.setFlowSpeed(paused ? 0 : slowed ? 0.4 : 1);
+          };
+          [...pause, ...slow].forEach((b) =>
+            b.addEventListener('click', () => {
+              b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true'));
+              flowSpeed();
+            }),
+          );
           let spoken = '';
           let timer = 0;
           store.subscribe((st) => {
@@ -1084,6 +1190,13 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
     display: flex;
     gap: 6px;
   }
+  .x-toolbar-low {
+    top: auto;
+    bottom: 64px;
+  }
+  .x-toolbar-low [hidden] {
+    display: none;
+  }
   .x-tool {
     min-height: var(--touch);
     padding: 0 12px;
@@ -1170,6 +1283,37 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
     font-size: var(--x-size-caption);
     font-weight: 400;
     color: var(--x-faint);
+  }
+  .x-accuracy p {
+    margin: 0 0 var(--s-8);
+  }
+  .x-accuracy-list {
+    margin: 0 0 var(--s-8);
+  }
+  .x-accuracy-list :global(.x-acc-row) {
+    padding: 8px 0;
+    border-top: 1px solid var(--x-border);
+  }
+  .x-accuracy-list :global(.x-acc-row dt) {
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .x-accuracy-list :global(.x-acc-row dd) {
+    margin: 0 0 2px;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  .x-accuracy-list :global(.x-acc-key) {
+    color: var(--x-muted);
+  }
+  .x-part-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: var(--s-8) 0;
+  }
+  .x-part-actions [hidden] {
+    display: none;
   }
   .x-card {
     margin-top: auto;

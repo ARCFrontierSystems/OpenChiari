@@ -3,7 +3,7 @@
  * 3D Explorer, side by side. Layout from design/mockups/Compare.dc.html; text from src/i18n/en.json
  * (docs/COPY.md "3D Explorer, side by side").
  *
- * Two Simple models, each with its own condition. "Rotate together" (on by default) makes either view follow the
+ * Two models, each with its own condition (Simple, or both Realistic: 3D roadmap step 3, Nov 5). "Rotate together" (on by default) makes either view follow the
  * other's camera exactly. Without WebGL, each side shows the 2D figure instead.
  * Always shown (CLAUDE.md rules 1 and 3): the illustration and flow captions, the evidence link, "Not medical
  * advice" and the model credit.
@@ -43,6 +43,7 @@ const note = (c: string) => (t.notes as Record<string, string>)[c] ?? x.conditio
       <h1>{t.title}</h1>
       <span class="cmp-spacer"></span>
       <label class="cmp-check"><input type="checkbox" checked data-together /> {t.rotateTogether}</label>
+      <label class="cmp-check" data-realistic-switch hidden><input type="checkbox" data-realistic /> {x.realistic}</label>
       <a class="cmp-lang" href={otherLanguagePath(Astro.url.pathname)} lang={Astro.currentLocale === 'es' ? 'en' : 'es'} hreflang={Astro.currentLocale === 'es' ? 'en' : 'es'} data-other-lang>{s.header.espanol}</a>
       <a class="cmp-back" href={routes.explorer}>{t.back}</a>
     </header>
@@ -98,12 +99,17 @@ const note = (c: string) => (t.notes as Record<string, string>)[c] ?? x.conditio
       const together = document.querySelector<HTMLInputElement>('[data-together]')!;
       type Follower = { followCamera(position: number[], target: number[]): void };
       const viewers: Record<string, Follower | undefined> = {};
+      // Realistic: both sides switch together, so the comparison stays like for like.
+      const realisticBox = document.querySelector<HTMLInputElement>('[data-realistic]')!;
+      const stores: ReturnType<typeof createStore>[] = [];
+      realisticBox.addEventListener('change', () => stores.forEach((s) => s.set({ model: realisticBox.checked ? 'realistic' : 'simple' })));
 
       const sides = Array.from(document.querySelectorAll<HTMLElement>('[data-side]'));
       for (const side of sides) {
         const id = side.dataset.side!;
         const select = side.querySelector<HTMLSelectElement>('[data-condition]')!;
         const store = createStore({ ...initialState, condition: select.value as Condition, flow: true, measure: true, labels: false });
+        stores.push(store);
         const figure = side.querySelector<HTMLElement>('[data-figure]')!;
         const host = side.querySelector<HTMLElement>('[data-viewer]')!;
         select.addEventListener('change', () => store.set({ condition: select.value as Condition }));
@@ -122,6 +128,7 @@ const note = (c: string) => (t.notes as Record<string, string>)[c] ?? x.conditio
             await createViewer(host, store, strings.figure, {
               // Stacked on a phone, the page scrolls: up-or-down swipes scroll it, sideways swipes turn the model.
               pageScroll: window.matchMedia('(max-width: 760px)').matches,
+              realisticUrl: () => `/models/realistic/realistic-${Math.min(window.innerWidth, window.innerHeight) < 700 ? 'phone' : 'desktop'}.glb`,
               onCameraChange: (cam) => {
                 if (!together.checked) return;
                 for (const [other, v] of Object.entries(viewers)) if (other !== id) v?.followCamera(cam.position, cam.target);
@@ -129,6 +136,7 @@ const note = (c: string) => (t.notes as Record<string, string>)[c] ?? x.conditio
             });
             viewers[id] = (host as HTMLElement & { viewer: Follower }).viewer;
             side.classList.add('has-3d');
+            document.querySelector<HTMLElement>('[data-realistic-switch]')!.hidden = false;
             count('explore');
           } catch (error) {
             console.warn('3D view unavailable, showing the figure instead.', error);

@@ -39,4 +39,9 @@ export const externalLinks = {
   asapDonate: 'https://asap.org/donate/',
   asapInfo: 'https://asap.org/',
   email: 'mailto:hello@openchiari.org',
+  // Research studies: the registry itself, and its search for recruiting Chiari and syringomyelia studies (the fallback
+  // when the list isn't available).
+  ctgov: 'https://clinicaltrials.gov',
+  ctgovSearch: 'https://clinicaltrials.gov/search?cond=Chiari%20OR%20Syringomyelia&aggFilters=status:rec',
+  ctgovStudy: 'https://clinicaltrials.gov/study/',
 } as const;

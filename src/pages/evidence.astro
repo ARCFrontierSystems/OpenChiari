@@ -1,0 +1,114 @@
+---
+/**
+ * Evidence notes: docs/EVIDENCE.md, published as it is (docs/SPEC.md: "a link from each view to its rows in
+ * EVIDENCE.md (published as a page)"). Every medical sentence on the site and every shape in the 3D model is listed
+ * there with its source. The page is built from that file, so it can never drift from it.
+ *
+ * Each Explorer view links to its own section (src/pages/explorer.astro, EVIDENCE_SECTION):
+ *   Typical and Chiari I -> #3d-model-shapes, Chiari I with syrinx -> #syrinx, After decompression -> #after-decompression
+ */
+import Base from '../layouts/Base.astro';
+import { getStrings } from '../i18n';
+import { Content } from '../../docs/EVIDENCE.md';
+
+const t = getStrings().explorer;
+---
+
+<Base title={t.evidencePage}>
+  <div class="ev container">
+    <h1 class="serif">{t.evidencePage}</h1>
+    <div class="md">
+      <Content />
+    </div>
+  </div>
+</Base>
+
+<style>
+  .ev {
+    padding-top: var(--s-48);
+    padding-bottom: var(--s-72);
+    max-width: 1100px;
+  }
+  .ev h1 {
+    font-size: var(--h1);
+    line-height: 1.08;
+    margin-bottom: var(--s-24);
+  }
+  /* The file's own title is the page title above. */
+  .md :global(h1) {
+    display: none;
+  }
+  .md :global(h2) {
+    font-family: var(--font-serif);
+    font-size: 28px;
+    margin: var(--s-48) 0 var(--s-16);
+    padding-top: var(--s-24);
+    border-top: 1px solid var(--rule);
+    scroll-margin-top: var(--s-24);
+  }
+  .md :global(h3) {
+    font-size: 19px;
+    margin: var(--s-32) 0 var(--s-12);
+    scroll-margin-top: var(--s-24);
+  }
+  .md :global(:target) {
+    outline: 2px solid var(--accent);
+    outline-offset: 6px;
+  }
+  .md :global(p),
+  .md :global(ul),
+  .md :global(ol) {
+    color: var(--ink-2);
+    max-width: 48em;
+    margin: 0 0 var(--s-16);
+  }
+  .md :global(li + li) {
+    margin-top: var(--s-4);
+  }
+  .md :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    font-size: var(--text-small);
+    margin: 0 0 var(--s-24);
+    /* Long words wrap only when they can't fit, so the table never needs sideways scrolling, even on a phone. */
+    overflow-wrap: break-word;
+  }
+  @media (min-width: 721px) {
+    .md :global(th:first-child),
+    .md :global(td:first-child) {
+      min-width: 7.5em;
+    }
+  }
+  .md :global(th),
+  .md :global(td) {
+    text-align: left;
+    vertical-align: top;
+    padding: var(--s-8) var(--s-12);
+    border-bottom: 1px solid var(--rule);
+  }
+  .md :global(th) {
+    font-weight: 600;
+    color: var(--muted);
+    background: var(--paper);
+  }
+  .md :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+  }
+  @media (max-width: 720px) {
+    .ev h1 {
+      font-size: 34px;
+    }
+    .md :global(th),
+    .md :global(td) {
+      padding: var(--s-8) 6px;
+    }
+    /* On a phone the columns are narrow, so long words may break anywhere rather than push the page sideways. */
+    .md :global(table) {
+      overflow-wrap: anywhere;
+      font-size: 13px;
+    }
+  }
+</style>

@@ -650,3 +650,25 @@ test('counter server: adds 1 only for known actions from openchiari.org, keeps o
   const totals = await (await onRequestGet({ env })).json();
   expect(totals).toEqual({ visit: 2, explore: 0, explain: 1, study: 0, embedSites: 1 });
 });
+
+test('Evidence notes: the page publishes EVIDENCE.md, and each Explorer view links to its own section', async ({ page }) => {
+  await withoutWebGL(page);
+  await page.goto('/explorer/');
+  const link = page.locator('a[data-evidence]:visible').first();
+  await expect(link).toHaveAttribute('href', /\/evidence\/#3d-model-shapes$/);
+  await page.locator('input[name="condition-wide"][value="syrinx"]').evaluate((r: HTMLInputElement) => r.click());
+  await expect(link).toHaveAttribute('href', /\/evidence\/#syrinx$/);
+  await page.locator('input[name="condition-wide"][value="surgery"]').evaluate((r: HTMLInputElement) => r.click());
+  await expect(link).toHaveAttribute('href', /\/evidence\/#after-decompression$/);
+  await link.click();
+  await expect(page).toHaveURL(/\/evidence\/#after-decompression$/);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Evidence notes');
+  for (const name of ['Medical claims', '3D model shapes', 'Syrinx', 'After decompression']) {
+    await expect(page.getByRole('heading', { level: 2, name, exact: true })).toBeVisible();
+  }
+  // Every row's sources are real links out, and the page has no sideways scrolling on a phone.
+  await expect(page.locator('.md a[href^="https://"]').first()).toBeAttached();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.reload();
+  await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
+});

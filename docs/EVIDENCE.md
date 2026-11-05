@@ -140,14 +140,14 @@ Each summary is written from the full ClinicalTrials.gov listing (saved copies a
 
 ## Still open (only people can close these)
 
-- [x] ~~A person with medical training looks at each finished 3D view once.~~ Matthew decided on 2026-11-04 not to use a medical reviewer. Replaced by the accuracy checks in CLAUDE.md rule 1a; reports in `docs/audits/`.
-- [x] ~~Open the blocked medical sources directly.~~ Done Nov 4 for NINDS, Cleveland Clinic, MedlinePlus and PubMed Central (rows marked "opened").
-- [ ] Still not openable from this environment: StatPearls (bot check), Mayo Clinic and Radiopaedia (refuse automated readers), PubMed abstracts, Frontiers, AJNR, QxMD, Manipal. Nothing on the site now rests on these alone; rows citing them also cite an opened source or are marked.
-- [ ] A medical translator signs off on the Spanish.
-- [ ] Confirm the Bobby Jones CSF registry status with them (their page says paused, last updated 2024).
-- [ ] Before Explain It launches: confirm in the browser network tab that analytics requests don't contain the note.
-- [ ] "Symptoms can come and go and are often invisible" (Home and Explain It) has no source row yet. Open the NINDS fact sheet or StatPearls NBK431076 and add one (found Nov 5; see `docs/drafts/2026-11-05-explain-it-drafts.md`).
-- [ ] Open mayoclinic.org by hand once to confirm the care-network copy matches.
+- **Done:** ~~A person with medical training looks at each finished 3D view once.~~ Matthew decided on 2026-11-04 not to use a medical reviewer. Replaced by the accuracy checks in CLAUDE.md rule 1a; reports in `docs/audits/`.
+- **Done:** ~~Open the blocked medical sources directly.~~ Done Nov 4 for NINDS, Cleveland Clinic, MedlinePlus and PubMed Central (rows marked "opened").
+- **Still open:** Still not openable from this environment: StatPearls (bot check), Mayo Clinic and Radiopaedia (refuse automated readers), PubMed abstracts, Frontiers, AJNR, QxMD, Manipal. Nothing on the site now rests on these alone; rows citing them also cite an opened source or are marked.
+- **Still open:** A medical translator signs off on the Spanish.
+- **Still open:** Confirm the Bobby Jones CSF registry status with them (their page says paused, last updated 2024).
+- **Still open:** Before Explain It launches: confirm in the browser network tab that analytics requests don't contain the note.
+- **Still open:** "Symptoms can come and go and are often invisible" (Home and Explain It) has no source row yet. Open the NINDS fact sheet or StatPearls NBK431076 and add one (found Nov 5; see `docs/drafts/2026-11-05-explain-it-drafts.md`).
+- **Still open:** Open mayoclinic.org by hand once to confirm the care-network copy matches.
 
 ## Sources not opened
 

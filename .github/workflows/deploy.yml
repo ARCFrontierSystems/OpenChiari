@@ -8,6 +8,8 @@
 #
 # On the first run it creates the Pages project "openchiari" and asks Cloudflare to attach openchiari.org and
 # www.openchiari.org (both steps are skipped quietly when already done).
+# The domain also needs DNS records in Cloudflare (added by hand on Nov 5, 2026): CNAME @ and CNAME www, both
+# pointing to openchiari.pages.dev, proxied. Without them the address can't be found.
 name: Deploy
 
 on:

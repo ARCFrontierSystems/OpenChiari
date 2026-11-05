@@ -3,6 +3,16 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: openchiari.org is live; Explain It published
+
+- **Explain It published:** merged in pull request #2, and the Deploy run succeeded.
+- **openchiari.org works (Matthew confirmed).** Attaching the domain to the Pages project wasn't enough. The domain had no DNS records, so browsers got "can't be reached".
+  - Fix: two CNAME records in Cloudflare DNS, `@` and `www`, both pointing to `openchiari.pages.dev` with the proxy on.
+- **Still waiting on Matthew:**
+  - approval of the Explain It drafts;
+  - a source for "Symptoms can come and go and are often invisible" (or allowing those sites in this environment's network settings).
+- **Next:** Phase 3 step 4, Research studies.
+
 ## 2026-11-05: Explain It drafts for approval
 
 - **Drafted** starter notes for School, Work and Other, and "How you can help" for School and Work. They are in `docs/drafts/2026-11-05-explain-it-drafts.md`. They are not on the site; until Matthew approves them, every audience uses the approved Family text.

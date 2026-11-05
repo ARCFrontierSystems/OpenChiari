@@ -96,7 +96,8 @@ export function webglAvailable(): boolean {
 /** Cut-away slider (0 whole, 50 midline, 100 far side) to plane depth in mm. */
 function cutDepth(slider: number): number {
   if (slider === 50) return 0;
-  return slider < 50 ? ((50 - slider) / 50) * 100 : -((slider - 50) / 50) * 60;
+  // Past the midline it goes up to 30 mm toward the far side (60 mm left only a sliver of the head).
+  return slider < 50 ? ((50 - slider) / 50) * 100 : -((slider - 50) / 50) * 30;
 }
 
 export interface ViewerOptions {
@@ -586,8 +587,27 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   function skinFade(): number {
     return fadeEnabled ? SKIN_SEE_THROUGH : 1;
   }
+  /** Seen edge-on to the cut (from the back, front or below), the skull hides everything the cut shows, so it
+   *  fades like the skin; seen from the side, where the cut faces the camera, it stays solid. */
+  const viewDir = new THREE.Vector3();
+  function boneFade(): number {
+    if (!fadeEnabled) return 1;
+    camera.getWorldDirection(viewDir);
+    const facing = Math.abs(viewDir.z); // 1 = looking straight at the cut face, 0 = edge-on
+    const t = THREE.MathUtils.clamp((facing - 0.35) / 0.35, 0, 1);
+    // The skull has several surfaces one behind the other, so it fades further than the skin. After surgery it fades
+    // less, so the gap where bone was removed stays readable.
+    const EDGE_ON = store.get().condition === 'surgery' ? 0.45 : 0.12;
+    return EDGE_ON + (1 - EDGE_ON) * t;
+  }
+  /** How see-through a structure is drawn right now. */
+  function drawnOpacity(p: { ghost: boolean; layer: LayerId; opacity: number; partId: string | null }, fade: number, bone: number): number {
+    // The "bone removed" marking (after surgery) never fades: it is what that view is there to show.
+    return p.ghost ? p.opacity * fade : p.layer === 'bone' && p.partId !== 'removed' ? p.opacity * bone : p.opacity;
+  }
   function applyOpacity() {
     const fade = skinFade();
+    const bone = boneFade();
     // The measure marks show through the model only when the midline is exposed (cut there or
     // further) or the skin is faded or off; otherwise they stay inside the head with the anatomy.
     const st = store.get();
@@ -596,7 +616,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     const showThrough = cutDepth(st.cut) <= 0.01 || skinOpacity < 0.6;
     for (const m of measureMats) m.depthTest = !showThrough;
     for (const p of parts) {
-      const opacity = p.ghost ? p.opacity * fade : p.opacity;
+      const opacity = drawnOpacity(p, fade, bone);
       const see = opacity < 1;
       const mat = p.mesh.material as THREE.MeshStandardMaterial;
       if (mat.transparent !== see) mat.needsUpdate = true;
@@ -604,7 +624,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       mat.transparent = see;
       mat.depthWrite = !see;
       // A see-through skin shows only its outside, so it doesn't look muddy.
-      mat.side = see && p.ghost && p.model === 'simple' ? THREE.FrontSide : THREE.DoubleSide;
+      mat.side = see && (p.ghost || p.layer === 'bone') && p.model === 'simple' ? THREE.FrontSide : THREE.DoubleSide;
       if (p.model === 'realistic') (p.mesh.userData.capAlpha as { value: number }).value = p.ghost ? p.opacity : opacity;
       const capMat = p.cap.material as THREE.MeshBasicMaterial;
       const capOpacity = p.ghost ? p.opacity : opacity;
@@ -816,6 +836,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     const depth = plane.constant;
     const shown = parts.filter((p) => p.mesh.visible);
     const fade = skinFade();
+    const bone = boneFade();
     const cutFace = new THREE.Vector3();
     const facesCut = camera.position.z > depth && raycaster.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0, 0, 1), -depth), cutFace);
     const cutDistance = facesCut ? raycaster.ray.origin.distanceTo(cutFace) : Infinity;
@@ -823,7 +844,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       if (hit.point.z > depth + 0.05) continue; // cut away
       if (hit.distance > cutDistance) break; // the ray reached the cut face first
       const p = parts.find((q) => q.mesh === hit.object)!;
-      const opacity = p.ghost ? p.opacity * fade : p.opacity;
+      const opacity = drawnOpacity(p, fade, bone);
       if (opacity < 0.5) continue; // see-through: look past it
       if (p.partId === 'foramen' && hit.point.length() > 25) return null; // skull, away from the opening
       return p.partId;

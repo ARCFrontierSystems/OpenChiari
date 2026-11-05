@@ -1,0 +1,1004 @@
+{
+  "_backTranslationNote": "Blind, literal back-translation of src/i18n/es.json and the 'es' fields of src/data/study-summaries.json into English, made on 2026-11-05 by an independent checker BEFORE opening en.json, the English study summaries, or docs/COPY.md. Wording is deliberately literal, not smoothed toward the English original.",
+  "_note": "Spanish UI text, pending medical-translator review (CLAUDE.md 'Translations'). Same keys as en.json; medical terms from docs/SPANISH-GLOSSARY.md. The side-by-side review file is docs/SPANISH-REVIEW.md. 'wide' = desktop wording, 'narrow' = phone wording.",
+  "siteName": "Open Chiari",
+  "metaDescription": "In Chiari malformation, the lowest part of the cerebellum ends up below the opening where the brain joins the spinal cord. Explore it in 3D, free.",
+  "skipLink": "Skip to content",
+  "header": {
+    "mainNavLabel": "Main",
+    "menu": "Menu",
+    "nav": {
+      "explorer": "3D Explorer",
+      "explain": "Explain It",
+      "studies": "Research studies",
+      "prep": "Prepare your appointment",
+      "model": "Open model",
+      "support": "Support"
+    },
+    "espanol": "English",
+    "calm": "Calm mode"
+  },
+  "translation": {
+    "notice": "Translation pending review by a medical translator. It was made with the help of artificial intelligence tools, and the English version is the reference version.",
+    "noticeShort": "Translation pending review by a medical translator.",
+    "link": "View in English"
+  },
+  "calm": {
+    "on": "Calm: yes",
+    "noteStrong": "Calm mode is turned on.",
+    "noteRest": "No motion or automatic rotation, larger text and softer colors. You can turn it off whenever you want.",
+    "lede": "In Chiari malformation, the lowest part of the cerebellum ends up below the opening where the brain joins the spinal cord.",
+    "figCaption": "Still image. Chiari I: the cerebellar tonsil extends below the dotted line. The cerebellar tonsils are shown at their lowest point, where they are measured on MRI. Illustration, not a medical image.",
+    "explorerNote": "In calm mode, the model only moves when you move it."
+  },
+  "home": {
+    "eyebrow": "Chiari malformation, type I",
+    "title": "See what happens at the base of the skull.",
+    "lede": {
+      "wide": "In Chiari malformation, the lowest part of the cerebellum ends up below the opening where the brain joins the spinal cord. Explore it in 3D, free and in plain language.",
+      "narrow": "In Chiari malformation, the lowest part of the cerebellum ends up below the opening where the brain joins the spinal cord. Explore it in 3D, free."
+    },
+    "openExplorer": "Open the 3D explorer",
+    "tour": "Take the 2-minute tour",
+    "figNumber": "Fig. 1",
+    "figCaption": {
+      "wide": "Midline view in Chiari I. The cerebellar tonsil (06) extends below the dotted line that crosses the opening of the skull. In reality, the cerebellar tonsils are just to each side of the midline; here they are shown where they are measured on MRI, at their lowest point. Illustration, not a medical image.",
+      "narrow": "Chiari I. The cerebellar tonsil extends below the dotted line. The cerebellar tonsils are shown at their lowest point, where they are measured on MRI. Illustration, not a medical image."
+    },
+    "whatIs": {
+      "title": "What is Chiari malformation?",
+      "whatItIs": {
+        "title": "What it is",
+        "wide": "The cerebellar tonsils, the lowest part of the cerebellum, extend below the foramen magnum, the opening at the base of the skull. The cerebellum helps control balance and coordination. It is usually related to the back and lower part of the skull being smaller or having another shape, which leaves little room for the brain. Less often, it appears later in life from other causes.",
+        "narrow": "The cerebellar tonsils, the lowest part of the cerebellum, extend below the opening at the base of the skull. It is usually related to the back and lower part of the skull being smaller or having another shape, which leaves little room for the brain. Less often, it appears later in life from other causes."
+      },
+      "whoHasIt": {
+        "title": "Who has it",
+        "wide": "Most people are born with the skull differences that cause it. Some never have symptoms; others notice them for the first time in adolescence or in adulthood.",
+        "narrow": "Most people are born with the skull differences that cause it. Some never have symptoms; others notice them for the first time in adolescence or in adulthood."
+      },
+      "howFound": {
+        "title": "How it is detected",
+        "wide": "Generally, with an MRI and a medical exam; sometimes, by chance, during a scan/test for another reason. The doctor reviews the images together with your symptoms.",
+        "narrow": "Generally, with an MRI and a medical exam; sometimes, by chance."
+      }
+    },
+    "feel": {
+      "title": "What can be felt",
+      "intro": "Chiari is different in each person, and many people with type I have no symptoms at all.",
+      "classic": {
+        "wide": "The classic symptom is a headache in the back of the head that appears after coughing, sneezing or straining.",
+        "narrow": "The classic symptom is a headache in the back of the head after coughing, sneezing or straining."
+      },
+      "listLabel": "Other symptoms that people describe",
+      "symptoms": [
+        {
+          "wide": "Neck pain",
+          "narrow": "Neck pain"
+        },
+        {
+          "wide": "Dizziness and balance problems",
+          "narrow": "Dizziness and balance problems"
+        },
+        {
+          "wide": "Numbness or tingling in the hands and feet",
+          "narrow": "Numbness or tingling in hands and feet"
+        },
+        {
+          "wide": "Weakness or difficulty making fine movements with the hands",
+          "narrow": "Weakness or difficulty making fine movements with the hands"
+        },
+        {
+          "wide": "Difficulty swallowing or speaking",
+          "narrow": "Difficulty swallowing or speaking"
+        },
+        {
+          "wide": "Problems breathing or sleeping, such as sleep apnea",
+          "narrow": "Problems breathing or sleeping"
+        },
+        {
+          "wide": "Ringing in the ears",
+          "narrow": "Ringing in the ears"
+        },
+        {
+          "wide": "Blurred or double vision",
+          "narrow": "Blurred or double vision"
+        },
+        {
+          "wide": "A curvature of the spine (scoliosis), especially in children",
+          "narrow": "A curvature of the spine (scoliosis)"
+        }
+      ],
+      "noSymptoms": "Many people with type I have no symptoms at all."
+    },
+    "myths": {
+      "title": "Common mistaken ideas",
+      "items": [
+        {
+          "myth": "\"It's just a bad headache.\"",
+          "wide": "Chiari is a difference in structure that can affect balance, the nerves and the flow of cerebrospinal fluid, not only cause headaches.",
+          "narrow": "It can also affect balance, the nerves and the flow of cerebrospinal fluid."
+        },
+        {
+          "myth": "\"The measurement says it all.\"",
+          "wide": "Traditionally, doctors use as a cutoff about 5 mm below the opening. How far the cerebellar tonsils go down does not always match how a person feels. Some people with a clear descent have no symptoms, and some with less than 5 mm do have them. Doctors also look at the shape of the cerebellar tonsils, the flow of cerebrospinal fluid and whether there is a syrinx.",
+          "narrow": "How far the cerebellar tonsils go down does not always match how a person feels. Doctors also look at their shape, the flow of the fluid and whether there is a syrinx."
+        }
+      ]
+    },
+    "tools": {
+      "title": "Tools",
+      "items": [
+        {
+          "num": "01",
+          "page": "explorer",
+          "title": "3D Explorer",
+          "wide": "Compare typical anatomy with Chiari, with syrinx and after surgery. Remove layers and cut the model.",
+          "narrow": "Compare typical anatomy, Chiari, syrinx and after surgery."
+        },
+        {
+          "num": "02",
+          "page": "explain",
+          "title": "Explain It (Explain it [formal command])",
+          "wide": "Send your family, your teachers or your employer a link to the view that corresponds to your diagnosis.",
+          "narrow": "Send a link to the view that corresponds to your diagnosis."
+        },
+        {
+          "num": "03",
+          "page": "studies",
+          "title": "Research studies",
+          "wide": "Studies on Chiari and syringomyelia that are looking for participants, updated daily.",
+          "narrow": "Studies looking for participants, updated daily."
+        },
+        {
+          "num": "04",
+          "page": "prep",
+          "title": "Prepare your medical appointment",
+          "wide": "Make a one-page list of questions for your next appointment. Nothing is saved.",
+          "narrow": "A list of questions to print. Nothing is saved."
+        },
+        {
+          "num": "05",
+          "page": "model",
+          "title": "Open model",
+          "wide": "Free to download and embed in websites, for foundations, nurses and teachers.",
+          "narrow": "Free to download and embed."
+        },
+        {
+          "num": "06",
+          "page": "support",
+          "title": "Support Chiari organizations",
+          "wide": "Donate or volunteer with the groups that fund research and maintain patient registries.",
+          "narrow": "Donate or volunteer on their own websites."
+        }
+      ]
+    }
+  },
+  "footer": {
+    "notAdvice": "It is not medical advice.",
+    "notAdviceRest": {
+      "wide": "Talk to your doctor about your own medical care.",
+      "narrow": "Talk to your doctor about your own medical care."
+    },
+    "factsBefore": "Information adapted from the",
+    "ninds": "NINDS fact sheet",
+    "modelBefore": ". 3D model by Open Chiari, CC BY-SA 4.0, adapted from",
+    "zAnatomy": "Z-Anatomy",
+    "modelAfter": "(CC BY-SA 4.0) and BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 JP).",
+    "personalProject": "A personal project of Matthew Borgfeld.",
+    "moreNavLabel": "More",
+    "links": {
+      "support": "Support",
+      "kit": "Awareness kit",
+      "impact": "Impact",
+      "openSource": "Open source",
+      "about": "About and contact",
+      "privacy": "Privacy"
+    }
+  },
+  "figure": {
+    "ariaPrefix": "Midline cut of the head and neck, ",
+    "aria": {
+      "typical": "typical anatomy: the cerebellar tonsils are above the opening at the base of the skull",
+      "chiari": "Chiari I: the cerebellar tonsils extend below the opening at the base of the skull and often reduce the cerebrospinal fluid space",
+      "syrinx": "Chiari I with syrinx, a fluid-filled cavity inside the spinal cord",
+      "surgery": "after decompression surgery: bone was removed from the back of the skull opening and the back of the first vertebra, which opens the fluid space"
+    },
+    "labels": {
+      "cerebrum": "Cerebrum [cerebro; also the everyday word for 'brain']",
+      "callosum": "Corpus callosum",
+      "cerebellum": "Cerebellum",
+      "fourthVentricle": "Fourth ventricle",
+      "brainstem": "Brainstem",
+      "tonsil": "Cerebellar tonsil",
+      "foramen": "Foramen magnum",
+      "foramenNote": "opening at the base of the skull",
+      "foramenNoteSurgery": "dotted line: where its edges were",
+      "cord": "Spinal cord",
+      "csf": "Cerebrospinal fluid (CSF)",
+      "c2": "C2 vertebra",
+      "syrinx": "Syrinx",
+      "syrinxNote": "fluid cavity in the cord [médula, bare]",
+      "boneRemoved": "Bone removed",
+      "boneRemovedNote": "edge of the skull and arch of C1"
+    }
+  },
+  "explorer": {
+    "title": "3D Explorer",
+    "backHome": "Back to home",
+    "explain": "Explain It",
+    "explainAria": "Explain It: share this view",
+    "condition": "Condition",
+    "conditions": {
+      "typical": {
+        "label": "Typical anatomy",
+        "short": "Typical",
+        "note": "The cerebellar tonsils are usually at the level of the dotted line that crosses the skull opening or above it (a few millimeters below can still be normal), and the cerebrospinal fluid circulates freely around them.",
+        "noteShort": "The cerebellar tonsils are usually at the level of the skull opening or above (a few millimeters below can be normal); the fluid circulates freely."
+      },
+      "chiari": {
+        "label": "Chiari I",
+        "short": "Chiari I",
+        "note": "The cerebellar tonsils extend below the opening, at least about 5 mm according to the usual definition. In a study of 160 people with Chiari I, the average was about 12 mm, but it varied from 5 to 25 mm, and the number by itself does not decide who needs surgery. They often have a pointed shape instead of rounded. The fluid space behind them is often reduced, and in many people the flow of the fluid becomes slower or is blocked there.",
+        "noteShort": "The cerebellar tonsils extend below the opening and often reduce the fluid space; in many people the flow becomes slower there."
+      },
+      "syrinx": {
+        "label": "Chiari I with syrinx",
+        "short": "With syrinx",
+        "note": "A syrinx is a fluid-filled cavity inside the spinal cord. It often appears together with Chiari, especially in the part of the spinal cord that is in the neck.",
+        "noteShort": "A fluid-filled cavity formed inside the spinal cord."
+      },
+      "surgery": {
+        "label": "After decompression",
+        "short": "After surgery",
+        "note": "Surgeons remove a small piece of bone from the back of the skull opening and, often, the back of the first vertebra. Often they also open the membrane that covers the brain and place a patch on it to give more space to the cerebrospinal fluid. The cerebellar tonsils often rise only partly. Surgery improves or stabilizes symptoms in most people, although damage that already occurred may not reverse completely, and some people need more than one operation. Results vary, and surgery is not right for everyone.",
+        "noteShort": "Bone is removed from the back of the opening to give space. Most people improve or stabilize, but results vary, some need another operation and surgery is not right for everyone."
+      }
+    },
+    "layers": "Layers",
+    "layerNames": {
+      "skin": "Skin",
+      "bone": "Skull and spine",
+      "brain": "Brain",
+      "csf": "Cerebrospinal fluid",
+      "nerves": "Nerves",
+      "vessels": "Blood vessels"
+    },
+    "opacitySuffix": ": opacity",
+    "cutaway": "Cut",
+    "cutawayAria": "Depth of the cut",
+    "cutWhole": "Whole",
+    "cutMidline": "Midline",
+    "cutFar": "Opposite side",
+    "model": "Model",
+    "realistic": "Realistic",
+    "simple": "Simple",
+    "viewTools": "View tools",
+    "flow": "Fluid flow",
+    "flowShort": "Flow",
+    "labels": "Names",
+    "measure": "Measure",
+    "close": "Close",
+    "viewerLabel": "Anatomy view",
+    "captionIllustration": "Illustration, not a medical image",
+    "captionFlow": "Fluid flow simplified",
+    "captionTonsils": "The cerebellar tonsils are shown at their lowest point, where they are measured on MRI",
+    "evidence": "Evidence notes for this view",
+    "structures": "Structures",
+    "search": "Search parts",
+    "selected": "selected",
+    "partsButton": "List of parts · tap a part of the model",
+    "parts": [
+      {
+        "id": "cerebrum",
+        "num": "01",
+        "name": "Cerebrum [cerebro]",
+        "text": "The largest part of the brain [encéfalo], in charge of thinking, movement and the senses."
+      },
+      {
+        "id": "callosum",
+        "num": "02",
+        "name": "Corpus callosum",
+        "text": "A thick band of nerve fibers that joins the left and right halves of the cerebrum/brain [cerebro]."
+      },
+      {
+        "id": "cerebellum",
+        "num": "03",
+        "name": "Cerebellum",
+        "text": "The back part of the brain [encéfalo] that helps control balance and coordination."
+      },
+      {
+        "id": "ventricle",
+        "num": "04",
+        "name": "Fourth ventricle",
+        "text": "A small fluid-filled space between the brainstem and the cerebellum, through which the cerebrospinal fluid passes."
+      },
+      {
+        "id": "brainstem",
+        "num": "05",
+        "name": "Brainstem",
+        "text": "Joins the cerebrum/brain [cerebro] with the spinal cord and controls automatic functions such as breathing, heart rate and swallowing."
+      },
+      {
+        "id": "tonsil",
+        "num": "06",
+        "name": "Cerebellar tonsil",
+        "text": "The two lowest parts of the cerebellum. In Chiari, they extend below the opening at the base of the skull and often have a pointed (peg-like) shape instead of rounded. In reality, they are just to each side of the midline and often come down unevenly; the model shows them at their lowest point, where they are measured on MRI."
+      },
+      {
+        "id": "foramen",
+        "num": "07",
+        "name": "Foramen magnum",
+        "text": "The opening at the base of the skull where the brainstem becomes the spinal cord."
+      },
+      {
+        "id": "cord",
+        "num": "08",
+        "name": "Spinal cord",
+        "text": "Carries the signals between the brain and the rest of the body."
+      },
+      {
+        "id": "csf",
+        "num": "09",
+        "name": "Cerebrospinal fluid (CSF)",
+        "text": "A clear fluid that cushions the brain and the spinal cord. With each heartbeat, it moves back and forth between the skull and the spinal canal."
+      },
+      {
+        "id": "c2",
+        "num": "10",
+        "name": "C2 vertebra",
+        "text": "The second bone of the neck. Its upward projection, the odontoid process, is just in front of the spinal cord."
+      },
+      {
+        "id": "syrinx",
+        "num": "11",
+        "name": "Syrinx",
+        "conditions": [
+          "syrinx"
+        ],
+        "text": "A fluid-filled cavity inside the spinal cord. It often appears together with Chiari, especially in the part of the spinal cord that is in the neck."
+      },
+      {
+        "id": "removed",
+        "num": "11",
+        "name": "Bone removed",
+        "conditions": [
+          "surgery"
+        ],
+        "text": "Surgeons remove a small piece of bone from the back of the skull opening and, often, the back of the first vertebra."
+      }
+    ],
+    "viewOptions": "View and layers",
+    "hint": "Drag to rotate · Scroll to zoom in · Shift and drag to move",
+    "camera": "Camera",
+    "cameraViews": {
+      "side": "Side",
+      "back": "Back",
+      "below": "Below",
+      "front": "Front"
+    },
+    "resetCamera": "Reset the camera",
+    "viewerRole": "3D model",
+    "keysHelp": "The arrows rotate the model. Shift and the arrows move it. Plus and minus zoom in and out. Press 1 for the side view, 2 for back, 3 for below, 4 for the front and 0 to reset.",
+    "viewNames": {
+      "side": "Side view",
+      "back": "View from behind",
+      "below": "View from below",
+      "front": "Front view",
+      "custom": "Rotated view"
+    },
+    "cutNames": {
+      "whole": "Whole model",
+      "near": "Partial cut, without the near side",
+      "midline": "Cut at the midline",
+      "far": "Cut past the midline, toward the opposite side"
+    },
+    "evidencePage": "Evidence notes"
+  },
+  "evidence": {
+    "inEnglish": "These notes are in English, the same as the sources they cite."
+  },
+  "prep": {
+    "title": "Prepare for your next appointment",
+    "intro": {
+      "wide": "Check the questions you want to ask, add your own and print a one-page sheet. Everything stays on your device; nothing is saved or sent.",
+      "narrow": "Check what you want to ask. Nothing is saved or sent."
+    },
+    "formLabel": "Choose the questions",
+    "groups": [
+      {
+        "id": "diagnosis",
+        "title": "About my diagnosis",
+        "questions": [
+          {
+            "id": "type",
+            "text": "What type of Chiari do I have?",
+            "checked": true
+          },
+          {
+            "id": "mri",
+            "text": "Can you give me a copy of the report and the images of my MRI?",
+            "checked": true
+          },
+          {
+            "id": "syrinx",
+            "text": "Do I have a syrinx?",
+            "checked": false
+          }
+        ]
+      },
+      {
+        "id": "symptoms",
+        "title": "My symptoms",
+        "questions": [
+          {
+            "id": "which",
+            "text": "Which of my symptoms do you think come from Chiari?",
+            "narrow": "Which of my symptoms do you think come from Chiari?",
+            "checked": true
+          },
+          {
+            "id": "er",
+            "text": "What changes should make me call you or go to the emergency room?",
+            "narrow": "What should make me call you or go to the emergency room?",
+            "checked": true
+          }
+        ]
+      },
+      {
+        "id": "tests",
+        "title": "Tests and follow-up",
+        "questions": [
+          {
+            "id": "cine",
+            "text": "Do I need a flow MRI (cine MRI) or other tests?",
+            "checked": false
+          },
+          {
+            "id": "followup",
+            "text": "Do I need follow-up scans/tests and, if so, how often?",
+            "checked": false
+          }
+        ]
+      },
+      {
+        "id": "treatment",
+        "title": "Treatment",
+        "questions": [
+          {
+            "id": "options",
+            "text": "What are my treatment options, including monitoring/follow-up?",
+            "checked": true
+          },
+          {
+            "id": "candidate",
+            "text": "Am I a candidate [masculine form] for decompression surgery? Why or why not?",
+            "checked": false
+          },
+          {
+            "id": "experience",
+            "text": "How many of these surgeries have you done and what is the recovery like?",
+            "checked": false
+          }
+        ]
+      },
+      {
+        "id": "daily",
+        "title": "Daily life and research",
+        "questions": [
+          {
+            "id": "avoid",
+            "text": "Are there activities I should avoid?",
+            "checked": false
+          },
+          {
+            "id": "studies",
+            "text": "Are there research studies I could take part in?",
+            "checked": true
+          }
+        ]
+      }
+    ],
+    "addOwn": "Add your own question",
+    "add": "Add",
+    "mention": "Things I want to mention",
+    "sheetCount": {
+      "one": "Your sheet · 1 question",
+      "other": "Your sheet · {n} questions"
+    },
+    "selectedCount": {
+      "one": "1 question selected",
+      "other": "{n} questions selected"
+    },
+    "sheetTitle": "Questions for my doctor",
+    "answerSpace": "When printing, space for the answers is added below each question.",
+    "print": "Print the sheet",
+    "previewPrint": "View and print",
+    "pdf": "Save as PDF",
+    "diagram": "Include a small Chiari diagram",
+    "pageNote": "It is not medical advice. What you choose on this page is never saved or sent.",
+    "sheetMeta": "Chiari malformation · Date: ____________ · Doctor: ______________________",
+    "sheetFooter": "Made with Open Chiari · openchiari.org · It is not medical advice",
+    "diagramCaption": "Chiari I. The cerebellar tonsils are shown at their lowest point, where they are measured on MRI. Illustration, not a medical image."
+  },
+  "support": {
+    "title": "Support the groups that do the work",
+    "intro": {
+      "wide": "These nonprofit organizations fund research, maintain patient registries and support families. Open Chiari does not accept donations; each link below goes directly to the organization's page.",
+      "narrow": "Open Chiari does not accept donations. Each link goes to the organization's page."
+    },
+    "orgs": [
+      {
+        "id": "bjcsf",
+        "name": "Bobby Jones Chiari & Syringomyelia Foundation",
+        "text": {
+          "wide": "Maintains an international patient registry (new enrollments are paused), organizes an annual research colloquium and funds fellowships and grants for Chiari research.",
+          "narrow": "International patient registry (enrollments paused), an annual research colloquium, and fellowships and grants for research."
+        },
+        "tags": "Research · Patient registry · Education",
+        "second": "Registry and research"
+      },
+      {
+        "id": "conquer",
+        "name": "Conquer Chiari",
+        "text": {
+          "wide": "Funds Chiari research, publishes educational materials for patients and supported the Chiari1000 patient registry (now closed).",
+          "narrow": "Funds research and publishes educational materials for patients."
+        },
+        "tags": "Research funding · Education",
+        "second": "More information"
+      },
+      {
+        "id": "asap",
+        "name": "ASAP: American Syringomyelia & Chiari Alliance Project",
+        "text": {
+          "wide": "Supports patients and families, publishes a newsletter and has helped fund research on the genetics of Chiari.",
+          "narrow": "Support for patients and families, a newsletter and research funding."
+        },
+        "tags": "Patient support · Research funding",
+        "second": "More information"
+      }
+    ],
+    "donate": "Donate on their website",
+    "checked": "Descriptions and links reviewed in November 2026. [Before launch: confirm with each organization.]",
+    "otherTitle": "Other ways to help",
+    "other": [
+      {
+        "id": "studies",
+        "title": "Take part in a research study",
+        "text": "Studies looking for participants now, updated daily."
+      },
+      {
+        "id": "kit",
+        "title": "Spread information in September",
+        "text": "Free graphics and cards for Chiari Awareness Month."
+      },
+      {
+        "id": "explain",
+        "title": "Share an Explain It link",
+        "text": "Help a person understand Chiari today."
+      }
+    ],
+    "notAffiliated": "Open Chiari is not affiliated with these organizations and receives nothing from the donations. Their websites may be in English only."
+  },
+  "about": {
+    "title": "About Open Chiari",
+    "intro": "Open Chiari is a free and independent website that helps people see and understand Chiari malformation, and points them to the organizations and the research that move this field forward.",
+    "howTitle": "How the content is made",
+    "how": {
+      "factsBefore": "The medical information is adapted from the",
+      "ninds": "NINDS fact sheet",
+      "factsAfter": "and from expert-reviewed research, which is cited on each page.",
+      "modelBefore": "The 3D model is made from",
+      "zAnatomy": "Z-Anatomy",
+      "modelAfter": "and BodyParts3D, open anatomy data.",
+      "checks": "The texts and each 3D view are compared with the published sources that appear in the evidence notes, through automatic measurements and independent audits, before being published. They have not been reviewed by a medical professional. Last review: November 4, 2026.",
+      "ai": "Artificial intelligence tools helped write the code and the first drafts; a person reviews each page."
+    },
+    "principlesTitle": "Principles",
+    "principles": [
+      {
+        "term": "Free, always",
+        "text": "No paywalls, ads or premium plans."
+      },
+      {
+        "term": "No personal data",
+        "text": "No accounts and no cookies.",
+        "link": "Read the privacy policy",
+        "href": "privacy"
+      },
+      {
+        "term": "Open source",
+        "text": "The code and the model are public, so that anyone can maintain the project.",
+        "link": "See the code",
+        "href": "openSource"
+      },
+      {
+        "term": "Independent",
+        "text": "No affiliation with any company, hospital or nonprofit organization, and no donation money."
+      },
+      {
+        "term": "It is not medical advice",
+        "text": "Open Chiari explains; your doctor diagnoses and treats."
+      }
+    ],
+    "correctionsTitle": "Corrections",
+    "corrections": "Do you see something incorrect or out of date? Write to us with the page and what needs to be corrected. Corrections are made as soon as possible and are noted in the change log.",
+    "contactTitle": "Contact",
+    "contact": "For corrections, organizations, researchers and press.",
+    "email": "hello@openchiari.org",
+    "noMedical": "Please do not send medical information. Open Chiari cannot give medical advice.",
+    "madeByTitle": "Made by",
+    "madeBy": "Matthew Borgfeld, as an independent project."
+  },
+  "privacy": {
+    "title": "Privacy",
+    "updated": "Last updated: November 5, 2026",
+    "short": "In short: Open Chiari does not know who you are, does not use cookies and never collects health information.",
+    "countedTitle": "What is counted",
+    "counted": {
+      "before": "To show the totals on the",
+      "impact": "Impact page",
+      "after": ", the site counts visits and some actions: opening the 3D model, creating an Explain It link and opening a study's listing. To count, Open Chiari's own counter is used, which does not use cookies or create a profile of you. Your browser sends only the name of the action, and the counter adds 1 to a total. It does not save your address, device, browser, country, the page you come from or the link. When the 3D model is shown on another website, the address of that site is noted, so that the Impact page can count the sites that use it."
+    },
+    "neverTitle": "What is never collected",
+    "never": [
+      {
+        "term": "Your identity",
+        "text": "No accounts, sign-ins, names or email addresses."
+      },
+      {
+        "term": "Explain It notes",
+        "text": "Your note goes in the message that you send, not in the link. The link only contains the chosen view, after the #. Browsers do not send that part to our server, and the counter never receives it."
+      },
+      {
+        "term": "The questions for your appointment",
+        "text": "They are created and printed entirely in your browser. Nothing you check or write leaves your device."
+      },
+      {
+        "term": "Your location",
+        "text": "The \"Near\" box in Research studies sorts the list on your device and is never sent."
+      },
+      {
+        "term": "Health information",
+        "text": "None, anywhere on the site."
+      }
+    ],
+    "savedTitle": "What is saved on your device",
+    "saved": "Calm mode and the language you choose are remembered in your own browser, so they stay that way next time. If you clear your browser's data, they are deleted. They are never sent to the site.",
+    "outsideTitle": "Outside services",
+    "outside": [
+      {
+        "term": "Hosting:",
+        "text": "Cloudflare Pages, which handles the site's traffic like any web hosting service."
+      },
+      {
+        "term": "Typefaces/fonts and 3D files:",
+        "text": "are served from Open Chiari itself, not from Google or other companies."
+      },
+      {
+        "term": "Research studies:",
+        "text": "the site gets them once a day from ClinicalTrials.gov, which is run by the U.S. National Library of Medicine, so your browser never connects with them."
+      },
+      {
+        "term": "External links:",
+        "text": "the donation pages, the study listings and other sites have their own privacy policies."
+      }
+    ],
+    "emailTitle": "Email",
+    "email": {
+      "before": "If you write to",
+      "address": "hello@openchiari.org",
+      "after": ", your message is used only to reply to you and is not shared. Please do not include medical information."
+    },
+    "changesTitle": "Changes",
+    "changes": "If this policy changes, the date above also changes, and any important change is announced on the home page for 30 days.",
+    "_note": "Translation of the policy approved in English on November 5, 2026 (pending review). The English version is the reference version."
+  },
+  "model": {
+    "title": "Use the model on your own website",
+    "intro": "The Chiari model is free for foundations, clinics, teachers and anyone who explains Chiari. Embed the viewer on your site or download the files for your own projects.",
+    "licenseLabel": "License",
+    "license": "CC BY-SA 4.0",
+    "basedOnLabel": "Based on",
+    "zAnatomy": "Z-Anatomy",
+    "basedOnRest": "(CC BY-SA 4.0) and BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 JP)",
+    "viewsLabel": "Views included",
+    "views": "Typical, Chiari I, Chiari I with syrinx, after decompression",
+    "checksLabel": "Accuracy checks",
+    "checks": "Measured according to published sources; not reviewed by a medical professional",
+    "figNum": "Fig. 2",
+    "figCaption": "Chiari I with syrinx, one of the four views included.",
+    "embedTitle": "Embed the viewer",
+    "startingView": "Starting view",
+    "viewOptions": {
+      "chiari": "Chiari I",
+      "typical": "Typical anatomy",
+      "syrinx": "Chiari I with syrinx",
+      "surgery": "After decompression"
+    },
+    "showSwitch": "Show the condition selector",
+    "showLabels": "Show the names",
+    "startCalm": "Start in calm mode",
+    "iframeTitle": "3D model of Chiari malformation",
+    "copyEmbed": "Copy the code to embed",
+    "downloadTitle": "Download",
+    "columns": {
+      "file": "File",
+      "format": "Format",
+      "bestFor": "Ideal for",
+      "size": "Size"
+    },
+    "downloads": [
+      {
+        "id": "gltf",
+        "file": "Web model, the four views",
+        "format": "glTF",
+        "bestFor": "Websites and applications"
+      },
+      {
+        "id": "blender",
+        "file": "Editable source",
+        "format": "Blender",
+        "bestFor": "Modifying the model"
+      },
+      {
+        "id": "figures",
+        "file": "Set of labeled figures (in English)",
+        "format": "PNG and PDF",
+        "bestFor": "Brochures and presentations"
+      }
+    ],
+    "download": "Download",
+    "creditTitle": "How to give credit",
+    "creditIntro": "Keep this line wherever you use the model, and share any modified version with the same license.",
+    "creditLine": "Chiari model by Open Chiari (openchiari.org), CC BY-SA 4.0, adapted from Z-Anatomy (CC BY-SA 4.0) and BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 JP)",
+    "footnote": "It is not medical advice. Illustrations for educational purposes, they are not medical images.",
+    "copied": "Copied"
+  },
+  "embed": {
+    "exploreFull": "Explore the full 3D model"
+  },
+  "explain": {
+    "_note": "Translation of 'Explain It' (pending review). starterNote: the English note does not fit in 280 characters in Spanish; this version says the same in fewer words (277 characters). See docs/SPANISH-REVIEW.md.",
+    "title": "Explain It (Explain it [formal command])",
+    "backToExplorer": "Back to the 3D explorer",
+    "previewTitle": "Preview of what they will see",
+    "intro": "Send someone a link that opens the model exactly at this view, with a brief note of yours.",
+    "noteLabel": "Your note",
+    "noteHint": "It is sent as your message, with the link below. Change it however you want.",
+    "starterNote": "In Chiari malformation, the lowest part of the cerebellum ends up below the opening at the base of the skull and reduces the space through which the cerebrospinal fluid circulates. It can cause headache and other symptoms that come and go, often with few visible signs.",
+    "explore": "Allow them to rotate and explore the model on their own",
+    "yourLink": "Your link",
+    "copy": "Copy the note and the link",
+    "copied": "Your note and the link were copied.",
+    "sms": "Text message",
+    "email": "Email",
+    "qr": "QR code",
+    "share": "Share",
+    "privacy": "The link only contains the view. Your note goes in your own message, not in the link, and we do not save anything.",
+    "sharedWithYou": "Someone shared this with you",
+    "dragHint": "Drag to rotate the model.",
+    "lookingTitle": "What you are seeing",
+    "lookingChiari": [
+      "The dotted line crosses the opening where the brain joins the spinal cord.",
+      "The lowest part of the cerebellum, the cerebellar tonsils, ends up below that line. The blue bracket shows how much.",
+      "That reduces the space where the cerebrospinal fluid normally circulates, which can cause headaches and other symptoms."
+    ],
+    "helpTitle": "How you can help",
+    "help": "Symptoms can come and go, and often there are few visible signs. Believing the person and giving them space to rest can mean a lot.",
+    "exploreFull": "Explore the full 3D model"
+  },
+  "studies": {
+    "_note": "Translation of 'Research studies' (pending review). The titles and the official listing of each study remain in English, as on ClinicalTrials.gov; Open Chiari's summaries are shown in Spanish when there is a Spanish version (src/data/study-summaries.json, field 'es').",
+    "title": "Research studies looking for people with Chiari",
+    "navTitle": "Research studies",
+    "intro": {
+      "wide": "Every study on this list appears on ClinicalTrials.gov, the U.S. government registry run by the National Library of Medicine, and is looking for participants now. Research moves forward when patients take part.",
+      "narrow": "Posted on ClinicalTrials.gov and looking for participants now."
+    },
+    "updated": "Updated daily · last update: {date}",
+    "updatedNarrow": "Updated daily · {n} studies",
+    "filterLabel": "Filter studies",
+    "filters": "Filters",
+    "condition": "Condition",
+    "conditions": {
+      "chiari": "Chiari malformation",
+      "syringomyelia": "Syringomyelia"
+    },
+    "whoCanJoin": "Who can take part",
+    "ages": {
+      "any": "Any age",
+      "adults": "Adults",
+      "children": "Children",
+      "both": "Children and adults"
+    },
+    "near": "Near",
+    "nearPlaceholder": "City, state or ZIP code",
+    "nearHint": "Only used to sort the list on your device.",
+    "remoteFilter": "Can take part from home",
+    "countOne": "1 study is looking for participants",
+    "countOther": "{n} studies are looking for participants",
+    "status": {
+      "RECRUITING": "Looking for participants"
+    },
+    "types": {
+      "observational": "Observational",
+      "trial": "Clinical trial"
+    },
+    "remote": "Remote",
+    "remoteLine": "Take part from home",
+    "moreSites": "+ {n} more",
+    "officialLabel": "From the official listing (in English)",
+    "englishOnly": "Summary in English",
+    "whatYoudDo": "What you would do",
+    "runBy": "Run by",
+    "listing": "Listing",
+    "listingLink": "{nct} on ClinicalTrials.gov (in English)",
+    "noMatch": "No study matches these filters.",
+    "unavailable": "The list of studies is not available right now. You can search for Chiari studies that are looking for participants on ClinicalTrials.gov (in English).",
+    "beforeTitle": "Before taking part in a study",
+    "before": {
+      "wide": "Talk to your doctor and ask the study team what it involves, how much it will cost you and how your data are used. Open Chiari simplifies the summaries; the official listing is the one that counts.",
+      "narrow": "Talk to your doctor and ask the study team what it involves. The official listing is the one that counts."
+    },
+    "registryBefore": "See also the",
+    "registry": "Bobby Jones Chiari & Syringomyelia Foundation patient registry",
+    "registryAfter": "(enrollments are paused for now).",
+    "creditBefore": "It is not medical advice. Study data from",
+    "creditSource": "ClinicalTrials.gov",
+    "creditAfter": ", processed on {date}. Summaries simplified by Open Chiari."
+  },
+  "impact": {
+    "_note": "Translation of 'Impact' (pending review).",
+    "title": "Impact",
+    "intro": "How Open Chiari is used, how well it works and how anyone can take it over. It is counted without cookies or personal data.",
+    "useTitle": "Use since launch",
+    "launched": "Launched on {date} · updated daily",
+    "launchDate": "November 4, 2026",
+    "totals": {
+      "visit": "Visits",
+      "explore": "3D models explored",
+      "explain": "Explain It links created",
+      "study": "Study listings opened",
+      "embedSites": "Sites that embed the model"
+    },
+    "notCounted": "Not counted yet",
+    "totalsNote": "Totals only. Open Chiari never records who you are, what your Explain It note says or which questions you print.",
+    "qualityTitle": "Quality report",
+    "qualityRun": "Tested automatically on each update · last test: {date}",
+    "columns": {
+      "check": "Test",
+      "phone": "Phone",
+      "desktop": "Computer",
+      "means": "What it means"
+    },
+    "accessibility": "Accessibility",
+    "accessibilityMeans": "Can be used with screen readers, with the keyboard and with low vision",
+    "speed": "Speed",
+    "speedMeans": "How fast the pages load with a typical connection",
+    "score": "{n} / 100",
+    "notMeasured": "Not measured yet",
+    "standard": "Accessibility standard",
+    "standardValue": "WCAG 2.2 AA · {result}",
+    "wcagPass": "passed the automatic tests",
+    "wcagIssues": "problems found by the automatic tests",
+    "standardMeans": "The current W3C standard; it also covers WCAG 2.1 AA, the level of the ADA rules in the U.S.",
+    "accuracy": "Accuracy checks",
+    "accuracyValue": "November 4, 2026 · passed",
+    "accuracyMeans": "Texts and 3D views compared with published sources; not reviewed by a medical professional",
+    "openTitle": "Open source: nothing is left abandoned",
+    "openText": "Every line of code and every model file are public: the code under the MIT license and the 3D model under CC BY-SA 4.0. Any organization can have its own copy, change it or take it over, at no cost and without depending on a single person or company.",
+    "code": "Code",
+    "codeLink": "github.com/ARCFrontierSystems/OpenChiari",
+    "codeLicense": "· MIT License",
+    "model": "3D model",
+    "modelLicense": "CC BY-SA 4.0",
+    "hosting": "Hosting",
+    "hostingText": "Free static hosting; includes a step-by-step guide",
+    "personalData": "Personal data",
+    "personalDataText": "None is saved, so there is nothing to transfer",
+    "orgsTitle": "For Chiari organizations",
+    "orgsText": "Do you want Open Chiari on your own site, with your colors, or a tool made to measure for you? Let's talk.",
+    "contact": "Contact Open Chiari",
+    "footer": "A personal project of Matthew Borgfeld. It is not medical advice."
+  },
+  "compare": {
+    "_note": "Text from docs/COPY.md '3D Explorer, side by side', translated (pending review). The syrinx and after-surgery notes are the explorer's short notes (explorer.conditions.*.noteShort).",
+    "title": "Side by side",
+    "rotateTogether": "Rotate together",
+    "back": "Back to a single view",
+    "left": "Condition of the left view",
+    "right": "Condition of the right view",
+    "notes": {
+      "typical": "The cerebellar tonsils are usually at the level of the dotted line or above (a few millimeters below can be normal). The fluid space behind them is open.",
+      "chiari": "The cerebellar tonsils extend below the line (blue bracket) and occupy the space where the fluid should pass. The red marks show where the flow is usually restricted."
+    }
+  },
+  "tour": {
+    "_note": "Translation of the guided tour (pending review).",
+    "title": "Guided tour",
+    "exit": "Exit the tour",
+    "progress": "Tour progress",
+    "stepOf": "Step {n} of {total}",
+    "back": "Back",
+    "next": "Next: {title}",
+    "finish": "Finish the tour",
+    "steps": [
+      {
+        "id": "meet",
+        "title": "Get to know the model",
+        "text": "This view cuts the head and neck in half. The cerebellum helps control balance and coordination. The foramen magnum is the opening at the base of the skull where the brainstem becomes the spinal cord."
+      },
+      {
+        "id": "typical",
+        "title": "Typical anatomy",
+        "text": "The cerebellar tonsils are usually at the level of the dotted line that crosses the skull opening or above it (a few millimeters below can still be normal), and the cerebrospinal fluid circulates freely around them."
+      },
+      {
+        "id": "low",
+        "title": "The cerebellar tonsils are too low",
+        "text": "The dotted line crosses the opening at the base of the skull. In Chiari, the cerebellar tonsils, the lowest part of the cerebellum, extend below it, as the blue bracket shows."
+      },
+      {
+        "id": "flow",
+        "title": "How the fluid circulates",
+        "text": "Cerebrospinal fluid is a clear fluid that cushions the brain and the spinal cord. With each heartbeat, it moves back and forth between the skull and the spinal canal. In Chiari, the cerebellar tonsils extend below the line (blue bracket) and occupy the space where the fluid should pass. The red marks show where the flow is usually restricted."
+      },
+      {
+        "id": "syrinx",
+        "title": "A syrinx",
+        "text": "A syrinx is a fluid-filled cavity inside the spinal cord. It often appears together with Chiari, especially in the part of the spinal cord that is in the neck."
+      }
+    ]
+  },
+  "kit": {
+    "_note": "Translation of the awareness kit (pending review). The Spanish files are made with scripts/make-kit.mjs in public/kit/es/.",
+    "eyebrow": "Chiari Awareness Month · September",
+    "title": "Awareness kit",
+    "intro": "Free graphics and printables for patients, families and organizations. Use them as they are or add your organization's logo in the indicated space.",
+    "zip": "Download the full kit (ZIP)",
+    "socialHeadline": "Chiari, explained in 1 image.",
+    "socialFooter": "openchiari.org · #ChiariAwarenessMonth",
+    "quote": "Chiari symptoms often are not noticed. Ask how you can help.",
+    "quoteFooter": "September · Chiari Awareness Month",
+    "cardLine1": "I have Chiari malformation.",
+    "cardLine2": "Scan to see in 3D what that means.",
+    "posterTitle": "What is Chiari malformation?",
+    "logoSpace": "your logo",
+    "items": {
+      "social": {
+        "title": "Square post for social media",
+        "format": "1080 × 1080 · PNG"
+      },
+      "quote": {
+        "title": "Card with a quote",
+        "format": "Square and story sizes · PNG"
+      },
+      "card": {
+        "title": "Explain It pocket card",
+        "format": "To print, 8 per page · PDF"
+      },
+      "poster": {
+        "title": "Poster and flyer for events",
+        "format": "Letter and A4 · PDF, with space for logo"
+      }
+    },
+    "download": "Download",
+    "letter": "Letter",
+    "orgsTitle": "For organizations",
+    "orgsText": "Do you need the kit with your colors or a version for a particular event? Write to us and we'll make it for you, free.",
+    "contact": "Contact Open Chiari",
+    "license": "The kit graphics can be used and shared freely, CC BY-SA 4.0. The graphics that show the 3D model also carry the credit of Z-Anatomy and BodyParts3D."
+  },
+  "studySummaries": {
+    "NCT06502431": {
+      "summary": "The researchers want to understand how the cerebrospinal fluid and the blood move in the head and neck in Chiari I. They use a special MRI that measures flow and compare adults with and without symptoms with people without Chiari.",
+      "whatYoudDo": "Additional flow scans that are added to an MRI, on a single day. For adults from 18 to 50 years old without previous surgeries of the brain or the spine and without a history of other conditions of the nerves or of the heart (ask the study team what counts). It is not for people who cannot have an MRI or for people who are pregnant or who are breastfeeding. People with Chiari are invited after a neurosurgery consultation at the Amiens hospital, and the team re-checks the images to confirm the Chiari I."
+    },
+    "NCT06724029": {
+      "summary": "The researchers want to know what predicts how people do after a surgery of the brain or the spine, in many conditions, among them Chiari I. The study does not change anyone's treatment; it only collects health information before the surgery and after.",
+      "whatYoudDo": "Your health information is collected before the surgery and during the later follow-up; the frequency and the duration depend on the condition, and the listing does not indicate it. For adults who have neurosurgery at one of the hospitals in Italy that still accept new people (the official listing shows which ones)."
+    }
+  }
+}

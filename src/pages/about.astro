@@ -22,7 +22,7 @@ const href = (key: string) => (routes as Record<string, string>)[key];
       <section aria-labelledby="how-title">
         <h2 id="how-title" class="serif">{t.howTitle}</h2>
         <ul class="how">
-          <li>{t.how.factsBefore} <a href={externalLinks.ninds}>{t.how.ninds}</a> {t.how.factsAfter}</li>
+          <li>{t.how.factsBefore} <a href={externalLinks.ninds}>{t.how.ninds}</a> {t.how.factsAfter} <a href={routes.evidence}>{t.how.evidenceLink}</a>{t.how.factsEnd}</li>
           <li>{t.how.modelBefore} <a href={externalLinks.zAnatomy}>{t.how.zAnatomy}</a> {t.how.modelAfter}</li>
           <li>{t.how.checks}</li>
           <li>{t.how.ai}</li>

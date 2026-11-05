@@ -11,6 +11,9 @@ import AnatomyFigure from '../components/AnatomyFigure.astro';
 import { getStrings } from '../i18n';
 
 const t = getStrings(Astro.currentLocale).prep;
+const f = getStrings(Astro.currentLocale).footer;
+// The model credit exactly as CLAUDE.md rule 3 gives it (from the footer's pieces).
+const credit = `${f.modelBefore.replace(/^\.\s*/, '')} ${f.zAnatomy} ${f.modelAfter}`;
 const all = t.groups.flatMap((g) => g.questions);
 const selected = all.filter((q) => q.checked);
 const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? forms.one : forms.other.replace('{n}', String(n)));
@@ -76,6 +79,10 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
           <ol data-preview-list>
             {selected.map((q) => <li>{q.text}</li>)}
           </ol>
+          <div class="preview-mention" data-preview-mention-wrap hidden>
+            <h3>{t.mention}</h3>
+            <ul data-preview-mention></ul>
+          </div>
           <p class="preview-note">{t.answerSpace}</p>
         </div>
 
@@ -120,6 +127,7 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
       <div class="line"></div>
     </div>
     <p class="sheet-footer mono">{t.sheetFooter}</p>
+    <p class="sheet-credit">{credit}</p>
   </section>
 </Base>
 
@@ -209,6 +217,11 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
     document.querySelector('[data-sheet-mention]')!.replaceChildren(
       ...mentions.map((text) => Object.assign(document.createElement('li'), { textContent: text })),
     );
+    // The on-screen preview shows them too.
+    document.querySelector('[data-preview-mention]')!.replaceChildren(
+      ...mentions.map((text) => Object.assign(document.createElement('li'), { textContent: text })),
+    );
+    document.querySelector<HTMLElement>('[data-preview-mention-wrap]')!.hidden = mentions.length === 0;
     sheet.classList.toggle('no-diagram', !diagram.checked);
     // Keep the sheet on one page: less answer space as the list grows.
     sheet.dataset.density = items.length <= 7 ? 'roomy' : items.length <= 10 ? 'medium' : 'tight';
@@ -492,6 +505,20 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
   }
 
   /* ---------- Calm mode ---------- */
+  .preview-mention h3 {
+    margin: var(--s-16) 0 var(--s-8);
+    font-size: 15px;
+  }
+  .preview-mention ul {
+    margin: 0;
+    padding-left: 1.2em;
+  }
+  /* Calm mode: larger buttons (DESIGN.md: at least 56 px). */
+  :global(:root[data-calm='on']) .add-row .button,
+  :global(:root[data-calm='on']) [data-own-add],
+  :global(:root[data-calm='on']) [data-mention-add] {
+    min-height: 56px;
+  }
   :global(:root[data-calm='on']) .group summary,
   :global(:root[data-calm='on']) .field-label {
     font-size: 20px;
@@ -569,8 +596,14 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
       color: #5e5f66;
       border-top: 1px solid #dcdbd6;
     }
-    .no-diagram .sheet-diagram {
+    .no-diagram .sheet-diagram,
+    .no-diagram .sheet-credit {
       display: none;
+    }
+    .sheet-credit {
+      margin: 2px 0 0;
+      font-size: 7pt;
+      color: #5e5f66;
     }
     .sheet-questions {
       margin: 0;

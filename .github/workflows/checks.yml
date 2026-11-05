@@ -18,6 +18,8 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 22
+          # The newest Node 22: Astro needs 22.23.4 or later, and some GitHub machines keep an older copy.
+          check-latest: true
           cache: npm
       - run: npm ci
       - name: Type check

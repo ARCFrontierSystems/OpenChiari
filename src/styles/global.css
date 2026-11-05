@@ -43,6 +43,12 @@ a:hover {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
+/* The 3D view's label buttons (made by src/explorer/viewer3d.ts) sit on the dark view: a light ring, drawn just
+   inside the button so the edge of the view doesn't clip it. */
+.x-label:focus-visible {
+  outline: 2px solid var(--x-accent);
+  outline-offset: -2px;
+}
 
 .serif {
   font-family: var(--font-serif);

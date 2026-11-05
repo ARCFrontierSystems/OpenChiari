@@ -168,7 +168,7 @@
           "num": "06",
           "page": "support",
           "title": "Support Chiari organizations",
-          "wide": "Donate to or volunteer with the groups funding research and running registries.",
+          "wide": "Donate to or volunteer with the groups funding research and supporting families.",
           "narrow": "Donate or volunteer on their own sites."
         }
       ]
@@ -393,10 +393,12 @@
       "midline": "Cut at the midline",
       "far": "Cut past the midline, toward the far side"
     },
-    "evidencePage": "Evidence notes"
+    "evidencePage": "Evidence notes",
+    "notInModel": "Not in this model yet"
   },
   "evidence": {
-    "inEnglish": "These notes are in English, like the sources they cite."
+    "inEnglish": "These notes are in English, like the sources they cite.",
+    "intro": "The evidence notes list every medical sentence and every 3D shape on the site with the source it rests on. They are the working file the site is built from, so they also name files and checks used by the people who maintain it."
   },
   "prep": {
     "title": "Prepare for your next appointment",
@@ -524,7 +526,7 @@
   "support": {
     "title": "Support the groups doing the work",
     "intro": {
-      "wide": "These nonprofits fund research, run patient registries and support families. Open Chiari doesn't take donations; every link below goes straight to the organization's own page.",
+      "wide": "These nonprofits fund research and support families, and one keeps an international patient registry. Open Chiari doesn't take donations; every link below goes straight to the organization's own page.",
       "narrow": "Open Chiari doesn't take donations. Every link goes to the organization's own page."
     },
     "orgs": [
@@ -560,7 +562,7 @@
       }
     ],
     "donate": "Donate on their site",
-    "checked": "Descriptions and links checked November 2026. [Before launch: confirm with each organization.]",
+    "checked": "Descriptions and links checked November 2026.",
     "otherTitle": "Other ways to help",
     "other": [
       {
@@ -588,11 +590,13 @@
     "how": {
       "factsBefore": "Medical facts are adapted from the",
       "ninds": "NINDS fact sheet",
-      "factsAfter": "and peer-reviewed research, listed on each page.",
+      "factsAfter": "and other published sources, listed in the",
+      "evidenceLink": "evidence notes",
+      "factsEnd": ".",
       "modelBefore": "The 3D model is built from",
       "zAnatomy": "Z-Anatomy",
       "modelAfter": "and BodyParts3D, open anatomy data.",
-      "checks": "Text and every 3D view are checked against the published sources listed in the evidence notes, by automatic measurements and independent audits, before they're published. They have not been reviewed by a medical professional. Last check: November 4, 2026.",
+      "checks": "Text and every 3D view are checked against the published sources listed in the evidence notes, by automatic measurements and independent audits, before they're published. They have not been reviewed by a medical professional. Last check: November 5, 2026.",
       "ai": "AI tools helped write the code and first drafts; every page is checked by a person."
     },
     "principlesTitle": "Principles",
@@ -623,7 +627,7 @@
       }
     ],
     "correctionsTitle": "Corrections",
-    "corrections": "Spot something wrong or out of date? Email with the page and what to fix. Corrections are made as quickly as possible and noted in the changelog.",
+    "corrections": "Spot something wrong or out of date? Email with the page and what to fix. Corrections are made as quickly as possible, and every change is listed in the site's public code history.",
     "contactTitle": "Contact",
     "contact": "For corrections, organizations, researchers and press.",
     "email": "hello@openchiari.org",
@@ -767,7 +771,7 @@
     "intro": "Send someone a link that opens the model in this exact view, with a short note from you.",
     "noteLabel": "Your note",
     "noteHint": "Sent as your message, with the link under it. Change it however you like.",
-    "starterNote": "In Chiari malformation, the lowest part of the cerebellum sits below the opening where the brain meets the spinal cord. That crowds the space where spinal fluid normally flows, which can cause headaches and other symptoms. Symptoms can come and go, often with few outward signs.",
+    "starterNote": "In Chiari malformation, the lowest part of the cerebellum sits below the opening where the brain meets the spinal cord. This can crowd the space where spinal fluid flows, which can cause headaches and other symptoms. Symptoms can come and go, often with few outward signs.",
     "explore": "Let them rotate and explore on their own",
     "yourLink": "Your link",
     "copy": "Copy note and link",
@@ -783,7 +787,7 @@
     "lookingChiari": [
       "The dashed line runs across the opening where the brain meets the spinal cord.",
       "The lowest part of the cerebellum, the tonsils, sits below that line. The blue bracket shows how far.",
-      "That crowds the space where spinal fluid normally flows, which can cause headaches and other symptoms."
+      "This can crowd the space where spinal fluid flows, which can cause headaches and other symptoms."
     ],
     "helpTitle": "How you can help",
     "help": "Symptoms can come and go, and there are often few outward signs. Believing them, and making room for rest, can mean a lot.",
@@ -885,7 +889,7 @@
     "wcagIssues": "issues found by automated checks",
     "standardMeans": "The current W3C standard; also covers WCAG 2.1 AA, the level in U.S. ADA rules",
     "accuracy": "Accuracy checks",
-    "accuracyValue": "November 4, 2026 · passed",
+    "accuracyValue": "November 5, 2026 · passed",
     "accuracyMeans": "Text and 3D views checked against published sources; not reviewed by a medical professional",
     "openTitle": "Open source: nothing gets stranded",
     "openText": "Every line of code and every model file is public: code under the MIT License, the 3D model under CC BY-SA 4.0. Any organization can run its own copy, change it, or take it over, with no fees and no dependence on one person or company.",
@@ -912,7 +916,7 @@
     "right": "Right view condition",
     "notes": {
       "typical": "Tonsils usually sit at or above the dashed line (a few millimeters below can be normal). The fluid space behind them is open.",
-      "chiari": "Tonsils extend below the line (blue bracket) and fill the space where fluid should pass. Red marks show where flow is often restricted."
+      "chiari": "Tonsils extend below the line (blue bracket) and often crowd the space where fluid should pass. Red marks show where flow is often restricted."
     }
   },
   "tour": {
@@ -943,7 +947,7 @@
       {
         "id": "flow",
         "title": "How fluid flows",
-        "text": "Cerebrospinal fluid is clear fluid that cushions the brain and spinal cord. With each heartbeat it pulses back and forth between the skull and the spinal canal. In Chiari, the tonsils extend below the line (blue bracket) and fill the space where fluid should pass. Red marks show where flow is often restricted."
+        "text": "Cerebrospinal fluid is clear fluid that cushions the brain and spinal cord. With each heartbeat it pulses back and forth between the skull and the spinal canal. In Chiari, the tonsils extend below the line (blue bracket) and often crowd the space where fluid should pass. Red marks show where flow is often restricted."
       },
       {
         "id": "syrinx",
@@ -960,10 +964,10 @@
     "zip": "Download the full kit (ZIP)",
     "socialHeadline": "1 picture of Chiari, explained.",
     "socialFooter": "openchiari.org · #ChiariAwarenessMonth",
-    "quote": "Chiari symptoms often don't show. Ask how you can help.",
+    "quote": "Chiari symptoms often have few outward signs. Ask how you can help.",
     "quoteFooter": "September · Chiari Awareness Month",
     "cardLine1": "I have Chiari malformation.",
-    "cardLine2": "Scan to see what that means in 3D.",
+    "cardLine2": "Scan to see Chiari malformation in 3D.",
     "posterTitle": "What is Chiari malformation?",
     "logoSpace": "your logo",
     "items": {

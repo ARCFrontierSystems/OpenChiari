@@ -776,7 +776,7 @@ test('Awareness kit: every graphic and printable downloads, and the ZIP carries 
     expect((await res.body()).length, href).toBeGreaterThan(1000);
   }
   // The quote card uses the wording approved after the source check, and the license line is shown.
-  await expect(page.locator('img[alt^="Chiari symptoms often don\'t show."]')).toBeVisible();
+  await expect(page.locator('img[alt^="Chiari symptoms often have few outward signs."]')).toBeVisible();
   await expect(page.getByText('Kit graphics are free to use and share, CC BY-SA 4.0.', { exact: false })).toBeVisible();
 });
 

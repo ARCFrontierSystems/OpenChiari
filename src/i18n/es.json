@@ -49,8 +49,8 @@
       "title": "¿Qué es la malformación de Chiari?",
       "whatItIs": {
         "title": "Qué es",
-        "wide": "Las amígdalas cerebelosas, la parte más baja del cerebelo, se extienden por debajo del agujero magno, la abertura en la base del cráneo. El cerebelo ayuda a controlar el equilibrio y la coordinación. A menudo, la malformación está relacionada con que la parte posterior e inferior del cráneo es más pequeña o tiene otra forma, lo que deja poco espacio al cerebro. Con menos frecuencia, aparece más adelante en la vida por otras causas.",
-        "narrow": "Las amígdalas cerebelosas, la parte más baja del cerebelo, se extienden por debajo de la abertura en la base del cráneo. A menudo, la malformación está relacionada con que la parte posterior e inferior del cráneo es más pequeña o tiene otra forma, lo que deja poco espacio al cerebro. Con menos frecuencia, aparece más adelante en la vida por otras causas."
+        "wide": "Las amígdalas cerebelosas, la parte más baja del cerebelo, se extienden por debajo del agujero magno, la abertura en la base del cráneo. El cerebelo ayuda a controlar el equilibrio y la coordinación. A menudo, la malformación está relacionada con que la parte posterior e inferior del cráneo sea más pequeña de lo habitual o tenga otra forma, lo que deja poco espacio al cerebro. Con menos frecuencia, aparece más adelante en la vida por otras causas.",
+        "narrow": "Las amígdalas cerebelosas, la parte más baja del cerebelo, se extienden por debajo de la abertura en la base del cráneo. A menudo, la malformación está relacionada con que la parte posterior e inferior del cráneo sea más pequeña de lo habitual o tenga otra forma, lo que deja poco espacio al cerebro. Con menos frecuencia, aparece más adelante en la vida por otras causas."
       },
       "whoHasIt": {
         "title": "Quién la tiene",
@@ -59,7 +59,7 @@
       },
       "howFound": {
         "title": "Cómo se detecta",
-        "wide": "Por lo general, con una resonancia magnética y un examen médico; a veces, por casualidad, durante un estudio por otro motivo. El médico revisa las imágenes junto con sus síntomas.",
+        "wide": "Por lo general, con una resonancia magnética y un examen médico; a veces, por casualidad, durante un estudio por otro motivo. El médico revisa las imágenes junto con los síntomas que usted tiene.",
         "narrow": "Por lo general, con una resonancia magnética y un examen médico; a veces, por casualidad."
       }
     },
@@ -140,7 +140,7 @@
           "num": "02",
           "page": "explain",
           "title": "Explain It (Explíquelo)",
-          "wide": "Envíe a su familia, a sus maestros o a su empleador un enlace a la vista que corresponde a su diagnóstico.",
+          "wide": "Envíe a su familia, a los maestros o a su empleador un enlace a la vista que corresponde a su diagnóstico.",
           "narrow": "Envíe un enlace a la vista que corresponde a su diagnóstico."
         },
         {
@@ -168,7 +168,7 @@
           "num": "06",
           "page": "support",
           "title": "Apoye a las organizaciones de Chiari",
-          "wide": "Done o sea voluntario en los grupos que financian la investigación y mantienen registros de pacientes.",
+          "wide": "Done o sea voluntario en los grupos que financian la investigación y apoyan a las familias.",
           "narrow": "Done o sea voluntario en sus propios sitios web."
         }
       ]
@@ -192,7 +192,7 @@
       "kit": "Kit de concientización",
       "impact": "Impacto",
       "openSource": "Código abierto",
-      "about": "Acerca de y contacto",
+      "about": "Acerca del sitio y contacto",
       "privacy": "Privacidad"
     }
   },
@@ -369,7 +369,7 @@
       }
     ],
     "viewOptions": "Vista y capas",
-    "hint": "Arrastre para girar · Desplácese para acercar o alejar · Mayús y arrastrar para mover",
+    "hint": "Arrastre para girar · Desplácese para acercar o alejar · Mantenga Mayús y arrastre para mover",
     "camera": "Cámara",
     "cameraViews": {
       "side": "Lado",
@@ -393,10 +393,12 @@
       "midline": "Corte en la línea media",
       "far": "Corte pasada la línea media, hacia el lado opuesto"
     },
-    "evidencePage": "Notas de evidencia"
+    "evidencePage": "Notas de evidencia",
+    "notInModel": "Aún no están en este modelo"
   },
   "evidence": {
-    "inEnglish": "Estas notas están en inglés, igual que las fuentes que citan."
+    "inEnglish": "Estas notas están en inglés, igual que las fuentes que citan.",
+    "intro": "Las notas de evidencia indican cada frase médica y cada forma 3D del sitio con la fuente en la que se basa. Son el archivo de trabajo con el que se hace el sitio, así que también mencionan archivos y comprobaciones que usan las personas que lo mantienen."
   },
   "prep": {
     "title": "Prepárese para su próxima cita",
@@ -467,7 +469,7 @@
         "questions": [
           {
             "id": "options",
-            "text": "¿Cuáles son mis opciones de tratamiento, incluido el seguimiento?",
+            "text": "¿Cuáles son mis opciones de tratamiento, incluida la vigilancia con controles periódicos?",
             "checked": true
           },
           {
@@ -524,7 +526,7 @@
   "support": {
     "title": "Apoye a los grupos que hacen el trabajo",
     "intro": {
-      "wide": "Estas organizaciones sin fines de lucro financian la investigación, mantienen registros de pacientes y apoyan a las familias. Open Chiari no acepta donaciones; cada enlace de abajo lleva directamente a la página de la organización.",
+      "wide": "Estas organizaciones sin fines de lucro financian la investigación y apoyan a las familias, y una de ellas mantiene un registro internacional de pacientes. Open Chiari no acepta donaciones; cada enlace de abajo lleva directamente a la página de la organización.",
       "narrow": "Open Chiari no acepta donaciones. Cada enlace lleva a la página de la organización."
     },
     "orgs": [
@@ -560,7 +562,7 @@
       }
     ],
     "donate": "Donar en el sitio web de la organización",
-    "checked": "Descripciones y enlaces revisados en noviembre de 2026. [Antes del lanzamiento: confirmar con cada organización.]",
+    "checked": "Descripciones y enlaces revisados en noviembre de 2026.",
     "otherTitle": "Otras formas de ayudar",
     "other": [
       {
@@ -570,7 +572,7 @@
       },
       {
         "id": "kit",
-        "title": "Difunda información en septiembre",
+        "title": "Ayude a crear conciencia en septiembre",
         "text": "Gráficos y tarjetas gratis para el Mes de Concientización sobre Chiari."
       },
       {
@@ -588,11 +590,13 @@
     "how": {
       "factsBefore": "La información médica está adaptada de la",
       "ninds": "hoja informativa del NINDS",
-      "factsAfter": "y de investigaciones revisadas por pares, que se indican en cada página.",
+      "factsAfter": "y de otras fuentes publicadas, que se indican en las",
+      "evidenceLink": "notas de evidencia",
+      "factsEnd": ".",
       "modelBefore": "El modelo 3D está hecho a partir de",
       "zAnatomy": "Z-Anatomy",
       "modelAfter": "y BodyParts3D, datos de anatomía abiertos.",
-      "checks": "Los textos y cada vista 3D se comparan con las fuentes publicadas que aparecen en las notas de evidencia, mediante mediciones automáticas y auditorías independientes, antes de publicarse. No han sido revisados por un profesional médico. Última comprobación: 4 de noviembre de 2026.",
+      "checks": "Los textos y cada vista 3D se comparan con las fuentes publicadas que aparecen en las notas de evidencia, mediante mediciones automáticas y auditorías independientes, antes de publicarse. No han sido revisados por un profesional médico. Última comprobación: 5 de noviembre de 2026.",
       "ai": "Herramientas de inteligencia artificial ayudaron a escribir el código y los primeros borradores; una persona revisa cada página."
     },
     "principlesTitle": "Principios",
@@ -623,7 +627,7 @@
       }
     ],
     "correctionsTitle": "Correcciones",
-    "corrections": "¿Ve algo incorrecto o desactualizado? Escríbanos con la página y lo que hay que corregir. Las correcciones se hacen lo antes posible y se anotan en el registro de cambios.",
+    "corrections": "¿Ve algo incorrecto o desactualizado? Escríbanos con la página y lo que hay que corregir. Las correcciones se hacen lo antes posible, y cada cambio queda registrado en el historial público del código del sitio.",
     "contactTitle": "Contacto",
     "contact": "Para correcciones, organizaciones, investigadores y prensa.",
     "email": "hello@openchiari.org",
@@ -760,14 +764,14 @@
     "exploreFull": "Explorar el modelo 3D completo"
   },
   "explain": {
-    "_note": "Traducción de 'Explain It' (pendiente de revisión). starterNote: la nota en inglés no cabe en 280 caracteres en español; esta versión dice lo mismo en menos palabras (277 caracteres). Ver docs/SPANISH-REVIEW.md.",
+    "_note": "Traducción de 'Explain It' (pendiente de revisión). starterNote: la nota en inglés no cabe en 280 caracteres en español; esta versión dice lo mismo en menos palabras (273 caracteres). Ver docs/SPANISH-REVIEW.md.",
     "title": "Explain It (Explíquelo)",
     "backToExplorer": "Volver al explorador 3D",
     "previewTitle": "Vista previa de lo que verán",
     "intro": "Envíe a alguien un enlace que abre el modelo exactamente en esta vista, con una nota breve suya.",
     "noteLabel": "Su nota",
     "noteHint": "Se envía como su mensaje, con el enlace debajo. Cámbiela como quiera.",
-    "starterNote": "En la malformación de Chiari, la parte más baja del cerebelo queda bajo la abertura en la base del cráneo y reduce el espacio por donde circula el líquido cefalorraquídeo. Puede causar dolor de cabeza y otros síntomas que pueden ir y venir, a menudo con pocas señales visibles.",
+    "starterNote": "En la malformación de Chiari, la parte más baja del cerebelo queda bajo la abertura en la base del cráneo y puede reducir el espacio del líquido cefalorraquídeo. Esto puede causar dolor de cabeza y otros síntomas, que pueden ir y venir, a menudo con pocas señales visibles.",
     "explore": "Permitir que giren y exploren el modelo por su cuenta",
     "yourLink": "Su enlace",
     "copy": "Copiar la nota y el enlace",
@@ -783,7 +787,7 @@
     "lookingChiari": [
       "La línea punteada cruza la abertura donde el cerebro se une con la médula espinal.",
       "La parte más baja del cerebelo, las amígdalas cerebelosas, queda por debajo de esa línea. El corchete azul muestra cuánto.",
-      "Eso reduce el espacio por donde normalmente circula el líquido cefalorraquídeo, lo que puede causar dolores de cabeza y otros síntomas."
+      "Esto puede reducir el espacio por donde circula el líquido cefalorraquídeo, lo que puede causar dolores de cabeza y otros síntomas."
     ],
     "helpTitle": "Cómo puede ayudar",
     "help": "Los síntomas pueden ir y venir, y a menudo hay pocas señales visibles. Creerle a la persona y darle espacio para descansar puede significar mucho.",
@@ -839,7 +843,7 @@
     "unavailable": "La lista de estudios no está disponible en este momento. Puede buscar estudios sobre Chiari que buscan participantes en ClinicalTrials.gov (en inglés).",
     "beforeTitle": "Antes de participar en un estudio",
     "before": {
-      "wide": "Hable con su médico y pregúntele al equipo del estudio en qué consiste, cuánto le costará y cómo se usan sus datos. Open Chiari simplifica los resúmenes; la ficha oficial es la que vale.",
+      "wide": "Hable con su médico y pregúntele al equipo del estudio en qué consiste, si tiene algún costo para usted y cómo se usan sus datos. Open Chiari simplifica los resúmenes; la ficha oficial es la que vale.",
       "narrow": "Hable con su médico y pregúntele al equipo del estudio en qué consiste. La ficha oficial es la que vale."
     },
     "registryBefore": "Vea también el",
@@ -885,7 +889,7 @@
     "wcagIssues": "problemas encontrados por las pruebas automáticas",
     "standardMeans": "La norma actual del W3C; también cubre WCAG 2.1 AA, el nivel de las normas de la ADA en los EE. UU.",
     "accuracy": "Comprobaciones de exactitud",
-    "accuracyValue": "4 de noviembre de 2026 · superadas",
+    "accuracyValue": "5 de noviembre de 2026 · superadas",
     "accuracyMeans": "Textos y vistas 3D comparados con fuentes publicadas; no revisados por un profesional médico",
     "openTitle": "Código abierto: nada queda abandonado",
     "openText": "Cada línea de código y cada archivo del modelo son públicos: el código con la licencia MIT y el modelo 3D con CC BY-SA 4.0. Cualquier organización puede poner en marcha su propia copia, cambiarla o hacerse cargo de ella, sin costo y sin depender de una sola persona o empresa.",
@@ -912,7 +916,7 @@
     "right": "Afección de la vista derecha",
     "notes": {
       "typical": "Las amígdalas cerebelosas suelen estar a la altura de la línea punteada o por encima (unos pocos milímetros por debajo puede ser normal). El espacio del líquido detrás de ellas está abierto.",
-      "chiari": "Las amígdalas cerebelosas se extienden por debajo de la línea (corchete azul) y ocupan el espacio por donde debería pasar el líquido. Las marcas rojas muestran dónde el flujo a menudo está restringido."
+      "chiari": "Las amígdalas cerebelosas se extienden por debajo de la línea (corchete azul) y a menudo reducen el espacio por donde debería pasar el líquido. Las marcas rojas muestran dónde el flujo a menudo está restringido."
     }
   },
   "tour": {
@@ -943,7 +947,7 @@
       {
         "id": "flow",
         "title": "Cómo circula el líquido",
-        "text": "El líquido cefalorraquídeo es un líquido transparente que amortigua el cerebro y la médula espinal. Con cada latido del corazón, se mueve de un lado a otro entre el cráneo y el canal espinal. En Chiari, las amígdalas cerebelosas se extienden por debajo de la línea (corchete azul) y ocupan el espacio por donde debería pasar el líquido. Las marcas rojas muestran dónde el flujo a menudo está restringido."
+        "text": "El líquido cefalorraquídeo es un líquido transparente que amortigua el cerebro y la médula espinal. Con cada latido del corazón, se mueve de un lado a otro entre el cráneo y el canal espinal. En Chiari, las amígdalas cerebelosas se extienden por debajo de la línea (corchete azul) y a menudo reducen el espacio por donde debería pasar el líquido. Las marcas rojas muestran dónde el flujo a menudo está restringido."
       },
       {
         "id": "syrinx",
@@ -960,10 +964,10 @@
     "zip": "Descargar el kit completo (ZIP)",
     "socialHeadline": "Chiari, explicado en 1 imagen.",
     "socialFooter": "openchiari.org · #ChiariAwarenessMonth",
-    "quote": "Los síntomas de Chiari a menudo no se ven. Pregunte cómo puede ayudar.",
+    "quote": "Los síntomas de Chiari a menudo dan pocas señales visibles. Pregunte cómo puede ayudar.",
     "quoteFooter": "Septiembre · Mes de Concientización sobre Chiari",
     "cardLine1": "Tengo malformación de Chiari.",
-    "cardLine2": "Escanee para ver en 3D lo que eso significa.",
+    "cardLine2": "Escanee para ver la malformación de Chiari en 3D.",
     "posterTitle": "¿Qué es la malformación de Chiari?",
     "logoSpace": "su logotipo",
     "items": {

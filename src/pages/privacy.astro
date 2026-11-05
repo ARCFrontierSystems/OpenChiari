@@ -62,8 +62,11 @@ const t = getStrings(Astro.currentLocale).privacy;
 </Base>
 
 <style>
+  /* A readable column, lined up with the logo like the other pages. */
+  .privacy > * {
+    max-width: 760px;
+  }
   .privacy {
-    max-width: calc(760px + 2 * var(--gutter));
     padding-top: var(--s-56);
     padding-bottom: var(--s-72);
     display: flex;

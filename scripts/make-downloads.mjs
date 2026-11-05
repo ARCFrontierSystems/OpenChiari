@@ -64,7 +64,7 @@ const creditText = `${footer.factsBefore} ${footer.ninds}${footer.modelBefore} $
 const page = (c) => `<section class="page">
   <h1>${x.conditions[c].label}</h1>
   ${anatomyFigureSvg({ condition: c, flow: true, labels: true, measure: true }, strings.figure)}
-  <p class="cap">${x.captionIllustration} · ${x.captionFlow}</p>
+  <p class="cap">${x.captionIllustration} · ${x.captionFlow} · ${x.captionTonsils}</p>
   <p class="credit">${creditText}</p>
   <p class="credit">${footer.notAdvice} ${footer.notAdviceRest.wide}</p>
 </section>`;

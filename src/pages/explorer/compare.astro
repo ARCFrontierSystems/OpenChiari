@@ -1,0 +1,340 @@
+---
+/**
+ * 3D Explorer, side by side. Layout from design/mockups/Compare.dc.html; text from src/i18n/en.json
+ * (docs/COPY.md "3D Explorer, side by side").
+ *
+ * Two Simple models, each with its own condition. "Rotate together" (on by default) makes either view follow the
+ * other's camera exactly. Without WebGL, each side shows the 2D figure instead.
+ * Always shown (CLAUDE.md rules 1 and 3): the illustration and flow captions, the evidence link, "Not medical
+ * advice" and the model credit.
+ */
+import Head from '../../components/Head.astro';
+import { anatomyFigureSvg, CONDITIONS } from '../../lib/anatomy-figure';
+import { getStrings, routes, externalLinks } from '../../i18n';
+
+const s = getStrings();
+const t = s.compare;
+const x = s.explorer;
+const f = s.footer;
+const sides = [
+  { id: 'a', letter: 'A', label: t.left, condition: 'typical' },
+  { id: 'b', letter: 'B', label: t.right, condition: 'chiari' },
+] as const;
+const note = (c: string) => (t.notes as Record<string, string>)[c] ?? x.conditions[c as keyof typeof x.conditions].noteShort;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head title={`${t.title} · ${x.title}`} themeColor="#111215" />
+  </head>
+  <body class="cmp">
+    <a class="skip" href="#views">{s.skipLink}</a>
+    <header class="cmp-bar">
+      <a class="cmp-brand" href={routes.home}>
+        <img src="/brand/logo-header-dark.png" alt={s.siteName} width="267" height="112" />
+      </a>
+      <span aria-hidden="true">/</span>
+      <a class="cmp-crumb" href={routes.explorer}>{x.title}</a>
+      <span aria-hidden="true">/</span>
+      <h1>{t.title}</h1>
+      <span class="cmp-spacer"></span>
+      <label class="cmp-check"><input type="checkbox" checked data-together /> {t.rotateTogether}</label>
+      <a class="cmp-back" href={routes.explorer}>{t.back}</a>
+    </header>
+
+    <main id="views" class="cmp-views">
+      {sides.map((side) => (
+        <section class="cmp-side" data-side={side.id} aria-labelledby={`label-${side.id}`}>
+          <div class="cmp-head">
+            <span class="cmp-letter" aria-hidden="true">{side.letter}</span>
+            <label id={`label-${side.id}`} for={`cond-${side.id}`}>{side.label}</label>
+            <select id={`cond-${side.id}`} data-condition>
+              {CONDITIONS.map((c) => (
+                <option value={c} selected={c === side.condition}>{x.conditions[c].label}</option>
+              ))}
+            </select>
+          </div>
+          <div class="cmp-stage">
+            <div
+              class="cmp-3d"
+              data-viewer
+              hidden
+              role="application"
+              aria-roledescription={x.viewerRole}
+              aria-label={s.figure.ariaPrefix + s.figure.aria[side.condition]}
+              aria-describedby="compare-keys"
+            ></div>
+            <div class="cmp-figure" data-figure set:html={anatomyFigureSvg({ condition: side.condition, flow: true, labels: false, measure: true, dark: true }, s.figure)} />
+          </div>
+          <p class="cmp-note" data-note aria-live="polite">{note(side.condition)}</p>
+        </section>
+      ))}
+      <p id="compare-keys" class="visually-hidden">{x.keysHelp}</p>
+    </main>
+
+    <footer class="cmp-foot">
+      <p>{x.captionIllustration} · {x.captionFlow} · <a href={routes.evidence}>{x.evidence}</a></p>
+      <p>
+        <strong>{f.notAdvice}</strong> {f.factsBefore} <a href={externalLinks.ninds}>{f.ninds}</a>{f.modelBefore}{' '}
+        <a href={externalLinks.zAnatomy}>{f.zAnatomy}</a> {f.modelAfter}
+      </p>
+    </footer>
+
+    <script>
+      import { createStore, initialState } from '../../explorer/state';
+      import { anatomyFigureSvg, type Condition } from '../../lib/anatomy-figure';
+      import { count } from '../../lib/count';
+      import strings from '../../i18n/en.json';
+
+      const t = strings.compare;
+      const x = strings.explorer;
+      const EVIDENCE: Record<string, string> = { typical: '3d-model-shapes', chiari: '3d-model-shapes', syrinx: 'syrinx', surgery: 'after-decompression' };
+      const note = (c: Condition) => (t.notes as Record<string, string>)[c] ?? x.conditions[c].noteShort;
+      const together = document.querySelector<HTMLInputElement>('[data-together]')!;
+      type Follower = { followCamera(position: number[], target: number[]): void };
+      const viewers: Record<string, Follower | undefined> = {};
+
+      const sides = Array.from(document.querySelectorAll<HTMLElement>('[data-side]'));
+      for (const side of sides) {
+        const id = side.dataset.side!;
+        const select = side.querySelector<HTMLSelectElement>('[data-condition]')!;
+        const store = createStore({ ...initialState, condition: select.value as Condition, flow: true, measure: true, labels: false });
+        const figure = side.querySelector<HTMLElement>('[data-figure]')!;
+        const host = side.querySelector<HTMLElement>('[data-viewer]')!;
+        select.addEventListener('change', () => store.set({ condition: select.value as Condition }));
+        store.subscribe((st) => {
+          figure.innerHTML = anatomyFigureSvg({ condition: st.condition, flow: true, labels: false, measure: true, dark: true }, strings.figure);
+          side.querySelector('[data-note]')!.textContent = note(st.condition);
+          host.setAttribute('aria-label', `${strings.figure.ariaPrefix}${strings.figure.aria[st.condition]}.`);
+          // The evidence link follows the right-hand view, the one people usually compare against.
+          if (id === 'b') document.querySelector<HTMLAnchorElement>('.cmp-foot a')!.hash = EVIDENCE[st.condition];
+        });
+
+        import('../../explorer/viewer3d').then(async ({ webglAvailable, createViewer }) => {
+          if (!webglAvailable()) return;
+          host.hidden = false;
+          try {
+            await createViewer(host, store, strings.figure, {
+              // Stacked on a phone, the page scrolls: up-or-down swipes scroll it, sideways swipes turn the model.
+              pageScroll: window.matchMedia('(max-width: 760px)').matches,
+              onCameraChange: (cam) => {
+                if (!together.checked) return;
+                for (const [other, v] of Object.entries(viewers)) if (other !== id) v?.followCamera(cam.position, cam.target);
+              },
+            });
+            viewers[id] = (host as HTMLElement & { viewer: Follower }).viewer;
+            side.classList.add('has-3d');
+            count('explore');
+          } catch (error) {
+            console.warn('3D view unavailable, showing the figure instead.', error);
+            host.hidden = true;
+            host.replaceChildren();
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
+
+<style>
+  .cmp {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--x-bg);
+    color: var(--x-text);
+    font-family: var(--font-sans);
+  }
+  .cmp a {
+    color: var(--x-text);
+  }
+  .cmp :focus-visible {
+    outline: 2px solid var(--x-accent);
+    outline-offset: 2px;
+  }
+  .skip {
+    position: absolute;
+    left: -9999px;
+  }
+  .skip:focus {
+    left: 12px;
+    top: 12px;
+    z-index: 10;
+    padding: 8px 12px;
+    background: var(--x-panel);
+  }
+  .cmp-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+    padding: 8px 20px;
+    background: var(--x-panel);
+    border-bottom: 1px solid var(--x-border);
+    color: var(--x-muted);
+  }
+  .cmp-brand img {
+    display: block;
+    height: 36px;
+    width: auto;
+  }
+  .cmp-crumb {
+    min-height: var(--touch);
+    display: inline-flex;
+    align-items: center;
+  }
+  .cmp-bar h1 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--x-text);
+  }
+  .cmp-spacer {
+    flex: 1 1 auto;
+  }
+  .cmp-check {
+    min-height: var(--touch);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--x-text);
+    cursor: pointer;
+  }
+  .cmp-check input {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    accent-color: var(--x-accent);
+  }
+  .cmp-back {
+    min-height: var(--touch);
+    display: inline-flex;
+    align-items: center;
+    padding: 0 14px;
+    border: 1px solid var(--x-control-border);
+    border-radius: var(--radius);
+    text-decoration: none;
+  }
+  .cmp-views {
+    flex: 1 1 auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .cmp-side {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    border-right: 1px solid var(--x-border);
+  }
+  .cmp-side:last-of-type {
+    border-right: 0;
+  }
+  .cmp-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--x-border);
+    background: var(--x-panel);
+  }
+  .cmp-letter {
+    width: 26px;
+    height: 26px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--x-control-border);
+    border-radius: var(--radius);
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+  .cmp-head label {
+    color: var(--x-muted);
+    font-size: 14px;
+  }
+  .cmp-head select {
+    min-height: var(--touch);
+    padding: 0 10px;
+    border: 1px solid var(--x-control-border);
+    border-radius: var(--radius);
+    background: var(--x-viewport);
+    color: var(--x-text);
+    font: inherit;
+  }
+  .cmp-stage {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 420px;
+    background: var(--x-viewport);
+  }
+  .cmp-3d {
+    position: absolute;
+    inset: 0;
+  }
+  .cmp-3d :global(canvas) {
+    display: block;
+    cursor: grab;
+  }
+  .cmp-figure {
+    position: absolute;
+    inset: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cmp-figure :global(.anatomy-figure) {
+    width: 100%;
+    height: 100%;
+  }
+  .has-3d .cmp-figure {
+    display: none;
+  }
+  .cmp-note {
+    margin: 0;
+    padding: 12px 16px 16px;
+    color: var(--x-text-2);
+    font-size: 15px;
+    line-height: 1.5;
+    min-height: 4.5em;
+  }
+  .cmp-foot {
+    padding: 10px 20px;
+    border-top: 1px solid var(--x-border);
+    background: var(--x-panel);
+    color: var(--x-muted);
+    font-size: 12px;
+  }
+  .cmp-foot p {
+    margin: 2px 0;
+  }
+  .cmp-foot strong {
+    color: var(--x-text);
+  }
+  :global(:root[data-calm='on']) .cmp-note {
+    font-size: 17px;
+  }
+  @media (max-width: 760px) {
+    .cmp-views {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .cmp-side {
+      border-right: 0;
+      border-bottom: 1px solid var(--x-border);
+    }
+    .cmp-stage {
+      min-height: 0;
+      height: 52svh;
+    }
+    .cmp-bar {
+      padding: 6px 12px;
+    }
+    .cmp-brand,
+    .cmp-bar > span[aria-hidden],
+    .cmp-crumb {
+      display: none;
+    }
+  }
+</style>

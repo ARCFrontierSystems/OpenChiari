@@ -367,6 +367,24 @@ Mockup: `design/mockups/TourPhone.dc.html`
 - Back
 - Next: how fluid flows
 
+## Guided tour, all five steps (approved by Matthew, 2026-11-05)
+
+Step 3 is the mockup text above. Steps 1, 2, 4 and 5 reuse approved sentences. Their titles, "Finish tour" and "Tour progress", and two small rephrasings ("The foramen magnum is the opening…", "Cerebrospinal fluid is clear fluid…") were approved on 2026-11-05.
+
+- Meet the model
+- This view is cut down the middle of the head and neck. The cerebellum helps control balance and coordination. The foramen magnum is the opening at the base of the skull where the brainstem becomes the spinal cord.
+- Typical anatomy
+- The tonsils usually sit at or above the dashed line across the skull opening (a few millimeters below can still be normal), and spinal fluid moves freely around them.
+- The tonsils sit too low
+- (step 3 text above)
+- How fluid flows
+- Cerebrospinal fluid is clear fluid that cushions the brain and spinal cord. With each heartbeat it pulses back and forth between the skull and the spinal canal. In Chiari, the tonsils extend below the line (blue bracket) and fill the space where fluid should pass. Red marks show where flow is often restricted.
+- A syrinx
+- A syrinx is a fluid-filled cavity inside the spinal cord. It often develops alongside Chiari, most often in the neck part of the spinal cord.
+- Next: [title of the next step]
+- Finish tour
+- Tour progress
+
 ## Explain It, create a link
 
 Mockup: `design/mockups/ExplainShare.dc.html`
@@ -381,7 +399,8 @@ Mockup: `design/mockups/ExplainShare.dc.html`
 - Send someone a link that opens the model in this exact view, with a short note from you.
 <!-- Removed 2026-11-05: "Who is it for?" / Family / School / Work / Other / "Picks a starter note you can edit, and a plain explanation suited to them." -->
 - Your note
-- In Chiari malformation, the lowest part of the cerebellum sits below the opening where the brain meets the spinal cord. That crowds the space where spinal fluid normally flows, which can cause headaches and other symptoms. Symptoms can come and go and are often invisible.
+- In Chiari malformation, the lowest part of the cerebellum sits below the opening where the brain meets the spinal cord. That crowds the space where spinal fluid normally flows, which can cause headaches and other symptoms. Symptoms can come and go, often with few outward signs.
+<!-- 2026-11-05 (approved by Matthew after the independent source check; the shorter "often with few outward signs" keeps the note under 280 characters, awaiting Matthew's OK): was "Symptoms can come and go and are often invisible." -->
 <!-- was "This is what my doctor meant by Chiari. The low part of my brain is crowding the opening at the base of my skull, which is why coughing gives me headaches." -->
 - Sent as your message, with the link under it. Change it however you like.
 - 272 / 280
@@ -409,7 +428,8 @@ Mockup: `design/mockups/ExplainView.dc.html`
 - The lowest part of the cerebellum, the tonsils, sits below that line. The blue bracket shows how far.
 - That crowds the space where spinal fluid normally flows, which can cause headaches and other symptoms.
 - How you can help
-- Symptoms can come and go and are often invisible. Believing them, and making room for rest, helps more than you might think.
+- Symptoms can come and go, and there are often few outward signs. Believing them, and making room for rest, can mean a lot.
+<!-- 2026-11-05 (approved by Matthew after the independent source check): was "Symptoms can come and go and are often invisible. Believing them, and making room for rest, helps more than you might think." -->
 - Explore the full 3D model
 - Not medical advice. 3D model by Open Chiari, CC BY-SA 4.0, adapted from Z-Anatomy (CC BY-SA 4.0) and BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 JP).
 
@@ -722,7 +742,8 @@ Mockup: `design/mockups/Kit.dc.html`
 - openchiari.org · #ChiariAwarenessMonth
 - Square social post
 - 1080 × 1080 · PNG
-- Chiari is often invisible. Ask how you can help.
+- Chiari symptoms often don't show. Ask how you can help.
+<!-- 2026-11-05 (approved by Matthew after the independent source check): was "Chiari is often invisible. Ask how you can help." -->
 - September · Chiari Awareness Month
 - Quote card
 - Square and story sizes · PNG

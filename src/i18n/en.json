@@ -764,7 +764,7 @@
     "intro": "Send someone a link that opens the model in this exact view, with a short note from you.",
     "noteLabel": "Your note",
     "noteHint": "Sent as your message, with the link under it. Change it however you like.",
-    "starterNote": "In Chiari malformation, the lowest part of the cerebellum sits below the opening where the brain meets the spinal cord. That crowds the space where spinal fluid normally flows, which can cause headaches and other symptoms. Symptoms can come and go and are often invisible.",
+    "starterNote": "In Chiari malformation, the lowest part of the cerebellum sits below the opening where the brain meets the spinal cord. That crowds the space where spinal fluid normally flows, which can cause headaches and other symptoms. Symptoms can come and go, often with few outward signs.",
     "explore": "Let them rotate and explore on their own",
     "yourLink": "Your link",
     "copy": "Copy note and link",
@@ -783,7 +783,7 @@
       "That crowds the space where spinal fluid normally flows, which can cause headaches and other symptoms."
     ],
     "helpTitle": "How you can help",
-    "help": "Symptoms can come and go and are often invisible. Believing them, and making room for rest, helps more than you might think.",
+    "help": "Symptoms can come and go, and there are often few outward signs. Believing them, and making room for rest, can mean a lot.",
     "exploreFull": "Explore the full 3D model"
   },
   "studies": {
@@ -898,5 +898,54 @@
     "orgsText": "Want Open Chiari on your own site, in your colors, or a tool built around your needs? Let's talk.",
     "contact": "Contact Open Chiari",
     "footer": "A personal project by Matthew Borgfeld. Not medical advice."
+  },
+  "compare": {
+    "_note": "Text from docs/COPY.md '3D Explorer, side by side'. The notes for the syrinx and after-surgery views are the Explorer's own approved short notes (explorer.conditions.*.noteShort).",
+    "title": "Side by side",
+    "rotateTogether": "Rotate together",
+    "back": "Back to single view",
+    "left": "Left view condition",
+    "right": "Right view condition",
+    "notes": {
+      "typical": "Tonsils usually sit at or above the dashed line (a few millimeters below can be normal). The fluid space behind them is open.",
+      "chiari": "Tonsils extend below the line (blue bracket) and fill the space where fluid should pass. Red marks show where flow is often restricted."
+    }
+  },
+  "tour": {
+    "_note": "From docs/COPY.md 'Guided tour, step 3 (phone)': 'Guided tour', 'Exit tour', 'Step 3 of 5', step 3's title and text, 'Back', 'Next: how fluid flows'. Steps 1, 2, 4 and 5 reuse approved sentences (Home, Explorer notes, structure cards, side-by-side note); their titles, 'Finish tour' and 'Tour progress' were approved by Matthew on Nov 5, 2026.",
+    "title": "Guided tour",
+    "exit": "Exit tour",
+    "progress": "Tour progress",
+    "stepOf": "Step {n} of {total}",
+    "back": "Back",
+    "next": "Next: {title}",
+    "finish": "Finish tour",
+    "steps": [
+      {
+        "id": "meet",
+        "title": "Meet the model",
+        "text": "This view is cut down the middle of the head and neck. The cerebellum helps control balance and coordination. The foramen magnum is the opening at the base of the skull where the brainstem becomes the spinal cord."
+      },
+      {
+        "id": "typical",
+        "title": "Typical anatomy",
+        "text": "The tonsils usually sit at or above the dashed line across the skull opening (a few millimeters below can still be normal), and spinal fluid moves freely around them."
+      },
+      {
+        "id": "low",
+        "title": "The tonsils sit too low",
+        "text": "The dashed line runs across the opening at the base of the skull. In Chiari, the tonsils, the lowest part of the cerebellum, extend below it, shown by the blue bracket."
+      },
+      {
+        "id": "flow",
+        "title": "How fluid flows",
+        "text": "Cerebrospinal fluid is clear fluid that cushions the brain and spinal cord. With each heartbeat it pulses back and forth between the skull and the spinal canal. In Chiari, the tonsils extend below the line (blue bracket) and fill the space where fluid should pass. Red marks show where flow is often restricted."
+      },
+      {
+        "id": "syrinx",
+        "title": "A syrinx",
+        "text": "A syrinx is a fluid-filled cavity inside the spinal cord. It often develops alongside Chiari, most often in the neck part of the spinal cord."
+      }
+    ]
   }
 }

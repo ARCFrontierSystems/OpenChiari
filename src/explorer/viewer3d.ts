@@ -118,6 +118,8 @@ export interface ViewerOptions {
   /** true when the viewer sits inside a page that scrolls (Explain It, embeds): an up-or-down swipe on the model
    *  scrolls the page, and a sideways swipe turns the model. */
   pageScroll?: boolean;
+  /** Side by side: called whenever this view's camera moves (turned by hand, a camera button, or a glide). */
+  onCameraChange?: (camera: { position: number[]; target: number[] }) => void;
 }
 
 export async function createViewer(host: HTMLElement, store: Store, figureStrings: FigureStrings, options: ViewerOptions = {}) {
@@ -471,8 +473,10 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     userMoving = false;
     setMoving(false);
   });
+  let following = false; // true while copying another view's camera (side by side), so it isn't sent back
   controls.addEventListener('change', () => {
     if (userMoving && store.get().camera !== 'custom') store.set({ camera: 'custom' });
+    if (!following) options.onCameraChange?.({ position: camera.position.toArray(), target: controls.target.toArray() });
     requestRender();
   });
   // Shift-drag pans (as the Explorer hint says).
@@ -1215,6 +1219,16 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     /** For checks: the realistic model's saved landmarks (labels, flow marks), once loaded. */
     get realisticLandmarks() {
       return realisticLandmarks;
+    },
+    /** Side by side: take another view's camera exactly (where it is and what it looks at). */
+    followCamera(position: number[], target: number[]) {
+      following = true;
+      stopTween();
+      camera.position.fromArray(position);
+      controls.target.fromArray(target);
+      controls.update();
+      following = false;
+      requestRender();
     },
     /** For screenshots of the head's shape: keep the skin solid when turned. */
     setSkinFade(on: boolean) {

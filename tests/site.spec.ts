@@ -3,7 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { readFileSync } from 'node:fs';
 
 // Every page that exists so far. Add new pages here as they're built.
-const pages = ['/', '/explorer/', '/evidence/', '/explain/', '/v/#c1.side.f.m.x', '/explain/#v=c1.side.flow.m&x=1&a=fam&n=Hello', '/studies/', '/prep/', '/model/', '/embed/', '/support/', '/kit/', '/impact/', '/about/', '/privacy/', '/es/'];
+const pages = ['/', '/explorer/', '/explorer/compare/', '/tour/', '/evidence/', '/explain/', '/v/#c1.side.f.m.x', '/explain/#v=c1.side.flow.m&x=1&a=fam&n=Hello', '/studies/', '/prep/', '/model/', '/embed/', '/support/', '/kit/', '/impact/', '/about/', '/privacy/', '/es/'];
 const sizes = [
   { name: 'desktop', width: 1440, height: 900 },
   { name: 'phone', width: 390, height: 844 },
@@ -671,4 +671,72 @@ test('Evidence notes: the page publishes EVIDENCE.md, and each Explorer view lin
   await page.setViewportSize({ width: 390, height: 844 });
   await page.reload();
   await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
+});
+
+test('side by side: two conditions, each with its note; "Rotate together" keeps the views in step', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/explorer/');
+  await page.getByRole('link', { name: 'Side by side' }).click();
+  await expect(page).toHaveURL(/\/explorer\/compare\/$/);
+  await expect(page.locator('.cmp-side.has-3d')).toHaveCount(2, { timeout: 30000 });
+  const notes = page.locator('[data-note]');
+  await expect(notes.nth(0)).toHaveText(/^Tonsils usually sit at or above the dashed line/);
+  await expect(notes.nth(1)).toHaveText(/^Tonsils extend below the line \(blue bracket\)/);
+  await page.getByRole('combobox', { name: 'Right view condition' }).selectOption('surgery');
+  await expect(notes.nth(1)).toHaveText(/^Bone is removed at the back of the opening/);
+  await expect(page.locator('.cmp-foot a').first()).toHaveAttribute('href', /#after-decompression$/);
+
+  const orbit = (i: number) => page.locator('[data-viewer]').nth(i).evaluate((el) => (el as HTMLElement & { viewer: { orbit(): { az: number; el: number } } }).viewer.orbit());
+  const drag = async (i: number) => {
+    const box = (await page.locator('[data-viewer]').nth(i).boundingBox())!;
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(box.x + box.width / 2 + 120, box.y + box.height / 2, { steps: 6 });
+    await page.mouse.up();
+  };
+  // Together: turning the left view turns the right one the same way.
+  await drag(0);
+  const [a, b] = [await orbit(0), await orbit(1)];
+  expect(Math.abs(a.az)).toBeGreaterThan(5);
+  expect(Math.abs(a.az - b.az)).toBeLessThan(0.5);
+  // Apart: only the view you turn moves.
+  await page.getByLabel('Rotate together').uncheck();
+  const before = await orbit(1);
+  await drag(0);
+  expect(Math.abs((await orbit(1)).az - before.az)).toBeLessThan(0.5);
+  expect(Math.abs((await orbit(0)).az - before.az)).toBeGreaterThan(5);
+  // Required captions and credit.
+  await expect(page.getByText('Illustration, not a medical image', { exact: false })).toBeVisible();
+  await expect(page.getByText('CC BY-SA 4.0', { exact: false })).toBeVisible();
+});
+
+test('guided tour: five steps, each sets the view; Back, Next and Finish work, and Home links to it', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  await page.getByRole('link', { name: 'Take the 2-minute tour' }).first().click();
+  await expect(page).toHaveURL(/\/tour\/$/);
+  await expect(page.locator('body.has-3d')).toBeAttached({ timeout: 30000 });
+  const bar = page.getByRole('progressbar', { name: 'Tour progress' });
+  const title = page.getByRole('heading', { level: 1 });
+  await expect(page.getByText('Step 1 of 5')).toBeVisible();
+  await expect(title).toHaveText('Meet the model');
+  await expect(page.getByRole('button', { name: 'Back' })).toBeHidden();
+  await page.getByRole('button', { name: 'Next: typical anatomy' }).click();
+  await page.getByRole('button', { name: 'Next: the tonsils sit too low' }).click();
+  // Step 3 is the approved mockup step, word for word.
+  await expect(page.getByText('Step 3 of 5')).toBeVisible();
+  await expect(title).toHaveText('The tonsils sit too low');
+  await expect(page.getByText('The dashed line runs across the opening at the base of the skull. In Chiari, the tonsils, the lowest part of the cerebellum, extend below it, shown by the blue bracket.')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Next: how fluid flows' })).toBeVisible();
+  await expect(bar).toHaveAttribute('aria-valuenow', '3');
+  await expect(title).toBeFocused();
+  await page.getByRole('button', { name: 'Back' }).click();
+  await expect(title).toHaveText('Typical anatomy');
+  await page.getByRole('button', { name: 'Next: the tonsils sit too low' }).click();
+  await page.getByRole('button', { name: 'Next: how fluid flows' }).click();
+  await page.getByRole('button', { name: 'Next: a syrinx' }).click();
+  await expect(title).toHaveText('A syrinx');
+  await expect(page.locator('[data-viewer]')).toHaveAttribute('aria-label', /syrinx/i);
+  await expect(page.getByRole('link', { name: 'Finish tour' })).toHaveAttribute('href', '/explorer/');
+  await expect(page.getByText('Illustration, not a medical image', { exact: false })).toBeVisible();
 });

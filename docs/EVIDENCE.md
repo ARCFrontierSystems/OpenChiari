@@ -34,6 +34,7 @@ Preferred sources, in order: NIH/NINDS and NLM, peer-reviewed research, major me
 | 13 | How common | Not on the site. If ever used: roughly 1% to 4% of people having brain MRIs, depending on age; not a general-population figure | Not used | [Strahle et al. 2011](https://profiles.wustl.edu/en/publications/chiari-malformation-type-i-and-syrinx-in-children-undergoing-magn/), Meadows et al. 2000 |
 | 14 | Cine MRI | A fluid-flow MRI (used in the visit-prep question) | Verified | [Cleveland Clinic](https://my.clevelandclinic.org/health/diseases/6008-chiari-malformation) |
 | 15 | How far the tonsils extend in Chiari I | "In one study of 160 people with Chiari I, the average was about 12 mm, but it ranged from 5 to 25 mm, and the number alone doesn't decide who needs surgery." (Replaces "in people who need surgery it's often around 10 to 12 mm", which had no row and implied the number decides surgery) | Verified | [Polish J Radiol, PMC9834072](https://pmc.ncbi.nlm.nih.gov/articles/PMC9834072/) (opened): 160 patients, tonsillar herniation 12.4 ± 3.7 mm, range 5.0 to 25.4; "the presence of cerebellar tonsillar herniation is not sufficient to identify symptomatic patients or patients who require surgical treatment" |
+| 16 | Symptoms vary and often show few outward signs | "Symptoms can come and go, and there are often few outward signs." (Explain It: the starter note and "How you can help"; Awareness kit: "Chiari symptoms often don't show.") Changed Nov 5 from "…and are often invisible" after the independent check: closer to the source, and doesn't suggest Chiari can't be seen on MRI | Simplified | [Baisden 2012, "Controversies in Chiari I malformations", Surg Neurol Int 3:S232](https://pmc.ncbi.nlm.nih.gov/articles/PMC3422094/) (opened Nov 5): "patients' clinical complaints vary and fluctuate, and are often accompanied by a paucity of physical findings." Saved copy: `docs/audits/sources/2026-11-05-symptoms/` |
 
 ### Explorer structure cards
 
@@ -146,7 +147,7 @@ Each summary is written from the full ClinicalTrials.gov listing (saved copies a
 - **Still open:** A medical translator signs off on the Spanish.
 - **Still open:** Confirm the Bobby Jones CSF registry status with them (their page says paused, last updated 2024).
 - **Still open:** Before Explain It launches: confirm in the browser network tab that analytics requests don't contain the note.
-- **Still open:** "Symptoms can come and go and are often invisible" (Home and Explain It) has no source row yet. Open the NINDS fact sheet or StatPearls NBK431076 and add one (found Nov 5; see `docs/drafts/2026-11-05-explain-it-drafts.md`).
+- **Done:** ~~"Symptoms can come and go and are often invisible" (Explain It) had no source row.~~ Row 16 added Nov 5 (Baisden 2012, opened; NINDS and StatPearls block automated readers). Independent check: pass with notes (`docs/audits/2026-11-05-symptoms-source-audit.md`); a second source (NINDS or StatPearls) should be added when someone can open one by hand.
 - **Still open:** Open mayoclinic.org by hand once to confirm the care-network copy matches.
 
 ## Sources not opened

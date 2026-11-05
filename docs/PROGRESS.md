@@ -17,6 +17,14 @@ Matthew's preference: when a step is done, lay out what the next step will cover
   - NINDS and StatPearls block automated readers with a robot check, and getting around a robot check isn't appropriate.
   - A suitable 2026 qualitative study ("Living with Arnold-Chiari malformation...") is on pubmed.ncbi.nlm.nih.gov, which isn't allowed yet.
   - Options for Matthew: paste the NINDS sentence himself, or allow pubmed and pmc.
+- **Syrinx view:** already exists in both models ("With syrinx", built in Phases 1 and 2). Nothing more is specified in SPEC.md, so it is left as is unless Matthew wants more.
+- **Phase 4, step 2: guided tour (`/tour/`):**
+  - built from the TourPhone mockup: five steps, a progress bar, Back, Next and Finish tour, and Exit tour;
+  - each step sets the view: 1 Typical with labels; 2 Typical with flow and measure; 3 Chiari I with measure; 4 Chiari I with flow and measure; 5 With syrinx;
+  - the model can be turned by hand, and in Calm mode the camera jumps instead of gliding;
+  - Home's "Take the 2-minute tour" now opens it;
+  - step 3 is the approved mockup text. Steps 1, 2, 4 and 5 reuse approved sentences;
+  - **awaiting Matthew's approval:** the step titles for 1, 2, 4 and 5; "Finish tour"; "Tour progress"; and two small rephrasings ("The foramen magnum is the opening…", "Cerebrospinal fluid is clear fluid…").
 - **Phase 4, step 1: side by side (`/explorer/compare/`):**
   - built from the Compare mockup, with text from COPY.md;
   - two Simple models, each with its own condition and note (the syrinx and after-surgery notes are the Explorer's approved short notes);

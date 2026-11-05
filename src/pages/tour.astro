@@ -1,0 +1,354 @@
+---
+/**
+ * Guided tour: five steps for first-time visitors (docs/SPEC.md). Layout from design/mockups/TourPhone.dc.html.
+ * Each step sets the model's view (condition, camera, flow, measure, labels) and shows its text from
+ * src/i18n/en.json ("tour"). In Calm mode the camera jumps instead of gliding (the viewer handles that).
+ * The model can still be turned by hand at any step. Without WebGL, the 2D figure follows the steps instead.
+ * Always shown (CLAUDE.md rules 1 and 3): the captions, "Not medical advice" and the model credit.
+ */
+import Head from '../components/Head.astro';
+import { anatomyFigureSvg } from '../lib/anatomy-figure';
+import { getStrings, routes, externalLinks } from '../i18n';
+
+const s = getStrings();
+const t = s.tour;
+const x = s.explorer;
+const f = s.footer;
+const total = t.steps.length;
+const first = t.steps[0];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head title={t.title} themeColor="#111215" />
+  </head>
+  <body class="tour">
+    <header>
+      <div class="tour-bar">
+        <span class="tour-name">{t.title}</span>
+        <a class="tour-exit" href={routes.explorer}>{t.exit}</a>
+      </div>
+      <div class="tour-progress" role="progressbar" aria-label={t.progress} aria-valuemin="1" aria-valuemax={total} aria-valuenow="1" data-progress>
+        {t.steps.map((_, i) => <span class:list={{ on: i === 0 }}></span>)}
+      </div>
+    </header>
+
+    <main class="tour-main">
+      <div class="tour-stage">
+        <div class="tour-3d" data-viewer hidden role="application" aria-roledescription={x.viewerRole} aria-label={s.figure.ariaPrefix + s.figure.aria.typical} aria-describedby="tour-keys"></div>
+        <div class="tour-labels" data-labels hidden></div>
+        <div class="tour-figure" data-figure set:html={anatomyFigureSvg({ condition: 'typical', flow: false, labels: true, measure: false, dark: true }, s.figure)} />
+        <p id="tour-keys" class="visually-hidden">{x.keysHelp}</p>
+      </div>
+
+      <section class="tour-panel" aria-live="polite">
+        <p class="tour-step mono" data-step>{t.stepOf.replace('{n}', '1').replace('{total}', String(total))}</p>
+        <h1 class="serif" tabindex="-1" data-title>{first.title}</h1>
+        <p class="tour-text" data-text>{first.text}</p>
+        <div class="tour-buttons">
+          <button type="button" class="button button-secondary" data-back hidden>{t.back}</button>
+          <button type="button" class="button button-primary" data-next>{t.next.replace('{title}', t.steps[1].title.toLowerCase())}</button>
+          <a class="button button-primary" href={routes.explorer} data-finish hidden>{t.finish}</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="tour-foot">
+      <p>{x.captionIllustration} · {x.captionFlow} · <a href={routes.evidence}>{x.evidence}</a></p>
+      <p>
+        <strong>{f.notAdvice}</strong> {f.factsBefore} <a href={externalLinks.ninds}>{f.ninds}</a>{f.modelBefore}{' '}
+        <a href={externalLinks.zAnatomy}>{f.zAnatomy}</a> {f.modelAfter}
+      </p>
+    </footer>
+
+    <script>
+      import { createStore, initialState, type ViewState } from '../explorer/state';
+      import { anatomyFigureSvg } from '../lib/anatomy-figure';
+      import { count } from '../lib/count';
+      import strings from '../i18n/en.json';
+
+      const t = strings.tour;
+      const x = strings.explorer;
+      // What the model shows at each step.
+      const VIEWS: Record<string, Partial<ViewState>> = {
+        meet: { condition: 'typical', camera: 'side', flow: false, measure: false, labels: true },
+        typical: { condition: 'typical', camera: 'side', flow: true, measure: true, labels: false },
+        low: { condition: 'chiari', camera: 'side', flow: false, measure: true, labels: false },
+        flow: { condition: 'chiari', camera: 'side', flow: true, measure: true, labels: false },
+        syrinx: { condition: 'syrinx', camera: 'side', flow: false, measure: false, labels: false },
+      };
+      const EVIDENCE: Record<string, string> = { typical: '3d-model-shapes', chiari: '3d-model-shapes', syrinx: 'syrinx', surgery: 'after-decompression' };
+
+      const store = createStore({ ...initialState, ...VIEWS.meet });
+      const $ = <T extends HTMLElement = HTMLElement>(sel: string) => document.querySelector<T>(sel)!;
+      const figure = $('[data-figure]');
+      const host = $('[data-viewer]');
+      store.subscribe((st) => {
+        figure.innerHTML = anatomyFigureSvg({ condition: st.condition, flow: st.flow, labels: st.labels, measure: st.measure, dark: true }, strings.figure);
+        host.setAttribute('aria-label', `${strings.figure.ariaPrefix}${strings.figure.aria[st.condition]}.`);
+        $<HTMLAnchorElement>('.tour-foot a').hash = EVIDENCE[st.condition];
+      });
+
+      let step = 0;
+      function show(n: number, focus = true) {
+        step = n;
+        const s = t.steps[n];
+        $('[data-step]').textContent = t.stepOf.replace('{n}', String(n + 1)).replace('{total}', String(t.steps.length));
+        $('[data-title]').textContent = s.title;
+        $('[data-text]').textContent = s.text;
+        $('[data-back]').hidden = n === 0;
+        const last = n === t.steps.length - 1;
+        $('[data-next]').hidden = last;
+        $('[data-finish]').hidden = !last;
+        if (!last) $('[data-next]').textContent = t.next.replace('{title}', t.steps[n + 1].title.toLowerCase());
+        const bar = $('[data-progress]');
+        bar.setAttribute('aria-valuenow', String(n + 1));
+        bar.querySelectorAll('span').forEach((dot, i) => dot.classList.toggle('on', i <= n));
+        store.set({ ...VIEWS[s.id] });
+        if (focus) $('[data-title]').focus();
+      }
+      $('[data-next]').addEventListener('click', () => show(Math.min(step + 1, t.steps.length - 1)));
+      $('[data-back]').addEventListener('click', () => show(Math.max(step - 1, 0)));
+
+      const LABEL_LAYERS: Record<string, 'brain' | 'csf' | 'bone'> = {
+        cerebrum: 'brain', callosum: 'brain', cerebellum: 'brain', brainstem: 'brain', tonsil: 'brain', cord: 'brain',
+        ventricle: 'csf', csf: 'csf', foramen: 'bone', c2: 'bone', syrinx: 'brain', removed: 'bone',
+      };
+      import('../explorer/viewer3d').then(async ({ webglAvailable, createViewer, labelAnchor }) => {
+        if (!webglAvailable()) return;
+        host.hidden = false;
+        try {
+          await createViewer(host, store, strings.figure, {
+            labelsHost: $('[data-labels]'),
+            labelMargins: { top: 12, bottom: 12 },
+            labels: x.parts.map((p) => ({ part: p.id, num: p.num, name: p.name, layer: LABEL_LAYERS[p.id], anchor: labelAnchor(p.id, store.get().condition), conditions: p.conditions })),
+            pageScroll: window.matchMedia('(max-width: 760px)').matches,
+          });
+          document.body.classList.add('has-3d');
+          count('explore');
+        } catch (error) {
+          console.warn('3D view unavailable, showing the figure instead.', error);
+          host.hidden = true;
+          host.replaceChildren();
+        }
+      });
+      show(0, false);
+    </script>
+  </body>
+</html>
+
+<style>
+  .tour {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--x-bg);
+    color: var(--x-text);
+    font-family: var(--font-sans);
+  }
+  .tour a {
+    color: var(--x-text);
+  }
+  .tour :focus-visible {
+    outline: 2px solid var(--x-accent);
+    outline-offset: 2px;
+  }
+  .tour-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 6px 16px;
+    background: var(--x-panel);
+    border-bottom: 1px solid var(--x-border);
+  }
+  .tour-name {
+    font-weight: 600;
+  }
+  .tour-exit {
+    min-height: var(--touch);
+    display: inline-flex;
+    align-items: center;
+    padding: 0 12px;
+    border: 1px solid var(--x-control-border);
+    border-radius: var(--radius);
+    text-decoration: none;
+  }
+  .tour-progress {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+    padding: 8px 16px;
+    background: var(--x-panel);
+  }
+  .tour-progress span {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--x-control-border);
+  }
+  .tour-progress span.on {
+    background: var(--x-accent);
+  }
+  .tour-main {
+    flex: 1 1 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 400px;
+  }
+  .tour-stage {
+    position: relative;
+    min-height: 460px;
+    background: var(--x-viewport);
+  }
+  .tour-3d {
+    position: absolute;
+    inset: 0;
+  }
+  .tour-3d :global(canvas) {
+    display: block;
+    cursor: grab;
+  }
+  .tour-figure {
+    position: absolute;
+    inset: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tour-figure :global(.anatomy-figure) {
+    width: 100%;
+    height: 100%;
+  }
+  :global(.has-3d) .tour-figure {
+    display: none;
+  }
+  .tour-labels {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .tour-labels :global(.x-label-lines) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .tour-labels :global(.x-label-lines line) {
+    stroke: var(--x-faint);
+    stroke-width: 0.75;
+  }
+  .tour-labels :global(.x-label) {
+    position: absolute;
+    right: 16px;
+    width: 200px;
+    min-height: var(--touch);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 8px;
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    background: var(--x-viewport);
+    color: var(--x-text);
+    font: 400 13px var(--font-sans);
+    text-align: left;
+    pointer-events: auto;
+  }
+  .tour-labels :global(.x-label[hidden]) {
+    display: none;
+  }
+  .tour-labels :global(.x-label-num) {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--x-muted);
+  }
+  @media (max-width: 760px) {
+    .tour-labels {
+      display: none !important;
+    }
+  }
+  .tour-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 28px 24px;
+    background: var(--x-panel);
+    border-left: 1px solid var(--x-border);
+  }
+  .tour-step {
+    margin: 0;
+    font-size: 13px;
+    color: var(--x-muted);
+  }
+  .tour-panel h1 {
+    margin: 0;
+    font-size: 28px;
+    line-height: 1.2;
+  }
+  .tour-panel h1:focus {
+    outline: none;
+  }
+  .tour-text {
+    margin: 0;
+    color: var(--x-text-2);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  :global(:root[data-calm='on']) .tour-text {
+    font-size: 19px;
+  }
+  .tour-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .tour-buttons .button {
+    flex: 1 1 auto;
+    font: inherit;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .tour-buttons [hidden] {
+    display: none;
+  }
+  .tour .button-secondary {
+    color: var(--x-text);
+    border-color: var(--x-control-border);
+    background: transparent;
+  }
+  .tour .button-primary {
+    color: var(--x-button-text);
+    background: var(--x-button-bg);
+    border-color: var(--x-button-bg);
+  }
+  .tour-foot {
+    padding: 10px 16px;
+    border-top: 1px solid var(--x-border);
+    background: var(--x-panel);
+    color: var(--x-muted);
+    font-size: 12px;
+  }
+  .tour-foot p {
+    margin: 2px 0;
+  }
+  .tour-foot strong {
+    color: var(--x-text);
+  }
+  @media (max-width: 760px) {
+    .tour-main {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .tour-stage {
+      min-height: 0;
+      height: 50svh;
+    }
+    .tour-panel {
+      border-left: 0;
+      padding: 20px 16px;
+    }
+    .tour-panel h1 {
+      font-size: 24px;
+    }
+  }
+</style>

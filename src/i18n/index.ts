@@ -25,8 +25,7 @@ export const routes = {
   privacy: '/privacy/',
   evidence: '/evidence/',
   es: '/es/',
-  // The guided tour is Phase 4; until then it opens the Explorer (approved by Matthew).
-  tour: '/explorer/',
+  tour: '/tour/',
 } as const;
 
 export const externalLinks = {

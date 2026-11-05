@@ -383,6 +383,21 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   section.renderOrder = 2000;
   scene.add(section);
 
+  // "What happens in surgery": the After decompression view drawn part way through (null = the finished view).
+  // Stages: 0 before surgery, 1 incision, 2 bone removed, 3 patch, 4 the result (src/lib/anatomy-figure.ts).
+  let surgeryStage: number | null = null;
+  const STAGE_PARTS: Record<string, (s: number) => boolean> = {
+    skull: (s) => s < 2, 'skull-surgery': (s) => s >= 2, 'bone-removed': (s) => s >= 2,
+    c1: (s) => s < 2, 'c1-surgery': (s) => s >= 2, 'dural-patch': (s) => s >= 3,
+    'tonsil-chiari': (s) => s < 4, 'tonsil-surgery': (s) => s >= 4,
+    'csf-chiari': (s) => s < 4, 'csf-surgery': (s) => s >= 4,
+  };
+  /** Whether a structure belongs in the view: its condition, or, part way through surgery, its stage. */
+  function inView(p: { name: string; conditions: string[] | null }, condition: string): boolean {
+    if (surgeryStage !== null && condition === 'surgery' && p.name in STAGE_PARTS) return STAGE_PARTS[p.name](surgeryStage);
+    return !p.conditions || p.conditions.includes(condition);
+  }
+
   let sectionKey = '';
   let sectionJob = 0;
   async function drawSection(st: ViewState) {
@@ -391,11 +406,11 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       const l = st.layers[id as LayerId];
       layers[id] = l.on ? l.opacity / 100 : 0;
     }
-    const key = JSON.stringify([st.condition, layers, st.part]);
+    const key = JSON.stringify([st.condition, layers, st.part, surgeryStage]);
     if (key === sectionKey) return;
     sectionKey = key;
     const job = ++sectionJob;
-    const svg = anatomyFigureSvg({ condition: st.condition, flow: false, measure: false, labels: false, layers }, figureStrings)
+    const svg = anatomyFigureSvg({ condition: st.condition, flow: false, measure: false, labels: false, layers, surgeryStage: surgeryStage ?? undefined }, figureStrings)
       .replace('<svg ', `<svg width="${sectionCanvas.width}" height="${sectionCanvas.height}" `);
     const t0 = performance.now();
     const img = new Image();
@@ -915,7 +930,9 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     const w = hostW, h = hostH;
     const box = `0 0 ${w} ${h}`;
     if (labelSvg.getAttribute('viewBox') !== box) labelSvg.setAttribute('viewBox', box);
-    const shownDefs = [...labelEls.values()].filter(({ def }) => st.layers[def.layer].on && (!def.conditions || def.conditions.includes(st.condition)));
+    // Part way through surgery, the "bone removed" label waits until the bone is out.
+    const stageHides = (part: string) => surgeryStage !== null && surgeryStage < 2 && part === 'removed';
+    const shownDefs = [...labelEls.values()].filter(({ def }) => st.layers[def.layer].on && (!def.conditions || def.conditions.includes(st.condition)) && !stageHides(def.part));
     const top = options.labelMargins?.top ?? 76, bottom = h - (options.labelMargins?.bottom ?? 56);
     const gap = shownDefs.length > 1 ? Math.min(46, (bottom - top) / (shownDefs.length - 1)) : 0;
     let row = 0;
@@ -1144,7 +1161,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     for (const p of parts) {
       const layer = st.layers[p.layer];
       const model = st.model === 'realistic' && realistic === 'ready' ? 'realistic' : 'simple';
-      const shown = p.model === model && layer.on && (!p.conditions || p.conditions.includes(st.condition));
+      const shown = p.model === model && layer.on && inView(p, st.condition);
       const opacity = p.baseOpacity * (layer.opacity / 100);
       p.opacity = opacity;
       p.mesh.visible = shown && opacity > 0;
@@ -1172,7 +1189,8 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     buildFlow(st.condition, simpleShown ? null : realisticLandmarks);
     updateOutline();
     // Flow marks follow the fluid spaces of the model on show (the figure's, or the realistic model's own).
-    flowGroup.visible = st.flow && st.layers.csf.on && (simpleShown || !!realisticLandmarks?.flow);
+    // Part way through surgery the fluid space is still as in Chiari I, so neither the flow marks nor the measure show.
+    flowGroup.visible = st.flow && st.layers.csf.on && (simpleShown || !!realisticLandmarks?.flow) && surgeryStage === null;
     if (flowGroup.visible && !stillOnly()) startFlowLoop();
     else {
       // Stop right away (not on the next frame), so turning flow off or Calm mode on takes effect at once.
@@ -1181,7 +1199,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       placeFlow(null);
     }
     buildMeasure(st.condition, simpleShown ? null : realisticLandmarks);
-    measureGroup.visible = st.measure;
+    measureGroup.visible = st.measure && surgeryStage === null;
     requestRender();
   }
   store.subscribe(apply);
@@ -1261,6 +1279,12 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   (host as HTMLElement & { viewer?: unknown }).viewer = {
     look,
     reset: frame,
+    /** "What happens in surgery": show the After decompression view at a stage (0 to 4), or null for the usual view. */
+    setSurgeryStage(stage: number | null) {
+      surgeryStage = stage;
+      apply(store.get());
+      placeLabels();
+    },
     /** One cough: the fluid marks move up into the head and ease back (about 2.6 seconds). In Calm mode, or with
      *  reduced motion, nothing moves: the "pushed up" still frame is shown for the same time, then the rest frame. */
     async cough(onPhase?: (phase: 'up' | 'back' | 'done') => void): Promise<void> {
@@ -1299,7 +1323,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       for (const p of parts) {
         if (p.model !== 'simple') continue;
         const layer = st.layers[p.layer];
-        if (!layer.on || (p.conditions && !p.conditions.includes(st.condition))) continue;
+        if (!layer.on || !inView(p, st.condition)) continue;
         const opacity = p.ghost ? p.opacity * SKIN_SEE_THROUGH : p.opacity;
         if (opacity <= 0) continue;
         const geom = clipAtMidline(p.mesh);

@@ -405,6 +405,39 @@ test('the contact address is marked so Cloudflare leaves it as plain text, and t
   expect(sw).not.toContain('"/kit/poster-letter.pdf"');
 });
 
+test('What happens in surgery: steps through from Chiari I to after decompression, and Show the usual view ends it', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/explorer/#c1');
+  await expect(page.locator('body')).toHaveClass(/has-3d/, { timeout: 30000 });
+  const panel = page.locator('[data-surgery-panel]').first();
+  await expect(panel).toBeVisible();
+  await panel.locator('summary').click();
+  await panel.locator('[data-surgery-next]').click();
+  await expect(panel.locator('[data-surgery-label]')).toHaveText('Step 1 of 5 · Before surgery');
+  await expect(page.locator('input[name="condition-wide"][value="surgery"]')).toBeChecked();
+  await expect(page.locator('li:has(> [data-part="removed"])').first()).toBeHidden();
+  for (let i = 0; i < 4; i++) await panel.locator('[data-surgery-next]').click();
+  await expect(panel.locator('[data-surgery-label]')).toHaveText('Step 5 of 5 · Afterward');
+  await expect(panel.locator('[data-surgery-next]')).toBeDisabled();
+  await expect(page.locator('li:has(> [data-part="removed"])').first()).toBeVisible();
+  await expect(panel).toContainText('Animation simplified.');
+  await expect(panel).toContainText('Tonsils shown at their lowest point');
+  await panel.locator('[data-surgery-stop]').click();
+  await expect(panel.locator('[data-surgery-label]')).toHaveText('');
+  // Typical anatomy has no surgery panel.
+  await page.locator('label:has(input[name="condition-wide"][value="typical"])').first().click();
+  await expect(page.locator('[data-surgery-panel]').first()).toBeHidden();
+});
+
+test('Support: Connect with others links to outside communities, with the not-checked note', async ({ page }) => {
+  await page.goto('/support/');
+  const section = page.locator('#connect');
+  await expect(section.locator('li')).toHaveCount(4);
+  await expect(section).toContainText("Open Chiari doesn't check it");
+  await expect(section.locator('a[href="https://chiarisupport.org/"]')).toBeVisible();
+  await expect(section.locator('a[hreflang="es"]')).toHaveAttribute('href', 'https://femacpa.com/');
+});
+
 test.describe('Helping your child', () => {
   test('the school sheet prints what was typed, as text only, and nothing is stored or sent', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });

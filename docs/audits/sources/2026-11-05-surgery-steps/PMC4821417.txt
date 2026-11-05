@@ -1,0 +1,411 @@
+ Clinical significance of changes in pB-C2 distance in Chiari I malformation patients following posterior fossa decompression: a single-institution experience - PMC
+ Skip to main content
+ Official websites use .gov
+ A
+ .gov website belongs to an official
+ government organization in the United States.
+ Secure .gov websites use HTTPS
+ A lock (
+ Lock
+ Locked padlock icon
+) or https:// means you've safely
+ connected to the .gov website. Share sensitive
+ information only on official, secure websites.
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+Search PMC Full-Text Archive
+Search in PMC
+- 
+ Journal List
+- 
+ User Guide
+- 
+- 
+- 
+- 
+- 
+- 
+PERMALINK
+ Copy
+ As a library, NLM provides access to scientific literature. Inclusion in an NLM database does not imply endorsement of, or agreement with,
+ the contents by NLM or the National Institutes of Health.
+ Learn more:
+ PMC Disclaimer
+ |
+ PMC Copyright Notice
+J Neurosurg Pediatr. Author manuscript; available in PMC: 2017 Mar 1.
+Published in final edited form as: J Neurosurg Pediatr. 2015 Nov 27;17(3):336–342. doi: 10.3171/2015.7.PEDS15261
+- 
+- 
+- 
+- 
+Clinical significance of changes in pB-C2 distance in Chiari I malformation patients following posterior fossa decompression: a single-institution experience
+Adrian J Maurer
+Adrian J Maurer, BA
+1Department of Neurosurgery, University of Oklahoma Health Sciences Center, Oklahoma City, OK, USA
+Find articles by Adrian J Maurer
+1, Ngoc Quyen Duong
+Ngoc Quyen Duong, MS
+2Department of Biostatistics, University of Oklahoma Health Sciences Center, Oklahoma City, OK, USA
+Find articles by Ngoc Quyen Duong
+2, Phillip A Bonney
+Phillip A Bonney, BS
+1Department of Neurosurgery, University of Oklahoma Health Sciences Center, Oklahoma City, OK, USA
+Find articles by Phillip A Bonney
+1, Ahmed A Cheema
+Ahmed A Cheema, MD
+1Department of Neurosurgery, University of Oklahoma Health Sciences Center, Oklahoma City, OK, USA
+Find articles by Ahmed A Cheema
+1, Chad A Glenn
+Chad A Glenn, MD
+1Department of Neurosurgery, University of Oklahoma Health Sciences Center, Oklahoma City, OK, USA
+Find articles by Chad A Glenn
+1, Sam Safavi-Abbasi
+Sam Safavi-Abbasi, MD, PhD
+1Department of Neurosurgery, University of Oklahoma Health Sciences Center, Oklahoma City, OK, USA
+Find articles by Sam Safavi-Abbasi
+1, Julie B Stoner
+Julie B Stoner, PhD
+2Department of Biostatistics, University of Oklahoma Health Sciences Center, Oklahoma City, OK, USA
+Find articles by Julie B Stoner
+2, Timothy B Mapstone
+Timothy B Mapstone, MD
+1Department of Neurosurgery, University of Oklahoma Health Sciences Center, Oklahoma City, OK, USA
+Find articles by Timothy B Mapstone
+1
+- Author information
+- Article notes
+- Copyright and License information
+1Department of Neurosurgery, University of Oklahoma Health Sciences Center, Oklahoma City, OK, USA
+2Department of Biostatistics, University of Oklahoma Health Sciences Center, Oklahoma City, OK, USA
+✉
+Corresponding Author: Timothy B. Mapstone, MD, Chairman and Wilkins Professor of Neurosurgery, Department of Neurosurgery, University of Oklahoma Health Sciences Center, 1000 N. Lincoln Blvd, Suite 4000, Oklahoma City, OK USA 73104, Phone: (405) 271-4912, Fax: (405) 271-3091, timothy-mapstone@ouhsc.edu
+Issue date 2016 Mar.
+PMC Copyright notice
+PMCID: PMC4821417  NIHMSID: NIHMS773016  PMID: 26613273
+The publisher's version of this article is available at J Neurosurg Pediatr
+Abstract
+Object
+The coexistence of Chiari I malformations and ventral brainstem compression (VBSC) has been well-documented, but the change in VBSC after posterior fossa decompression (PFD) has had little investigation. In this study we evaluate the incidence and degree of VBSC in patients with Chiari I malformations and determine the change in VBSC after PFD, correlating changes in VBSC with clinical status and the need for further intervention.
+Methods
+Patients who underwent PFD for Chiari I malformations by the senior author from November 2005 – January 2013 with complete radiographic records were included in the analysis. The following data were obtained: subjective and objective measures of ventral brainstem compression; relationship of odontoid to Chamberlain’s, McGregor’s, McRae’s, and Wackenheim’s lines; clival length; foramen magnum diameter; and basal angle. The objective evaluation of VBSC was performed with the senior author’s previously described method using pB-C2 distance. Statistical analyses were performed using paired t-tests and a mixed effects ANOVA model.
+Results
+Thirty-one patients were included in the analysis. The mean age of the cohort was 10.0 years. There was a small but statistically significant increase in pB-C2 postoperatively (0.5 mm, p < 0.0001 via mixed effects ANOVA). Eleven patients had postoperative pB-C2 values greater than 9 mm. The mean distance from the odontoid tip to Wackenheim’s line did not change after PFD, signifying postoperative occipitocervical stability. No patients underwent transoral odontoidectomy or occipitocervical fusion. No patients experienced clinical deterioration after PFD.
+Conclusions
+The increase in pB-C2 in patients undergoing posterior fossa decompression is likely a result of releasing the posterior vector on the ventral dura, allowing it to relax posteriorly. This increase is well-tolerated, and a postoperative pB-C2 measurement of greater than 9 mm in light of stable craniocervical metrics and a non-worsened clinical examination does not warrant further intervention.
+Keywords: Chiari, Brainstem compression, Posterior fossa decompression, Pediatric neurosurgery
+The association of Chiari I malformation with ventral brainstem compression (VBSC), with or without basilar invagination, has been well-established, with a reported incidence of 4–31%.5,6,8,10,12,13,15,16,18,20,21,25,26,28,31,34 A causal relationship for these so-called “complex Chiaris” has not been elucidated to date, but in the treatment of symptomatic patients with both conditions, there is controversy as to what extent the brainstem compression should be surgically addressed, if at all.1–3,5–10,14–21,23,24,26,27,29,32–34 While symptomatic VBSC must be treated, procedures aimed at or related to alleviating VBSC have substantial risks.14,32,34 As such, determining the surgical significance of VBSC before PFD is crucial.
+Many of the measurements used to track the course of ventral brainstem compression depend largely on bony landmarks in the posterior fossa and posterior foramen magnum (e.g., the opisthion), which are removed during PFD. Moreover, these traditional measurements do not directly quantify the relationship of the ventral brainstem to the osseous structures compressing it anteriorly. To that end, a previously-derived measurement system using ventral cervico-medullary anatomy, pB-C2, is useful in evaluating serial MRIs of patients with Chiari I malformations and VBSC.18
+The purpose of this study was to evaluate the relationship between pre- and postoperative VBSC using the pB-C2 measurement in patients undergoing PFD for symptomatic Chiari I malformations. Further, we sought to determine the clinical significance of changes in pB-C2 postoperatively to identify the risk of worsening VBSC in patients with PFD without circumferential decompression. We demonstrate our results based on a cohort of patients treated at our institution and discuss our findings in the context of the current literature.
+METHODS
+Prior to collection of data, this study was approved by and subsequently conducted in accordance with all institutional and local regulations and guidelines for human research. Departmental records were queried for all patients undergoing PFD for Chiari I malformations by the senior author at our institution from November 2005 to January 2013, which returned 83 patients. Hospital and clinic records were retrospectively reviewed and data were entered into a database for assimilation and analysis. Patients were excluded if they were presenting for revision of a previous PFD performed by another surgeon (4 patients). Patients were also necessarily excluded if their pre- or postoperative hospital and clinical records or MRIs were unavailable (46 patients). Additionally, one patient with achondroplasia and one patient who upon review actually had Chiari II malformation with myelomeningocele were excluded.
+Thus, the study population consisted of 31 patients with complete clinical and radiographic records. For these patients, we recorded the following data points: age at operation, gender, presenting symptoms, pre- and postoperative exam findings, pre- and postoperative radiographic characteristics, associated conditions (e.g., scoliosis, tethered cord, syringomyelia, hydrocephalus) and outcome, surgery performed, postoperative complications, outcome of presenting symptoms, and length of follow-up. Preoperative sagittal T2-weighted magnetic resonance image (MRI) sequences for each patient were reviewed for subjective grades of VBSC (Figure 1); objective grades of VBSC via the pB-C2 method, described previously18 (Figure 2); ventral brain stem kink angle; distance of tonsillar descent; odontoid tip distance from McRae’s, Chamberlain’s, McGregor’s, and Wackenheim’s lines; clival length; foramen magnum diameter; and basal angle (Figure 3). Postoperative MRIs at the time of last radiologic follow-up were also reviewed for each patient.
+Figure 1.
+Open in a new tab
+Subjective evaluation of ventral brainstem compression. (A) No compression. (B) Mild compression. (C) Moderate compression.
+Figure 2.
+Open in a new tab
+pB-C2 measurement. A line is drawn between the basion and the inferior-posterior aspect of C2 (B-C2 line). pB-C2 is the perpendicular distance between B-C2 and the ventral cervicomedullary dura.
+Figure 3.
+Open in a new tab
+Other lines and relationships used in the study. McRae’s, Chamberlain’s, McGregor’s, and Wackenheim’s lines are represented with dotted lines in A–D, respectively. (A) Odontoid-McRae distance (C2-McR) and tonsillar descent (TD) are shown. (B) Odontoid-Chamberlain distance (C2-Cham), basal angle (BA) and clival length (CL) are shown. (C) Odontoid-McGregor distance (C2-McG) and ventral kink angle (VKA) are shown. (D) Odontoid-Wackenheim distance (C2-Wack) is shown.
+All radiographic measurements were performed by two authors (AJM and SSA) and were overseen and approved by the senior author. Subjective grading and objective pB-C2 measurements were performed three times each in all patients and were averaged. Objective measurement precision was excellent--among the set of three pre- or postoperative measurements, the pB-C2 value did not differ by more than 0.3 mm.
+Surgical Technique
+All surgeries were performed by the senior author with the following operative technique. The patient is positioned prone in a Mayfield pinned head holder and the posterior cranium is shaved, prepped, and draped in the usual sterile fashion. A midline incision is made from the inion to the spinous process of C2, and the muscles are divided at the midline raphe, exposing the posterior cranium, the posterior arch of C1, and the superior aspect of C2. Unless the tonsils are descended down to the level of C2 (necessitating the removal of the superior aspect of the C2 posterior arch), the origins of the suboccipital musculature on C2 are left alone. The arch of C1 is removed with Kerrison rongeurs. Two burr holes are placed about 1.5 cm from the midline, 2 cm above the foramen magnum. An occipital craniectomy is created using a burr and Kerrison rongeurs, to the width of the cervical dura (about 3 cm). The dura is evaluated for pulsations, signifying satisfactory restoration of CSF flow after bony decompression. If the pulsations are inadequate or absent, the dura is then picked up with a 4-0 Nurolon suture and opened in a Y-shaped fashion. Any arachnoidal adhesions are lysed and the obex is visualized to ensure adequate CSF flow from the 4th ventricle and into the central canal. If the tonsils are enlarged or necrotic, they are carefully bipolared to retract them rostrally and restore good CSF flow. An acellular tissue matrix is used for duraplasty, sutured with 4-0 Nurolon, and a watertight dural closure is confirmed with a Valsalva maneuver. The incision is then closed in layers and dressed in a sterile fashion.
+Statistical Analysis
+Descriptive statistics were calculated for continuous variables, including pre- and postoperative radiographic measures and the change in measurements from pre- to postoperative time points. Frequency tables were created for categorical pre- and postoperative variables. Wilcoxon signed-rank tests were obtained to determine if pretest and posttest measures were significantly different for variables with small number of paired pre- and postoperative measurements. Otherwise, normality test was performed to justify the use of a paired t-test. The pre- versus postoperative comparison of the objective grade of VBSC was made using a mixed effects ANOVA model. A random patient effect was fit along with a fixed time period effect. The Kruskal-Wallis test was used to test the differences in the mean ranks of continuous measures when making comparisons among more than two groups. Pearson’s correlation was used to quantify the strength of the linear association between two continuous variables.
+RESULTS
+Patient Population
+Patient demographics are presented in Table 1. The mean age of the cohort was 10.0 years (range 18 months – 43 years), and the mean length of follow-up was 20.5 months (range 1.8 – 46.5 months). There were 16 male and 15 female patients. The mean tonsillar descent distance was 11.8 mm. The most common presenting symptom was headache (20 patients, 64.5%), followed by clumsiness (7 patients, 22.6%). Seven patients were diagnosed in association with scoliosis (22.6%). Seventeen patients (55%) were found to have syringomyelia. Three patients (9.7%) were found to have tethered cords, and one additional patient had received prior detethering. Two patients (6.5%) presented with hydrocephalus.
+Table 1.
+Patient Demographics
+Characteristic
+Value (%)
+Gender
+ Male
+16 (51.6%)
+ Female
+15 (48.4%)
+Age (years)
+ Mean
+10.0
+ Range
+1.5 – 43
+Presentation
+ Headache
+22 (68.8%)
+ Clumsiness
+7 (21.9%)
+ Scoliosis
+7 (21.9%)
+Pre-operative tonsillar descent (mm)
+ Mean
+11.8
+ Range
+1.8 – 23
+Duraplasty
+ Yes
+25 (80.6%)
+ No
+6 (19.4%)
+Clinical follow-up (months)
+ Mean
+21
+ Range
+2 – 47
+Post-operative imaging interval (months)
+ Mean
+10
+ Range
+3 – 37
+Open in a new tab
+Intra-operatively, the majority of patients (25 patients, 81%) underwent duraplasty; in the remaining 6 patients, a dural opening was unnecessary (as tonsillar pulsations were visualized through the dura after bony decompression).
+Pre- and Postoperative Craniocervical Relationships
+On preoperative evaluation of subjective VBSC, 12 patients had no compression, 15 had mild compression, and 4 had moderate compression. Postoperatively, 16 patients had no compression, 11 had mild compression, and 2 had moderate compression. Twenty-three patients had no change in subjective VBSC, while 7 improved and 1 worsened. These data are shown in Table 2.
+Table 2.
+Relationship of Pre- and Postoperative Grade of Subjective VBSC
+Post-operative Grade
+Pre-operative Grade
+Absent
+Mild
+Moderate
+Absent
+11
+1
+0
+Mild
+5
+10
+0
+Moderate
+0
+2
+2
+Open in a new tab
+Table 3 presents radiographic measurements of craniocervical relationships. Preoperatively, the mean tonsillar descent distance was 11.8 mm (range 1.3 – 23 mm) and the mean foramen magnum diameter was 34.2 mm (range 27.1 – 42.1 mm). The mean clival-spinal angle was 156.1 degrees (range 124.9 – 179.8 degrees), and the mean ventral kink angle was 152.1 degrees (range 128.6 – 165.4 degrees). The mean distance of the odontoid tip from Wackenheim’s line and McRae’s line were 2.8 mm below and 7.9 mm below, respectively.
+Table 3.
+Radiographic Craniocervical Relationships
+Pre-operative Mean ± SD (Range)
+Post-operative Mean ± SD (Range)
+Change, Mean ± SD
+p-value1
+pB-C2 (mm)
+7.5 ± 1.1 (5.7 – 9.8)
+8.0 ± 1.4 (5.2 – 9.9)
+0.5 ± 1.2
+< 0.0001
+2
+Ventral Kink Angle (degrees)
+152.1 ± 8.8 (128.6 – 165.4)
+154.4 ± 9.5 (136.7 – 176.0)
+2.3 ± 11.3
+0.29 3
+Clival-Spinal Angle (degrees)
+156.1 ± 12.5 (124.9 – 179.8)
+155.1 ± 14.0 (127.2 – 199.1)
+−1.0 ± 10.5
+0.77 4
+Odontoid to Wackenheim (mm)
+2.8 below ± 3.7 (11.6 below – 3.6 above)
+2.9 below ± 3.4 (11.9 below – 4.4 above)
+0.12 below
+0.79 4
+Odontoid to McRae (mm)
+7.9 below ± 2.6 (13.8 below – 3.9 below)
+n/a
+n/a
+n/a
+Odontoid to McGregor (mm)
+2.9 below ± 3.8 (11.7 below – 2.8 above)
+n/a
+n/a
+n/a
+Odontoid to Chamberlain (mm)
+3.4 below ± 3.3 (12.0 below – 1.0 above)
+n/a
+n/a
+n/a
+Open in a new tab
+1
+Values in bold are statistically significant,
+2
+mixed effects ANOVA,
+3
+paired T-test,
+4
+Wilcoxin Signed Rank test,
+Abbreviations: n/a = not applicable, SD = standard deviation
+The mean preoperative pB-C2 measurement was 7.5 mm (range 5.7 – 9.8 mm). On postoperative measurement, mean pB-C2 was 8.0 mm (range 5.2 – 9.9 mm). Thus, the mean pB-C2 distance increased between the preoperative imaging and postoperative imaging by 0.5 mm (mixed effects ANOVA, p < 0.0001). The relationship of preoperative and postoperative pB-C2s is demonstrated graphically in Figure 4. In 8 patients, minimal change in pB-C2 was seen (<0.5 mm). In 15 patients, pB-C2 increased, with 10 of these between 0.5 and 1.5 mm and 5 greater than 1.5 mm. Finally, in 8 patients, pB-C2 decreased between 0.5 and 1.5 mm. Two patients had a pB-C2 measurement greater than 9 mm preoperatively, one of which had an increase of 0.69 mm and the other a decrease of 1.05 mm postoperatively. Ten patients who had a preoperative pB-C2 measurement of less than 9 mm exceeded 9 mm on postoperative measurement.
+Figure 4.
+Open in a new tab
+Graphical representation of the change in pB-C2 values after surgery.
+The mean preoperative ventral kink angle was 152.1 degrees (range 128.6 – 165.4), and the mean postoperative ventral kink angle was 154.4 degrees (range 136.7 – 176.0). The change in mean ventral kink angle was 2.3 degrees, which was not statistically significant via paired t-test (p=0.29).
+The mean preoperative clival-spinal angle was 156.1 degrees (range = 124.9 – 179.8), and the mean postoperative angle was 155.1 degrees (range 127.2 – 199.1). The mean change in clival-spinal angle was −1.03 degrees, which was not significant via Wilcoxon signed-rank test (p = 0.77).
+The mean preoperative odontoid tip distance from Wackenheim’s line was 2.80 mm antero-inferior (range 11.56 mm antero-inferior to 3.55 mm postero-superior). The mean postoperative distance was 2.92 mm antero-inferior (range 11.86 antero-inferior to 4.35 postero-superior). The mean change in odontoid tip distance from Wackenheim’s line was 0.12 mm in the antero-inferior direction, which was not significant via Wilcoxon signed-rank test (p = 0.79).
+Correlations between variables of interest are demonstrated in Table 4. The change in pB-C2 was moderately negatively correlated with change in ventral kink angle (Pearson’s correlation coefficient r = −0.46; p=0.001). The change in pB-C2 was also negatively correlated with the change in clival-spinal angle (Pearson’s correlation coefficient r = −0.44; p=0.013).
+Table 4.
+Intervariable Correlations
+Relationship
+Pearson’s correlation coefficient, r
+p-value1
+Δ ventral kink angle vs. Δ pB-C2
+−0.46
+0.001
+Δ clival-spinal angle vs. Δ pB-C2
+−0.44
+0.013
+Δ Odontoid to Wackenheim’s line vs. Δ pB-C2
+−0.08
+0.685
+Open in a new tab
+1
+Values in bold are statistically significant
+Patient Outcomes
+Postoperatively, two patients developed pseudomeningoceles and one patient developed a cerebrospinal fluid leak. One patient experienced early postoperative hemiparesis which resolved. In the 22 patients presenting with headaches, 23% of headaches improved and 68% resolved following treatment. At last follow-up, at a mean of 21 months, no patients required additional procedures for VBSC. All patients were clinically stable or improved.
+The rates and outcomes of Chiari I-associated conditions are presented in Table 5. The majority of the 17 patients with syringomyelia showed improvement or resolution of the syrinx (13 patients and 1 patient, respectively). For one patient, the available postoperative radiographic studies of the spine were not adequate for syrinx evaluation. Twelve patients had scoliosis preoperatively. For the seven patients with accessible spine imaging and clinical notes, the mean preoperative Cobb angle was 50.6 degrees (range 12 – 105 degrees). In these patients, the degree of scoliosis was unchanged in 2 patients and worsened in 5 patients postoperatively. Two patients had hydrocephalus preoperatively; one patient’s hydrocephalus persisted after PFD, requiring a ventriculoperitoneal shunt.
+Table 5.
+Associated Conditions and Post-operative Outcomes
+Condition
+n
+Post-operative outcome
+Syringomyelia
+17
+Resolved: 1 (5.9%), improved: 13 (76.5%), unchanged: 2 (11.8%), undocumented: 1 (5.9%)
+Scoliosis
+12
+Unchanged: 2 (16.7%), worsened: 5 (41.7%), undocumented: 5 (41.7%)
+Hydrocephalus
+2
+Resolved: 1 (50%), unresolved 1 (50%)
+Open in a new tab
+DISCUSSION
+Pediatric patients with Chiari I malformations and symptomatic and/or radiologic evidence of brainstem compression are often successfully treated with posterior fossa decompression alone.12,18,22 For patients who do not benefit from posterior fossa decompression or who display delayed neurologic worsening, ventral brainstem compression (VBSC) may be the cause of their dysfunction.4,12 Thus, quantification of VBSC is advantageous in the choice of decompressive approach (i.e., dorsal vs. ventral vs. circumferential decompression) and to assist in the long-term follow-up clinical picture.18,22 This has been previously documented in regard to patients with basilar invagination, but in symptomatic Chiari patients without basilar invagination, VBSC is not always a diagnostic or prognostic consideration. Our series shows preoperative flattening or distortion of the cervicomedullary junction in 61% of patients (n = 19) by subjective grading, even though only 8 of the patients had preoperative radiographic evidence of basilar invagination using Wackenheim’s line, and none had preoperative basilar invagination using McRae’s, McGregor’s, or Chamberlain’s criteria.11,30
+In reviewing our data, we are intrigued by the statistically significant postoperative increase in pB-C2. At first glance, one may attribute this to increased occipitocervical instability from the PFD. The likelihood of this in light of our technique for PFD is low, as we do not transect suboccipital musculature or violate the occipitoatlantal articulation during the procedure. Additionally, the craniectomy is limited to approximately 3 cm in width, the width of the cervicomedullary dura. Objectively, there was no change in the relationship between odontoid tip and Wackenheim’s line postoperatively. Further, there was no correlation between the change in pB-C2 and the change in the distance from odontoid to Wackenheim’s line, indicating that these variables are unrelated. These data lend support to the idea that there is no instability introduced from the PFD, including patients in whom postoperative increases in pB-C2 are seen. Clinically, the vast majority experienced satisfactory amelioration of their preoperative symptoms after PFD. None of these patients underwent transoral odontoidectomy or occipitocervical fusion, including 11 patients who had a postoperative pB-C2 measurement greater than 9 mm, suggesting that this post-PFD increase is well-tolerated.
+We postulate that the increase in pB-C2 is not from instability, but rather a function of the ventral dura relaxing posteriorly, once the posterior compression vector is relieved. Of course, it does not follow that all post-PFD increase in VBSC is benign. If there is symptomatic cervicomedullary compression following PFD, the patient may require additional decompressive or stabilizing procedures. However, the presence of slightly increased pB-C2 and an otherwise improving clinical picture should not immediately dictate an additional procedure which may be of no benefit.
+There are several limitations to our study that warrant discussion. Foremost, as a retrospective study the limits of data availability are inherent and unavoidable. Secondary to this, our study cohort was small, as more than half the patients who underwent PFD for Chiari I malformations did not have a full complement of imaging for evaluation and were necessarily excluded. Thus, the potential impact of selection bias should be kept in mind while interpreting these results. As the cohort consisted exclusively of patients who underwent PFD, a surgical selection bias may also have been introduced. Future studies of the change in pB-C2 measurement would ideally be prospective, with a standardized pre-and postoperative MR imaging protocol, whereby the acquired sequences are tailored to the evaluation of craniocervical metrics including the pB-C2 measurement. Additionally, a standardized symptom rating system for both preoperative assessment and postoperative change of symptoms could allow the evaluation of the change in pB-C2 compared to patient symptoms. Finally, a study with extended clinical and radiographic follow-up would be ideal, consisting of 60 months or more.
+CONCLUSION
+Our results indicate that there is a slight increase in pB-C2 in patients following posterior fossa decompression for Chiari I malformations. The mechanism of this increase is most likely a releasing of pressure on the ventral dura from the posterior vector, rather than changes in muscular, ligamentous, or articular relationships. Given that the relationship of the odontoid to the skull base does not change (via evaluation of the odontoid tip to Wackenheim’s line), an increased pB-C2, even above 9 mm, does not necessarily require intervention. In our series, no patient required transoral odontoidectomy or occipitocervical fusion. Thus, our data suggest that these procedures are not routinely necessary in these patients, and treatment can be limited to PFD.
+References
+- 
+1.Baisden J. Controversies in Chiari I malformations. Surg Neurol Int. 2012;3:S232–237. doi: 10.4103/2152-7806.98580. [DOI] [PMC free article] [PubMed] [Google Scholar]
+- 
+2.Bekelis K, Duhaime AC, Missios S, Belden C, Simmons N. Placement of occipital condyle screws for occipitocervical fixation in a pediatric patient with occipitocervical instability after decompression for Chiari malformation. J Neurosurg Pediatr. 2010;6:171–176. doi: 10.3171/2010.4.PEDS09551. [DOI] [PubMed] [Google Scholar]
+- 
+3.Bharucha EP, Dastur HM. Craniovertebral anomalies (a report on 40 cases) Brain. 1964;87:469–480. doi: 10.1093/brain/87.3.469. [DOI] [PubMed] [Google Scholar]
+- 
+4.Bindal AK, Dunsker SB, Tew JM., Jr Chiari I malformation: classification and management. Neurosurgery. 1995;37:1069–1074. doi: 10.1227/00006123-199512000-00005. [DOI] [PubMed] [Google Scholar]
+- 
+5.Brockmeyer DL. The complex Chiari: issues and management strategies. Neurol Sci. 2011;32(Suppl 3):S345–347. doi: 10.1007/s10072-011-0690-5. [DOI] [PubMed] [Google Scholar]
+- 
+6.Caetano de Barros M, Farias W, Ataide L, Lins S. Basilar impression and Arnold-Chiari malformation. A study of 66 cases. J Neurol Neurosurg Psychiatry. 1968;31:596–605. doi: 10.1136/jnnp.31.6.596. [DOI] [PMC free article] [PubMed] [Google Scholar]
+- 
+7.Collignon FP, Cohen-Gadol AA, Krauss WE. Circumferential decompression of the foramen magnum for the treatment of syringomyelia associated with basilar invagination. Neurosurg Rev. 2004;27:168–172. doi: 10.1007/s10143-004-0329-6. [DOI] [PubMed] [Google Scholar]
+- 
+8.da Silva JA. Basilar impression and Arnold-Chiari malformation. Surgical findings in 209 cases. Neurochirurgia (Stuttg) 1992;35:189–195. doi: 10.1055/s-2008-1052276. [DOI] [PubMed] [Google Scholar]
+- 
+9.da Silva JA, dos Santos AA, Jr, Melo LR, de Araujo AF, Regueira GP. Posterior fossa decompression with tonsillectomy in 104 cases of basilar impression, Chiari malformation and/or syringomyelia. Arq Neuropsiquiatr. 2011;69:817–823. doi: 10.1590/s0004-282x2011000600018. [DOI] [PubMed] [Google Scholar]
+- 
+10.da Silva JA, Holanda MM. Basilar impression, Chiari malformation and syringomyelia: a retrospective study of 53 surgically treated patients. Arq Neuropsiquiatr. 2003;61:368–375. doi: 10.1590/s0004-282x2003000300009. [DOI] [PubMed] [Google Scholar]
+- 
+11.Dolan KD. Cervicobasilar relationships. Radiol Clin North Am. 1977;15:155–166. [PubMed] [Google Scholar]
+- 
+12.Dyste GN, Menezes AH, VanGilder JC. Symptomatic Chiari malformations. An analysis of presentation, management, and long-term outcome. J Neurosurg. 1989;71:159–168. doi: 10.3171/jns.1989.71.2.0159. [DOI] [PubMed] [Google Scholar]
+- 
+13.Elster AD, Chen MY. Chiari I malformations: clinical and radiologic reappraisal. Radiology. 1992;183:347–353. doi: 10.1148/radiology.183.2.1561334. [DOI] [PubMed] [Google Scholar]
+- 
+14.Fenoy AJ, Menezes AH, Fenoy KA. Craniocervical junction fusions in patients with hindbrain herniation and syringohydromyelia. J Neurosurg Spine. 2008;9:1–9. doi: 10.3171/SPI/2008/9/7/001. [DOI] [PubMed] [Google Scholar]
+- 
+15.Galarza M, Martinez-Lage JF, Ham S, Sood S. Cerebral anomalies and Chiari type 1 malformation. Pediatr Neurosurg. 2010;46:442–449. doi: 10.1159/000327220. [DOI] [PubMed] [Google Scholar]
+- 
+16.Goel A. Basilar invagination, Chiari malformation, syringomyelia: a review. Neurol India. 2009;57:235–246. doi: 10.4103/0028-3886.53260. [DOI] [PubMed] [Google Scholar]
+- 
+17.Goel A, Bhatjiwale M, Desai K. Basilar invagination: a study based on 190 surgically treated patients. J Neurosurg. 1998;88:962–968. doi: 10.3171/jns.1998.88.6.0962. [DOI] [PubMed] [Google Scholar]
+- 
+18.Grabb PA, Mapstone TB, Oakes WJ. Ventral brain stem compression in pediatric and young adult patients with Chiari I malformations. Neurosurgery. 1999;44:520–527. doi: 10.1097/00006123-199903000-00050. discussion 527–528. [DOI] [PubMed] [Google Scholar]
+- 
+19.Hankinson TC, Grunstein E, Gardner P, Spinks TJ, Anderson RC. Transnasal odontoid resection followed by posterior decompression and occipitocervical fusion in children with Chiari malformation Type I and ventral brainstem compression. J Neurosurg Pediatr. 2010;5:549–553. doi: 10.3171/2010.2.PEDS09362. [DOI] [PubMed] [Google Scholar]
+- 
+20.Kim LJ, Rekate HL, Klopfenstein JD, Sonntag VK. Treatment of basilar invagination associated with Chiari I malformations in the pediatric population: cervical reduction and posterior occipitocervical fusion. J Neurosurg. 2004;101:189–195. doi: 10.3171/ped.2004.101.2.0189. [DOI] [PubMed] [Google Scholar]
+- 
+21.Kyoshima K, Kakizawa Y, Tokushige K, Akaishi K, Kanaji M, Kuroyanagi T. Odontoid compression of the brainstem without basilar impression-- “odontoid invagination”. J Clin Neurosci. 2005;12:565–569. doi: 10.1016/j.jocn.2004.07.022. [DOI] [PubMed] [Google Scholar]
+- 
+22.Ladner TR, Dewan MC, Day MA, Shannon CN, Tomycz L, Tulipan N, et al. Evaluating the relationship of the pB-C2 line to clinical outcomes in a 15-year single-center cohort of pediatric Chiari I malformation. J Neurosurg Pediatr. 2015;15:178–188. doi: 10.3171/2014.9.PEDS14176. [DOI] [PubMed] [Google Scholar]
+- 
+23.Menezes AH. Craniovertebral junction abnormalities with hindbrain herniation and syringomyelia: regression of syringomyelia after removal of ventral craniovertebral junction compression. J Neurosurg. 2012;116:301–309. doi: 10.3171/2011.9.JNS11386. [DOI] [PubMed] [Google Scholar]
+- 
+24.Menezes AH. Primary craniovertebral anomalies and the hindbrain herniation syndrome (Chiari I): data base analysis. Pediatr Neurosurg. 1995;23:260–269. doi: 10.1159/000120969. [DOI] [PubMed] [Google Scholar]
+- 
+25.Milhorat TH, Chou MW, Trinidad EM, Kula RW, Mandell M, Wolpert C, et al. Chiari I malformation redefined: clinical and radiographic findings for 364 symptomatic patients. Neurosurgery. 1999;44:1005–1017. doi: 10.1097/00006123-199905000-00042. [DOI] [PubMed] [Google Scholar]
+- 
+26.Nishikawa M, Ohata K, Baba M, Terakawa Y, Hara M. Chiari I malformation associated with ventral compression and instability: one-stage posterior decompression and fusion with a new instrumentation technique. Neurosurgery. 2004;54:1430–1434. doi: 10.1227/01.neu.0000125326.15525.b8. discussion 1434–1435. [DOI] [PubMed] [Google Scholar]
+- 
+27.Perrini P, Benedetto N, Guidi E, Di Lorenzo N. Transoral approach and its superior extensions to the craniovertebral junction malformations: surgical strategies and results. Neurosurgery. 2009;64:331–342. doi: 10.1227/01.NEU.0000334430.25626.DC. discussion 342. [DOI] [PubMed] [Google Scholar]
+- 
+28.Roth M. Cranio-cervical growth collision: another explanation of the Arnold-Chiari malformation and of basilar impression. Neuroradiology. 1986;28:187–194. doi: 10.1007/BF00548190. [DOI] [PubMed] [Google Scholar]
+- 
+29.Salunke P, Sura S, Futane S, Aggarwal A, Khandelwal NK, Chhabra R, et al. Ventral compression in adult patients with Chiari 1 malformation sans basilar invagination: cause and management. Acta Neurochir (Wien) 2012;154:147–152. doi: 10.1007/s00701-011-1215-y. [DOI] [PubMed] [Google Scholar]
+- 
+30.Smoker WR. Craniovertebral junction: normal anatomy, craniometry, and congenital anomalies. Radiographics. 1994;14:255–277. doi: 10.1148/radiographics.14.2.8190952. [DOI] [PubMed] [Google Scholar]
+- 
+31.Tubbs RS, Wellons JC, 3rd, Blount JP, Grabb PA, Oakes WJ. Inclination of the odontoid process in the pediatric Chiari I malformation. J Neurosurg. 2003;98:43–49. doi: 10.3171/spi.2003.98.1.0043. [DOI] [PubMed] [Google Scholar]
+- 
+32.Tuite GF, Veres R, Crockard HA, Sell D. Pediatric transoral surgery: indications, complications, and long-term outcome. J Neurosurg. 1996;84:573–583. doi: 10.3171/jns.1996.84.4.0573. [DOI] [PubMed] [Google Scholar]
+- 
+33.VanGilder JC, Menezes AH, Dolan KD. The craniovertebral junction and its abnormalities. Futura Publishing Company; Mount Kisco, NY: 1987. [Google Scholar]
+- 
+34.Zileli M, Cagli S. Combined anterior and posterior approach for managing basilar invagination associated with type I Chiari malformation. J Spinal Disord Tech. 2002;15:284–289. doi: 10.1097/00024720-200208000-00004. [DOI] [PubMed] [Google Scholar]
+ACTIONS
+- 
+ View on publisher site
+- 
+ PDF (551.8 KB)
+- 
+ Cite
+- 
+ Collections
+- 
+ Permalink
+PERMALINK
+ Copy
+RESOURCES
+ Similar articles
+ Cited by other articles
+ Links to NCBI Databases
+Cite
+- 
+ Copy
+- 
+ Download .nbib
+ .nbib
+- 
+ Format:
+ AMA
+ APA
+ MLA
+ NLM
+Add to Collections
+ Create a new collection
+ Add to an existing collection
+ Name your collection
+ *
+ Choose a collection
+ Unable to load your collection due to an error
+ Please try again
+ Add
+ Cancel
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+ Back to Top

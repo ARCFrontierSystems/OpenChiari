@@ -440,7 +440,40 @@
       "up": "During the cough: some spinal fluid moves up from the spine into the head.",
       "back": "Then it flows back down."
     },
-    "sizeNote": "The usual cutoff, about 5 mm, is half a centimeter, about the height of 3 stacked quarters. The model shows about 12 mm, a little over 1 centimeter, about the height of 7 stacked quarters. How far the tonsils extend doesn't always match how someone feels."
+    "sizeNote": "The usual cutoff, about 5 mm, is half a centimeter, about the height of 3 stacked quarters. The model shows about 12 mm, a little over 1 centimeter, about the height of 7 stacked quarters. How far the tonsils extend doesn't always match how someone feels.",
+    "surgery": {
+      "title": "What happens in surgery, step by step",
+      "intro": "Surgeons don't all do the same operation. Some remove bone only, and some also shrink the tonsils. Your surgeon can tell you which steps apply to you.",
+      "play": "Play",
+      "pause": "Pause",
+      "back": "Back",
+      "next": "Next",
+      "stop": "Show the usual view",
+      "stepLabel": "Step {n} of {total}",
+      "steps": [
+        {
+          "title": "Before surgery",
+          "text": "In Chiari I, the tonsils extend below the opening at the base of the skull. This can crowd the space where spinal fluid flows."
+        },
+        {
+          "title": "The incision",
+          "text": "The person is asleep under anesthesia. The surgeon makes a cut down the middle of the back of the head and upper neck, and moves the muscles aside to reach the bone."
+        },
+        {
+          "title": "Bone removed",
+          "text": "A small piece of bone is removed at the back of the skull opening, and often the back of the first neck bone (vertebra), to make more room."
+        },
+        {
+          "title": "The patch",
+          "text": "Often the surgeon also opens the brain's tough covering (the dura) and sews in a patch, like letting out a waistband, to make more room for spinal fluid. Then the muscles and skin are closed."
+        },
+        {
+          "title": "Afterward",
+          "text": "On scans after surgery, the fluid space behind the cerebellum is often larger, and the tonsils often rise only partly."
+        }
+      ],
+      "caption": "Animation simplified. The incision line is approximate."
+    }
   },
   "evidence": {
     "inEnglish": "These notes are in English, like the sources they cite.",
@@ -783,7 +816,43 @@
         "text": "Help one person understand Chiari today."
       }
     ],
-    "notAffiliated": "Open Chiari is not affiliated with these organizations and receives nothing from donations."
+    "notAffiliated": "Open Chiari is not affiliated with these organizations and receives nothing from donations.",
+    "connect": {
+      "title": "Connect with others",
+      "intro": "Talking with people who have been through it can help. These communities are run by other organizations, not by Open Chiari. What members share there is their own experience, not medical advice, and Open Chiari doesn't check it.",
+      "privacy": "Before you post, look at each site's privacy settings. Some posts can be seen by anyone.",
+      "groups": [
+        {
+          "id": "bensfriends",
+          "name": "Chiari Support (Ben's Friends)",
+          "kind": "Online forum",
+          "text": "A support forum for patients, families and friends, part of Ben's Friends, a network of patient communities for rare diseases. Members can be as young as 12.",
+          "link": "Visit Chiari Support"
+        },
+        {
+          "id": "inspire",
+          "name": "Bobby Jones CSF Support Community",
+          "kind": "Online community on Inspire",
+          "text": "An online community for patients and families living with Chiari malformation, syringomyelia and related disorders. You choose how anonymous you are.",
+          "link": "Visit the community"
+        },
+        {
+          "id": "asap",
+          "name": "ASAP support groups",
+          "kind": "Video, phone and in person",
+          "text": "Monthly support groups over Zoom, monthly phone support groups, and a list of local groups that meet in person.",
+          "link": "Find a group"
+        },
+        {
+          "id": "femacpa",
+          "name": "FEMACPA (Spain)",
+          "kind": "In Spanish",
+          "text": "The Spanish federation of Chiari patient associations. It offers support after diagnosis.",
+          "link": "Visit FEMACPA"
+        }
+      ],
+      "checked": "Links checked November 2026."
+    }
   },
   "about": {
     "title": "About Open Chiari",

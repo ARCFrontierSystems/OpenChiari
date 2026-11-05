@@ -71,6 +71,12 @@ export const externalLinks = {
   // when the list isn't available).
   // The code, public since November 5, 2026.
   repository: 'https://github.com/ARCFrontierSystems/OpenChiari',
+  // Support page, "Connect with others": communities run by others (checked Nov 2026; sources in
+  // docs/audits/sources/2026-11-05-communities/). The Inspire address is the one Bobby Jones CSF links to.
+  bensFriends: 'https://chiarisupport.org/',
+  bjcsfInspire: 'https://www.inspire.com/groups/chiari-syringomyelia/',
+  asapSupport: 'https://asap.org/find-support/',
+  femacpa: 'https://femacpa.com/',
   ctgov: 'https://clinicaltrials.gov',
   ctgovSearch: 'https://clinicaltrials.gov/search?cond=Chiari%20OR%20Syringomyelia&aggFilters=status:rec',
   ctgovStudy: 'https://clinicaltrials.gov/study/',

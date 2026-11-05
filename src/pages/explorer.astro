@@ -182,6 +182,21 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
           <p class="x-cough-caption">{x.cough.caption} {x.captionIllustration} · {x.captionFlow}</p>
           <p class="visually-hidden" aria-live="polite" data-cough-status></p>
         </details>
+        <details class="x-cough x-surgery" data-surgery-panel hidden>
+          <summary>{x.surgery.title}</summary>
+          <p>{x.surgery.intro}</p>
+          <div class="x-surgery-controls">
+            <button type="button" class="x-tool" data-surgery-play>{x.surgery.play}</button>
+            <button type="button" class="x-tool" data-surgery-back disabled>{x.surgery.back}</button>
+            <button type="button" class="x-tool" data-surgery-next>{x.surgery.next}</button>
+          </div>
+          <div class="x-surgery-step" aria-live="polite">
+            <p class="x-h" data-surgery-label></p>
+            <p data-surgery-text></p>
+          </div>
+          <button type="button" class="x-tool" data-surgery-stop hidden>{x.surgery.stop}</button>
+          <p class="x-cough-caption">{x.surgery.caption} {x.captionIllustration} · {x.captionTonsils}</p>
+        </details>
         <div class="x-card x-card-wide" aria-live="polite">
           <ListenButton target=".x-card-wide" dark />
           <p class="x-h"><span data-part-num>{part.num}</span> · {x.selected}</p>
@@ -216,6 +231,21 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
           <p class="x-cough-caption">{x.cough.caption} {x.captionIllustration} · {x.captionFlow}</p>
           <p class="visually-hidden" aria-live="polite" data-cough-status></p>
         </details>
+        <details class="x-cough x-surgery" data-surgery-panel hidden>
+          <summary>{x.surgery.title}</summary>
+          <p>{x.surgery.intro}</p>
+          <div class="x-surgery-controls">
+            <button type="button" class="x-tool" data-surgery-play>{x.surgery.play}</button>
+            <button type="button" class="x-tool" data-surgery-back disabled>{x.surgery.back}</button>
+            <button type="button" class="x-tool" data-surgery-next>{x.surgery.next}</button>
+          </div>
+          <div class="x-surgery-step" aria-live="polite">
+            <p class="x-h" data-surgery-label></p>
+            <p data-surgery-text></p>
+          </div>
+          <button type="button" class="x-tool" data-surgery-stop hidden>{x.surgery.stop}</button>
+          <p class="x-cough-caption">{x.surgery.caption} {x.captionIllustration} · {x.captionTonsils}</p>
+        </details>
         <button type="button" class="x-parts-toggle" aria-expanded="false" aria-controls="parts-narrow" data-parts-toggle>
           <span>{x.partsButton}</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"></path></svg>
@@ -245,7 +275,7 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
     <Footer dark />
 
     <script>
-      import { bindCalmSwitches } from '../lib/calm';
+      import { bindCalmSwitches, isCalm, onCalmChange } from '../lib/calm';
       import { createStore, LAYERS, type ViewState } from '../explorer/state';
       import { decodeView, encodeView, type Orbit } from '../explorer/share';
       import { count } from '../lib/count';
@@ -377,6 +407,84 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
               button.disabled = false;
             }),
           );
+          // What happens in surgery, step by step: the After decompression view drawn part way through. Play moves on by
+          // itself; in Calm mode (or with reduced motion) nothing moves on its own: Next and Back only.
+          {
+            const sv = viewerHost as HTMLElement & { viewer?: { setSurgeryStage(stage: number | null): void } };
+            const steps = x.surgery.steps;
+            const panels = () => Array.from(document.querySelectorAll<HTMLElement>('[data-surgery-panel]'));
+            const playButtons = () => Array.from(document.querySelectorAll<HTMLButtonElement>('[data-surgery-play]'));
+            let step: number | null = null;
+            let timer = 0;
+            const STEP_MS = 7000;
+            const pauseTimer = () => {
+              clearInterval(timer);
+              timer = 0;
+              playButtons().forEach((b) => (b.textContent = x.surgery.play));
+            };
+            const render = () => {
+              panels().forEach((panel) => {
+                const label = panel.querySelector<HTMLElement>('[data-surgery-label]')!;
+                const text = panel.querySelector<HTMLElement>('[data-surgery-text]')!;
+                label.textContent = step === null ? '' : `${x.surgery.stepLabel.replace('{n}', String(step + 1)).replace('{total}', String(steps.length))} · ${steps[step].title}`;
+                text.textContent = step === null ? '' : steps[step].text;
+                panel.querySelector<HTMLButtonElement>('[data-surgery-back]')!.disabled = step === null || step === 0;
+                panel.querySelector<HTMLButtonElement>('[data-surgery-next]')!.disabled = step === steps.length - 1;
+                panel.querySelector<HTMLButtonElement>('[data-surgery-stop]')!.hidden = step === null;
+              });
+              // "11 Bone removed" joins the parts list once the bone is out.
+              document.querySelectorAll<HTMLElement>('[data-part="removed"]').forEach((el) => {
+                const li = el.closest('li');
+                if (li) li.hidden = store.get().condition !== 'surgery' || (step !== null && step < 2);
+              });
+            };
+            const show = (n: number) => {
+              if (store.get().condition !== 'surgery') store.set({ condition: 'surgery' });
+              step = n;
+              sv.viewer?.setSurgeryStage(n);
+              render();
+              if (n === steps.length - 1) pauseTimer();
+            };
+            const stop = () => {
+              pauseTimer();
+              step = null;
+              sv.viewer?.setSurgeryStage(null);
+              render();
+            };
+            playButtons().forEach((b) =>
+              b.addEventListener('click', () => {
+                if (timer) return pauseTimer();
+                show(step === null || step === steps.length - 1 ? 0 : step);
+                if (isCalm()) return;
+                playButtons().forEach((pb) => (pb.textContent = x.surgery.pause));
+                timer = window.setInterval(() => show(Math.min((step ?? 0) + 1, steps.length - 1)), STEP_MS);
+              }),
+            );
+            document.querySelectorAll<HTMLButtonElement>('[data-surgery-next]').forEach((b) =>
+              b.addEventListener('click', () => {
+                pauseTimer();
+                show(step === null ? 0 : Math.min(step + 1, steps.length - 1));
+              }),
+            );
+            document.querySelectorAll<HTMLButtonElement>('[data-surgery-back]').forEach((b) =>
+              b.addEventListener('click', () => {
+                pauseTimer();
+                show(Math.max((step ?? 1) - 1, 0));
+              }),
+            );
+            document.querySelectorAll<HTMLButtonElement>('[data-surgery-stop]').forEach((b) => b.addEventListener('click', stop));
+            onCalmChange(() => {
+              if (isCalm()) pauseTimer();
+            });
+            // Leaving the After decompression view ends the play-through. The panel shows with Chiari I and after surgery.
+            const placePanels = (condition: string) => panels().forEach((el) => (el.hidden = !['chiari', 'surgery'].includes(condition)));
+            store.subscribe((st) => {
+              if (st.condition !== 'surgery' && step !== null) stop();
+              placePanels(st.condition);
+            });
+            placePanels(store.get().condition);
+            render();
+          }
           // "See it in your room": only where the phone or tablet can show it (src/explorer/ar.ts).
           import('../explorer/ar').then(async ({ arSupport, openAr }) => {
             const kind = await arSupport();
@@ -733,6 +841,22 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
   .x-cough .x-cough-caption {
     font-size: var(--x-size-caption);
     color: var(--x-faint);
+  }
+  .x-surgery-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: var(--s-8);
+  }
+  .x-surgery-step:empty,
+  .x-surgery-step p:empty {
+    display: none;
+  }
+  .x-surgery-step .x-h {
+    margin: 0 0 4px;
+  }
+  .x-surgery [data-surgery-stop] {
+    margin-bottom: var(--s-8);
   }
   .x-cough[hidden] {
     display: none;

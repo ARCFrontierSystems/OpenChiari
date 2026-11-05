@@ -21,6 +21,10 @@ export interface FigureOptions {
   measure?: boolean;
   dark?: boolean;
   className?: string;
+  /** After decompression, drawn part way through, for "What happens in surgery" (docs/EVIDENCE.md, "Surgery, step by
+   *  step"): 0 before surgery (as Chiari I), 1 the skin incision, 2 bone removed, 3 the dural patch, 4 the result
+   *  (the full After decompression figure, the default). Only used with condition 'surgery'. */
+  surgeryStage?: number;
   /** Black outlines on white, for a coloring page: every fill turns white; dark lines turn black, pale ones vanish. */
   lineArt?: boolean;
   /** Opacity of each layer, 0 to 1 (0 hides it). Leave out for the full figure. Used by the 3D cut face. */
@@ -72,6 +76,7 @@ function toLineArt(svg: string): string {
     .replace(/fill="(#[0-9A-Fa-f]{6})"/g, 'fill="#FFFFFF"')
     .replace(/stroke="(#[0-9A-Fa-f]{6})"/g, (_, hex: string) => `stroke="${light(hex) ? '#FFFFFF' : '#1C1D21'}"`);
 }
+let clipCount = 0;
 const chevron = (x: number, y: number, w = 5) => `M${x - w} ${y - 3} L${x} ${y + 3} L${x + w} ${y - 3}`;
 
 /** Flow chevrons (figure units): in front of the cord, and behind it ([x, y, half-width]). Shared with the 3D view. */
@@ -84,8 +89,11 @@ export const FLOW = {
 export function anatomyFigureSvg(options: FigureOptions, t: FigureStrings): string {
   const { condition: c = 'chiari', flow = true, labels = true, measure = true, dark = false, className = '', layers = {}, lineArt = false } = options;
   const L = t.labels;
-  const low = c === 'chiari' || c === 'syrinx';
-  const surgery = c === 'surgery';
+  const stage = c === 'surgery' ? (options.surgeryStage ?? 4) : -1;
+  // Part way through surgery the tonsils and the fluid space are still as in Chiari I.
+  const low = c === 'chiari' || c === 'syrinx' || (stage >= 0 && stage < 4);
+  const surgery = stage >= 4;
+  const boneOut = stage >= 2;
   // Without labels the frame is just the head and neck (widened 2026-11-04 so the back of the head isn't clipped).
   const viewBox = labels ? '56 128 704 512' : '60 128 488 512';
   const tonsilPath = low ? TONSIL.low : surgery ? TONSIL.surgery : TONSIL.typical;
@@ -117,11 +125,11 @@ export function anatomyFigureSvg(options: FigureOptions, t: FigureStrings): stri
   // continuous path from the fourth ventricle outlet to the neck; in Chiari I the tonsil fills it.
   add(true, CSF(shapes.csfFront), 'csf');
   add(true, CSF(shapes.csfBack[low ? 'chiari' : surgery ? 'surgery' : 'typical']), 'csf');
-  add(surgery, `<path d="${shapes.surgeryPatch}" fill="none" stroke="#7D6F58" stroke-width="1.5" stroke-dasharray="5 4"/>`, 'csf');
+  add(stage >= 3, `<path d="${shapes.surgeryPatch}" fill="none" stroke="#7D6F58" stroke-width="1.5" stroke-dasharray="5 4"/>`, 'csf');
   const skull = shapes.skull.d;
   add(true, `<path d="${skull}" fill="none" stroke="#A69B85" stroke-width="16" stroke-linecap="round"/><path d="${skull}" fill="none" stroke="#E7DFCF" stroke-width="12" stroke-linecap="round"/><path d="${skull}" fill="none" stroke="#D3C8B2" stroke-width="2" stroke-dasharray="2 5"/>`, 'bone');
   const removed = shapes.boneRemovedSkull.d;
-  add(surgery, `<path d="${removed}" fill="none" stroke="#EFE3D8" stroke-width="18" stroke-linecap="butt"/><path d="${removed}" fill="none" stroke="#9A3412" stroke-width="1.75" stroke-dasharray="5 4"/>`, 'bone');
+  add(boneOut, `<path d="${removed}" fill="none" stroke="#EFE3D8" stroke-width="18" stroke-linecap="butt"/><path d="${removed}" fill="none" stroke="#9A3412" stroke-width="1.75" stroke-dasharray="5 4"/>`, 'bone');
   add(true, `<path d="${shapes.skullBase.d}" fill="none" stroke="#A69B85" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>`, 'bone');
   add(true, `<path d="${shapes.clivus}" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"/>`, 'bone');
   add(true, `<path d="${shapes.cerebrum}" fill="#E9CFC6" stroke="#B38D82" stroke-width="1.5"/>`, 'brain');
@@ -140,10 +148,16 @@ export function anatomyFigureSvg(options: FigureOptions, t: FigureStrings): stri
   add(c === 'syrinx', `<path d="${shapes.syrinx}" fill="#7FB3D3" stroke="#3F6F90" stroke-width="1.25"/>`, 'brain');
   const BONE = '#E7DFCF', BONE_EDGE = '#A69B85', DISC = '#D9C3A4';
   add(true, `${shapeEl(shapes.c1Anterior, 'fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"')}${bonePath(shapes.dens)}${rect(shapes.c2Body, BONE, BONE_EDGE)}${rect(shapes.disc23, DISC)}${rect(shapes.c3Body, BONE, BONE_EDGE)}${rect(shapes.disc34, DISC)}${rect(shapes.c4Body, BONE, BONE_EDGE)}${rect(shapes.disc45, DISC)}${rect(shapes.c5Body, BONE, BONE_EDGE)}`, 'bone');
-  add(!surgery, shapeEl(shapes.c1Posterior, 'fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"'), 'bone');
-  add(surgery, shapeEl(shapes.c1Posterior, 'fill="none" stroke="#9A3412" stroke-width="1.75" stroke-dasharray="4 3"'), 'bone');
+  add(!boneOut, shapeEl(shapes.c1Posterior, 'fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5"'), 'bone');
+  add(boneOut, shapeEl(shapes.c1Posterior, 'fill="none" stroke="#9A3412" stroke-width="1.75" stroke-dasharray="4 3"'), 'bone');
   // Back of each vertebra (lamina and spinous process), closing the spinal canal.
   add(true, [shapes.spinous2, shapes.spinous3, shapes.spinous4, shapes.spinous5].map(bonePath).join(''), 'bone');
+  // The skin incision, while the operation is under way (stages 1 to 3): the back skin line from the level of the inion
+  // (where the tentorium meets the back of the skull, y 382) down to the C2 spinous process (y 522), about 7 cm.
+  if (stage >= 1 && stage <= 3) {
+    const id = `incision-${++clipCount}`;
+    parts.push(`<clipPath id="${id}"><rect x="430" y="382" width="120" height="140"/></clipPath><path d="${SKIN}" fill="none" stroke="#9A3412" stroke-width="3.5" stroke-linecap="round" clip-path="url(#${id})"/>`);
+  }
   // Flow marks sit in the fluid: the neck canal is narrow (about 2 mm in front of the cord, 3 mm behind).
   const front = FLOW.front.map(([x, y]) => chevron(x, y, 2.5));
   const flowPath = (marks: string[]) => `<path d="${marks.join(' ')}" fill="none" stroke="#1F5F8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;

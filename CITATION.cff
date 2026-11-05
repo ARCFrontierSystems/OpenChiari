@@ -1,0 +1,27 @@
+# How to cite Open Chiari. GitHub shows this as "Cite this repository"; Zenodo reads .zenodo.json.
+cff-version: 1.2.0
+message: "If you use the Open Chiari 3D model or figures, please cite them as below and give the credit in LICENSE-MODEL.md."
+title: "Open Chiari: an open 3D anatomy model of Chiari malformation type I"
+type: dataset
+authors:
+  - family-names: Borgfeld
+    given-names: Matthew
+    affiliation: Open Chiari
+doi: 10.5281/zenodo.23983232
+url: "https://openchiari.org"
+repository-code: "https://github.com/ARCFrontierSystems/OpenChiari"
+license: CC-BY-SA-4.0
+keywords:
+  - Chiari malformation
+  - Chiari I
+  - syringomyelia
+  - 3D anatomy
+  - patient education
+  - open educational resource
+abstract: >-
+  Open 3D models and figures of the head and upper neck at the midline, in four conditions: typical anatomy,
+  Chiari malformation type I, Chiari I with a syrinx, and after decompression surgery. Built for patient education.
+  Every shape and measurement is traced to a source in docs/EVIDENCE.md and checked automatically
+  (npm run model:check). Illustrations, not medical images. The model is CC BY-SA 4.0 (LICENSE-MODEL.md),
+  adapted from Z-Anatomy (CC BY-SA 4.0) and BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 JP);
+  the website code is MIT (LICENSE).

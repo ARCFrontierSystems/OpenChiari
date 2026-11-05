@@ -3,11 +3,64 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: Second check-up, site walk-through (`docs/audits/2026-11-05-site-checkup-2.md`)
+
+32 pages were checked, each on desktop and phone, in light and Dim mode: 0 accessibility problems, no errors, no broken links. Today's features all work.
+
+- **Fixed in code (not yet published):**
+  - the contact address is marked so Cloudflare leaves it as plain text;
+  - the Spanish desktop header now fits on one row from 1200 px wide; narrower, or in Calm mode, it uses the menu;
+  - a stronger focus ring on Listen buttons on dark pages;
+  - a + / − mark on the cough panel and on the folded Visit prep groups;
+  - the English kit page works offline;
+  - offline pages that weren't saved fall back to Home;
+  - the "Copy embed code" button uses the site font;
+  - the embed-code box stays visible in Dim mode;
+  - more room between the Spanish layer rows;
+  - an Español link on the tour and side-by-side pages;
+  - the iPhone room view's banner now also carries the model credit.
+- **Already fixed before the report:**
+  - Listen skips the English pronunciation guide (Spanish Home);
+  - the Android room view shows "Not medical advice" and the credit.
+- **For Matthew, in the Cloudflare dashboard:**
+  - Cloudflare Web Analytics is switched on for the live site and loads a script from Cloudflare's address in every visitor's browser. Matthew chose Open Chiari's own counters instead, and CLAUDE.md rule 2 forbids third-party requests, so it should be turned off.
+  - Email Address Obfuscation can stay on now that the address is marked.
+  - **Done Nov 5:** Matthew turned off Real user monitoring (RUM) for openchiari.org. The live site was checked afterward (Home, About, Explorer, Spanish Home, Visit prep): no analytics script, and no requests to any other address.
+  - Safety net (not yet published): `public/_headers` tells browsers to run only the site's own scripts, so Cloudflare's analytics script is refused even if it is switched on. Tested on the Explorer, Visit prep and Helping your child pages. Matthew couldn't find openchiari.org in the Web Analytics list. It is probably switched on from the Pages project (Metrics tab), or listed under the pages.dev name.
+- **Left as is:**
+  - The 3D model is saved for offline use only after the 3D Explorer has been opened once. This keeps the first visit light.
+  - On phones, the captions below the Explorer view need a scroll. They are on the page.
+
+## 2026-11-05: Surgery questions, "Helping your child", and a citable copy (built, not published)
+
+Matthew chose these three ("Go with 2, 3, and 4").
+
+- **Visit prep:**
+  - three folded question groups: "Before surgery", "Before going home from the hospital", "Follow-up after surgery";
+  - a "Packing for a hospital stay" list that prints on its own sheet;
+  - a link to the new page.
+- **Helping your child** (`/children/`):
+  - tips for parents from SickKids and KidsHealth;
+  - a six-page picture story with the site's figures (Listen works on it);
+  - a coloring page of the figure as black-and-white line art, one large drawing per printed page;
+  - a fill-in school sheet that prints. Nothing typed is stored or sent, which the tests check.
+- **Citable copy:** `scripts/make-dataset.mjs` builds a 20 MB archive of the model, figures, plaques, scripts, EVIDENCE.md and audits. `.zenodo.json` and `CITATION.cff` describe it, and `docs/ZENODO.md` explains how to publish.
+- **Wording:** drafted with opened sources (`docs/drafts/2026-11-05-surgery-and-children.md`). The independent audit (`docs/audits/2026-11-05-surgery-and-children-audit.md`) passed it with changes, and all its fixes are applied.
+- **Waiting for Matthew:**
+  - approval of the wording, then EVIDENCE rows, COPY.md and the Spanish (translation and back-translation check);
+  - whether to publish on Zenodo, and how.
+
+## 2026-11-05: Email set up
+
+- **Done by Matthew:** Cloudflare Email Routing forwards hello@openchiari.org (the address shown on the site) to a site-only inbox, plus support@openchiari.org to the same inbox (not shown on the site). The inbox address is kept out of the repository.
+- **Tested by Matthew:** a test message to each address arrived.
+- **Replies** come from the forwarding inbox. Sending as hello@ directly would need a paid Cloudflare plan or a mail provider.
+
 ## 2026-11-05: New features, release 3 (medical text)
 
 - **Approved by Matthew** ("All three approved"), after the independent audit (`docs/audits/2026-11-05-new-features-audit.md`) and its fixes.
 - **How do you say it?** on Home: Chiari, Chiari malformation, syringomyelia and syrinx, with sources (Mayfield, KidsHealth, Merriam-Webster). On the Spanish site it is marked "(en inglés)"; the translator is asked for a Spanish respelling.
-- **Real-world size** line in the Explorer's Chiari I and syrinx views, with Measure on (centimeters). The coin comparison waits for the U.S. Mint page.
+- **Real-world size** line in the Explorer's Chiari I and syrinx views, with Measure on: centimeters and stacked quarters (option A, chosen by Matthew; the quarter's size from the U.S. Mint, opened by Matthew).
 - **Why can coughing bring on a headache?** in the Explorer, Typical and Chiari I views:
   - three hedged sentences;
   - a "Cough" button: the fluid marks move up into the head and ease back, and nothing else moves;

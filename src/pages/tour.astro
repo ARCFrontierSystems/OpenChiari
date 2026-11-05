@@ -10,7 +10,7 @@ import TranslationNotice from '../components/TranslationNotice.astro';
 import Head from '../components/Head.astro';
 import ListenButton from '../components/ListenButton.astro';
 import { anatomyFigureSvg } from '../lib/anatomy-figure';
-import { getStrings, getRoutes, externalLinks } from '../i18n';
+import { getStrings, getRoutes, externalLinks, otherLanguagePath } from '../i18n';
 const routes = getRoutes(Astro.currentLocale);
 
 const s = getStrings(Astro.currentLocale);
@@ -31,7 +31,10 @@ const first = t.steps[0];
     <header>
       <div class="tour-bar">
         <span class="tour-name">{t.title}</span>
-        <a class="tour-exit" href={routes.explorer}>{t.exit}</a>
+        <span class="tour-actions">
+          <a class="tour-lang" href={otherLanguagePath(Astro.url.pathname)} lang={Astro.currentLocale === 'es' ? 'en' : 'es'} hreflang={Astro.currentLocale === 'es' ? 'en' : 'es'} data-other-lang>{s.header.espanol}</a>
+          <a class="tour-exit" href={routes.explorer}>{t.exit}</a>
+        </span>
       </div>
       <div class="tour-progress" role="progressbar" aria-label={t.progress} aria-valuemin="1" aria-valuemax={total} aria-valuenow="1" data-progress>
         {t.steps.map((_, i) => <span class:list={{ on: i === 0 }}></span>)}
@@ -173,6 +176,16 @@ const first = t.steps[0];
   }
   .tour-name {
     font-weight: 600;
+  }
+  .tour-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .tour-lang {
+    min-height: var(--touch);
+    display: inline-flex;
+    align-items: center;
   }
   .tour-exit {
     min-height: var(--touch);

@@ -12,6 +12,7 @@ interface Props {
 const { dark = false } = Astro.props;
 const t = getStrings(Astro.currentLocale).footer;
 const links = [
+  { href: routes.children, label: t.links.children },
   { href: routes.support, label: t.links.support },
   { href: routes.kit, label: t.links.kit },
   { href: routes.impact, label: t.links.impact },

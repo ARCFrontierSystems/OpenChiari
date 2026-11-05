@@ -50,7 +50,7 @@ const offline = {
       const keep = files
         // Left out up front (kept once used): downloads, kit files, print files, the 3D models, and the large logos and
         // link-preview picture, so the first visit stays light on a phone plan.
-        .filter((f) => !/^\/(downloads|models|kit)\//.test(f) && !/\.(zip|pdf)$/.test(f) && !/^\/brand\/(logo\.png|logo-dark\.png|share\.png|icon-(180|512)\.png)$/.test(f) && f !== '/sw.js')
+        .filter((f) => (f === '/kit/index.html' || !/^\/(downloads|models|kit)\//.test(f)) && !/\.(zip|pdf)$/.test(f) && !/^\/brand\/(logo\.png|logo-dark\.png|share\.png|icon-(180|512)\.png)$/.test(f) && f !== '/sw.js')
         .map((f) => (f.endsWith('/index.html') ? f.slice(0, -'index.html'.length) : f));
       const template = readFileSync(fileURLToPath(new URL('./scripts/sw-template.js', import.meta.url)), 'utf8');
       const version = Date.now().toString(36);

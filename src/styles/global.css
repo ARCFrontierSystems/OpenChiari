@@ -82,7 +82,10 @@ a:hover {
   min-height: var(--button-height);
   padding: 0 22px;
   border-radius: var(--radius);
+  /* A <button> doesn't take the page font by itself (walk-through 2, item 12). */
+  font: inherit;
   font-weight: 500;
+  cursor: pointer;
   text-decoration: none;
   border: 1px solid transparent;
 }
@@ -228,6 +231,20 @@ a:hover {
 }
 .ar-title {
   font-weight: 600;
+}
+.ar-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.ar-credit {
+  margin: 0;
+  padding: 6px 10px;
+  border-radius: var(--radius);
+  background: rgba(17, 18, 21, 0.75);
+  font-size: 12px;
+  text-align: center;
 }
 .ar-close {
   align-self: center;

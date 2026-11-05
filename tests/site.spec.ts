@@ -3,7 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { readFileSync } from 'node:fs';
 
 // Every page that exists so far. Add new pages here as they're built.
-const englishPages = ['/', '/explorer/', '/explorer/compare/', '/tour/', '/evidence/', '/explain/', '/v/#c1.side.f.m.x', '/explain/#v=c1.side.flow.m&x=1&a=fam&n=Hello', '/studies/', '/prep/', '/model/', '/embed/', '/support/', '/kit/', '/impact/', '/about/', '/privacy/'];
+const englishPages = ['/', '/explorer/', '/explorer/compare/', '/tour/', '/evidence/', '/explain/', '/v/#c1.side.f.m.x', '/explain/#v=c1.side.flow.m&x=1&a=fam&n=Hello', '/studies/', '/prep/', '/children/', '/model/', '/embed/', '/support/', '/kit/', '/impact/', '/about/', '/privacy/'];
 // The Spanish site: the same pages under /es/ (src/pages/es/), text from src/i18n/es.json.
 const spanishPages = englishPages.filter((p) => !p.includes('&n=')).map((p) => `/es${p}`);
 const pages = [...englishPages, ...spanishPages];
@@ -337,8 +337,9 @@ test.describe('Doctor visit prep', () => {
     await expect(page.getByLabel('Things I want to mention')).toHaveValue('');
     await page.getByLabel('Include a small diagram of Chiari').uncheck();
 
-    // Tick everything, then check the printed sheet is still one page on Letter and A4.
-    for (const box of await page.locator('[data-prep-form] input[type="checkbox"]').all()) await box.check();
+    // Tick everything in the everyday groups, then check the printed sheet is still one page on Letter and A4.
+    // (The surgery groups start folded; ticking them all as well makes a longer sheet.)
+    for (const box of await page.locator('[data-prep-form] details:not([data-group^="surgery"]) input[type="checkbox"], [data-own-list] input, [data-mention-list] input').all()) await box.check();
     await page.emulateMedia({ media: 'print' });
     await expect(page.locator('[data-print-sheet]')).toBeVisible();
     await expect(page.locator('[data-sheet-list] li')).toHaveCount(13);
@@ -349,6 +350,28 @@ test.describe('Doctor visit prep', () => {
       const pdf = (await page.pdf({ format })).toString('latin1');
       expect(pdf.match(/\/Type\s*\/Page[^s]/g)?.length, `${format} pages`).toBe(1);
     }
+  });
+
+  test('surgery groups start folded and add to the sheet; the packing list prints on its own', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/prep/');
+    const before = page.locator('details[data-group="surgeryBefore"]');
+    await expect(before).not.toHaveAttribute('open', '');
+    await before.locator('summary').click();
+    await page.getByLabel('How will my pain be managed after surgery?').check();
+    await expect(page.locator('[data-sheet-count]')).toHaveText('Your sheet · 7 questions');
+    await expect(page.locator('.child-link a')).toHaveAttribute('href', '/children/');
+
+    await page.getByLabel('Non-slip slippers').uncheck();
+    await page.evaluate(() => (window.print = () => {}));
+    await page.locator('[data-print-pack]').click();
+    await page.emulateMedia({ media: 'print' });
+    await expect(page.locator('[data-print-pack-sheet]')).toBeVisible();
+    await expect(page.locator('[data-print-sheet]')).toBeHidden();
+    await expect(page.locator('[data-pack-sheet-list] li')).toHaveCount(11);
+    await expect(page.locator('[data-pack-sheet-list]')).not.toContainText('Non-slip slippers');
+    const pdf = (await page.pdf({ format: 'Letter' })).toString('latin1');
+    expect(pdf.match(/\/Type\s*\/Page[^s]/g)?.length).toBe(1);
   });
 
   test('nothing is stored or sent', async ({ page }) => {
@@ -369,6 +392,129 @@ test.describe('Doctor visit prep', () => {
     expect(after).toEqual(before);
     expect(requests).toEqual([]);
     await expect(page).toHaveURL(/\/prep\/$/);
+  });
+});
+
+test('the contact address is marked so Cloudflare leaves it as plain text, and the English kit page works offline', async ({ request }) => {
+  for (const path of ['/about/', '/privacy/', '/es/about/', '/es/privacy/']) {
+    const html = await (await request.get(path)).text();
+    expect(html, path).toMatch(/<!--email_off-->[^]*?hello@openchiari\.org[^]*?<!--\/email_off-->/);
+  }
+  const sw = await (await request.get('/sw.js')).text();
+  expect(sw).toContain('"/kit/"');
+  expect(sw).not.toContain('"/kit/poster-letter.pdf"');
+});
+
+test('What happens in surgery: steps through from Chiari I to after decompression, and Show the usual view ends it', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/explorer/#c1');
+  await expect(page.locator('body')).toHaveClass(/has-3d/, { timeout: 30000 });
+  const panel = page.locator('[data-surgery-panel]').first();
+  await expect(panel).toBeVisible();
+  await panel.locator('summary').click();
+  await panel.locator('[data-surgery-next]').click();
+  await expect(panel.locator('[data-surgery-label]')).toHaveText('Step 1 of 5 · Before surgery');
+  await expect(page.locator('input[name="condition-wide"][value="surgery"]')).toBeChecked();
+  await expect(page.locator('li:has(> [data-part="removed"])').first()).toBeHidden();
+  await page.locator('[data-part="cerebellum"]').first().click();
+  await expect(page.locator('li:has(> [data-part="removed"])').first()).toBeHidden();
+  await expect(page.locator('[data-viewer]').first()).toHaveAttribute('aria-label', /Before surgery/);
+  for (let i = 0; i < 4; i++) await panel.locator('[data-surgery-next]').click();
+  await expect(panel.locator('[data-surgery-label]')).toHaveText('Step 5 of 5 · Afterward');
+  await expect(panel.locator('[data-surgery-next]')).toBeDisabled();
+  await expect(page.locator('li:has(> [data-part="removed"])').first()).toBeVisible();
+  await expect(panel).toContainText('Animation simplified.');
+  await expect(panel).toContainText('Tonsils shown at their lowest point');
+  await panel.locator('[data-surgery-stop]').click();
+  await expect(panel.locator('[data-surgery-label]')).toHaveText('');
+  // Typical anatomy has no surgery panel.
+  await page.locator('label:has(input[name="condition-wide"][value="typical"])').first().click();
+  await expect(page.locator('[data-surgery-panel]').first()).toBeHidden();
+});
+
+test('Support: Connect with others links to outside communities, with the not-checked note', async ({ page }) => {
+  await page.goto('/support/');
+  const section = page.locator('#connect');
+  await expect(section.locator('li')).toHaveCount(4);
+  await expect(section).toContainText("isn't checked by Open Chiari");
+  await expect(section).toContainText("isn't a recommendation");
+  await expect(section.locator('a[href="https://chiarisupport.org/"]')).toBeVisible();
+  await expect(section.locator('a[hreflang="es"]')).toHaveAttribute('href', 'https://femacpa.com/quienes-somos');
+});
+
+test('the hosting rules let browsers run only the site\'s own scripts, and the 3D Explorer still works under them', async ({ browser }) => {
+  const { readFileSync } = await import('node:fs');
+  const rules = readFileSync(new URL('../dist/_headers', import.meta.url), 'utf8');
+  const csp = rules.match(/Content-Security-Policy: (.+)/)?.[1] ?? '';
+  expect(csp).toContain("script-src 'self'");
+  expect(csp).not.toMatch(/https?:/);
+  // Serve the pages with that rule, plus a stand-in for a script Cloudflare could add, and check only it is refused.
+  const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  await context.route('**/*', async (route) => {
+    if (!route.request().url().startsWith('http://127.0.0.1') && !route.request().url().startsWith('http://localhost')) return route.abort();
+    const response = await route.fetch();
+    const headers = response.headers();
+    if (!(headers['content-type'] ?? '').includes('text/html')) return route.fulfill({ response });
+    const body = (await response.text()).replace('</body>', '<script defer src="https://static.cloudflareinsights.com/beacon.min.js"></script></body>');
+    await route.fulfill({ response, headers: { ...headers, 'content-security-policy': csp }, body });
+  });
+  const page = await context.newPage();
+  const refused: string[] = [];
+  const errors: string[] = [];
+  page.on('console', (m) => m.text().includes('Content Security Policy') && refused.push(m.text()));
+  page.on('pageerror', (e) => errors.push(e.message));
+  await page.goto('/explorer/#c1');
+  await expect(page.locator('body')).toHaveClass(/has-3d/, { timeout: 30000 });
+  await page.goto('/prep/');
+  await page.goto('/children/');
+  expect(errors).toEqual([]);
+  expect(refused.length).toBeGreaterThan(0);
+  expect(refused.every((m) => m.includes('cloudflareinsights'))).toBe(true);
+  await context.close();
+});
+
+test.describe('Helping your child', () => {
+  test('the school sheet prints what was typed, as text only, and nothing is stored or sent', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    const requests: string[] = [];
+    await page.goto('/children/', { waitUntil: 'networkidle' });
+    page.on('request', (r) => requests.push(r.url()));
+    const before = await page.evaluate(() => ({ local: { ...localStorage }, session: { ...sessionStorage }, cookies: document.cookie }));
+
+    await page.getByLabel("Child's first name").fill('<b>Sam</b>');
+    await page.getByLabel('Surgery date').fill('December 2');
+    await page.getByLabel('Rest breaks').check();
+    await page.getByLabel('Other', { exact: true }).fill('A seat near the door');
+    await page.evaluate(() => (window.print = () => {}));
+    await page.locator('[data-print-part="school"]').click();
+    await page.emulateMedia({ media: 'print' });
+    await expect(page.locator('[data-print-only="school"]')).toBeVisible();
+    await expect(page.locator('[data-print-only="story"]')).toBeHidden();
+    await expect(page.locator('[data-school-title]')).toHaveText("About <b>Sam</b>'s Chiari surgery");
+    await expect(page.locator('[data-school-helps] li')).toHaveText(['Rest breaks', 'A seat near the door']);
+    await expect(page.locator('[data-print-only="school"]')).toContainText('3D model by Open Chiari');
+    const pdf = (await page.pdf({ format: 'Letter' })).toString('latin1');
+    expect(pdf.match(/\/Type\s*\/Page[^s]/g)?.length).toBe(1);
+
+    const after = await page.evaluate(() => ({ local: { ...localStorage }, session: { ...sessionStorage }, cookies: document.cookie }));
+    expect(after).toEqual(before);
+    expect(requests).toEqual([]);
+    await expect(page).toHaveURL(/\/children\/$/);
+  });
+
+  test('the story and coloring page carry the required captions, and the coloring page is line art', async ({ page }) => {
+    await page.goto('/children/');
+    await expect(page.locator('.story-page figcaption').first()).toHaveText('Illustration, not a medical image.');
+    await expect(page.locator('.story-page figcaption').nth(2)).toContainText('Tonsils shown at their lowest point');
+    const fills = await page.locator('[data-color-preview] svg [fill]').evaluateAll((els) =>
+      [...new Set(els.map((e) => e.getAttribute('fill')).filter((f) => f !== 'none'))],
+    );
+    expect(fills).toEqual(['#FFFFFF']);
+    await page.evaluate(() => (window.print = () => {}));
+    await page.locator('[data-print-part="color"]').click();
+    await page.emulateMedia({ media: 'print' });
+    const pdf = (await page.pdf({ format: 'Letter' })).toString('latin1');
+    expect(pdf.match(/\/Type\s*\/Page[^s]/g)?.length).toBe(2);
   });
 });
 
@@ -396,7 +542,8 @@ test('Support links only to the organizations themselves; About says how content
   await page.goto('/support/');
   const outside = await page.locator('main a[href^="http"]').evaluateAll((as) => as.map((a) => new URL((a as HTMLAnchorElement).href).hostname));
   expect(outside.length).toBeGreaterThanOrEqual(6);
-  for (const host of outside) expect(['bobbyjonescsf.org', 'conquerchiari.org', 'www.conquerchiari.org', 'asap.org']).toContain(host);
+  // The organizations, and (Connect with others) the communities they and others run.
+  for (const host of outside) expect(['bobbyjonescsf.org', 'conquerchiari.org', 'www.conquerchiari.org', 'asap.org', 'chiarisupport.org', 'www.inspire.com', 'femacpa.com']).toContain(host);
   await expect(page.locator('main form')).toHaveCount(0);
   await page.goto('/about/');
   await expect(page.getByText('They have not been reviewed by a medical professional.', { exact: false })).toBeVisible();
@@ -861,8 +1008,14 @@ test('Read aloud: Listen buttons appear where the browser can speak, and switch 
     // A stand-in voice, so the test doesn't depend on the machine's speech engine.
     const spoken: string[] = [];
     (window as unknown as { spoken: string[] }).spoken = spoken;
+    const voices = [{ lang: 'en-US', localService: true }, { lang: 'es-US', localService: true }];
+    class Utterance {
+      text: string; lang = ''; voice: unknown = null; rate = 1; onend: null | (() => void) = null;
+      constructor(text: string) { this.text = text; }
+    }
+    Object.defineProperty(window, 'SpeechSynthesisUtterance', { value: Utterance });
     Object.defineProperty(window, 'speechSynthesis', {
-      value: { speak: (u: SpeechSynthesisUtterance) => spoken.push(u.text), cancel: () => {}, getVoices: () => [] },
+      value: { speak: (u: Utterance) => spoken.push(u.text), cancel: () => {}, getVoices: () => voices, addEventListener: () => {} },
     });
   });
   await page.goto('/');

@@ -59,6 +59,11 @@ stay in English; "Explain It" is followed by "(Explíquelo)" where it is introdu
 | Illustration, not a medical image | Ilustración, no es una imagen médica | COPY.md ("Ilustración") |
 | Fluid flow simplified | Flujo del líquido simplificado | new |
 | Calm mode | Modo tranquilo | COPY.md |
+| incision | incisión | standard |
+| anesthesia (asleep under anesthesia) | anestesia (dormida con anestesia) | standard |
+| child life specialist | especialista en vida infantil (child life) | standard; translator: please confirm |
+| intensive care | cuidados intensivos | standard |
+| hearing aids / headphones | aparatos auditivos / audífonos (*audífonos* alone can mean either; the packing list keeps them apart) | back-translation check 3 |
 | 3D Explorer | Explorador 3D | COPY.md |
 | Research studies | Estudios de investigación | COPY.md |
 | Doctor visit prep | Prepare su cita médica | COPY.md |

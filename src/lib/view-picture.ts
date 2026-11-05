@@ -10,6 +10,8 @@ export interface PictureText {
   advice: string;
   credit: string;
   site: string;
+  /** Spanish pages: the short "translation pending review" notice. */
+  notice?: string;
 }
 
 function wrap(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, width: number, lineHeight: number): number {
@@ -62,7 +64,8 @@ export async function makePicture(view: CanvasImageSource & { width: number; hei
   y = wrap(ctx, text.advice, PAD, y, W - 2 * PAD, 32) + 4;
   ctx.fillStyle = '#A3A1A9'; // --x-muted
   ctx.font = "400 20px 'IBM Plex Sans', system-ui, sans-serif";
-  wrap(ctx, text.credit, PAD, y, W - 2 * PAD, 28);
+  y = wrap(ctx, text.credit, PAD, y, W - 2 * PAD, 28);
+  if (text.notice) wrap(ctx, text.notice, PAD, y + 4, W - 2 * PAD, 28);
   ctx.fillStyle = '#7FB3D3'; // --x-accent
   ctx.font = "400 26px 'IBM Plex Mono', ui-monospace, monospace";
   ctx.fillText(text.site, PAD, H - PAD + 6);

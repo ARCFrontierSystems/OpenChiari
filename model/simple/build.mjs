@@ -668,14 +668,16 @@ function checkClosed(tris) {
 // and Chiari I, a solid plaque of the midline view from the skull base to the upper neck, life size (about 150 by
 // 115 mm, 12 mm thick), so they can be laid side by side. It prints as one piece on a single-color printer: on its
 // face, bone stands 1.5 mm proud, spinal fluid is 2 mm deep, soft tissue 0.8 mm, brain and cord flush, and the
-// McRae line is a 1 mm wide, 2 mm deep groove. The outlines are the figure's own (the same fields as the web model, at the midline),
+// McRae line is a 1 mm wide, 3.5 mm deep groove (deeper than the fluid spaces, so it shows across them too). The outlines are the figure's own (the same fields as the web model, at the midline),
 // so the EVIDENCE.md positions carry over; the check at the end measures the tonsil against the McRae line.
 if (process.argv.includes('--print')) {
   const byName = Object.fromEntries(structures.map((s) => [s.name, s]));
   const PRINT_OUT = new URL('../../public/downloads/print/', import.meta.url);
   mkdirSync(PRINT_OUT, { recursive: true });
   const BOX = [236, 326, 540, 562]; // figure units: x 236–540, y 326–562 (skull base to upper neck)
-  const BACK = -24, RELIEF = { bone: 3, brain: 0, csf: -4, soft: -1.6, groove: -4 };
+  const BACK = -24, RELIEF = { bone: 3, brain: 0, csf: -4, soft: -1.6, groove: -7 };
+  const labelFile = JSON.parse(readFileSync(new URL('./reference/print-label.json', import.meta.url), 'utf8'));
+  const LABEL = { ...labelFile, bits: Buffer.from(labelFile.bits, 'base64') };
   const lineDist = (x, y) => {
     const [ax, ay] = S.mcrae.basion, [bx2, by2] = S.mcrae.opisthion;
     const dx = bx2 - ax, dy = by2 - ay;
@@ -703,9 +705,20 @@ if (process.argv.includes('--print')) {
     const H = new Float32Array(hx * hy);
     for (let j = 0; j < hy; j++) for (let i = 0; i < hx; i++) H[i + hx * j] = height(BOX[0] - step + i * step, BOX[1] - step + j * step);
     const hAt = (x, y) => H[Math.round((x - BOX[0] + step) / step) + hx * Math.round((y - BOX[1] + step) / step)] ?? RELIEF.soft;
-    const field = (x, y, z) =>
+    const plaque = (x, y, z) =>
       Math.min(x - BOX[0], BOX[2] - x, y - BOX[1], BOX[3] - y, skinField(x, y, Math.min(z, 0)), hAt(x, y) - z, z - BACK);
-    const mesh = smooth(extract(field, [BOX[0] - 2, BOX[1] - 2, BACK - 2], [BOX[2] + 2, BOX[3] + 2, 5], 0.5), 2);
+    // A label strip along the bottom edge, the plaque's full width and 18 mm tall, with raised lettering
+    // (model/simple/print-label.py): "Illustration, not a medical image" and "openchiari.org" (CLAUDE.md rule 1).
+    const STRIP_END = BOX[3] + 36;
+    const labelAt = (x, y) => {
+      const mx = (x - BOX[0]) / S.unitsPerMm - ((BOX[2] - BOX[0]) / S.unitsPerMm - LABEL.width / LABEL.pxPerMm) / 2;
+      const my = (y - BOX[3]) / S.unitsPerMm - 1;
+      const i = Math.round(mx * LABEL.pxPerMm), j = Math.round(my * LABEL.pxPerMm);
+      return i >= 0 && j >= 0 && i < LABEL.width && j < LABEL.height && LABEL.bits[i + LABEL.width * j] === 1;
+    };
+    const strip = (x, y, z) => Math.min(x - BOX[0], BOX[2] - x, y - (BOX[3] - 2), STRIP_END - y, (labelAt(x, y) ? 3 : 0) - z, z - BACK);
+    const field = (x, y, z) => Math.max(plaque(x, y, z), strip(x, y, z));
+    const mesh = smooth(extract(field, [BOX[0] - 2, BOX[1] - 2, BACK - 2], [BOX[2] + 2, STRIP_END + 2, 5], 0.5), 2);
     for (let t = 0; t < mesh.tris.length; t += 3) [mesh.tris[t + 1], mesh.tris[t + 2]] = [mesh.tris[t + 2], mesh.tris[t + 1]];
     const pos = toMm(mesh.pos);
     // Fewer triangles (about 1 in 8, with at most about 0.05 mm of change), so the file is a reasonable download.
@@ -752,10 +765,11 @@ if (process.argv.includes('--print')) {
   writeFileSync(join(dir, 'README.txt'), [
     'Open Chiari: 3D-printable midline plaques',
     '',
-    'Two plaques of the midline view, skull base to upper neck, life size (about 150 x 120 mm, 12 mm thick):',
+    'Two plaques of the midline view, skull base to upper neck, life size (about 150 x 135 mm, 12 mm thick):',
     'openchiari-midline-typical.stl (typical anatomy) and openchiari-midline-chiari.stl (Chiari I). Lay them side by side.',
     'Bone stands 1.5 mm proud, spinal fluid spaces are 2 mm deep, soft tissue 0.8 mm, brain and spinal cord flush,',
-    'and the McRae line (across the opening at the base of the skull) is a groove.',
+    'and the McRae line (across the opening at the base of the skull) is a groove. Along the bottom edge, raised',
+    'lettering reads "Illustration, not a medical image" and "openchiari.org".',
     '',
     'Printing: lay each plaque flat, face up; no supports needed. 0.2 mm layers work; a light-colored filament shows the',
     'relief best. They also scale down well (for example 60%) for a smaller, cheaper print.',

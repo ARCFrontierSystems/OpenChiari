@@ -1,0 +1,563 @@
+ Prospective, Longitudinal Study of Clinical Outcome and Morphometric Posterior Fossa Changes after Craniocervical Decompression for Symptomatic Chiari I Malformation - PMC
+ Skip to main content
+ Official websites use .gov
+ A
+ .gov website belongs to an official
+ government organization in the United States.
+ Secure .gov websites use HTTPS
+ A lock (
+ Lock
+ Locked padlock icon
+) or https:// means you've safely
+ connected to the .gov website. Share sensitive
+ information only on official, secure websites.
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+Search PMC Full-Text Archive
+Search in PMC
+- 
+ Journal List
+- 
+ User Guide
+- 
+- 
+- 
+- 
+- 
+- 
+PERMALINK
+ Copy
+ As a library, NLM provides access to scientific literature. Inclusion in an NLM database does not imply endorsement of, or agreement with,
+ the contents by NLM or the National Institutes of Health.
+ Learn more:
+ PMC Disclaimer
+ |
+ PMC Copyright Notice
+AJNR Am J Neuroradiol. 2023 Oct;44(10):1150–1156. doi: 10.3174/ajnr.A7993
+- 
+- 
+- 
+- 
+Prospective, Longitudinal Study of Clinical Outcome and Morphometric Posterior Fossa Changes after Craniocervical Decompression for Symptomatic Chiari I Malformation
+Alaaddin Ibrahimy
+Alaaddin Ibrahimy
+aFrom the Surgical Neurology Branch (A.I., J.M., G.C.S., M.X.C., F.K.C., J.D.H.), National Institute of Neurological Disorders and Stroke, National Institutes of Health, Bethesda, Maryland
+bDepartment of Biomedical Engineering (A.I.), Yale University, New Haven, Connecticut
+Find articles by Alaaddin Ibrahimy
+a,b,✉, Tianxia Wu
+Tianxia Wu
+cClinical Trials Unit (T.W.), National Institute of Neurological Disorders and Stroke, National Institutes of Health, Bethesda, Maryland
+Find articles by Tianxia Wu
+c, Jessica Mack
+Jessica Mack
+aFrom the Surgical Neurology Branch (A.I., J.M., G.C.S., M.X.C., F.K.C., J.D.H.), National Institute of Neurological Disorders and Stroke, National Institutes of Health, Bethesda, Maryland
+Find articles by Jessica Mack
+a, Gretchen C Scott
+Gretchen C Scott
+aFrom the Surgical Neurology Branch (A.I., J.M., G.C.S., M.X.C., F.K.C., J.D.H.), National Institute of Neurological Disorders and Stroke, National Institutes of Health, Bethesda, Maryland
+Find articles by Gretchen C Scott
+a, Michaela X Cortes
+Michaela X Cortes
+aFrom the Surgical Neurology Branch (A.I., J.M., G.C.S., M.X.C., F.K.C., J.D.H.), National Institute of Neurological Disorders and Stroke, National Institutes of Health, Bethesda, Maryland
+Find articles by Michaela X Cortes
+a, Fredric K Cantor
+Fredric K Cantor
+aFrom the Surgical Neurology Branch (A.I., J.M., G.C.S., M.X.C., F.K.C., J.D.H.), National Institute of Neurological Disorders and Stroke, National Institutes of Health, Bethesda, Maryland
+Find articles by Fredric K Cantor
+a, Francis Loth
+Francis Loth
+dDepartments of Mechanical and Industrial Engineering, and Bioengineering (F.L.), Northeastern University College of Engineering, Boston, Massachusetts
+Find articles by Francis Loth
+d, John D Heiss
+John D Heiss
+aFrom the Surgical Neurology Branch (A.I., J.M., G.C.S., M.X.C., F.K.C., J.D.H.), National Institute of Neurological Disorders and Stroke, National Institutes of Health, Bethesda, Maryland
+Find articles by John D Heiss
+a
+- Author information
+- Article notes
+- Copyright and License information
+aFrom the Surgical Neurology Branch (A.I., J.M., G.C.S., M.X.C., F.K.C., J.D.H.), National Institute of Neurological Disorders and Stroke, National Institutes of Health, Bethesda, Maryland
+bDepartment of Biomedical Engineering (A.I.), Yale University, New Haven, Connecticut
+cClinical Trials Unit (T.W.), National Institute of Neurological Disorders and Stroke, National Institutes of Health, Bethesda, Maryland
+dDepartments of Mechanical and Industrial Engineering, and Bioengineering (F.L.), Northeastern University College of Engineering, Boston, Massachusetts
+✉
+Please address correspondence to Alaaddin Ibrahimy, M.S.E., Yale University, 40 Temple St, 7G, New Haven, CT 06510; e-mail: alaaddin.ibrahimy@yale.edu
+✉
+Corresponding author.
+Received 2023 Jun 13; Accepted 2023 Aug 16.
+© 2023 by American Journal of Neuroradiology
+Indicates open access to non-subscribers at www.ajnr.org
+PMC Copyright notice
+PMCID: PMC10549945  PMID: 37709353
+This prospective, longitudinal study of patients with Chiari I malformation posterior fossa dural opening and duraplasty quantified the change in the posterior fossa and upper cervical spine morphometrics and determined the change in symptomatology between at baseline and up to 5 years postsurgery. The authors found that symptomatic and MR imaging morphometric changes occurred within the first postoperative year.
+Abstract
+BACKGROUND AND PURPOSE:
+The time course of changes in posterior fossa morphology, quality of life, and neurologic function of patients with Chiari I malformation after craniocervical decompression requires further elaboration. To better understand the pace of these changes, we longitudinally studied patients with Chiari I malformation, with or without syringomyelia, before and after the operation for up to 5 years.
+MATERIALS AND METHODS:
+Thirty-eight symptomatic adult patients (35 women, 3 men) diagnosed with Chiari I malformation only (n = 15) or Chiari I malformation and syringomyelia (n = 23) and without previous Chiari I malformation surgery were enrolled in a clinical study. Patients underwent outpatient study visits and MR imaging at 7 time points (ie, initial [before the operation], 3 months, 1 year, 2 years, 3 years, 4 years, and 5 years) during 5 years. The surgical procedure for all patients was suboccipital craniectomy, C1 laminectomy, and autologous duraplasty.
+RESULTS:
+Morphometric measurements demonstrated an enlargement of the CSF areas posterior to the cerebellar tonsils after the operation, which remained largely stable through the following years. There was a decrease in pain and improved quality of life after the operation, which remained steady during the following years. Reduction in pain and improved quality of life correlated with CSF area morphometrics.
+CONCLUSIONS:
+Most changes in MR imaging morphometrics and quality of life measures occurred within the first year after the operation. A 1-year follow-up period after Chiari I malformation surgery is usually sufficient for evaluating surgical efficacy and postoperative MR imaging changes.
+In Chiari I malformation (CMI), tonsillar herniation and posterior fossa underdevelopment disrupt normal CSF dynamics.1 Typical CMI symptoms are posterior headache and suboccipital neck pain, aggravated by straining, coughing, and the Valsalva maneuver. Symptoms of visual disturbances, dizziness, imbalance, fatigue, and cognitive impairment also occur. Patients with associated syringomyelia often have spinal cord symptoms and signs.2 Surgical indications in CMI include syringomyelia-related neurologic deficits and cough-related headache.2-4 Posterior fossa and foramen magnum decompression surgery (PFD) reduces CMI symptoms, restores CSF flow, and treats syringomyelia.5,6
+PFD for CMI varies from bony decompression to operations opening the dura, arachnoid, and fourth ventricle, reducing tonsillar size, and including duraplasty.6 Intraoperative MR imaging or sonography can assess whether posterior bone removal decompressed the cerebellar tonsils and opened the CSF pathways or if additional decompression measures are necessary.7-9 Most symptoms improve after PFD surgery.10-13 Children improve more than adults.14 Complications like CSF leakage, swallowing dysfunction, aseptic meningitis, and infection worsen surgical outcomes.15
+PFD affects anatomic morphologies and CSF flow.7,16-19 Favorable treatment outcomes follow PFD, which enlarges the retrotonsillar CSF space and relieves CSF flow obstruction.13,18,20 Tonsillar ectopia decreases after PFD, almost 50% in studies by Heiss et al17,18 and Nikoobakht,13 but 7%, 19%, and 33%, respectively, in studies by Bond et al,7 Quon et al,19 and Eppelheimer et al16 The CSF pathway expands in various amounts after PFD surgery. In patients undergoing PFD with dural opening and duraplasty (PFDD), the retrotonsillar CSF space enlarged 11–13 mm and the ventral foramen magnum CSF space enlarged 0.8–2 mm.17,18 PFDD enlarged the ventral CSF width more in patients with syringomyelia.16,18 In another duraplasty study, the retrotonsillar space widened 9.7 mm but the ventral CSF width did not change significantly.16 In a study of PFD, most (86%) without duraplasty, the foramen magnum CSF pathways enlarged only 1 mm dorsally and 0.2 mm ventrally.7
+Khalsa et al,21 in 2017, reported that more significant (5.89% versus 1.54%) posterior fossa enlargement after PFD was associated with relief of CMI-related headache and reduced tonsillar ectopia. Noudel et al20 reported that complete recovery was associated with a 15% increase in posterior cranial fossa (PCF) volume, and partial recovery, with a 7% increase in PCF volume after PFD.
+This prospective, longitudinal study of patients with CMI with and without syringomyelia treated with PFDD aimed to achieve the following: 1) quantify the change in the posterior fossa and upper cervical spine morphometrics between before PFDD surgery (baseline, denoted “−0.5 time point [TP]”) and TPs up to 5 years after PFDD surgery, and 2) determine the change in symptomatology between before PFDD surgery (baseline) and TPs after surgery. The study also evaluated whether the Karnofsky Performance Scale (KPS) score, the primary performance outcome measure of the study, was related to retrotonsillar CSF space expansion after the operation, the primary morphometric outcome measure of the study, or other morphometric changes (exploratory measures). Establishing the timing of functional improvement and morphologic changes following PFDD may guide neurosurgeons advising patients with CMI about expected recovery and MR imaging after PFDD.
+MATERIALS AND METHODS
+Study Population and Ethics
+Thirty-eight adult patients (35 women, 3 men) diagnosed with CMI only (n = 15) or CMI and syringomyelia (n = 23) and without previous CMI surgery were enrolled in a clinical protocol and underwent PFDD surgery. The NIH Combined Neuroscience Institutional Review Board approved the research protocol: 10N0143. Consent was obtained from all patients. All patients were evaluated and treated at a single clinical site. The mean age at surgery was 40.6 (SD, 12.6) years (range, 20.3–64.9 years). The protocol specified outpatient study visits and MR imaging 7 times (ie, initial [before the operation], 3 months, 1 year, 2 years, 3 years, 4 years, and 5 years after the operation). MR images and clinical data were collected between 2010 and 2021. MR images were stored in the PACS server. Clinical data were recorded on case report forms, transcribed, and stored in a secure database. All 38 patients attended at least 1 scheduled visit after the operation, and 14 completed the 5-year protocol (Table 1).
+Table 1:
+Number of subjects at each TP category for clinical outcomes and morphometric measurements
+TP categories
+ TP (yr)
+–0.5
+0.5
+1
+2
+3
+4
+5
+ Relative to surgery (mo)
+–9 to –1
+0–9
+9–18
+18–30
+30–42
+42–54
+>54
+Number of subjects for each TP
+ Morphometric measurements
+38
+35
+31
+23
+19
+17
+14
+ KPS score
+36
+34
+32
+24
+22
+16
+14
+ Average pain
+34
+33
+32
+23
+21
+14
+14
+ Mean of affective pain
+34
+33
+32
+23
+21
+14
+14
+ Mean of continuous pain
+33
+33
+32
+23
+21
+14
+14
+ Mean of intermittent pain
+34
+33
+32
+23
+21
+14
+14
+ Mean of neuropathic pain
+34
+33
+32
+23
+21
+14
+14
+ ASIA total score
+35
+35
+33
+23
+24
+17
+14
+ Ambulatory score
+35
+35
+33
+24
+24
+17
+14
+ Cognitive subtotal
+35
+35
+32
+24
+22
+16
+14
+ McCormick class score
+35
+35
+32
+24
+24
+17
+14
+ Motor subtotal
+35
+35
+32
+24
+22
+16
+14
+ Total FIM
+35
+35
+32
+24
+22
+16
+14
+Open in a new tab
+Note:—ASIA indicates American Spinal Injury Association; FIM, Functional Independence Measure.
+Surgical Procedure
+All patients underwent the operation in a prone, horizontal position with the head in a neutral or gently flexed posture. The surgical procedure included a suboccipital craniectomy, C1 laminectomy, and sometimes removal of the superior part of the lamina of C2. The bony opening decompressed the inferior cerebellar hemispheres and cerebellar tonsils. A Y-shaped durotomy was performed. The arachnoid was preserved. Intradural structures were not manipulated. An autologous dural graft of the occipital pericranium measuring 4 × 4  cm was sewn to the durotomy edges using a 4–0 braided nylon suture.18
+Image Registration and Midsagittal Plane Selection
+We used Matlab (MathWorks), FSL (http://www.fmrib.ox.ac.uk/fsl), and bash scripts in parallel to register 3D T1 MR images to the Montreal Neurological Institute images (MNI152_T1_brain.nii.gz, from FSL) and identify the midsagittal plane. DICOM (.dcm) images were initially converted to NIfTI (.nii.gz) format. The “dcm2nii” Unix command compressed file sizes. FSL commands extracted the brain from MR images. A linear image registration tool (FLIRT command; FMRIB Linear Image Registration Tool; FLIRT; http://www.fmrib.ox.ac.uk/fsl/fslwiki/FLIRT) registered the skull-free image to the atlas image (MNI152_T1_brain.nii.gz). The FSL transformation matrix, including the superior-inferior ROI, was applied to the original images, registering them in the atlas image orientation. The final midsagittal MR image in the midsagittal plane of the atlas was saved as a Matlab file for morphometric measurements.
+Morphometric Measurements and Software
+We made 9 morphometric measurements using 2 custom software programs developed in Matlab (Table 2, Fig 1, and Supplemental Online Video). In previous studies, these measurements significantly changed after PFDD surgery.16,22 PFDD removes the opisthion. A described method reconstructed the McRae line on postsurgical images.16,18
+Table 2:
+Description of morphometric measurements
+Morphometric Measurement
+Description
+Area
+1
+ CSF area posterior to PCF (mm2)
+CSF area posterior to a line drawn between the IOP and opisthion, and posterior to the cerebellum
+2
+ Anterior CSF area (mm2)
+CSF area in the upper cervical spinal canal anterior to the spinal cord between the FM and inferior limit of the C2 vertebra
+3
+ Posterior CSF area (mm2)
+CSF area in the upper cervical spinal canal posterior to the spinal cord between the FM and inferior limit of the C2 vertebra
+Length
+4
+ Cerebellar height (mm)
+Distance between the most superior point of the superior vermis and the most inferior point of the tonsil
+5
+ Total dorsal CSF width (mm)
+Width of the CSF space measured at the level of the FM, anterior to the cerebellum, posterior to the brainstem and posterior the cerebellum, anterior to the subarachnoid space
+6
+ Ventral CSF width (mm)
+Width of the CSF space measured at the level of the FM, anterior to the brainstem, posterior to the subarachnoid space
+7
+ Cerebellar tonsillar position (mm)
+The perpendicular distance between the most inferior tip of the cerebellar tonsils and the McRae line
+8
+ Occipital bone length (mm)
+Length between a point at the midpoint of the occipital bone at the level of the tentorium and IOP and the most inferior tip of the occipital bone
+Angle
+9
+ Cerebellum-clivus bone angle (degree)
+The angle subtended by the major axis of the cerebellum with the posterior margin of the clivus bone
+Open in a new tab
+Note:—IOP indicates internal occipital protuberance; FM, foramen magnum.
+FIG 1.
+Open in a new tab
+Morphometric measurements on a presurgery MR image (A) and a postsurgery MR image (B) for the same patient 1 year later. 1) CSF area posterior to PCF, 2) anterior CSF area, 3) posterior CSF area, 4) cerebellar height, 5a) posterior dorsal width + (5b) anterior dorsal width = total dorsal CSF width, 6) ventral CSF width, 7) cerebellar tonsillar position, 8) occipital bone length, and 9) cerebellum-clivus bone angle. Note that the syrinx in the presurgical MR image resolved after surgery (Supplemental Online Video).
+Clinical Outcomes Measures
+The primary clinical outcome measure was the KPS score change between before and after the operation. The KPS was graded on a 0–100 scale at study visits, representing the patient’s ability to perform everyday activities, work, and function without assistance.23 Exploratory clinical outcomes included the following: 1) the Short-form McGill Pain Questionnaire, a self-reported pain questionnaire used in longitudinal studies;24 2) the McCormick Clinical/Functional classification, a 4-grade scale ranging from grade I (normal or insignificant functional neurologic deficit) to grade IV (severe deficit, quadriparesis, usually not independent);25 3) the Functional Ambulatory Score, a 4-grade scale ranging from 1 (ambulant without a walking aid) to 4 (complete motor and sensory paraplegia); 4) the American Spinal Injury Association motor grading scale,26 a 0–100 scale based on a sum of the strengths of 5 upper- and 5 lower-extremity muscles graded from 5 (normal) to 0 (total paralysis); and 5) the Functional Independence Measure, a 13-item questionnaire assessing motor and cognitive functioning on a 1 (total assistance) to 7 (complete independence) ordinal scale.27 The Chicago Chiari Outcome Scale complication component graded complications as 1 (persistent complication, poorly controlled), 2 (persistent complication, well-controlled), 3 (transient complication), and 4 (uncomplicated course).28
+Morphologic Outcomes Measures
+The primary morphometric outcome measure was the dorsal CSF space, denoted by 5 in Fig 1. The dorsal CSF space (5) summated the anterior-posterior widths of the foramen magnum CSF space (5a) and the retrotonsillar space (5b). Eight other morphometric measures shown in Table 2 were exploratory.
+Data Distribution
+TPs represented the order of scheduled study visits, including MR imaging scans and clinical data collection. The TP before surgery was –0.5, with the negative sign connoting before surgery. The TP values without negative sign prefixes connoted visits after surgery.
+Statistical Analysis
+The initial statistical plan of analysis was a repeated measures analysis of variance (RM-ANOVA) or analysis of covariance (RM-ANCOVA), assuming normality. The Box-Cox transformation was applied to the 12 clinical variables with skewed distributions. However, the transformation did not work for 6 of them, and the Friedman test was performed. The Shapiro-Wilk method tested the normality assumption.
+For each morphometric and transformed clinical variable, either RM-ANOVA or RM-ANCOVA was used to evaluate the change with time. The TP (years from the operation) variable was treated as categorical because the change in all variables across time did not show linear trends. Age and diagnosis (with and without syringomyelia) were considered covariates, and the significance level of .1 was applied to covariate selection (including 2 interactions: TP × age and TP × diagnosis). For the compound symmetry, the heterogeneous covariance structure was selected based on the Akaike information criterion to account for the correlation among the repeated measures from the same subject and the heterogeneity of time variance. The Dunnett method was applied to multiple comparisons using TP −0.5 or TP 0.5 as the control. The Bonferroni correction was used for multiple comparisons. For the Box-Cox transformed variables, the back-transformed least square (LS) means and 95% CI were reported.
+Spearman correlation coefficients were calculated to assess the association between the clinical and morphometric variables based on the following: 1) the relative change: between pre- (TP = −0.5) and postsurgery (TP = 0.5): 100 × (post to pre)/pre, and 2) the measurements at TP = −0.5 and TP = 0.5. The P values were not adjusted for the multiple statistical tests of the exploratory variables. SAS Version 9.4 (SAS Institute) was used for statistical analysis, and P values <.05 were considered statistically significant.
+RESULTS
+Morphometric Measurements
+Age and diagnosis (CMI only versus CMI and syringomyelia) did not significantly affect any morphometric variables except for the anterior CSF area and cerebellum-clivus bone angle (F-test, P value > .1). RM-ANOVA was, therefore, used for all morphometric variables except the anterior CSF area and cerebellum-clivus bone angle (Fig 2). The RM-ANCOVA analyzed the anterior CSF area (diagnosis as a covariate) and the cerebellum-clivus bone angle (age as a covariate). The RM-ANOVA or RM-ANCOVA (Fig 2) showed a significant change across TPs (F-test, df = 6, ventral CSF width: P = .023, others: P < .0001) in all variables except the anterior CSF area in the CMI-only group (F-test, df = 6, P < .1499). The difference between presurgery (TP = –0.5, control) and each postsurgery TP was significant (adjusted P < .0001). Furthermore, the change between the first (TP = 0.5) and postsurgical TPs for the CSF area posterior to the PCF was also significant (P < .05). For the posterior CSF area, a significant change was observed at TPs 1 and 2 (P < .05). For the other 7 variables, the difference between the first postsurgery TP (TP = 0.5, control) and each postsurgical TP (TP = 1–5) was not significant (adjusted P > .05).
+FIG 2.
+Open in a new tab
+Morphometric length, angle, and CSF area measurements (LS-means and 95% CI). A, CSF area posterior to the PCF. B, Posterior CSF area. A and B, RM-ANOVA F-test (df = 6) of TP: P value < .0001. C, Anterior CSF area for CMI-only, and for patients with CMI plus syringomyelia; C, RM-ANCOVA (diagnosis as a covariate), F-test (df = 6) for the interaction (diagnosis × TP): P = .0374. RM-ANOVA F-test (df = 6) for TP: P > .05 for CMI-only, no multiple comparisons: P < .0001 for CMI and syringomyelia (SM). D, Cerebellar height. E, Total dorsal width. F, Ventral CSF width. G, Cerebellar tonsillar position, H, Occipital bone length. I, Cerebellum-clivus bone angle. RM-ANOVA F-test (df = 6) of TP: P value < .0001 except for ventral CSF width (P = .023, F). Hash tag indicates the Dunnett adjusted P value < .05 at the TP compared with TP = –0.5; plus sign, the Dunnett adjusted P value < .05 at the TP compared with TP = +0.5; asterisk, the Dunnett adjusted P value < .01 at the TP compared with TP = –0.5.
+The total dorsal CSF width increased by 12 mm after PFDD surgery (Fig 2). The posterior CSF area increased its preoperative size >2.5-fold after the operation. The CSF area posterior to the PCF increased 3-fold by 3–6 months after the operation (TP = 0.5), 4-fold at TP = 1, and remained stable thereafter.
+The ventral CSF width for the entire CM cohort did not change significantly following PFDD (P > .05). The RM-ANCOVA confirmed significant interaction between diagnosis and TP (P = .0374). The anterior CSF area following PFDD surgery increased by >25% in the CMI and syringomyelia group but <10% in the CMI-only group (Fig 2).
+The change from baseline for the cerebellar tonsillar position inferior to the McRae line, cerebellar height, occipital bone length, and cerebellum-clivus bone angle occurred within the first 3–6 months after surgery (Fig 2). The cerebellar tonsillar position inferior to the McRae line decreased 2 mm 3–6  months after surgery (TP = 0.5) and 0.8 mm more in following years. The cerebellar height decreased by 2 mm following PFDD surgery. The occipital bone length was 23 mm shorter following PFDD surgery. PFDD surgery produced a 3°–4° reduction in the cerebellum-clivus bone angle 3–6 months after the operation (TP = 0.5).
+Clinical Outcomes
+Clinical outcomes significantly changed across TPs (F-test, df =6, P < .01; RM-ANOVA). Age and diagnosis had no significant effect (F-test P value > 0.1). The difference between presurgery (TP = −0.5 as a control) and postsurgery TP = 0.5 was significant (adjusted P < .05) for the KPS score and pain variables (Fig 3). After the PFDD surgery, the mean KPS score increased from 81 to 88 (Fig 3). Average pain and other pain measures decreased by almost 50% 3–6 months following PFDD surgery and remained stable thereafter (Fig 3). The other 6 clinical variables (American Spinal Injury Association total score, Functional Ambulatory Score, Total Functional Independence Measure Cognitive Subtotal, Motor Subtotal, McCormick Class Score) did not change significantly following PFDD surgery (Friedman test, df = 6, P > .05).
+FIG 3.
+Open in a new tab
+Clinical outcomes (back-transformed LS-means and 95% CI): A, KPS score. B, Average pain. C, Mean continuous pain. D, Mean intermittent pain. E, Mean affective pain. F, Mean neuropathic pain. RM-ANOVA F-test (df = 6) of TP: P value < .005. The asterisk indicates the Dunnett adjusted P value < .05 at the TP compared with TP = –0.5.
+Five transient treatment complications occurred. There were endotracheal tube–related tongue abrasions in 3 patients, one of whom also had postoperative pneumonia. Another patient developed atrial fibrillation requiring cardioversion 4 days postoperatively. There were no CSF leaks or wound infections.
+Correlation between Clinical Outcomes and Morphometric Measurements
+There was no significant correlation at TP = −0.5 between any clinical outcomes and morphometric measurements. At TP = 0.5, the posterior CSF area was weakly correlated with average pain and mean of intermittent pain (n = 33, r = 0.375, P = .0314; r = 0.431, P = .013, respectively), and the total dorsal CSF width was weakly correlated with average pain, mean of intermittent pain, and mean of neuropathic pain (n = 33, r = 0.39, P = .0248; r = 0.413, P = .0168; r = 0.366, P = .0362, respectively). The relative change in the KPS score had a weak negative correlation with occipital bone length (n = 28, r = −0.483, P = .0093). The relative change of the cerebellum-clivus bone angle was weakly associated with the mean of affective pain (exploratory tests; n = 28, r = 0.407, P = .0314).
+The Online Supplemental Data contain detailed statistical results like LS-means, 95% confidence intervals, and P values from the Dunnett multiple comparisons for morphometric measurements and clinical variables.
+DISCUSSION
+This study evaluated clinical signs and symptoms and posterior fossa morphology in patients with CMI before, at 3–6 months, and then annually for 5 years after craniocervical decompression and duraplasty. Clinical symptoms improved after the operation. We used 9 previously validated morphometric measures.16 Seven of the 9 measures changed significantly between the pre- and 3- to 6 -month post-PFDD visits (Table 1).16-18,21 All changes occurred within 3–6 months after the operation, except for the CSF area posterior to the PCF, which increased 25% between 3 and 6 months and 1 year after the operation (Fig 2).
+In the present study, 60% of subjects had syringomyelia. The anterior CSF area significantly increased (27%) following PFDD surgery for the CMI with syringomyelia group, but not in the CMI-only group.16,18 Ventral CSF width combining CMI groups increased by 0.3 mm postsurgery, a statistically insignificant change.7,16 The semiautomated measurements used were more accurate than manual measurements.18
+Among the 12 clinical symptoms, the KPS score increased significantly following PFDD surgery. Average pain and all 4 pain subcategories (mean of affective pain, mean of continuous pain, mean of intermittent pain, and mean of neuropathic pain) decreased significantly following PFDD surgery. Craniectomy reduced the occipital bone length by a mean of 24 mm, or 60%. More significant length reduction correlated weakly with KPS score improvement.16,18
+The posterior CSF area doubled by 3–6 months after the operation, reached 2.5 times its preoperative size by 1 year after the operation, and remained stable thereafter.16,18 After PFDD surgery, total dorsal CSF width increased by 9–12 mm, >3.5 times its preoperative size, because of increased posterior CSF area, upward tonsillar migration, and reduced occipital bone length. The dura expanded posteriorly into the craniectomy. At TP = 0.5 postsurgery, the posterior CSF area weakly correlated with average pain and mean of intermittent pain. Total dorsal CSF width weakly correlated with average pain, mean of intermittent pain, and mean of neuropathic pain. Patients with a larger posterior CSF area after PFDD had less pain relief.
+The cerebellum-clivus bone angle decreased 3°–5° after PFDD decompression because tonsillar compression and entrapment relief allowed the inferior cerebellum to rotate posteriorly and superiorly.18 Eppelheimer et al16 reported less (2.2°) counterclockwise rotation. The change in cerebellar rotation weakly correlated with the relative change in mean affective pain.
+Limitations
+Patients infrequently did not complete functional measurement questionnaires. Clinical outcomes did not consider surgically related changes in syrinx size.2,3,17
+CONCLUSIONS
+After posterior fossa decompression, CMI symptoms and functional performance of patients improved, and their retrotonsillar CSF space enlarged. Symptomatic and MR imaging morphometric changes occurred within the first postoperative year. One year is sufficient for evaluating surgical efficacy and postoperative MR imaging changes after PFDD surgery.
+ABBREVIATIONS:
+CMI
+Chiari I malformation
+KPS
+Karnofsky Performance Scale
+LS
+least square
+PFD
+posterior fossa and foramen magnum decompression surgery
+PCF
+posterior cranial fossa
+PFDD
+PFD with dural opening and duraplasty
+RM-ANCOVA
+repeated measures ANCOVA
+RM-ANOVA
+repeated-measures ANOVA
+TP
+time point
+Footnotes
+This work was supported by the National Institutes of Health, National Institute of Neurological Disorders and Stroke, grant No. NIH-ZIANS003052-15.
+Disclosure forms provided by the authors are available with the full text and PDF of this article at www.ajnr.org.
+References
+- 
+1.
+Bolognese PA, Brodbelt A, Bloom AB, et al. Professional profiles, technical preferences, surgical opinions, and management of clinical scenarios from a panel of 63 international experts in the field of Chiari I malformation. World Neurosurg
+2020;140:e14–22
+10.1016/j.wneu.2020.03.119
+ [DOI] [PubMed] [Google Scholar]
+- 
+2.
+Milhorat TH, Chou MW, Trinidad EM, et al. Chiari I malformation redefined: clinical and radiographic findings for 364 symptomatic patients. Neurosurgery
+1999;44:1005–17
+10.1097/00006123-199905000-00042
+ [DOI] [PubMed] [Google Scholar]
+- 
+3.
+Batzdorf U. Considerations regarding decompressive surgery for Chiari malformation. World Neurosurg
+2011;75:222–23
+10.1016/j.wneu.2010.10.058
+ [DOI] [PubMed] [Google Scholar]
+- 
+4.
+Chavez A, Roguski M, Killeen A, et al. Comparison of operative and non-operative outcomes based on surgical selection criteria for patients with Chiari I malformations. J Clin Neurosci
+2014;21:2201–06
+10.1016/j.jocn.2014.06.009
+ [DOI] [PubMed] [Google Scholar]
+- 
+5.
+Arnautovic A, Splavski B, Boop FA, et al. Pediatric and adult Chiari malformation type I surgical series 1965-2013: a review of demographics, operative treatment, and outcomes. J Neurosurg Pediatr
+2015;15:161–77
+10.3171/2014.10.PEDS14295
+ [DOI] [PubMed] [Google Scholar]
+- 
+6.
+Yilmaz A, Kanat A, Musluman AM, et al. When is duraplasty required in the surgical treatment of Chiari malformation type I based on tonsillar descending grading scale?
+World Neurosurg
+2011;75:307–13
+10.1016/j.wneu.2010.09.005
+ [DOI] [PubMed] [Google Scholar]
+- 
+7.
+Bond AE, Jane JA Sr, Liu KC, et al. Changes in cerebrospinal fluid flow assessed using intraoperative MRI during posterior fossa decompression for Chiari malformation. J Neurosurg
+2015;122:1068–75
+10.3171/2015.1.JNS132712
+ [DOI] [PubMed] [Google Scholar]
+- 
+8.
+Cui LG, Jiang L, Zhang HB, et al. Monitoring of cerebrospinal fluid flow by intraoperative ultrasound in patients with Chiari I malformation. Clin Neurol Neurosurg
+2011;113:173–76
+10.1016/j.clineuro.2010.10.011
+ [DOI] [PubMed] [Google Scholar]
+- 
+9.
+Milhorat TH, Bolognese PA. Tailored operative technique for Chiari type I malformation using intraoperative color Doppler ultrasonography. Neurosurgery
+2003;53:899–905; discussion 905–06
+10.1227/01.neu.0000083591.22113.cb
+ [DOI] [PubMed] [Google Scholar]
+- 
+10.
+De Vlieger J, Dejaegher J, Van Calenbergh F. Posterior fossa decompression for Chiari malformation type I: clinical and radiological presentation, outcome and complications in a retrospective series of 105 procedures. Acta Neurol Belg
+2019;119:245–52
+10.1007/s13760-019-01086-7
+ [DOI] [PubMed] [Google Scholar]
+- 
+11.
+Giammattei L, Messerer M, Daniel RT, et al. Long-term outcome of surgical treatment of Chiari malformation without syringomyelia. J Neurosurg Sci
+2020;64:364–68
+10.23736/S0390-5616.17.04063-2
+ [DOI] [PubMed] [Google Scholar]
+- 
+12.
+Mueller D, Oro JJ. Prospective analysis of self-perceived quality of life before and after posterior fossa decompression in 112 patients with Chiari malformation with or without syringomyelia. Neurosurg Focus
+2005;18:1–6
+10.3171/foc.2005.18.2.11
+ [DOI] [PubMed] [Google Scholar]
+- 
+13.
+Nikoobakht M, Shojaei H, Gerszten PC, et al. Craniometrical imaging and clinical findings of adult Chiari malformation type 1 before and after posterior fossa decompression surgery with duraplasty. Br J Neurosurg
+2019;33:481–85
+10.1080/02688697.2019.1617407
+ [DOI] [PubMed] [Google Scholar]
+- 
+14.
+Gilmer HS, Xi M, Young SH. Surgical decompression for Chiari malformation type I: an age-based outcomes study based on the Chicago Chiari Outcome Scale. World Neurosurg
+2017;107:285–90
+10.1016/j.wneu.2017.07.162
+ [DOI] [PubMed] [Google Scholar]
+- 
+15.
+Klekamp J, Batzdorf U, Samii M, et al. The surgical treatment of Chiari I malformation. Acta Neurochir (Wien)
+1996;138:788–801
+10.1007/BF01411256
+ [DOI] [PubMed] [Google Scholar]
+- 
+16.
+Eppelheimer MS, Biswas D, Braun AM, et al. Quantification of changes in brain morphology following posterior fossa decompression surgery in women treated for Chiari malformation type 1. Neuroradiology
+2019;61:1011–22
+10.1007/s00234-019-02206-z
+ [DOI] [PubMed] [Google Scholar]
+- 
+17.
+Heiss JD, Patronas N, DeVroom HL, et al. Elucidating the pathophysiology of syringomyelia. J Neurosurg
+1999;91:553–62
+10.3171/jns.1999.91.4.0553
+ [DOI] [PubMed] [Google Scholar]
+- 
+18.
+Heiss JD, Suffredini G, Bakhtian KD, et al. Normalization of hindbrain morphology after decompression of Chiari malformation type I. J Neurosurg
+2012;117:942–46
+10.3171/2012.8.JNS111476
+ [DOI] [PMC free article] [PubMed] [Google Scholar]
+- 
+19.
+Quon JL, Grant RA, DiLuna ML. Multimodal evaluation of CSF dynamics following extradural decompression for Chiari malformation type I. J Neurosurg Spine
+2015;22:622–30
+10.3171/2014.10.SPINE1433
+ [DOI] [PubMed] [Google Scholar]
+- 
+20.
+Noudel R, Gomis P, Sotoares G, et al. Posterior fossa volume increase after surgery for Chiari malformation type I: a quantitative assessment using magnetic resonance imaging and correlations with the treatment response. J Neurosurg
+2011;115:647–58
+10.3171/2010.11.JNS102148
+ [DOI] [PubMed] [Google Scholar]
+- 
+21.
+Khalsa SS, Siu A, DeFreitas TA, et al. Comparison of posterior fossa volumes and clinical outcomes after decompression of Chiari malformation type I. J Neurosurg Pediatr
+2017;19:511–17
+10.3171/2016.11.PEDS16263
+ [DOI] [PubMed] [Google Scholar]
+- 
+22.
+Biswas D, Eppelheimer MS, Houston JR, et al. Quantification of cerebellar crowding in type I Chiari malformation. Ann Biomed Eng
+2019;47:731–43
+10.1007/s10439-018-02175-z
+ [DOI] [PubMed] [Google Scholar]
+- 
+23.
+Gupta SK, Gahlot S, Singh R, et al. Spinal tumors and tumor-like masses: relevance of initial imaging, Karnofsky performance status, age, location, and cord edema. J Clin Imaging Sci
+2019;9:21
+10.25259/JCIS-24-2019
+ [DOI] [PMC free article] [PubMed] [Google Scholar]
+- 
+24.
+Melzack R. The short-form McGill Pain Questionnaire. Pain
+1987;30:191–97 n 10.1016/0304-3959(87)91074-8
+ [DOI] [PubMed] [Google Scholar]
+- 
+25.
+McCormick PC, Torres R, Post KD, et al. Intramedullary ependymoma of the spinal cord. J Neurosurg
+1990;72:523–32
+10.3171/jns.1990.72.4.0523
+ [DOI] [PubMed] [Google Scholar]
+- 
+26.
+Ditunno JF Jr, Young W, Donovan WH, et al. The international standards booklet for neurological and functional classification of spinal cord injury: American Spinal Injury Association. Paraplegia
+1994;32:70–80
+ [DOI] [PubMed] [Google Scholar]
+- 
+27.
+Caro CC, Mendes PV, Costa JD, et al. Independence and cognition post-stroke and its relationship to burden and quality of life of family caregivers. Top Stroke Rehabil
+2017;24:194–99
+10.1080/10749357.2016.1234224
+ [DOI] [PubMed] [Google Scholar]
+- 
+28.
+Aliaga L, Hekman KE, Yassari R, et al. A novel scoring system for assessing Chiari malformation type I treatment outcomes. Neurosurgery
+2012;70:656–64; discussion 664–65
+10.1227/NEU.0b013e31823200a6
+ [DOI] [PMC free article] [PubMed] [Google Scholar]
+ACTIONS
+- 
+ View on publisher site
+- 
+ PDF (2.2 MB)
+- 
+ Cite
+- 
+ Collections
+- 
+ Permalink
+PERMALINK
+ Copy
+RESOURCES
+ Similar articles
+ Cited by other articles
+ Links to NCBI Databases
+Cite
+- 
+ Copy
+- 
+ Download .nbib
+ .nbib
+- 
+ Format:
+ AMA
+ APA
+ MLA
+ NLM
+Add to Collections
+ Create a new collection
+ Add to an existing collection
+ Name your collection
+ *
+ Choose a collection
+ Unable to load your collection due to an error
+ Please try again
+ Add
+ Cancel
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+ Back to Top

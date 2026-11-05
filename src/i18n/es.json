@@ -218,6 +218,7 @@
     "personalProject": "Un proyecto personal de Matthew Borgfeld.",
     "moreNavLabel": "Más",
     "links": {
+      "children": "Cómo ayudar a su hijo",
       "support": "Apoyo",
       "kit": "Kit de concientización",
       "impact": "Impacto",
@@ -431,15 +432,48 @@
       "title": "¿Por qué toser puede provocar un dolor de cabeza?",
       "text": [
         "Al toser, la presión en el pecho sube por un momento, y eso empuja algo de líquido cefalorraquídeo desde la columna hacia la cabeza. Normalmente, después vuelve a bajar.",
-        "Una explicación es que, en algunas personas con Chiari I, las amígdalas cerebelosas bajas estorban el paso del líquido cuando vuelve a bajar, y justo después de toser son empujadas más hacia abajo, dentro de la abertura.",
-        "Los investigadores no están de acuerdo en cómo funciona esto, ni en si es la razón por la que toser puede provocar el dolor de cabeza clásico. No todas las personas con Chiari tienen estos dolores de cabeza."
+        "Una explicación es que, en algunas personas con Chiari I, las amígdalas cerebelosas bajas estorban el paso del líquido cuando vuelve a bajar, por lo que justo después de toser son empujadas más hacia abajo, dentro de la abertura.",
+        "No todos los investigadores están de acuerdo en cómo funciona esto, ni en si es la razón por la que toser puede provocar el dolor de cabeza clásico. No todas las personas con Chiari tienen estos dolores de cabeza."
       ],
       "button": "Toser",
       "caption": "Animación simplificada.",
       "up": "Al toser: algo de líquido cefalorraquídeo sube desde la columna hacia la cabeza.",
       "back": "Después vuelve a bajar."
     },
-    "sizeNote": "El límite habitual, unos 5 mm, es medio centímetro, más o menos la altura de 3 monedas de 25 centavos de EE. UU. apiladas. El modelo muestra unos 12 mm, algo más de 1 centímetro, más o menos la altura de 7 de esas monedas apiladas. Lo que bajan las amígdalas cerebelosas no siempre coincide con cómo se siente una persona."
+    "sizeNote": "El límite habitual, unos 5 mm, es medio centímetro, más o menos la altura de 3 monedas de 25 centavos de EE. UU. apiladas. El modelo muestra unos 12 mm, algo más de 1 centímetro, más o menos la altura de 7 de esas monedas apiladas. Lo que bajan las amígdalas cerebelosas no siempre coincide con cómo se siente una persona.",
+    "surgery": {
+      "title": "Qué pasa en la cirugía, paso a paso",
+      "intro": "No todos los cirujanos hacen la misma operación. Algunos solo retiran hueso, otros también abren la membrana que cubre el cerebro y colocan un parche, y otros además reducen las amígdalas cerebelosas. Esto muestra una versión común. Su cirujano puede decirle qué pasos se aplican en su caso.",
+      "play": "Reproducir",
+      "pause": "Pausa",
+      "back": "Atrás",
+      "next": "Siguiente",
+      "stop": "Mostrar la vista habitual",
+      "stepLabel": "Paso {n} de {total}",
+      "steps": [
+        {
+          "title": "Antes de la cirugía",
+          "text": "En Chiari I, las amígdalas cerebelosas se extienden por debajo de la abertura en la base del cráneo. Esto puede reducir el espacio por donde fluye el líquido cefalorraquídeo."
+        },
+        {
+          "title": "La incisión",
+          "text": "La persona está dormida con anestesia. El cirujano hace un corte por el centro de la parte de atrás de la cabeza y la parte alta del cuello, y aparta los músculos para llegar al hueso."
+        },
+        {
+          "title": "Hueso retirado",
+          "text": "Se retira un pequeño trozo de hueso de la parte de atrás de la abertura del cráneo y, a menudo, la parte de atrás del primer hueso del cuello (vértebra), para hacer más espacio."
+        },
+        {
+          "title": "El parche",
+          "text": "A menudo el cirujano también abre la membrana protectora del cerebro (la duramadre) y cose un parche, como cuando se suelta la cintura de un pantalón, para dar más espacio al líquido cefalorraquídeo. Luego se cierran los músculos y la piel."
+        },
+        {
+          "title": "Después",
+          "text": "En los estudios de imagen después de la cirugía, el espacio del líquido detrás del cerebelo a menudo es más grande, y las amígdalas cerebelosas a menudo suben solo en parte."
+        }
+      ],
+      "caption": "Animación simplificada. La línea de la incisión es aproximada; su longitud varía."
+    }
   },
   "evidence": {
     "inEnglish": "Estas notas están en inglés, igual que las fuentes que citan.",
@@ -544,6 +578,137 @@
             "checked": true
           }
         ]
+      },
+      {
+        "id": "surgeryBefore",
+        "title": "Antes de la cirugía",
+        "folded": true,
+        "questions": [
+          {
+            "id": "why",
+            "text": "¿Por qué me recomienda la cirugía, y cuáles son los beneficios y los riesgos para mí?",
+            "checked": false
+          },
+          {
+            "id": "steps",
+            "text": "¿Qué pasos incluirá mi cirugía? Por ejemplo, ¿solo retirará hueso, o también abrirá la membrana que cubre el cerebro y colocará un parche?",
+            "checked": false
+          },
+          {
+            "id": "length",
+            "text": "¿Cuánto durará la cirugía y cuánto tiempo estaré en el hospital?",
+            "checked": false
+          },
+          {
+            "id": "eating",
+            "text": "¿Cuándo debo dejar de comer y beber antes de la cirugía?",
+            "checked": false
+          },
+          {
+            "id": "icu",
+            "text": "¿Pasaré tiempo en cuidados intensivos después de la cirugía?",
+            "checked": false
+          },
+          {
+            "id": "parentStay",
+            "text": "Para un niño: ¿puede uno de los padres quedarse durante la noche y estar presente cuando despierte?",
+            "checked": false
+          },
+          {
+            "id": "comfortItem",
+            "text": "Para un niño: ¿puede llevar su peluche o cobija favorita al quirófano?",
+            "checked": false
+          },
+          {
+            "id": "pain",
+            "text": "¿Cómo se controlará mi dolor después de la cirugía?",
+            "checked": false
+          },
+          {
+            "id": "medicines",
+            "text": "¿Debo dejar de tomar o cambiar alguno de mis medicamentos antes de la cirugía?",
+            "checked": false
+          },
+          {
+            "id": "back",
+            "text": "¿Cuándo puedo volver a la escuela, al trabajo o a mis actividades habituales?",
+            "checked": false
+          },
+          {
+            "id": "again",
+            "text": "¿Podría necesitar otra cirugía más adelante?",
+            "checked": false
+          }
+        ]
+      },
+      {
+        "id": "surgeryHome",
+        "title": "Antes de salir del hospital",
+        "folded": true,
+        "questions": [
+          {
+            "id": "call",
+            "text": "¿En qué casos debo llamarle o volver al hospital?",
+            "checked": false
+          },
+          {
+            "id": "incision",
+            "text": "¿Cómo cuido mi incisión y cuándo puedo ducharme?",
+            "checked": false
+          },
+          {
+            "id": "homeMedicines",
+            "text": "¿Qué medicamentos debo tomar en casa y por cuánto tiempo?",
+            "checked": false
+          },
+          {
+            "id": "limits",
+            "text": "¿Qué debo evitar y por cuánto tiempo? ¿Cuándo puedo levantar cosas, manejar o hacer deporte?",
+            "checked": false
+          },
+          {
+            "id": "whoToCall",
+            "text": "¿A quién llamo si tengo preguntas, también de noche y los fines de semana?",
+            "checked": false
+          },
+          {
+            "id": "followupVisit",
+            "text": "¿Cuándo es mi cita de seguimiento y necesitaré otra resonancia magnética?",
+            "checked": false
+          }
+        ]
+      },
+      {
+        "id": "surgeryAfter",
+        "title": "Seguimiento después de la cirugía",
+        "folded": true,
+        "questions": [
+          {
+            "id": "expected",
+            "text": "¿Mi recuperación va como se esperaba?",
+            "checked": false
+          },
+          {
+            "id": "improve",
+            "text": "¿Cuáles de mis síntomas es probable que mejoren, y cuánto podría tardar?",
+            "checked": false
+          },
+          {
+            "id": "scans",
+            "text": "¿Necesito más estudios de imagen para revisar el espacio del líquido, o mi siringe si la tengo?",
+            "checked": false
+          },
+          {
+            "id": "activities",
+            "text": "¿Ya puedo volver a todas mis actividades habituales?",
+            "checked": false
+          },
+          {
+            "id": "therapy",
+            "text": "¿Me ayudaría la fisioterapia u otro especialista?",
+            "checked": false
+          }
+        ]
       }
     ],
     "addOwn": "Agregue su propia pregunta",
@@ -566,7 +731,32 @@
     "pageNote": "No es consejo médico. Lo que elija en esta página nunca se guarda ni se envía.",
     "sheetMeta": "Malformación de Chiari · Fecha: ____________ · Médico: ______________________",
     "sheetFooter": "Hecho con Open Chiari · openchiari.org · No es consejo médico",
-    "diagramCaption": "Chiari I. Las amígdalas cerebelosas se muestran en su punto más bajo, donde se miden en la resonancia magnética. Ilustración, no es una imagen médica."
+    "diagramCaption": "Chiari I. Las amígdalas cerebelosas se muestran en su punto más bajo, donde se miden en la resonancia magnética. Ilustración, no es una imagen médica.",
+    "pack": {
+      "title": "Qué llevar para una estadía en el hospital",
+      "intro": "Es posible que su hospital le envíe su propia lista. Siga primero la del hospital.",
+      "items": [
+        "Tarjeta del seguro médico e identificación con foto",
+        "Documentos de custodia, si corresponde",
+        "Sus medicamentos o una lista de ellos (pregunte en el hospital cuáles llevar)",
+        "Lentes, aparatos auditivos, una máquina CPAP u otro equipo que use",
+        "Cepillo de dientes y otros artículos de aseo",
+        "Ropa cómoda para volver a casa",
+        "Pantuflas antideslizantes",
+        "Teléfono y cargadores",
+        "Libros, una tableta o juegos, y audífonos para escuchar",
+        "Para un niño: su cobija o peluche favorito",
+        "Para los padres: refrigerios y una botella de agua",
+        "Su hoja de preguntas de esta página"
+      ],
+      "print": "Imprimir la lista",
+      "formLabel": "Lista de cosas para llevar"
+    },
+    "child": {
+      "before": "¿Está preparando a un niño para la cirugía? Vea",
+      "link": "Cómo ayudar a su hijo",
+      "after": "."
+    }
   },
   "support": {
     "title": "Apoye a los grupos que hacen el trabajo",
@@ -626,7 +816,43 @@
         "text": "Ayude hoy a una persona a entender Chiari."
       }
     ],
-    "notAffiliated": "Open Chiari no está afiliado a estas organizaciones y no recibe nada de las donaciones. Sus sitios web pueden estar solo en inglés."
+    "notAffiliated": "Open Chiari no está afiliado a estas organizaciones y no recibe nada de las donaciones. Sus sitios web pueden estar solo en inglés.",
+    "connect": {
+      "title": "Conectar con otras personas",
+      "intro": "Hablar con personas que han pasado por lo mismo puede ayudar. Estas comunidades las dirigen otras organizaciones, no Open Chiari, y aparecer aquí no es una recomendación. Lo que comparten estos sitios y sus miembros no lo revisa Open Chiari y no es consejo médico.",
+      "privacy": "Antes de publicar, lea la política de privacidad de cada sitio. En algunos sitios, cualquier persona en internet puede leer las publicaciones.",
+      "groups": [
+        {
+          "id": "bensfriends",
+          "name": "Chiari Support (Ben's Friends)",
+          "kind": "Foro en línea, en inglés",
+          "text": "Un foro de apoyo para pacientes, familias y amigos, parte de Ben's Friends, una red de comunidades de pacientes con enfermedades raras. Los miembros pueden tener desde 12 años.",
+          "link": "Visitar Chiari Support"
+        },
+        {
+          "id": "inspire",
+          "name": "Comunidad de apoyo de Bobby Jones CSF",
+          "kind": "Comunidad en línea en Inspire, en inglés",
+          "text": "Una comunidad en línea para pacientes y familias que viven con malformación de Chiari, siringomielia y trastornos relacionados. Bobby Jones CSF dice que usted decide qué tan anónimo quiere ser.",
+          "link": "Visitar la comunidad"
+        },
+        {
+          "id": "asap",
+          "name": "Grupos de apoyo de ASAP",
+          "kind": "Por video, por teléfono y en persona, en inglés",
+          "text": "Grupos de apoyo mensuales por Zoom, grupos de apoyo mensuales por teléfono y ayuda para encontrar un grupo local que se reúne en persona.",
+          "link": "Buscar un grupo"
+        },
+        {
+          "id": "femacpa",
+          "name": "FEMACPA (España)",
+          "kind": "En español",
+          "text": "La federación española de asociaciones de pacientes con Chiari. Ofrece apoyo después del diagnóstico.",
+          "link": "Visitar FEMACPA"
+        }
+      ],
+      "checked": "Enlaces revisados en noviembre de 2026."
+    }
   },
   "about": {
     "title": "Acerca de Open Chiari",
@@ -710,7 +936,7 @@
       },
       {
         "term": "Su cámara",
-        "text": "\"Véalo en su habitación\" usa la cámara de su teléfono solo en el propio teléfono. La imagen nunca sale de su dispositivo y el sitio nunca la ve."
+        "text": "El sitio nunca recibe la imagen de la cámara de \"Véalo en su habitación\"; la función de realidad aumentada de su propio teléfono se encarga de ella."
       },
       {
         "term": "Información de salud",
@@ -718,7 +944,7 @@
       }
     ],
     "savedTitle": "Lo que se guarda en su dispositivo",
-    "saved": "El modo tranquilo, el modo oscuro y el idioma que elija se recuerdan en su propio navegador, para que sigan así la próxima vez. Para que el sitio también funcione sin señal, su navegador guarda una copia de sus páginas y archivos; no contiene nada de lo que usted escriba o elija. Si borra los datos de su navegador, todo esto se elimina. Nada de esto se envía nunca al sitio.",
+    "saved": "El modo tranquilo y el modo oscuro se recuerdan en su propio navegador, para que sigan así la próxima vez. Para que el sitio también funcione sin señal, su navegador guarda una copia de sus páginas y archivos; no contiene nada de lo que usted escriba o elija. Si borra los datos de su navegador, todo esto se elimina. Nada de esto se envía nunca al sitio.",
     "outsideTitle": "Servicios externos",
     "outside": [
       {
@@ -813,7 +1039,9 @@
     "creditIntro": "Mantenga esta línea dondequiera que use el modelo, y comparta cualquier versión modificada con la misma licencia.",
     "creditLine": "Modelo de Chiari de Open Chiari (openchiari.org), CC BY-SA 4.0, adaptado de Z-Anatomy (CC BY-SA 4.0) y BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 JP)",
     "footnote": "No es consejo médico. Ilustraciones con fines educativos, no son imágenes médicas.",
-    "copied": "Copiado"
+    "copied": "Copiado",
+    "citeLabel": "Cómo citarlo",
+    "cite": "Borgfeld M. Open Chiari: an open 3D anatomy model of Chiari malformation type I. Zenodo. doi:"
   },
   "embed": {
     "exploreFull": "Explorar el modelo 3D completo"
@@ -1051,5 +1279,128 @@
     "orgsText": "¿Necesita el kit con sus colores o una versión para un evento en particular? Escríbanos y se lo hacemos, gratis.",
     "contact": "Contactar a Open Chiari",
     "license": "Los gráficos del kit se pueden usar y compartir libremente, CC BY-SA 4.0. Los gráficos que muestran el modelo 3D también llevan el crédito de Z-Anatomy y BodyParts3D."
+  },
+  "children": {
+    "title": "Cómo ayudar a su hijo con la cirugía de Chiari",
+    "navLabel": "Cómo ayudar a su hijo",
+    "intro": "Ideas de hospitales infantiles para preparar a un niño, un cuento con dibujos para leer juntos, una página para colorear y una hoja para la escuela. Nada de lo que escriba aquí se guarda ni se envía.",
+    "ready": {
+      "title": "Prepararse juntos",
+      "tips": [
+        {
+          "lead": "Hable con honestidad, con palabras que su hijo conozca.",
+          "text": "Los niños más pequeños suelen necesitar menos detalles que los mayores. Los adolescentes quizá quieran saber más y participar en las decisiones."
+        },
+        {
+          "lead": "Explique el porqué.",
+          "text": "La cirugía es para ayudar a que una parte de su cuerpo haga su trabajo."
+        },
+        {
+          "lead": "Llámelo un sueño especial.",
+          "text": "La medicina para la cirugía da un sueño especial, así que no verá, oirá ni sentirá nada, y el equipo médico lo despertará cuando termine. Evite decir \"lo van a dormir\": algunos niños conocen esa frase por mascotas que nunca despertaron."
+        },
+        {
+          "lead": "No prometa \"nada de dolor\" ni \"nada de agujas\".",
+          "text": "En cambio, dígale que las enfermeras y los médicos tienen medicinas y maneras de ayudar."
+        },
+        {
+          "lead": "Está bien decir \"no sé\".",
+          "text": "Anote la pregunta y háganla juntos al equipo médico."
+        },
+        {
+          "lead": "Acepte sus sentimientos.",
+          "text": "Dígale que está bien sentir miedo, o incluso enojo."
+        },
+        {
+          "lead": "Prepárese para posibles cambios.",
+          "text": "A veces la cirugía se retrasa o se cancela por emergencias."
+        },
+        {
+          "lead": "Lleve algo de casa.",
+          "text": "Su cobija o peluche favorito puede ayudar. Pregunte si su hijo puede llevarlo al quirófano."
+        },
+        {
+          "lead": "Jueguen y dibujen juntos.",
+          "text": "Representar una visita al hospital con juguetes, o dibujarla, puede mostrarle cómo se siente su hijo."
+        },
+        {
+          "lead": "Pregunte si el hospital tiene un especialista en vida infantil (child life).",
+          "text": "Están capacitados para hablar con los niños de una manera reconfortante."
+        },
+        {
+          "lead": "Cuídese usted también.",
+          "text": "Los niños perciben cómo se siente usted. Acepte la ayuda que le ofrezcan. Hablar con un consejero o un trabajador social también puede ayudar."
+        }
+      ],
+      "source": "Adaptado de SickKids AboutKidsHealth y Nemours KidsHealth."
+    },
+    "story": {
+      "title": "Un cuento con dibujos para leer juntos",
+      "intro": "Léalo con su hijo y sáltese las páginas que quiera. Cambie las palabras que haga falta para que coincidan con lo que le diga su equipo médico.",
+      "pageLabel": "Página {n}",
+      "pages": [
+        {
+          "figure": "typical",
+          "text": "Este es un dibujo del interior de una cabeza y un cuello, como si pudiéramos mirar desde un lado."
+        },
+        {
+          "figure": "typical",
+          "text": "Tu cerebro está dentro de tu cráneo. Cerca de la parte de atrás hay una parte que se llama cerebelo. Te ayuda a mantener el equilibrio y a moverte con suavidad. Tu cerebro y tu médula espinal están protegidos por un líquido transparente."
+        },
+        {
+          "figure": "chiari",
+          "text": "En Chiari, la parte de abajo del cerebelo baja un poco más de lo normal, por la abertura donde el cráneo se une con el cuello. Ahí no hay suficiente espacio. Tú no hiciste nada para causarlo."
+        },
+        {
+          "figure": "surgery",
+          "text": "Los médicos pueden hacer más espacio. Durante la cirugía tendrás un sueño especial gracias a una medicina, así que no verás, oirás ni sentirás nada. El cirujano quita un pedacito de hueso de la parte de atrás de la cabeza y, a menudo, un poco de la parte de arriba del cuello. Muchas veces también pone un parche para hacer más espacio."
+        },
+        {
+          "figure": "",
+          "text": "Cuando despiertes, es posible que te duela la parte de atrás de la cabeza y del cuello. Tus enfermeras y médicos tienen medicinas para ayudarte. Te quedarás en el hospital hasta que tus médicos digan que ya puedes volver a casa. Los adultos que te cuidan te dirán más o menos cuánto tiempo, y estarán contigo todo lo que puedan. Puedes llevar tu cobija o peluche favorito."
+        },
+        {
+          "figure": "",
+          "text": "Después descansarás en casa un tiempo antes de volver a la escuela. Puedes hacer preguntas cuando quieras. Todas las preguntas son buenas."
+        }
+      ],
+      "print": "Imprimir el cuento"
+    },
+    "color": {
+      "title": "Para colorear",
+      "intro": "Dos dibujos para imprimir y colorear: antes y después de la cirugía.",
+      "before": "Antes de la cirugía",
+      "after": "Después de la cirugía",
+      "key": "Colores sugeridos (cualquier color está bien): hueso, cerebro, médula espinal, el líquido transparente.",
+      "print": "Imprimir la página para colorear"
+    },
+    "school": {
+      "title": "Una hoja para la escuela",
+      "intro": "Llene lo que quiera y luego imprímala para un maestro o la enfermera de la escuela. Todos los campos son opcionales.",
+      "name": "Nombre de pila del niño",
+      "forWhom": "Para",
+      "forHint": "Maestro o enfermera de la escuela",
+      "date": "Fecha de la cirugía",
+      "timeAway": "Tiempo previsto fuera de la escuela",
+      "limits": "Límites indicados por el cirujano (por ejemplo, deportes, educación física, levantar peso)",
+      "careTeamHint": "Según el equipo médico",
+      "helps": "Cosas que pueden ayudar cuando regrese",
+      "helpItems": [
+        "Pausas para descansar",
+        "Un pase para ir con la enfermera",
+        "Más tiempo para el trabajo atrasado",
+        "Ayuda para cargar libros o una mochila pesada"
+      ],
+      "other": "Otro",
+      "contact": "Contacto de los padres o cuidadores",
+      "sheetTitle": "Sobre la cirugía de Chiari de {name}",
+      "sheetTitleDefault": "Sobre la cirugía de Chiari de mi hijo",
+      "lead": "{name} va a tener, o ya tuvo, una cirugía por malformación de Chiari tipo I.",
+      "leadDefault": "Mi hijo va a tener, o ya tuvo, una cirugía por malformación de Chiari tipo I.",
+      "explain": "En Chiari I, la parte más baja de la parte de atrás del cerebro se extiende por debajo de la abertura en la base del cráneo. La cirugía hace más espacio ahí.",
+      "print": "Imprimir la hoja para la escuela",
+      "callIf": "Por favor llámeme de inmediato si"
+    },
+    "pageNote": "No es consejo médico. Nada de lo que escriba en esta página se guarda ni se envía."
   }
 }

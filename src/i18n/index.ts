@@ -26,6 +26,7 @@ export const routes = {
   compare: '/explorer/compare/',
   studies: '/studies/',
   prep: '/prep/',
+  children: '/children/',
   model: '/model/',
   support: '/support/',
   kit: '/kit/',
@@ -58,6 +59,8 @@ export function otherLanguagePath(pathname: string): string {
 export const externalLinks = {
   ninds: 'https://www.ninds.nih.gov/publications/chiari-malformation',
   zAnatomy: 'https://github.com/Z-Anatomy/Models-of-human-anatomy',
+  // The model's permanent record on Zenodo; this DOI always points to the newest version.
+  zenodoDoi: '10.5281/zenodo.23983232',
   // Support page: each organization's own pages (from the Support mockup; confirm with each before launch)
   bjcsfDonate: 'https://bobbyjonescsf.org/donate-online/',
   bjcsfRegistry: 'https://bobbyjonescsf.org/keytoacure/',
@@ -70,6 +73,12 @@ export const externalLinks = {
   // when the list isn't available).
   // The code, public since November 5, 2026.
   repository: 'https://github.com/ARCFrontierSystems/OpenChiari',
+  // Support page, "Connect with others": communities run by others (checked Nov 2026; sources in
+  // docs/audits/sources/2026-11-05-communities/). The Inspire address is the one Bobby Jones CSF links to.
+  bensFriends: 'https://chiarisupport.org/',
+  bjcsfInspire: 'https://www.inspire.com/groups/chiari-syringomyelia/',
+  asapSupport: 'https://asap.org/find-support/',
+  femacpa: 'https://femacpa.com/quienes-somos',
   ctgov: 'https://clinicaltrials.gov',
   ctgovSearch: 'https://clinicaltrials.gov/search?cond=Chiari%20OR%20Syringomyelia&aggFilters=status:rec',
   ctgovStudy: 'https://clinicaltrials.gov/study/',

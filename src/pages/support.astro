@@ -14,6 +14,12 @@ const links: Record<string, { donate: string; second: string }> = {
   conquer: { donate: externalLinks.conquerDonate, second: externalLinks.conquerInfo },
   asap: { donate: externalLinks.asapDonate, second: externalLinks.asapInfo },
 };
+const groupHref: Record<string, string> = {
+  bensfriends: externalLinks.bensFriends,
+  inspire: externalLinks.bjcsfInspire,
+  asap: externalLinks.asapSupport,
+  femacpa: externalLinks.femacpa,
+};
 const otherHref: Record<string, string> = { studies: routes.studies, kit: routes.kit, explain: routes.explain };
 ---
 
@@ -40,6 +46,22 @@ const otherHref: Record<string, string> = { studies: routes.studies, kit: routes
       ))}
     </ul>
     <p class="checked only-wide">{t.checked}</p>
+
+    <section class="connect" id="connect" aria-labelledby="connect-title">
+      <h2 id="connect-title" class="serif">{t.connect.title}</h2>
+      <p class="connect-intro">{t.connect.intro}</p>
+      <ul>
+        {t.connect.groups.map((g) => (
+          <li>
+            <p class="kind mono">{g.kind}</p>
+            <h3>{g.name}</h3>
+            <p>{g.text}</p>
+            <a href={groupHref[g.id]} hreflang={g.id === 'femacpa' ? 'es' : undefined}>{g.link}</a>
+          </li>
+        ))}
+      </ul>
+      <p class="connect-note">{t.connect.privacy} {t.connect.checked}</p>
+    </section>
 
     <section class="other" aria-labelledby="other-title">
       <h2 id="other-title" class="serif">{t.otherTitle}</h2>
@@ -156,6 +178,56 @@ const otherHref: Record<string, string> = { studies: routes.studies, kit: routes
   }
   .other p {
     color: var(--ink-2);
+  }
+  .connect h2 {
+    font-size: 28px;
+    padding-bottom: var(--s-16);
+    border-bottom: 2px solid var(--ink);
+  }
+  .connect-intro {
+    max-width: 760px;
+    margin-top: var(--s-16);
+    color: var(--ink-2);
+  }
+  .connect ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--s-24);
+    margin-top: var(--s-16);
+  }
+  .connect li {
+    padding: var(--s-16);
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-8);
+  }
+  .connect h3 {
+    font-size: 19px;
+    line-height: 1.25;
+  }
+  .connect li p {
+    color: var(--ink-2);
+  }
+  .connect .kind {
+    font-size: var(--text-mono);
+    color: var(--muted);
+  }
+  .connect li a {
+    margin-top: auto;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    font-weight: 500;
+  }
+  .connect-note {
+    margin-top: var(--s-16);
+    font-size: var(--text-small);
+    color: var(--muted);
   }
   .not-affiliated {
     border-top: 1px solid var(--rule);

@@ -997,16 +997,16 @@ Non-medical, approved with the check-up fixes ("All approved, and fix the rest o
 - Impact, Accuracy checks value: November 5, 2026 · passed (after the Nov 5 re-audit fixes, `docs/audits/2026-11-05-wording-reaudit.md`). Spanish: 5 de noviembre de 2026 · superadas.
 - About, "How the content is made": "…and other published sources, listed in the [evidence notes](/evidence/)." (the words "evidence notes" link to the page).
 
-## New features, release 1 (2026-11-05): wording pending Matthew's approval
+## New features, release 1 (2026-11-05): approved by Matthew ("Approved")
 
-Non-medical. Shown to Matthew with screenshots before publishing.
+Non-medical. Shown to Matthew with screenshots; approved and published 2026-11-05.
 
 - Header: Dim (screen-reader name: "Dim mode: dark colors, less light"). Spanish: Modo oscuro.
 - Listen / Stop (tooltip: "Listen: your device reads this part aloud"). Spanish: Escuchar / Detener.
 - Explain It: Picture; "The picture was saved to your downloads." Spanish: Imagen; "La imagen se guardó en sus descargas."
 - Privacy, "Saved on your device" (replaces the earlier text): Calm mode, Dim mode and your language choice are remembered in your own browser so they stay on next time. So the site also works without a signal, your browser keeps a copy of its pages and files; nothing you type or choose is in it. Clearing your browser data removes all of this. None of it is ever sent to the site.
 
-## New features, release 2 (2026-11-05): wording pending Matthew's approval
+## New features, release 2 (2026-11-05): approved by Matthew ("Approved")
 
 Non-medical. The model shown is the existing Simple model (approved), cut at the midline like the Explorer.
 
@@ -1030,3 +1030,105 @@ After the independent audit (`docs/audits/2026-11-05-new-features-audit.md`) and
 
 Releases 1 and 2 wording above: approved by Matthew on 2026-11-05 ("Approved").
 
+## Accuracy audit 2 follow-ups (2026-11-05): approved by Matthew ("Go with your recommendations for all 3")
+
+- Privacy, "Saved on your device": now begins "Calm mode and Dim mode are remembered in your own browser…" (the language is not stored; it comes from the page address). Spanish: "El modo tranquilo y el modo oscuro se recuerdan en su propio navegador…"
+- Privacy, "Your camera": The site never receives the camera picture from "See it in your room"; your phone's own AR feature handles it.
+- 3D-printable plaques: raised lettering on a strip along the bottom edge: "Illustration, not a medical image" and "openchiari.org".
+
+
+
+## Surgery questions, packing list, Helping your child, surgery play-through, Connect with others (2026-11-05): approved by Matthew ("All approved")
+
+After the independent audits (`docs/audits/2026-11-05-surgery-and-children-audit.md`, `docs/audits/2026-11-05-surgery-steps-and-communities-audit.md`) and their fixes. EVIDENCE.md rows 23 to 28, the incision-line note and "Connect with others". Spanish: translated, pending medical-translator review.
+
+### Visit prep
+
+- **Before surgery** (starts folded, nothing ticked):
+  - Why do you recommend surgery, and what are the benefits and risks for me?
+  - Which steps will my surgery include? For example, will you remove bone only, or also open the covering of the brain and add a patch?
+  - How long will the surgery take, and how long will I stay in the hospital?
+  - When do I need to stop eating and drinking before surgery?
+  - Will I spend time in intensive care after surgery?
+  - For a child: can a parent stay overnight, and be there when they wake up?
+  - For a child: can their comfort item go into the operating room?
+  - How will my pain be managed after surgery?
+  - Should I stop or change any of my medicines before surgery?
+  - How soon can I go back to school, work or my usual activities?
+  - Could I need another surgery later?
+- **Before going home from the hospital** (starts folded, nothing ticked):
+  - What should make me call you or come back to the hospital?
+  - How do I care for my incision, and when can I shower?
+  - Which medicines should I take at home, and for how long?
+  - What should I avoid, and for how long? When can I lift things, drive or play sports?
+  - Who do I call with questions, including at night and on weekends?
+  - When is my follow-up visit, and will I need another MRI?
+- **Follow-up after surgery** (starts folded, nothing ticked):
+  - Is my recovery going as expected?
+  - Which of my symptoms are likely to get better, and how long might that take?
+  - Do I need more scans to check the fluid space, or my syrinx if I have one?
+  - Can I go back to all my usual activities now?
+  - Would physical therapy or another specialist help me?
+- Under the groups: Getting a child ready for surgery? See Helping your child.
+- **Packing for a hospital stay**: Your hospital may send its own list. Follow theirs first.
+  - Health insurance card and photo ID
+  - Custody papers, if they apply
+  - Your medicines, or a list of them (ask the hospital which to bring)
+  - Glasses, hearing aids, a CPAP machine or other equipment you use
+  - Toothbrush and other toiletries
+  - Comfortable clothes for going home
+  - Non-slip slippers
+  - Phone and chargers
+  - Books, a tablet or games, and headphones
+  - For a child: a favorite blanket or stuffed animal
+  - For the parent: snacks and a water bottle
+  - Your questions sheet from this page
+  - Button: Print packing list
+
+### Helping your child (new page, /children/; footer link "Helping your child")
+
+- Title: Helping your child through Chiari surgery
+- Intro: Ideas from children's hospitals for getting a child ready, a picture story to read together, a coloring page, and a sheet for school. Nothing you type here is saved or sent.
+- **Getting ready together**
+  - **Be honest, in words your child knows.** Younger children usually need fewer details than older kids. Teens may want to know more and to help make decisions.
+  - **Say why.** The surgery is to help a part of their body do its job.
+  - **Call it a special sleep.** The medicine for surgery gives a special sleep, so they won't see, hear or feel anything, and the care team wakes them when it's over. Avoid "put to sleep": some children know it from pets that never woke up.
+  - **Don't promise "no pain" or "no needles."** Instead, say the nurses and doctors have medicine and ways to help.
+  - **It's fine to say "I don't know."** Write the question down and ask the care team together.
+  - **Accept their feelings.** Let them know it's OK to feel scared, or even mad.
+  - **Be ready for changes.** Sometimes surgery is delayed or cancelled because of emergencies.
+  - **Bring something from home.** A favorite blanket or stuffed animal can help. Ask whether it can go into the operating room.
+  - **Play and draw it.** Acting out a hospital visit with toys, or drawing it, can show you how your child feels.
+  - **Ask if the hospital has a child life specialist.** They are trained to talk with children in a comforting way.
+  - **Look after yourself too.** Children pick up on how you feel. Accept help when it's offered. Talking with a counselor or social worker can help too.
+  - Adapted from SickKids AboutKidsHealth and Nemours KidsHealth.
+- **A picture story to read together**: Read it with your child, and skip any page you like. Change any words to match what your care team tells you.
+  1. This is a picture of the inside of a head and neck, as if we could look in from the side.
+  2. Your brain is inside your skull. Near the back is a part called the cerebellum. It helps you balance and move smoothly. Your brain and spinal cord are cushioned by a clear liquid.
+  3. In Chiari, the bottom of the cerebellum reaches down a little too low, through the opening where the skull meets the neck. There isn't quite enough room there. You didn't do anything to cause it.
+  4. Doctors can make more room. During surgery you'll be in a special sleep from medicine, so you won't see, hear or feel anything. The surgeon takes away a small piece of bone at the back of the head, and often a little from the top of the neck. Many times they also add a patch to make more space.
+  5. When you wake up, the back of your head and neck may feel sore. Your nurses and doctors have medicine to help. You'll stay in the hospital until your doctors say you're ready to go home. Your grown-up will tell you about how long, and will be with you as much as they can. You can bring your favorite blanket or stuffed animal.
+  6. Then you'll rest at home for a while before going back to school. You can ask questions anytime. Every question is a good one.
+- **Color it in**: Two drawings to print and color: before and after surgery. A suggested key (any colors are fine): bone, brain, spinal cord, the clear liquid. (Before surgery / After surgery)
+- **A sheet for school**: Fill in what you like, then print it for a teacher or the school nurse. Every box is optional. Printed: "About my child's Chiari surgery" / "My child is having, or has had, surgery for Chiari I malformation." / "In Chiari I, the lowest part of the back of the brain extends below the opening at the base of the skull. The surgery makes more room there." Boxes: Surgery date; Expected time away from school; Limits from the surgeon (for example, sports, PE, lifting); Things that may help when they're back (Rest breaks, A pass to the nurse, Extra time for missed work, Help carrying books or a heavy bag, Other); Please call me right away if; Parent or caregiver contact.
+- Page note: Not medical advice. Nothing you type on this page is stored or sent.
+
+### 3D Explorer: What happens in surgery, step by step
+
+- Surgeons don't all do the same operation. Some remove bone only, some also open the brain's covering and add a patch, and some also shrink the tonsils. This shows one common version. Your surgeon can tell you which steps apply to you.
+  1. **Before surgery.** In Chiari I, the tonsils extend below the opening at the base of the skull. This can crowd the space where spinal fluid flows.
+  2. **The incision.** The person is asleep under anesthesia. The surgeon makes a cut down the middle of the back of the head and upper neck, and moves the muscles aside to reach the bone.
+  3. **Bone removed.** A small piece of bone is removed at the back of the skull opening, and often the back of the first neck bone (vertebra), to make more room.
+  4. **The patch.** Often the surgeon also opens the brain's protective covering (the dura) and sews in a patch, like letting out a waistband, to make more room for spinal fluid. Then the muscles and skin are closed.
+  5. **Afterward.** On scans after surgery, the fluid space behind the cerebellum is often larger, and the tonsils often rise only partly.
+- Caption: Animation simplified. The incision line is approximate; its length varies. (with "Illustration, not a medical image · Tonsils shown at their lowest point, where MRI measures them")
+- Buttons: Play / Pause / Back / Next / Show the usual view
+
+### Support: Connect with others
+
+- Talking with people who have been through it can help. These communities are run by other organizations, not by Open Chiari, and being listed here isn't a recommendation. What these sites and their members share isn't checked by Open Chiari and isn't medical advice.
+  - **Chiari Support (Ben's Friends)** (Online forum): A support forum for patients, families and friends, part of Ben's Friends, a network of patient communities for rare diseases. Members can be as young as 12. (Visit Chiari Support)
+  - **Bobby Jones CSF Support Community** (Online community on Inspire): An online community for patients and families living with Chiari malformation, syringomyelia and related disorders. Bobby Jones CSF says you choose how anonymous you are. (Visit the community)
+  - **ASAP support groups** (Video, phone and in person): Monthly support groups over Zoom, monthly phone support groups, and help finding a local group that meets in person. (Find a group)
+  - **FEMACPA (Spain)** (In Spanish): The Spanish federation of Chiari patient associations. It offers support after diagnosis. (Visit FEMACPA)
+- Before you post, read each site's privacy policy. On some sites, posts can be read by anyone on the internet. Links checked November 2026.

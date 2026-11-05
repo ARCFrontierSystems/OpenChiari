@@ -9,11 +9,13 @@
  */
 
 const READABLE = 'h1, h2, h3, p, li, dt, dd, blockquote, figcaption';
+// Never read: the sender's own note on a shared link, and the English respellings (a voice would mispronounce them).
+const NEVER = '[data-listen-skip], [hidden], [aria-hidden="true"], [data-shared-note], [data-no-listen]';
 
 /** The visible text of an area, block by block (each block is read as its own sentence group). */
 function blocks(area: Element): string[] {
   const all = Array.from(area.querySelectorAll<HTMLElement>(READABLE)).filter(
-    (el) => !el.closest('[data-listen-skip], [hidden], [aria-hidden="true"]') && (el.checkVisibility?.() ?? el.offsetParent !== null),
+    (el) => !el.closest(NEVER) && (el.checkVisibility?.() ?? el.offsetParent !== null),
   );
   // Only the innermost readable blocks, so nested ones aren't read twice.
   const leaves = all.filter((el) => !all.some((other) => other !== el && el.contains(other)));
@@ -31,6 +33,11 @@ function blocks(area: Element): string[] {
 
 let current: HTMLButtonElement | null = null;
 
+/** A voice for the page's language that runs on the device (localService), if there is one. */
+function localVoice(lang: string): SpeechSynthesisVoice | undefined {
+  return window.speechSynthesis.getVoices().find((v) => v.localService && v.lang.replace('_', '-').startsWith(lang.slice(0, 2)));
+}
+
 function setPlaying(button: HTMLButtonElement, on: boolean): void {
   button.setAttribute('aria-pressed', String(on));
   const label = button.querySelector('[data-listen-label]');
@@ -46,7 +53,9 @@ export function stopSpeaking(): void {
 function speak(button: HTMLButtonElement, area: Element): void {
   stopSpeaking();
   const lang = document.documentElement.lang === 'es' ? 'es-US' : 'en-US';
-  const voice = window.speechSynthesis.getVoices().find((v) => v.lang.replace('_', '-').startsWith(lang.slice(0, 2)));
+  // Only a voice that runs on the device itself (some browsers also offer voices that send the text to a server).
+  const voice = localVoice(lang);
+  if (!voice) return;
   const parts = blocks(area);
   if (!parts.length) return;
   current = button;
@@ -55,7 +64,7 @@ function speak(button: HTMLButtonElement, area: Element): void {
     // One utterance per block: long single utterances are cut off by some browsers.
     const u = new SpeechSynthesisUtterance(text);
     u.lang = lang;
-    if (voice) u.voice = voice;
+    u.voice = voice;
     u.rate = document.documentElement.dataset.calm === 'on' ? 0.9 : 1;
     if (i === parts.length - 1) u.onend = () => current === button && stopSpeaking();
     window.speechSynthesis.speak(u);
@@ -64,10 +73,17 @@ function speak(button: HTMLButtonElement, area: Element): void {
 
 export function bindListenButtons(root: ParentNode = document): void {
   if (!('speechSynthesis' in window)) return;
+  const lang = document.documentElement.lang === 'es' ? 'es-US' : 'en-US';
+  // Voices can arrive a moment after the page loads; the buttons appear only once a voice on the device is there.
+  const show = () => {
+    if (!localVoice(lang)) return;
+    root.querySelectorAll<HTMLButtonElement>('button[data-listen]').forEach((b) => (b.hidden = false));
+  };
+  show();
+  window.speechSynthesis.addEventListener?.('voiceschanged', show);
   root.querySelectorAll<HTMLButtonElement>('button[data-listen]').forEach((button) => {
     if (button.dataset.listenBound) return;
     button.dataset.listenBound = '1';
-    button.hidden = false;
     button.addEventListener('click', () => {
       if (current === button) return stopSpeaking();
       const area = button.dataset.listen ? document.querySelector(button.dataset.listen) : button.closest('section');

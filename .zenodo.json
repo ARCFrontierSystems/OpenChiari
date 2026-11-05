@@ -1,0 +1,14 @@
+{
+  "title": "Open Chiari: an open 3D anatomy model of Chiari malformation type I",
+  "upload_type": "dataset",
+  "description": "<p>Open 3D models and figures of the head and upper neck at the midline, in four conditions: typical anatomy, Chiari malformation type I, Chiari I with a syrinx, and after decompression surgery. They were made for patient education on <a href=\"https://openchiari.org\">openchiari.org</a>.</p><p>Every shape and measurement is traced to a source in <code>docs/EVIDENCE.md</code>. The measurements are checked automatically (<code>npm run model:check</code>), and independent audits are kept in <code>docs/audits/</code>. In the Simple model, the lowest point of the cerebellar tonsils sits about 1 mm above the McRae line in the typical view and about 12 mm below it in the Chiari I view, as EVIDENCE.md states.</p><p>Included: the Simple model (glTF and Blender), the anatomy figures, 3D-printable plaques, the scripts that build and check them, and the source records and audits. A more realistic model in <code>model/realistic/</code> is still in development and has not passed the site's accuracy checks.</p><p>Illustrations, not medical images. Not medical advice. No medical professional has reviewed this work; see the site's accuracy checks.</p><p>Credit: 3D model by Open Chiari, CC BY-SA 4.0, adapted from Z-Anatomy (CC BY-SA 4.0) and BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 JP). The model and figures are CC BY-SA 4.0 (LICENSE-MODEL.md). The website code in the same archive is under the MIT License (LICENSE).</p>",
+  "creators": [{ "name": "Borgfeld, Matthew", "affiliation": "Open Chiari" }],
+  "license": "cc-by-sa-4.0",
+  "access_right": "open",
+  "keywords": ["Chiari malformation", "Chiari I", "syringomyelia", "3D anatomy", "patient education", "open educational resource"],
+  "related_identifiers": [
+    { "identifier": "https://openchiari.org", "relation": "isDocumentedBy", "resource_type": "publication-other" },
+    { "identifier": "https://github.com/Z-Anatomy/Models-of-human-anatomy", "relation": "isDerivedFrom", "resource_type": "dataset" }
+  ],
+  "language": "eng"
+}

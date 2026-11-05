@@ -59,7 +59,7 @@ const calm = getStrings(Astro.currentLocale).calm;
           </div>
         ))}
       </div>
-      <aside class="say" aria-labelledby="say-title">
+      <aside class="say" aria-labelledby="say-title" data-no-listen>
         <h3 id="say-title">{h.say.title}</h3>
         <dl>
           {h.say.items.map((item) => (

@@ -399,7 +399,8 @@ Mockup: `design/mockups/ExplainShare.dc.html`
 - Send someone a link that opens the model in this exact view, with a short note from you.
 <!-- Removed 2026-11-05: "Who is it for?" / Family / School / Work / Other / "Picks a starter note you can edit, and a plain explanation suited to them." -->
 - Your note
-- In Chiari malformation, the lowest part of the cerebellum sits below the opening where the brain meets the spinal cord. That crowds the space where spinal fluid normally flows, which can cause headaches and other symptoms. Symptoms can come and go and are often invisible.
+- In Chiari malformation, the lowest part of the cerebellum sits below the opening where the brain meets the spinal cord. That crowds the space where spinal fluid normally flows, which can cause headaches and other symptoms. Symptoms can come and go, often with few outward signs.
+<!-- 2026-11-05 (approved by Matthew after the independent source check; the shorter "often with few outward signs" keeps the note under 280 characters, awaiting Matthew's OK): was "Symptoms can come and go and are often invisible." -->
 <!-- was "This is what my doctor meant by Chiari. The low part of my brain is crowding the opening at the base of my skull, which is why coughing gives me headaches." -->
 - Sent as your message, with the link under it. Change it however you like.
 - 272 / 280
@@ -427,7 +428,8 @@ Mockup: `design/mockups/ExplainView.dc.html`
 - The lowest part of the cerebellum, the tonsils, sits below that line. The blue bracket shows how far.
 - That crowds the space where spinal fluid normally flows, which can cause headaches and other symptoms.
 - How you can help
-- Symptoms can come and go and are often invisible. Believing them, and making room for rest, helps more than you might think.
+- Symptoms can come and go, and there are often few outward signs. Believing them, and making room for rest, can mean a lot.
+<!-- 2026-11-05 (approved by Matthew after the independent source check): was "Symptoms can come and go and are often invisible. Believing them, and making room for rest, helps more than you might think." -->
 - Explore the full 3D model
 - Not medical advice. 3D model by Open Chiari, CC BY-SA 4.0, adapted from Z-Anatomy (CC BY-SA 4.0) and BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 JP).
 
@@ -740,7 +742,8 @@ Mockup: `design/mockups/Kit.dc.html`
 - openchiari.org · #ChiariAwarenessMonth
 - Square social post
 - 1080 × 1080 · PNG
-- Chiari is often invisible. Ask how you can help.
+- Chiari symptoms often don't show. Ask how you can help.
+<!-- 2026-11-05 (approved by Matthew after the independent source check): was "Chiari is often invisible. Ask how you can help." -->
 - September · Chiari Awareness Month
 - Quote card
 - Square and story sizes · PNG

@@ -764,7 +764,7 @@
     "intro": "Send someone a link that opens the model in this exact view, with a short note from you.",
     "noteLabel": "Your note",
     "noteHint": "Sent as your message, with the link under it. Change it however you like.",
-    "starterNote": "In Chiari malformation, the lowest part of the cerebellum sits below the opening where the brain meets the spinal cord. That crowds the space where spinal fluid normally flows, which can cause headaches and other symptoms. Symptoms can come and go and are often invisible.",
+    "starterNote": "In Chiari malformation, the lowest part of the cerebellum sits below the opening where the brain meets the spinal cord. That crowds the space where spinal fluid normally flows, which can cause headaches and other symptoms. Symptoms can come and go, often with few outward signs.",
     "explore": "Let them rotate and explore on their own",
     "yourLink": "Your link",
     "copy": "Copy note and link",
@@ -783,7 +783,7 @@
       "That crowds the space where spinal fluid normally flows, which can cause headaches and other symptoms."
     ],
     "helpTitle": "How you can help",
-    "help": "Symptoms can come and go and are often invisible. Believing them, and making room for rest, helps more than you might think.",
+    "help": "Symptoms can come and go, and there are often few outward signs. Believing them, and making room for rest, can mean a lot.",
     "exploreFull": "Explore the full 3D model"
   },
   "studies": {

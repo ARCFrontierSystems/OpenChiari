@@ -160,7 +160,8 @@ async function png(name, html, width, height) {
 }
 async function pdf(name, html, format) {
   await render(html, { width: 816, height: 1056 });
-  await tab.pdf({ path: join(out, name), format, printBackground: true, margin: { top: 0, right: 0, bottom: 0, left: 0 } });
+  // Tagged: the PDF keeps its structure and reading order for screen readers (Phase A, Nov 5).
+  await tab.pdf({ path: join(out, name), format, printBackground: true, tagged: true, outline: true, margin: { top: 0, right: 0, bottom: 0, left: 0 } });
   console.log('wrote', join(out, name));
 }
 

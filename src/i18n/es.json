@@ -915,8 +915,8 @@
       "modelBefore": "El modelo 3D está hecho a partir de",
       "zAnatomy": "Z-Anatomy",
       "modelAfter": "y BodyParts3D, datos de anatomía abiertos.",
-      "checks": "Los textos y cada vista 3D se comparan con las fuentes publicadas que aparecen en las notas de evidencia, mediante mediciones automáticas y auditorías independientes, antes de publicarse. No han sido revisados por un profesional médico. Última comprobación: 5 de noviembre de 2026.",
-      "ai": "Herramientas de inteligencia artificial ayudaron a escribir el código y los primeros borradores; una persona revisa cada página."
+      "checks": "Antes de publicar algo, los textos y cada vista 3D se comparan con las fuentes publicadas que aparecen en las notas de evidencia, mediante mediciones automáticas y revisiones aparte, hechas con ayuda de inteligencia artificial, que consultan esas fuentes. Nada del sitio ha sido revisado todavía por un profesional médico. Última comprobación: 5 de noviembre de 2026.",
+      "ai": "Herramientas de inteligencia artificial ayudaron a escribir el código, los primeros borradores y las comprobaciones de fuentes. Matthew, un paciente y no un médico, lee y aprueba cada página antes de publicarla."
     },
     "principlesTitle": "Principios",
     "principles": [
@@ -1330,6 +1330,8 @@
       }
     },
     "download": "Descargar",
+    "copyAlt": "Copiar la descripción de la imagen",
+    "copiedAlt": "Copiada. Péguela como descripción de la imagen (texto alternativo) al publicar, para que las personas que usan lectores de pantalla sepan lo que dice.",
     "letter": "Carta",
     "orgsTitle": "Para organizaciones",
     "orgsText": "¿Quiere su propia versión? Use \"Haga su propio diseño\" más abajo para agregar sus palabras, su logotipo y sus colores. Nada de lo que agregue se envía a ningún lugar.",

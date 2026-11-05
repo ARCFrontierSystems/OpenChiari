@@ -2,3 +2,13 @@
 # address can load in a visitor's browser (CLAUDE.md rule 2), whatever is switched on in the Cloudflare dashboard.
 /*
   Content-Security-Policy: script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: same-origin
+  Permissions-Policy: geolocation=(), microphone=(), payment=(), usb=(), browsing-topics=()
+  X-Frame-Options: SAMEORIGIN
+
+# The embed is made to be shown inside other sites (the Open model page).
+/embed/*
+  ! X-Frame-Options
+/es/embed/*
+  ! X-Frame-Options

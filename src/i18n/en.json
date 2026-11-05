@@ -915,8 +915,8 @@
       "modelBefore": "The 3D model is built from",
       "zAnatomy": "Z-Anatomy",
       "modelAfter": "and BodyParts3D, open anatomy data.",
-      "checks": "Text and every 3D view are checked against the published sources listed in the evidence notes, by automatic measurements and independent audits, before they're published. They have not been reviewed by a medical professional. Last check: November 5, 2026.",
-      "ai": "AI tools helped write the code and first drafts; every page is checked by a person."
+      "checks": "Before anything is published, the text and every 3D view are checked against the published sources listed in the evidence notes, by automatic measurements and by separate AI-assisted reviews that open those sources. Nothing on the site has been reviewed by a medical professional yet. Last check: November 5, 2026.",
+      "ai": "AI tools helped write the code, the first drafts and the source checks. Matthew, a patient and not a doctor, reads and approves every page before it's published."
     },
     "principlesTitle": "Principles",
     "principles": [
@@ -1330,6 +1330,8 @@
       }
     },
     "download": "Download",
+    "copyAlt": "Copy image description",
+    "copiedAlt": "Copied. Paste it as the image description (alt text) when you post, so people using screen readers know what it says.",
     "letter": "Letter",
     "orgsTitle": "For organizations",
     "orgsText": "Want your own version? Use \"Make your own\" below to add your words, logo and colors. Nothing you add is sent anywhere.",

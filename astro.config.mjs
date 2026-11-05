@@ -59,6 +59,49 @@ const offline = {
   },
 };
 
+// Search engines: a sitemap of every page (each with its other-language twin), and robots.txt pointing to it. The
+// embed and the shared views (/v/) are left out; they carry "noindex" (src/components/Head.astro).
+/** @type {import('astro').AstroIntegration} */
+const sitemap = {
+  name: 'sitemap',
+  hooks: {
+    'astro:build:done': ({ dir }) => {
+      const root = fileURLToPath(dir);
+      const site = 'https://openchiari.org';
+      /** @type {string[]} */
+      const pages = [];
+      /** @param {string} folder */
+      const walk = (folder) => {
+        for (const name of readdirSync(folder)) {
+          const path = join(folder, name);
+          if (statSync(path).isDirectory()) walk(path);
+          else if (name === 'index.html') pages.push('/' + relative(root, folder).split('\\').join('/') + '/');
+        }
+      };
+      walk(root);
+      const paths = pages
+        .map((p) => p.replace(/^\/\/$/, '/').replace(/^\/\//, '/'))
+        .filter((p) => !/^\/(es\/)?(embed|v)\//.test(p))
+        .sort();
+      /** @param {string} p */
+      const twin = (p) => (p.startsWith('/es/') ? p.slice(3) : '/es' + p);
+      /** @param {string} p */
+      const english = (p) => (p.startsWith('/es/') ? twin(p) : p);
+      const urls = paths.map((p) => {
+        const alts = paths.includes(twin(p))
+          ? ['en', 'es'].map((l) => `<xhtml:link rel="alternate" hreflang="${l}" href="${site}${l === 'es' ? '/es' + english(p) : english(p)}"/>`).join('')
+          : '';
+        return `<url><loc>${site}${p}</loc>${alts}</url>`;
+      });
+      writeFileSync(
+        join(root, 'sitemap.xml'),
+        `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.join('\n')}\n</urlset>\n`,
+      );
+      writeFileSync(join(root, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: ${site}/sitemap.xml\n`);
+    },
+  },
+};
+
 // Static site. English at the root, Spanish under /es/ (built in Phase 4).
 export default defineConfig({
   site: 'https://openchiari.org',
@@ -69,7 +112,7 @@ export default defineConfig({
     locales: ['en', 'es'],
     routing: { prefixDefaultLocale: false },
   },
-  integrations: [realisticModel, offline],
+  integrations: [realisticModel, offline, sitemap],
   // Local previews only: the counter tests open the preview under the name openchiari.org (tests/site.spec.ts).
   vite: { preview: { allowedHosts: ['openchiari.org'] } },
 });

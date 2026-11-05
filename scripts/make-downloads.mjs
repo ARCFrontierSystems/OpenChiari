@@ -89,7 +89,7 @@ for (const c of conditions) {
 }
 await tab.setContent(`<!doctype html><meta charset="utf-8"><style>${css}</style>${conditions.map(page).join('')}`);
 await tab.evaluate(() => document.fonts.ready);
-await tab.pdf({ path: join(work, 'figures.pdf'), format: 'A4', landscape: true, printBackground: true });
+await tab.pdf({ path: join(work, 'figures.pdf'), format: 'A4', landscape: true, printBackground: true, tagged: true, outline: true });
 files['openchiari-figures.pdf'] = join(work, 'figures.pdf');
 await browser.close();
 pack('openchiari-figures', files);

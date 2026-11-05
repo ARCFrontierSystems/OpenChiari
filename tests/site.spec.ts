@@ -1,5 +1,6 @@
 import { test, expect, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { readFileSync } from 'node:fs';
 
 // Every page that exists so far. Add new pages here as they're built.
 const pages = ['/', '/explorer/', '/evidence/', '/explain/', '/v/#c1.side.f.m.x', '/explain/#v=c1.side.flow.m&x=1&a=fam&n=Hello', '/studies/', '/prep/', '/model/', '/embed/', '/support/', '/kit/', '/impact/', '/about/', '/privacy/', '/es/'];
@@ -472,4 +473,47 @@ test('Explain It: the note is shown as text, the note is limited to 280 characte
   // A look-only model never takes the finger from the page, so swiping over it scrolls.
   await expect(page.locator('[data-recipient] canvas')).toHaveCSS('touch-action', 'auto', { timeout: 30000 });
   await expect(page.getByRole('link', { name: 'Explore the full 3D model' })).toHaveAttribute('href', /#syr\.custom\.m\.x\.o-30,12,150\.c35\.hskin\+bone$/);
+});
+
+test('Research studies: the list, its filters and Near sorting work on the device, and nothing is sent', async ({ page }) => {
+  const data = JSON.parse(readFileSync(new URL('../src/data/studies.json', import.meta.url), 'utf8'));
+  const sent: string[] = [];
+  await page.goto('/studies/', { waitUntil: 'networkidle' });
+  page.on('request', (r) => sent.push(r.url()));
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Research studies looking for people with Chiari');
+  if (!data.studies.length) {
+    // No saved list: a link to the registry's own search instead.
+    await expect(page.getByRole('link', { name: /search for recruiting Chiari studies on ClinicalTrials\.gov/ })).toBeVisible();
+    return;
+  }
+  const cards = page.locator('[data-study]');
+  await expect(cards).toHaveCount(data.studies.length);
+  await expect(page.locator('[data-count]')).toHaveText(data.studies.length === 1 ? '1 study recruiting' : `${data.studies.length} studies recruiting`);
+  await expect(page.getByText(/Study data from ClinicalTrials\.gov, processed \w+ \d+, \d{4}\. Summaries simplified by Open Chiari\./)).toBeVisible();
+  // Every card links to its official listing.
+  for (const s of data.studies) await expect(page.locator(`a[href="https://clinicaltrials.gov/study/${s.nct}"]`).first()).toBeAttached();
+
+  // Who can join: Children shows only studies that take children.
+  await page.getByLabel('Children', { exact: true }).check();
+  const kids = data.studies.filter((s: { children: boolean }) => s.children).length;
+  await expect(cards.locator('visible=true')).toHaveCount(kids);
+  await page.getByLabel('Any age').check();
+
+  // Condition: unticking both leaves nothing, with a message.
+  await page.getByLabel('Chiari malformation').uncheck();
+  await page.getByLabel('Syringomyelia').uncheck();
+  await expect(cards.locator('visible=true')).toHaveCount(0);
+  await expect(page.getByText('No studies match these filters.')).toBeVisible();
+  await page.getByLabel('Chiari malformation').check();
+  await page.getByLabel('Syringomyelia').check();
+
+  // Near: a study with a site in the typed state moves to the top.
+  const withState = data.studies.find((s: { sites: { state: string; country: string }[] }) => s.sites.some((x) => x.state && x.country === 'United States'));
+  if (withState) {
+    const state = withState.sites.find((x: { state: string; country: string }) => x.state && x.country === 'United States').state;
+    await page.getByLabel('Near').fill(state);
+    const firstPlaces = await cards.first().getAttribute('data-places');
+    expect(firstPlaces!.toLowerCase()).toContain(`|${state.toLowerCase()}|`);
+  }
+  expect(sent).toEqual([]);
 });

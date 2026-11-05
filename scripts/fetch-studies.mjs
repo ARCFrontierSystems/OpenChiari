@@ -120,7 +120,8 @@ export function recentlyVerified(verified, today = new Date()) {
 const leftOut = curated.leftOut ?? {};
 const studies = raw
   .map(toStudy)
-  .filter((s) => s.nct && s.status === 'RECRUITING' && s.conditions.length && s.type !== 'other' && !leftOut[s.nct] && recentlyVerified(s.verified))
+  // Only well-formed IDs (NCT and 8 digits): they go into links and into the daily job's commands.
+  .filter((s) => /^NCT\d{8}$/.test(s.nct ?? '') && s.status === 'RECRUITING' && s.conditions.length && s.type !== 'other' && !leftOut[s.nct] && recentlyVerified(s.verified))
   .sort((a, b) => a.title.localeCompare(b.title));
 const data = {
   source: 'ClinicalTrials.gov API v2',

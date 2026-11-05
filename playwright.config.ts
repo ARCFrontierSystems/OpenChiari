@@ -10,13 +10,14 @@ export default defineConfig({
   fullyParallel: true,
   reporter: process.env.CI ? 'github' : 'list',
   use: {
-    baseURL: 'http://localhost:4322',
+    // A fixed IPv4 address, so the counter tests can point the name openchiari.org at the same server.
+    baseURL: 'http://127.0.0.1:4322',
     // WebGL in headless Chromium runs on its software renderer (SwiftShader).
     launchOptions: { executablePath, args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] },
   },
   webServer: {
-    command: 'npx astro preview --port 4322 --ignore-lock',
-    url: 'http://localhost:4322',
+    command: 'npx astro preview --port 4322 --host 127.0.0.1 --ignore-lock',
+    url: 'http://127.0.0.1:4322',
     reuseExistingServer: !process.env.CI,
   },
 });

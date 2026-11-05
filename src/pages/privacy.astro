@@ -1,7 +1,7 @@
 ---
 /**
  * Privacy. Layout from design/mockups/Privacy.dc.html. All text from src/i18n/en.json, word for word from
- * docs/COPY.md. The placeholders ([date], [analytics service], [host]) stay until Matthew confirms the details.
+ * docs/COPY.md. Counting is described as Open Chiari's own counter (functions/api/count.js).
  */
 import Base from '../layouts/Base.astro';
 import { getStrings, routes, externalLinks } from '../i18n';
@@ -20,7 +20,6 @@ const t = getStrings().privacy;
     <section aria-labelledby="counted-title">
       <h2 id="counted-title" class="serif">{t.countedTitle}</h2>
       <p>{t.counted.before} <a href={routes.impact}>{t.counted.impact}</a>{t.counted.after}</p>
-      <p class="small">{t.countedNote}</p>
     </section>
 
     <section aria-labelledby="never-title">

@@ -799,6 +799,15 @@ Mockup: `design/mockups/Impact.dc.html`
 - Contact Open Chiari
 - A personal project by Matthew Borgfeld. Not medical advice.
 
+### Added 2026-11-05 (approved by Matthew)
+
+Shown on the Impact page but not in the mockup:
+- Not counted yet
+- Not measured yet
+- passed automated checks
+- issues found by automated checks
+- [GitHub repository] is github.com/ARCFrontierSystems/OpenChiari (the repository was made public on November 5, 2026)
+
 ## About
 
 Mockup: `design/mockups/About.dc.html`
@@ -871,13 +880,14 @@ Mockup: `design/mockups/Privacy.dc.html`
 - What is counted
 - To show the totals on the
 - Impact page
-- , the site counts visits and a few actions, such as opening the 3D model or making an Explain It link. Counting uses [analytics service], which uses no cookies and doesn't build a profile of you. It sees which page was visited, the page you came from, your device and browser type, your country, and how fast the page loaded, then adds it to a total.
+- , the site counts visits and a few actions: opening the 3D model, making an Explain It link, and opening a study listing. Counting uses Open Chiari's own counter, which uses no cookies and doesn't build a profile of you. Your browser sends only the name of the action, and the counter adds 1 to a total. It doesn't keep your address, device, browser, country, the page you came from, or the link. When the 3D model is shown on another website, that website's address is noted, so the Impact page can count the sites that use it.
+<!-- 2026-11-05 (approved by Matthew): Open Chiari's own counter replaces the planned Cloudflare Web Analytics; was ", the site counts visits and a few actions, such as opening the 3D model or making an Explain It link. Counting uses [analytics service], which uses no cookies and doesn't build a profile of you. It sees which page was visited, the page you came from, your device and browser type, your country, and how fast the page loaded, then adds it to a total." -->
 - [Confirm this list against the chosen analytics service before launch.]
 - What is never collected
 - Your identity
 - No accounts, sign-ins, names or email addresses.
 - Explain It notes
-- Your note goes in the message you send, not in the link. The link holds only the chosen view, after the #. Browsers don't send that part to our server, and our analytics are set up not to record it.
+- Your note goes in the message you send, not in the link. The link holds only the chosen view, after the #. Browsers don't send that part to our server, and the counter never receives it.
 <!-- 2026-11-05 (approved by Matthew): was "Your note and chosen view live after the # in the link. Browsers don't send that part to our server, and our analytics are set up not to record it. Anyone with the link can read the note." -->
 - Visit prep questions
 - Built and printed entirely in your browser. Nothing you tick or type leaves your device.

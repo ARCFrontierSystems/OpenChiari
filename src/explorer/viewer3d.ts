@@ -129,8 +129,13 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   let movingRatio = 1;
   const touchScreen = window.matchMedia('(pointer: coarse)').matches;
   renderer.setPixelRatio(restRatio);
+  // The realistic model has far more detail to shade than the Simple one, so on touch screens it is drawn a little
+  // less sharply: 1.5 at rest and 0.75 while a finger moves it.
+  const realisticOnTouch = () => touchScreen && realisticShown();
   function setMoving(moving: boolean) {
-    const ratio = moving && touchScreen ? Math.min(restRatio, movingRatio) : restRatio;
+    const rest = realisticOnTouch() ? Math.min(restRatio, 1.5) : restRatio;
+    const move = realisticOnTouch() ? Math.min(movingRatio, 0.75) : movingRatio;
+    const ratio = moving && touchScreen ? Math.min(rest, move) : rest;
     if (renderer.getPixelRatio() !== ratio) {
       renderer.setPixelRatio(ratio);
       requestRender();
@@ -201,10 +206,11 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     const color = new THREE.Color(String(extras.color));
     const baseOpacity = Number(extras.opacity ?? 1);
     mesh.geometry.computeVertexNormals();
-    mesh.material = new THREE.MeshStandardMaterial({
+    // The realistic model uses simpler (matte) shading, which costs a phone much less per pixel and looks the same
+    // on these non-shiny surfaces; the Simple model keeps its original shading.
+    mesh.material = new (model === 'realistic' ? THREE.MeshLambertMaterial : THREE.MeshStandardMaterial)({
       color,
-      roughness: 0.85,
-      metalness: 0,
+      ...(model === 'realistic' ? {} : { roughness: 0.85, metalness: 0 }),
       side: THREE.DoubleSide,
       clippingPlanes: [plane],
       transparent: baseOpacity < 1,
@@ -343,6 +349,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       await renderer.compileAsync(scene, camera);
       realistic = 'ready';
       options.onRealistic?.('ready');
+      setMoving(false);
       // The structure picked before the model arrived gets its highlight on the new parts too.
       applyHighlight(store.get().part);
       apply(store.get());
@@ -533,7 +540,8 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     if (slowFrames.length < 30) return;
     const sorted = [...slowFrames].sort((a, b) => a - b);
     slowFrames.length = 0;
-    if (sorted[15] > 50 && movingRatio === 1) {
+    // (A little stricter for the realistic model: about 25 frames a second.)
+    if (sorted[15] > (realisticShown() ? 40 : 50) && movingRatio === 1) {
       movingRatio = 0.75;
       restRatio = Math.min(restRatio, 1.5);
       setMoving(true);
@@ -1083,6 +1091,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   let lastCamera: CameraView = store.get().camera;
   let lastPart = '';
   function apply(st: ViewState) {
+    setMoving(userMoving); // the resting sharpness depends on which model is showing
     const depth = cutDepth(st.cut);
     plane.constant = depth;
     const midline = depth === 0;

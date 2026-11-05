@@ -45,7 +45,7 @@ test('no third-party requests from the browser', async ({ page }) => {
   const outside: string[] = [];
   page.on('request', (request) => {
     const url = new URL(request.url());
-    if (url.origin !== 'http://localhost:4322') outside.push(request.url());
+    if (url.origin !== 'http://127.0.0.1:4322') outside.push(request.url());
   });
   for (const path of pages) await page.goto(path, { waitUntil: 'networkidle' });
   expect(outside).toEqual([]);
@@ -554,4 +554,99 @@ test('phones: the Realistic switch is with the view tools, and loads the lighter
   await expect(toggle).toHaveAttribute('aria-busy', 'false', { timeout: 60000 });
   expect(models.some((u) => u.endsWith('/realistic-phone.glb'))).toBe(true);
   await ctx.close();
+});
+
+test('counters: on openchiari.org only the name of an action is sent, never the note, the view or the link', async ({ playwright }) => {
+  // Make the browser believe it's on openchiari.org (counts are sent only from there), pointing at the test server.
+  const browser = await playwright.chromium.launch({
+    executablePath: process.env.PLAYWRIGHT_CHROMIUM_PATH || undefined,
+    args: ['--host-resolver-rules=MAP openchiari.org 127.0.0.1', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'],
+  });
+  const page = await browser.newPage();
+  const sent: string[] = [];
+  const other: string[] = [];
+  await page.route('**/api/count', (route) => {
+    sent.push(route.request().postData() ?? '');
+    return route.fulfill({ status: 204 });
+  });
+  await page.route('https://clinicaltrials.gov/**', (route) => route.abort());
+  page.on('request', (r) => !r.url().startsWith('http://openchiari.org:4322/') && !r.url().startsWith('https://clinicaltrials.gov/') && other.push(r.url()));
+  const site = 'http://openchiari.org:4322';
+
+  // Arriving from outside counts one visit; making an Explain It link counts once, without the note.
+  await page.goto(`${site}/explain/#c1.side.f.m`);
+  await page.getByLabel('Your note').fill('Secret note 9Z');
+  await page.locator('[data-copy]').click().catch(() => {});
+  await page.locator('[data-qr-open]').click();
+  await expect.poll(() => sent.length).toBe(2);
+  expect(sent.map((s) => JSON.parse(s))).toEqual([{ e: 'visit' }, { e: 'explain' }]);
+
+  // Moving to another page of the site isn't a new visit; opening a study listing counts once.
+  await page.goto(`${site}/studies/`, { referer: `${site}/explain/` });
+  const listing = page.locator('a[href^="https://clinicaltrials.gov/study/"]').first();
+  if (await listing.count()) {
+    await listing.click({ noWaitAfter: true }).catch(() => {});
+    await expect.poll(() => sent.length).toBe(3);
+    expect(JSON.parse(sent[2])).toEqual({ e: 'study' });
+  }
+
+  // An embedded model counts the address of the site showing it, and nothing else.
+  const before = sent.length;
+  await page.goto(`${site}/embed/#v=c1`, { referer: 'https://www.example.org/some/page?x=1' });
+  await expect.poll(() => sent.length).toBe(before + 1);
+  expect(JSON.parse(sent[before])).toEqual({ e: 'embed', site: 'www.example.org' });
+
+  for (const s of sent) expect(s).not.toMatch(/9Z|#|c1\.side|http/);
+  expect(other).toEqual([]);
+  await browser.close();
+});
+
+test('counters: nothing is sent from any other address (tests, previews, copies of the site)', async ({ page }) => {
+  const sent: string[] = [];
+  page.on('request', (r) => r.url().includes('/api/count') && sent.push(r.url()));
+  await page.goto('/explain/#c1.side.f.m');
+  await page.locator('[data-qr-open]').click();
+  await page.goto('/embed/', { referer: 'https://www.example.org/' });
+  await page.waitForTimeout(500);
+  expect(sent).toEqual([]);
+});
+
+test('counter server: adds 1 only for known actions from openchiari.org, keeps only totals and embedding sites', async () => {
+  const { onRequestPost } = await import('../functions/api/count.js');
+  const { onRequestGet } = await import('../functions/api/totals.js');
+  const counts = new Map<string, number>();
+  const sites = new Set<string>();
+  const env = {
+    COUNTS: {
+      prepare: (sql: string) => ({
+        bind: (...args: string[]) => ({
+          run: async () => {
+            if (sql.startsWith('INSERT INTO counts')) counts.set(args[0], (counts.get(args[0]) ?? 0) + 1);
+            else if (sql.startsWith('INSERT OR IGNORE INTO embed_sites')) sites.add(args[0]);
+          },
+        }),
+        all: async () => ({ results: [...counts].map(([name, n]) => ({ name, n })) }),
+        first: async () => ({ n: sites.size }),
+      }),
+    },
+  };
+  const post = (body: string, origin = 'https://openchiari.org') =>
+    onRequestPost({ request: new Request('https://openchiari.org/api/count', { method: 'POST', body, headers: { Origin: origin } }), env });
+
+  for (const r of [
+    await post('{"e":"visit"}'),
+    await post('{"e":"visit"}', 'https://www.openchiari.org'),
+    await post('{"e":"explain"}'),
+    await post('{"e":"visit"}', 'https://evil.example'), // not from the site: ignored
+    await post('{"e":"note","n":"secret"}'), // unknown action: ignored
+    await post('not json'),
+    await post('{"e":"embed","site":"www.ConquerChiari.org"}'),
+    await post('{"e":"embed","site":"conquerchiari.org"}'),
+    await post('{"e":"embed","site":"openchiari.org"}'), // our own site isn't an embedding site
+    await post('{"e":"embed","site":"https://bad host/"}'),
+  ]) expect(r.status).toBe(204);
+  expect(Object.fromEntries(counts)).toEqual({ visit: 2, explain: 1 });
+  expect([...sites]).toEqual(['conquerchiari.org']);
+  const totals = await (await onRequestGet({ env })).json();
+  expect(totals).toEqual({ visit: 2, explore: 0, explain: 1, study: 0, embedSites: 1 });
 });

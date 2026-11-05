@@ -564,6 +564,69 @@
       "toCondition": "Show {name}",
       "pause": "Pause flow",
       "slow": "Slow"
+    },
+    "accuracy": {
+      "title": "How close is this to real anatomy?",
+      "intro": "Each measurement is checked automatically against published studies whenever the model changes. Real people vary; this is one representative example.",
+      "feature": "Feature",
+      "model": "This model",
+      "published": "Published studies",
+      "more": "Sources in the evidence notes",
+      "rows": {
+        "typical": [
+          {
+            "feature": "Tonsil tip",
+            "model": "About 1 mm above the dashed line",
+            "published": "Average about 1 mm above; normal range about 7 mm above to 5 mm below"
+          },
+          {
+            "feature": "Skull opening, front to back",
+            "model": "About 35 mm (Simple), 38 mm (Realistic)",
+            "published": "About 33 to 36 mm; 36 ± 3 mm in one study of healthy adults"
+          },
+          {
+            "feature": "Spinal canal in the neck",
+            "model": "About 14.5 mm (Simple)",
+            "published": "13 to 15 mm in adults"
+          }
+        ],
+        "chiari": [
+          {
+            "feature": "Tonsil tip",
+            "model": "About 12 mm below the dashed line",
+            "published": "At least about 5 mm below by definition; about 12 mm on average (5 to 25 mm) in a study of 160 people with Chiari I"
+          },
+          {
+            "feature": "Tonsil shape",
+            "model": "Pointed",
+            "published": "Often pointed (peg-like) rather than rounded"
+          }
+        ],
+        "syrinx": [
+          {
+            "feature": "Tonsil tip",
+            "model": "About 12 mm below the dashed line",
+            "published": "At least about 5 mm below by definition; about 12 mm on average (5 to 25 mm) in a study of 160 people with Chiari I"
+          },
+          {
+            "feature": "Syrinx",
+            "model": "In the neck part of the cord, beaded",
+            "published": "Most often in the neck part; long, spindle-shaped or beaded, about 5 vertebrae long on average"
+          }
+        ],
+        "surgery": [
+          {
+            "feature": "Tonsil tip",
+            "model": "About 10 mm below the line, risen about 2 mm",
+            "published": "Often rise only partly: about 2 mm on average in one study"
+          },
+          {
+            "feature": "Bone removed",
+            "model": "About 30 × 25 mm at the back of the skull opening, and the middle 25 mm of the first neck bone's back arch",
+            "published": "A few centimeters, sized to each patient (for example 2.5 × 3 cm); about 2.5 cm of the first neck bone's arch"
+          }
+        ]
+      }
     }
   },
   "evidence": {

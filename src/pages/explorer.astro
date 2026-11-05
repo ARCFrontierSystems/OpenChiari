@@ -134,13 +134,13 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
           <button type="button" class="x-tool" data-toggle="flow" aria-pressed={(st.flow) ? 'true' : 'false'}>{x.flow}</button>
           <button type="button" class="x-tool" data-toggle="labels" aria-pressed={(st.labels) ? 'true' : 'false'}>{x.labels}</button>
           <button type="button" class="x-tool" data-toggle="measure" aria-pressed={(st.measure) ? 'true' : 'false'}>{x.measure}</button>
-          <button type="button" class="x-tool" data-ar hidden>{x.ar}</button>
         </div>
         <!-- Lower bar: compare with typical in one tap, and the flow's pace (3D roadmap step 3). -->
         <div class="x-toolbar x-toolbar-low only-wide-x" role="group" aria-label={x.viewTools}>
           <button type="button" class="x-tool x-switcher" data-switcher>{x.switcher.toTypical}</button>
           <button type="button" class="x-tool" data-flow-pause aria-pressed="false" data-3d-only>{x.switcher.pause}</button>
           <button type="button" class="x-tool" data-flow-slow aria-pressed="false" data-3d-only>{x.switcher.slow}</button>
+          <button type="button" class="x-tool" data-ar hidden>{x.ar}</button>
         </div>
         <div class="x-camera only-wide-x" role="group" aria-label={x.camera} data-3d-only>
           {CAMERA_PRESETS.map((v) => (
@@ -193,6 +193,20 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
           <p class="x-card-note" data-cond-note>{cond.note}</p>
           <p class="x-size-note" data-size-note hidden={!(['chiari', 'syrinx'].includes(st.condition) && st.measure)}>{x.sizeNote}</p>
         </div>
+<details class="x-cough x-accuracy" data-accuracy>
+          <summary>{x.accuracy.title}</summary>
+          <p>{x.accuracy.intro}</p>
+          <dl class="x-accuracy-list" data-accuracy-rows>
+            {x.accuracy.rows[st.condition].map((r) => (
+              <div class="x-acc-row">
+                <dt>{r.feature}</dt>
+                <dd><span class="x-acc-key">{x.accuracy.model}:</span> {r.model}</dd>
+                <dd><span class="x-acc-key">{x.accuracy.published}:</span> {r.published}</dd>
+              </div>
+            ))}
+          </dl>
+          <a href={routes.evidence + '#3d-model-shapes'} data-evidence>{x.accuracy.more}</a>
+        </details>
         <details class="x-cough x-cough-wide" data-cough-panel hidden={!['typical', 'chiari'].includes(st.condition)}>
           <summary>{x.cough.title}</summary>
           {x.cough.text.map((line) => <p>{line}</p>)}
@@ -234,6 +248,20 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
           <p class="x-size-note" data-size-note hidden={!(['chiari', 'syrinx'].includes(st.condition) && st.measure)}>{x.sizeNote}</p>
         </div>
         <button type="button" class="x-tool x-ar-narrow" data-ar hidden>{x.ar}</button>
+<details class="x-cough x-accuracy" data-accuracy>
+          <summary>{x.accuracy.title}</summary>
+          <p>{x.accuracy.intro}</p>
+          <dl class="x-accuracy-list" data-accuracy-rows>
+            {x.accuracy.rows[st.condition].map((r) => (
+              <div class="x-acc-row">
+                <dt>{r.feature}</dt>
+                <dd><span class="x-acc-key">{x.accuracy.model}:</span> {r.model}</dd>
+                <dd><span class="x-acc-key">{x.accuracy.published}:</span> {r.published}</dd>
+              </div>
+            ))}
+          </dl>
+          <a href={routes.evidence + '#3d-model-shapes'} data-evidence>{x.accuracy.more}</a>
+        </details>
         <details class="x-cough x-cough-narrow" data-cough-panel hidden={!['typical', 'chiari'].includes(st.condition)}>
           <summary>{x.cough.title}</summary>
           {x.cough.text.map((line) => <p>{line}</p>)}
@@ -322,6 +350,25 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
         $$<HTMLButtonElement>('[data-switcher]').forEach((b) => b.textContent !== label && (b.textContent = label));
         // Pause and Slow only mean something while the flow shows.
         $$<HTMLButtonElement>('[data-flow-pause], [data-flow-slow]').forEach((b) => (b.hidden = !st.flow));
+      });
+      // Accuracy panel: the rows for the condition on show.
+      store.subscribe((st) => {
+        $$<HTMLElement>('[data-accuracy-rows]').forEach((body) => {
+          if (body.dataset.condition === st.condition) return;
+          body.dataset.condition = st.condition;
+          body.replaceChildren(
+            ...x.accuracy.rows[st.condition].map((r) => {
+              const row = Object.assign(document.createElement('div'), { className: 'x-acc-row' });
+              const dd = (key: string, text: string) => {
+                const el = document.createElement('dd');
+                el.append(Object.assign(document.createElement('span'), { className: 'x-acc-key', textContent: key + ':' }), ' ' + text);
+                return el;
+              };
+              row.append(Object.assign(document.createElement('dt'), { textContent: r.feature }), dd(x.accuracy.model, r.model), dd(x.accuracy.published, r.published));
+              return row;
+            }),
+          );
+        });
       });
       // Show only / hide the selected part, and show everything again.
       $$<HTMLButtonElement>('[data-focus]').forEach((button) =>
@@ -1233,6 +1280,28 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
     font-size: var(--x-size-caption);
     font-weight: 400;
     color: var(--x-faint);
+  }
+  .x-accuracy p {
+    margin: 0 0 var(--s-8);
+  }
+  .x-accuracy-list {
+    margin: 0 0 var(--s-8);
+  }
+  .x-accuracy-list :global(.x-acc-row) {
+    padding: 8px 0;
+    border-top: 1px solid var(--x-border);
+  }
+  .x-accuracy-list :global(.x-acc-row dt) {
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .x-accuracy-list :global(.x-acc-row dd) {
+    margin: 0 0 2px;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  .x-accuracy-list :global(.x-acc-key) {
+    color: var(--x-muted);
   }
   .x-part-actions {
     display: flex;

@@ -1177,8 +1177,8 @@ test('Explorer: close-up view, zoom to a part, show only or hide a part, and lin
   await expect(card.locator('[data-focus="all"]')).toBeHidden();
   await card.locator('[data-part-zoom]').click();
   // A link keeps the selected part and "show only" (opened fresh, as someone receiving it would).
-  const other = await page.context().newPage();
-  await other.setViewportSize({ width: 1280, height: 900 });
+  const other = page;
+  await other.goto('about:blank');
   await other.goto('/explorer/#syr.side.psyrinx.io');
   await expect(other.locator('.x-card-wide [data-part-name]')).toHaveText('Syrinx');
   await expect(other.locator('.x-card-wide [data-focus="only"]')).toHaveAttribute('aria-pressed', 'true');
@@ -1204,6 +1204,18 @@ test('Explorer: one tap between typical and the condition shown, flow pause and 
   await expect(page.locator('[data-flow-pause]')).toBeHidden();
   await page.goto('/explorer/compare/');
   await expect(page.locator('[data-realistic-switch]')).toBeVisible({ timeout: 30000 });
+});
+
+test('Explorer: "How close is this to real anatomy?" shows the checked numbers for the condition on show', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/explorer/');
+  const panel = page.locator('.x-right [data-accuracy]');
+  await panel.locator('summary').click();
+  await expect(panel.locator('.x-acc-row dt').first()).toHaveText('Tonsil tip');
+  await expect(panel).toContainText('About 12 mm below the dashed line');
+  await page.locator('.x-cond-list label', { hasText: 'Typical anatomy' }).click();
+  await expect(panel).toContainText('About 1 mm above the dashed line');
+  await expect(panel).toContainText('13 to 15 mm in adults');
 });
 
 test('Awareness kit: every graphic and printable downloads, and the ZIP carries the credit', async ({ page, request }) => {

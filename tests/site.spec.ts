@@ -523,6 +523,20 @@ test('Home: the tools include Helping your child, the Awareness kit and Connect 
   for (const href of ['/children/', '/kit/', '/support/#connect']) await expect(page.locator(`.tools a[href="${href}"]`)).toHaveCount(1);
 });
 
+test('links that leave the site open in a new tab, say so to screen readers, and pass no referrer; links on the site do not', async ({ page }) => {
+  for (const [path, note] of [['/support/', '(opens in a new tab)'], ['/es/support/', '(se abre en una pestaña nueva)']] as const) {
+    await page.goto(path);
+    const outside = page.locator('main a[href^="https://"]');
+    expect(await outside.count()).toBeGreaterThan(4);
+    for (const link of await outside.all()) {
+      await expect(link).toHaveAttribute('target', '_blank');
+      await expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+      await expect(link.locator('.visually-hidden')).toHaveText(` ${note}`);
+    }
+    for (const link of await page.locator('a[href^="/"]').all()) await expect(link).not.toHaveAttribute('target', '_blank');
+  }
+});
+
 test.describe('Helping your child', () => {
   test('the school sheet prints what was typed, as text only, and nothing is stored or sent', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });

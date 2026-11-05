@@ -994,7 +994,7 @@ test('Explorer: the size line shows with the 12 mm views, and the cough plays an
   await expect(page.locator('.x-view.has-3d')).toBeVisible({ timeout: 30000 });
   const size = page.locator('.x-card-wide [data-size-note]');
   await expect(size).toBeVisible(); // Chiari I, Measure on
-  await expect(size).toHaveText(/^The usual cutoff, about 5 mm, is half a centimeter\./);
+  await expect(size).toHaveText(/^The usual cutoff, about 5 mm, is half a centimeter, about the height of 3 stacked quarters\./);
   await page.getByRole('radio', { name: 'Typical anatomy' }).first().check({ force: true });
   await expect(size).toBeHidden();
   const panel = page.locator('.x-cough-wide');

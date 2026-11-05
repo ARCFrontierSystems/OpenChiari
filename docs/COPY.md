@@ -1020,7 +1020,7 @@ Non-medical. The model shown is the existing Simple model (approved), cut at the
 After the independent audit (`docs/audits/2026-11-05-new-features-audit.md`) and its fixes. EVIDENCE.md rows 18 to 22 and the pronunciation rows. Spanish: translated, pending medical-translator review.
 
 - Home, "How do you say it?": Chiari: key-AR-ee · Chiari malformation: key-AR-ee mal-fore-MAY-shun · Syringomyelia: suh-ring-go-my-EE-lee-uh · Syrinx: SEER-inks. "Capital letters show the part you say loudest. Hans Chiari first described Chiari malformations at the end of the 1800s."
-- 3D Explorer, Chiari I and syrinx views with Measure on: The usual cutoff, about 5 mm, is half a centimeter. The model shows about 12 mm, a little over 1 centimeter. How far the tonsils extend doesn't always match how someone feels.
+- 3D Explorer, Chiari I and syrinx views with Measure on: The usual cutoff, about 5 mm, is half a centimeter, about the height of 3 stacked quarters. The model shows about 12 mm, a little over 1 centimeter, about the height of 7 stacked quarters. How far the tonsils extend doesn't always match how someone feels. <!-- Coin comparison (option A, stacked quarters) chosen and approved by Matthew 2026-11-05; quarter size from the U.S. Mint, opened by Matthew. -->
 - 3D Explorer, Typical and Chiari I views, "Why can coughing bring on a headache?":
   - A cough briefly raises the pressure in your chest, which pushes some spinal fluid up from the spine into the head. Normally it then flows back down.
   - One explanation is that, in some people with Chiari I, the low tonsils get in the way as the fluid flows back, so just after a cough they are pushed further down into the opening.

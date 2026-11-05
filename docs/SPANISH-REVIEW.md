@@ -16,7 +16,7 @@ Known deliberate differences: the Explain It starter note says the same thing in
 limit; "(en inglés)" is added where content stays in English (official study listings, the downloadable figure set);
 Support adds "Sus sitios web pueden estar solo en inglés."
 
-Please check the **medical sentences** first (174 rows), then the rest (406 rows).
+Please check the **medical sentences** first (174 rows), then the rest (440 rows).
 Made by `scripts/make-spanish-review.mjs`; rebuild it after any text change.
 
 ## Medical sentences
@@ -214,6 +214,8 @@ Made by `scripts/make-spanish-review.mjs`; rebuild it after any text change.
 | `header.nav.support` | Support | Apoyo | Support |
 | `header.espanol` | Español | English | English |
 | `header.calm` | Calm mode | Modo tranquilo | Calm mode |
+| `header.dim` | Dim | Modo oscuro |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `header.dimLabel` | Dim mode: dark colors, less light | Modo oscuro: colores oscuros, menos luz |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `translation.label` | About this translation | Sobre esta traducción | About this translation |
 | `translation.notice` | Translation pending review by a medical translator. It was made with the help of AI tools, and the English version is the reference. | Traducción pendiente de revisión por un traductor médico. Se hizo con ayuda de herramientas de inteligencia artificial, y la versión en inglés es la de referencia. | Translation pending review by a medical translator. It was made with the help of artificial intelligence tools, and the English version is the reference version. |
 | `translation.noticeShort` | Translation pending review by a medical translator. | Traducción pendiente de revisión por un traductor médico. | Translation pending review by a medical translator. |
@@ -222,11 +224,25 @@ Made by `scripts/make-spanish-review.mjs`; rebuild it after any text change.
 | `calm.noteStrong` | Calm mode is on. | El modo tranquilo está activado. | Calm mode is on. |
 | `calm.noteRest` | No motion or auto-rotation, larger text, softer colors. You can turn it off any time. | Sin movimiento ni rotación automática, texto más grande y colores más suaves. Puede desactivarlo cuando quiera. | No movement or automatic rotation, larger text and softer colors. You can turn it off whenever you want. |
 | `calm.explorerNote` | In Calm mode, the model only moves when you move it. | En el modo tranquilo, el modelo solo se mueve cuando usted lo mueve. | In calm mode, the model only moves when you move it. |
+| `listen.listen` | Listen | Escuchar |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `listen.stop` | Stop | Detener |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `listen.label` | Listen: your device reads this part aloud | Escuchar: su dispositivo lee esta parte en voz alta |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `home.eyebrow` | Chiari malformation, Type I | Malformación de Chiari, tipo I | Chiari malformation, type I |
 | `home.title` | See what's happening at the base of the skull. | Vea lo que pasa en la base del cráneo. | See what happens at the base of the skull. |
 | `home.openExplorer` | Open the 3D Explorer | Abrir el explorador 3D | Open the 3D explorer |
 | `home.tour` | Take the 2-minute tour | Hacer el recorrido de 2 minutos | Take the 2-minute tour |
 | `home.figNumber` | Fig. 1 | Fig. 1 | Fig. 1 |
+| `home.say.title` | How do you say it? | ¿Cómo se dice? (en inglés) |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `home.say.items.0.term` | Chiari | Chiari |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `home.say.items.0.say` | key-AR-ee | key-AR-ee |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `home.say.items.1.term` | Chiari malformation | Chiari malformation |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `home.say.items.1.say` | key-AR-ee mal-fore-MAY-shun | key-AR-ee mal-fore-MAY-shun |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `home.say.items.2.term` | Syringomyelia | Syringomyelia |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `home.say.items.2.say` | suh-ring-go-my-EE-lee-uh | suh-ring-go-my-EE-lee-uh |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `home.say.items.3.term` | Syrinx | Syrinx |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `home.say.items.3.say` | SEER-inks | SEER-inks |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `home.say.key` | Capital letters show the part you say loudest. | Así se pronuncia en inglés; las mayúsculas muestran la parte que se dice más fuerte. |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `home.say.history` | Hans Chiari first described Chiari malformations at the end of the 1800s. | Hans Chiari describió por primera vez las malformaciones de Chiari a finales del siglo XIX. |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `home.tools.title` | Tools | Herramientas | Tools |
 | `home.tools.items.0.title` | 3D Explorer | Explorador 3D | 3D Explorer |
 | `home.tools.items.1.title` | Explain It | Explain It (Explíquelo) | Explain It (Explain it) |
@@ -277,6 +293,8 @@ Made by `scripts/make-spanish-review.mjs`; rebuild it after any text change.
 | `explorer.flowShort` | Flow | Flujo | Flow |
 | `explorer.labels` | Labels | Nombres | Names |
 | `explorer.measure` | Measure | Medir | Measure |
+| `explorer.ar` | See it in your room | Véalo en su habitación |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `explorer.arHint` | Point your phone at a table or the floor, then tap to place the model. It is life size; walk around it. | Apunte el teléfono hacia una mesa o el piso y toque la pantalla para colocar el modelo. Tiene tamaño real; camine a su alrededor. |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `explorer.close` | Close | Cerrar | Close |
 | `explorer.viewerLabel` | Anatomy view | Vista de la anatomía | Anatomy view |
 | `explorer.evidence` | Evidence notes for this view | Notas de evidencia de esta vista | Evidence notes for this view |
@@ -305,6 +323,15 @@ Made by `scripts/make-spanish-review.mjs`; rebuild it after any text change.
 | `explorer.cutNames.far` | Cut past the midline, toward the far side | Corte pasada la línea media, hacia el lado opuesto | Cut past the midline, toward the opposite side |
 | `explorer.evidencePage` | Evidence notes | Notas de evidencia | Evidence notes |
 | `explorer.notInModel` | Not in this model yet | Aún no están en este modelo | Not yet in this model |
+| `explorer.cough.title` | Why can coughing bring on a headache? | ¿Por qué toser puede provocar un dolor de cabeza? |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `explorer.cough.text.0` | A cough briefly raises the pressure in your chest, which pushes some spinal fluid up from the spine into the head. Normally it then flows back down. | Al toser, la presión en el pecho sube por un momento, y eso empuja algo de líquido cefalorraquídeo desde la columna hacia la cabeza. Normalmente, después vuelve a bajar. |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `explorer.cough.text.1` | One explanation is that, in some people with Chiari I, the low tonsils get in the way as the fluid flows back, so just after a cough they are pushed further down into the opening. | Una explicación es que, en algunas personas con Chiari I, las amígdalas cerebelosas bajas estorban el paso del líquido cuando vuelve a bajar, y justo después de toser son empujadas más hacia abajo, dentro de la abertura. |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `explorer.cough.text.2` | Researchers don't all agree on how this works, or whether it's why coughing can bring on the classic headache. Not everyone with Chiari gets these headaches. | Los investigadores no están de acuerdo en cómo funciona esto, ni en si es la razón por la que toser puede provocar el dolor de cabeza clásico. No todas las personas con Chiari tienen estos dolores de cabeza. |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `explorer.cough.button` | Cough | Toser |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `explorer.cough.caption` | Animation simplified. | Animación simplificada. |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `explorer.cough.up` | During the cough: some spinal fluid moves up from the spine into the head. | Al toser: algo de líquido cefalorraquídeo sube desde la columna hacia la cabeza. |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `explorer.cough.back` | Then it flows back down. | Después vuelve a bajar. |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `explorer.sizeNote` | The usual cutoff, about 5 mm, is half a centimeter, about the height of 3 stacked quarters. The model shows about 12 mm, a little over 1 centimeter, about the height of 7 stacked quarters. How far the tonsils extend doesn't always match how someone feels. | El límite habitual, unos 5 mm, es medio centímetro, más o menos la altura de 3 monedas de 25 centavos de EE. UU. apiladas. El modelo muestra unos 12 mm, algo más de 1 centímetro, más o menos la altura de 7 de esas monedas apiladas. Lo que bajan las amígdalas cerebelosas no siempre coincide con cómo se siente una persona. |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `evidence.inEnglish` | These notes are in English, like the sources they cite. | Estas notas están en inglés, igual que las fuentes que citan. | These notes are in English, the same as the sources they cite. |
 | `evidence.intro` | The evidence notes list every medical sentence and every 3D shape on the site with the source it rests on. They are the working file the site is built from, so they also name files and checks used by the people who maintain it. | Las notas de evidencia indican cada frase médica y cada forma 3D del sitio con la fuente en la que se basa. Son el archivo de trabajo con el que se hace el sitio, así que también mencionan archivos y comprobaciones que usan las personas que lo mantienen. | The evidence notes give each medical sentence and each 3D shape on the site with the source it is based on. They are the working file the site is made with, so they also mention files and checks used by the people who maintain it. |
 | `prep.title` | Prepare for your next appointment | Prepárese para su próxima cita | Prepare for your next appointment |
@@ -403,10 +430,12 @@ Made by `scripts/make-spanish-review.mjs`; rebuild it after any text change.
 | `privacy.never.2.text` | Built and printed entirely in your browser. Nothing you tick or type leaves your device. | Se crean e imprimen por completo en su navegador. Nada de lo que marque o escriba sale de su dispositivo. | They are created and printed entirely in your browser. Nothing you check or type leaves your device. |
 | `privacy.never.3.term` | Your location | Su ubicación | Your location |
 | `privacy.never.3.text` | The "Near" box on Research studies sorts the list on your device and is never sent. | El cuadro "Cerca de" en Estudios de investigación ordena la lista en su dispositivo y nunca se envía. | The "Near" box in Research studies sorts the list on your device and is never sent. |
-| `privacy.never.4.term` | Health information | Información de salud | Health information |
-| `privacy.never.4.text` | None, anywhere on the site. | Ninguna, en ninguna parte del sitio. | None, anywhere on the site. |
+| `privacy.never.4.term` | Your camera | Su cámara | Health information **(changed since the back-translation; it reads the earlier Spanish)** |
+| `privacy.never.4.text` | "See it in your room" uses your phone's camera on the phone itself. The picture never leaves your device, and the site never sees it. | "Véalo en su habitación" usa la cámara de su teléfono solo en el propio teléfono. La imagen nunca sale de su dispositivo y el sitio nunca la ve. | None, anywhere on the site. **(changed since the back-translation; it reads the earlier Spanish)** |
+| `privacy.never.5.term` | Health information | Información de salud |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `privacy.never.5.text` | None, anywhere on the site. | Ninguna, en ninguna parte del sitio. |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `privacy.savedTitle` | Saved on your device | Lo que se guarda en su dispositivo | What is saved on your device |
-| `privacy.saved` | Calm mode and your language choice are remembered in your own browser so they stay on next time. Clearing your browser data removes them. They're never sent to the site. | El modo tranquilo y el idioma que elija se recuerdan en su propio navegador, para que sigan así la próxima vez. Si borra los datos de su navegador, se eliminan. Nunca se envían al sitio. | Calm mode and the language you choose are remembered in your own browser, so they stay that way next time. If you clear your browser's data, they are deleted. They are never sent to the site. |
+| `privacy.saved` | Calm mode, Dim mode and your language choice are remembered in your own browser so they stay on next time. So the site also works without a signal, your browser keeps a copy of its pages and files; nothing you type or choose is in it. Clearing your browser data removes all of this. None of it is ever sent to the site. | El modo tranquilo, el modo oscuro y el idioma que elija se recuerdan en su propio navegador, para que sigan así la próxima vez. Para que el sitio también funcione sin señal, su navegador guarda una copia de sus páginas y archivos; no contiene nada de lo que usted escriba o elija. Si borra los datos de su navegador, todo esto se elimina. Nada de esto se envía nunca al sitio. | Calm mode and the language you choose are remembered in your own browser, so they stay that way next time. If you clear your browser's data, they are deleted. They are never sent to the site. **(changed since the back-translation; it reads the earlier Spanish)** |
 | `privacy.outsideTitle` | Outside services | Servicios externos | Outside services |
 | `privacy.outside.0.term` | Hosting: | Alojamiento: | Hosting: |
 | `privacy.outside.0.text` | Cloudflare Pages, which handles the site's traffic like any web host. | Cloudflare Pages, que maneja el tráfico del sitio como cualquier servicio de alojamiento web. | Cloudflare Pages, which handles the site's traffic like any web hosting service. |
@@ -459,6 +488,9 @@ Made by `scripts/make-spanish-review.mjs`; rebuild it after any text change.
 | `model.downloads.2.file` | Figure set, labeled | Juego de figuras con nombres (en inglés) | Set of figures with names (in English) |
 | `model.downloads.2.format` | PNG and PDF | PNG y PDF | PNG and PDF |
 | `model.downloads.2.bestFor` | Handouts and slides | Folletos y presentaciones | Brochures and presentations |
+| `model.downloads.3.file` | 3D-printable plaques, typical and Chiari I | Placas para imprimir en 3D, típica y Chiari I |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `model.downloads.3.format` | STL | STL |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `model.downloads.3.bestFor` | Printing to hold and show | Imprimir para tocar y mostrar |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `model.download` | Download | Descargar | Download |
 | `model.creditTitle` | How to credit it | Cómo dar crédito | How to give credit |
 | `model.creditIntro` | Keep this line wherever you use the model, and share any changed version under the same license. | Mantenga esta línea dondequiera que use el modelo, y comparta cualquier versión modificada con la misma licencia. | Keep this line wherever you use the model, and share any modified version under the same license. |
@@ -479,6 +511,8 @@ Made by `scripts/make-spanish-review.mjs`; rebuild it after any text change.
 | `explain.email` | Email | Correo electrónico | Email |
 | `explain.qr` | QR code | Código QR | QR code |
 | `explain.share` | Share | Compartir | Share |
+| `explain.picture` | Picture | Imagen |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `explain.pictureSaved` | The picture was saved to your downloads. | La imagen se guardó en sus descargas. |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `explain.privacy` | The link holds only the view. Your note goes in your own message, not in the link, and nothing is saved on our side. | El enlace solo contiene la vista. Su nota va en su propio mensaje, no en el enlace, y no guardamos nada. | The link only contains the view. Your note goes in your own message, not in the link, and we do not save anything. |
 | `explain.sharedWithYou` | Someone shared this with you | Alguien compartió esto con usted | Someone shared this with you |
 | `explain.dragHint` | Drag to turn the model. | Arrastre para girar el modelo. | Drag to rotate the model. |

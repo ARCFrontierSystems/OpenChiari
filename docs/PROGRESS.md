@@ -15,7 +15,7 @@ Matthew's preference: when a step is done, lay out what the next step will cover
   - the Spanish wallet card line fits, and the Spanish quote and wallet cards carry the pending-review notice;
   - the Impact date is recorded in COPY.md.
 - **CI:** both workflows now always use the newest Node 22 (Astro needs 22.23.4; one GitHub machine had 22.23.3).
-- **Waiting for Matthew:** approval of the new see-through skull from the back, front and below (before and after pictures, Simple and Realistic), since he approved the realistic views on Nov 4. Publish after that.
+- **Approved and published:** Matthew approved the new see-through skull from the back, front and below (before-and-after pictures, Simple and Realistic) and said "Approved, publish it"; PR #7 merged and published on Nov 5.
 
 ## 2026-11-05: Phase 4: the full Spanish site, published with a notice
 

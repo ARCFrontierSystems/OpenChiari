@@ -1264,7 +1264,8 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     /** One cough: the fluid marks move up into the head and ease back (about 2.6 seconds). In Calm mode, or with
      *  reduced motion, nothing moves: the "pushed up" still frame is shown for the same time, then the rest frame. */
     async cough(onPhase?: (phase: 'up' | 'back' | 'done') => void): Promise<void> {
-      if (!store.get().flow) store.set({ flow: true });
+      const now = store.get();
+      if (!now.flow || !now.layers.csf.on) store.set({ flow: true, layers: { ...now.layers, csf: { ...now.layers.csf, on: true } } });
       onPhase?.('up');
       if (stillOnly()) {
         placeFlow(null, 1);

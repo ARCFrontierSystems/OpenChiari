@@ -997,16 +997,16 @@ Non-medical, approved with the check-up fixes ("All approved, and fix the rest o
 - Impact, Accuracy checks value: November 5, 2026 · passed (after the Nov 5 re-audit fixes, `docs/audits/2026-11-05-wording-reaudit.md`). Spanish: 5 de noviembre de 2026 · superadas.
 - About, "How the content is made": "…and other published sources, listed in the [evidence notes](/evidence/)." (the words "evidence notes" link to the page).
 
-## New features, release 1 (2026-11-05): wording pending Matthew's approval
+## New features, release 1 (2026-11-05): approved by Matthew ("Approved")
 
-Non-medical. Shown to Matthew with screenshots before publishing.
+Non-medical. Shown to Matthew with screenshots; approved and published 2026-11-05.
 
 - Header: Dim (screen-reader name: "Dim mode: dark colors, less light"). Spanish: Modo oscuro.
 - Listen / Stop (tooltip: "Listen: your device reads this part aloud"). Spanish: Escuchar / Detener.
 - Explain It: Picture; "The picture was saved to your downloads." Spanish: Imagen; "La imagen se guardó en sus descargas."
 - Privacy, "Saved on your device" (replaces the earlier text): Calm mode, Dim mode and your language choice are remembered in your own browser so they stay on next time. So the site also works without a signal, your browser keeps a copy of its pages and files; nothing you type or choose is in it. Clearing your browser data removes all of this. None of it is ever sent to the site.
 
-## New features, release 2 (2026-11-05): wording pending Matthew's approval
+## New features, release 2 (2026-11-05): approved by Matthew ("Approved")
 
 Non-medical. The model shown is the existing Simple model (approved), cut at the midline like the Explorer.
 

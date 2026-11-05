@@ -390,7 +390,12 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
                 try {
                   const st = store.get();
                   const caption = [x.captionIllustration, x.captionTonsils].join('. ') + '.';
-                  await openAr(kind, await host.viewer.arModel(), { title: x.conditions[st.condition].label, caption, hint: x.arHint, close: x.close });
+                  const f = strings.footer;
+                  await openAr(kind, await host.viewer.arModel(), {
+                    title: x.conditions[st.condition].label, caption, hint: x.arHint, close: x.close,
+                    advice: `${f.notAdvice} ${f.notAdviceRest.wide}`,
+                    credit: `${f.modelBefore.replace(/^\.\s*/, '')} ${f.zAnatomy} ${f.modelAfter}`,
+                  });
                 } catch (error) {
                   console.warn('Room view not available.', error);
                 } finally {

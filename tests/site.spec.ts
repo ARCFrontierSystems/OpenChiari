@@ -861,8 +861,14 @@ test('Read aloud: Listen buttons appear where the browser can speak, and switch 
     // A stand-in voice, so the test doesn't depend on the machine's speech engine.
     const spoken: string[] = [];
     (window as unknown as { spoken: string[] }).spoken = spoken;
+    const voices = [{ lang: 'en-US', localService: true }, { lang: 'es-US', localService: true }];
+    class Utterance {
+      text: string; lang = ''; voice: unknown = null; rate = 1; onend: null | (() => void) = null;
+      constructor(text: string) { this.text = text; }
+    }
+    Object.defineProperty(window, 'SpeechSynthesisUtterance', { value: Utterance });
     Object.defineProperty(window, 'speechSynthesis', {
-      value: { speak: (u: SpeechSynthesisUtterance) => spoken.push(u.text), cancel: () => {}, getVoices: () => [] },
+      value: { speak: (u: Utterance) => spoken.push(u.text), cancel: () => {}, getVoices: () => voices, addEventListener: () => {} },
     });
   });
   await page.goto('/');

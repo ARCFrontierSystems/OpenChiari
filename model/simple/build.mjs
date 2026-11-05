@@ -668,14 +668,14 @@ function checkClosed(tris) {
 // and Chiari I, a solid plaque of the midline view from the skull base to the upper neck, life size (about 150 by
 // 115 mm, 12 mm thick), so they can be laid side by side. It prints as one piece on a single-color printer: on its
 // face, bone stands 1.5 mm proud, spinal fluid is 2 mm deep, soft tissue 0.8 mm, brain and cord flush, and the
-// McRae line is a 1 mm wide, 2 mm deep groove. The outlines are the figure's own (the same fields as the web model, at the midline),
+// McRae line is a 1 mm wide, 3.5 mm deep groove (deeper than the fluid spaces, so it shows across them too). The outlines are the figure's own (the same fields as the web model, at the midline),
 // so the EVIDENCE.md positions carry over; the check at the end measures the tonsil against the McRae line.
 if (process.argv.includes('--print')) {
   const byName = Object.fromEntries(structures.map((s) => [s.name, s]));
   const PRINT_OUT = new URL('../../public/downloads/print/', import.meta.url);
   mkdirSync(PRINT_OUT, { recursive: true });
   const BOX = [236, 326, 540, 562]; // figure units: x 236–540, y 326–562 (skull base to upper neck)
-  const BACK = -24, RELIEF = { bone: 3, brain: 0, csf: -4, soft: -1.6, groove: -4 };
+  const BACK = -24, RELIEF = { bone: 3, brain: 0, csf: -4, soft: -1.6, groove: -7 };
   const lineDist = (x, y) => {
     const [ax, ay] = S.mcrae.basion, [bx2, by2] = S.mcrae.opisthion;
     const dx = bx2 - ax, dy = by2 - ay;

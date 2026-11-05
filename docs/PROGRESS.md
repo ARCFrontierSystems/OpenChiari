@@ -13,7 +13,7 @@ Matthew's preference: when a step is done, lay out what the next step will cover
 
 - **Approved by Matthew** ("All three approved"), after the independent audit (`docs/audits/2026-11-05-new-features-audit.md`) and its fixes.
 - **How do you say it?** on Home: Chiari, Chiari malformation, syringomyelia and syrinx, with sources (Mayfield, KidsHealth, Merriam-Webster). On the Spanish site it is marked "(en inglés)"; the translator is asked for a Spanish respelling.
-- **Real-world size** line in the Explorer's Chiari I and syrinx views, with Measure on (centimeters). The coin comparison waits for the U.S. Mint page.
+- **Real-world size** line in the Explorer's Chiari I and syrinx views, with Measure on: centimeters and stacked quarters (option A, chosen by Matthew; the quarter's size from the U.S. Mint, opened by Matthew).
 - **Why can coughing bring on a headache?** in the Explorer, Typical and Chiari I views:
   - three hedged sentences;
   - a "Cough" button: the fluid marks move up into the head and ease back, and nothing else moves;

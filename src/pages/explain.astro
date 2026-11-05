@@ -278,6 +278,7 @@ const t = s.explain;
           advice: `${f.notAdvice} ${f.notAdviceRest.wide}`,
           credit: `${f.modelBefore.replace(/^\.\s*/, '')} ${f.zAnatomy} ${f.modelAfter}`,
           site: 'openchiari.org',
+          notice: document.documentElement.lang === 'es' ? strings.translation.noticeShort : undefined,
         });
         const result = await sharePicture(blob, `open-chiari-${st.condition}.png`);
         if (result === 'saved') status.textContent = t.pictureSaved;

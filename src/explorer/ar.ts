@@ -26,6 +26,10 @@ export interface ArText {
   caption: string;
   hint: string;
   close: string;
+  /** "Not medical advice. Talk to your doctor about your own care." */
+  advice: string;
+  /** The model credit exactly as CLAUDE.md rule 3 gives it. */
+  credit: string;
 }
 
 /** Life size (millimetres to metres), standing on its lowest point, centered. */
@@ -45,7 +49,7 @@ async function quickLook(model: THREE.Group, text: ArText): Promise<void> {
   const data = await new USDZExporter().parseAsync(placeOnFloor(model));
   const url = URL.createObjectURL(new Blob([data], { type: 'model/vnd.usdz+zip' }));
   // Apple's banner under the model carries the name and the required caption.
-  const banner = new URLSearchParams({ checkoutTitle: text.title, checkoutSubtitle: text.caption, callToAction: text.close });
+  const banner = new URLSearchParams({ checkoutTitle: text.title, checkoutSubtitle: `${text.caption} ${text.advice}` });
   const a = document.createElement('a');
   a.rel = 'ar';
   a.href = `${url}#${banner.toString().replace(/\+/g, '%20')}`;
@@ -59,13 +63,14 @@ async function webXR(model: THREE.Group, text: ArText): Promise<void> {
   // The words shown over the camera picture: name, caption, how to place it, and Close.
   const overlay = document.createElement('div');
   overlay.className = 'ar-overlay';
-  overlay.innerHTML = `<div class="ar-text"><p class="ar-title"></p><p class="ar-caption"></p><p class="ar-hint"></p></div><button type="button" class="ar-close"></button>`;
+  overlay.innerHTML = `<div class="ar-text"><p class="ar-title"></p><p class="ar-caption"></p><p class="ar-hint"></p></div><div class="ar-bottom"><p class="ar-credit"></p><button type="button" class="ar-close"></button></div>`;
   overlay.querySelector('.ar-title')!.textContent = text.title;
   overlay.querySelector('.ar-caption')!.textContent = text.caption;
   overlay.querySelector('.ar-hint')!.textContent = text.hint;
+  overlay.querySelector('.ar-credit')!.textContent = `${text.advice} ${text.credit}`;
   overlay.querySelector('.ar-close')!.textContent = text.close;
   document.body.appendChild(overlay);
-  const session = await xr.requestSession('immersive-ar', { requiredFeatures: ['hit-test'], optionalFeatures: ['dom-overlay'], domOverlay: { root: overlay } });
+  const session = await xr.requestSession('immersive-ar', { requiredFeatures: ['hit-test', 'dom-overlay'], domOverlay: { root: overlay } });
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setPixelRatio(window.devicePixelRatio);

@@ -69,7 +69,9 @@ const spanish = new URL(isSpanish ? here : otherLanguagePath(here), site).href;
   import { countVisit } from '../lib/count';
   countVisit();
   // The offline helper, on the real site only (tests and previews run without it).
-  if ('serviceWorker' in navigator && location.hostname === 'openchiari.org') navigator.serviceWorker.register('/sw.js').catch(() => {});
+  // Not inside another site's frame or on the embed page: people who never visited Open Chiari shouldn't get a copy.
+  if ('serviceWorker' in navigator && location.hostname === 'openchiari.org' && window.top === window.self && !location.pathname.includes('/embed/'))
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
   // Switching language keeps the view after the # (the same model view opens in the other language).
   document.addEventListener('click', (event) => {
     const link = (event.target as Element | null)?.closest?.<HTMLAnchorElement>('a[data-other-lang]');

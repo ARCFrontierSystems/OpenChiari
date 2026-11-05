@@ -63,7 +63,7 @@ const pages = {
     <p class="serif" style="font-size:76px;line-height:1.1;margin:36px 0 0">${k.socialHeadline}</p>
     <div class="figure" style="flex:1;margin:24px 0;min-height:0">${figure({ measure: true })}</div>
     <p style="font-size:34px;margin:0;color:#5B027E;font-weight:600">${k.socialFooter}</p>
-    <p style="font-size:17px;margin:14px 0 0;color:#5E5F66">${caption} ${notAdvice} ${credit}</p>
+    <p style="font-size:17px;margin:14px 0 0;color:#5E5F66">${caption} ${notAdvice} ${credit}${spanish ? ' ' + s.translation.noticeShort : ''}</p>
   </div>`,
   quoteSquare: `<div style="width:1080px;height:1080px;padding:96px;display:flex;flex-direction:column;justify-content:center;background:#5B027E;color:#fff">
     <span style="display:block;width:120px;height:10px;background:#CB98E1;margin-bottom:56px"></span>

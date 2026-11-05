@@ -132,6 +132,7 @@ The Washington University study "Redefining Chiari Malformations Type I" is NIH-
 - [ ] A medical translator signs off on the Spanish.
 - [ ] Confirm the Bobby Jones CSF registry status with them (their page says paused, last updated 2024).
 - [ ] Before Explain It launches: confirm in the browser network tab that analytics requests don't contain the note.
+- [ ] "Symptoms can come and go and are often invisible" (Home and Explain It) has no source row yet. Open the NINDS fact sheet or StatPearls NBK431076 and add one (found Nov 5; see `docs/drafts/2026-11-05-explain-it-drafts.md`).
 - [ ] Open mayoclinic.org by hand once to confirm the care-network copy matches.
 
 ## Sources not opened

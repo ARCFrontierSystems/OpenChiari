@@ -215,13 +215,16 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
     <script>
       import { bindCalmSwitches } from '../lib/calm';
       import { createStore, LAYERS, type ViewState } from '../explorer/state';
+      import { decodeView, encodeView, type Orbit } from '../explorer/share';
       import { anatomyFigureSvg, type Condition } from '../lib/anatomy-figure';
       import strings from '../i18n/en.json';
 
       bindCalmSwitches();
 
       const x = strings.explorer;
-      const store = createStore();
+      // A view passed in the link after the # (from Explain It) opens here as it was; nothing is sent anywhere.
+      const shared = decodeView(location.hash);
+      const store = createStore(shared?.state);
       const $$ = <T extends Element = HTMLElement>(sel: string) => Array.from(document.querySelectorAll<T>(sel));
 
       // ----- Controls write to the store -----
@@ -303,6 +306,7 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
             labels: x.parts.map((p) => ({ part: p.id, num: p.num, name: p.name, layer: LABEL_LAYERS[p.id], anchor: labelAnchor(p.id, store.get().condition), conditions: p.conditions })),
             // Realistic model: loaded only when picked; phones and small screens get the lighter version.
             realisticUrl: () => `/models/realistic/realistic-${Math.min(window.innerWidth, window.innerHeight) < 700 ? 'phone' : 'desktop'}.glb`,
+            startOrbit: shared?.orbit ?? null,
             onRealistic: (status) => {
               $$<HTMLButtonElement>('[data-model="realistic"]').forEach((b) => b.setAttribute('aria-busy', String(status === 'loading')));
             },
@@ -334,6 +338,15 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
           viewerHost.replaceChildren();
         }
       });
+
+      // ----- Explain It: the button carries this view (and a hand-turned camera) to the page that makes the link -----
+      document.querySelectorAll<HTMLAnchorElement>('a.x-explain').forEach((a) =>
+        a.addEventListener('click', () => {
+          const st = store.get();
+          const v = (document.querySelector('[data-viewer]') as (HTMLElement & { viewer?: { orbit(): Orbit } }) | null)?.viewer;
+          a.href = `/explain/#${encodeView({ state: st, orbit: st.camera === 'custom' ? v?.orbit() ?? null : null, explore: true, audience: 'fam' })}`;
+        }),
+      );
 
       // ----- The store updates every view and control -----
       const figures = $$('[data-figure]');

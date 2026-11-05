@@ -2,7 +2,7 @@ import { test, expect, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
 // Every page that exists so far. Add new pages here as they're built.
-const pages = ['/', '/explorer/', '/evidence/', '/explain/', '/studies/', '/prep/', '/model/', '/embed/', '/support/', '/kit/', '/impact/', '/about/', '/privacy/', '/es/'];
+const pages = ['/', '/explorer/', '/evidence/', '/explain/', '/explain/#v=c1.side.flow.m&x=1&a=fam&n=Hello', '/studies/', '/prep/', '/model/', '/embed/', '/support/', '/kit/', '/impact/', '/about/', '/privacy/', '/es/'];
 const sizes = [
   { name: 'desktop', width: 1440, height: 900 },
   { name: 'phone', width: 390, height: 844 },
@@ -406,4 +406,49 @@ test('embed: follows its settings, and always shows the captions, credit and dis
   expect(await page.evaluate(() => localStorage.getItem('openchiari-calm'))).toBeNull();
   await page.goto('/embed/#v=typ');
   await expect(page.locator('[data-switch]')).toBeHidden();
+});
+
+test('Explain It: carries the view from the Explorer, and the note never leaves the browser', async ({ page }) => {
+  const NOTE = 'Private test note 7Q2';
+  const sent: string[] = [];
+  page.on('request', (r) => sent.push(r.url() + ' ' + (r.postData() ?? '')));
+  await page.goto('/explorer/');
+  await expect(page.locator('.x-view.has-3d')).toBeVisible({ timeout: 30000 });
+  await page.getByRole('radio', { name: 'Typical anatomy' }).first().check({ force: true });
+  await page.locator('[data-camera="back"]:visible').first().click();
+  await page.locator('a.x-explain').first().click();
+  await page.waitForURL(/\/explain\/#v=typ\.back/);
+  await expect(page.locator('[data-summary]')).toHaveText(/^Typical anatomy · back view/);
+  await page.getByLabel('Your note').fill(NOTE);
+  await expect(page.locator('[data-count]')).toHaveText(`${NOTE.length} / 280`);
+  await page.getByLabel('Let them rotate and explore on their own').uncheck();
+  const link = await page.locator('[data-link]').inputValue();
+  expect(link).toContain('/explain/#v=typ.back');
+  expect(link).toContain('n=Private+test+note+7Q2');
+  expect(link).not.toContain('x=1');
+  // The view and note are only after the # in the link, and no request ever carries the note.
+  expect(new URL(link).search).toBe('');
+  await page.goto(link);
+  await expect(page.getByText('Someone shared this with you')).toBeVisible();
+  await expect(page.locator('[data-shared-note]')).toHaveText(NOTE);
+  await expect(page.locator('[data-caption]')).toHaveText('Typical anatomy, back view. Illustration, not a medical image. Fluid flow simplified.');
+  await expect(page.getByRole('link', { name: 'Explore the full 3D model' })).toHaveAttribute('href', /\/explorer\/#v=typ\.back/);
+  await expect(page.getByRole('link', { name: 'Explore the full 3D model' })).not.toHaveAttribute('href', /n=/);
+  for (const s of sent) expect(s).not.toContain('7Q2');
+});
+
+test('Explain It: the note is shown as text, the note is limited to 280 characters, and the Chiari I explanation shows', async ({ page }) => {
+  const evil = '<img src=x onerror="window.__hacked=1">Hi';
+  await page.goto('/explain/#v=c1.side.flow.m&x=1&a=fam&n=' + encodeURIComponent(evil));
+  await expect(page.locator('[data-shared-note]')).toHaveText(evil);
+  await expect(page.locator('[data-shared-note] img')).toHaveCount(0);
+  expect(await page.evaluate(() => (window as unknown as { __hacked?: number }).__hacked)).toBeUndefined();
+  await expect(page.getByText('The blue bracket shows how far.', { exact: false })).toBeVisible();
+  await expect(page.locator('[data-caption]')).toContainText('Drag to turn the model.');
+  await page.goto('/explain/#v=c1.side&a=fam&n=' + 'a'.repeat(400));
+  await expect(page.locator('[data-shared-note]')).toHaveText('a'.repeat(280));
+  // Measure off: the explanation that points at the bracket isn't used; the view's own note is.
+  await expect(page.getByText('The tonsils extend below the opening', { exact: false })).toBeVisible();
+  await page.goto('/explain/');
+  await expect(page.getByLabel('Your note')).toHaveAttribute('maxlength', '280');
 });

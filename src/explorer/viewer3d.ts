@@ -108,6 +108,10 @@ export interface ViewerOptions {
   realisticUrl?: () => string;
   /** Called when the realistic model starts or finishes loading, or fails ('loading' | 'ready' | 'failed'). */
   onRealistic?: (status: 'loading' | 'ready' | 'failed') => void;
+  /** Start from this exact camera (an Explain It link): azimuth and elevation in degrees, zoom 1 = whole head. */
+  startOrbit?: { az: number; el: number; zoom: number } | null;
+  /** false: look only (no turning, zooming, moving or camera keys), for a shared view the sender fixed. */
+  interactive?: boolean;
 }
 
 export async function createViewer(host: HTMLElement, store: Store, figureStrings: FigureStrings, options: ViewerOptions = {}) {
@@ -422,6 +426,8 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   controls.enableDamping = false;
   controls.minDistance = 250;
   controls.maxDistance = 2000;
+  const interactive = options.interactive !== false;
+  controls.enabled = interactive;
   // Only a real turn, zoom or move by the visitor counts as leaving a named camera view (a tap doesn't).
   let userMoving = false;
   controls.addEventListener('start', () => {
@@ -604,8 +610,9 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   }
 
   // ----- Keyboard: arrows turn, Shift+arrows move, + and - zoom, 1 to 4 presets, 0 resets -----
-  host.tabIndex = 0;
+  host.tabIndex = interactive ? 0 : -1;
   host.addEventListener('keydown', (e) => {
+    if (!interactive) return;
     const [az, el] = anglesNow();
     const dist = camera.position.distanceTo(controls.target);
     const custom = () => store.get().camera !== 'custom' && store.set({ camera: 'custom' });
@@ -976,6 +983,21 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
 
   resize();
   frame();
+  // Start from the view asked for: an exact camera from a shared link, or a named direction other than the side.
+  {
+    const start = store.get().camera;
+    const placeAt = (az: number, el: number, dist: number) => {
+      const a = THREE.MathUtils.degToRad(az), e = THREE.MathUtils.degToRad(el);
+      camera.position.set(
+        controls.target.x + dist * Math.sin(a) * Math.cos(e),
+        controls.target.y + dist * Math.sin(e),
+        controls.target.z + dist * Math.cos(a) * Math.cos(e),
+      );
+      controls.update();
+    };
+    if (options.startOrbit) placeAt(options.startOrbit.az, options.startOrbit.el, defaultDistance() / options.startOrbit.zoom);
+    else if (start !== 'side' && start !== 'custom') placeAt(...PRESET_ANGLES[start], defaultDistance());
+  }
   lap('set up');
   // Prepare the graphics programs in the background where the browser supports it.
   section.visible = true;
@@ -1003,6 +1025,11 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   (host as HTMLElement & { viewer?: unknown }).viewer = {
     look,
     reset: frame,
+    /** The camera now, as an Explain It link records it: azimuth, elevation (degrees) and zoom (1 = whole head). */
+    orbit() {
+      const [az, el] = anglesNow();
+      return { az, el, zoom: defaultDistance() / camera.position.distanceTo(controls.target) };
+    },
     /** For tests: camera distance from its target, and the target itself (mm). */
     cameraState() {
       return { distance: camera.position.distanceTo(controls.target), target: controls.target.toArray() };

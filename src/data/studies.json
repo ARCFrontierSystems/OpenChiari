@@ -1,6 +1,227 @@
 {
   "source": "ClinicalTrials.gov API v2",
-  "query": {},
-  "processed": null,
-  "studies": []
+  "query": {
+    "query.cond": "Chiari OR Syringomyelia",
+    "filter.overallStatus": "RECRUITING",
+    "pageSize": "100",
+    "format": "json"
+  },
+  "processed": "2026-11-05",
+  "studies": [
+    {
+      "nct": "NCT06502431",
+      "title": "Analysis of Disturbances in Neurofluid Dynamics in Type I Chiari Malformations",
+      "status": "RECRUITING",
+      "type": "trial",
+      "children": false,
+      "adults": true,
+      "conditions": [
+        "chiari"
+      ],
+      "sponsor": "Centre Hospitalier Universitaire, Amiens",
+      "officialSummary": "A global analysis of craniospinal hemodynamics and hydrodynamics is necessary to better understand the pathophysiology of Chiari malformations. This includes an analysis of intraventricular CSF flow, intracranial subarachnoid spaces, foramen magnum, cervical subarachnoid spaces and within the syringomyelia cavity when present.",
+      "sites": [
+        {
+          "facility": "CHU Amiens Picardie",
+          "city": "Amiens",
+          "state": "Picardie",
+          "zip": "80054",
+          "country": "France"
+        }
+      ],
+      "lastUpdated": "2026-09-08"
+    },
+    {
+      "nct": "NCT03856034",
+      "title": "Laparotomy Versus Percutaneous Endoscopic Correction of Myelomeningocele",
+      "status": "RECRUITING",
+      "type": "trial",
+      "children": false,
+      "adults": true,
+      "conditions": [
+        "chiari"
+      ],
+      "sponsor": "USFetus",
+      "officialSummary": "The purpose of this study is to evaluate the feasibility of a fetoscopic surgical technique for antenatal correction of fetal myelomeningocele. Two surgical approaches will be utilized.",
+      "sites": [
+        {
+          "facility": "University of Southern California / Huntington Memorial Hospital",
+          "city": "Los Angeles",
+          "state": "California",
+          "zip": "91105",
+          "country": "United States"
+        },
+        {
+          "facility": "Wellington Regional Medical Center",
+          "city": "Wellington",
+          "state": "Florida",
+          "zip": "33141",
+          "country": "United States"
+        }
+      ],
+      "lastUpdated": "2019-11-13"
+    },
+    {
+      "nct": "NCT06724029",
+      "title": "Neurosurgical Outcome Network",
+      "status": "RECRUITING",
+      "type": "observational",
+      "children": false,
+      "adults": true,
+      "conditions": [
+        "chiari"
+      ],
+      "sponsor": "Fondazione I.R.C.C.S. Istituto Neurologico Carlo Besta",
+      "officialSummary": "The evaluation of neurosurgical outcomes varies from center to center, and the predictive factors that determine these outcomes are not fully known or shared. This study aims to assess outcomes and their predictors using measures agreed upon by the participating centers.",
+      "sites": [
+        {
+          "facility": "Azienda Ospedaliero Universitaria Policlinico \"G. Rodolico - San Marco\"",
+          "city": "Catania",
+          "state": "",
+          "zip": "",
+          "country": "Italy"
+        },
+        {
+          "facility": "Azienda Ospedaliero Universitaria Careggi",
+          "city": "Florence",
+          "state": "",
+          "zip": "",
+          "country": "Italy"
+        },
+        {
+          "facility": "Ospedale F. Spaziani di Frosinone",
+          "city": "Frosinone",
+          "state": "",
+          "zip": "03100",
+          "country": "Italy"
+        },
+        {
+          "facility": "Ospedali Riuniti di Livorno -Azienda USL Toscana nord ovest",
+          "city": "Livorno",
+          "state": "",
+          "zip": "",
+          "country": "Italy"
+        },
+        {
+          "facility": "Fondazione IRCCS Istituto Neurologico Carlo Besta",
+          "city": "Milan",
+          "state": "",
+          "zip": "20133",
+          "country": "Italy"
+        },
+        {
+          "facility": "ASST Santi Paolo e Carlo",
+          "city": "Milan",
+          "state": "",
+          "zip": "20153",
+          "country": "Italy"
+        },
+        {
+          "facility": "Policlinico di Monza",
+          "city": "Monza",
+          "state": "",
+          "zip": "20900",
+          "country": "Italy"
+        },
+        {
+          "facility": "A.R.N.A.S. Ospedali Civico di Palermo",
+          "city": "Palermo",
+          "state": "",
+          "zip": "90127",
+          "country": "Italy"
+        },
+        {
+          "facility": "ASL Roma 1",
+          "city": "Roma",
+          "state": "",
+          "zip": "00135",
+          "country": "Italy"
+        },
+        {
+          "facility": "Fondazione Policlinico Universitario Gemelli di Roma",
+          "city": "Roma",
+          "state": "",
+          "zip": "00168",
+          "country": "Italy"
+        },
+        {
+          "facility": "Azienda Sanitaria Universitaria Friuli Centrale di Udine",
+          "city": "Udine",
+          "state": "",
+          "zip": "33100",
+          "country": "Italy"
+        }
+      ],
+      "lastUpdated": "2026-03-30"
+    },
+    {
+      "nct": "NCT06375759",
+      "title": "Subarachnoid-Subarachnoid (S-S) Bypass Versus Adhesion Lysis in Spinal Arachnoiditis and Syringomyelia",
+      "status": "RECRUITING",
+      "type": "trial",
+      "children": false,
+      "adults": true,
+      "conditions": [
+        "syringomyelia"
+      ],
+      "sponsor": "Xuanwu Hospital, Beijing",
+      "officialSummary": "To determine whether Subarachnoid-Subarachnoid (S-S) Bypass results in better patient outcomes with fewer complications and improved quality of life compared to intradural adhesion lysis in individuals with Spinal Arachnoiditis and Syringomyelia.",
+      "sites": [
+        {
+          "facility": "Fengzeng Jian",
+          "city": "Beijing",
+          "state": "Beijing Municipality",
+          "zip": "100053",
+          "country": "China"
+        }
+      ],
+      "lastUpdated": "2024-04-19"
+    },
+    {
+      "nct": "NCT06308367",
+      "title": "The Therapeutic Effect of Betaine in Syringomyelia",
+      "status": "RECRUITING",
+      "type": "trial",
+      "children": false,
+      "adults": true,
+      "conditions": [
+        "syringomyelia"
+      ],
+      "sponsor": "Xuanwu Hospital, Beijing",
+      "officialSummary": "Purpose: This clinical trial aims to evaluate the indications, therapeutic effects and side effects of betaine in refractory syringomyelia. Primary outcome measure: The primary endpoint is the change of ASIA at week 12.",
+      "sites": [
+        {
+          "facility": "Fengzeng Jian",
+          "city": "Beijing",
+          "state": "Beijing Municipality",
+          "zip": "100053",
+          "country": "China"
+        }
+      ],
+      "lastUpdated": "2024-03-13"
+    },
+    {
+      "nct": "NCT06268093",
+      "title": "The Therapeutic Effect of Thalidomide in Syringomyelia",
+      "status": "RECRUITING",
+      "type": "trial",
+      "children": false,
+      "adults": true,
+      "conditions": [
+        "syringomyelia"
+      ],
+      "sponsor": "Xuanwu Hospital, Beijing",
+      "officialSummary": "Purpose: This phase II clinical trial aims to evaluate the indications, therapeutic effects and side effects of thalidomide in refractory syringomyelia. Primary outcome measure: The primary endpoint is the change of ASIA at week 12.",
+      "sites": [
+        {
+          "facility": "Fengzeng Jian",
+          "city": "Beijing",
+          "state": "Beijing City",
+          "zip": "100032",
+          "country": "China"
+        }
+      ],
+      "lastUpdated": "2024-02-20"
+    }
+  ]
 }

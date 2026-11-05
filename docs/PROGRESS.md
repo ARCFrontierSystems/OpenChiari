@@ -3,6 +3,40 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: Phase 3, step 4: Research studies
+
+- **Matthew's choices:**
+  - **Summaries:** official text first. A new study shows the first two sentences of its official summary, labeled "From the official listing", until a plain summary is written, checked by a fresh agent against the listing, and approved.
+  - **Publishing:** automatic every morning.
+- **Data:** `scripts/fetch-studies.mjs` calls the ClinicalTrials.gov API v2.
+  - It fetches recruiting studies about Chiari or syringomyelia and keeps only registry facts.
+  - It writes `src/data/studies.json` with the processed date.
+  - Budd-Chiari syndrome, an unrelated liver condition, never counts.
+  - If the registry is down, the last list is kept and its date shows its age.
+- **Publishing:**
+  - `deploy.yml` now also runs every morning (09:23 UTC) and refreshes the list before building, so there are no daily commits.
+  - It keeps one GitHub issue listing the studies still waiting for a plain summary.
+  - The Checks workflow confirms the registry still answers.
+- **Page `/studies/`:**
+  - built from the Studies and StudiesPhone mockups;
+  - filters for condition, who can join and "Can take part from home";
+  - a Near box that sorts by city, state or ZIP, on the device only;
+  - each card shows status, type, ages, place, title, summary, sponsor and the listing link;
+  - "Before you join a study", the Bobby Jones registry line, and the ClinicalTrials.gov credit with the processed date;
+  - a link to the registry's own search if the list is empty.
+- **First real list (Nov 5):** 6 recruiting studies.
+  - 2 are about Chiari: neurofluid dynamics in Chiari I (Amiens), and the Neurosurgical Outcome Network (Italy).
+  - 3 are about syringomyelia (Beijing).
+  - 1 is fetal surgery for myelomeningocele, which lists Chiari II. Asked Matthew whether to keep it.
+- **New UI wording awaiting Matthew's approval:**
+  - "From the official listing"
+  - "No studies match these filters."
+  - the unavailable message
+  - "+ N more"
+  - "Filters"
+  - "City, state or ZIP"
+- **Checks:** all tests pass, including the accessibility scan of `/studies/` and a test of the filters, Near sorting and that nothing is sent.
+
 ## 2026-11-05: Realistic model: clearer highlight, easy to reach on phones
 
 - **Highlight (Matthew: selected parts were hard to see on the realistic model).**

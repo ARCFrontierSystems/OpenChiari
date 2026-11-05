@@ -24,7 +24,8 @@ const SUMMARIES = new URL('../src/data/study-summaries.json', import.meta.url);
 const API = 'https://clinicaltrials.gov/api/v2/studies';
 const QUERY = { 'query.cond': 'Chiari OR Syringomyelia', 'filter.overallStatus': 'RECRUITING', pageSize: '100', format: 'json' };
 
-const isChiari = (s) => /chiari/i.test(s);
+// Budd-Chiari syndrome is an unrelated liver condition that shares the name, so it never counts.
+const isChiari = (s) => /chiari/i.test(s.replace(/budd[\s-]*chiari/gi, ''));
 const isSyrinx = (s) => /syring|syrinx|hydromyel/i.test(s);
 
 /** Text from the registry can carry Markdown escapes ("\>") and stray spacing. */

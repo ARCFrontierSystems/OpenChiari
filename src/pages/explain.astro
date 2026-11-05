@@ -183,7 +183,9 @@ const t = s.explain;
     // The approved Chiari I explanation refers to the dashed line and the blue bracket, so it's used only when the
     // Measure marks are shown; otherwise each view's own approved note from the Explorer explains it.
     const looking = section.querySelector<HTMLElement>('[data-looking]')!;
-    if ((st.condition === 'chiari' || st.condition === 'syrinx') && st.measure && (st.camera === 'side' || st.camera === 'custom')) {
+    // A turned view counts as a side view when it is within 45 degrees of it (the line and bracket are on the midline).
+    const sideLike = st.camera === 'side' || (st.camera === 'custom' && !!shared?.orbit && Math.abs(shared.orbit.az) <= 45 && Math.abs(shared.orbit.el) <= 45);
+    if ((st.condition === 'chiari' || st.condition === 'syrinx') && st.measure && sideLike) {
       const ol = document.createElement('ol');
       for (const line of t.lookingChiari) ol.appendChild(document.createElement('li')).textContent = line;
       looking.appendChild(ol);

@@ -49,8 +49,8 @@
       "title": "¿Qué es la malformación de Chiari?",
       "whatItIs": {
         "title": "Qué es",
-        "wide": "Las amígdalas cerebelosas, la parte más baja del cerebelo, se extienden por debajo del agujero magno, la abertura en la base del cráneo. El cerebelo ayuda a controlar el equilibrio y la coordinación. A menudo, la malformación está relacionada con que la parte posterior e inferior del cráneo es más pequeña o tiene otra forma, lo que deja poco espacio al cerebro. Con menos frecuencia, aparece más adelante en la vida por otras causas.",
-        "narrow": "Las amígdalas cerebelosas, la parte más baja del cerebelo, se extienden por debajo de la abertura en la base del cráneo. A menudo, la malformación está relacionada con que la parte posterior e inferior del cráneo es más pequeña o tiene otra forma, lo que deja poco espacio al cerebro. Con menos frecuencia, aparece más adelante en la vida por otras causas."
+        "wide": "Las amígdalas cerebelosas, la parte más baja del cerebelo, se extienden por debajo del agujero magno, la abertura en la base del cráneo. El cerebelo ayuda a controlar el equilibrio y la coordinación. A menudo, la malformación está relacionada con que la parte posterior e inferior del cráneo sea más pequeña de lo habitual o tenga otra forma, lo que deja poco espacio al cerebro. Con menos frecuencia, aparece más adelante en la vida por otras causas.",
+        "narrow": "Las amígdalas cerebelosas, la parte más baja del cerebelo, se extienden por debajo de la abertura en la base del cráneo. A menudo, la malformación está relacionada con que la parte posterior e inferior del cráneo sea más pequeña de lo habitual o tenga otra forma, lo que deja poco espacio al cerebro. Con menos frecuencia, aparece más adelante en la vida por otras causas."
       },
       "whoHasIt": {
         "title": "Quién la tiene",
@@ -59,7 +59,7 @@
       },
       "howFound": {
         "title": "Cómo se detecta",
-        "wide": "Por lo general, con una resonancia magnética y un examen médico; a veces, por casualidad, durante un estudio por otro motivo. El médico revisa las imágenes junto con sus síntomas.",
+        "wide": "Por lo general, con una resonancia magnética y un examen médico; a veces, por casualidad, durante un estudio por otro motivo. El médico revisa las imágenes junto con los síntomas que usted tiene.",
         "narrow": "Por lo general, con una resonancia magnética y un examen médico; a veces, por casualidad."
       }
     },
@@ -140,7 +140,7 @@
           "num": "02",
           "page": "explain",
           "title": "Explain It (Explíquelo)",
-          "wide": "Envíe a su familia, a sus maestros o a su empleador un enlace a la vista que corresponde a su diagnóstico.",
+          "wide": "Envíe a su familia, a los maestros o a su empleador un enlace a la vista que corresponde a su diagnóstico.",
           "narrow": "Envíe un enlace a la vista que corresponde a su diagnóstico."
         },
         {
@@ -192,7 +192,7 @@
       "kit": "Kit de concientización",
       "impact": "Impacto",
       "openSource": "Código abierto",
-      "about": "Acerca de y contacto",
+      "about": "Acerca del sitio y contacto",
       "privacy": "Privacidad"
     }
   },
@@ -369,7 +369,7 @@
       }
     ],
     "viewOptions": "Vista y capas",
-    "hint": "Arrastre para girar · Desplácese para acercar o alejar · Mayús y arrastrar para mover",
+    "hint": "Arrastre para girar · Desplácese para acercar o alejar · Mantenga Mayús y arrastre para mover",
     "camera": "Cámara",
     "cameraViews": {
       "side": "Lado",
@@ -469,7 +469,7 @@
         "questions": [
           {
             "id": "options",
-            "text": "¿Cuáles son mis opciones de tratamiento, incluido el seguimiento?",
+            "text": "¿Cuáles son mis opciones de tratamiento, incluida la vigilancia con controles periódicos?",
             "checked": true
           },
           {
@@ -572,7 +572,7 @@
       },
       {
         "id": "kit",
-        "title": "Difunda información en septiembre",
+        "title": "Ayude a crear conciencia en septiembre",
         "text": "Gráficos y tarjetas gratis para el Mes de Concientización sobre Chiari."
       },
       {
@@ -590,7 +590,9 @@
     "how": {
       "factsBefore": "La información médica está adaptada de la",
       "ninds": "hoja informativa del NINDS",
-      "factsAfter": "y de otras fuentes publicadas, que se indican en las notas de evidencia.",
+      "factsAfter": "y de otras fuentes publicadas, que se indican en las",
+      "evidenceLink": "notas de evidencia",
+      "factsEnd": ".",
       "modelBefore": "El modelo 3D está hecho a partir de",
       "zAnatomy": "Z-Anatomy",
       "modelAfter": "y BodyParts3D, datos de anatomía abiertos.",
@@ -762,7 +764,7 @@
     "exploreFull": "Explorar el modelo 3D completo"
   },
   "explain": {
-    "_note": "Traducción de 'Explain It' (pendiente de revisión). starterNote: la nota en inglés no cabe en 280 caracteres en español; esta versión dice lo mismo en menos palabras (277 caracteres). Ver docs/SPANISH-REVIEW.md.",
+    "_note": "Traducción de 'Explain It' (pendiente de revisión). starterNote: la nota en inglés no cabe en 280 caracteres en español; esta versión dice lo mismo en menos palabras (273 caracteres). Ver docs/SPANISH-REVIEW.md.",
     "title": "Explain It (Explíquelo)",
     "backToExplorer": "Volver al explorador 3D",
     "previewTitle": "Vista previa de lo que verán",
@@ -841,7 +843,7 @@
     "unavailable": "La lista de estudios no está disponible en este momento. Puede buscar estudios sobre Chiari que buscan participantes en ClinicalTrials.gov (en inglés).",
     "beforeTitle": "Antes de participar en un estudio",
     "before": {
-      "wide": "Hable con su médico y pregúntele al equipo del estudio en qué consiste, cuánto le costará y cómo se usan sus datos. Open Chiari simplifica los resúmenes; la ficha oficial es la que vale.",
+      "wide": "Hable con su médico y pregúntele al equipo del estudio en qué consiste, si tiene algún costo para usted y cómo se usan sus datos. Open Chiari simplifica los resúmenes; la ficha oficial es la que vale.",
       "narrow": "Hable con su médico y pregúntele al equipo del estudio en qué consiste. La ficha oficial es la que vale."
     },
     "registryBefore": "Vea también el",

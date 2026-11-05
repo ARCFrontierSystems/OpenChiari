@@ -70,20 +70,23 @@ const pages = {
     <p class="serif" style="font-size:92px;line-height:1.12;margin:0">${k.quote}</p>
     <p style="font-size:36px;margin:64px 0 0;color:#EBD7F4">${k.quoteFooter}</p>
     <p style="font-size:30px;margin:16px 0 0;color:#EBD7F4">openchiari.org</p>
+    ${spanish ? `<p style="font-size:22px;margin:40px 0 0;color:#EBD7F4">${s.translation.noticeShort}</p>` : ''}
   </div>`,
   quoteStory: `<div style="width:1080px;height:1920px;padding:120px 96px;display:flex;flex-direction:column;justify-content:center;background:#5B027E;color:#fff">
     <span style="display:block;width:140px;height:12px;background:#CB98E1;margin-bottom:72px"></span>
     <p class="serif" style="font-size:112px;line-height:1.1;margin:0">${k.quote}</p>
     <p style="font-size:42px;margin:96px 0 0;color:#EBD7F4">${k.quoteFooter}</p>
     <p style="font-size:36px;margin:20px 0 0;color:#EBD7F4">openchiari.org</p>
+    ${spanish ? `<p style="font-size:26px;margin:48px 0 0;color:#EBD7F4">${s.translation.noticeShort}</p>` : ''}
   </div>`,
   // US Letter, 2 × 4 business-card-size cards (3.5 × 2 in) with dashed cut lines.
   cards: `<div style="width:8.5in;height:11in;padding:0.5in 0.75in;display:grid;grid-template-columns:3.5in 3.5in;grid-auto-rows:2in;gap:0.25in 0">
     ${Array.from({ length: 8 }, () => `<div style="border:1px dashed #A9A8A2;padding:0.18in 0.2in;display:flex;gap:0.16in;align-items:center">
       <div style="flex:1">
         <p class="serif" style="font-size:15pt;line-height:1.15;margin:0">${k.cardLine1}</p>
-        <p style="font-size:10pt;line-height:1.35;margin:0.08in 0 0">${k.cardLine2}</p>
+        <p style="font-size:${spanish ? '9pt' : '10pt'};line-height:1.35;margin:0.08in 0 0">${k.cardLine2}</p>
         <p class="mono" style="font-size:8pt;margin:0.1in 0 0;color:#5B027E">openchiari.org</p>
+        ${spanish ? `<p style="font-size:6pt;line-height:1.3;margin:0.05in 0 0;color:#5E5F66">${s.translation.noticeShort}</p>` : ''}
       </div>
       <div style="width:1.15in;height:1.15in">${qr(CARD_URL)}</div>
     </div>`).join('')}

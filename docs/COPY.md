@@ -994,3 +994,5 @@ Non-medical, approved with the check-up fixes ("All approved, and fix the rest o
 - Evidence notes, Spanish pages only: These notes are in English, like the sources they cite.
 - About, Corrections: …Corrections are made as quickly as possible, and every change is listed in the site's public code history.
 - Translation notice (Spanish pages): see `src/i18n/es.json` "translation"; English equivalents in `src/i18n/en.json`.
+- Impact, Accuracy checks value: November 5, 2026 · passed (after the Nov 5 re-audit fixes, `docs/audits/2026-11-05-wording-reaudit.md`). Spanish: 5 de noviembre de 2026 · superadas.
+- About, "How the content is made": "…and other published sources, listed in the [evidence notes](/evidence/)." (the words "evidence notes" link to the page).

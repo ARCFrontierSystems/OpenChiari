@@ -595,12 +595,15 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     camera.getWorldDirection(viewDir);
     const facing = Math.abs(viewDir.z); // 1 = looking straight at the cut face, 0 = edge-on
     const t = THREE.MathUtils.clamp((facing - 0.35) / 0.35, 0, 1);
-    const EDGE_ON = 0.12; // the skull has several surfaces one behind the other, so it fades further than the skin
+    // The skull has several surfaces one behind the other, so it fades further than the skin. After surgery it fades
+    // less, so the gap where bone was removed stays readable.
+    const EDGE_ON = store.get().condition === 'surgery' ? 0.45 : 0.12;
     return EDGE_ON + (1 - EDGE_ON) * t;
   }
   /** How see-through a structure is drawn right now. */
-  function drawnOpacity(p: { ghost: boolean; layer: LayerId; opacity: number }, fade: number, bone: number): number {
-    return p.ghost ? p.opacity * fade : p.layer === 'bone' ? p.opacity * bone : p.opacity;
+  function drawnOpacity(p: { ghost: boolean; layer: LayerId; opacity: number; partId: string | null }, fade: number, bone: number): number {
+    // The "bone removed" marking (after surgery) never fades: it is what that view is there to show.
+    return p.ghost ? p.opacity * fade : p.layer === 'bone' && p.partId !== 'removed' ? p.opacity * bone : p.opacity;
   }
   function applyOpacity() {
     const fade = skinFade();

@@ -590,7 +590,9 @@
     "how": {
       "factsBefore": "Medical facts are adapted from the",
       "ninds": "NINDS fact sheet",
-      "factsAfter": "and other published sources, listed in the evidence notes.",
+      "factsAfter": "and other published sources, listed in the",
+      "evidenceLink": "evidence notes",
+      "factsEnd": ".",
       "modelBefore": "The 3D model is built from",
       "zAnatomy": "Z-Anatomy",
       "modelAfter": "and BodyParts3D, open anatomy data.",

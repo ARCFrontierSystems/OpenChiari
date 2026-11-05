@@ -43,6 +43,8 @@ stay in English; "Explain It" is followed by "(Explíquelo)" where it is introdu
 | decompression surgery | cirugía de descompresión | standard; translator: please confirm |
 | dura, dural patch | duramadre, parche de duramadre | standard; translator: please confirm |
 | C1, C2 vertebra | vértebra C1 (atlas), vértebra C2 | standard |
+| dens (the peg of C2) | apófisis odontoides | standard; translator: please confirm |
+| monitoring (watch and wait) | vigilancia con controles periódicos | standard; translator: please confirm |
 | McRae line | línea de McRae | name |
 | headache | dolor de cabeza | MedlinePlus, COPY.md |
 | neck pain | dolor de cuello | MedlinePlus, COPY.md |

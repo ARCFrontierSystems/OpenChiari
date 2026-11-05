@@ -3,6 +3,20 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: Check-up wording and walk-through fixes (PR #7)
+
+- **Matthew approved** all the check-up wording recommendations and asked for the rest of the check-up items to be fixed (details in the PR and COPY.md; new EVIDENCE.md row 17).
+- **Independent re-audit** (`docs/audits/2026-11-05-wording-reaudit.md`): the wording passes in English and Spanish; two fixes needed, both done:
+  1. the "bone removed" marking had faded in the after-surgery back and below views; it now never fades, and the skull fades less after surgery;
+  2. the translator's review sheet now marks rows changed since a back-translation, after a second blind back-translation of the current Spanish (`docs/audits/2026-11-05-spanish-backtranslation-2.md`: no high or medium findings; its 9 small wording points fixed).
+- **Smaller re-audit points also fixed:**
+  - a turned Explain It view uses the line-and-bracket text only within 45 degrees of the side view;
+  - About links "evidence notes";
+  - the Spanish wallet card line fits, and the Spanish quote and wallet cards carry the pending-review notice;
+  - the Impact date is recorded in COPY.md.
+- **CI:** both workflows now always use the newest Node 22 (Astro needs 22.23.4; one GitHub machine had 22.23.3).
+- **Waiting for Matthew:** approval of the new see-through skull from the back, front and below (before and after pictures, Simple and Realistic), since he approved the realistic views on Nov 4. Publish after that.
+
 ## 2026-11-05: Phase 4: the full Spanish site, published with a notice
 
 - **Matthew's decision:** build the Spanish site, reduce the risk as much as possible, and publish it with a notice; a professional (and a Chiari research group) will check it later.

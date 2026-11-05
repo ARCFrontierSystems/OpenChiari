@@ -222,6 +222,7 @@
     "backHome": "Back to home",
     "pages": {
       "kit": "Awareness kit",
+      "impact": "Impact",
       "evidence": "Evidence notes"
     }
   },
@@ -630,14 +631,15 @@
   },
   "privacy": {
     "title": "Privacy",
-    "updated": "Last updated November 5, 2026",
+    "updated": "Last updated November 4, 2026",
     "short": "The short version: Open Chiari doesn't know who you are, doesn't use cookies, and never collects health information.",
     "countedTitle": "What is counted",
     "counted": {
       "before": "To show the totals on the",
       "impact": "Impact page",
-      "after": ", the site counts visits and a few actions: opening the 3D model, making an Explain It link, and opening a study listing. Counting uses Open Chiari's own counter, which uses no cookies and doesn't build a profile of you. Your browser sends only the name of the action, and the counter adds 1 to a total. It doesn't keep your address, device, browser, country, the page you came from, or the link. When the 3D model is shown on another website, that website's address is noted, so the Impact page can count the sites that use it."
+      "after": ", the site counts visits and a few actions, such as opening the 3D model or making an Explain It link. Counting uses [analytics service], which uses no cookies and doesn't build a profile of you. It sees which page was visited, the page you came from, your device and browser type, your country, and how fast the page loaded, then adds it to a total."
     },
+    "countedNote": "[Confirm this list against the chosen analytics service before launch.]",
     "neverTitle": "What is never collected",
     "never": [
       {
@@ -646,7 +648,7 @@
       },
       {
         "term": "Explain It notes",
-        "text": "Your note goes in the message you send, not in the link. The link holds only the chosen view, after the #. Browsers don't send that part to our server, and the counter never receives it."
+        "text": "Your note goes in the message you send, not in the link. The link holds only the chosen view, after the #. Browsers don't send that part to our server, and our analytics are set up not to record it."
       },
       {
         "term": "Visit prep questions",
@@ -689,8 +691,7 @@
       "after": ", your message is used only to reply and isn't shared. Please don't include medical details."
     },
     "changesTitle": "Changes",
-    "changes": "If this policy changes, the date at the top changes too, and anything significant is noted on the home page for 30 days.",
-    "_note": "Nov 5, 2026: 'updated', counted.after and the Explain It notes text describe Open Chiari's own counter (Matthew chose it over Cloudflare Web Analytics); wording awaits Matthew's approval."
+    "changes": "If this policy changes, the date at the top changes too, and anything significant is noted on the home page for 30 days."
   },
   "model": {
     "title": "Use the model on your own site",
@@ -844,59 +845,5 @@
     "creditBefore": "Not medical advice. Study data from",
     "creditSource": "ClinicalTrials.gov",
     "creditAfter": ", processed {date}. Summaries simplified by Open Chiari."
-  },
-  "impact": {
-    "_note": "Text from docs/COPY.md 'Impact'. New wording not in the mockup (notMeasured, wcagPass, wcagIssues, notCounted, launchDate) awaits Matthew's approval.",
-    "title": "Impact",
-    "intro": "How Open Chiari is used, how well it works, and how anyone can take it over. Counted without cookies or personal data.",
-    "useTitle": "Use since launch",
-    "launched": "Launched {date} · updated daily",
-    "launchDate": "November 4, 2026",
-    "totals": {
-      "visit": "Visits",
-      "explore": "3D models explored",
-      "explain": "Explain It links made",
-      "study": "Study listings opened",
-      "embedSites": "Sites embedding the model"
-    },
-    "notCounted": "Not counted yet",
-    "totalsNote": "Totals only. Open Chiari never records who you are, what your Explain It note says, or which questions you print.",
-    "qualityTitle": "Quality report",
-    "qualityRun": "Tested automatically on every update · last run {date}",
-    "columns": {
-      "check": "Check",
-      "phone": "Phone",
-      "desktop": "Desktop",
-      "means": "What it means"
-    },
-    "accessibility": "Accessibility",
-    "accessibilityMeans": "Usable with screen readers, keyboards and low vision",
-    "speed": "Speed",
-    "speedMeans": "How fast pages load on a typical connection",
-    "score": "{n} / 100",
-    "notMeasured": "Not measured yet",
-    "standard": "Accessibility standard",
-    "standardValue": "WCAG 2.2 AA · {result}",
-    "wcagPass": "passed automated checks",
-    "wcagIssues": "issues found by automated checks",
-    "standardMeans": "The current W3C standard; also covers WCAG 2.1 AA, the level in U.S. ADA rules",
-    "accuracy": "Accuracy checks",
-    "accuracyValue": "November 4, 2026 · passed",
-    "accuracyMeans": "Text and 3D views checked against published sources; not reviewed by a medical professional",
-    "openTitle": "Open source: nothing gets stranded",
-    "openText": "Every line of code and every model file is public: code under the MIT License, the 3D model under CC BY-SA 4.0. Any organization can run its own copy, change it, or take it over, with no fees and no dependence on one person or company.",
-    "code": "Code",
-    "codeLink": "[GitHub repository]",
-    "codeLicense": "· MIT License",
-    "model": "3D model",
-    "modelLicense": "CC BY-SA 4.0",
-    "hosting": "Hosting",
-    "hostingText": "Free static hosting; step-by-step guide included",
-    "personalData": "Personal data",
-    "personalDataText": "None stored, so there's nothing to migrate",
-    "orgsTitle": "For Chiari organizations",
-    "orgsText": "Want Open Chiari on your own site, in your colors, or a tool built around your needs? Let's talk.",
-    "contact": "Contact Open Chiari",
-    "footer": "A personal project by Matthew Borgfeld. Not medical advice."
   }
 }

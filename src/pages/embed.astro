@@ -69,17 +69,10 @@ const figure = anatomyFigureSvg({ condition: 'chiari', flow: true, labels: false
       import { anatomyFigureSvg, CONDITIONS, type Condition } from '../lib/anatomy-figure';
       import { showCalmForThisPage } from '../lib/calm';
       import strings from '../i18n/en.json';
-      import { count } from '../lib/count';
 
       const CODES: Record<string, Condition> = { typ: 'typical', c1: 'chiari', syr: 'syrinx', dec: 'surgery' };
       // A new set of settings after the # (without a page load) starts the view afresh.
       window.addEventListener('hashchange', () => location.reload());
-      // "Sites embedding the model": the address of the website showing this view, nothing else.
-      try {
-        if (document.referrer) count('embed', new URL(document.referrer).hostname);
-      } catch {
-        // No readable address: not counted.
-      }
       const params = new URLSearchParams(location.hash.slice(1));
       const condition = CODES[params.get('v') ?? ''] ?? 'chiari';
       const labels = params.get('labels') === '1';

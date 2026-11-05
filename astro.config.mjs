@@ -37,6 +37,4 @@ export default defineConfig({
     routing: { prefixDefaultLocale: false },
   },
   integrations: [realisticModel],
-  // Local previews only: the counter tests open the preview under the name openchiari.org (tests/site.spec.ts).
-  vite: { preview: { allowedHosts: ['openchiari.org'] } },
 });

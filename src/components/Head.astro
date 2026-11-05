@@ -47,8 +47,3 @@ const pageTitle = title ? `${title} · ${t.siteName}` : t.siteName;
     if (saved === 'on' || (saved !== 'off' && reduce)) document.documentElement.dataset.calm = 'on';
   })();
 </script>
-<script>
-  // Visits: totals only, never anything about the visitor (src/lib/count.ts).
-  import { countVisit } from '../lib/count';
-  countVisit();
-</script>

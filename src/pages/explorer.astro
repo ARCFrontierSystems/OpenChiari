@@ -217,6 +217,7 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
       import { bindCalmSwitches } from '../lib/calm';
       import { createStore, LAYERS, type ViewState } from '../explorer/state';
       import { decodeView, encodeView, type Orbit } from '../explorer/share';
+      import { count } from '../lib/count';
       import { anatomyFigureSvg, type Condition } from '../lib/anatomy-figure';
       import strings from '../i18n/en.json';
 
@@ -323,6 +324,7 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
           });
           view.classList.add('has-3d');
           document.body.classList.add('has-3d');
+          count('explore');
           $$<HTMLButtonElement>('[data-camera]').forEach((b) => b.addEventListener('click', () => store.set({ camera: b.dataset.camera as ViewState['camera'] })));
           $$<HTMLButtonElement>('[data-camera-reset]').forEach((b) => b.addEventListener('click', () => viewer.reset()));
           let spoken = '';

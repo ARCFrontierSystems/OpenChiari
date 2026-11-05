@@ -1,0 +1,5 @@
+{
+  "_note": "Written by scripts/fetch-totals.mjs from /api/totals when the site is published (every morning). null = not counted yet.",
+  "updated": null,
+  "totals": { "visit": null, "explore": null, "explain": null, "study": null, "embedSites": null }
+}

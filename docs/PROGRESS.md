@@ -16,6 +16,43 @@ Matthew's preference: when a step is done, lay out what the next step will cover
 - **Checks:** all 97 tests pass, and the realistic view check passes (fluid shows at every flow-mark place, in all four views).
 - **If it still stutters:** a lighter phone model, with fewer triangles. `model/realistic/web.mjs` re-checks the tonsil landmark and parts after simplifying.
 
+## 2026-11-05: Phase 3, step 5: visitor counts and the Impact page
+
+- **Matthew's choice:** Open Chiari's own counters, instead of Cloudflare Web Analytics, which can't count actions and loads a script from another address.
+- **Counter (`functions/api/count.js`, a Cloudflare Pages Function on openchiari.org):**
+  - The browser sends only the name of what happened: visit, explore, explain, study, or embed with the embedding site's address.
+  - The counter adds 1 to a total in a Cloudflare D1 database (`counts/schema.sql`).
+  - It stores no IP address, device, browser, page, link, note or time.
+  - It only accepts requests from openchiari.org's own pages.
+  - `/api/totals` returns the totals.
+- **When each count is sent (`src/lib/count.ts`):**
+  - **Visits:** counted only when arriving from outside the site.
+  - **3D explored:** when the 3D model is up.
+  - **Explain It links made:** once, on Copy, Share, Text message, Email or QR code.
+  - **Study listings opened:** when a listing link is followed.
+  - **Sites embedding:** the address of the site showing the embed.
+  - Nothing is sent from any other address (tests, previews, copies).
+- **Impact page `/impact/`:** built from the Impact mockup.
+  - **Totals:** read each morning by `scripts/fetch-totals.mjs`.
+  - **Quality report:** measured each morning by `scripts/quality.mjs`, using Lighthouse on the home page (phone and desktop) and the axe scans of every page.
+  - **Accuracy checks:** November 4, 2026, passed.
+  - **Open source facts:** shown as in the mockup.
+  - **Empty values:** anything not counted or measured yet says so.
+- **Publishing:** `deploy.yml` creates the counter database on its first run. This needs the API token to also have **Account > D1 > Edit**; without it, counting stays off and the site still publishes.
+- **Privacy page:** rewritten to describe the counter, and the placeholder note removed. Approved by Matthew, along with the new Impact wording.
+- **Checks:** all tests pass, including new ones:
+  - exactly what the counters send, checked on the openchiari.org name;
+  - nothing is sent from anywhere else;
+  - the counter server, with a stand-in database.
+- **Repository made public (Matthew, November 5):**
+  - Matthew's personal email was in one early save. It was replaced in the history with his GitHub no-reply address.
+  - The cleaned history went into a new public repository, github.com/ARCFrontierSystems/OpenChiari. A full copy downloaded back from GitHub has no trace of the email.
+  - The old copy, OpenChiari-old, stays private with Actions turned off.
+  - A security scan of every file and all history found no keys, tokens, passwords or credential files.
+  - Hardening: only well-formed study IDs are accepted.
+  - Secret scanning and push protection are on.
+  - The Impact page links to the repository.
+
 ## 2026-11-05: Phase 3, step 4: Research studies
 
 - **Matthew's choices:**

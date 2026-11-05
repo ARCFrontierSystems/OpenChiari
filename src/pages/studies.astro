@@ -192,8 +192,11 @@ const cards = studies.map((st) => {
 
 <script>
   import strings from '../i18n/en.json';
+  import { count } from '../lib/count';
 
   const t = strings.studies;
+  // "Study listings opened": counted when a listing link is followed (which one isn't recorded).
+  document.querySelectorAll('a[href^="https://clinicaltrials.gov/study/"]').forEach((a) => a.addEventListener('click', () => count('study')));
   const form = document.querySelector<HTMLFormElement>('[data-filters]')!;
   const list = document.querySelector<HTMLElement>('[data-list]');
   const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-study]'));

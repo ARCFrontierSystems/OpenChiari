@@ -41,6 +41,8 @@ export const externalLinks = {
   email: 'mailto:hello@openchiari.org',
   // Research studies: the registry itself, and its search for recruiting Chiari and syringomyelia studies (the fallback
   // when the list isn't available).
+  // The code, public since November 5, 2026.
+  repository: 'https://github.com/ARCFrontierSystems/OpenChiari',
   ctgov: 'https://clinicaltrials.gov',
   ctgovSearch: 'https://clinicaltrials.gov/search?cond=Chiari%20OR%20Syringomyelia&aggFilters=status:rec',
   ctgovStudy: 'https://clinicaltrials.gov/study/',

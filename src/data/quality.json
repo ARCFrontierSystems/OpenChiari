@@ -1,0 +1,7 @@
+{
+  "_note": "Written by scripts/quality.mjs when the site is published: Lighthouse on the home page (phone and desktop) and the axe accessibility scans of every page. null = not measured yet.",
+  "lastRun": null,
+  "phone": { "accessibility": null, "speed": null },
+  "desktop": { "accessibility": null, "speed": null },
+  "wcag": null
+}

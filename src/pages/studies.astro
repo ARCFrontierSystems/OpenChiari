@@ -1,0 +1,494 @@
+---
+/**
+ * Research studies. Layout from design/mockups/Studies.dc.html (desktop) and StudiesPhone.dc.html (phone).
+ * Text from src/i18n/en.json (docs/COPY.md "Research studies").
+ *
+ * The list comes from src/data/studies.json, which scripts/fetch-studies.mjs writes from the ClinicalTrials.gov API
+ * before each publish (every morning). Visitors' browsers never contact ClinicalTrials.gov until they open a listing.
+ * Each card shows the plain summary Open Chiari wrote once Matthew has approved it (src/data/study-summaries.json);
+ * until then, the first two sentences of the official summary, marked "From the official listing".
+ * Filtering and the "Near" sorting happen on the visitor's device; nothing is stored or sent.
+ */
+import Base from '../layouts/Base.astro';
+import { getStrings, externalLinks } from '../i18n';
+import data from '../data/studies.json';
+import plain from '../data/study-summaries.json';
+
+const t = getStrings().studies;
+
+interface Site {
+  facility: string;
+  city: string;
+  state: string;
+  zip: string;
+  country: string;
+}
+interface Study {
+  nct: string;
+  title: string;
+  status: string;
+  type: 'trial' | 'observational';
+  children: boolean;
+  adults: boolean;
+  conditions: string[];
+  sponsor: string;
+  officialSummary: string;
+  sites: Site[];
+}
+interface Plain {
+  summary: string;
+  whatYoudDo?: string;
+  remote?: boolean;
+  approved: string;
+}
+
+const leftOut = ((plain as { leftOut?: Record<string, unknown> }).leftOut ?? {}) as Record<string, unknown>;
+const studies = ((data.studies as unknown as Study[]) ?? []).filter((s) => !leftOut[s.nct]);
+const approved = (plain.studies ?? {}) as Record<string, Plain>;
+const processed = data.processed
+  ? new Date(`${data.processed}T12:00:00Z`).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })
+  : null;
+const count = (n: number) => (n === 1 ? t.countOne : t.countOther.replace('{n}', String(n)));
+
+const place = (s: Site) => [s.city, s.country === 'United States' ? s.state : s.country].filter(Boolean).join(', ');
+function locationLabel(st: Study) {
+  const places = [...new Set(st.sites.map(place).filter(Boolean))];
+  if (!places.length) return '';
+  return places.length === 1 ? places[0] : `${places[0]} ${t.moreSites.replace('{n}', String(places.length - 1))}`;
+}
+const ageKey = (st: Study): keyof typeof t.ages => (st.children && st.adults ? 'both' : st.children ? 'children' : 'adults');
+
+const cards = studies.map((st) => {
+  const p = approved[st.nct];
+  return {
+    ...st,
+    summary: p?.summary ?? st.officialSummary,
+    official: !p,
+    whatYoudDo: p?.whatYoudDo ?? '',
+    remote: !!p?.remote,
+    age: ageKey(st),
+    location: locationLabel(st),
+    // For the "Near" sort, done on the device: every recruiting site's city, state, ZIP and country.
+    places: st.sites.map((s) => [s.city, s.state, s.zip, s.country].join('|')).join(';'),
+  };
+});
+---
+
+<Base title={t.navTitle}>
+  <div class="studies container">
+    <div class="page-intro">
+      <div>
+        <h1 class="serif">{t.title}</h1>
+        <p><span class="only-wide">{t.intro.wide}</span><span class="only-narrow">{t.intro.narrow}</span></p>
+      </div>
+      {processed && (
+        <p class="updated mono">
+          <span class="only-wide">{t.updated.replace('{date}', processed)}</span>
+          <span class="only-narrow">{t.updatedNarrow.replace('{n}', String(cards.length))}</span>
+        </p>
+      )}
+    </div>
+
+    <div class="layout">
+      <button type="button" class="button button-secondary filters-toggle only-narrow" aria-expanded="false" aria-controls="study-filters" data-filters-toggle>
+        {t.filters}<span data-filters-count></span>
+      </button>
+      <form id="study-filters" class="filters" aria-label={t.filterLabel} data-filters>
+        <fieldset>
+          <legend>{t.condition}</legend>
+          {Object.entries(t.conditions).map(([id, label]) => (
+            <label class="check"><input type="checkbox" name="condition" value={id} checked /> {label}</label>
+          ))}
+        </fieldset>
+        <fieldset>
+          <legend>{t.whoCanJoin}</legend>
+          {(['any', 'adults', 'children'] as const).map((id, i) => (
+            <label class="check"><input type="radio" name="age" value={id} checked={i === 0} /> {t.ages[id]}</label>
+          ))}
+        </fieldset>
+        <div class="near">
+          <label for="near" class="legend">{t.near}</label>
+          <input id="near" type="text" autocomplete="off" placeholder={t.nearPlaceholder} aria-describedby="near-hint" data-near />
+          <p class="hint" id="near-hint">{t.nearHint}</p>
+        </div>
+        <label class="check"><input type="checkbox" name="remote" data-remote /> {t.remoteFilter}</label>
+      </form>
+
+      <section class="list" aria-label={t.navTitle}>
+        {cards.length ? (
+          <>
+            <p class="count mono" aria-live="polite" data-count>{count(cards.length)}</p>
+            <div data-list>
+              {cards.map((c) => (
+                <article
+                  class="study"
+                  data-study
+                  data-conditions={c.conditions.join(' ')}
+                  data-children={String(c.children)}
+                  data-adults={String(c.adults)}
+                  data-remote={String(c.remote)}
+                  data-title={c.title}
+                  data-places={c.places}
+                >
+                  <p class="tags mono">
+                    <span class="status">{t.status.RECRUITING}</span>
+                    <span>{t.types[c.type]}</span>
+                    <span>{t.ages[c.age]}</span>
+                    {c.remote ? <span>{t.remote}</span> : c.location && <span class="only-wide">{c.location}</span>}
+                  </p>
+                  <h2 class="serif">
+                    <a href={externalLinks.ctgovStudy + c.nct} rel="noopener">{c.title}</a>
+                  </h2>
+                  {c.summary && (
+                    <p class="summary">
+                      {c.official && <span class="official mono">{t.officialLabel}</span>}
+                      {c.summary}
+                    </p>
+                  )}
+                  <dl class="only-wide">
+                    {c.whatYoudDo && (
+                      <>
+                        <dt>{t.whatYoudDo}</dt>
+                        <dd>{c.whatYoudDo}</dd>
+                      </>
+                    )}
+                    {c.sponsor && (
+                      <>
+                        <dt>{t.runBy}</dt>
+                        <dd>{c.sponsor}</dd>
+                      </>
+                    )}
+                    <dt>{t.listing}</dt>
+                    <dd><a href={externalLinks.ctgovStudy + c.nct} rel="noopener">{t.listingLink.replace('{nct}', c.nct)}</a></dd>
+                  </dl>
+                  <p class="byline only-narrow">{[c.sponsor, c.remote ? t.remoteLine : c.location].filter(Boolean).join(' · ')}</p>
+                </article>
+              ))}
+            </div>
+            <p class="no-match" hidden data-no-match>{t.noMatch}</p>
+          </>
+        ) : (
+          <p class="unavailable">
+            <a href={externalLinks.ctgovSearch} rel="noopener">{t.unavailable}</a>
+          </p>
+        )}
+
+        <aside class="before">
+          <h2>{t.beforeTitle}</h2>
+          <p><span class="only-wide">{t.before.wide}</span><span class="only-narrow">{t.before.narrow}</span></p>
+        </aside>
+        <p class="registry only-wide">
+          {t.registryBefore} <a href={externalLinks.bjcsfRegistry} rel="noopener">{t.registry}</a> {t.registryAfter}
+        </p>
+        {processed && (
+          <p class="credit">
+            {t.creditBefore} <a href={externalLinks.ctgov} rel="noopener">{t.creditSource}</a>{t.creditAfter.replace('{date}', processed)}
+          </p>
+        )}
+      </section>
+    </div>
+  </div>
+</Base>
+
+<script>
+  import strings from '../i18n/en.json';
+
+  const t = strings.studies;
+  const form = document.querySelector<HTMLFormElement>('[data-filters]')!;
+  const list = document.querySelector<HTMLElement>('[data-list]');
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-study]'));
+  const near = document.querySelector<HTMLInputElement>('[data-near]')!;
+  const toggle = document.querySelector<HTMLButtonElement>('[data-filters-toggle]')!;
+  const STATES: Record<string, string> = {
+    AL: 'alabama', AK: 'alaska', AZ: 'arizona', AR: 'arkansas', CA: 'california', CO: 'colorado', CT: 'connecticut',
+    DE: 'delaware', DC: 'district of columbia', FL: 'florida', GA: 'georgia', HI: 'hawaii', ID: 'idaho', IL: 'illinois',
+    IN: 'indiana', IA: 'iowa', KS: 'kansas', KY: 'kentucky', LA: 'louisiana', ME: 'maine', MD: 'maryland',
+    MA: 'massachusetts', MI: 'michigan', MN: 'minnesota', MS: 'mississippi', MO: 'missouri', MT: 'montana',
+    NE: 'nebraska', NV: 'nevada', NH: 'new hampshire', NJ: 'new jersey', NM: 'new mexico', NY: 'new york',
+    NC: 'north carolina', ND: 'north dakota', OH: 'ohio', OK: 'oklahoma', OR: 'oregon', PA: 'pennsylvania',
+    RI: 'rhode island', SC: 'south carolina', SD: 'south dakota', TN: 'tennessee', TX: 'texas', UT: 'utah',
+    VT: 'vermont', VA: 'virginia', WA: 'washington', WV: 'west virginia', WI: 'wisconsin', WY: 'wyoming', PR: 'puerto rico',
+  };
+
+  // Nothing is ever submitted anywhere.
+  form.addEventListener('submit', (e) => e.preventDefault());
+
+  /** How close a study's sites are to what was typed: ZIP, then city, then state, then country. Text only, on the device. */
+  function closeness(card: HTMLElement, query: string) {
+    const parts = query.toLowerCase().split(/[\s,]+/).filter(Boolean);
+    if (!parts.length) return 0;
+    const zip = parts.find((p) => /^\d{3,5}$/.test(p));
+    const words = query.toLowerCase().replace(/\d+/g, ' ').split(',').map((w) => w.trim()).filter(Boolean);
+    const stateWords = new Set(parts.flatMap((p) => (STATES[p.toUpperCase()] ? [STATES[p.toUpperCase()]] : [])).concat(words));
+    let best = 0;
+    for (const site of (card.dataset.places ?? '').split(';')) {
+      const [city, state, siteZip, country] = site.toLowerCase().split('|');
+      let score = 0;
+      if (zip && siteZip) {
+        if (siteZip.startsWith(zip)) score = 6;
+        else if (siteZip.slice(0, 3) === zip.slice(0, 3)) score = 5;
+        else if (siteZip[0] === zip[0]) score = 1.5;
+      }
+      if (city && words.some((w) => w === city || w.startsWith(city + ' '))) score = Math.max(score, 4);
+      if (state && stateWords.has(state)) score = Math.max(score, 3);
+      if (country && words.includes(country)) score = Math.max(score, 1);
+      best = Math.max(best, score);
+    }
+    return best;
+  }
+
+  function update() {
+    const conditions = Array.from(form.querySelectorAll<HTMLInputElement>('input[name="condition"]:checked')).map((b) => b.value);
+    const age = form.querySelector<HTMLInputElement>('input[name="age"]:checked')?.value ?? 'any';
+    const remoteOnly = form.querySelector<HTMLInputElement>('[data-remote]')!.checked;
+    let shown = 0;
+    for (const card of cards) {
+      const ok =
+        (card.dataset.conditions ?? '').split(' ').some((c) => conditions.includes(c)) &&
+        (age === 'any' || card.dataset[age] === 'true') &&
+        (!remoteOnly || card.dataset.remote === 'true');
+      card.hidden = !ok;
+      if (ok) shown++;
+    }
+    // Near: closest first, then studies people can join from home, then the rest by title.
+    const query = near.value.trim();
+    const ranked = cards
+      .map((card) => ({ card, score: closeness(card, query), remote: card.dataset.remote === 'true' ? 1 : 0 }))
+      .sort((a, b) => b.score - a.score || (query ? b.remote - a.remote : 0) || a.card.dataset.title!.localeCompare(b.card.dataset.title!));
+    list?.replaceChildren(...ranked.map((r) => r.card));
+
+    const countEl = document.querySelector('[data-count]');
+    if (countEl) countEl.textContent = shown === 1 ? t.countOne : t.countOther.replace('{n}', String(shown));
+    const noMatch = document.querySelector<HTMLElement>('[data-no-match]');
+    if (noMatch) noMatch.hidden = shown > 0 || !cards.length;
+
+    // Phone: the Filters button shows how many filters are narrowing the list.
+    const active =
+      (conditions.length < 2 ? 1 : 0) + (age !== 'any' ? 1 : 0) + (remoteOnly ? 1 : 0) + (query ? 1 : 0);
+    document.querySelector('[data-filters-count]')!.textContent = active ? ` · ${active}` : '';
+  }
+  form.addEventListener('change', update);
+  near.addEventListener('input', update);
+
+  toggle.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') !== 'true';
+    toggle.setAttribute('aria-expanded', String(open));
+    form.classList.toggle('is-open', open);
+  });
+  update();
+</script>
+
+<style>
+  .studies {
+    padding-top: var(--s-48);
+    padding-bottom: var(--s-72);
+  }
+  .page-intro {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--s-16) var(--s-40);
+    margin-bottom: var(--s-40);
+  }
+  .page-intro h1 {
+    font-size: var(--h1);
+    line-height: 1.08;
+    max-width: 14em;
+    margin-bottom: var(--s-16);
+  }
+  .page-intro p {
+    max-width: 44em;
+    color: var(--ink-2);
+  }
+  .updated {
+    font-size: var(--text-mono);
+    color: var(--muted);
+  }
+  .layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: var(--s-40);
+    align-items: start;
+  }
+  .filters {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-24);
+    position: sticky;
+    top: var(--s-24);
+  }
+  .filters fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  .filters legend,
+  .filters .legend {
+    display: block;
+    font-weight: 600;
+    margin-bottom: var(--s-8);
+  }
+  .check {
+    min-height: var(--touch);
+    display: flex;
+    align-items: center;
+    gap: var(--s-12);
+    cursor: pointer;
+  }
+  .check input {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    accent-color: var(--accent);
+    flex: none;
+  }
+  .near input {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: var(--touch);
+    padding: 0 var(--s-12);
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    font: inherit;
+    color: var(--ink);
+  }
+  .hint {
+    margin-top: var(--s-4);
+    font-size: var(--text-small);
+    color: var(--muted);
+  }
+  .count {
+    font-size: var(--text-mono);
+    color: var(--muted);
+    margin-bottom: var(--s-16);
+  }
+  .study {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: var(--s-24);
+    margin-bottom: var(--s-16);
+  }
+  .study[hidden] {
+    display: none;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-4) var(--s-16);
+    font-size: var(--text-mono);
+    color: var(--muted);
+    margin-bottom: var(--s-12);
+  }
+  .tags .status {
+    color: var(--status-good);
+  }
+  .study h2 {
+    font-size: 22px;
+    line-height: 1.3;
+    margin-bottom: var(--s-12);
+  }
+  .study h2 a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .study h2 a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+  .summary {
+    color: var(--ink-2);
+    margin-bottom: var(--s-16);
+  }
+  .official {
+    display: block;
+    font-size: var(--text-mono);
+    color: var(--muted);
+    margin-bottom: var(--s-4);
+  }
+  dl {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: var(--s-4) var(--s-24);
+    margin: 0;
+    font-size: var(--text-small);
+  }
+  dt {
+    color: var(--muted);
+  }
+  dd {
+    margin: 0;
+  }
+  .byline {
+    font-size: var(--text-small);
+    color: var(--muted);
+  }
+  .no-match,
+  .unavailable {
+    padding: var(--s-24);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--surface);
+    margin-bottom: var(--s-16);
+  }
+  .before {
+    margin-top: var(--s-32);
+    padding: var(--s-24);
+    border-left: 3px solid var(--accent);
+    background: var(--surface);
+  }
+  .before h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: var(--s-8);
+  }
+  .registry,
+  .credit {
+    margin-top: var(--s-24);
+    font-size: var(--text-small);
+    color: var(--muted);
+  }
+  .filters-toggle {
+    display: none;
+  }
+
+  @media (max-width: 860px) {
+    .layout {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--s-16);
+    }
+    .page-intro h1 {
+      font-size: 34px;
+    }
+    .page-intro {
+      margin-bottom: var(--s-24);
+    }
+    .filters-toggle {
+      display: inline-flex;
+      justify-self: start;
+      font: inherit;
+      font-weight: 500;
+      cursor: pointer;
+      background: transparent;
+    }
+    .filters {
+      position: static;
+      display: none;
+      padding: var(--s-16);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+    .filters.is-open {
+      display: flex;
+    }
+    .study {
+      padding: var(--s-16);
+    }
+    .study h2 {
+      font-size: 19px;
+    }
+  }
+</style>

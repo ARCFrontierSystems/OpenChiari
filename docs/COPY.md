@@ -463,6 +463,16 @@ Mockup: `design/mockups/Studies.dc.html`
 - ClinicalTrials.gov
 - , processed [date]. Summaries simplified by Open Chiari.
 
+### Added 2026-11-05 (approved by Matthew)
+
+Shown on the page but not in the mockups:
+- From the official listing
+- No studies match these filters.
+- The study list isn't available right now. You can search for recruiting Chiari studies on ClinicalTrials.gov.
+- + [N] more
+- Filters
+- City, state or ZIP
+
 ## Research studies (phone)
 
 Mockup: `design/mockups/StudiesPhone.dc.html`

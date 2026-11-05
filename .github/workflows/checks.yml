@@ -24,6 +24,8 @@ jobs:
         run: npm run check
       - name: 3D model matches EVIDENCE.md
         run: npm run model:check
+      - name: ClinicalTrials.gov still answers (the site itself uses the saved list)
+        run: node scripts/fetch-studies.mjs --out "$RUNNER_TEMP/studies.json"
       - name: Build
         run: npm run build
       - name: Install test browser

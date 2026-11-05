@@ -137,6 +137,7 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
         <div class="x-tools-narrow only-narrow-x" role="group" aria-label={x.viewTools}>
           <button type="button" class="x-tool" data-toggle="flow" aria-pressed={(st.flow) ? 'true' : 'false'}>{x.flowShort}</button>
           <button type="button" class="x-tool" data-toggle="measure" aria-pressed={(st.measure) ? 'true' : 'false'}>{x.measure}</button>
+          <button type="button" class="x-tool" data-model-toggle aria-pressed={st.model === 'realistic' ? 'true' : 'false'} data-3d-only>{x.realistic}</button>
           <button type="button" class="x-tool" data-layers-toggle aria-expanded="false" aria-controls="view-options">{x.layers}</button>
         </div>
 
@@ -244,6 +245,10 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
         range.addEventListener('input', () => store.setLayer(range.dataset.layerOpacity as (typeof LAYERS)[number], { opacity: Number(range.value) })),
       );
       $$<HTMLInputElement>('[data-cut]').forEach((range) => range.addEventListener('input', () => store.set({ cut: Number(range.value) })));
+      // Phones: the Realistic switch sits with the other view tools, so it's easy to find.
+      $$<HTMLButtonElement>('[data-model-toggle]').forEach((button) =>
+        button.addEventListener('click', () => store.set({ model: store.get().model === 'realistic' ? 'simple' : 'realistic' })),
+      );
       $$<HTMLButtonElement>('[data-model]').forEach((button) =>
         button.addEventListener('click', () => store.set({ model: button.dataset.model as ViewState['model'] })),
       );
@@ -308,7 +313,7 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
             realisticUrl: () => `/models/realistic/realistic-${Math.min(window.innerWidth, window.innerHeight) < 700 ? 'phone' : 'desktop'}.glb`,
             startOrbit: shared?.orbit ?? null,
             onRealistic: (status) => {
-              $$<HTMLButtonElement>('[data-model="realistic"]').forEach((b) => b.setAttribute('aria-busy', String(status === 'loading')));
+              $$<HTMLButtonElement>('[data-model="realistic"], [data-model-toggle]').forEach((b) => b.setAttribute('aria-busy', String(status === 'loading')));
             },
             onPick: (part) => {
               store.set({ part });
@@ -369,6 +374,7 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
         $$<HTMLInputElement>('[data-layer-opacity]').forEach((r) => (r.value = String(st.layers[r.dataset.layerOpacity as (typeof LAYERS)[number]].opacity)));
         $$<HTMLInputElement>('[data-cut]').forEach((r) => (r.value = String(st.cut)));
         $$('[data-model]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.model === st.model)));
+        $$('[data-model-toggle]').forEach((b) => b.setAttribute('aria-pressed', String(st.model === 'realistic')));
         $$('[data-part]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.part === st.part)));
 
         // Part 11 (syrinx, bone removed) only exists in its own view; elsewhere go back to the tonsil.

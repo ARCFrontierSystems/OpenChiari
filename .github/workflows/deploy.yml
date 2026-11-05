@@ -15,10 +15,15 @@ name: Deploy
 on:
   push:
     branches: [main]
+  # Every morning, so the Research studies list is refreshed from ClinicalTrials.gov (Matthew chose automatic
+  # publishing for these updates on Nov 5, 2026; only the registry's facts change, plain summaries still need approval).
+  schedule:
+    - cron: '23 9 * * *'
   workflow_dispatch:
 
 permissions:
   contents: read
+  issues: write
 
 concurrency:
   group: deploy
@@ -47,6 +52,10 @@ jobs:
           cache: npm
       - if: steps.secrets.outputs.ok == 'true'
         run: npm ci
+      - name: Refresh research studies from ClinicalTrials.gov
+        id: studies
+        if: steps.secrets.outputs.ok == 'true'
+        run: npm run studies:fetch
       - name: Build
         if: steps.secrets.outputs.ok == 'true'
         run: npm run build
@@ -64,3 +73,18 @@ jobs:
               -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "Content-Type: application/json" \
               --data "{\"name\":\"$domain\"}" | grep -o '"success":[a-z]*' || true
           done
+      - name: List studies still waiting for a plain summary (one open issue, kept up to date)
+        if: steps.secrets.outputs.ok == 'true' && steps.studies.outputs.waiting != ''
+        # A problem here (for example, issues turned off for the repository) never fails the publish.
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          WAITING: ${{ steps.studies.outputs.waiting }}
+        run: |
+          title="Research studies waiting for a plain summary"
+          body="These recruiting studies need a plain summary (they show the official one until it is written, checked against the listing and approved), or their listing has changed since their summary was checked (src/data/study-summaries.json):"$'\n\n'
+          for id in ${WAITING//,/ }; do body+="- [$id](https://clinicaltrials.gov/study/$id)"$'\n'; done
+          body+=$'\n'"Updated automatically by the Deploy workflow."
+          number=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "\"$title\" in:title" --json number --jq '.[0].number')
+          if [ -n "$number" ]; then gh issue edit "$number" --repo "$GITHUB_REPOSITORY" --body "$body";
+          else gh issue create --repo "$GITHUB_REPOSITORY" --title "$title" --body "$body"; fi

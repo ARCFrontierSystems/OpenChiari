@@ -3,6 +3,74 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: Phase 3, step 4: Research studies
+
+- **Matthew's choices:**
+  - **Summaries:** official text first. A new study shows the first two sentences of its official summary, labeled "From the official listing", until a plain summary is written, checked by a fresh agent against the listing, and approved.
+  - **Publishing:** automatic every morning.
+- **Data:** `scripts/fetch-studies.mjs` calls the ClinicalTrials.gov API v2.
+  - It fetches recruiting studies about Chiari or syringomyelia and keeps only registry facts.
+  - It writes `src/data/studies.json` with the processed date.
+  - Budd-Chiari syndrome, an unrelated liver condition, never counts.
+  - If the registry is down, the last list is kept and its date shows its age.
+- **Publishing:**
+  - `deploy.yml` now also runs every morning (09:23 UTC) and refreshes the list before building, so there are no daily commits.
+  - It keeps one GitHub issue listing the studies still waiting for a plain summary.
+  - The Checks workflow confirms the registry still answers.
+- **Page `/studies/`:**
+  - built from the Studies and StudiesPhone mockups;
+  - filters for condition, who can join and "Can take part from home";
+  - a Near box that sorts by city, state or ZIP, on the device only;
+  - each card shows status, type, ages, place, title, summary, sponsor and the listing link;
+  - "Before you join a study", the Bobby Jones registry line, and the ClinicalTrials.gov credit with the processed date;
+  - a link to the registry's own search if the list is empty.
+- **First real list (Nov 5):** 6 recruiting studies.
+  - 2 are about Chiari: neurofluid dynamics in Chiari I (Amiens), and the Neurosurgical Outcome Network (Italy).
+  - 3 are about syringomyelia (Beijing).
+  - 1 is fetal surgery for myelomeningocele, which lists Chiari II. Matthew: leave it out. It's now in `leftOut` in `src/data/study-summaries.json`, with the reason, and the daily refresh skips it. The page lists 5.
+- **New UI wording, approved by Matthew the same day:**
+  - "From the official listing"
+  - "No studies match these filters."
+  - the unavailable message
+  - "+ N more"
+  - "Filters"
+  - "City, state or ZIP"
+- **Checks:** all tests pass, including the accessibility scan of `/studies/` and a test of the filters, Near sorting and that nothing is sent.
+- **Matthew allowed clinicaltrials.gov; the full listings were opened.**
+  - NCT06375759 (Beijing bypass surgery) excludes people with Chiari, so Matthew had it left out.
+  - **The 2-year rule (Matthew):** a study whose status its team hasn't confirmed in the last 2 years is hidden automatically. ClinicalTrials.gov uses the same limit, together with a passed end date, for its "unknown" status. This hides the betaine and thalidomide trials, last confirmed in February 2024.
+  - The list is now 2 studies, both including Chiari I: Amiens (France) and the Neurosurgical Outcome Network (Italy).
+- **Plain summaries:** drafted for the 2 remaining studies in `docs/drafts/2026-11-05-study-summaries.md`.
+  - A fresh agent checked them against the saved listings (`docs/audits/2026-11-05-study-summaries-audit.md`): 7 medium and 12 low issues, none high, and nothing that reads as advice.
+  - All issues for the 2 listed studies are fixed in the revised drafts.
+  - **Approved by Matthew** and live: both cards now show the plain summary and "What you'd do".
+  - They are recorded in EVIDENCE.md ("Research studies summaries").
+  - If a listing changes after its summary was checked, the daily refresh's issue lists it again.
+
+## 2026-11-05: Realistic model: clearer highlight, easy to reach on phones
+
+- **Highlight (Matthew: selected parts were hard to see on the realistic model).**
+  - The selected structure is now laid over the view as an even blue shape (`--accent`, 55%), so its whole outline shows even where other structures cover it.
+  - A light line marks where the cut passes through it, and its surface glows blue.
+  - Fixed: the structure selected before the realistic model finished loading (the tonsils, by default) was never highlighted.
+  - The Simple model is unchanged.
+- **Phones.**
+  - A **Realistic** switch now sits with Flow, Measure and Layers. Before, it was hidden inside the Layers panel.
+  - It loads the lighter phone version (about 145,000 triangles, 0.55 MB).
+  - It is drawn at lower resolution while a finger moves it.
+  - New speed guard: if a phone still draws fewer than about 20 frames a second while turning, the model is drawn a little coarser so it stays smooth.
+- **Checks:** 94 tests pass, including the phone Realistic switch.
+
+## 2026-11-05: Smoother 3D on phones, part 2
+
+- **Matthew:** the 3D model still stutters on phones.
+- **Done (src/explorer/viewer3d.ts):**
+  - **Lower resolution while moving.** On touch screens, the model is drawn at half resolution while a finger turns or zooms it, then sharp again the moment the finger lifts. That is about a quarter of the pixels while moving.
+  - **No page measuring on every frame.** Before, the viewer measured the page on every frame, which forced the browser to redo its layout. It now measures only when the viewer resizes or the labels are switched on or off.
+  - **No label work when labels are hidden.** When the label column is hidden (as on phones), the labels are no longer positioned on every frame.
+  - A test checks the resolution drops while moving and comes back afterwards.
+- **Not tested on a real phone from here.** Matthew to try it once it's live.
+
 ## 2026-11-05: Visit prep mention list; smoother scrolling on phones
 
 - **Visit prep (Matthew):** "Things I want to mention" had no Add button.

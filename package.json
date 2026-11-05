@@ -9,6 +9,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
+    "studies:fetch": "node scripts/fetch-studies.mjs",
     "test": "playwright test",
     "model:simple": "node model/simple/build.mjs",
     "model:check": "node model/simple/check.mjs",

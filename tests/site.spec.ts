@@ -360,15 +360,22 @@ test.describe('Doctor visit prep', () => {
     await before.locator('summary').click();
     await page.getByLabel('How will my pain be managed after surgery?').check();
     await expect(page.locator('[data-sheet-count]')).toHaveText('Your sheet · 7 questions');
-    await expect(page.locator('.child-link a')).toHaveAttribute('href', '/children/');
+    // The link to Helping your child sits with the packing list, not among the questions.
+    await expect(page.locator('[data-pack] .child-link a')).toHaveAttribute('href', '/children/');
+    await expect(page.locator('[data-prep-form] .child-link')).toHaveCount(0);
 
     await page.getByLabel('Non-slip slippers').uncheck();
+    await page.getByLabel('Add your own item').fill('<b>Reading glasses</b>');
+    await page.getByLabel('Add your own item').press('Enter');
+    await expect(page.locator('[data-pack-own-list] input:checked')).toHaveCount(1);
     await page.evaluate(() => (window.print = () => {}));
     await page.locator('[data-print-pack]').click();
     await page.emulateMedia({ media: 'print' });
     await expect(page.locator('[data-print-pack-sheet]')).toBeVisible();
     await expect(page.locator('[data-print-sheet]')).toBeHidden();
-    await expect(page.locator('[data-pack-sheet-list] li')).toHaveCount(11);
+    await expect(page.locator('[data-pack-sheet-list] li')).toHaveCount(12);
+    // The visitor's item is printed as text, never as HTML.
+    await expect(page.locator('[data-pack-sheet-list] li').last()).toHaveText('<b>Reading glasses</b>');
     await expect(page.locator('[data-pack-sheet-list]')).not.toContainText('Non-slip slippers');
     const pdf = (await page.pdf({ format: 'Letter' })).toString('latin1');
     expect(pdf.match(/\/Type\s*\/Page[^s]/g)?.length).toBe(1);

@@ -10,14 +10,15 @@
  * Anything not counted or measured yet says so, rather than showing a made-up number.
  */
 import Base from '../layouts/Base.astro';
-import { getStrings, routes, externalLinks } from '../i18n';
+import { getStrings, getRoutes, externalLinks } from '../i18n';
 import impact from '../data/impact.json';
 import quality from '../data/quality.json';
+const routes = getRoutes(Astro.currentLocale);
 
-const t = getStrings().impact;
+const t = getStrings(Astro.currentLocale).impact;
 const fmtDate = (iso: string | null) =>
-  iso ? new Date(`${iso.slice(0, 10)}T12:00:00Z`).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }) : null;
-const fmtNum = (n: number | null | undefined) => (typeof n === 'number' ? n.toLocaleString('en-US') : null);
+  iso ? new Date(`${iso.slice(0, 10)}T12:00:00Z`).toLocaleDateString(Astro.currentLocale === 'es' ? 'es-US' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }) : null;
+const fmtNum = (n: number | null | undefined) => (typeof n === 'number' ? n.toLocaleString(Astro.currentLocale === 'es' ? 'es-US' : 'en-US') : null);
 const totals = impact.totals as Record<string, number | null>;
 const q = quality as {
   lastRun: string | null;
@@ -76,7 +77,7 @@ const lastRun = fmtDate(q.lastRun);
       </div>
     </section>
 
-    <section class="block open" aria-labelledby="open-title">
+    <section class="block open" id="open-source" aria-labelledby="open-title">
       <div>
         <h2 id="open-title" class="serif">{t.openTitle}</h2>
         <p>{t.openText}</p>
@@ -212,6 +213,9 @@ const lastRun = fmtDate(q.lastRun);
   }
   .facts dd {
     margin: 0;
+    min-width: 0;
+    /* The long repository address wraps on phones instead of widening the page. */
+    overflow-wrap: anywhere;
   }
   .orgs {
     background: var(--surface);

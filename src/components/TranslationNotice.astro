@@ -1,0 +1,64 @@
+---
+/**
+ * On every Spanish page: the translation is pending medical-translator review (CLAUDE.md "Translations"), with a
+ * link to the same page in English. Shows nothing on English pages.
+ */
+import { getStrings, otherLanguagePath } from '../i18n';
+
+interface Props {
+  dark?: boolean;
+}
+const { dark = false } = Astro.props;
+const t = getStrings(Astro.currentLocale).translation;
+const english = otherLanguagePath(Astro.url.pathname);
+---
+
+{Astro.currentLocale === 'es' && (
+  <aside class:list={['translation-notice', { dark }]} aria-label={t.label}>
+    <p>
+      <span class="only-wide">{t.notice}</span><span class="only-narrow">{t.noticeShort}</span>
+      <a href={english} lang="en" hreflang="en" data-other-lang>{t.link}</a>
+    </p>
+  </aside>
+)}
+
+
+<style>
+  .translation-notice {
+    background: var(--surface-2, #f1efe9);
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  .translation-notice p {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 12px;
+    margin: 0;
+    padding: 0 16px;
+    max-width: 1200px;
+    margin-inline: auto;
+  }
+  .translation-notice span {
+    padding: 6px 0;
+  }
+  .translation-notice a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch);
+    font-weight: 600;
+  }
+  .dark {
+    background: var(--x-panel);
+    border-bottom-color: var(--x-border);
+    color: var(--x-text-2);
+  }
+  .dark a {
+    color: var(--x-accent);
+  }
+  :global(:root[data-calm='on']) .translation-notice {
+    font-size: 16px;
+  }
+</style>

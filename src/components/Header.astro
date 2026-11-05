@@ -5,10 +5,12 @@
  * Calm mode: a real switch (checkbox with role="switch"). On phones it looks like the
  * outlined button in HomePhone, and reads "Calm on" when on (HomeCalm). Logic is in src/lib/calm.ts.
  */
-import { getStrings, routes } from '../i18n';
+import { getStrings, getRoutes, otherLanguagePath } from '../i18n';
+import TranslationNotice from './TranslationNotice.astro';
+const routes = getRoutes(Astro.currentLocale);
 
-const t = getStrings().header;
-const calm = getStrings().calm;
+const t = getStrings(Astro.currentLocale).header;
+const calm = getStrings(Astro.currentLocale).calm;
 const navItems = [
   { href: routes.explorer, label: t.nav.explorer },
   { href: routes.explain, label: t.nav.explain },
@@ -18,12 +20,16 @@ const navItems = [
   { href: routes.support, label: t.nav.support },
 ];
 const current = Astro.url.pathname;
+// The language link opens this same page in the other language.
+const otherLang = Astro.currentLocale === 'es' ? 'en' : 'es';
+const otherHref = otherLanguagePath(current);
 ---
 
+<TranslationNotice />
 <header class="site-header">
   <div class="bar container">
     <a class="brand" href={routes.home}>
-      <img class="brand-logo" src="/brand/logo-header.png" alt={getStrings().siteName} width="267" height="112" />
+      <img class="brand-logo" src="/brand/logo-header.png" alt={getStrings(Astro.currentLocale).siteName} width="267" height="112" />
     </a>
 
     <nav class="nav-wide" aria-label={t.mainNavLabel}>
@@ -32,7 +38,7 @@ const current = Astro.url.pathname;
       ))}
     </nav>
 
-    <a class="lang nav-wide-only" href={routes.es} lang="es" hreflang="es">{t.espanol}</a>
+    <a class="lang nav-wide-only" href={otherHref} lang={otherLang} hreflang={otherLang} data-other-lang>{t.espanol}</a>
 
     <label class="calm-toggle">
       <input type="checkbox" role="switch" data-calm-switch aria-label={t.calm} />
@@ -52,7 +58,7 @@ const current = Astro.url.pathname;
     {navItems.map((item) => (
       <a href={item.href} aria-current={current === item.href ? 'page' : undefined}>{item.label}</a>
     ))}
-    <a href={routes.es} lang="es" hreflang="es">{t.espanol}</a>
+    <a href={otherHref} lang={otherLang} hreflang={otherLang} data-other-lang>{t.espanol}</a>
   </nav>
 </header>
 

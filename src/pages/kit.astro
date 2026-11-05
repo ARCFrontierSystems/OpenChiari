@@ -5,30 +5,33 @@
  * public/kit/ (run it again after the text or figure changes). No donation handling (CLAUDE.md "Don't").
  */
 import Base from '../layouts/Base.astro';
-import { getStrings, routes } from '../i18n';
+import { getStrings, getRoutes } from '../i18n';
+const routes = getRoutes(Astro.currentLocale);
 
-const s = getStrings();
+const s = getStrings(Astro.currentLocale);
 const k = s.kit;
+// Spanish pages offer the Spanish files (made by make-kit.mjs --locale es into public/kit/es/).
+const base = Astro.currentLocale === 'es' ? '/kit/es/' : '/kit/';
 const fig = s.figure.ariaPrefix + s.figure.aria.chiari + '.';
 const items = [
-  { id: 'social', preview: '/kit/preview-social.png', alt: `${k.socialHeadline} ${fig} ${k.socialFooter}`, files: [{ href: '/kit/social-post.png', label: 'PNG' }] },
+  { id: 'social', preview: base + 'preview-social.png', alt: `${k.socialHeadline} ${fig} ${k.socialFooter}`, files: [{ href: base + 'social-post.png', label: 'PNG' }] },
   {
     id: 'quote',
-    preview: '/kit/preview-quote.png',
+    preview: base + 'preview-quote.png',
     alt: `${k.quote} ${k.quoteFooter}`,
     files: [
-      { href: '/kit/quote-card-square.png', label: '1080 × 1080' },
-      { href: '/kit/quote-card-story.png', label: '1080 × 1920' },
+      { href: base + 'quote-card-square.png', label: '1080 × 1080' },
+      { href: base + 'quote-card-story.png', label: '1080 × 1920' },
     ],
   },
-  { id: 'card', preview: '/kit/preview-cards.png', alt: `${k.cardLine1} ${k.cardLine2}`, files: [{ href: '/kit/wallet-cards.pdf', label: 'PDF' }] },
+  { id: 'card', preview: base + 'preview-cards.png', alt: `${k.cardLine1} ${k.cardLine2}`, files: [{ href: base + 'wallet-cards.pdf', label: 'PDF' }] },
   {
     id: 'poster',
-    preview: '/kit/preview-poster.png',
+    preview: base + 'preview-poster.png',
     alt: `${k.posterTitle} ${fig} ${k.logoSpace}`,
     files: [
-      { href: '/kit/poster-letter.pdf', label: 'Letter' },
-      { href: '/kit/poster-a4.pdf', label: 'A4' },
+      { href: base + 'poster-letter.pdf', label: k.letter },
+      { href: base + 'poster-a4.pdf', label: 'A4' },
     ],
   },
 ] as const;
@@ -42,7 +45,7 @@ const items = [
         <h1 class="serif">{k.title}</h1>
         <p>{k.intro}</p>
       </div>
-      <a class="button button-primary" href="/kit/open-chiari-awareness-kit.zip" download>{k.zip}</a>
+      <a class="button button-primary" href={base + 'open-chiari-awareness-kit.zip'} download>{k.zip}</a>
     </div>
 
     <ul class="items">

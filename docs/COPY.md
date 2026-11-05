@@ -176,6 +176,8 @@ Mockup: `design/mockups/HomeCalm.dc.html`
 
 ## Home, Spanish (phone)
 
+> **2026-11-05:** the whole site is now in Spanish (`src/i18n/es.json`), translated from the approved English and checked by an independent blind back-translation; see `docs/SPANISH-REVIEW.md` (side by side, for the translator) and `docs/SPANISH-GLOSSARY.md`. Published with a notice on every page (Matthew's decision). The text below is the earlier planning-stage Spanish; where the English hadn't changed, the site uses it. Still pending medical-translator review.
+
 Mockup: `design/mockups/HomeES.dc.html`
 
 > **Needs a matching update (2026-11-04).** The English Home text changed after the accuracy audit (symptom list, "How it's found", the measurement myth, the Explain It line, the caption and the footer). This Spanish text has not been changed to match yet; the medical translator should translate the new English lines. Still pending medical-translator review.

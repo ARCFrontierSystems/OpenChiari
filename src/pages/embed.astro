@@ -10,18 +10,20 @@
  * and a link to the full Explorer. Without WebGL the 2D figure is shown instead.
  * All text from src/i18n/en.json (approved text from docs/COPY.md).
  */
+import TranslationNotice from '../components/TranslationNotice.astro';
 import Head from '../components/Head.astro';
 import { anatomyFigureSvg, CONDITIONS } from '../lib/anatomy-figure';
-import { getStrings, routes, externalLinks } from '../i18n';
+import { getStrings, getRoutes, externalLinks } from '../i18n';
+const routes = getRoutes(Astro.currentLocale);
 
-const s = getStrings();
+const s = getStrings(Astro.currentLocale);
 const x = s.explorer;
 const f = s.footer;
 const figure = anatomyFigureSvg({ condition: 'chiari', flow: true, labels: false, measure: true, dark: true }, s.figure);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={Astro.currentLocale ?? 'en'}>
   <head>
     <Head title={s.model.iframeTitle} themeColor="#17181C" />
     <meta name="robots" content="noindex" />
@@ -56,6 +58,7 @@ const figure = anatomyFigureSvg({ condition: 'chiari', flow: true, labels: false
     </main>
 
     <footer class="e-foot">
+      <TranslationNotice dark />
       <p>{x.captionIllustration} · {x.captionFlow} · {x.captionTonsils}</p>
       <p>
         <strong>{f.notAdvice}</strong> {f.notAdviceRest.wide} {f.factsBefore} <a href={externalLinks.ninds} target="_blank" rel="noopener">{f.ninds}</a>{f.modelBefore}{' '}
@@ -68,7 +71,7 @@ const figure = anatomyFigureSvg({ condition: 'chiari', flow: true, labels: false
       import { createStore, initialState } from '../explorer/state';
       import { anatomyFigureSvg, CONDITIONS, type Condition } from '../lib/anatomy-figure';
       import { showCalmForThisPage } from '../lib/calm';
-      import strings from '../i18n/en.json';
+      import strings, { localePath } from '../i18n/client';
       import { count } from '../lib/count';
 
       const CODES: Record<string, Condition> = { typ: 'typical', c1: 'chiari', syr: 'syrinx', dec: 'surgery' };
@@ -90,7 +93,7 @@ const figure = anatomyFigureSvg({ condition: 'chiari', flow: true, labels: false
 
       // The link to the full Explorer opens on this site's own address when served from it.
       const full = document.querySelector<HTMLAnchorElement>('[data-full]')!;
-      if (location.hostname !== 'openchiari.org') full.href = new URL('/explorer/', location.origin).href;
+      if (location.hostname !== 'openchiari.org') full.href = new URL(localePath('/explorer/'), location.origin).href;
 
       // Condition switch
       const sw = document.querySelector<HTMLFieldSetElement>('[data-switch]')!;

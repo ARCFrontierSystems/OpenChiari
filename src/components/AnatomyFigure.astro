@@ -13,7 +13,7 @@ interface Props {
 }
 
 const { class: className, ...options } = Astro.props;
-const svg = anatomyFigureSvg({ ...options, className }, getStrings().figure);
+const svg = anatomyFigureSvg({ ...options, className }, getStrings(Astro.currentLocale).figure);
 ---
 
 <Fragment set:html={svg} />

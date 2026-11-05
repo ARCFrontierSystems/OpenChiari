@@ -10,6 +10,7 @@
 // All text comes from src/i18n/en.json (docs/COPY.md "Awareness kit" and approved Home text). Graphics showing the
 // model carry the model credit (CLAUDE.md rule 3); the poster also says "Not medical advice".
 // Run after the text or figure changes: node --experimental-strip-types scripts/make-kit.mjs
+// Spanish (from src/i18n/es.json, pending medical-translator review) into public/kit/es/: add --locale es
 import { chromium } from 'playwright';
 import { execFileSync } from 'node:child_process';
 import { copyFileSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
@@ -20,9 +21,11 @@ import qrcode from 'qrcode-generator';
 import { anatomyFigureSvg } from '../src/lib/anatomy-figure.ts';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
-const out = join(root, 'public/kit');
+const locale = process.argv.includes('--locale') ? process.argv[process.argv.indexOf('--locale') + 1] : 'en';
+const spanish = locale === 'es';
+const out = join(root, spanish ? 'public/kit/es' : 'public/kit');
 mkdirSync(out, { recursive: true });
-const s = JSON.parse(readFileSync(join(root, 'src/i18n/en.json'), 'utf8'));
+const s = JSON.parse(readFileSync(join(root, spanish ? 'src/i18n/es.json' : 'src/i18n/en.json'), 'utf8'));
 const k = s.kit;
 // The model credit exactly as CLAUDE.md rule 3 gives it (built from the footer's pieces, like make-downloads.mjs).
 const credit = `${s.footer.modelBefore.replace(/^\.\s*/, '')} ${s.footer.zAnatomy} ${s.footer.modelAfter}`;
@@ -30,7 +33,7 @@ const credit = `${s.footer.modelBefore.replace(/^\.\s*/, '')} ${s.footer.zAnatom
 const caption = s.home.figCaption.narrow;
 const notAdvice = `${s.footer.notAdvice} ${s.footer.notAdviceRest.wide}`;
 // The wallet card's QR code opens the shared 3D view: Chiari I, side view, flow and measure on, free to explore.
-const CARD_URL = 'https://openchiari.org/v/#c1.side.f.m.x';
+const CARD_URL = spanish ? 'https://openchiari.org/es/v/#c1.side.f.m.x' : 'https://openchiari.org/v/#c1.side.f.m.x';
 
 const font = (f) => `url(data:font/woff2;base64,${readFileSync(join(root, 'node_modules/@fontsource', f)).toString('base64')})`;
 const logo = `data:image/png;base64,${readFileSync(join(root, 'public/brand/logo.png')).toString('base64')}`;
@@ -96,6 +99,7 @@ const pages = {
         <p class="mono" style="font-size:14pt;margin:0 0 0.08in;color:#5B027E">openchiari.org · #ChiariAwarenessMonth</p>
         <p style="margin:0"><strong style="color:#1C1D21">${s.footer.notAdvice}</strong> ${s.footer.notAdviceRest.wide} ${caption}</p>
         <p style="margin:0">${credit}</p>
+        ${spanish ? `<p style="margin:0.04in 0 0">${s.translation.notice}</p>` : ''}
       </div>
       <div style="width:2in;height:1in;border:1.5px dashed #A9A8A2;display:flex;align-items:center;justify-content:center;color:#A9A8A2;font-size:11pt">${k.logoSpace}</div>
     </div>
@@ -106,18 +110,18 @@ const browser = await chromium.launch();
 const tab = await browser.newPage({ deviceScaleFactor: 1 });
 async function render(html, viewport) {
   if (viewport) await tab.setViewportSize(viewport);
-  await tab.setContent(`<!doctype html><meta charset="utf-8"><style>${css}</style>${html}`);
+  await tab.setContent(`<!doctype html><html lang="${locale}"><meta charset="utf-8"><style>${css}</style>${html}`);
   await tab.evaluate(() => document.fonts.ready);
 }
 async function png(name, html, width, height) {
   await render(html, { width, height });
   await tab.screenshot({ path: join(out, name), clip: { x: 0, y: 0, width, height } });
-  console.log('wrote', `public/kit/${name}`);
+  console.log('wrote', join(out, name));
 }
 async function pdf(name, html, format) {
   await render(html, { width: 816, height: 1056 });
   await tab.pdf({ path: join(out, name), format, printBackground: true, margin: { top: 0, right: 0, bottom: 0, left: 0 } });
-  console.log('wrote', `public/kit/${name}`);
+  console.log('wrote', join(out, name));
 }
 
 await png('social-post.png', pages.social, 1080, 1080);
@@ -130,10 +134,10 @@ await pdf('poster-a4.pdf', pages.poster('210mm', '297mm'), 'A4');
 // Small pictures of each item for the kit page (the PDFs shown as their first page).
 async function preview(name, html, width, height, scale) {
   await tab.setViewportSize({ width: Math.round(width * scale), height: Math.round(height * scale) });
-  await tab.setContent(`<!doctype html><meta charset="utf-8"><style>${css} html{zoom:${scale}}</style>${html}`);
+  await tab.setContent(`<!doctype html><html lang="${locale}"><meta charset="utf-8"><style>${css} html{zoom:${scale}}</style>${html}`);
   await tab.evaluate(() => document.fonts.ready);
   await tab.screenshot({ path: join(out, name), clip: { x: 0, y: 0, width: Math.round(width * scale), height: Math.round(height * scale) } });
-  console.log('wrote', `public/kit/${name}`);
+  console.log('wrote', join(out, name));
 }
 await preview('preview-social.png', pages.social, 1080, 1080, 0.5);
 await preview('preview-quote.png', pages.quoteSquare, 1080, 1080, 0.5);
@@ -146,9 +150,9 @@ const work = mkdtempSync(join(tmpdir(), 'oc-kit-'));
 const dir = join(work, 'open-chiari-awareness-kit');
 mkdirSync(dir);
 for (const f of ['social-post.png', 'quote-card-square.png', 'quote-card-story.png', 'wallet-cards.pdf', 'poster-letter.pdf', 'poster-a4.pdf']) copyFileSync(join(out, f), join(dir, f));
-writeFileSync(join(dir, 'CREDIT.txt'), [k.license, '', credit, '', s.model.footnote, '', 'https://openchiari.org/kit/', ''].join('\n'));
+writeFileSync(join(dir, 'CREDIT.txt'), [k.license, '', credit, '', s.model.footnote, '', ...(spanish ? [s.translation.notice, ''] : []), spanish ? 'https://openchiari.org/es/kit/' : 'https://openchiari.org/kit/', ''].join('\n'));
 copyFileSync(join(root, 'LICENSE-MODEL.md'), join(dir, 'LICENSE.md'));
 rmSync(join(out, 'open-chiari-awareness-kit.zip'), { force: true });
 execFileSync('zip', ['-q', '-X', '-r', join(out, 'open-chiari-awareness-kit.zip'), 'open-chiari-awareness-kit'], { cwd: work });
 rmSync(work, { recursive: true, force: true });
-console.log('wrote public/kit/open-chiari-awareness-kit.zip');
+console.log('wrote', join(out, 'open-chiari-awareness-kit.zip'));

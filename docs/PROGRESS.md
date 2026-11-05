@@ -3,6 +3,20 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: Phase 4: the full Spanish site, published with a notice
+
+- **Matthew's decision:** build the Spanish site, reduce the risk as much as possible, and publish it with a notice; a professional (and a Chiari research group) will check it later.
+- **Every page in Spanish** under `/es/` (the same page files; text in `src/i18n/es.json`), including the 3D Explorer, side by side, tour, Explain It (Spanish links: `/es/v/#…`), visit prep and its printed sheet, studies (Spanish summaries of the two approved studies; titles and official listings stay in English, marked "en inglés"), Open model, embed, Support, Impact, About, Privacy and the kit (Spanish files in `public/kit/es/`, made by `make-kit.mjs --locale es`).
+- **The notice** on every Spanish page (and the Spanish poster and kit ZIP): "Traducción pendiente de revisión por un traductor médico. Se hizo con ayuda de herramientas de inteligencia artificial, y la versión en inglés es la de referencia. Ver en inglés" (shorter on phones). The language link on every page opens the same page in the other language, keeping the 3D view.
+- **Risk reduction:**
+  1. a word list from official MedlinePlus en español pages (`docs/SPANISH-GLOSSARY.md`, sources saved in `docs/audits/sources/2026-11-05-spanish/`);
+  2. an independent blind back-translation and comparison (`docs/audits/2026-11-05-spanish-backtranslation.md`): no high findings; its 4 medium and 10 of 11 low findings fixed (the brain/cerebrum word choice is left for the translator);
+  3. a side-by-side review sheet for the translator, medical sentences first (`docs/SPANISH-REVIEW.md`, made by `scripts/make-spanish-review.mjs`).
+- **The Evidence notes** stay in English (like their sources); the Spanish page says so.
+- **Checks:** 67 Spanish tests added (accessibility at both sizes, Calm off and on; notice, language links, Spanish Explorer and Explain It, Spanish kit files); all pass.
+- **Also fixed:** the Impact page scrolled sideways on phones (the repository link); the footer's "Open source" link now lands on its section.
+- **Open:** the medical translator's review; the walk-through check-up findings (`docs/audits/2026-11-05-site-checkup.md`) still to work through; the accuracy-audit wording items waiting for Matthew.
+
 ## 2026-11-05: Check-up: accuracy audit fixes (required captions and credit)
 
 - **Independent accuracy audit** of this week's text (`docs/audits/2026-11-05-checkup-accuracy-audit.md`): 15 findings, none high. Every medical sentence matches COPY.md; nothing reads as medical advice.

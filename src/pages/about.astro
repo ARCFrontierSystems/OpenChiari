@@ -4,9 +4,10 @@
  * docs/COPY.md (the accuracy-checks wording, not a medical review: CLAUDE.md rule 1a).
  */
 import Base from '../layouts/Base.astro';
-import { getStrings, routes, externalLinks } from '../i18n';
+import { getStrings, getRoutes, externalLinks } from '../i18n';
+const routes = getRoutes(Astro.currentLocale);
 
-const t = getStrings().about;
+const t = getStrings(Astro.currentLocale).about;
 const href = (key: string) => (routes as Record<string, string>)[key];
 ---
 

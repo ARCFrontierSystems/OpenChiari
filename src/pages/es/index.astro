@@ -1,7 +1,6 @@
 ---
-/** Spanish Home is built in a later phase (HomeES mockup). Stand-in until then. */
-import NotBuilt from '../../components/NotBuilt.astro';
-import { getStrings } from '../../i18n';
+/** Spanish: the same page as src/pages/index.astro, in Spanish (its text comes from src/i18n/es.json). */
+import Page from '../index.astro';
 ---
 
-<NotBuilt title={getStrings().header.espanol} />
+<Page />

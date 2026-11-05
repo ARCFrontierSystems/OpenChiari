@@ -8,11 +8,13 @@
  * Always shown (CLAUDE.md rules 1 and 3): the illustration and flow captions, the evidence link, "Not medical
  * advice" and the model credit.
  */
+import TranslationNotice from '../../components/TranslationNotice.astro';
 import Head from '../../components/Head.astro';
 import { anatomyFigureSvg, CONDITIONS } from '../../lib/anatomy-figure';
-import { getStrings, routes, externalLinks } from '../../i18n';
+import { getStrings, getRoutes, externalLinks } from '../../i18n';
+const routes = getRoutes(Astro.currentLocale);
 
-const s = getStrings();
+const s = getStrings(Astro.currentLocale);
 const t = s.compare;
 const x = s.explorer;
 const f = s.footer;
@@ -24,12 +26,13 @@ const note = (c: string) => (t.notes as Record<string, string>)[c] ?? x.conditio
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={Astro.currentLocale ?? 'en'}>
   <head>
     <Head title={`${t.title} · ${x.title}`} themeColor="#111215" />
   </head>
   <body class="cmp">
     <a class="skip" href="#views">{s.skipLink}</a>
+    <TranslationNotice dark />
     <header class="cmp-bar">
       <a class="cmp-brand" href={routes.home}>
         <img src="/brand/logo-header-dark.png" alt={s.siteName} width="267" height="112" />
@@ -85,7 +88,7 @@ const note = (c: string) => (t.notes as Record<string, string>)[c] ?? x.conditio
       import { createStore, initialState } from '../../explorer/state';
       import { anatomyFigureSvg, type Condition } from '../../lib/anatomy-figure';
       import { count } from '../../lib/count';
-      import strings from '../../i18n/en.json';
+      import strings from '../../i18n/client';
 
       const t = strings.compare;
       const x = strings.explorer;

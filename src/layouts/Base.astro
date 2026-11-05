@@ -11,7 +11,7 @@ interface Props {
   lang?: string;
 }
 
-const { title, description, lang = 'en' } = Astro.props;
+const { title, description, lang = Astro.currentLocale ?? 'en' } = Astro.props;
 ---
 
 <!doctype html>
@@ -20,7 +20,7 @@ const { title, description, lang = 'en' } = Astro.props;
     <Head title={title} description={description} />
   </head>
   <body>
-    <a class="skip-link" href="#content">{getStrings().skipLink}</a>
+    <a class="skip-link" href="#content">{getStrings(Astro.currentLocale).skipLink}</a>
     <Header />
     <main id="content">
       <slot />

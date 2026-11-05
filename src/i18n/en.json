@@ -17,6 +17,12 @@
     "espanol": "Español",
     "calm": "Calm mode"
   },
+  "translation": {
+    "label": "About this translation",
+    "notice": "Translation pending review by a medical translator. It was made with the help of AI tools, and the English version is the reference.",
+    "noticeShort": "Translation pending review by a medical translator.",
+    "link": "View in English"
+  },
   "calm": {
     "on": "Calm on",
     "noteStrong": "Calm mode is on.",
@@ -217,10 +223,6 @@
       "boneRemovedNote": "skull edge and C1 arch"
     }
   },
-  "stub": {
-    "notBuilt": "Not built yet. This page comes in a later step of the build.",
-    "backHome": "Back to home"
-  },
   "explorer": {
     "title": "3D Explorer",
     "backHome": "Back to home",
@@ -392,6 +394,9 @@
       "far": "Cut past the midline, toward the far side"
     },
     "evidencePage": "Evidence notes"
+  },
+  "evidence": {
+    "inEnglish": "These notes are in English, like the sources they cite."
   },
   "prep": {
     "title": "Prepare for your next appointment",
@@ -825,6 +830,7 @@
     "remoteLine": "Takes part from home",
     "moreSites": "+ {n} more",
     "officialLabel": "From the official listing",
+    "englishOnly": "Summary in English",
     "whatYoudDo": "What you'd do",
     "runBy": "Run by",
     "listing": "Listing",
@@ -979,6 +985,7 @@
       }
     },
     "download": "Download",
+    "letter": "Letter",
     "orgsTitle": "For organizations",
     "orgsText": "Need the kit in your colors, or a version for a specific event? Get in touch and it's made for you, free.",
     "contact": "Contact Open Chiari",

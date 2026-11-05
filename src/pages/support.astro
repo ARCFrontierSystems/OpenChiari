@@ -5,9 +5,10 @@
  * every button goes to the organization's own page (CLAUDE.md "Don't").
  */
 import Base from '../layouts/Base.astro';
-import { getStrings, routes, externalLinks } from '../i18n';
+import { getStrings, getRoutes, externalLinks } from '../i18n';
+const routes = getRoutes(Astro.currentLocale);
 
-const t = getStrings().support;
+const t = getStrings(Astro.currentLocale).support;
 const links: Record<string, { donate: string; second: string }> = {
   bjcsf: { donate: externalLinks.bjcsfDonate, second: externalLinks.bjcsfRegistry },
   conquer: { donate: externalLinks.conquerDonate, second: externalLinks.conquerInfo },

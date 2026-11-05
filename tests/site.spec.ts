@@ -3,7 +3,10 @@ import AxeBuilder from '@axe-core/playwright';
 import { readFileSync } from 'node:fs';
 
 // Every page that exists so far. Add new pages here as they're built.
-const pages = ['/', '/explorer/', '/explorer/compare/', '/tour/', '/evidence/', '/explain/', '/v/#c1.side.f.m.x', '/explain/#v=c1.side.flow.m&x=1&a=fam&n=Hello', '/studies/', '/prep/', '/model/', '/embed/', '/support/', '/kit/', '/impact/', '/about/', '/privacy/', '/es/'];
+const englishPages = ['/', '/explorer/', '/explorer/compare/', '/tour/', '/evidence/', '/explain/', '/v/#c1.side.f.m.x', '/explain/#v=c1.side.flow.m&x=1&a=fam&n=Hello', '/studies/', '/prep/', '/model/', '/embed/', '/support/', '/kit/', '/impact/', '/about/', '/privacy/'];
+// The Spanish site: the same pages under /es/ (src/pages/es/), text from src/i18n/es.json.
+const spanishPages = englishPages.filter((p) => !p.includes('&n=')).map((p) => `/es${p}`);
+const pages = [...englishPages, ...spanishPages];
 const sizes = [
   { name: 'desktop', width: 1440, height: 900 },
   { name: 'phone', width: 390, height: 844 },
@@ -775,4 +778,55 @@ test('Awareness kit: every graphic and printable downloads, and the ZIP carries 
   // The quote card uses the wording approved after the source check, and the license line is shown.
   await expect(page.locator('img[alt^="Chiari symptoms often don\'t show."]')).toBeVisible();
   await expect(page.getByText('Kit graphics are free to use and share, CC BY-SA 4.0.', { exact: false })).toBeVisible();
+});
+
+test('Spanish site: every page is in Spanish, says the translation is pending review, and links to the same page in English', async ({ page }) => {
+  for (const path of ['/es/', '/es/explorer/', '/es/tour/', '/es/explorer/compare/', '/es/prep/', '/es/kit/']) {
+    await page.goto(path);
+    await expect(page.locator('html')).toHaveAttribute('lang', 'es');
+    const notice = page.locator('.translation-notice');
+    await expect(notice).toContainText('Traducción pendiente de revisión por un traductor médico.');
+    await expect(notice.getByRole('link', { name: 'Ver en inglés' })).toHaveAttribute('href', path.slice(3));
+    await expect(page.locator('link[rel="alternate"][hreflang="en"]')).toHaveAttribute('href', `https://openchiari.org${path.slice(3)}`);
+    // Required on every page (CLAUDE.md rules 1 and 3), in Spanish.
+    await expect(page.getByText('No es consejo médico.', { exact: false }).first()).toBeVisible();
+    await expect(page.getByText('Modelo 3D de Open Chiari, CC BY-SA 4.0, adaptado de', { exact: false }).first()).toBeAttached();
+  }
+  // English pages show no notice, and their language link opens the same page in Spanish.
+  await page.goto('/prep/');
+  await expect(page.locator('.translation-notice')).toHaveCount(0);
+  await expect(page.locator('a[hreflang="es"]').first()).toHaveAttribute('href', '/es/prep/');
+  // Links inside the Spanish site stay in Spanish.
+  await page.goto('/es/');
+  await expect(page.getByRole('link', { name: 'Abrir el explorador 3D' })).toHaveAttribute('href', '/es/explorer/');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Vea lo que pasa en la base del cráneo.');
+});
+
+test('Spanish site: the 3D Explorer and Explain It work in Spanish, and Explain It makes a Spanish link', async ({ page }) => {
+  await page.goto('/es/explorer/');
+  await expect(page.locator('.x-view.has-3d')).toBeVisible({ timeout: 30000 });
+  await expect(page.locator('.x-toolbar').getByRole('button', { name: 'Flujo del líquido' })).toBeVisible();
+  await page.goto('/es/explain/#c1.side.f.m');
+  await expect(page.getByLabel('Su nota')).toHaveValue(/^En la malformación de Chiari/);
+  expect((await page.getByLabel('Su nota').inputValue()).length).toBeLessThanOrEqual(280);
+  expect(await page.locator('[data-link]').inputValue()).toMatch(/\/es\/v\/#c1\.side/);
+  await page.goto('/es/v/#c1.side.f.m.x');
+  await expect(page.locator('[data-recipient]')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Lo que está viendo' })).toBeVisible();
+  await expect(page.locator('[data-caption]')).toContainText('Ilustración, no es una imagen médica.');
+});
+
+test('Spanish site: the kit offers the Spanish files, and the studies show Spanish summaries', async ({ page, request }) => {
+  await page.goto('/es/kit/');
+  const hrefs = await page.locator('a[download]').evaluateAll((as) => as.map((a) => (a as HTMLAnchorElement).getAttribute('href')!));
+  expect(hrefs.length).toBeGreaterThan(5);
+  for (const href of hrefs) {
+    expect(href).toMatch(/^\/kit\/es\//);
+    const res = await request.get(href);
+    expect(res.status(), href).toBe(200);
+    expect((await res.body()).length, href).toBeGreaterThan(1000);
+  }
+  await page.goto('/es/studies/');
+  const first = page.locator('[data-study]').first();
+  if (await first.count()) await expect(first.locator('.summary')).toContainText(/Los investigadores|De la ficha oficial|Resumen en inglés/);
 });

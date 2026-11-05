@@ -118,8 +118,10 @@ const calm = getStrings(Astro.currentLocale).calm;
   <section class="band" aria-labelledby="tools">
     <div class="container band-inner">
       <h2 class="section-title" id="tools">{h.tools.title}</h2>
+      {h.tools.groups.map((group) => (
+      <h3 class="tools-group">{group.title}</h3>
       <ul class="tools">
-        {h.tools.items.map((tool) => (
+        {group.pages.map((page) => h.tools.items.find((tool) => tool.page === page)!).map((tool) => (
           <li>
             <a class="tool" href={routes[tool.page as keyof typeof routes]}>
               <span class="tool-num mono">{tool.num}</span>
@@ -133,6 +135,7 @@ const calm = getStrings(Astro.currentLocale).calm;
           </li>
         ))}
       </ul>
+      ))}
     </div>
   </section>
 </Base>
@@ -329,9 +332,21 @@ const calm = getStrings(Astro.currentLocale).calm;
     color: var(--ink-2);
   }
 
-  /* Tools: numbered list with hairline rules */
+  /* Tools: three headed groups (Nov 5), each a numbered list with hairline rules */
+  .tools-group {
+    margin: var(--s-32) 0 var(--s-12);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .tools-group:first-of-type {
+    margin-top: var(--s-16);
+  }
   .tools {
     list-style: none;
+    margin: 0;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));

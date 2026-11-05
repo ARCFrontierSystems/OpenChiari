@@ -11,13 +11,12 @@ const routes = getRoutes(Astro.currentLocale);
 
 const t = getStrings(Astro.currentLocale).header;
 const calm = getStrings(Astro.currentLocale).calm;
+// The four everyday tools (Matthew, Nov 5). Open model and Support are in the footer and in the Home tools.
 const navItems = [
   { href: routes.explorer, label: t.nav.explorer },
+  { href: routes.prep, label: t.nav.prep },
   { href: routes.explain, label: t.nav.explain },
   { href: routes.studies, label: t.nav.studies },
-  { href: routes.prep, label: t.nav.prep },
-  { href: routes.model, label: t.nav.model },
-  { href: routes.support, label: t.nav.support },
 ];
 const current = Astro.url.pathname;
 // The language link opens this same page in the other language.

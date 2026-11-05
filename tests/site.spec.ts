@@ -245,7 +245,21 @@ test.describe('3D Explorer controls', () => {
     await page.locator('.x-toolbar').getByRole('button', { name: 'Fluid flow' }).click();
     await expect.poll(animating).toBe(true);
     await page.getByRole('switch', { name: 'Calm mode' }).check();
-    await expect.poll(animating).toBe(false);
+    // GitHub's test machines draw 3D in software and can be very busy, so the page may take a while to answer;
+    // the wait is longer than usual. If it ever fails, the message says what state the page was in.
+    const errors: string[] = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await expect
+      .poll(animating, { timeout: 15000 })
+      .toBe(false)
+      .catch(async (e) => {
+        const state = await page.evaluate(() => ({
+          calm: document.documentElement.dataset.calm ?? 'off',
+          switchChecked: document.querySelector<HTMLInputElement>('[data-calm-switch]')?.checked,
+          reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+        }));
+        throw new Error(`${e.message}\nPage state: ${JSON.stringify(state)}; page errors: ${JSON.stringify(errors)}`);
+      });
   });
 
   test('reduced motion: fluid flow does not animate', async ({ page }) => {

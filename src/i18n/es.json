@@ -17,7 +17,8 @@
     "espanol": "English",
     "calm": "Modo tranquilo",
     "dim": "Modo oscuro",
-    "dimLabel": "Modo oscuro: colores oscuros, menos luz"
+    "dimLabel": "Modo oscuro: colores oscuros, menos luz",
+    "more": "Más"
   },
   "translation": {
     "label": "Sobre esta traducción",

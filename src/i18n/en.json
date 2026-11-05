@@ -17,7 +17,8 @@
     "espanol": "Español",
     "calm": "Calm mode",
     "dim": "Dim",
-    "dimLabel": "Dim mode: dark colors, less light"
+    "dimLabel": "Dim mode: dark colors, less light",
+    "more": "More"
   },
   "translation": {
     "label": "About this translation",

@@ -24,8 +24,11 @@ const out = join(root, 'public/kit');
 mkdirSync(out, { recursive: true });
 const s = JSON.parse(readFileSync(join(root, 'src/i18n/en.json'), 'utf8'));
 const k = s.kit;
-const credit = s.model.creditLine + '.';
-const caption = s.explorer.captionIllustration + '.';
+// The model credit exactly as CLAUDE.md rule 3 gives it (built from the footer's pieces, like make-downloads.mjs).
+const credit = `${s.footer.modelBefore.replace(/^\.\s*/, '')} ${s.footer.zAnatomy} ${s.footer.modelAfter}`;
+// The approved short caption for a Chiari I picture: what it shows, the required tonsil note, and "Illustration".
+const caption = s.home.figCaption.narrow;
+const notAdvice = `${s.footer.notAdvice} ${s.footer.notAdviceRest.wide}`;
 // The wallet card's QR code opens the shared 3D view: Chiari I, side view, flow and measure on, free to explore.
 const CARD_URL = 'https://openchiari.org/v/#c1.side.f.m.x';
 
@@ -57,7 +60,7 @@ const pages = {
     <p class="serif" style="font-size:76px;line-height:1.1;margin:36px 0 0">${k.socialHeadline}</p>
     <div class="figure" style="flex:1;margin:24px 0;min-height:0">${figure({ measure: true })}</div>
     <p style="font-size:34px;margin:0;color:#5B027E;font-weight:600">${k.socialFooter}</p>
-    <p style="font-size:17px;margin:14px 0 0;color:#5E5F66">${caption} ${credit}</p>
+    <p style="font-size:17px;margin:14px 0 0;color:#5E5F66">${caption} ${notAdvice} ${credit}</p>
   </div>`,
   quoteSquare: `<div style="width:1080px;height:1080px;padding:96px;display:flex;flex-direction:column;justify-content:center;background:#5B027E;color:#fff">
     <span style="display:block;width:120px;height:10px;background:#CB98E1;margin-bottom:56px"></span>
@@ -91,7 +94,7 @@ const pages = {
     <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:0.3in">
       <div style="font-size:9pt;color:#5E5F66;line-height:1.45;max-width:4.6in">
         <p class="mono" style="font-size:14pt;margin:0 0 0.08in;color:#5B027E">openchiari.org · #ChiariAwarenessMonth</p>
-        <p style="margin:0"><strong style="color:#1C1D21">${s.footer.notAdvice}</strong> ${caption}</p>
+        <p style="margin:0"><strong style="color:#1C1D21">${s.footer.notAdvice}</strong> ${s.footer.notAdviceRest.wide} ${caption}</p>
         <p style="margin:0">${credit}</p>
       </div>
       <div style="width:2in;height:1in;border:1.5px dashed #A9A8A2;display:flex;align-items:center;justify-content:center;color:#A9A8A2;font-size:11pt">${k.logoSpace}</div>

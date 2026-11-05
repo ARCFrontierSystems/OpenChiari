@@ -3,6 +3,25 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: Check-up: accuracy audit fixes (required captions and credit)
+
+- **Independent accuracy audit** of this week's text (`docs/audits/2026-11-05-checkup-accuracy-audit.md`): 15 findings, none high. Every medical sentence matches COPY.md; nothing reads as medical advice.
+- **Fixed now (required captions and credit only, all approved wording):**
+  - the tonsil note on the tour, side by side, embed, Explain It and Open model Fig. 2 (item 1);
+  - a caption under the Explain It preview (item 2);
+  - "Talk to your doctor about your own care." in the tour, side by side, embed and poster footers (item 6);
+  - the exact rule 3 model credit on the kit files (item 7);
+  - figure descriptions for the kit previews (item 13);
+  - the kit files rebuilt.
+- **Waiting for Matthew (wording changes):**
+  - "often crowd" in the tour and side by side (item 3);
+  - "This can crowd…" in Explain It (item 4);
+  - the "before they're published" claim on About and Impact (item 5);
+  - wallet card, registries, "peer-reviewed", the kit quote (items 9, 11, 12, 15).
+- **Still to do:**
+  - the downloadable figure set (`public/downloads/openchiari-figures.zip`) also needs the tonsil note; it needs the Blender setup to rebuild;
+  - the EVIDENCE.md row 16 record (item 10).
+
 ## 2026-11-05: Awareness kit; tour published; wording after the source check
 
 - **Published (PR #4):** side by side, the guided tour, and the wording Matthew approved after the independent source check:

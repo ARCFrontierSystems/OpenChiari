@@ -9,8 +9,9 @@ import { getStrings, routes } from '../i18n';
 
 const s = getStrings();
 const k = s.kit;
+const fig = s.figure.ariaPrefix + s.figure.aria.chiari + '.';
 const items = [
-  { id: 'social', preview: '/kit/preview-social.png', alt: `${k.socialHeadline} ${k.socialFooter}`, files: [{ href: '/kit/social-post.png', label: 'PNG' }] },
+  { id: 'social', preview: '/kit/preview-social.png', alt: `${k.socialHeadline} ${fig} ${k.socialFooter}`, files: [{ href: '/kit/social-post.png', label: 'PNG' }] },
   {
     id: 'quote',
     preview: '/kit/preview-quote.png',
@@ -24,7 +25,7 @@ const items = [
   {
     id: 'poster',
     preview: '/kit/preview-poster.png',
-    alt: `${k.posterTitle} ${k.logoSpace}`,
+    alt: `${k.posterTitle} ${fig} ${k.logoSpace}`,
     files: [
       { href: '/kit/poster-letter.pdf', label: 'Letter' },
       { href: '/kit/poster-a4.pdf', label: 'A4' },

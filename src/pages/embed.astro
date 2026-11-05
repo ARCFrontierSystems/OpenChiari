@@ -56,9 +56,9 @@ const figure = anatomyFigureSvg({ condition: 'chiari', flow: true, labels: false
     </main>
 
     <footer class="e-foot">
-      <p>{x.captionIllustration} · {x.captionFlow}</p>
+      <p>{x.captionIllustration} · {x.captionFlow} · {x.captionTonsils}</p>
       <p>
-        <strong>{f.notAdvice}</strong> {f.factsBefore} <a href={externalLinks.ninds} target="_blank" rel="noopener">{f.ninds}</a>{f.modelBefore}{' '}
+        <strong>{f.notAdvice}</strong> {f.notAdviceRest.wide} {f.factsBefore} <a href={externalLinks.ninds} target="_blank" rel="noopener">{f.ninds}</a>{f.modelBefore}{' '}
         <a href={externalLinks.zAnatomy} target="_blank" rel="noopener">{f.zAnatomy}</a> {f.modelAfter}
       </p>
       <p><a class="e-full" href={'https://openchiari.org' + routes.explorer} target="_blank" rel="noopener" data-full>{s.embed.exploreFull}</a></p>

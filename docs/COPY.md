@@ -272,6 +272,7 @@ Mockup: `design/mockups/Explorer.dc.html`
 - Front
 - Drag to rotate · Scroll to zoom · Shift-drag to move · Mockup shows the midline cut-away
 - Illustration, not a medical image · Fluid flow simplified ·
+<!-- 2026-11-05 check-up audit (docs/audits/2026-11-05-checkup-accuracy-audit.md, item 1): the required tonsil note, the approved sentence "Tonsils shown at their lowest point, where MRI measures them" (from the Home caption), is now also shown in the caption line of pages with no tonsil card: tour, side by side, embed, Explain It (preview and recipient), Open model Fig. 2. The tour, side by side and embed footers also gained "Talk to your doctor about your own care." (item 6). Required captions only; no new wording. -->
 - Evidence notes for this view
 - Structures
 - Typical anatomy
@@ -724,6 +725,8 @@ Mockup: `design/mockups/SupportPhone.dc.html`
 ## Awareness kit
 
 Mockup: `design/mockups/Kit.dc.html`
+
+<!-- 2026-11-05 check-up audit (items 1, 6, 7, 13): the social post and poster now carry the approved short Home caption ("Chiari I. The tonsil extends below the dashed line. Tonsils shown at their lowest point, where MRI measures them. Illustration, not a medical image."), the full "Not medical advice. Talk to your doctor about your own care.", and the model credit exactly as CLAUDE.md rule 3 gives it (also in the ZIP's CREDIT.txt). The kit page's picture descriptions add the approved Chiari I figure description. No new wording. -->
 
 - Open Chiari
 - 3D Explorer

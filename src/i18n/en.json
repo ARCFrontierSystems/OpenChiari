@@ -280,6 +280,7 @@
     "viewerLabel": "Anatomy view",
     "captionIllustration": "Illustration, not a medical image",
     "captionFlow": "Fluid flow simplified",
+    "captionTonsils": "Tonsils shown at their lowest point, where MRI measures them",
     "evidence": "Evidence notes for this view",
     "structures": "Structures",
     "search": "Search parts",

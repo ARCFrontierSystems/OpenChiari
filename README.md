@@ -27,6 +27,10 @@ npm run dev
 
 Then open http://localhost:4321. `npm run build` makes the static site in `dist/`; `npm run check` runs the type check; `npm test` runs the accessibility and behavior tests on the built site (run `npx playwright install chromium` once first). `npm run model:simple` rebuilds the Simple 3D model and `npm run model:check` checks it against EVIDENCE.md.
 
+## Cite the model
+
+Borgfeld M. Open Chiari: an open 3D anatomy model of Chiari malformation type I. Zenodo. doi:[10.5281/zenodo.23983232](https://doi.org/10.5281/zenodo.23983232) (all versions).
+
 ## Not medical advice
 
 Open Chiari is for education only. Talk to your doctor about your own diagnosis and care.

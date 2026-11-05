@@ -7,6 +7,7 @@ authors:
   - family-names: Borgfeld
     given-names: Matthew
     affiliation: Open Chiari
+doi: 10.5281/zenodo.23983232
 url: "https://openchiari.org"
 repository-code: "https://github.com/ARCFrontierSystems/OpenChiari"
 license: CC-BY-SA-4.0

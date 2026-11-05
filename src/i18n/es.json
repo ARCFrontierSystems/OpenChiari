@@ -1039,7 +1039,9 @@
     "creditIntro": "Mantenga esta línea dondequiera que use el modelo, y comparta cualquier versión modificada con la misma licencia.",
     "creditLine": "Modelo de Chiari de Open Chiari (openchiari.org), CC BY-SA 4.0, adaptado de Z-Anatomy (CC BY-SA 4.0) y BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 JP)",
     "footnote": "No es consejo médico. Ilustraciones con fines educativos, no son imágenes médicas.",
-    "copied": "Copiado"
+    "copied": "Copiado",
+    "citeLabel": "Cómo citarlo",
+    "cite": "Borgfeld M. Open Chiari: an open 3D anatomy model of Chiari malformation type I. Zenodo. doi:"
   },
   "embed": {
     "exploreFull": "Explorar el modelo 3D completo"

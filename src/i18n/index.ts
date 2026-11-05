@@ -59,6 +59,8 @@ export function otherLanguagePath(pathname: string): string {
 export const externalLinks = {
   ninds: 'https://www.ninds.nih.gov/publications/chiari-malformation',
   zAnatomy: 'https://github.com/Z-Anatomy/Models-of-human-anatomy',
+  // The model's permanent record on Zenodo; this DOI always points to the newest version.
+  zenodoDoi: '10.5281/zenodo.23983232',
   // Support page: each organization's own pages (from the Support mockup; confirm with each before launch)
   bjcsfDonate: 'https://bobbyjonescsf.org/donate-online/',
   bjcsfRegistry: 'https://bobbyjonescsf.org/keytoacure/',

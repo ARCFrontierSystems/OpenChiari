@@ -1932,11 +1932,11 @@
     "sourcesLink": "evidence notes",
     "view": {
       "title": "What a side-view MRI looks like",
-      "intro": "This is a real MRI of a healthy adult volunteer, from a public research collection, cut down the middle like the 3D model. On this kind of scan, called T2, spinal fluid looks bright and the brain and spinal cord look darker. The numbers match the labels in the 3D model.",
+      "intro": "This is a real MRI of a healthy adult volunteer, from a public research collection, cut down the middle like the 3D model. On this kind of image, called T2, spinal fluid looks bright and the brain and spinal cord look darker. On other kinds, such as T1, fluid looks dark. The numbers match the labels in the 3D model.",
       "alt": "Side-view MRI of a healthy adult's head and neck, with numbered markers on the cerebrum, cerebellum, fourth ventricle, brainstem, spinal cord, spinal fluid and the C2 vertebra.",
-      "caption": "MRI of a healthy adult volunteer, side view at the midline (T2). Not a Chiari scan, and not yours: everyone's scan looks a little different. The researchers removed the face before sharing it.",
-      "notMarked": "The lowest point of the tonsils and the edges of the skull opening aren't marked: placing them precisely is a radiologist's job.",
-      "credit": "MRI: Bédard S, Cohen-Adad J. Spinal Cord Head Positions, OpenNeuro ds004507 (public domain, CC0).",
+      "caption": "MRI of a healthy adult volunteer, side view at the midline (T2), from a study of healthy volunteers, not a Chiari study. It's not your scan: everyone's scan looks a little different. The researchers removed the face before sharing it.",
+      "notMarked": "The lowest point of the cerebellar tonsils and the edges of the skull opening aren't marked: placing them precisely is a radiologist's job.",
+      "credit": "MRI: Bédard S, Cohen-Adad J. Spinal Cord Head Positions, OpenNeuro ds004507, doi:10.18112/openneuro.ds004507.v1.1.2 (public domain, CC0).",
       "seeIt": "See it in 3D"
     }
   },

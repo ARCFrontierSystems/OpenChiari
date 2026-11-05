@@ -41,15 +41,15 @@ r_cord = 200
 cols = np.nonzero(seg[r_cord])[0]
 cord = (float(cols.mean()), float(r_cord))
 
-# (column, row) in the displayed slice. Checked by eye and by an independent check (docs/audits).
+# (column, row) in the displayed slice. Checked by eye and by an independent check (docs/audits/2026-11-05-mri-view-check.md).
 MARKERS = [
     ('cerebrum', '01', (300, 22)),       # occipital lobe, above the tentorium
     ('cerebellum', '03', (262, 80)),     # the folia ("tree" pattern)
-    ('ventricle', '04', (222, 75)),      # the fourth ventricle: bright fluid between brainstem and cerebellum
-    ('brainstem', '05', (209, 92)),      # just behind the researchers' pontomedullary-junction point (col 200, row 102)
+    ('ventricle', '04', (227, 84)),      # the fourth ventricle at its widest: bright fluid between brainstem and cerebellum
+    ('brainstem', '05', (200, 60)),      # the pons (above the researchers' pontomedullary-junction point, col 200, row 102)
     ('cord', '08', cord),                # from the manual cord outline
     ('csf', '09', (258, 118)),           # the bright fluid space behind and below the cerebellum (cisterna magna)
-    ('c2', '10', (174, 181)),            # C2 body, between the researchers' C1-C2 and C2-C3 disc points (rows 169, 193)
+    ('c2', '10', (178, 184)),            # middle of the C2 body, between the researchers' C1-C2 and C2-C3 disc points (rows 169, 193)
 ]
 w, h = C1 - C0, R1 - R0
 out = {

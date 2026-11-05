@@ -986,7 +986,8 @@ test('Spanish site: every page is in Spanish, says the translation is pending re
     await expect(notice.getByRole('link', { name: 'Ver en inglés' })).toHaveAttribute('href', path.slice(3));
     await expect(page.locator('link[rel="alternate"][hreflang="en"]')).toHaveAttribute('href', `https://openchiari.org${path.slice(3)}`);
     // Required on every page (CLAUDE.md rules 1 and 3), in Spanish.
-    await expect(page.getByText('No es consejo médico.', { exact: false }).first()).toBeVisible();
+    // (A visible copy: the kit page also has one inside its hidden print poster.)
+    await expect(page.getByText('No es consejo médico.', { exact: false }).filter({ visible: true }).first()).toBeVisible();
     await expect(page.getByText('Modelo 3D de Open Chiari, CC BY-SA 4.0, adaptado de', { exact: false }).first()).toBeAttached();
   }
   // English pages show no notice, and their language link opens the same page in Spanish.

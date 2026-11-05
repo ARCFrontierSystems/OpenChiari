@@ -1,0 +1,38 @@
+---
+/** Stand-in for pages from later steps, so links from Home don't break. No medical text. */
+import Base from '../layouts/Base.astro';
+import { getStrings, routes } from '../i18n';
+
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+const t = getStrings().stub;
+---
+
+<Base title={title}>
+  <section class="container not-built">
+    <h1 class="section-title">{title}</h1>
+    <p>{t.notBuilt}</p>
+    <p><a href={routes.home}>{t.backHome}</a></p>
+  </section>
+</Base>
+
+<style>
+  .not-built {
+    padding-top: var(--s-72);
+    padding-bottom: var(--s-72);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-16);
+    min-height: 50vh;
+  }
+  .not-built p {
+    color: var(--ink-2);
+  }
+  .not-built a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch);
+  }
+</style>

@@ -1187,6 +1187,25 @@ test('Explorer: close-up view, zoom to a part, show only or hide a part, and lin
   await expect(other.locator('#foramen .see-it')).toHaveAttribute('href', '/explorer/#typ.side.l.pforamen');
 });
 
+test('Explorer: one tap between typical and the condition shown, flow pause and slow, and side by side on the realistic model', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/explorer/');
+  await expect(page.locator('body')).toHaveClass(/has-3d/, { timeout: 30000 });
+  const sw = page.locator('[data-switcher]');
+  await expect(sw).toHaveText('Show typical');
+  await sw.click();
+  await expect(page.locator('input[name="condition-wide"][value="typical"]')).toBeChecked();
+  await expect(sw).toHaveText('Show Chiari I');
+  await sw.click();
+  await expect(page.locator('input[name="condition-wide"][value="chiari"]')).toBeChecked();
+  await page.locator('[data-flow-pause]').click();
+  await expect(page.locator('[data-flow-pause]')).toHaveAttribute('aria-pressed', 'true');
+  await page.locator('.x-toolbar [data-toggle="flow"]').first().click();
+  await expect(page.locator('[data-flow-pause]')).toBeHidden();
+  await page.goto('/explorer/compare/');
+  await expect(page.locator('[data-realistic-switch]')).toBeVisible({ timeout: 30000 });
+});
+
 test('Awareness kit: every graphic and printable downloads, and the ZIP carries the credit', async ({ page, request }) => {
   await page.goto('/kit/');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Awareness kit');

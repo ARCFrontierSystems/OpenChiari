@@ -1157,6 +1157,9 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     flowMat.opacity = seconds === null ? 1 : 0.65 + 0.35 * w;
   }
   let flowLoop = 0;
+  /** 1 = normal, 0.4 = slow, 0 = paused. */
+  let flowSpeed = 1;
+  let flowClock = performance.now() / 1000;
   let lastFlowFrame = 0;
   let lastPageScroll = -Infinity;
   window.addEventListener('scroll', () => (lastPageScroll = performance.now()), { passive: true, capture: true });
@@ -1173,9 +1176,11 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       // About 30 frames a second is plenty for a gentle pulse, and easier on phone batteries. The pulse holds
       // still while the page is scrolling, so the phone can give scrolling its full attention.
       if (visible && !document.hidden && now - lastFlowFrame > 30 && now - lastPageScroll > 250) {
+        // Flow time runs at the chosen speed (paused = 0), so pausing keeps the marks where they are.
+        flowClock += (Math.min(100, now - (lastFlowFrame || now)) / 1000) * flowSpeed;
         lastFlowFrame = now;
         const lift = coughLift(now / 1000);
-        placeFlow(now / 1000, lift);
+        placeFlow(flowClock, lift);
         measureGroup.visible = store.get().measure && coughStart < 0; // the bracket is hidden while the cough plays
         requestRender();
       }
@@ -1233,8 +1238,34 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   // ----- Apply the view state -----
   let lastCamera: CameraView = store.get().camera;
   let lastPart = '';
+  let lastCondition = '';
+  /** Switching between conditions: the structures that differ (the tonsils, the fluid behind them, the syrinx) fade
+   *  over FADE_MS, so the change reads in place. None in Calm mode or during the surgery play-through. */
+  function fadeCondition(before: string, after: string) {
+    if (!before || before === after || surgeryStage !== null || stillOnly()) return;
+    const was = new Set(parts.filter((p) => inView(p, before)).map((p) => p.name));
+    const now = new Set(parts.filter((p) => inView(p, after)).map((p) => p.name));
+    stageFade = {
+      start: performance.now(),
+      fadeIn: new Set([...now].filter((n) => !was.has(n))),
+      fadeOut: new Set([...was].filter((n) => !now.has(n))),
+    };
+    const tick = () => {
+      requestRender();
+      if (fadeProgress() < 1) requestAnimationFrame(tick);
+      else {
+        stageFade = null;
+        apply(store.get());
+      }
+    };
+    requestAnimationFrame(tick);
+  }
   function apply(st: ViewState) {
     setMoving(userMoving); // the resting sharpness depends on which model is showing
+    if (st.condition !== lastCondition) {
+      fadeCondition(lastCondition, st.condition);
+      lastCondition = st.condition;
+    }
     const depth = cutDepth(st.cut);
     plane.constant = depth;
     const midline = depth === 0;
@@ -1511,6 +1542,11 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     pick,
     /** Glide to a structure and bring it close. */
     focusPart,
+    /** Flow speed: 1 normal, 0.4 slow, 0 paused. */
+    setFlowSpeed(speed: number) {
+      flowSpeed = speed;
+      requestRender();
+    },
     /** For tests and the screen reader text. */
     get partCount() {
       return parts.length;

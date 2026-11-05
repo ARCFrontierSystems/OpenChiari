@@ -558,6 +558,12 @@
       "only": "Show only this part",
       "hide": "Hide this part",
       "all": "Show all parts"
+    },
+    "switcher": {
+      "toTypical": "Show typical",
+      "toCondition": "Show {name}",
+      "pause": "Pause flow",
+      "slow": "Slow"
     }
   },
   "evidence": {

@@ -136,6 +136,12 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
           <button type="button" class="x-tool" data-toggle="measure" aria-pressed={(st.measure) ? 'true' : 'false'}>{x.measure}</button>
           <button type="button" class="x-tool" data-ar hidden>{x.ar}</button>
         </div>
+        <!-- Lower bar: compare with typical in one tap, and the flow's pace (3D roadmap step 3). -->
+        <div class="x-toolbar x-toolbar-low only-wide-x" role="group" aria-label={x.viewTools}>
+          <button type="button" class="x-tool x-switcher" data-switcher>{x.switcher.toTypical}</button>
+          <button type="button" class="x-tool" data-flow-pause aria-pressed="false" data-3d-only>{x.switcher.pause}</button>
+          <button type="button" class="x-tool" data-flow-slow aria-pressed="false" data-3d-only>{x.switcher.slow}</button>
+        </div>
         <div class="x-camera only-wide-x" role="group" aria-label={x.camera} data-3d-only>
           {CAMERA_PRESETS.map((v) => (
             <button type="button" data-camera={v} aria-pressed={v === st.camera ? 'true' : 'false'}>{x.cameraViews[v]}</button>
@@ -305,6 +311,18 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
       $$<HTMLInputElement>('input[name^="condition-"]').forEach((radio) =>
         radio.addEventListener('change', () => radio.checked && store.set({ condition: radio.value as Condition })),
       );
+      // Typical <-> the condition you were looking at, in one tap (the model fades between them).
+      let lastNotTypical: Condition = store.get().condition === 'typical' ? 'chiari' : store.get().condition;
+      $$<HTMLButtonElement>('[data-switcher]').forEach((button) =>
+        button.addEventListener('click', () => store.set({ condition: store.get().condition === 'typical' ? lastNotTypical : 'typical' })),
+      );
+      store.subscribe((st) => {
+        if (st.condition !== 'typical') lastNotTypical = st.condition;
+        const label = st.condition === 'typical' ? x.switcher.toCondition.replace('{name}', x.conditions[lastNotTypical].short) : x.switcher.toTypical;
+        $$<HTMLButtonElement>('[data-switcher]').forEach((b) => b.textContent !== label && (b.textContent = label));
+        // Pause and Slow only mean something while the flow shows.
+        $$<HTMLButtonElement>('[data-flow-pause], [data-flow-slow]').forEach((b) => (b.hidden = !st.flow));
+      });
       // Show only / hide the selected part, and show everything again.
       $$<HTMLButtonElement>('[data-focus]').forEach((button) =>
         button.addEventListener('click', () => {
@@ -545,6 +563,20 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
           $$<HTMLButtonElement>('[data-camera]').forEach((b) => b.addEventListener('click', () => store.set({ camera: b.dataset.camera as ViewState['camera'] })));
           $$<HTMLButtonElement>('[data-camera-reset]').forEach((b) => b.addEventListener('click', () => viewer.reset()));
           $$<HTMLButtonElement>('[data-part-zoom]').forEach((b) => b.addEventListener('click', () => viewer.focusPart(store.get().part)));
+          // Flow: pause keeps the marks where they are; slow runs them at 40%.
+          const pause = $$<HTMLButtonElement>('[data-flow-pause]');
+          const slow = $$<HTMLButtonElement>('[data-flow-slow]');
+          const flowSpeed = () => {
+            const paused = pause[0]?.getAttribute('aria-pressed') === 'true';
+            const slowed = slow[0]?.getAttribute('aria-pressed') === 'true';
+            viewer.setFlowSpeed(paused ? 0 : slowed ? 0.4 : 1);
+          };
+          [...pause, ...slow].forEach((b) =>
+            b.addEventListener('click', () => {
+              b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true'));
+              flowSpeed();
+            }),
+          );
           let spoken = '';
           let timer = 0;
           store.subscribe((st) => {
@@ -1107,6 +1139,13 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
     left: 16px;
     display: flex;
     gap: 6px;
+  }
+  .x-toolbar-low {
+    top: auto;
+    bottom: 64px;
+  }
+  .x-toolbar-low [hidden] {
+    display: none;
   }
   .x-tool {
     min-height: var(--touch);

@@ -558,6 +558,12 @@
       "only": "Mostrar solo esta parte",
       "hide": "Ocultar esta parte",
       "all": "Mostrar todas las partes"
+    },
+    "switcher": {
+      "toTypical": "Mostrar típica",
+      "toCondition": "Mostrar {name}",
+      "pause": "Pausar el flujo",
+      "slow": "Lento"
     }
   },
   "evidence": {

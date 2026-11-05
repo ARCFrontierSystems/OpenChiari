@@ -82,7 +82,7 @@ jobs:
           WAITING: ${{ steps.studies.outputs.waiting }}
         run: |
           title="Research studies waiting for a plain summary"
-          body="These recruiting studies show the official summary until a plain one is written, checked against the listing and approved (src/data/study-summaries.json):"$'\n\n'
+          body="These recruiting studies need a plain summary (they show the official one until it is written, checked against the listing and approved), or their listing has changed since their summary was checked (src/data/study-summaries.json):"$'\n\n'
           for id in ${WAITING//,/ }; do body+="- [$id](https://clinicaltrials.gov/study/$id)"$'\n'; done
           body+=$'\n'"Updated automatically by the Deploy workflow."
           number=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "\"$title\" in:title" --json number --jq '.[0].number')

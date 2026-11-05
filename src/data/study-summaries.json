@@ -1,6 +1,23 @@
 {
   "_note": "Plain-language study summaries written by Open Chiari. Each entry goes live only after a fresh agent has checked it against the official ClinicalTrials.gov listing (report in docs/audits/) and Matthew has approved it (CLAUDE.md rules 1 and 1a). Until then the card shows the first two sentences of the official summary, marked as such. Fields: summary (what the study is trying to learn, two sentences), whatYoudDo (short), remote (true only when the listing says people can take part from home), approved (date Matthew approved), listingChecked (the listing's last-update date the summary was checked against). leftOut: studies Matthew decided not to list, with the reason; the daily refresh skips them.",
-  "studies": {},
+  "studies": {
+    "NCT06502431": {
+      "summary": "Researchers want to understand how spinal fluid and blood move in the head and neck in Chiari I. They use a special MRI that measures flow, comparing adults with and without symptoms to people without Chiari.",
+      "whatYoudDo": "Extra flow scans added to an MRI, on one day. For adults 18 to 50 with no past brain or spine surgery and no other nerve or heart conditions in their history (ask the study team what counts). Not for people who can't have an MRI, or who are pregnant or breastfeeding. People with Chiari are invited after a neurosurgery visit at the hospital in Amiens, and the team re-checks the scans to confirm Chiari I.",
+      "remote": false,
+      "approved": "2026-11-05",
+      "listingChecked": "2026-09-08",
+      "audit": "docs/audits/2026-11-05-study-summaries-audit.md"
+    },
+    "NCT06724029": {
+      "summary": "Researchers want to learn what predicts how people do after brain and spine surgery, across many conditions including Chiari I. The study doesn't change anyone's treatment; it only collects health information before surgery and afterwards.",
+      "whatYoudDo": "Your health information is collected before surgery and during follow-up afterwards; how often and for how long depends on the condition, and the listing doesn't say. For adults having neurosurgery at one of the hospitals in Italy that are still taking new people (the official listing shows which).",
+      "remote": false,
+      "approved": "2026-11-05",
+      "listingChecked": "2026-03-30",
+      "audit": "docs/audits/2026-11-05-study-summaries-audit.md"
+    }
+  },
   "leftOut": {
     "NCT03856034": {
       "reason": "Fetal surgery for spina bifida (myelomeningocele), listed under Chiari II; for pregnant women, not people with Chiari I.",

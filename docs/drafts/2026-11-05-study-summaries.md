@@ -1,6 +1,6 @@
 # Research studies: plain summaries for Matthew's approval (November 5, 2026)
 
-**Status: draft.** None of this is on the site. Until approved, each card shows the first two sentences of the official summary, marked "From the official listing".
+**Status: approved by Matthew on November 5, 2026**, and live in `src/data/study-summaries.json`. Studies without an approved summary show the first two sentences of the official one, marked "From the official listing".
 
 Each summary was written from the full ClinicalTrials.gov listing (API v2, opened November 5, 2026). Saved copies of the listings: `docs/audits/sources/2026-11-05-studies/`. An independent check against those listings is in `docs/audits/2026-11-05-study-summaries-audit.md`.
 

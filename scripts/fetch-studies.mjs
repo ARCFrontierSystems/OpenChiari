@@ -131,10 +131,11 @@ const data = {
 writeFileSync(OUT, JSON.stringify(data, null, 2) + '\n');
 
 const approved = curated.studies ?? {};
-const waiting = studies.filter((s) => !approved[s.nct]);
+// Waiting: no approved summary yet, or the listing has changed since its summary was checked (to look at again).
+const waiting = studies.filter((s) => !approved[s.nct] || (s.lastUpdated && approved[s.nct].listingChecked && s.lastUpdated > approved[s.nct].listingChecked));
 console.log(`${studies.length} recruiting studies written (processed ${data.processed}).`);
 const report = waiting.length
-  ? `Studies waiting for a plain summary (${waiting.length}):\n${waiting.map((s) => `- ${s.nct}: ${s.title}`).join('\n')}\n`
+  ? `Studies waiting for a plain summary, or for theirs to be checked again (${waiting.length}):\n${waiting.map((s) => `- ${s.nct}: ${s.title}`).join('\n')}\n`
   : 'Every listed study has an approved plain summary.\n';
 console.log(report);
 if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, `### Research studies\n\n${studies.length} recruiting, processed ${data.processed}.\n\n${report}`);

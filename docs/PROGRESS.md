@@ -43,7 +43,9 @@ Matthew's preference: when a step is done, lay out what the next step will cover
 - **Plain summaries:** drafted for the 2 remaining studies in `docs/drafts/2026-11-05-study-summaries.md`.
   - A fresh agent checked them against the saved listings (`docs/audits/2026-11-05-study-summaries-audit.md`): 7 medium and 12 low issues, none high, and nothing that reads as advice.
   - All issues for the 2 listed studies are fixed in the revised drafts.
-  - Waiting for Matthew's approval.
+  - **Approved by Matthew** and live: both cards now show the plain summary and "What you'd do".
+  - They are recorded in EVIDENCE.md ("Research studies summaries").
+  - If a listing changes after its summary was checked, the daily refresh's issue lists it again.
 
 ## 2026-11-05: Realistic model: clearer highlight, easy to reach on phones
 

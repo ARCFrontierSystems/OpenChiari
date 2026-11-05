@@ -108,6 +108,20 @@ The McRae line is still drawn after surgery. It marks where the edges of the ope
 
 The Washington University study "Redefining Chiari Malformations Type I" is NIH-funded and enrolling ([study page](https://chiari.wustl.edu/research/current-projects/)).
 
+## Research studies summaries
+
+Plain summaries of individual studies are kept in `src/data/study-summaries.json`. Each entry records:
+- the date Matthew approved it;
+- the listing's last-update date it was checked against;
+- its audit report.
+
+Each summary is written from the full ClinicalTrials.gov listing (saved copies are in `docs/audits/sources/`) and checked by a fresh agent before approval. A summary only describes the study; it makes no claim about Chiari itself. When a listing changes after its check, the daily refresh's issue lists the study again. (Rule added Nov 5, 2026.)
+
+| Study | Listing checked | Audit | Approved |
+| --- | --- | --- | --- |
+| [NCT06502431](https://clinicaltrials.gov/study/NCT06502431) | Last updated 2026-09-08 (opened 2026-11-05) | `docs/audits/2026-11-05-study-summaries-audit.md` | 2026-11-05 |
+| [NCT06724029](https://clinicaltrials.gov/study/NCT06724029) | Last updated 2026-03-30 (opened 2026-11-05) | `docs/audits/2026-11-05-study-summaries-audit.md` | 2026-11-05 |
+
 ## Non-medical claims
 
 | Claim | Verdict | Sources |

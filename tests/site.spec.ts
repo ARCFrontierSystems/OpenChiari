@@ -542,7 +542,8 @@ test('Support links only to the organizations themselves; About says how content
   await page.goto('/support/');
   const outside = await page.locator('main a[href^="http"]').evaluateAll((as) => as.map((a) => new URL((a as HTMLAnchorElement).href).hostname));
   expect(outside.length).toBeGreaterThanOrEqual(6);
-  for (const host of outside) expect(['bobbyjonescsf.org', 'conquerchiari.org', 'www.conquerchiari.org', 'asap.org']).toContain(host);
+  // The organizations, and (Connect with others) the communities they and others run.
+  for (const host of outside) expect(['bobbyjonescsf.org', 'conquerchiari.org', 'www.conquerchiari.org', 'asap.org', 'chiarisupport.org', 'www.inspire.com', 'femacpa.com']).toContain(host);
   await expect(page.locator('main form')).toHaveCount(0);
   await page.goto('/about/');
   await expect(page.getByText('They have not been reviewed by a medical professional.', { exact: false })).toBeVisible();

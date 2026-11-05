@@ -2,7 +2,7 @@
 
 **Status (Nov 5): version 1.0.0 published by Matthew** (https://zenodo.org/records/23983233, doi:10.5281/zenodo.23983233). The DOI for all versions, used on the site, is **10.5281/zenodo.23983232**.
 
-**Version 1.0.0 mistake:** a test file (test-8mb.bin, 8 MB of random data) went out with 1.0.0. It came from checking the upload size limit: Zenodo reported that upload as failed, and the attempt to delete it didn't take. Version 1.0.1 (draft https://zenodo.org/deposit/23983394, reserved doi:10.5281/zenodo.23983394) has only the archive and a note explaining the change; Matthew publishes it. Zenodo support can be asked to remove the test file from 1.0.0 (see below). Lesson: list a draft's files before handing it over.
+**Version 1.0.0 mistake:** a test file (test-8mb.bin, 8 MB of random data) went out with 1.0.0. It came from checking the upload size limit: Zenodo reported that upload as failed, and the attempt to delete it didn't take. Version 1.0.1 (https://zenodo.org/records/23983394, doi:10.5281/zenodo.23983394), published by Matthew on Nov 5, has only the archive and a note explaining the change. The all-versions DOI now leads to it. Zenodo support can be asked to remove the test file from 1.0.0 (see below). Lesson: list a draft's files before handing it over.
 
 Earlier: draft created on Zenodo with the archive uploaded (checksum matches), waiting for Matthew to press Publish.** Draft: https://zenodo.org/deposit/23983233 · reserved DOI: 10.5281/zenodo.23983233 (it works once published). Matthew chose option A and agreed to be named as creator.
 

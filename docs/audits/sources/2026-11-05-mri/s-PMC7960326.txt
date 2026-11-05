@@ -1,0 +1,407 @@
+
+ Cough-Associated Changes in CSF Flow in Chiari I Malformation Evaluated by Real-Time MRI - PMC
+ Skip to main content
+ An official website of the United States government
+ Here's how you know 
+ Here's how you know 
+ Official websites use .gov 
+ A
+ .gov website belongs to an official
+ government organization in the United States.
+ Secure .gov websites use HTTPS 
+ A lock (
+ Lock 
+ Locked padlock icon
+ ) or https:// means you've safely
+ connected to the .gov website. Share sensitive
+ information only on official, secure websites.
+ Search
+ Log in 
+ Dashboard
+ Publications
+ Account settings
+ Log out
+ Search…
+ Search NCBI
+ Primary site navigation
+ Search
+ Logged in as:
+ Dashboard
+ Publications
+ Account settings
+ Log in
+ Search PMC Full-Text Archive 
+ Search in PMC 
+ Journal List
+ User Guide
+ PERMALINK
+ Copy 
+ As a library, NLM provides access to scientific literature. Inclusion in an NLM database does not imply endorsement of, or agreement with,
+ the contents by NLM or the National Institutes of Health.
+ Learn more:
+ PMC Disclaimer 
+ |
+ PMC Copyright Notice
+ AJNR Am J Neuroradiol 
+. 2016 May;37(5):825–830. doi: 10.3174/ajnr.A4629 
+ Search in PMC 
+ Search in PubMed 
+ View in NLM Catalog 
+ Add to search 
+ Cough-Associated Changes in CSF Flow in Chiari I Malformation Evaluated by Real-Time MRI
+ RA Bhadelia 
+ RA Bhadelia 
+ a From the Department of Radiology (R.A.B., D.K.), Beth Israel Deaconess Medical Center, Boston, Massachusetts
+ Find articles by RA Bhadelia 
+ a, ✉ , S Patz 
+ S Patz 
+ b Department of Radiology (S.P.), Brigham and Women's Hospital, Boston, Massachusetts
+ Find articles by S Patz 
+ b , C Heilman 
+ C Heilman 
+ c Departments of Neurosurgery (C.H.)
+ Find articles by C Heilman 
+ c , D Khatami 
+ D Khatami 
+ a From the Department of Radiology (R.A.B., D.K.), Beth Israel Deaconess Medical Center, Boston, Massachusetts
+ Find articles by D Khatami 
+ a , E Kasper 
+ E Kasper 
+ e Department of Neurosurgery (E.K.), Beth Israel Deaconess Medical Center, Boston, Massachusetts
+ Find articles by E Kasper 
+ e , Y Zhao 
+ Y Zhao 
+ f Phillips Healthcare (Y.Z.), Boston, Massachusetts.
+ Find articles by Y Zhao 
+ f , N Madan 
+ N Madan 
+ d Radiology (N.M.), Tufts Medical Center, Boston, Massachusetts
+ Find articles by N Madan 
+ d 
+ Author information 
+ Article notes 
+ Copyright and License information 
+ a From the Department of Radiology (R.A.B., D.K.), Beth Israel Deaconess Medical Center, Boston, Massachusetts
+ b Department of Radiology (S.P.), Brigham and Women's Hospital, Boston, Massachusetts
+ c Departments of Neurosurgery (C.H.)
+ d Radiology (N.M.), Tufts Medical Center, Boston, Massachusetts
+ e Department of Neurosurgery (E.K.), Beth Israel Deaconess Medical Center, Boston, Massachusetts
+ f Phillips Healthcare (Y.Z.), Boston, Massachusetts.
+ ✉ Please address correspondence to Rafeeque A. Bhadelia, MD, Department of Radiology, Beth Israel Deaconess Medical Center, WCB90, 330 Brookline Ave, Boston, MA 02115; e-mail: rbhadeli@bidmc.harvard.edu ; @rbhadeliaMD
+ ✉ Corresponding author.
+ Received 2015 Sep 8; Accepted 2015 Oct 27.
+ © 2016 by American Journal of Neuroradiology
+ PMC Copyright notice 
+ PMCID: PMC7960326  PMID: 26705321 
+ Eight symptomatic patients with Chiari I malformation and 6 healthy participants were studied by using MR pencil beam imaging with a temporal resolution of 50 ms. Patients and healthy participants were scanned in real-time during resting, coughing, and postcoughing periods. CSF flow waveform amplitude, CSF stroke volume, and CSF flow rate were compared between the patients and the control population. Real-time MR imaging noninvasively showed a transient decrease in CSF flow across the foramen magnum after coughing in symptomatic patients with Chiari I malformation.
+ Abstract
+ BACKGROUND AND PURPOSE:
+ Invasive pressure studies have suggested that CSF flow across the foramen magnum may transiently decrease after coughing in patients with symptomatic Chiari I malformation. The purpose of this exploratory study was to demonstrate this phenomenon noninvasively by assessing CSF flow response to coughing in symptomatic patients with Chiari I malformation by using MR pencil beam imaging and to compare the response with that in healthy participants.
+ MATERIALS AND METHODS:
+ Eight symptomatic patients with Chiari I malformation and 6 healthy participants were studied by using MR pencil beam imaging with a temporal resolution of ∼50 ms. Patients and healthy participants were scanned for 90 seconds (without cardiac gating) to continuously record cardiac cycle–related CSF flow waveforms in real-time during resting, coughing, and postcoughing periods. CSF flow waveform amplitude, CSF stroke volume, and CSF flow rate (CSF Flow Rate = CSF Stroke Volume × Heart Rate) in the resting and immediate postcoughing periods were determined and compared between patients and healthy participants.
+ RESULTS:
+ There was no significant difference in CSF flow waveform amplitude, CSF stroke volume, and the CSF flow rate between patients with Chiari I malformation and healthy participants during rest. However, immediately after coughing, a significant decrease in CSF flow waveform amplitude ( P < .001), CSF stroke volume ( P = .001), and CSF flow rate ( P = .001) was observed in patients with Chiari I malformation but not in the healthy participants.
+ CONCLUSIONS:
+ Real-time MR imaging noninvasively showed a transient decrease in CSF flow across the foramen magnum after coughing in symptomatic patients with Chiari I malformation, a phenomenon not seen in healthy participants. Our results provide preliminary evidence that the physiology-based imaging method used here has the potential to be an objective clinical test to differentiate symptomatic from asymptomatic patients with Chiari I malformation.
+ Although the diagnosis of Chiari I malformation (CMI) by MR imaging can be easily made by using a simple definition of >5-mm downward displacement of the cerebellar tonsils through the foramen magnum, management of this condition remains challenging and controversial. 1 – 6 The issue under debate is that some patients who meet the MR imaging criteria for CMI diagnosis are asymptomatic and some with <5-mm tonsillar herniation may have typical symptoms of CMI. 5 – 8 Therefore, in the absence of an objective assessment test for CMI that correlates well with the severity of the clinical findings, a decision for surgery is often based entirely on the clinical judgment and management philosophy of the treating neurosurgeon. This scenario is believed to have led to overuse of surgical treatment. 9 
+ Many of the symptoms and signs associated with CMI are due to abnormal CSF circulation between the head and spine, secondary to foramen magnum obstruction produced by herniated cerebellar tonsils. 10 – 18 During the past 2 decades, attempts have been made to use cine phase contrast MR imaging to noninvasively assess CSF flow abnormalities in patients with CMI and to provide an objective test for assessment of disease severity. 3 , 4 , 11 – 13 , 15 Despite success in showing group differences in CSF flow between symptomatic and asymptomatic patients with CMI, 3 , 4 , 15 , 19 critical questions remain concerning the management of an individual patient with CMI presenting for treatment, such as whether and when surgery should be performed and how a patient without typical clinical or MR imaging features should be managed. 6 , 9 
+ Symptoms experienced by patients with CMI can be induced or exaggerated by physiologic alterations such as coughing or the Valsalva maneuver. 16 , 18 This result is believed to be related to transient alterations in CSF flow across the foramen magnum. Therefore, it is logical to propose that an imaging test for patients with CMI include an assessment of the CSF flow response after a physiologic challenge. However, this is difficult, even with a very fast version of the cine phase contrast sequence, because it produces images that are weighted averages of the phasic behavior over many cardiac cycles and is therefore unable to show transient changes in CSF flow that result from a physiologic challenge and in which the duration of the transient changes is just a few cardiac cycles. 20 Therefore, we have chosen to assess CSF flow with the real-time MR imaging technique, pencil beam imaging (PBI).
+ Previously performed simultaneous invasive cranial and spinal pressure monitoring showed that in symptomatic patients with CMI, immediately after coughing or Valsalva maneuver, dissociation develops between intracranial and intraspinal pressures. During this pressure dissociation, a higher intracranial pressure compared with intraspinal pressure pushes the already herniated tonsils downward and further narrows the foramen magnum and thereby transiently reduces the CSF flow across it. 18 , 20 – 23 The purpose of this exploratory study was to demonstrate this phenomenon noninvasively by assessing CSF flow response to coughing in patients with CMI by using PBI and to compare the response with that in healthy participants.
+ Materials and Methods
+ Patients and Healthy Subjects
+ Eight patients with CMI (mean age, 41.1 ± 7.6 years; 7 women) and 6 healthy participants (mean age, 38.8 ± 13.3 years; 4 women) underwent MR imaging on a 3T scanner (Achieva; Philips Healthcare, Best, the Netherlands). Institutional review board approval was obtained for this Health Insurance Portability and Accountability Act–compliant prospective study, and each patient and participant signed an informed consent. All patients with CMI were consecutive patients presenting for treatment who agreed to a research MR imaging study and were assessed by a neurosurgeon as having typical features of symptomatic CMI 3 : severe cough-associated headache ( n = 6/8), syringomyelia ( n = 2/8), and objective neurologic signs such as brisk reflexes, muscle weakness, and nystagmus ( n = 4/8). Healthy participants were recruited by local advertisement, and none had cardiovascular or neurologic disorders.
+ CSF Flow Imaging Technique
+ PBI excites a narrow cylinder or “pencil” region and has been described in detail previously. 20 , 24 , 25 For this investigation, a 25-mm-diameter and 64-mm-length cylinder was excited by using a 2D spatially localized radiofrequency pulse with 8-turn spiral excitations, followed by a bipolar velocity-encoding gradient and a readout gradient applied along the axis of the cylinder. 20 A velocity-encoding of 5 cm/s along the superior-to-inferior direction was used. Other imaging parameters were the following: TR, 25–28 ms; TE, 3.8 ms; and flip angle, 10°. The effective temporal resolution was 2 × TR (ie, 50–56 ms). Heart rate and respiratory movements were continuously monitored by using the physiologic recording system of the scanner. Cardiac gating was not required for this PBI study, which recorded pulsatile CSF flow motion in real-time and, therefore, was able to acquire data much faster than the gated cine phase contrast sequence.
+ MR Imaging
+ Sagittal 3D T2-weighted images were obtained to provide anatomic details. For PBI, the pencil beam was positioned along the long axis of the cervical spinal canal, extending from just above the level of the foramen magnum to the C2–3 disc level ( Fig 1 ). Using multiplanar image reformatting, we positioned the pencil beam to cover the entire thecal sac. 20 The PBI scan was acquired for approximately 90 seconds, during which the participant was asked to do the following: 1) breathe quietly for the first 15–20 seconds (by counting from 1 to 20); 2) then cough as forcefully as possible consecutively 6 times; and 3) breathe quietly again after the end of coughing. Each ∼90-second scan session was repeated 3 times.
+ Fig 1.
+ Open in a new tab 
+ Position of the PBI cylinder ( white rectangle ) and location of CSF flow evaluation ( white line ) are shown in a patient with CMI.
+ Image Analysis
+ 3D anatomic images were used to determine the degree of tonsillar herniation below the level of the foramen magnum. CSF flow analysis was performed off-line by using custom software developed in Matlab (MathWorks, Natick, Massachusetts), which allows simultaneous display of 3D anatomic and physiologic PBI data along with the heart rate and respiration. Anatomic images allow selection of a position along the pencil beam cylinder for assessment of CSF flow ( Fig 1 and On-line Figure). By determining the area of the thecal sac on axial images at the position selected, the software then calculates CSF flow in milliliters per second by multiplying average velocity by area and plots the CSF flow on the y-axis versus time (seconds) on the x-axis, thereby depicting cardiac cycle–related CSF flow pulsations over the entire 90-second data acquisition. For further quantitative analysis, we determined 3 CSF flow parameters: 1) peak-to-peak CSF flow waveform amplitude (A CSF in units of milliliters per minute: sum of the absolute values of peak craniocaudal and caudocranial flow rates), 2) CSF stroke volume (SV CSF in milliliters: average of the absolute values of integrated craniocaudal and caudocranial CSF flows), and 3) CSF flow rate (FR CSF ) = (SV CSF × Heart Rate), with units of milliliters per minute, as shown in Fig 2 . FR CSF was calculated to eliminate any possible difference attributable to changes in heart rate after coughing.
+ Fig 2.
+ Open in a new tab 
+ CSF flow waveforms from a healthy participant during a 5-second period: craniocaudal CSF flow (green) and caudocranial CSF flow (yellow). A CSF is shown in red; SV CSF is the average of absolute flow from yellow and green areas.
+ The average CSF flow parameters were calculated during 2 separate 5-second periods (see horizontal blue and green color bars in Fig 3 showing resting and postcoughing periods). For postcoughing assessment, the 5-second period was selected approximately 5 seconds after the end of coughing to allow sufficient time for motion-related coughing to subside ( Fig 3 ). While it is possible to assess CSF flow at multiple levels along the PBI cylinder, for this exploratory study, our assessment was limited to the C1 vertebral level for both patients and healthy participants ( Fig 1 ). The phase images from each PBI acquisition were reviewed to determine whether there were any phase discontinuities indicating aliasing from velocities exceeding the encoding value of 5 cm/s. No aliasing was observed at the C1 level in either the patients with CMI or healthy participants.
+ Fig 3.
+ Open in a new tab 
+ The effect of coughing on cardiac cycle–related CSF flow waveforms is seen in a patient with CMI ( A ) and a healthy participant ( B ). Left-to-right resting (blue), coughing (red), and immediate postcoughing (green) periods are seen. In the patient with CMI, the CSF flow-pulsation magnitude in the immediate postcoughing period decreases to ∼50% of the resting value before gradually returning to the resting level. In contrast, for the healthy participant, the CSF flow-pulsation magnitude immediately postcoughing is not significantly different compared with that of the resting period. X-axis indicates time in seconds; y-axis, CSF flow rate in milliliters per minute.
+ Data Analysis
+ Resting and immediate postcoughing values for A CSF , SV CSF , and FR CSF were determined and compared between patients with CMI and healthy participants. Furthermore, postcoughing values of all 3 CSF flow parameters were expressed as a percentage of resting values and compared between patients with CMI and healthy participants. A Mann-Whitney U test was used for all comparisons. All statistical analyses were performed with SPSS software (IBM, Armonk, New York).
+ Results
+ There was no significant difference in age ( P = .68) or sex distribution (χ 2 , P = .34) between the patients with CMI and healthy participants. In all patients with CMI, tonsillar herniation was >5 mm below the level of foramen magnum (mean, 14.5 ± 5.5 mm; range, 9–22-mm). None of the healthy participants had tonsils below the level of foramen magnum.
+ Representative real-time cardiac cycle–related CSF flow waveforms from a patient with CMI and a healthy participant are shown in Fig 3 A , -B . In both, minimal heartbeat-to-heartbeat variation in the magnitude of the CSF flow waveforms is seen during the resting period (blue color bar) with high-amplitude haphazard motion during the coughing period (red color bar). However, in the immediate postcoughing period (green color bar), CSF flow waveforms are markedly decreased in magnitude in the patient with CMI for up to 10 seconds before returning to the resting magnitude ( Fig 3 A ). As opposed to this result, in the healthy participant, the magnitude of the CSF waveforms immediately returns to resting values ( Fig 3 B ). Figure 4 shows simultaneous recordings of CSF flow waveform (top) and respiratory motion (bottom, obtained with a respiratory bellows) in a patient with CMI (a different patient than the one shown in Fig 3 ). The respiratory tracing shows irregular motion during the coughing period with almost simultaneous haphazard motion in the CSF flow waveforms (red lines) followed by a decrease in CSF flow waveform magnitude in the immediate postcoughing period (green line).
+ Fig 4.
+ Open in a new tab 
+ CSF flow waveforms (upper trace) and simultaneous recordings of respiratory motion ( lower trace ) in a patient with CMI (the patient is different from the one shown in Fig 3 ). The coughing period ( red bar ) is seen as irregular respiratory motion ( lower trace ) with almost simultaneous haphazard motion in the CSF flow waveform ( upper trace ). In the immediate postcoughing period, respiratory motion is regular but larger in magnitude ( green bar ). The decrease in CSF flow waveform magnitude is seen in the postcoughing period ( green bar in the upper trace ). CSF flow waveforms depict flow in milliliters per minute, and respiratory motion is recorded in arbitrary units (Arb). Mil indicates milliliters.
+ The resting and postcoughing values of A CSF , SV CSF , and FR CSF in patients with CMI and healthy participants are shown in Table 1 . There was no difference between patients with CMI and healthy participants in resting values. However, when postcoughing values were compared between patients with CMI and healthy participants, a significant difference was observed in A CSF ( P = .007), but the difference in SV CSF and FR CSF was not significant. We also compared the postcoughing heart rate between patients with CMI and healthy participants and did not find any significant difference ( P = .43).
+ Table 1:
+ CSF flow parameters in resting and after coughing in patients with CMI compared with healthy participants a 
+ CSF Flow Parameter 
+ Resting 
+ Postcough 
+ CMI ( n = 8) 
+ Healthy ( n = 6) 
+ P Value 
+ CMI ( n = 8) 
+ Healthy ( n = 6) 
+ P Value 
+ A CSF (mL/min) 
+ 3.85 ± 1.55 
+ 3.5 ± 1.9 
+ NS 
+ 1.65 ± 1.01 
+ 3.95 ± 2.2 
+ .007 
+ SV CSF (mL) 
+ 0.38 ± 0.15 
+ 0.43 ± 0.21 
+ NS 
+ 0.17 ± 0.11 
+ 0.37 ± 0.19 
+ NS 
+ FR CSF (mL/min) 
+ 31.1 ± 14.1 
+ 30.1 ± 16.2 
+ NS 
+ 16.5 ± 11.3 
+ 32.2 ± 21 
+ NS 
+ Open in a new tab 
+ Note: —NS indicates not significant.
+ a All values of CSF variables are shown as means. P values were assessed with the Mann-Whitney U test.
+ For each subject group (ie, the CMI group and the healthy group), Table 2 shows postcoughing A CSF , V CSF , and FR CSF values as a percentage of resting values. There was a significant difference in the percentage of postcoughing change in A CSF ( P < .001), SV CSF ( P < .001), and FR CSF ( P < .001) in patients with CMI compared with healthy participants.
+ Table 2:
+ Postcoughing CSF flow parameters expressed as a percentage of the resting value in patients with CMI and healthy participants a 
+ CSF Flow Variable (% of Resting) 
+ CMI ( n = 8) 
+ Healthy Participants ( n = 6) 
+ P Value 
+ A CSF 
+ 45.5 ± 16.8 
+ 114.7 ± 22.2 
+ <.001 
+ SV CSF 
+ 44.1 ± 14.9 
+ 83.3 ± 13.6 
+ <.001 
+ FR CSF 
+ 51.8 ± 16.9 
+ 106.5 ± 20.7 
+ <.001 
+ Open in a new tab 
+ a All values are shown as means. P values were assessed with the Mann-Whitney U test.
+ Discussion
+ A significant decrease in CSF flow across the foramen magnum was observed in response to coughing only in symptomatic patients with CMI, a finding that was not seen in healthy participants. These observations are consistent with previous experiments performed by Williams 18 , 22 , 23 using simultaneous invasive measurements of CSF pressures in the head and spine. In his experiments, Williams observed that in patients with CMI immediately after coughing, dissociation developed between intracranial and intraspinal pressures due to the presence of tonsillar herniation. During this pressure dissociation, a higher intracranial pressure compared with intraspinal pressure pushes the already herniated tonsils in patients with CMI downward, further narrowing the foramen magnum and thereby transiently reducing the CSF flow across it. In healthy subjects without herniated tonsils, pressure dissociation does not develop and CSF flow across the foramen magnum does not significantly change with coughing. We believe that this is the first study to noninvasively demonstrate this phenomenon in patients with CMI.
+ Anatomic MR imaging provides some information about foramen magnum narrowing in patients with CMI through assessment of the degree of tonsillar herniation and crowding of the neural structures, but the findings are poorly correlated with the severity of symptoms. 3 , 6 , 9 , 10 This result has led investigators to assess CSF circulation abnormalities at the foramen magnum by using physiologic means, such as invasive pressure measurements 14 , 16 , 18 , 22 or noninvasive motion-sensitive MR imaging. 3 , 4 , 10 – 13 , 15 , 19 Although simultaneous invasive pressure measurements in the head and spinal canal during coughing or Valsalva maneuver can quantitatively assess the degree of foramen magnum obstruction in patients with CMI by assessing pressure dissociation, this method has not gained widespread acceptance and is rarely used as a diagnostic test. Using MR imaging CSF flow measurements obtained only in resting conditions has its limitations in an individual patient with CMI for clinical decision-making because of the wide variation in quantitative estimates of CSF flow between individuals due to the confounding effects of cerebral arterial and venous flow amplitudes, intracranial compliance, and the anatomy of posterior fossa and CSF pathways. 3 , 8 , 10 , 26 Results presented in Table 1 confirm this notion by showing a lack of significant differences in CSF flow parameters between patients with CMI and healthy participants when their resting values were directly compared, and the postcoughing difference was seen only in the A CSF .
+ The major benefit of our approach is that using a physiologic challenge such as coughing assesses an individual patient's ability to handle compensatory CSF flow across the foramen magnum. By comparing the CSF flow-pulsation magnitudes with and without a physiologic challenge, one eliminates the effect of other confounding variables described above by using a patient as her or his own control. The strength of this method is highlighted in Table 2 . Here, a significant difference in a percentile change between resting and postcoughing values of all 3 CSF flow parameters is seen in patients with CMI compared with the healthy participants. In this study, we have also shown that the dynamic quantitative information that was previously only available through invasive means can now be available to neurosurgeons through a noninvasive physiologic MR imaging method. In addition, unlike the invasive pressure measurements used to study CSF physiology, our approach can be used in a large number of patients with CMI and healthy participants to establish a normative data base, which can help develop an objective assessment test for differentiating patients with CMI who may need surgery from those who may not benefit from it.
+ Several limitations of this exploratory study need to be addressed in the future. First, the physiologic maneuver (coughing) used here was not quantified. The patients were simply asked to cough as forcibly as possible; this request can induce variability in the CSF flow response. While this did not affect the results in this exploratory study, which assessed only the symptomatic patients, for wider use in patients with CMI of different disease severity, the coughing effort will have to be quantified so that the CSF flow response can be appropriately scaled. We are currently exploring different options to address this issue. Second, given the small sample size, we could not determine the relationship between the degree of tonsillar herniation and CSF flow response to coughing. Finally, most patients examined had cough-associated headache. In a small number of patients with CMI in this study without cough-associated headache ( n = 2), CSF flow response to coughing was similar to that in those with cough-associated headache. However, given the small sample size, this similarity needs to be further assessed in future studies.
+ We believe that on the basis of this exploratory study, a larger study can be designed to prospectively study patients with CMI of different disease severities to develop a quantitative noninvasive analysis tool for the evaluation of these patients. Our overall goal is to develop a protocol that will guide clinical management of patients with CMI. By adding a physiology-based quantitative assessment of CSF flow in patients with CMI to routine anatomic imaging, clinicians will be able to make an assessment of a patient's ability to handle altered CSF flow under conditions of stress that are known to produce symptoms in these patients. This objective assessment of CSF flow obstruction in patients with CMI can help their clinical management in 2 different ways. First, the presence of a significant dynamic foramen magnum obstruction, even in the absence of typical radiologic features, will provide supporting evidence that an operation is indicated. Second, the absence of a dynamic foramen magnum obstruction in patients who are asymptomatic or have atypical clinical features will provide objective evidence to clinicians that these patients will likely not benefit from the operation and should be managed by nonsurgical means.
+ Conclusions
+ Our results provide preliminary evidence that the physiology-based imaging method using real-time CSF flow imaging with PBI has the potential to be an objective clinical test to differentiate symptomatic from asymptomatic patients with CMI.
+ Supplementary Material
+ 15-00904.pdf 
+ 15-00904.pdf (763.9KB, pdf) 
+ ABBREVIATIONS:
+ A CSF 
+ CSF flow waveform amplitude
+ CMI 
+ Chiari I malformation
+ FR CSF 
+ CSF flow rate
+ PBI 
+ pencil beam imaging
+ SV CSF 
+ CSF stroke volume
+ Footnotes
+ Disclosures: Rafeeque A. Bhadelia— RELATED : Grant : Conquer Chiari Foundation,* Comments : A grant was provided to perform MRI scans and develop an analysis program for the project. Samuel Patz— RELATED : Consulting Fee or Honorarium : Beth Israel Deaconess Medical Center, Comments : I was a consultant on a grant awarded to R. Bhadelia (first author) from the Conquer Chiari Foundation. The grant was awarded to Beth Israel Deaconess Medical Center with Dr Bhadelia as the Principal Investigator. The consultant fees were paid to me directly by Beth Israel Deaconess Medical Center. Yansong Zhao— UNRELATED : Employment : I am a Clinical Scientist of Philips Healthcare North America. Neel Madan— RELATED : Grant : Conquer Chiari Foundation,* Comments : Seed grant, with money to pay for MRI acquisitions and to give a small amount of money to subjects. *Money paid to the institution.
+ This work was supported by a grant from the Conquer Chiari Foundation.
+ References
+ 1. 
+Elster AD, Chen MY. Chiari I malformations: clinical and radiologic reappraisal. Radiology
+1992;183:347–53
+10.1148/radiology.183.2.1561334
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 2. 
+Alden TD, Ojemann JG, Park TS. Surgical treatment of Chiari I malformation: indications and approaches. Neurosurg Focus
+2001;11:E2
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 3. 
+Alperin N, Loftus JR, Oliu CJ, et al. MRI measures of posterior cranial fossa morphology and CSF physiology in Chiari malformation type I. Neurosurgery
+2014. 
+July
+18. [Epub ahead of print]
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 4. 
+Hofkes SK, Iskandar BJ, Turski PA, et al. Differentiation between symptomatic Chiari I malformation and asymptomatic tonsilar ectopia by using cerebrospinal fluid flow imaging: initial estimate of imaging accuracy. Radiology
+2007;245:532–40
+10.1148/radiol.2452061096
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 5. 
+Meadows J, Kraut M, Guarnieri M, et al. Asymptomatic Chiari type I malformations identified on magnetic resonance imaging. J Neurosurg
+2000;92:920–26
+10.3171/jns.2000.92.6.0920
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 6. 
+Voelker R. Chiari conundrum: researchers tackle a brain puzzle for the 21st century. JAMA
+2009;301:147–49
+10.1001/jama.2008.915
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 7. 
+Sekula RF Jr, Arnone GD, Crocker C, et al. The pathogenesis of Chiari I malformation and syringomyelia. Neurol Res
+2011;33:232–39
+10.1179/016164111X12962202723724
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 8. 
+Tubbs RS, Beckman J, Naftel RP, et al. Institutional experience with 500 cases of surgically treated pediatric Chiari malformation type I. J Neurosurg Pediatr
+2011;7:248–56
+10.3171/2010.12.PEDS10379
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 9. 
+Baisden J. Controversies in Chiari I malformations. Surg Neurol Int
+2012;3(suppl 3):S232–37
+10.4103/2152-7806.98580
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 10. 
+Alperin N, Kulkarni K, Loth F, et al. Analysis of magnetic resonance imaging-based blood and cerebrospinal fluid flow measurements in patients with Chiari I malformation: a system approach. Neurosurg Focus
+2001;11:E6
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 11. 
+Armonda RA, Citrin CM, Foley KT, et al. Quantitative cine-mode magnetic resonance imaging of Chiari I malformations: an analysis of cerebrospinal fluid dynamics. Neurosurgery
+1994;35:214–23; discussion 223–24
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 12. 
+Bhadelia RA, Bogdan AR, Wolpert SM, et al. Cerebrospinal fluid flow waveforms: analysis in patients with Chiari I malformation by means of gated phase-contrast MR imaging velocity measurements. Radiology
+1995;196:195–202
+10.1148/radiology.196.1.7784567
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 13. 
+Haughton VM, Korosec FR, Medow JE, et al. Peak systolic and diastolic CSF velocity in the foramen magnum in adult patients with Chiari I malformations and in normal control participants. AJNR Am J Neuroradiol
+2003;24:169–76
+ [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 14. 
+Oldfield EH, Muraszko K, Shawker TH, et al. Pathophysiology of syringomyelia associated with Chiari I malformation of the cerebellar tonsils: implications for diagnosis and treatment. J Neurosurg
+1994;80:3–15
+10.3171/jns.1994.80.1.0003
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 15. 
+Quigley MF, Iskandar B, Quigley ME, et al. Cerebrospinal fluid flow in foramen magnum: temporal and spatial patterns at MR imaging in volunteers and in patients with Chiari I malformation. Radiology
+2004;232:229–36
+10.1148/radiol.2321030666
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 16. 
+Sansur CA, Heiss JD, DeVroom HL, et al. Pathophysiology of headache associated with cough in patients with Chiari I malformation. J Neurosurg
+2003;98:453–58
+10.3171/jns.2003.98.3.0453
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 17. 
+Williams B. Cerebrospinal fluid pressure changes in response to coughing. Brain
+1976;99:331–46
+10.1093/brain/99.2.331
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 18. 
+Williams B. Cough headache due to craniospinal pressure dissociation. Arch Neurol
+1980;37:226–30
+10.1001/archneur.1980.00500530064010
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 19. 
+Krueger KD, Haughton VM, Hetzel S. Peak CSF velocities in patients with symptomatic and asymptomatic Chiari I malformation. AJNR Am J Neuroradiol
+2010;31:1837–41
+10.3174/ajnr.A2268
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 20. 
+Bhadelia RA, Madan N, Zhao Y, et al. Physiology-based MR imaging assessment of CSF flow at the foramen magnum with a valsalva maneuver. AJNR Am J Neuroradiol
+2013;34:1857–62
+10.3174/ajnr.A3509
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 21. 
+Tachibana S, Iida H, Yada K. Significance of positive Queckenstedt test in patients with syringomyelia associated with Arnold-Chiari malformations. J Neurosurg
+1992;76:67–71
+10.3171/jns.1992.76.1.0067
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 22. 
+Williams B. Simultaneous cerebral and spinal fluid pressure recordings, 2: cerebrospinal dissociation with lesions at the foramen magnum. Acta Neurochir (Wien)
+1981;59:123–42
+10.1007/BF01411198
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 23. 
+Williams B. Simultaneous cerebral and spinal fluid pressure recordings, I: technique, physiology, and normal results. Acta Neurochir (Wien)
+1981;58:167–85
+10.1007/BF01407124
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 24. 
+Hardy CJ, Pearlman JD, Moore JR, et al. Rapid NMR cardiography with a half-echo M-mode method. J Comput Assist Tomogr
+1991;15:868–74
+10.1097/00004728-199109000-00032
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 25. 
+Maier SE, Hardy CJ, Jolesz FA. Brain and cerebrospinal fluid motion: real-time quantification with M-mode MR imaging. Radiology
+1994;193:477–83
+10.1148/radiology.193.2.7972766
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 26. 
+Bhadelia RA, Bogdan AR, Kaplan RF, et al. Cerebrospinal fluid pulsation amplitude and its quantitative relationship to cerebral blood flow pulsations: a phase-contrast MR flow imaging study. Neuroradiology
+1997;39:258–64
+10.1007/s002340050404
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ Associated Data
+ This section collects any data citations, data availability statements, or supplementary materials included in this article. 
+ Supplementary Materials
+ 15-00904.pdf 
+ 15-00904.pdf (763.9KB, pdf) 
+ Articles from AJNR: American Journal of Neuroradiology are provided here courtesy of American Society of Neuroradiology 
+ ACTIONS
+ View on publisher site 
+ PDF (2.1 MB) 
+ Cite 
+ Collections 
+ Permalink 
+ PERMALINK
+ Copy 
+ RESOURCES
+ Similar articles
+ Cited by other articles
+ Links to NCBI Databases
+ Cite
+ Copy 
+ Download .nbib 
+ .nbib 
+ Format: 
+ AMA
+ APA
+ MLA
+ NLM
+ Add to Collections
+ Create a new collection 
+ Add to an existing collection 
+ Name your collection
+ * 
+ Choose a collection
+ Unable to load your collection due to an error
+ Please try again 
+ Add
+ Cancel
+ Follow NCBI
+ NCBI on X (formerly known as Twitter) 
+ NCBI on Facebook 
+ NCBI on LinkedIn 
+ NCBI on GitHub 
+ NCBI RSS feed 
+ Connect with NLM
+ NLM on X (formerly known as Twitter) 
+ NLM on Facebook 
+ NLM on YouTube 
+ National Library of Medicine
+ 8600 Rockville Pike
+ Bethesda, MD 20894 
+ Web Policies
+ FOIA
+ HHS Vulnerability Disclosure
+ Help
+ Accessibility
+ Careers
+ NLM
+ NIH
+ HHS
+ USA.gov
+ Back to Top 

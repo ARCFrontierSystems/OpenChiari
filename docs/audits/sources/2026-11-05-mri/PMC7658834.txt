@@ -1,0 +1,545 @@
+
+ The Perplexity Surrounding Chiari Malformations – Are We Any Wiser Now? - PMC
+ Skip to main content
+ An official website of the United States government
+ Here's how you know 
+ Here's how you know 
+ Official websites use .gov 
+ A
+ .gov website belongs to an official
+ government organization in the United States.
+ Secure .gov websites use HTTPS 
+ A lock (
+ Lock 
+ Locked padlock icon
+ ) or https:// means you've safely
+ connected to the .gov website. Share sensitive
+ information only on official, secure websites.
+ Search
+ Log in 
+ Dashboard
+ Publications
+ Account settings
+ Log out
+ Search…
+ Search NCBI
+ Primary site navigation
+ Search
+ Logged in as:
+ Dashboard
+ Publications
+ Account settings
+ Log in
+ Search PMC Full-Text Archive 
+ Search in PMC 
+ Journal List
+ User Guide
+ PERMALINK
+ Copy 
+ As a library, NLM provides access to scientific literature. Inclusion in an NLM database does not imply endorsement of, or agreement with,
+ the contents by NLM or the National Institutes of Health.
+ Learn more:
+ PMC Disclaimer 
+ |
+ PMC Copyright Notice
+ AJNR Am J Neuroradiol 
+. 2020 Nov;41(11):1975–1981. doi: 10.3174/ajnr.A6743 
+ Search in PMC 
+ Search in PubMed 
+ View in NLM Catalog 
+ Add to search 
+ The Perplexity Surrounding Chiari Malformations – Are We Any Wiser Now?
+ SB Hiremath 
+ SB Hiremath 
+ a From the Division of Diagnostic and Interventional Neuroradiology (S.B.H., A.F., J.B., M.I.V.)
+ c Division of Neuroradiology (S.B.H., C.T., N.Z.), Department of Radiology, University of Ottawa, The Ottawa Hospital Civic Campus, Ottawa, Ontario, Canada
+ Find articles by SB Hiremath 
+ a, c , A Fitsiori 
+ A Fitsiori 
+ a From the Division of Diagnostic and Interventional Neuroradiology (S.B.H., A.F., J.B., M.I.V.)
+ Find articles by A Fitsiori 
+ a , J Boto 
+ J Boto 
+ a From the Division of Diagnostic and Interventional Neuroradiology (S.B.H., A.F., J.B., M.I.V.)
+ Find articles by J Boto 
+ a , C Torres 
+ C Torres 
+ c Division of Neuroradiology (S.B.H., C.T., N.Z.), Department of Radiology, University of Ottawa, The Ottawa Hospital Civic Campus, Ottawa, Ontario, Canada
+ Find articles by C Torres 
+ c , N Zakhari 
+ N Zakhari 
+ c Division of Neuroradiology (S.B.H., C.T., N.Z.), Department of Radiology, University of Ottawa, The Ottawa Hospital Civic Campus, Ottawa, Ontario, Canada
+ Find articles by N Zakhari 
+ c , J-L Dietemann 
+ J-L Dietemann 
+ d University of Strasbourg (J.-L.D.), Strasbourg, France
+ Find articles by J-L Dietemann 
+ d , TR Meling 
+ TR Meling 
+ b Division of Neurosurgery (T.R.M.), Department of Clinical Neurosciences, Geneva University Hospitals, Geneva, Switzerland
+ Find articles by TR Meling 
+ b , MI Vargas 
+ MI Vargas 
+ a From the Division of Diagnostic and Interventional Neuroradiology (S.B.H., A.F., J.B., M.I.V.)
+ e Faculty of Medicine (M.I.V.), University of Geneva, Geneva, Switzerland.
+ Find articles by MI Vargas 
+ a, e, ✉ 
+ Author information 
+ Article notes 
+ Copyright and License information 
+ a From the Division of Diagnostic and Interventional Neuroradiology (S.B.H., A.F., J.B., M.I.V.)
+ b Division of Neurosurgery (T.R.M.), Department of Clinical Neurosciences, Geneva University Hospitals, Geneva, Switzerland
+ c Division of Neuroradiology (S.B.H., C.T., N.Z.), Department of Radiology, University of Ottawa, The Ottawa Hospital Civic Campus, Ottawa, Ontario, Canada
+ d University of Strasbourg (J.-L.D.), Strasbourg, France
+ e Faculty of Medicine (M.I.V.), University of Geneva, Geneva, Switzerland.
+ ✉ Please address correspondence to Maria Isabel Vargas, MD, Division of Diagnostic and Interventional Neuroradiology, Department of Diagnostics, Geneva University Hospitals, Rue Gabrielle-Perret-Gentil 4, 1211 Genève 14, Switzerland; e-mail: maria.i.vargas@hcuge.ch ; @maiva96
+ ✉ Corresponding author.
+ Received 2020 May 10; Accepted 2020 Jun 23.
+ © 2020 by American Journal of Neuroradiology
+ Indicates open access to non-subscribers at www.ajnr.org 
+ PMC Copyright notice 
+ PMCID: PMC7658834  PMID: 32943418 
+ SUMMARY:
+ Chiari malformations are a diverse group of abnormalities of the brain, craniovertebral junction, and the spine. Chiari 0, I, and 1.5 malformations, likely a spectrum of the same malformation with increasing severity, are due to the inadequacy of the para-axial mesoderm, which leads to insufficient development of occipital somites. Chiari II malformation is possibly due to nonclosure of the caudal end of the neuropore, with similar pathogenesis in the rostral end, which causes a Chiari III malformation. There have been significant developments in the understanding of this complex entity owing to insights into the pathogenesis and advancements in imaging modalities and neurosurgical techniques. This article aims to review the different types and pathophysiology of the Chiari malformations, along with a description of the various associated abnormalities. We also highlight the role of ante- and postnatal imaging, with a focus on the newer techniques in the presurgical evaluation, with a brief mention of the surgical procedures and the associated postsurgical complications.
+ Chiari malformations (CMs) are a group of rhombencephalic abnormalities, initially described by Hans Chiari, traditionally classified into 4 types. 1 - 3 Types I to III are associated with a varying degree of caudal displacement of the contents of the posterior fossa, along with cerebellar tonsillar herniation through the foramen magnum. Type IV is characterized by cerebellar hypoplasia or aplasia and an occipital encephalocele. 1 - 3 Because of the complex nature of the associated abnormalities, CMs can present with diverse clinical manifestations, secondary to the involvement of the cerebellum, brain stem, spinal cord, lower cranial nerves, and altered CSF flow dynamics. Recent advances in imaging techniques, such as phase-contrast imaging, cine MR imaging, and DTI, with frequent imaging and surgical management of these malformations, necessitate a re-evaluation of this classification because some forms do not conform well to the previously described categories. We present herein a review of the existing literature on the newer types of CMs, their etiopathogenesis, associated abnormalities, and postsurgical evaluation.
+ Types and Prevalence of CMs
+ Chiari I malformation (CM-1) is characterized by caudal migration of the cerebellar tonsils below the foramen magnum by >5 mm ( Fig 1 ). 1 , 2 , 4 - 6 The prevalence of CM-1 was previously estimated to be <1%, with a mild female preponderance. 7 However, with the frequent use of neuroimaging, incidental identification of CM-1 is estimated to range between 1% and 4% in individuals undergoing MR imaging of the brain and cervical spine. 8 An advanced form of CM-1, associated with caudal migration of the obex beyond the foramen magnum, and elongation of the medulla and fourth ventricle, is described as CM-1.5 ( Fig 2 ). 3 , 4 , 9 Tubbs et al 10 described a prevalence of CM-1.5 in 17% of individuals initially diagnosed as CM-1. 9 The higher rates of revision surgery for persistent syringohydromyelia after posterior fossa decompression in CM-1.5 highlight the need to distinguish between the 2 variants. 4 , 9 Individuals who present with typical clinical symptoms of CM-1 and syringohydromyelia but lack tonsillar and brain stem herniation are classified as CM-0. Milhorat et al 11 , 12 described the occurrence of mild tonsillar herniation (<5 mm), along with syringohydromyelia and clinical features typical for CM-1 in 8.7% of patients who are symptomatic, calling it low-lying cerebellar tonsil syndrome.
+ FIG 1.
+ Open in a new tab 
+ CM-1. Sagittal T2WI of the cervical and upper thoracic spine ( A ) shows cerebellar tonsillar herniation below the foramen magnum, with syringohydromyelia ( arrows ). Axial T2WI at C4 ( B ) and T5 ( C ) levels demonstrate syringohydromyelia.
+ FIG 2.
+ Open in a new tab 
+ CM-1.5. Sagittal T1WI and T2WI of the cervical and upper thoracic spine ( A and B ) show obex herniation below the foramen magnum, with medullary kink ( arrowhead ).
+ CM-2 is characterized by caudal migration of the brain stem, cerebellum, and fourth ventricle through the foramen magnum, along with inferior displacement of the cervical spinal cord ( Fig 3 ). 1 , 2 , 13 The occurrence of low occipital or high cervical encephalocele with signs of CM-2 other than lumbar meningocele and/or myelomeningocele is described as a CM-3. 1 , 2 Since the initial description of CM-3, there have only been approximately 60 reported cases. 3 , 14 The only reported case of occipitocervical encephalocele communicating with the foregut has been referred to as CM-3.5. 3 , 15 , 16 CM-4, currently termed “primary cerebellar agenesis” or “severe cerebellar hypoplasia,” was initially described as cerebellar hypoplasia with occipital encephalocele. 2 , 3 CM 5 is the coexistence of lumbar meningocele and/or myelomeningocele (CM-2), with a low occipital or high cervical myelomeningocele (CM-3). 17 
+ FIG 3.
+ Open in a new tab 
+ CM-2. Sagittal T2WI of the brain ( A ) shows cerebellar tonsillar herniation below the level of the foramen magnum ( arrow ), hydrocephalus ( asterisk ), tectal beaking, and towering of the cerebellum. Axial and sagittal T2WIs of the lumbar spine ( B and C ) show myelomeningocele with neural placode exposure ( arrowheads ) and CSF flow artifacts ( asterisk ).
+ Pathophysiology of CMs
+ The exact etiopathogenesis of CM-1 is not entirely understood. There is no single hypothesis that can explain the occurrence of CM and all the associated abnormalities. CM-1 is thought to be due to the inadequacy of paraxial mesoderm after the closure of the neural tube, leading to insufficient development of occipital somites. 18 , 19 Although a small posterior fossa is not necessarily seen in all patients with CM-1, individuals with a small posterior fossa tend to be symptomatic at an earlier age, present with syringohydromyelia, and show a better response to suboccipital decompression. 20 - 23 CM-0, CM-1, and CM-1.5 share a common pathophysiologic basis and could likely represent a spectrum of the same malformation, with increasing severity, rather than distinct entities.
+ CM-2 is believed to be due to nonclosure of the caudal end of the neuropore, leading to the egress of CSF from the CNS. 24 , 25 The ventricular distension acts as a scaffold for neurodevelopment, primarily of the supratentorial cerebral parenchyma and surrounding mesenchyme, which form the skull vault and base. 25 , 26 The absence of adequate ventricular fluid and the failure of distension of the developing ventricles lead to disorganized development of the CNS, which results in abnormalities, including callosal dysgenesis, anomalous neural migration, and falx defects. Secondary effects include mesenchymal maldevelopment and a small posterior fossa, which proves inadequate to contain the developing hindbrain. This leads to caudal descent of the cerebellar vermis, the tonsils, and the fourth ventricle through the foramen magnum into the cervical spinal canal and also to obstruction of CSF flow, with resultant hydrocephalus. CM-3 shares a similar pathophysiology with the defect that involves the rostral end of the neuropore. In fetal life, the neurenteric canal establishes a temporary communication between the yolk sac and the amniotic cavity, and possibly maintains equal pressures in the 2 cavities. 27 CM-3.5 may be due to the persistence of the neurenteric canal with resultant abnormal communication between the yolk sac and the amniotic cavity. 15 
+ Associated Abnormalities
+ The associated abnormalities in CM can be categorized based on their anatomic location into those that involve the brain and spinal cord, skull and vertebral column, ventricles, and meninges, as described in On-line Table 1.
+ Brain.
+ In CM-1, the brain is usually normal except for asymmetrical tonsillar herniation with a peglike configuration, showing loss of folial pattern. 28 CM-1 is associated with anterior flattening of the midbrain, pons, and medulla, and rarely hydrocephalus. 29 Although rare, spontaneous resolution of CM-1 is known to occur in children and adults, possibly related to an increased posterior fossa volume, cerebellar tonsillar atrophy, and spontaneous disruption of arachnoid adhesions (On-line Fig 1). 8 
+ CM-2 is associated with cerebellar hypoplasia and caudal herniation of the cerebellar tonsils, which wrap around the medulla, ie, the so-called banana sign, along with towering of the cerebellum. 30 Other cerebellar abnormalities include heterotopic and dysplastic gray matter. In a retrospective study, 2 of 17 patients with cerebellar dysplasias had associated CMs. 31 The brain stem, especially the midbrain, is elongated, with the fusion of the colliculi and tectal beaking. There is elongation and stenosis of the cerebral aqueduct with hypoplasia or aplasia of cranial nerves. 28 The massa intermedia is enlarged and anteriorly displaced in approximately 75%–90% of patients, along with elongation of the habenular commissure and pineal gland. 28 , 32 Approximately 90% of patients with CM-2 have associated hydrocephalus and disproportionate enlargement of the atria and occipital horns, ie, colpocephaly. 33 The corpus callosum may show partial or complete agenesis with the absence of the septum pellucidum ( Fig 4 ). The cerebral cortex may show multiple small gyri, ie, stenogyria, with a partial or complete absence of the olfactory bulbs and tracts. In approximately one-third of the patients with CM-2, ventricular margins may show a nodular appearance due to subependymal nodular heterotopia. 28 , 34 
+ FIG 4.
+ Open in a new tab 
+ CM-2. Sagittal T1WI of the brain ( A ) shows hypoplasia of the splenium of corpus callosum ( asterisk ) and tonsillar parenchymal loss secondary to the herniation ( arrowhead ), scalloping of the clivus ( short arrow ), and dysplastic sella ( gray asterisk ). Axial T2WIs ( B and C ) show interdigitating gyri ( white arrows in B ) due to fenestrated falx, stenogyria ( gray arrowhead ), and hypoplasia of the splenium of the corpus callosum ( white arrows in C ).
+ In CM-3, there is cerebellar or low occipital encephalocele in association with herniation of the sagittal sinus or torcular herophili and the brain stem. Partial or complete agenesis of the corpus callosum may also be seen in CM-3.
+ Spinal Cord.
+ Syringomyelia is a fluid-filled cavity formed by CSF dissecting the spinal cord, as opposed to hydromyelia, which represents dilation of the ependymal-lined central canal. Because the distinction between these entities is often not possible on imaging, the term syringohydromyelia is used. The filiform or fusiform dilation of the central ependymal canal up to 2–3 mm is termed prominent central canal and >3 mm as syringomyelia. 17 , 35 It typically involves the lower cervical or upper thoracic spinal cord; seen in approximately 50%–75% of individuals with CM-1 and 25%–45% of patients with CM-2, and may also be seen in CM-3. 36 - 38 The extent of the abnormality may vary from a small segment of spinal cord to an elongated (holocord) syringohydromyelia. Rarely, syringohydromyelia may contain internal septations and affect the entire length of the spinal cord.
+ Neuroimaging of the syrinx is essential for presurgical planning for associated scoliosis and craniovertebral junction abnormalities. 39 The aim of imaging is to assess the size, extent, and level of cord involvement. It is essential to identify the presyrinx state, ie, an abnormal spinal cord signal intensity adjacent to the syrinx, and the presence of flow voids within the syrinx on T2-weighted MRI because these features are potential predictors of a good response after correction of the CSF obstruction. 40 - 42 Open spinal dysraphism, ie, lumbar meningocele and/or myelomeningocele, is associated with CM-2 in >90% of cases. 1 , 2 , 13 , 17 The global birth prevalence of spina bifida aperta is between 3.4 and 4.8 per 10,000 live births, and nearly all cases are associated with CM-2. 43 - 45 Approximately 8% of patients with open spinal dysraphism have an associated diastematomyelia, ie, split cord malformation. 46 
+ Skull and Vertebral Column.
+ CM-1 is associated with skull base and craniovertebral junction abnormalities, including concave clivus, basilar invagination, and platybasia, in approximately 50% of patients. 36 There also is hypoplasia of the basiocciput and foramen magnum widening. The associated bony abnormalities are severe in CM-2. Luckenschadel, or lacunar skull, along with bone scalloping in the frontal region, ie, lemon sign, is usually seen in CM-2. Scalloping of the clivus, petrous temporal bone, and jugular tubercles leads to a shortening of the internal auditory canals. In CM-2, the posterior vertebral defects often affect the lumbar spine and, less commonly, the thoracic spine, compared with CM-3, which involves the cervical spine, predominantly in the upper cervical vertebrae; however, there could be involvement up to the level of C7. Various vertebral segmentation and fusion abnormalities, such as hemivertebrae, block vertebrae, and Klippel-Feil syndrome, can be associated with CM. Other vertebral abnormalities include atlanto-occipital assimilation, the retroflexed odontoid process, and scoliosis. 47 
+ Meninges.
+ In CM-1, the tentorium cerebelli shows increased sloping, there is arachnoid thickening and adhesions in approximately 70% of patients at the level of the foramen magnum, and outlet of the fourth ventricle can be seen. 28 , 48 , 49 In CM-2, however, the tentorium is low-lying, hypoplastic, V-shaped, and widened, and there is tectal beaking and towering of the cerebellum. The straight sinus is more vertical due to tentorial sloping. The falx cerebri may show fenestrations or hypoplasia with interdigitating gyri in approximately 30% of patients ( Fig 4 B ). 50 CM-3 shows findings similar to CM-2.
+ Imaging Modalities and Clinical Utility
+ Antenatal Imaging.
+ Sonography is currently the imaging technique of choice for the assessment of fetal abnormalities. Fetal MR imaging, a level III diagnostic tool, has increased sensitivity and diagnostic confidence, and provides additional findings that may affect prognosis and management. 51 , 52 Fetal MR imaging may accurately demonstrate the level of the defect in open spinal dysraphism but has a limited ability to reveal split cord malformations compared with postnatal MR imaging. 46 Recent studies indicate improved cerebellar herniation and a decreased need for ventriculoperitoneal CSF shunting, along with improved mental and motor function in patients who underwent in utero repair of open spinal dysraphism compared with those who underwent postnatal repair. 45 , 53 Prenatal MR imaging of patients with open spinal dysraphism has shown an association between decreased head circumference and effaced extra-axial CSF spaces in higher grades of CM. However, there was no significant difference in postnatal ventricular size between the prenatal and postnatal repair groups. 53 
+ Postnatal Imaging.
+ Radiographic evaluation by using a lateral projection of the skull is used to assess platybasia, retroflexion of the odontoid process, basilar invagination, and atlanto-occipital assimilation. A decreased clival canal angle <125° and a posterior margin of the odontoid process located >9 mm beyond the pB-C2 line indicate a potential risk for occipitocervical fusion, along with posterior cervical decompression. 54 , 55 Evaluation of the spine is performed on anteroposterior, upright, and lateral views. The assessment for acute idiopathic scoliosis includes the coronal Cobb angle to look for hyperscoliosis, and Risser scores to look for residual growth potential. The presence of hyperscoliosis may point to an associated neural axis abnormality and syringohydromyelia.
+ A volumetric CT aids in the optimal evaluation of the bony abnormalities of the skull base, craniocervical junction, and vertebral anomalies. CT is also helpful in the assessment of the posterior fossa volume and cerebellar tonsillar herniation. MR imaging is the most sensitive imaging technique for the evaluation of intracranial abnormalities in CM. The conventional and advanced MR imaging sequences useful in the morphologic assessment of the brain and spine, CSF flow dynamics, tonsillar motion, and the microstructural alterations of the brain stem are as detailed in On-line Table 2.
+ The evaluation of CSF flow by phase-contrast MR imaging in the presurgical period may serve as a guide for surgical planning and predict surgical outcomes in CM. 56 , 57 The salient findings on CSF flow studies include obstruction of CSF flow at the level of the foramen magnum, which results in increased flow in the anterior and decreased flow in the posterior subarachnoid space along the proximal cervical cord ( Fig 5 ). Other findings on CSF flow studies include increased flow in the anterior subarachnoid space and increased CSF flow velocity. Based on the involved regions, the CSF flow abnormalities are classified into 3 different patterns: 1) CSF flow obstruction posterior to the cerebellum and tonsils; 2) CSF flow obstruction posterior to the cerebellum, tonsils, and through the fourth ventricle and cerebral aqueduct; and 3) CSF flow obstruction posterior to the cerebellum and the tonsils, through the fourth ventricle, and the cerebral aqueduct, and ventral to the brain stem. 58 In pattern 1, “bone only” craniocervical decompression is usually performed and the subarachnoid manipulation, ie, bone decompression with duraplasty with or without dissection of the arachnoid adhesions, is reserved for patients with pattern 3. 58 The surgical management in pattern 2 is based on the extent of the CSF flow restoration on intraoperative sonography.
+ FIG 5.
+ Open in a new tab 
+ Phase-contrast MR imaging: CSF flow study. Phase images in systole and diastole ( A and B ) show decreased CSF flow posterior to the cerebellum and the dorsal subarachnoid space ( arrowheads ).
+ In healthy individuals, cine MR imaging demonstrates a slight inferior motion of the cerebellar tonsils, followed by the medulla and the spinal cord. Also, there is a mild anteroposterior motion of the tonsils, medulla, and the spinal cord. In CM, there is increased craniocaudal displacement of the tonsils and the medulla. There may be impaired passive recoil, with a decreased upward motion, which may contribute to syrinx formation. DTI is a sensitive technique to assess microstructural changes in the brain stem and cerebellar peduncles. In CM-2, antenatal DTI demonstrated increased fractional anisotropy values in the midbrain, which may aid in the prenatal diagnosis of open neural tube defects. 59 Presurgical MR imaging in CM-1 showed elevated fractional anisotropy values in the anterior pons, which reduced after decompression surgery. 60 DTI studies demonstrate parenchymal alterations and may contribute to the diagnosis and management of CM in the future. 59 , 60 
+ Posterior Fossa Decompression for CM-1
+ The decision to treat CM-1 surgically is based on the severity and progression of symptoms and signs, in conjunction with the MR imaging findings. Indications for surgery are typically symptoms that affect daily life or any degree of symptomatic syringohydromyelia. 61 The goals of surgery are to stop the progression of symptoms, relieve the brain stem and spinal cord compression, restore the normal flow of CSF through the foramen magnum, and stop the progression of syringohydromyelia. If warranted, posterior fossa decompression consists of surgical enlargement of the posterior cranial fossa, with a “bone-only” craniocervical decompression (typically a small suboccipital craniectomy above the foramen magnum with removal of the posterior arch of C1) or bone decompression, with an expanding duraplasty, ie, opening of the dura mater over the cisterna magna, and insertion and suturing of allogenic and xenogenic connective tissue dura graft in a watertight fashion to enlarge the cistern ( Fig 6 ). Intraoperative sonography may be performed to determine if a dura mater opening is necessary because bone removal alone may sometimes not suffice to restore normal CSF flow. Dissection of arachnoid adhesions is frequently performed in patients with a syrinx. Tonsillopexy, ie, limited resection of the cerebellar tonsils with bipolar cautery, may also be performed when the surgeon is unable to adequately superiorly mobilize herniated tonsils that severely impinge on the foramen magnum.
+ FIG 6.
+ Open in a new tab 
+ Intraoperative photographs show posterior fossa decompression in a patient with CM-1. A , After a midline incision in the occipitocervical region, the occipital bone, the atlanto-occipital membrane, and the C1 lamina are exposed. B , A suboccipital craniectomy and removal of the posterior arch of C1 has been performed, and the dura mater will be opened in a Y-shaped fashion. C , After opening of the dura mater and the arachnoid overlying the cisterna magna, the 2 cerebellar hemispheres with their respective cerebellar tonsils can be visualized. D , A duraplasty has been performed, wherein a dural graft has been inserted and sutured in a watertight fashion to enlarge the cistern.
+ Postsurgical Imaging in CM
+ MR imaging is generally the technique of choice for evaluation of the expected postoperative imaging findings (On-line Fig 2) and the associated complications in patients with CMs.
+ Complications in CM-1 Surgery.
+ Pseudomeningoceles are subcutaneous fluid collections that are more likely in patients undergoing posterior fossa decompression with duraplasty versus without duraplasty (18.5% versus 1.8%). 62 Wound infections are either superficial, ie, cellulitis involving the postoperative bed, or deep in the form of subcutaneous abscesses or meningitis. The incidence rates of postsurgical infections range from 1% to as high as 11%. 63 Abscesses appear as rim-enhancing fluid collections with restricted diffusion. Meningitis typically demonstrates leptomeningeal enhancement that predominantly involves the posterior fossa.
+ Anterior and posterior circulation strokes are rare complications of CM surgery, occurring in 0.5% of patients. 62 The posterior inferior cerebellar artery territory is usually involved, possibly due to injury to its distal branches during revision surgeries. Arachnoid adhesions complicate approximately 0.5% of cases with allogenic and xenogenic connective tissue grafts. 64 They may obstruct the normal flow of CSF owing to tethering of the parenchyma to the overlying dura, leading to hydrocephalus and symptomatic recurrence. Inferior migration of the cerebellum, ie, cerebellar slumping, is an unlikely event due to excessive bony decompression of the foramen magnum (>4 × 4 cm). It may result in treatment failure or even mass effect on the brain stem and spinal cord. 65 
+ Complications in CM-2 Surgery.
+ Postoperative complications in CM-2 include wound dehiscence and shunt infection (7.6%), CSF leaks and postoperative fluid collections (32.8%), and inclusion cysts and intraspinal arachnoid cysts (3.4%). 45 , 46 
+ CONCLUSIONS
+ CMs are a diverse group of abnormalities that involve the brain, the craniocervical junction, and the spine. They present with a multitude of clinical manifestations, depending on the affected regions, and altered CSF flow dynamics. Because of the increasing performance of neuroimaging for optimal therapeutic guidance, we need to be aware of common and uncommon types of CM, associated abnormalities, and common imaging findings.
+ Supplementary Material
+ 20-00640.pdf 
+ 20-00640.pdf (1.7MB, pdf) 
+ ABBREVIATION:
+ CM 
+ Chiari malformation
+ References
+ 1. Chiari H.
+Ueber Veränderungen des Kleinhirns infolge von Hydrocephalie des Grosshirns1
+[About changes in the cerebellum as a result of hydrocephus of the cerebrum]
+Dtsch Med Wochenschr
+1891;17:1172–75
+10.1055/s-0029-1206803 [ DOI ] [ Google Scholar ]
+ 2. Chiari H.
+Uber Veranderungen des Kleinhirns, der Pons und der Medulla oblongata infolge von congenitaler Hydrocephalie des Grosshirns
+[About changes in the cerebellum, the pons and the medulla oblongata as a result of congenital hydrocephalus of the cerebrum]
+Denkschr Akad Wiss Wien
+1895;63:71–115 [ Google Scholar ]
+ 3. Haddad FA, Qaisi I, Joudeh N, et al. 
+The newer classifications of the Chiari malformations with clarifications: an anatomical review. Clin Anat
+2018;31:314–22
+10.1002/ca.23051
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 4. Tubbs RS, Iskandar BJ, Bartolucci AA, et al. 
+A critical analysis of the Chiari 1.5 malformation. J Neurosurg
+2004;101:179–83
+10.3171/ped.2004.101.2.0179
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 5. Chiapparini L, Saletti V, Solero CL, et al. 
+Neuroradiological diagnosis of Chiari malformations. Neurol Sci
+2011;32(suppl 3):S283–86
+10.1007/s10072-011-0695-0
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 6. Doberstein CA, Torabi R, Klinge PM. 
+Current concepts in the pathogenesis, diagnosis, and management of type I Chiari malformations. R I Med J (2013)
+2017;100:47–49
+ [ PubMed ] [ Google Scholar ]
+ 7. Speer MC, Enterline DS, Mehltretter L, et al. 
+Review article: Chiari type I malformation with or without syringomyelia: prevalence and genetics. J Genet Couns
+2003;12:297–311
+10.1023/A:1023948921381
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 8. Briganti F, Leone G, Briganti G, et al. 
+Spontaneous resolution of Chiari type 1 malformation. A case report and literature review. Neuroradiol J
+2013;26:304–09
+10.1177/197140091302600309
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 9. Kim I-K, Wang K-C, Kim I-O, et al. 
+Chiari 1.5 malformation: an advanced form of Chiari I malformation. J Korean Neurosurg Soc
+2010;48:375–79
+10.3340/jkns.2010.48.4.375
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 10. Tubbs RS, McGirt MJ, Oakes WJ. 
+Surgical experience in 130 pediatric patients with Chiari I malformations. J Neurosurg
+2003;99:291–96
+10.3171/jns.2003.99.2.0291
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 11. Milhorat TH, Chou MW, Trinidad EM, et al. 
+Chiari I malformation redefined: clinical and radiographic findings for 364 symptomatic patients. Neurosurgery
+1999;44:1005–17
+10.1097/00006123-199905000-00042
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 12. Milhorat TH, Bolognese PA, Nishikawa M, et al. 
+Association of Chiari malformation type I and tethered cord syndrome: preliminary results of sectioning filum terminale. Surg Neurol
+2009;72:20–35
+10.1016/j.surneu.2009.03.008
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 13. Cama A, Tortori-Donati P, Piatelli GL, et al. 
+Chiari complex in children–neuroradiological diagnosis, neurosurgical treatment and proposal of a new classification (312 cases). Eur J Pediatr Surg
+1995;5(suppl 1):35–38
+10.1055/s-2008-1066261
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 14. Ivashchuk G, Loukas M, Blount JP, et al. 
+Chiari III malformation: a comprehensive review of this enigmatic anomaly. Childs Nerv Syst
+2015;31:2035–40
+10.1007/s00381-015-2853-9
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 15. Fisahn C, Shoja MM, Turgut M, et al. 
+The Chiari 3.5 malformation: a review of the only reported case. Childs Nerv Syst
+2016;32:2317–19
+10.1007/s00381-016-3255-3
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 16. Muscatello G.
+Ueber die angeborenen Spalten des Schädels und der Wirbelsäule
+[About the congenital clefts of the skull and the spine]
+Archiv f kiln Chir Bd
+1984;47:162–301 [ Google Scholar ]
+ 17. Osborn AG, Hedlund GL. 
+Posterior fossa malformations. In: Osborn’s Brain: Imaging, Pathology, and Anatomy. 2nd ed.
+Osborn AG (ed)
+Elsevier: Philadelphia, 2018:1169–94 [ Google Scholar ]
+ 18. Müller F, O'Rahilly R. 
+The human chondrocranium at the end of the embryonic period, proper, with particular reference to the nervous system. Am J Anat
+1980;159:33–58
+10.1002/aja.1001590105
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 19. Marin-Padilla M, Marin-Padilla TM. 
+Morphogenesis of experimentally induced Arnold–Chiari malformation. J Neurol Sci
+1981;50:29–55
+10.1016/0022-510x(81)90040-x
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 20. Tubbs RS, Hill M, Loukas M, et al. 
+Volumetric analysis of the posterior cranial fossa in a family with four generations of the Chiari malformation type I. J Neurosurg Pediatr
+2008;1:21–24
+10.3171/PED-08/01/021
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 21. Sgouros S, Kountouri M, Natarajan K. 
+Posterior fossa volume in children with Chiari malformation type I. J Neurosurg
+2006;105(suppl):101–06
+10.3171/ped.2006.105.2.101
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 22. Badie B, Mendoza D, Batzdorf U. 
+Posterior fossa volume and response to suboccipital decompression in patients with Chiari I malformation. Neurosurgery
+1995;37:214–18
+10.1227/00006123-199508000-00004
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 23. Taylor DG, Mastorakos P, Jane JA, et al. 
+Two distinct populations of Chiari I malformation based on presence or absence of posterior fossa crowdedness on magnetic resonance imaging. J Neurosurg
+2017;126:1934–40
+10.3171/2016.6.JNS152998
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 24. McLone DG, Knepper PA. 
+The cause of Chiari II malformation: a unified theory. Pediatr Neurosci
+1989;15:1–12
+10.1159/000120432
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 25. McLone DG, Nakahara S, Knepper PA. 
+Chiari II malformation: pathogenesis and dynamics. Concepts Pediatr Neurosurg
+1991:1–17
+10.1159/000120432
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 26. Pexieder T, Jelínek R. 
+Pressure of the CSF and the morphogenesis of the CNS. II. Pressure necessary for normal development of brain vesicles. Folia Morphol (Praha)
+1970;18:181–92
+ [ PubMed ] [ Google Scholar ]
+ 27. Birinyi PV, Bieser S, Reis M, et al. 
+Impact of DTI tractography on surgical planning for resection of a pediatric pre-pontine neurenteric cyst: a case discussion and literature review. Childs Nerv Syst
+2015;31:457–63
+10.1007/s00381-014-2587-0
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 28. Tubb RS, Pugh JA, Oakes WJ. 
+Chiari Malformations. In: Youmans Neurological Surgery, Winn HR (ed)
+Elsevier Saunders: Philadelphia, 2011:1918–27 [ Google Scholar ]
+ 29. Cai C, Oakes WJ. 
+Hindbrain herniation syndromes: the Chiari malformations (I and II). Semin Pediatr Neurol
+1997;4:179–91
+10.1016/S1071-9091(97)80036-8
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 30. Van den Hof MC, Nicolaides KH, Campbell J, et al. 
+Evaluation of the lemon and banana signs in one hundred thirty fetuses with open spina bifida. Am J Obstet Gynecol
+1990;162:322–27
+10.1016/0002-9378(90)90378-k
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 31. Soto-Ares G, Delmaire C, Deries B, et al. 
+Cerebellar cortical dysplasia: MR findings in a complex entity. AJNR Am J Neuroradiol
+2000;21:1511–19
+ [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 32. Gooding CA, Carter A, Hoare RD. 
+New ventriculographic aspects of the Arnold-Chiari malformation. Radiology
+1967;89:626–32
+10.1148/89.4.626
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 33. Rauzzino M, Oakes WJ. 
+Chiari II malformation and syringomyelia. Neurosurg Clin N Am
+1995;6:293–309
+10.1016/S1042-3680(18)30464-9
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 34. Hino-Shishikura A, Niwa T, Aida N, et al. 
+Periventricular nodular heterotopia is related to severity of the hindbrain deformity in Chiari II malformation. Pediatr Radiol
+2012;42:1212–17
+10.1007/s00247-012-2431-1
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 35. Petit-Lacour MC, Lasjaunias P, Iffenecker C, et al. 
+Visibility of the central canal on MRI. Neuroradiology
+2000;42:756–61
+10.1007/s002340000373
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 36. Menezes AH.
+Chiari I malformations and hydromyelia–complications. Pediatr Neurosurg
+1991;17:146–54
+10.1159/000120586
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 37. Alai A, Reddy CG, Amrami KK, et al. 
+Charcot arthropathy of the shoulder associated with typical and atypical findings. Clin Anat
+2013;26:1017–23
+10.1002/ca.22110
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 38. Sgouros S.
+Chiari II malformation and syringomyelia. In: Memet Özek M, Cinalli G, Maixner WJ, eds. 
+The Spina Bifida: Management and Outcome. Springer-Verlag: Milan, 2008: 237–48 [ Google Scholar ]
+ 39. Milhorat TH.
+Classification of syringomyelia. Neurosurg Focus
+2000;8:E1
+10.3171/foc.2000.8.3.1
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 40. Fischbein NJ, Dillon WP, Cobbs C, et al. 
+The “presyrinx” state: a reversible myelopathic condition that may precede syringomyelia. AJNR Am J Neuroradiol
+1999;20:7–20. Accessed April 26, 2020. http://www.ajnr.org/content/20/1/7 
+ [ PubMed ] [ Google Scholar ]
+ 41. Goh S, Bottrell CL, Aiken AH, et al. 
+Presyrinx in children with Chiari malformations. Neurology
+2008;71:351–56
+10.1212/01.wnl.0000304087.91204.95
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 42. Sen A.
+Flow comp off: an easy technique to confirm CSF flow within syrinx and aqueduct. Indian J Radiol Imaging
+2013;23:97–100
+10.4103/0971-3026.113626
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 43. Atta CAM, Fiest KM, Frolkis AD, et al. 
+Global birth prevalence of spina bifida by folic acid fortification status: a systematic review and meta-analysis. Am J Public Health
+2016;106:e24–34
+10.2105/AJPH.2015.302902
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 44. Boulet SL, Yang Q, Mai C, et al. 
+Trends in the postfortification prevalence of spina bifida and anencephaly in the United States. Birth Defects Res Part A Clin Mol Teratol
+2008;82:527–32
+10.1002/bdra.20468
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 45. Adzick NS, Thom EA, Spong CY, et al. 
+A randomized trial of prenatal versus postnatal repair of myelomeningocele. N Engl J Med
+2011;364:993–1004
+10.1056/NEJMoa1014379
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 46. Nagaraj UD, Bierbrauer KS, Stevenson CB, et al. 
+Spinal imaging findings of open spinal dysraphisms on fetal and postnatal MRI. AJNR Am J Neuroradiol
+2018;39:1947–52
+10.3174/ajnr.A5760
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 47. Cesmebasi A, Loukas M, Hogan E, et al. 
+The Chiari malformations: a review with emphasis on anatomical traits. Clin Anat
+2015;28:184–94
+10.1002/ca.22442
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 48. Dlouhy BJ, Dawson JD, Menezes AH. 
+Intradural pathology and pathophysiology associated with Chiari I malformation in children and adults with and without syringomyelia. J Neurosurg Pediatr
+2017;20:526–41
+10.3171/2017.7.PEDS17224
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 49. Menezes AH, Greenlee JDW, Dlouhy BJ. 
+Syringobulbia in pediatric patients with Chiari malformation type I. J Neurosurg Pediatr
+2018;22:52–60
+10.3171/2018.1.PEDS17472
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 50. Geerdink N, van der Vliet T, Rotteveel JJ, et al. 
+Essential features of Chiari II malformation in MR imaging: an interobserver reliability study—part 1. Childs Nerv Syst
+2012;28:977–85
+10.1007/s00381-012-1761-5
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 51. Gonçalves LF, Lee W, Mody S, et al. 
+Diagnostic accuracy of ultrasonography and magnetic resonance imaging for the detection of fetal anomalies: a blinded case–control study. Ultrasound Obstet Gynecol
+2016;48:185–92
+10.1002/uog.15774
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 52. Griffiths PD, Bradburn M, Campbell MJ, et al. 
+Use of MRI in the diagnosis of fetal brain abnormalities in utero (MERIDIAN): a multicentre, prospective cohort study. Lancet
+2017;389:538–46
+10.1016/S0140-6736(16)31723-8
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 53. Nagaraj UD, Bierbrauer KS, Zhang B, et al. 
+Hindbrain herniation in Chiari II malformation on fetal and postnatal MRI. AJNR Am J Neuroradiol
+2017;38:1031–36
+10.3174/ajnr.A5116
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 54. Bollo RJ, Riva-Cambrin J, Brockmeyer MM, et al. 
+Complex Chiari malformations in children: an analysis of preoperative risk factors for occipitocervical fusion. J Neurosurg Pediatr
+2012;10:134–41
+10.3171/2012.3.PEDS11340
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 55. Grabb PA, Mapstone TB, Oakes WJ. 
+Ventral brain stem compression in pediatric and young adult patients with Chiari I malformations. Neurosurgery
+1999;44:520–27; discussion 527–28
+10.1097/00006123-199903000-00050
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 56. McGirt MJ, Nimjee SM, Fuchs HE, et al. 
+Relationship of cine phase-contrast magnetic resonance imaging with outcome after decompression for Chiari I malformations. Neurosurgery
+2006;59:140–46; discussion 140–46
+10.1227/01.NEU.0000219841.73999.B3
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 57. Lee A, Yarbrough CK, Greenberg JK, et al. 
+Comparison of posterior fossa decompression with or without duraplasty in children with type I Chiari malformation. Childs Nerv Syst
+2014;30:1419–24
+10.1007/s00381-014-2424-5
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 58. Fan T, Zhao H, Zhao X, et al. 
+Surgical management of Chiari I malformation based on different cerebrospinal fluid flow patterns at the cranial-vertebral junction. Neurosurg Rev
+2017;40:663–70
+10.1007/s10143-017-0824-1
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 59. Woitek R, Prayer D, Weber M, et al. 
+Fetal diffusion tensor quantification of brainstem pathology in Chiari II malformation. Eur Radiol
+2016;26:1274–83
+10.1007/s00330-015-3939-1
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 60. Eshetu T, Meoded A, Jallo GI, et al. 
+Diffusion tensor imaging in pediatric Chiari type I malformation. Dev Med Child Neurol
+2014;56:742–48
+10.1111/dmcn.12494
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 61. Bolognese PA, Brodbelt A, Bloom AB, et al. 
+Professional profiles, technical preferences, surgical opinions, and management of clinical scenarios from a panel of 63 international experts in the field of Chiari I malformation. World Neurosurg
+2020;S1878-8750:30590-98
+10.1016/j.wneu.2020.03.119
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 62. Klekamp J.
+Surgical treatment of Chiari I malformation–analysis of intraoperative findings, complications, and outcome for 371 foramen magnum decompressions. Neurosurgery
+2012;71:365–80; discussion 380
+10.1227/NEU.0b013e31825c3426
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 63. Arnautovic A, Splavski B, Boop FA, et al. 
+Pediatric and adult Chiari malformation type I surgical series 1965–2013: a review of demographics, operative treatment, and outcomes. J Neurosurg Pediatr
+2015;15:161–77
+10.3171/2014.10.PEDS14295
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 64. Parízek J, Mĕricka P, Husek Z, et al. 
+Detailed evaluation of 2959 allogeneic and xenogeneic dense connective tissue grafts (fascia lata, pericardium, and dura mater) used in the course of 20 years for duraplasty in neurosurgery. Acta Neurochir (Wien)
+1997;139:827–38
+10.1007/BF01411400
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ 65. Duddy MJ, Williams B. 
+Hindbrain migration after decompression for hindbrain hernia: a quantitative assessment using MRI. Br J Neurosurg
+1991;5:141–52
+10.3109/02688699108998460
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ Associated Data
+ This section collects any data citations, data availability statements, or supplementary materials included in this article. 
+ Supplementary Materials
+ 20-00640.pdf 
+ 20-00640.pdf (1.7MB, pdf) 
+ Articles from AJNR: American Journal of Neuroradiology are provided here courtesy of American Society of Neuroradiology 
+ ACTIONS
+ View on publisher site 
+ PDF (1.8 MB) 
+ Cite 
+ Collections 
+ Permalink 
+ PERMALINK
+ Copy 
+ RESOURCES
+ Similar articles
+ Cited by other articles
+ Links to NCBI Databases
+ Cite
+ Copy 
+ Download .nbib 
+ .nbib 
+ Format: 
+ AMA
+ APA
+ MLA
+ NLM
+ Add to Collections
+ Create a new collection 
+ Add to an existing collection 
+ Name your collection
+ * 
+ Choose a collection
+ Unable to load your collection due to an error
+ Please try again 
+ Add
+ Cancel
+ Follow NCBI
+ NCBI on X (formerly known as Twitter) 
+ NCBI on Facebook 
+ NCBI on LinkedIn 
+ NCBI on GitHub 
+ NCBI RSS feed 
+ Connect with NLM
+ NLM on X (formerly known as Twitter) 
+ NLM on Facebook 
+ NLM on YouTube 
+ National Library of Medicine
+ 8600 Rockville Pike
+ Bethesda, MD 20894 
+ Web Policies
+ FOIA
+ HHS Vulnerability Disclosure
+ Help
+ Accessibility
+ Careers
+ NLM
+ NIH
+ HHS
+ USA.gov
+ Back to Top 

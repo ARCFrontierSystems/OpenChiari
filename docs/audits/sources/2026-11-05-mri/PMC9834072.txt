@@ -1,0 +1,387 @@
+
+ Comparison of posterior cranial fossa morphometric measurements in Chiari type I patients with and without syrinx cavity on magnetic resonance imaging - PMC
+ Skip to main content
+ An official website of the United States government
+ Here's how you know 
+ Here's how you know 
+ Official websites use .gov 
+ A
+ .gov website belongs to an official
+ government organization in the United States.
+ Secure .gov websites use HTTPS 
+ A lock (
+ Lock 
+ Locked padlock icon
+ ) or https:// means you've safely
+ connected to the .gov website. Share sensitive
+ information only on official, secure websites.
+ Search
+ Log in 
+ Dashboard
+ Publications
+ Account settings
+ Log out
+ Search…
+ Search NCBI
+ Primary site navigation
+ Search
+ Logged in as:
+ Dashboard
+ Publications
+ Account settings
+ Log in
+ Search PMC Full-Text Archive 
+ Search in PMC 
+ Journal List
+ User Guide
+ PERMALINK
+ Copy 
+ As a library, NLM provides access to scientific literature. Inclusion in an NLM database does not imply endorsement of, or agreement with,
+ the contents by NLM or the National Institutes of Health.
+ Learn more:
+ PMC Disclaimer 
+ |
+ PMC Copyright Notice
+ Pol J Radiol 
+. 2022 Dec 31;87:e694–e700. doi: 10.5114/pjr.2022.123895 
+ Search in PMC 
+ Search in PubMed 
+ View in NLM Catalog 
+ Add to search 
+ Comparison of posterior cranial fossa morphometric measurements in Chiari type I patients with and without syrinx cavity on magnetic resonance imaging
+ Gulec Mert Dogan 
+ Gulec Mert Dogan 
+ 1 Department of Pediatric Radiology, Inonu University, Malatya, Turkey
+ Find articles by Gulec Mert Dogan 
+ 1, ✉ , Ahmet Sigirci 
+ Ahmet Sigirci 
+ 1 Department of Pediatric Radiology, Inonu University, Malatya, Turkey
+ Find articles by Ahmet Sigirci 
+ 1 , Bora Tetik 
+ Bora Tetik 
+ 2 Department of Neurosurgery, Inonu University, Malatya, Turkey
+ Find articles by Bora Tetik 
+ 2 , Ramazan Pasahan 
+ Ramazan Pasahan 
+ 2 Department of Neurosurgery, Inonu University, Malatya, Turkey
+ Find articles by Ramazan Pasahan 
+ 2 , Cagatay Onal 
+ Cagatay Onal 
+ 2 Department of Neurosurgery, Inonu University, Malatya, Turkey
+ Find articles by Cagatay Onal 
+ 2 , Ahmet K Arslan 
+ Ahmet K Arslan 
+ 3 Department of Biostatistics, Inonu University, Malatya, Turkey
+ Find articles by Ahmet K Arslan 
+ 3 
+ Author information 
+ Article notes 
+ Copyright and License information 
+ 1 Department of Pediatric Radiology, Inonu University, Malatya, Turkey
+ 2 Department of Neurosurgery, Inonu University, Malatya, Turkey
+ 3 Department of Biostatistics, Inonu University, Malatya, Turkey
+ ✉ Correspondence address: Dr. Gulec Mert Dogan, Department of Pediatric Radiology, Inonu University, Malatya, Turkey, e-mail: dr_gulecmert@hotmail.com 
+ Received 2022 Feb 12; Accepted 2022 Jun 15; Collection date 2022.
+ Copyright © Polish Medical Society of Radiology 2022
+ This is an Open Access article distributed under the terms of the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0). License ( https://creativecommons.org/licenses/by-nc-nd/4.0/ )
+ PMC Copyright notice 
+ PMCID: PMC9834072  PMID: 36643005 
+ Abstract
+ Purpose
+ To compare the posterior fossa measurements of Chiari type I malformation (CHM1) patients with and without syrinx and with a control group.
+ Material and methods
+ The patients with syrinx were divided into 2 groupd according to syrinx width/cord width (S/C) ratios: group 1 – S/C ratio < 50%; group 2 – S/C ratio > 50%. The length of the clivus, the AP length of the foramen magnum, the AP length of the posterior fossa, the perpendicular distance between the McRae line and (a) the splenium of corpus callosum, (b) the pons, and (c) the fastigium of the 160 patients and of the 160 control patients were statistically compared. In addition, the measurements of the patients with and without syrinx, according to the S/C ratio, were statistically compared.
+ Results
+ Syrinx was present in 59 (36.8 %) of the 160 patients. The S/C ratio was < 50% in 30 (50.9 %) of them, and S/C ratio > 50% in 29 (49.1%) of them. All the measurements in the patient group, except of the AP length of the foramen magnum, were statistically significantly lower than in the control group ( p = 0.001). There was no significant difference in the measurements of the patients with syrinx group 1 and the patients without syrinx, but the AP length of posterior fossa was statistically significantly lower in the patients with syrinx group 2 than the patients without syrinx ( p = 0.03).
+ Conclusion
+ The S/C ratio can be a guide to the underlying aetiology.
+ Keywords: MRI, posterior cranial fossa, Chiari malformation type I, syrinx
+ Introduction
+ The incidence of Chiari type I malformation (CHM1) is approximately 0.1%, and in this disease cerebellar tonsils descend more than 3-5 mm from the foramen magnum (FM) to the cervical canal. This may lead to hypoplasia of the posterior cranial fossa [ 1 ]. Even if there is herniation of the cerebellar tonsils, patients are occasionally asymptomatic. The patients with CHM1 can be symptomatic, but the pathognomonic finding of CHM1 is herniation of the cerebellar tonsils reaching more than 5 mm below the FM [ 2 ]. Previous studies have shown that the presence cerebellar tonsillar herniation (CTH) is not sufficient to identify symptomatic patients or patients who require surgical treatment. Different morphological measurements should be made in magnetic resonance imaging (MRI) in to achieve this goal [ 3 , 4 ]. This malformation may be accompanied by syrinx in 25-80% of the patients [ 5 ]. The syrinx can damage the spinal cord and can cause irreversible neurological deficits, and therefore it is an indication for surgical therapy [ 6 ]. Early diagnosis of the syrinx is important for the surgical planning [ 7 ].
+ There are various studies regarding specific measurements which are important in the prognosis of the disease and determination of the indication of surgery. In the majority of these studies, the patients with and without syrinx were included regardless of the degree of CTH [ 8 , 9 ].
+ Our aim in this study is to compare the posterior fossa measurements in MRI of the CHM1 patients with and without syrinx within each group and with a (non-CHM) control group. In addition to the presence of the syrinx, it is our opinion that the anatomical changes that cause the development of the syrinx are important to determine the prognosis of the disease. Therefore, our secondary aim was to determine the factors that take part in the development of CHM1.
+ Material and methods
+ The study was in accordance with the guidelines of the Health Insurance Portability and Accountability Act. Informed consent was taken from the parents of the patients. This study was approved by the Ethics Committee on 16/11/2021 with the number 2021/2646.
+ Patient selection
+ The present study was a retrospective study, with 160 patients and 160 control patients. The patients included in this study were referred to the radiology department for MRI from the neurosurgery department with symptoms such as neck pain ( n = 50, 31.2%), motor weakness ( n = 20, 12.5%), dizziness ( n = 35, 21.8%), and headache ( n = 55, 34.3%). The study period was between 2012 and 2020. The study cohort included patients with CHM1 (CTH from the FM > 5 mm) diagnosed with MRI. The control group consisted of patients with headache, who received MRI scans and showed no pathological findings. Furthermore, the demographic characteristics of the control group were comparable with the study cohort. Patients who had previous surgery for CHM1 or any other craniocervical pathology, patients with additional pathologies of the spinal cord, and those who did not have the appro-priate protocol for MRI were excluded from the study.
+ The patients were divided into 3 groups according to the degree of CTH. In the grade 1 CTH, the tonsils were descended through the FM but did not reach the C1 arch. In the grade 2 CTH, the tonsils had reached the C1 arch. In the grade 3 CTH, the tonsils had passed below the C1 arch [ 9 ] ( Figures 1 - 3 ). The patients were further sub-divided into 2 groups according to the presence or absence of the syrinx in the spinal cord. The maximum anteroposterior measurement of the syrinx was delineated as S and the anteroposterior measurement of the spinal cord at the same level as C. The severity of syrinx was graded into 2 groups according to S/C ratios: grade 1 syrinx – S/C ratio < 50%; grade 2 syrinx – S/C ratio > 50% [ 10 ] ( Figures 4 and 5 ).
+ Figure 1.
+ Open in a new tab 
+ Grade 1 cerebellar tonsillar herniation – the tonsils were descended from the foramen magnum, but did not reach the C1 arch
+ Figure 3.
+ Open in a new tab 
+ Grade 3 cerebellar tonsillar herniation – the tonsils have passed below the C1 arch
+ Figure 4.
+ Open in a new tab 
+ S (the maximum anteroposterior measurement of the syrinx) and C (the anteroposterior measurement of the spinal cord at the same level) measurements from an axial T2-weighted MRI image. S/C ratio is < 50%
+ Figure 5.
+ Open in a new tab 
+ S (the maximum anteroposterior measurement of the syrinx) and C (the anteroposterior measurement of the spinal cord at the same level) measurements from an axial T2-weighted MRI image. S/C ratio > 50%
+ Figure 2.
+ Open in a new tab 
+ Grade 2 cerebellar tonsillar herniation – the tonsils have reached the C1 arch
+ Magnetic resonance image
+ All images in this study were obtained using a 1.5-Tesla (Siemens, Magnetom-Avanto) (Siemens, Magnetom-Skyra) MR using a standard head coil. All MR images were evaluated manually from mid-sagittal T2-weighted images (T2WI) by a radiologist (G.M.D.) with 15 years of experience. To determine the midsagittal image, it was necessary to identify 3 of the 4 structures: a) the splenium of the corpus callosum; b) the pituitary; c) the cerebral aqueduct; and d) the genu of the corpus callosum [ 11 ].
+ The measurements were as follows ( Figures 6 and 7 ):
+ Figure 6.
+ Open in a new tab 
+ Morphometric measurements obtained from a mid-sagittal T2-weighted MRI image: 1 – tonsillar position, 2 – perpendicular distance between the McRae line and the pons, 3 – perpendicular distance between the McRae line and the splenium of corpus callosum, 4 – perpendicular distance between the McRae line and the fastigium of the cerebellum
+ Figure 7.
+ Open in a new tab 
+ Morphometric measurements obtained from a mid-sagittal T2-weighted MRI image: 5 – length of the clivus, 6 – AP length of the foramen magnum, 7 – AP length of the posterior fossa
+ CTH (the perpendicular distance between the McRae line and the most inferior margin of the cerebellar tonsils);
+ the perpendicular distance between the McRae line and the pons;
+ the perpendicular distance between the McRae line and the splenium of corpus callosum;
+ the perpendicular distance between the McRae line and the fastigium of the cerebellum;
+ the length of the clivus (distance from the dorsum sellae to the basion);
+ AP length of the foramen magnum;
+ AP length of the posterior fossa (distance between the dorsum sellae and the protuberentia occipitalis interna);
+ clivus canal angle (the angle between the Weckenheim line and the posterior vertebral body line).
+ All these measurements were compared between the study groups and the control group. In patients with syrinx, the measurements of the patients were compared according to the S/C ratio.
+ Statistical analysis
+ The continuous variables used in the study are summarized as mean ± standard deviation or median (min. – max.). The categorical variables were expressed as the number of affected individuals and the percentage of the study population. The Kolmogorov-Smirnoff test was used for determination of normal distribution of the continuous variables. The Mann-Whitney U test was used to compare the continuous variables among the groups. Pearson, Yates corrected Pearson, and Fisher’s exact c 2 tests were used to compare the categorical variables among the groups. P -value ≤ 0.05 was accepted as statistically significant. All statistical analyses were performed using Statistical Software Package for the Social Sciences (SPSS) version 26 (IBM, USA).
+ Results
+ There were 160 patients, 102 (63.75%) female and 58 (36.25%) male. The mean age of the patients was 36.02 ± 11.71 (15-70) years. Syrinx was present in 59 (36.8%) of the patients. The S/C ratio was > 50% in 29 (49.1%) patients and < 50% in 30 (50.9%) patents. 52.5% ( n = 31) of the syrinx were in the cervical, 42.3% ( n = 25) in the thoracic, and 3.3% ( n = 2) in the lumbar spinal cord. The syrinx was in the entire spinal cord in one (1.6%) patient.
+ 45 (28.1%) patients had grade 1 CTH, 50 (31.2%) had grade 2 CTH, and 65 (40.7%) had grade 3 CTH. Among the 59 patients, who had syrinx, 10 (16.9%) had grade 1; 20 (33.8%) had grade 2, and 29 (49.1%) had grade 3 CTH. There was a statistically significant positive correlation between CTH grade and the presence of the syrinx ( p = 0.001). There was no statistically significant difference in terms of the measurements in the study cohort according to the CTH grade ( p > 0.05).
+ The clivus canal angle was pathologic in 60 (37.5%) patients, showing platybasia in all of them. On the other hand, all the angles were within the normal range in the control group.
+ The MRI measurements of the patients and the control group are given in Table 1 . All the measurements made in the sagittal MRI in the patient group were significantly lower than in the control group. All the measurements in the patients, except of the AP length of the foramen magnum, were significantly lower than the control group ( p = 0.001) ( Table 1 ).
+ Table 1.
+ Comparison of measurements between patients and control group
+ Factor 
+ Control group 
+ Patients 
+ p -value 
+ Age (years), mean ± SD (range) 
+ 36.02 (15-70) 
+ 36.02 (15-70) 
+ TH, mean ± SD (range) 
+ 0 
+ 12.4 ± 3.7 (5.0-25.4) 
+ M1, mean ± SD (range) 
+ 38.99 ± 2.67 (31.6-46.2) 
+ 32.63 ± 3.97 (20.2-46.0) 
+ 0.001 
+ M2, mean ± SD (range) 
+ 41.34 ± 8.57 (32.0-48.7) 
+ 34.03 ± 5.07 (17.3-46.4) 
+ 0.001 
+ M3, mean ± SD (range) 
+ 60.93 ± 3.73 (52.6-70.2) 
+ 54.4 ± 4.93 (38.0-67.4) 
+ 0.001 
+ M4, mean ± SD (range) 
+ 27.43 ± 2.98 (20.2-35.4) 
+ 23.23 ± 4.36 (12.9-36.5) 
+ 0.001 
+ M5, mean ± SD (range) 
+ 96.64 ± 7.61 (76.0-107.0) 
+ 76.87.4 ± 5.78 (60.0-95.0) 
+ 0.001 
+ M6, mean ± SD (range) 
+ 36.23 ± 3.26 (30.2-46.5) 
+ 35.88 ± 4.58 (23.3-49.8) 
+ 0.689 
+ Open in a new tab 
+ TH – tonsillar herniation, M1 – clivus length, M2 – the perpendicular distance between the McRae line and the pons, M3 – the perpendicular distance between the McRae line and the splenium of corpus callosum, M4 – the perpendicular distance between the McRae line and the fastigium of the cerebellum, M5 – AP length of the posterior fossa, M6 – AP length of the foramen magnum, SD – standard deviation
+ There was no significant difference in age and gender between the patients with and without syrinx ( p > 0.05). There was a significant difference in the AP length of posterior fossa in the patients with syrinx and without syrinx ( p = 0.04), but there was no significant difference between the 2 groups in the other measurements ( p > 0.05) ( Table 2 ). When the patients without syrinx and the patients with grade 1 syrinx (S/C < 50%) were compared, there was no significant difference between the 2 groups in terms of the measurements ( Table 3 ). When the patients without syrinx and the patients with syrinx grade 2 (S/C > 50%) were compared, the AP length of the posterior fossa was found to be statistically lower in patients with grade 2 syrinx ( p = 0.03). There was no significant difference between in the other measurements between the 2 grades of the syrinx ( p > 0.05) ( Table 3 ).
+ Table 2.
+ Comparison of measurements between patients with and without syrinx
+ Without syrinx 
+ With syrinx 
+ p -value 
+ Age (years), mean ± SD (range) 
+ 36.2 ± 13.0 
+ 35.7 ± 13.0 
+ 0.88 
+ TH, mean ± SD (range) 
+ 11.5 ± 2.6 (5.0-20.2) 
+ 13.9 ± 2.1 (5.0-25.4) 
+ 0.32 
+ M1, mean ± SD (range) 
+ 32.0 ± 3.8 (23.3-45.5) 
+ 33.7 ± 4.9 (20.2-46.0) 
+ 0.24 
+ M2, mean ± SD (range) 
+ 34.1 ± 5.1 (17.3-46.4) 
+ 33.9 ± 5.2 (17.5-43.7) 
+ 0.81 
+ M3, mean ± SD (range) 
+ 54.3 ± 5.3 (40.4-67.4) 
+ 54.5 ± 4.6 (38.0-67.0) 
+ 0.92 
+ M4, mean ± SD (range) 
+ 23.4 ± 4.3 (13.0-36.5) 
+ 23.0 ± 3.9 (12.9-30.9) 
+ 0.78 
+ M5, mean ± SD (range) 
+ 77.5 ± 5.3(66.0-95.0) 
+ 75.8 ± 5.7 (60.0-90.0) 
+ 0.04 
+ M6, mean ± SD (range) 
+ 36.3 ± 3.3 (30.2-46.5) 
+ 35.2 ± 4.0 (23.3-49.8) 
+ 0.69 
+ Open in a new tab 
+ TH – tonsillar herniation, M1 – clivus length, M2 – the perpendicular distance between the McRae line and the pons, M3 – the perpendicular distance between the McRae line and the splenium of corpus callosum, M4 – the perpendicular distance between the McRae line and the fastigium of the cerebellum, M5 – AP length of the posterior fossa, M6 – AP length of the foramen magnum, SD – standard deviation
+ Table 3.
+ Comparison of measurements between patients without syrinx and patients who had syrinx < 50% of AP length of the spinal cord, and between those without syrinx and patients who had syrinx > 50% of the AP length of the spinal cord
+ Factor 
+ Without syrinx 
+ Group 1 syrinx 
+ Group 2 syrinx 
+ Age (years), mean ± SD (range) 
+ 36.2 (15-70) 
+ 37 (15-64)
+ p = 0.750 
+ 34.3 ± 12.0 (15.0-57.0)
+ p = 0.220 
+ TH, mean ± SD (range) 
+ 11.5 ± 2.6 (5-20.2) 
+ 13.3 ± 2.1 (5.0-22.4)
+ p = 0.420 
+ 14.5 ± 2.3 (7.4-25.4)
+ p = 0.06 
+ M1, mean ± SD (range) 
+ 32.0 ± 3.8 (23.3-45.5) 
+ 33.1 ± 4.9 (20.2-44.2)
+ p = 0.550 
+ 34.3 ± 4.1 (28.0-46.0)
+ p = 0.428 
+ M2, mean ± SD (range) 
+ 34.1 ± 5.1 (17.3-46.4) 
+ 33.9 ± 5.4 (22.0-43.7)
+ p = 0.945 
+ 33.8 ± 5.3 (17.5-42.2)
+ p = 0.87 
+ M3, mean ± SD (range) 
+ 54.3 ± 5.3 (40.4-67.4) 
+ 52.3 ± 4.9 (45.0-67.0)
+ p = 0.202 
+ 56.8 ± 4.6 (38.0-63.8)
+ p = 0.475 
+ M4, mean ± SD (range) 
+ 23.4 ± 4.3 (13-36.5) 
+ 22.9 ± 4.4 (12.9-30.9)
+ p = 0.88 
+ 23.1 ± 3.9 (13.5-30.0)
+ p = 0.657 
+ M5, mean ± SD (range) 
+ 77.5 ± 5.3 (66-95) 
+ 76.7 ± 7.0 (62.0-90.0)
+ p = 0.22 
+ 74.8 ± 5.0 (60.0-88.0)
+ p = 0.03 
+ M6, mean ± SD (range) 
+ 36.3 ± 3.3 (30.2-46.5) 
+ 35.5 ± 5.0 (23.3-45.5)
+ p = 0.457 
+ 34.8 ± 5.1 (27.8-49.8)
+ p = 0.112 
+ Open in a new tab 
+ TH – tonsillar herniation, Group 1 syrinx: S/C ratio was < 50%, M1 – clivus length, M2 – the perpendicular distance between the McRae line and the pons, M3 – the perpendicular distance between the McRae line and the splenium of corpus callosum, M4 – the perpendicular distance between the McRae line and the fastigium of the cerebellum, M5 – AP length of the posterior fossa, M6 – AP length of the foramen magnum, SD – standard deviation
+ Discussion
+ The present study was the second study with high patient volume to include posterior fossa measurements in the CHM1. Our study is unique because we included a control group performing the same measurements. In addition, it is one of the few studies in the literature that examined CHM1 patients with and without syrinx in the separate groups.
+ The mean age of the patients was 36.02 (15-70) years, and 63.75% of the patients were female in this study. The age of the patients, who were admitted to our institution with CHM1, ranged between 25 and 40 years, and it was slightly more common in females [ 10 ].
+ In this study, 59 (36.8%) of 160 CHM1 patients had syrinx, which was consistent with the incidence reported in the literature [ 5 ]. In addition, 52.5% of the syrinx were in the cervical spinal cord, which was also similar to other reports.
+ CTH of 5 mm or more from the FM to the spinal canal is defined as diagnostic criteria of CHM1. The degree of CTH is also important in the course of the disease [ 11 ]. In the study of Alkoç et al ., the mean CTH was found to be 9.09 ± 3.29 mm, while 66.7% had grade 1, 24.2% had grade 2, and 9.1% had grade 3 CTH [ 11 ]. In another study, grade 1 CTH was observed in 56.7%, grade 2 CTH in 32.8%, and grade 3 CTH in 10.5% of the patients [ 12 ]. In the present study, 59.3% of CTHs were grade 1 and 2, while 40.7% were grade 3. The reason for having frequent high-grade CTH can be explained by referral of the patients to our institution after the emergence of symptoms. The majority of studies included asymptomatic and incidentally diagnosed CHM1 patients [ 10 , 12 ].
+ In our study, almost half of the patients with syrinx had grade 3 CTH, but only 16.9% of the patients had grade 1 CTH. It was shown that there was a significant correlation between CTH grade and the presence of the syrinx. In different studies, it has been shown that there is a significant relationship between the degree of CTH and the syrinx [ 13 ]. In a study evaluating the clivus length in symptomatic adult CHM1 patients, the degree of CTH did not have a significant effect on the symptoms of the disease, but significant correlations between the other morphometric values and degree of CTH were found [ 14 ]. Similarly, we found no significant relationship between the posterior fossa measurements and degree of CTH. Similarly, the results of a study published by Güvenç et al . showed that there was no significant difference between CTH grade and the presence of the syrinx and other measurements of the posterior cranial fossa [ 2 ]. We believe that the morphometric measurements of the cranial base play a role in the development of CTH. In our opinion, all clinical and neuroradiological findings should be evaluated together when determining the treatment plan.
+ Although the aetiology of the syrinx is not clear in CHM1 patients, the presence of a small posterior cranial fossa has been accepted in the aetiology in recent years [ 2 ]. In a study, the posterior cranial fossa measurements were evaluated in 19 patients without syrinx, in 48 patients with syrinx, and in 40 controls; the morphometric measurements were found to be lower in all patients than in the control group. However, these measurements were not different between the patients with and without syrinx [ 2 ]. Only the clivus gradient was different between the patients with and without syrinx [ 2 ]. In another study, MRIs of 108 CHM1 patients were evaluated, and 39 patients had syrinx. The craniocervical osseous anomalies were found to be more common in patients with syrinx than the patients without syrinx [ 15 ]. In our study, all measurements related to the posterior cranial fossa were found to be significantly lower than in the control group, except the AP length of foramen magnum. Although there are very different results in the literature regarding the AP length of foramen magnum, there are several studies that did not find a difference between the control group and the patient group in the AP length of the foramen magnum [ 11 , 16 ].
+ The most prominent result of our study was that the AP length of the posterior fossa was found to be significantly lower in the patients with syrinx than in the patients without syrinx. Our results described this phenomenon for the first time in the literature. The AP length was significantly lower in the patients with syrinx size > 50% of spinal cord; however, it showed no significant change in patients with syrinx size < 50% of spinal cord. We think that our results are reliable due to the high number of patients and the fact that all the patients were symptomatic. Although there are studies evaluating the AP length of the posterior fossa which showed no difference in CHM1 patients and healthy individuals [ 3 ], some studies showed the opposite [ 2 , 14 , 16 - 18 ]. However, syrinx is associated with narrow foramen magnum and is associated with lower diameter of posterior fossa morphometric measurements, which shows a mechanical event in the development of this pathology. On the other hand, 20-35% of patients with CHM1 do not have a syrinx even though the posterior cranial fossa is small [ 12 ]. Therefore, there is a need for further studies to evaluate other causes for development of syrinx. Through our study and other studies, strategies can be developed in the management of the patients.
+ Our study has certain limitations. It was a retrospective study, and therefore MRIs of the previous course of the patients with syrinx could not be evaluated. In this regard, we think that prospective studies that will analyse the time taken for syrinx formation and the changes in morphometric measurements in MRI in this process may be very useful in illuminating the aetiology of the syrinx.
+ Conclusions
+ Although all the posterior cranial fossa lengths are lower in patients with syrinx, the AP length of the posterior fossa was found to be the only measurement that was significantly different in the CHM1 patients with syrinx. The posterior cranial fossa measurements were especially found to be significantly lower in the patients with syrinx that was > 50% of the spinal cord. Therefore, the S/C ratio can give a guide to the underlying aetiology. Further studies are needed to evaluate the size of the syrinx and to compare patients with CHM1 with and without syrinx.
+ Conflicts of interest
+ The authors report no conflict of interest.
+ References
+ 1. Levine DN. The pathogenesis of syringomyelia associated with lesions at the foramen magnum: a critical review of existing theories and proposal of a new hypothesis. J Neurol Sci
+2004; 220: 3-21. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 2. Guvenc G, Sarp AF, Kizmazoglu C, et al. Craniometric analysis of skullbase with magnetic resonance imaging in patients with Chiari malformation. J Craniofac Surg
+2019; 30: 818-822. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 3. Houston JR, Eppelheimer MS, Pahlavian SH, et al. A morphometric assessment of type I Chiari malformation above the McRae line: a retrospective case-control study in 302 adult female subjects. J Neuroradiol
+2018; 45: 23-31. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 4. Tastemur Y, Sabanciogullari V, Sonmez M, et al. The relationship of the posterior cranial fossa, the cerebrum, and cerebellum morphometry with tonsiller herniation. Iran J Radiol
+2017; 14: e13461. doi: 10.5812/iranjradiol.24436. [ DOI ] [ Google Scholar ]
+ 5. Strahle J, Muraszko KM, Kapurch J, et al. Chiari malformation type I and syrinx in children undergoing magnetic resonance imaging. J Neurosurg Pediatr
+2011; 8: 205-213. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 6. Passias PG, Pyne A, Horn SR, et al. Developments in the treatment of Chiari type 1 malformations over the past decade. J Spine Surg
+2018; 4: 45-54. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 7. Haines SJ, Berger M. Current treatment of Chiari I malformations types I and II: a survey of the Pediatric Section of the American Association of Neurological Surgeons. Neurosurgery
+1991; 28: 353-357. [ PubMed ] [ Google Scholar ]
+ 8. Bagci AM, Lee SH, Nagornaya N, et al. Automated posterior cranial fossa volumetry by MRI: applications to Chiari malformation type I. AJNR Am J Neuroradiol
+2013; 34: 1758-1763. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 9. Zhu Z, Sha S, Sun X, et al. Tapering of the cervical spinal canal in patients with distended or nondistended syringes secondary to Chiari type I malformation. Am J Neuroradiol
+2014; 35: 2021-2026. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 10. Alkoc OA, Songur A, Eser O, et al. Stereological and morphometric analysis of MRI Chiari malformation type-1. J Korean Neurosurg Soc
+2015; 58: 454-461. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 11. Elster AD, Chen MY. Chiari I malformations: clinical and radiologic reappraisal. Radiology
+1992; 183: 347-353. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 12. Yang H, Han X, Jin M, et al. Morphometric features of posterior cranial fossa are different between Chiari I malformation with and without syringomyelia. Eur Spine J
+2016; 25: 2202-2209. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 13. Koyanagi I, Houkin K. Pathogenesis of syringomyelia associated with Chiari type 1 malformation: review of evidences and proposal of a new hypothesis. Neurosurg Rev
+2010; 33: 271-284. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 14. Nwotchouang BST, Eppelheimer MS, Ibrahimy A, et al. Clivus length distinguishes between asymptomatic healthy controls and symptomatic adult women with Chiari malformation type I. Neurora-diology
+2020; 62: 1389-1400. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 15. Gad KA, Yousem DM. Syringohydromyelia in patients with Chiari I malformation: a retrospective analysis. AJNR Am J Neuroradiol
+2017; 38: 1833-1838. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 16. Karagoz F, Izgi N, Kapijcijoglu SS. Morphometric measurements of the cranium in patients with Chiari type I malformation and comparison with the normal population. Acta Neurochir (Wien)
+2002; 144: 165-171. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 17. Sekula RF, Jannetta PJ, Casey KF, et al. Dimensions of the posterior fossa in patients symptomatic for Chiari I malformation but without cerebellar tonsillar descent. Cerebrospinal Fluid Res
+2005; 2: 11. doi: 10.1186/1743-8454-2-11. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 18. Aydin S, Hanimoglu H, Tanriverdi T, et al. Chiari type I malformations in adults: a morphometric analysis of the posterior cranial fossa. Surg Neurol
+2005; 64: 237-241. [ DOI ] [ PubMed ] [ Google Scholar ]
+ Articles from Polish Journal of Radiology are provided here courtesy of Termedia Publishing 
+ ACTIONS
+ View on publisher site 
+ PDF (184.6 KB) 
+ Cite 
+ Collections 
+ Permalink 
+ PERMALINK
+ Copy 
+ RESOURCES
+ Similar articles
+ Cited by other articles
+ Links to NCBI Databases
+ Cite
+ Copy 
+ Download .nbib 
+ .nbib 
+ Format: 
+ AMA
+ APA
+ MLA
+ NLM
+ Add to Collections
+ Create a new collection 
+ Add to an existing collection 
+ Name your collection
+ * 
+ Choose a collection
+ Unable to load your collection due to an error
+ Please try again 
+ Add
+ Cancel
+ Follow NCBI
+ NCBI on X (formerly known as Twitter) 
+ NCBI on Facebook 
+ NCBI on LinkedIn 
+ NCBI on GitHub 
+ NCBI RSS feed 
+ Connect with NLM
+ NLM on X (formerly known as Twitter) 
+ NLM on Facebook 
+ NLM on YouTube 
+ National Library of Medicine
+ 8600 Rockville Pike
+ Bethesda, MD 20894 
+ Web Policies
+ FOIA
+ HHS Vulnerability Disclosure
+ Help
+ Accessibility
+ Careers
+ NLM
+ NIH
+ HHS
+ USA.gov
+ Back to Top 

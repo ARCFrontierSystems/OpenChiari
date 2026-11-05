@@ -48,6 +48,27 @@
     },
     "openExplorer": "Abrir el explorador 3D",
     "tour": "Hacer el recorrido de 2 minutos",
+    "start": {
+      "label": "Empiece aquí",
+      "items": [
+        {
+          "page": "mri",
+          "text": "Acabo de recibir el informe de mi resonancia"
+        },
+        {
+          "page": "prepSurgery",
+          "text": "Se acerca una cirugía"
+        },
+        {
+          "page": "children",
+          "text": "Es mi hijo o mi hija"
+        },
+        {
+          "page": "explain",
+          "text": "Quiero explicárselo a alguien"
+        }
+      ]
+    },
     "figNumber": "Fig. 1",
     "figCaption": {
       "wide": "Vista de la línea media en Chiari I. La amígdala cerebelosa (06) se extiende por debajo de la línea punteada que cruza la abertura del cráneo. En realidad, las amígdalas cerebelosas están justo a cada lado de la línea media; aquí se muestran donde se miden en la resonancia magnética, en su punto más bajo. Ilustración, no es una imagen médica.",
@@ -168,42 +189,21 @@
           "narrow": "Compare la anatomía típica, Chiari, siringe y después de la cirugía."
         },
         {
-          "num": "04",
-          "page": "explain",
-          "title": "Explain It (Explíquelo)",
-          "wide": "Envíe a su familia, a los maestros o a su empleador un enlace a la vista que corresponde a su diagnóstico.",
-          "narrow": "Envíe un enlace a la vista que corresponde a su diagnóstico."
-        },
-        {
-          "num": "08",
-          "page": "studies",
-          "title": "Estudios de investigación",
-          "wide": "Estudios sobre Chiari y siringomielia que buscan participantes, actualizados a diario.",
-          "narrow": "Estudios que buscan participantes, actualizados a diario."
-        },
-        {
           "num": "02",
+          "page": "mri",
+          "title": "Cómo leer el informe de su resonancia",
+          "wide": "Palabras que puede ver en un informe de resonancia sobre Chiari, en lenguaje sencillo y enlazadas al modelo 3D.",
+          "narrow": "Qué significan las palabras de su informe de resonancia."
+        },
+        {
+          "num": "03",
           "page": "prep",
           "title": "Prepare su cita médica",
           "wide": "Haga una lista de preguntas de una página para su próxima cita. No se guarda nada.",
           "narrow": "Una lista de preguntas para imprimir. No se guarda nada."
         },
         {
-          "num": "06",
-          "page": "model",
-          "title": "Modelo abierto",
-          "wide": "Gratis para descargar e insertar en sitios web, para fundaciones, enfermeros y maestros.",
-          "narrow": "Gratis para descargar e insertar."
-        },
-        {
-          "num": "09",
-          "page": "support",
-          "title": "Apoye a las organizaciones de Chiari",
-          "wide": "Done o sea voluntario en los grupos que financian la investigación y apoyan a las familias.",
-          "narrow": "Done o sea voluntario en sus propios sitios web."
-        },
-        {
-          "num": "03",
+          "num": "04",
           "page": "children",
           "title": "Cómo ayudar a su hijo",
           "wide": "Cómo preparar a un niño para la cirugía de Chiari: consejos, un cuento con dibujos, páginas para colorear y una hoja para la escuela.",
@@ -211,6 +211,13 @@
         },
         {
           "num": "05",
+          "page": "explain",
+          "title": "Explain It (Explíquelo)",
+          "wide": "Envíe a su familia, a los maestros o a su empleador un enlace a la vista que corresponde a su diagnóstico.",
+          "narrow": "Envíe un enlace a la vista que corresponde a su diagnóstico."
+        },
+        {
+          "num": "06",
           "page": "kit",
           "title": "Kit de concientización",
           "wide": "Publicaciones, pósteres y calcomanías gratis para compartir, o haga los suyos con sus palabras y su logotipo.",
@@ -218,10 +225,31 @@
         },
         {
           "num": "07",
+          "page": "model",
+          "title": "Modelo abierto",
+          "wide": "Gratis para descargar e insertar en sitios web, para fundaciones, enfermeros y maestros.",
+          "narrow": "Gratis para descargar e insertar."
+        },
+        {
+          "num": "08",
           "page": "connect",
           "title": "Conectar con otras personas",
           "wide": "Foros y grupos de apoyo para personas con Chiari y sus familias.",
           "narrow": "Foros y grupos de apoyo."
+        },
+        {
+          "num": "09",
+          "page": "studies",
+          "title": "Estudios de investigación",
+          "wide": "Estudios sobre Chiari y siringomielia que buscan participantes, actualizados a diario.",
+          "narrow": "Estudios que buscan participantes, actualizados a diario."
+        },
+        {
+          "num": "10",
+          "page": "support",
+          "title": "Apoye a las organizaciones de Chiari",
+          "wide": "Done o sea voluntario en los grupos que financian la investigación y apoyan a las familias.",
+          "narrow": "Done o sea voluntario en sus propios sitios web."
         }
       ],
       "groups": [
@@ -229,6 +257,7 @@
           "title": "Comprender y prepararse",
           "pages": [
             "explorer",
+            "mri",
             "prep",
             "children"
           ]
@@ -532,6 +561,54 @@
       "wide": "Marque las preguntas que quiere hacer, agregue las suyas e imprima una hoja de una página. Todo se queda en su dispositivo; no se guarda ni se envía nada.",
       "narrow": "Marque lo que quiere preguntar. No se guarda ni se envía nada."
     },
+    "quick": {
+      "label": "Me preparo para",
+      "hint": "Marca las preguntas que corresponden. Puede cambiar cualquiera.",
+      "done": "Se marcaron {n} preguntas para: {name}.",
+      "items": [
+        {
+          "id": "first",
+          "text": "Una primera consulta",
+          "groups": [
+            "diagnosis",
+            "symptoms",
+            "tests"
+          ]
+        },
+        {
+          "id": "surgery",
+          "text": "Decidir sobre la cirugía",
+          "groups": [
+            "treatment",
+            "surgeryBefore"
+          ]
+        },
+        {
+          "id": "home",
+          "text": "Volver a casa después de la cirugía",
+          "groups": [
+            "surgeryHome"
+          ]
+        },
+        {
+          "id": "after",
+          "text": "Un control después de la cirugía",
+          "groups": [
+            "surgeryAfter",
+            "symptoms"
+          ]
+        },
+        {
+          "id": "routine",
+          "text": "Un control de rutina",
+          "groups": [
+            "symptoms",
+            "tests",
+            "daily"
+          ]
+        }
+      ]
+    },
     "formLabel": "Elija las preguntas",
     "groups": [
       {
@@ -758,6 +835,28 @@
         ]
       }
     ],
+    "warning": {
+      "title": "Cuándo llamar después de la cirugía",
+      "intro": "Antes de volver a casa, su equipo quirúrgico debería decirle qué vigilar y a quién llamar, de día o de noche. Siga primero sus instrucciones.",
+      "lead": "Las instrucciones para el alta después de una cirugía de Chiari a menudo incluyen estas razones para",
+      "leadStrong": "llamar de inmediato al equipo quirúrgico:",
+      "items": [
+        "fiebre o escalofríos (pregunte a partir de qué temperatura);",
+        "enrojecimiento, hinchazón, sangrado o más dolor en la herida, cualquier líquido o pus que salga de ella, o que la herida se abra;",
+        "líquido transparente que sale de la herida, de la nariz o del oído, o que gotea por la garganta, o una hinchazón blanda bajo la herida;",
+        "un dolor de cabeza que empeora, o que no mejora con el medicamento que le dieron;",
+        "dolor o rigidez fuerte en el cuello que no le deja bajar la barbilla hasta el pecho;",
+        "vómitos;",
+        "debilidad nueva o peor en los brazos o las piernas, o dificultad para caminar, mantener el equilibrio o hablar;",
+        "problemas nuevos para ver, como visión doble;",
+        "confusión, o mucho más sueño de lo habitual;",
+        "una pantorrilla hinchada y dolorida en una pierna;",
+        "efectos secundarios de un medicamento (no lo deje sin preguntar primero)."
+      ],
+      "other": "Llámelos también por cualquier otra cosa que le preocupe.",
+      "emergencyStrong": "Llame al 911 o al número de emergencias de su país",
+      "emergencyRest": "si hay dificultad para respirar, dolor en el pecho, una convulsión, confusión repentina, o si la persona está muy difícil de despertar. Si cree que es una emergencia, no espere."
+    },
     "addOwn": "Agregue su propia pregunta",
     "add": "Agregar",
     "mention": "Cosas que quiero mencionar",
@@ -799,6 +898,19 @@
       "print": "Imprimir la lista",
       "formLabel": "Lista de cosas para llevar",
       "addOwn": "Agregue su propio artículo"
+    },
+    "diary": {
+      "title": "Diario de síntomas",
+      "intro": "Anote los cambios a medida que ocurren, en papel, y lleve la hoja a su consulta. Nada se guarda en este sitio.",
+      "print": "Imprimir un diario de síntomas en blanco",
+      "columns": [
+        "Fecha y hora",
+        "Qué pasó",
+        "Cuánto duró",
+        "Qué tan fuerte (0–10)",
+        "Qué estaba haciendo y qué ayudó"
+      ],
+      "footer": "Hecho con Open Chiari · openchiari.org · No es consejo médico"
     },
     "child": {
       "before": "¿Está preparando a un niño para la cirugía? Vea",
@@ -1286,6 +1398,11 @@
         "id": "syrinx",
         "title": "Una siringe",
         "text": "Una siringe es una cavidad llena de líquido dentro de la médula espinal. A menudo aparece junto con Chiari, sobre todo en la parte de la médula espinal que está en el cuello."
+      },
+      {
+        "id": "surgery",
+        "title": "Después de la cirugía",
+        "text": "Los cirujanos retiran un pequeño trozo de hueso de la parte de atrás de la abertura del cráneo y, a menudo, la parte de atrás de la primera vértebra. A menudo también abren la membrana que cubre el cerebro y le colocan un parche para dar más espacio al líquido cefalorraquídeo. Las amígdalas cerebelosas a menudo suben solo en parte. La cirugía mejora o estabiliza los síntomas en la mayoría de las personas, aunque el daño que ya ocurrió puede no revertirse por completo, y algunas personas necesitan más de una operación. Los resultados varían, y la cirugía no es adecuada para todos."
       }
     ]
   },
@@ -1595,5 +1712,143 @@
       "link": "calcomanías para después de la cirugía",
       "after": "."
     }
+  },
+  "mri": {
+    "_note": "Pendiente de la aprobación de Matthew y de la revisión de un traductor médico.",
+    "title": "Cómo leer el informe de su resonancia",
+    "metaDescription": "Palabras que puede ver en un informe de resonancia sobre la malformación de Chiari, en lenguaje sencillo y enlazadas al modelo 3D.",
+    "intro": "Palabras que puede ver en un informe de resonancia sobre Chiari, en lenguaje sencillo, cada una con un enlace para verla en el modelo 3D. Esta página no puede decirle qué significa su estudio. Un médico mira la imagen junto con sus síntomas.",
+    "note": "Los informes están escritos para médicos, y distintos radiólogos usan palabras distintas para lo mismo.",
+    "indexTitle": "Términos en esta página",
+    "alsoLabel": "También aparece como",
+    "seeIt": "Verlo en 3D",
+    "terms": [
+      {
+        "id": "chiari",
+        "name": "Malformación de Chiari tipo I",
+        "also": "malformación de Chiari tipo 1, Chiari 1, CM-I",
+        "text": [
+          "La parte más baja de la parte de atrás del cerebro se extiende por debajo de la abertura en la base del cráneo."
+        ],
+        "view": "c1.side.m"
+      },
+      {
+        "id": "tonsils",
+        "name": "Amígdalas cerebelosas",
+        "also": "tonsilas cerebelosas",
+        "text": [
+          "Las dos partes más bajas del cerebelo, en la parte de abajo de la parte de atrás del cerebro (no las amígdalas de la garganta). El cerebelo ayuda a controlar el equilibrio y la coordinación."
+        ],
+        "view": "c1.side.l"
+      },
+      {
+        "id": "ectopia",
+        "name": "Ectopia amigdalina",
+        "also": "descenso amigdalino, amígdalas cerebelosas bajas, herniación amigdalina",
+        "text": [
+          "Distintas maneras de decir que las amígdalas cerebelosas están más abajo de lo habitual.",
+          "Algunos informes usan \"ectopia\" o \"amígdalas cerebelosas bajas\" para un descenso pequeño que no se llama Chiari, y otros usan las palabras de la misma manera. El número en milímetros dice más que la palabra.",
+          "En un informe sobre Chiari, \"herniación\" suele describir este mismo hallazgo: cuánto bajan las amígdalas cerebelosas por debajo de la abertura. Pregunte a su médico qué significa su informe para usted."
+        ],
+        "view": "c1.side.m"
+      },
+      {
+        "id": "foramen",
+        "name": "Agujero magno",
+        "also": "foramen magno, foramen magnum",
+        "text": [
+          "La abertura en la base del cráneo donde el tronco encefálico se convierte en la médula espinal."
+        ],
+        "view": "typ.side.l"
+      },
+      {
+        "id": "mm",
+        "name": "\"7 mm por debajo del agujero magno\"",
+        "also": "por debajo del foramen magno, de la línea de McRae o de la línea basión-opistión",
+        "text": [
+          "Cuánto bajan las puntas de las amígdalas cerebelosas por debajo de una línea trazada a lo ancho de la abertura del cráneo. Unos 5 mm es el límite habitual; unos pocos milímetros por debajo todavía pueden ser normales.",
+          "Algunas personas con un descenso claro no tienen síntomas, y algunas con menos de 5 mm sí los tienen. Los médicos también miran la forma de las amígdalas cerebelosas, el flujo del líquido cefalorraquídeo y si hay una siringe. El número por sí solo no decide quién necesita cirugía."
+        ],
+        "view": "c1.side.m"
+      },
+      {
+        "id": "peg",
+        "name": "Amígdalas cerebelosas en forma de clavija",
+        "also": "amígdalas cerebelosas puntiagudas",
+        "text": [
+          "Las amígdalas cerebelosas son puntiagudas en lugar de redondeadas, algo común en Chiari I."
+        ],
+        "view": "c1.side"
+      },
+      {
+        "id": "crowding",
+        "name": "Estrechez en el agujero magno",
+        "also": "borramiento de los espacios de LCR",
+        "text": [
+          "El espacio alrededor de las amígdalas cerebelosas por donde fluye el líquido cefalorraquídeo está apretado, así que el líquido tiene menos espacio para pasar.",
+          "\"Borramiento\" significa que el espacio está estrechado o cerrado, así que en la imagen se ve poco o nada de líquido ahí."
+        ],
+        "view": "c1.side.f.m"
+      },
+      {
+        "id": "csf",
+        "name": "LCR",
+        "also": "líquido cefalorraquídeo",
+        "text": [
+          "Líquido transparente que amortigua el cerebro y la médula espinal. Con cada latido del corazón va y viene entre el cráneo y el canal de la columna."
+        ],
+        "view": "typ.side.f"
+      },
+      {
+        "id": "flow",
+        "name": "Estudio de flujo de LCR",
+        "also": "resonancia cine, resonancia de contraste de fase",
+        "text": [
+          "Una resonancia especial que muestra cómo el líquido cefalorraquídeo va y viene con los latidos del corazón. Algunos médicos la usan para ver si el flujo está más lento o bloqueado en la abertura del cráneo."
+        ],
+        "view": "c1.side.f"
+      },
+      {
+        "id": "syrinx",
+        "name": "Siringe",
+        "also": "siringomielia, siringohidromielia, hidromielia",
+        "text": [
+          "Una siringe es una cavidad llena de líquido dentro de la médula espinal. A menudo se forma junto con Chiari, sobre todo en la parte de la médula espinal que está en el cuello.",
+          "Siringomielia significa tener una siringe. Hidromielia, en sentido estricto, significa que el canal central de líquido de la médula espinal, que es muy fino, se ha ensanchado. En la resonancia a menudo es difícil distinguirlas, así que los informes pueden decir \"siringohidromielia\". Pregunte a su médico a cuál se refiere su informe."
+        ],
+        "view": "syr.side"
+      },
+      {
+        "id": "fossa",
+        "name": "Fosa posterior",
+        "also": "fosa posterior pequeña o estrecha",
+        "text": [
+          "El espacio en la parte de atrás y de abajo del cráneo donde están el cerebelo y el tronco encefálico. En Chiari I a menudo es más pequeño o tiene una forma distinta de lo habitual, lo que aprieta el cerebro."
+        ]
+      },
+      {
+        "id": "hydrocephalus",
+        "name": "Hidrocefalia",
+        "also": "",
+        "text": [
+          "Una acumulación de demasiado líquido cefalorraquídeo en los espacios llenos de líquido en lo profundo del cerebro (los ventrículos). Es mucho menos común en Chiari I que en Chiari II."
+        ]
+      },
+      {
+        "id": "surgery",
+        "name": "Después de la cirugía",
+        "also": "craniectomía suboccipital, laminectomía de C1, duroplastia, cambios posoperatorios",
+        "text": [
+          "Craniectomía suboccipital: retirar un pequeño trozo de hueso de la parte de atrás del cráneo, junto a la abertura. Laminectomía de C1: retirar la parte de atrás del primer hueso del cuello. Duroplastia: abrir la membrana que cubre el cerebro (la duramadre) y coserle un parche para dar más espacio.",
+          "\"Cambios posoperatorios\" significa que la imagen muestra cambios por la cirugía, como el lugar donde se retiró hueso. Su cirujano puede explicarle cualquier otra cosa que mencione el informe."
+        ],
+        "view": "dec.side.f"
+      }
+    ],
+    "nextBefore": "¿Tiene preguntas sobre su informe? Conviértalas en una hoja para su médico con",
+    "nextLink": "Prepare su cita",
+    "nextAfter": ".",
+    "sourcesBefore": "Cada oración de esta página viene de una fuente publicada, que aparece en las",
+    "sourcesLink": "notas de evidencia"
   }
 }

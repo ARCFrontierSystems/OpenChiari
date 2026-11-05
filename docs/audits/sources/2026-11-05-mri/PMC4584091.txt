@@ -1,0 +1,410 @@
+
+ Surgical history of sleep apnea in pediatric patients with Chiari type 1 malformation - PMC
+ Skip to main content
+ An official website of the United States government
+ Here's how you know 
+ Here's how you know 
+ Official websites use .gov 
+ A
+ .gov website belongs to an official
+ government organization in the United States.
+ Secure .gov websites use HTTPS 
+ A lock (
+ Lock 
+ Locked padlock icon
+ ) or https:// means you've safely
+ connected to the .gov website. Share sensitive
+ information only on official, secure websites.
+ Search
+ Log in 
+ Dashboard
+ Publications
+ Account settings
+ Log out
+ Search…
+ Search NCBI
+ Primary site navigation
+ Search
+ Logged in as:
+ Dashboard
+ Publications
+ Account settings
+ Log in
+ Search PMC Full-Text Archive 
+ Search in PMC 
+ Journal List
+ User Guide
+ PERMALINK
+ Copy 
+ As a library, NLM provides access to scientific literature. Inclusion in an NLM database does not imply endorsement of, or agreement with,
+ the contents by NLM or the National Institutes of Health.
+ Learn more:
+ PMC Disclaimer 
+ |
+ PMC Copyright Notice
+ Neurosurg Clin N Am 
+. Author manuscript; available in PMC: 2016 Oct 1.
+ Published in final edited form as: Neurosurg Clin N Am. 2015 Aug 4;26(4):543–553. doi: 10.1016/j.nec.2015.06.009 
+ Search in PMC 
+ Search in PubMed 
+ View in NLM Catalog 
+ Add to search 
+ Surgical history of sleep apnea in pediatric patients with Chiari type 1 malformation
+ I Jonathan Pomeraniec 
+ I Jonathan Pomeraniec , BSc 
+ 1 Department of Neurological Surgery University of Virginia Health Science Center Charlottesville, Virginia, USA
+ Find articles by I Jonathan Pomeraniec 
+ 1 , Alexander Ksendzovsky 
+ Alexander Ksendzovsky , MD 
+ 1 Department of Neurological Surgery University of Virginia Health Science Center Charlottesville, Virginia, USA
+ Find articles by Alexander Ksendzovsky 
+ 1 , Pearl L Yu 
+ Pearl L Yu , MD 
+ 1 Department of Neurological Surgery University of Virginia Health Science Center Charlottesville, Virginia, USA
+ Find articles by Pearl L Yu 
+ 1 , John A Jane Jr 
+ John A Jane Jr , MD 
+ 1 Department of Neurological Surgery University of Virginia Health Science Center Charlottesville, Virginia, USA
+ Find articles by John A Jane Jr 
+ 1 
+ Author information 
+ Article notes 
+ Copyright and License information 
+ 1 Department of Neurological Surgery University of Virginia Health Science Center Charlottesville, Virginia, USA
+ ✉ Correspondence to: John A. Jane, Jr, MD, Department of Neurosurgery, University of Virginia Health Science Center, PO Box 800386, Charlottesville, VA 22908, Phone (434) 243-5749, jaj2k@virginia.edu 
+ Issue date 2015 Oct.
+ Keywords: Chiari malformation, sleep apnea, duraplasty, dural splitting
+ PMC Copyright notice 
+ PMCID: PMC4584091  NIHMSID: NIHMS705430  PMID: 26408064 
+ The publisher's version of this article is available at Neurosurg Clin N Am 
+ Introduction
+ Chiari malformation type 1 (CM-1) has become increasingly recognized as a significant clinical burden in approximately 3.6% of children undergoing brain and cervical spinal cord imaging. 1 , 2 While almost two thirds of children are asymptomatic and present with incidental findings, symptoms can result from compression of neural structures in the posterior fossa and be associated with syrinx of the spinal cord or brain stem. 3 , 4 Children can also have more occult findings such as ataxia; sensory and motor deficits; lower cranial nerve abnormalities; or merely irritability or neck arching. 5 
+ The association between Chiari-related herniation and sleep apnea syndromes has been previously described. 6 – 10 While sleep apnea syndromes are relatively rare in childhood with a prevalence of approximately 1–3%, recent series have reported upwards of 60% in children with CM-1. 11 – 14 Sleep related breathing disruption results from compression of the medullary respiratory control centers and manifest in central or obstructive sleep apnea, hypoventilation, or even sudden death. 14 – 19 Brainstem compression in addition to strain on lower cranial nerves may also result in dysphagia, hoarseness of voice with decreased vocal cord mobility, dysarthria, palatal and hypoglossal weakness, and recurrent aspiration. 20 While surgical decompression serves as the preferred treatment for sleep disordered breathing in patients with Chiari malformation, the effect of surgery differs among patients and respiratory failure can be a complication of treatment. 6 , 8 , 9 , 21 – 26 Reports have proposed not only increased incidence of respiratory arrest and death during sleep, but also nocturnal respiratory depression during the immediate postoperative period (up to 14% of patients in the first five days) presumably secondary to edema formation 6 , 21 , 22 , 27 
+ Without a widely recognized, definitive correlation between magnitude of tonsillar herniation and clinical manifestations of cervicomedullary junction compression, debate lingers over the indications for operative versus nonoperative management of CM-1. 5 , 28 – 32 As such, there are no generally accepted criteria for selecting patients with CM-1 for surgical treatment and the decision for suboccipital decompression for symptomatic relief can be subjective. 20 A recent review by the current authors (manuscript in publication) of 95 consecutive cases of Chiari type 1 malformation in pediatric patients identified dysphagia and sleep apnea as symptoms indicating surgical management.
+ The purpose of the present review is twofold: 1) review the long-term clinical and radiographic information for surgically managed pediatric patients with concurrent sleep apnea and CM-1, and 2) review the literature and provide a representative case series comparing two different surgical techniques (duraplasty and dural splitting) as well as their correlation to symptomatic and radiographic resolution or progression.
+ Methods
+ The authors retrospectively reviewed eight consecutive pediatric patients (less than 18 years old) with suspected symptomatic sleep apnea and concurrent CM-1 (defined as herniation of the cerebellar tonsils at least 5 mm below the foramen magnum) who were treated at the University of Virginia between 2004 and 2014. One patient was treated conservatively and followed in the outpatient setting. Seven patients received posterior fossa decompression and were grouped based on operative technique: three patients underwent duraplasty (one with tonsillectomy, one with tonsillopexy and one with tonsils untouched) and four patients underwent a dural splitting technique.
+ Clinical evaluation
+ Patients underwent comprehensive multidisciplinary evaluation including child neurology, sleep specialist and otolaryngology consultations with information available about history, neurological exams, polysomnography data, vocal cord mobility, upper airway motor dysfunction and swallowing difficulty. The patients were treated/operated on by the same pediatric neurosurgeon.
+ Imaging
+ All patients underwent high-resolution MR imaging using standard T1- and T2-weighted spin echo sequences. Imaging studies were independently reviewed at diagnosis by a neuroradiologist and pediatric neurosurgeon for amount of cerebellar tonsillar ectopia, CSF flow dynamics at the foramen magnum and spinal cord syringomyelia. We defined a syrinx as a contiguous fluid collection (hypointense on T1-weighted images with corresponding T2 hyperintensity) of at least 2 mm in maximal anteroposterior (AP) diameter on sagittal or axial imaging suggesting fluid within the spinal cord. If a syrinx was present, we noted its widest diameter in millimeters as viewed on sagittal imaging and its length according to number of spanning vertebral levels. Presyrinx states (T2 hyperintensity with indistinct T1 prolongation and without cavitation) were separately classified. CSF flow at the foramen magnum was evaluated by CINE MR imaging. Sagittal CSF flow studies at the craniocervical junction were evaluated for CSF pulsations across the anterior and posterior midline foramen magnum as well as for any abnormally exaggerated cranial or caudal pulsations of the lower brainstem, upper cervical cord or cerebellar tonsils. We compared baseline imaging parameters to findings on postoperative imaging.
+ Sleep evaluation
+ Patients were evaluated in the University of Virginia Sleep Disorders Laboratory. Standard testing consisted of EEG (C3/A2, C2/A1, O1/A2, O2/A1), EMG (chin), EOG (right/left), ECG, and oxygen saturation by digital pulse oximetry, nasal/oral airflow by thermistor or nasal pressure cannula, end-tidal CO2 by nasal cannula, and qualitative thoracic/abdominal movement by respiratory inductive plethysmography. Natural sleep was observed overnight. No sedation was administered. Central apneas, obstructive apneas, hypopneas, periodic breathing, the adequacy of gas exchange and heart rate were recorded during sleep.
+ Surgical technique
+ For patients undergoing posterior fossa decompression (PFD), a midline incision was made from the inion to the C2 level and carried down the midline using sharp dissection through the midline raphe to expose the suboccipital region of C1 and upper portion of C2. A suboccipital craniectomy was performed with a high-speed drill ( Figure 1A ) with the foramen magnum decompression measuring a minimum of 2 cm wide and 2 cm above the foramen ( Figure 1B and 1C ). C1 laminectomy was performed all patients and a C2 laminectomy was performed in those patients whose tonsils extended to that level. Intraoperative ultrasound was performed before and after duraplasty and/or dural splitting but in no case was a planned dural splitting technique converted to a duraplasty on the basis of ultrasound. For duraplasty cases, arachnoid adhesions were released with sharp dissection and tonsillar coagulation or tonsillar resection was performed if these techniques were judged to be necessary to restore normal 4 th ventricular CSF outflow. Duraplasty was performed using collagen based dural substitutes. For those who underwent dural splitting, the superficial layer of the dura was split and opened without completely cutting through the inferior layer until the dura was translucent. The dural band at the foramen magnum was released.
+ Figure 1. Suboccipital craniectomy.
+ Open in a new tab 
+ A–C: Bone removal of the foramen magnum. Foramen magnum decompression was performed measuring a minimum of 2 cm wide and 2 cm above the foramen
+ Duraplasty
+ Under microscope visualization, a Woodson elevator was used to elevate the thick and tense band constituting the outer leaf of the foramen magnum dura and periosteum, which was encountered invariably in all patients ( Figure 2 ). With thinning of the dural band there was a subsequent release of pressure at the cervicomedullary junction giving more room for expansion of herniated cerebellar tonsils which were visualized pulsating under the microscope. The dura was then incised in a Y-shape under the microscope and held open by sutures tacked laterally and superiorly. The arachnoid was inspected for any scarring and adhesions, which were sharply dissected if present, and the thick band of arachnoid between the tonsils and dura was sharply released. For tonsillectomy (n=1), dissection was taken circumferentially around the tonsils which were subsequently elevated with careful dissection from underneath C2. The inferior portion of the tonsils were cauterized, incised and internally debulked. For tonsillopexy (n=1) ( Video 1 ; available online at http://www.neurosurgery.theclinics.com/ ), tonsils were mobilized from below the level of the dural opening and subsequently cauterized superiorly with bipolar electrocautery. For duraplasty with tonsils untouched (n=1), the tonsils themselves were not scarred down and an easy dissection was taken between and beneath the tonsils. A fashioned piece of artificial dura (DuraGen or Durepair) was used for the duraplasty and tacked into place. A central tacking suture was placed in the dural graft through the fascia or muscle to avoid adherence of the dural graft to underlying arachnoid. The dural graft was covered with duraseal (in one patient) or gelfoam and the closure was performed in standard layered fashion. All patients were admitted to the neurosurgical ICU postoperatively.
+ Figure 2. Duraplasty.
+ Open in a new tab 
+ A: removal of thick fibrous dural band.
+ B–C: dural tack-up suture.
+ D–E: open arachnoid, no adhesions.
+ F–G: duraplasty.
+ H–I: tonsillopexy
+ Dural splitting
+ Adherent fibers between the posterior atlanto-occipital membrane and dura were similarly removed and the fibrous band was released sharply ( Figure 3 ). Once the thick fibrous band was incised, a dissector was used to split the dura caudally and laterally to the inferior and lateral extent of the bony exposure. A vertical incision was made of the outer layer of the dura, laterally from the midline. Using blunt dissection the outer layer of the dura was removed without breaching the inner layer or the arachnoid membrane. The cerebellar tonsils were then easily seen pulsating through the thinned dura ( Video 2 ; available online at http://www.neurosurgery.theclinics.com/ ). The ultrasound was used to visualize the tonsils which were seen to move freely ( Video 3 ; available online at http://www.neurosurgery.theclinics.com/ ). CSF was identified posterior to the tonsils and between the dura as well as below the inferior aspect of the tonsils. The tonsils, which had been compressed and were quite pointed preoperatively had been obviously freed and had a much more rounded appearance indicating their decompression. The dura appeared transparent and bluish. Muscular and subcutaneous planes were closed without any tension.
+ Figure 3. Dural splitting.
+ Open in a new tab 
+ For those who underwent dural splitting, the superficial layer of the dura was split and opened without completely cutting through the inferior layer until the dura was translucent.
+ A: incising the dura.
+ B: splitting the dural band at the foramen magnum.
+ C–F: bluntly dissecting between the leaves of the dura and then sharply dividing perpendicularly to periosteal fibers.
+ G–H: thinned dura.
+ I: final thinned dura
+ Results
+ Patient characteristics
+ In total, eight pediatric patients were evaluated for and diagnosed with CM-1 and attendant central sleep apnea. One patient was treated conservatively without surgery and seven patients received PFD with either duraplasty (n=3) or dural splitting (n=4). The average age at presentation was 11.9 years (range 2.2 – 17.1 years). Median clinical follow-up was 47.4 months (range 3.2 – 98.3 months) and median imaging follow-up was 45.7 months (range 3.2 – 107.4 months).
+ Imaging characteristics
+ The mean extent of tonsillar herniation below foramen magnum at presentation was 22.2 mm (range 9.5–37.0 mm). Across all surgical patients, preoperative tonsillar descent ranged from 14.0–37.0 mm. On average, duraplasty reduced tonsillar herniation by 58% and dural splitting by 35%. Excluding the one patient with tonsillectomy and 100% reduction in herniation, duraplasty reduced tonsillar herniation by 37%. There was no significant difference of reduction in tonsillar herniation between duraplasty (16.2 mm) and dural splitting (9.7 mm, avg) (p=0.40), which was further elucidated when excluding the patient who underwent tonsillectomy (p=0.92) ( Table 1 ).
+ Table 1.
+ Tonsillar descent below foramen magnum
+ mm below,
+avg 
+ mm below,
+most recent 
+ difference, avg.
+mm (% change) 
+ Nonsurgical 
+ 9.5 
+ 15.5 
+ 6.0 (63%) 
+ Duraplasty 
+ 23.0 
+ 6.7 
+ −16.2 (−58%) 
+ Dural splitting 
+ 24.8 
+ 18.6 
+ −9.7 (−35%) 
+ Open in a new tab 
+ One patient (33%) in the duraplasty group and one patient (25%) in the dural splitting group presented with syrinx. One patient in the duraplasty (tonsillopexy) group developed syrinx after the first decompression which resolved with repeat tonsillopexy and reconstruction of the subarachnoid space. All patients with a syrinx had at least one repeat MR imaging study of the spine. These repeat imaging studies revealed resolution of syrinx size (e.g. no evidence of syringomyelia on postoperative MRI) in both patients with surgery. Two patients (50%) in the dural splitting group developed presyrinx before surgery and both of these patients exhibited resolution of presyrinx after surgery ( Table 2 ).
+ Table 2.
+ Clinical presentation and follow-up
+ Age 1 
+(surgery),
+Gender 
+ f/u
+length 2 ,
+(clinical) 
+ f/u
+length 2 ,
+(imaging) 
+ Neurological exam 
+ Other symptoms
+(in addition to
+sleep apnea) 
+ Syrinx
+level 
+ Management 
+ Symptom
+course 
+ Sleep apnea
+course 
+ Syrinx course 
+ 2.2 * M 
+ 53.0 
+ 49.5 
+ delayed language 
+ incidental ** 
+ n/a 
+ conservative 
+ no change 
+ no change 
+ n/a 
+ 16.4 M 
+ 68.1 
+ 68.1 
+ nystagmus, Romberg 
+ h/a, motor 
+ C3 
+ tonsillectomy 
+ improved 
+ improved 
+ resolved 
+ 12.9 F 
+ 98.3 
+ 107.4 
+ normal 
+ h/a, visual, sensory 
+ n/a 
+ tonsillopexy 
+ improved 
+ improved 
+ n/a 
+ 9.0 M 
+ 82.6 
+ 82.6 
+ palate asymmetry 
+ h/a, sensory 
+ n/a 
+ tonsils untouched 
+ improved 
+ improved 
+ increased 
+ 17.1 M 
+ 3.2 
+ 3.2 
+ normal 
+ h/a 
+ presyrinx 
+ dural splitting 
+ improved 
+ no change 
+ improved 
+ 4.8 M 
+ 29.0 
+ 29.0 
+ normal 
+ h/a, dysphagia 
+ presyrinx 
+ dural splitting 
+ improved 
+ improved 
+ improved 
+ 12.5 F 
+ 23.1 
+ 23.1 
+ normal 
+ none 
+ C3–T9 
+ dural splitting 
+ improved 
+ no change 
+ resolved 
+ 13.2 M 
+ 41.8 
+ 41.8 
+ normal 
+ h/a 
+ n/a 
+ dural splitting 
+ improved 
+ improved 
+ n/a 
+ Open in a new tab 
+ 1 Age measured in years
+ 2 Follow-up length measured in months
+ * Patient did not have surgery (age at presentation)
+ ** Incidental finding during evaluation for seizures
+ h/a Headache
+ Clinical characteristics
+ All eight patients experienced central sleep apnea related to CM-1. One patient in the dural splitting group experienced both central and obstructive sleep apnea. The one patient who was managed conservatively was diagnosed with CM-1 as an incident finding during workup for seizures. Only one patient (in the dural splitting group) had no additional symptoms. In total, six patients also presented with headache: three of four patients (75%) in both the duraplasty and dural splitting groups. Other symptoms included sensorimotor (n=3), visual (n=1) and dysphagia (n=1). All seven surgical patients (100%) experienced improvement in these symptoms over the follow-up period (p=1.00). Based on number of central and obstructive apnea episodes and hypopneas during sleep studies, only five (62.5%) surgical patients experienced improvement of sleep apnea while the remaining two (37.5%) experienced no change. All three patients (100%) in the duraplasty group experienced improved sleep apnea versus two of four (50%) patients in the dural splitting group, though this finding was not significant (p=0.43) ( Table 2 ). Two patients in the dural splitting cohort experienced minimal improvement postoperatively and required positive airway pressure as of most recent follow-up. In total, three patients underwent repeat surgery. Two (67%) patients in the duraplasty group exhibited symptomatic improvement but underwent repeat duraplasty (both tonisllopexy), one for an expansile syrinx and the other for a pseudomeningocele. One (25%) patient in the dural splitting group went on to receive duraplasty nine months later for persistent symptoms and tonsillar herniation. All three of the patients who underwent repeat surgery showed improvement in sleep apnea at last follow-up. Postoperative complications included nausea/vomiting (n=2), somnolence (n=1, duraplasty) and significant neck pain with slow ambulation (n=1, dural splitting). Median length of hospital stay was 4.0 (range 3.0 – 71.0) days for duraplasty and 3.5 (range 2.0 – 5.0) days for dural splitting. Median postoperative ICU length was 1.0 (range 1.0 – 25.0) day for duraplasty and 1.0 day (for all patients) for dural splitting. One patient with duraplasty had significant postoperative complications that required tracheostomy and longer-term care in the pediatric rehabilitation center.
+ Evaluation of CSF Flow
+ CSF flow at the foramen magnum was evaluated in all eight patients at the time of CM-1 diagnosis. All patients (100%) exhibited abnormal CSF flow during the initial imaging study. One patient in the duraplasty group exhibited mild improvement in CSF flow compared with initial MR imaging. A higher proportion of dural splitting patients exhibited improved CSF flow on follow-up imaging (100% of patients who underwent repeat studies). A change in CSF flow analysis was not used as a surgical indication in this series of patients.
+ Clinical results in the literature
+ Pediatric patients with CM-1 can present with a diverse spectrum of symptoms secondary to posterior fossa compression. Tonsillar herniation can result in compression of the afferent, efferent and/or central respiratory control pathways within the brainstem and manifest clinically in acute respiratory failure, central and obstructive apnea and/or hypopnea. The association between Chiari malformation with tonsillar herniation and sleep apnea has been previously described in several series, though these have been limited mostly to adult populations. 6 – 10 Botelho and colleagues reported an incidence of sleep apnea (defined as apnea/hypopnea index >5) of 44% and 60% in 23 patients with CM-1 with and without syringomyelia, respectively (compared to 12% in the control group, n=12). 33 The same group previously reported that 72% of 11 patients with CM-1 presented with (predominately central) sleep apnea 34 . Another series by Gagnadoux and colleagues illustrated sleep apnea (apnea/hypopnea index > 10) in 75% of 16 adult patients with CM-1. 27 Central apneic events ranged from 17–48% in both cases. A more recent report of 46 patients (20 children, 26 adults) identified sleep apnea in 70% of CM-1 patients composed of mainly children. 14 Relatively few reports describe the frequency, severity and underlying pathophysiology of respiratory disturbances in CM-1, particularly in the pediatric population.
+ Without generally accepted criteria for selecting patients with CM-1 for surgical treatment, coupled with the diverse constellation of symptoms associated with CM-1, the decision for and technique of surgery can be somewhat provisional. While surgical decompression serves as the preferred treatment for sleep apnea in patients with Chiari malformation, the effect of surgery differs among patients and respiratory failure can become a complication of treatment. 6 , 8 , 9 , 21 – 26 Similarly, there is a dearth of literature describing and comparing different approaches to and the nuances of PFD for CM-1 and their respective outcomes, particularly with respect to concurrent sleep apnea.
+ In this study of a cohort of eight pediatric patients diagnosed with concurrent CM-1 and sleep apnea, one patient was treated conservatively and seven patients underwent posterior fossa decompression. Of these seven surgical patients, three were treated with duraplasty and four were treated with a dural splitting technique. Surgical intervention was associated with improvement of symptoms and radiographic evidence of tonsillar ectopia and syringomyelia. Overall, surgery improved sleep apnea in 62.5% of patients (100% of the duraplasty group and 50% of the dural splitting group). In reference to surgical technique, there was no statistically significant difference in resolution of sleep apnea between duraplasty and dural splitting techniques (p=0.43), though this was likely secondary to the low study power of seven surgical patients. Duraplasty and dural splitting were both associated with a notable reduction in tonsillar herniation of 58% and 24%, respectively (duraplasty excluding tonsillectomy was associated with a mean reduction of 37%).
+ These finding are consistent with the prevailing literature comparing more versus less invasive modes of Chiari decompression. In recent years, several neurosurgical series have compared extradural posterior fossa decompression to duraplasty with mixed evidence to suggest any significant difference in symptomatic outcome. 35 – 38 Limonadi and colleagues reported the relative safety, good early clinical results and significantly reduced resource use for dural splitting in 24 pediatric patients with CM-1. 35 Navarro and colleagues advocated for a tailored posterior fossa craniectomy with dural scoring as the initial surgical procedure in children with CM-1 with or without syrinx as this minimized postoperative complications associated with dural opening and offered comparable rates of success in 96 patients (72% for PFD with bony decompression and dural scoring vs. 68% for duraplasty). 36 While recent series have described patients with or without syringomyelia, symptoms considered were largely confined to headache, sensorimotor disturbance, dysphagia and nausea/vomiting and did not include patients with sleep apnea.
+ Lee and colleagues provided a balanced treatment comparison focusing on long-term clinical outcome and radiographic syrinx improvement and proposed that extradural decompression for CM-1 leads to comparable clinical and radiographic improvement compared to traditional decompression with duraplasty (PFDD) but offers decreased postoperative morbidity. The authors recommended more invasive PFDD as first-line treatment for more severe patients with rapidly progressive symptoms or severe neurological deficits. 39 However, as PFD with dural augmentation has become the traditional procedure of choice in most centers, there has been increasing advocacy for the use of a less invasive extradural decompression 39 – 43 secondary to shorter lengths of operation and hospital admission as well as reduced pain, morbidity and cerebrospinal fluid (CSF)-related complications. 35 – 37 , 40 , 42 , 44 – 46 Our institutional experience echoes the prospect that dural splitting portends quicker and easier recovery for pediatric patients. Despite the advantage of avoiding a more invasive procedure, some recent reports have associated extradural decompression with higher rates of surgical revision for patients with persistent underlying malformations. 36 , 40 , 46 – 49 Controversy also persists with regards to treating syringomyelia. 40 , 50 
+ Insofar as specific decision criteria for identifying suitable patients with CM-1 for decompression remains contentious, so too does surgical technique. That bony decompression alone rarely suffices in restoring CSF circulation at the cervico-occipital junction 51 – 53 may be a byproduct not only of the thickened dura in CM-1 54 but also that dura in the posterior fossa cannot reliably expand when left wholly intact. 55 Recent series supporting intradural techniques such as CSF shunting of the fourth ventricle, ablation or retraction of the cerebellar tonsils have tempered decent results with potentially unnecessary risk of meningocele, meningitis and delayed wound healing 55 – 58 . Complications secondary to CSF leaks have been reported in approximately 16% of cases with dural grafts without arachnoid opening. 59 Earlier reports of duraplasty with arachnoid opening have been associated with aseptic meningitis and CSF leaks in 36% and 32% of surgical patients, respectively. 60 
+ The original account of an extradural approach to removing the outer dural layer by Isu and colleagues in 1993 included seven patients, six of whom improved with surgical management and experienced no postoperative complications. 61 A more recent report of dural splitting showed similar improvement in symptoms in 11 patients with CM-1 (five with syringomyelia), including headaches, cervicalgias, dizziness and parasthesias, with only one postoperative complication manifesting as a minor superficial wound infection. 55 Although investigators have proposed that dural splitting often fails to completely resolve symptoms associated with more severe degrees of tonsillar herniation, such as below the level of C2, dural splitting has in fact precluded the need for repeat surgery. 55 , 56 , 62 In pediatric patients, dural splitting has wielded positive results. 35 , 63 , 64 Despite these positive results, our findings suggest that revision surgery is certainly a risk with duraplasty (67% of patients) and, to a lesser extent dural splitting (25%). so caution should be taken when choosing appropriate patients for these techniques.
+ To our knowledge, there are no other published reports directly comparing duraplasty and dural splitting with long-term outcomes of patients with concurrent sleep apnea and CM-1. Literature describing symptomatic control of sleep apnea in patients with CM-1 remains sparse. Previous reports based on isolated cases have demonstrated improvement of central sleep apnea after surgical correction. 6 , 65 , 66 Gagnadoux and colleagues reported a series of 12 patients with CM-1 whose average apnea–hypopnea index declined from 56.5 to 37.2 and central apnea index from 14.9 to 1.3 after surgical decompression. 27 Botelho and colleagues reported clinically beneficial improvement in polysomnographic values (>50% decrease) in 47% of 17 patients with sleep apnea. The authors proposed that surgery was associated with a significant improvement in the mean number of respiratory events, obstructive events, central events, apnea/hypopnea index and central apnea index, with a more pronounced effected in patients with central sleep apnea. 67 
+ The longitudinal nature of follow-up and multidisciplinary evaluation and care lend credence to the present comparison of posterior fossa decompression technique in children with sleep apnea as part of a CM-1 diagnosis. Comprehensive neurological and radiographic examinations were instrumental in confirming prospective diagnoses of CM-1 and concurrent syringomyelia as well as identifying appropriate surgical candidates.
+ Going forward, longitudinal follow-up studies with special emphasis on patients with either neurological deficits or severe symptoms such as sleep apnea, despite widespread acceptance of decompression in these patients, will help to further elucidate the natural history of CM-1 and more appropriately gauge the risk-benefit tradeoff of a growing spectrum of surgical interventions. PFD technique and resolution of sleep apnea in CM-1 should be explored with more patients. With further study over longer time horizons meant to capture all cases of clinical and/or radiographic deterioration, we may further be able to refine diagnostic criteria, predict symptomatic progression and accordingly match appropriate surgical and nonsurgical therapeutic modalities to patient functioning.
+ Summary
+ Duraplasty and dural splitting are associated with radiographic and symptomatic improvement in pediatric patients with concurrent sleep-related breathing disorders and CM-1. Central sleep apnea represents an indication for surgical decompression in these patients.
+ Supplementary Material
+ Video 1: Tonsillopexy. Tonsils were mobilized from below the level of the dural opening and subsequently cauterized superiorly with bipolar electrocautery.
+ Download video file (94.9MB, avi) 
+ Key points.
+ Sleep apnea represents a relative indication for posterior fossa decompression in pediatric patients with Chiari type 1 malformation
+ Duraplasty was associated with improvement of sleep apnea in 100% of patients and dural splitting with improvement in 50% of patients
+ Duraplasty and dural splitting were associated with a similar reduction in tonsillar herniation on radiographic imaging of 58% (37% excluding tonsillectomy) and 35%, respectively
+ Intraoperative ultrasound can be beneficial in determining restoration of cerebrospinal fluid (CSF) circulation in the posterior fossa
+ Longitudinal follow-up studies of patients with either neurological deficits or severe symptoms will further elucidate the natural history of CM-1 and more appropriately gauge the risk-benefit tradeoff of surgical intervention
+ Footnotes
+ Publisher's Disclaimer: This is a PDF file of an unedited manuscript that has been accepted for publication. As a service to our customers we are providing this early version of the manuscript. The manuscript will undergo copyediting, typesetting, and review of the resulting proof before it is published in its final citable form. Please note that during the production process errors may be discovered which could affect the content, and all legal disclaimers that apply to the journal pertain.
+ Video 2: Dural splitting technique. Outer layer of dura was removed without breaching inner layer or arachnoid membrane. Cerebellar tonsils were then easily seen pulsating through the thinned dura.
+ Video 3: Intraoperative ultrasound showing visualization of underlying tonsils which were seen to move freely
+ References
+ 1. Dhamija R, Wetjen NM, Slocumb NL, et al. The role of nocturnal polysomnography in assessing children with Chiari type I malformation. Clinical neurology and neurosurgery. 2013;115(9):1837–1841. doi: 10.1016/j.clineuro.2013.05.025. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 2. Speer MC, George TM, Enterline DS, et al. A genetic hypothesis for Chiari I malformation with or without syringomyelia. Neurosurgical focus. 2000;8(3):E12. doi: 10.3171/foc.2000.8.3.12. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 3. Strahle J, Muraszko KM, Kapurch J, et al. Chiari malformation Type I and syrinx in children undergoing magnetic resonance imaging. Journal of neurosurgery Pediatrics. 2011;8(2):205–213. doi: 10.3171/2011.5.PEDS1121. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 4. Steinbok P. Clinical features of Chiari I malformations. Child's nervous system : ChNS : official journal of the International Society for Pediatric Neurosurgery. 2004;20(5):329–331. doi: 10.1007/s00381-003-0879-x. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 5. Benglis D, Jr, Covington D, Bhatia R, et al. Outcomes in pediatric patients with Chiari malformation Type I followed up without surgery. Journal of neurosurgery Pediatrics. 2011;7(4):375–379. doi: 10.3171/2011.1.PEDS10341. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 6. Zolty P, Sanders MH, Pollack IF. Chiari malformation and sleep-disordered breathing: a review of diagnostic and management issues. Sleep. 2000;23(5):637–643. [ PubMed ] [ Google Scholar ]
+ 7. Alvarez D, Requena I, Arias M, et al. Acute respiratory failure as the first sign of Arnold-Chiari malformation associated with syringomyelia. The European respiratory journal. 1995;8(4):661–663. [ PubMed ] [ Google Scholar ]
+ 8. Shiihara T, Shimizu Y, Mitsui T, et al. Isolated sleep apnea due to Chiari type I malformation and syringomyelia. Pediatric neurology. 1995;13(3):266–267. doi: 10.1016/0887-8994(95)00180-n. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 9. Rabec C, Laurent G, Baudouin N, et al. Central sleep apnoea in Arnold-Chiari malformation: evidence of pathophysiological heterogeneity. The European respiratory journal. 1998;12(6):1482–1485. doi: 10.1183/09031936.98.12061482. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 10. Yglesias A, Narbona J, Vanaclocha V, et al. Chiari type I malformation, glossopharyngeal neuralgia and central sleep apnoea in a child. Developmental medicine and child neurology. 1996;38(12):1126–1130. doi: 10.1111/j.1469-8749.1996.tb15076.x. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 11. Ali NJ, Pitson DJ, Stradling JR. Snoring, sleep disturbance, and behaviour in 4–5 year olds. Archives of disease in childhood. 1993;68(3):360–366. doi: 10.1136/adc.68.3.360. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 12. Montgomery-Downs HE, O'Brien LM, Gulliver TE, et al. Polysomnographic characteristics in normal preschool and early school-aged children. Pediatrics. 2006;117(3):741–753. doi: 10.1542/peds.2005-1067. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 13. Traeger N, Schultz B, Pollock AN, et al. Polysomnographic values in children 2–9 years old: additional data and review of the literature. Pediatric pulmonology. 2005;40(1):22–30. doi: 10.1002/ppul.20236. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 14. Dauvilliers Y, Stal V, Abril B, et al. Chiari malformation and sleep related breathing disorders. Journal of neurology, neurosurgery, and psychiatry. 2007;78(12):1344–1348. doi: 10.1136/jnnp.2006.108779. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 15. Aarts LA, Willemsen MA, Vandenbussche NL, et al. Nocturnal apnea in Chiari type I malformation. European journal of pediatrics. 2011;170(10):1349–1352. doi: 10.1007/s00431-011-1500-z. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 16. Gosalakkal JA. Sleep-disordered breathing in Chiari malformation type 1. Pediatric neurology. 2008;39(3):207–208. doi: 10.1016/j.pediatrneurol.2008.05.017. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 17. Murray C, Seton C, Prelog K, et al. Arnold Chiari type 1 malformation presenting with sleep disordered breathing in well children. Archives of disease in childhood. 2006;91(4):342–343. doi: 10.1136/adc.2005.085324. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 18. Van den Broek MJ, Arbues AS, Chalard F, et al. Chiari type I malformation causing central apnoeas in a 4-month-old boy. European journal of paediatric neurology : EJPN : official journal of the European Paediatric Neurology Society. 2009;13(5):463–465. doi: 10.1016/j.ejpn.2008.07.012. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 19. Wealthall SR, Whittaker GE, Greenwood N. The relationship of apnoea and stridor in spina bifida to other unexplained infant deaths. Developmental medicine and child neurology. 1974;16(6) Suppl 32:107–116. doi: 10.1111/j.1469-8749.1974.tb03458.x. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 20. Tubbs RS, Lyerly MJ, Loukas M, et al. The pediatric Chiari I malformation: a review. Child's nervous system : ChNS : official journal of the International Society for Pediatric Neurosurgery. 2007;23(11):1239–1250. doi: 10.1007/s00381-007-0428-0. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 21. Paul KS, Lye RH, Strang FA, et al. Arnold-Chiari malformation. Review of 71 cases. Journal of neurosurgery. 1983;58(2):183–187. doi: 10.3171/jns.1983.58.2.0183. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 22. Omer S, al-Kawi MZ, Bohlega S, et al. Respiratory arrest: a complication of Arnold-Chiari malformation in adults. European neurology. 1996;36(1):36–38. doi: 10.1159/000117197. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 23. Tsara V, Serasli E, Kimiskidis V, et al. Acute respiratory failure and sleep-disordered breathing in Arnold-Chiari malformation. Clinical neurology and neurosurgery. 2005;107(6):521–524. doi: 10.1016/j.clineuro.2004.10.008. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 24. Doherty MJ, Spence DP, Young C, et al. Obstructive sleep apnoea with Arnold-Chiari malformation. Thorax. 1995;50(6):690–691. doi: 10.1136/thx.50.6.690. discussion 696–697. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 25. Bokinsky GE, Hudson LD, Weil JV. Impaired peripheral chemosensitivity and acute respiratory failure in Arnold-Chiari malformation and syringomyelia. The New England journal of medicine. 1973;288(18):947–948. doi: 10.1056/NEJM197305032881807. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 26. Ely EW, McCall WV, Haponik EF. Multifactorial obstructive sleep apnea in a patient with Chiari malformation. Journal of the neurological sciences. 1994;126(2):232–236. doi: 10.1016/0022-510x(94)90280-1. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 27. Gagnadoux F, Meslier N, Svab I, et al. Sleep-disordered breathing in patients with Chiari malformation: improvement after surgery. Neurology. 2006;66(1):136–138. doi: 10.1212/01.wnl.0000191394.53786.62. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 28. Wu YW, Chin CT, Chan KM, et al. Pediatric Chiari I malformations: do clinical and radiologic features correlate? Neurology. 1999;53(6):1271–1276. doi: 10.1212/wnl.53.6.1271. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 29. Aboulezz AO, Sartor K, Geyer CA, et al. Position of cerebellar tonsils in the normal population and in patients with Chiari malformation: a quantitative approach with MR imaging. Journal of computer assisted tomography. 1985;9(6):1033–1036. doi: 10.1097/00004728-198511000-00005. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 30. Aitken LA, Lindan CE, Sidney S, et al. Chiari type I malformation in a pediatric population. Pediatric neurology. 2009;40(6):449–454. doi: 10.1016/j.pediatrneurol.2009.01.003. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 31. Barkovich AJ, Wippold FJ, Sherman JL, et al. Significance of cerebellar tonsillar position on MR. AJNR American journal of neuroradiology. 1986;7(5):795–799. [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 32. Novegno F, Caldarelli M, Massa A, et al. The natural history of the Chiari Type I anomaly. Journal of neurosurgery Pediatrics. 2008;2(3):179–187. doi: 10.3171/PED/2008/2/9/179. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 33. Botelho RV, Bittencourt LR, Rotta JM, et al. A prospective controlled study of sleep respiratory events in patients with craniovertebral junction malformation. Journal of neurosurgery. 2003;99(6):1004–1009. doi: 10.3171/jns.2003.99.6.1004. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 34. Botelho RV, Bittencourt LR, Rotta JM, et al. Polysomnographic respiratory findings in patients with Arnold-Chiari type I malformation and basilar invagination, with or without syringomyelia: preliminary report of a series of cases. Neurosurgical review. 2000;23(3):151–155. doi: 10.1007/pl00011947. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 35. Limonadi FM, Selden NR. Dura-splitting decompression of the craniocervical junction: reduced operative time, hospital stay, and cost with equivalent early outcome. Journal of neurosurgery. 2004;101(2 Suppl):184–188. doi: 10.3171/ped.2004.101.2.0184. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 36. Navarro R, Olavarria G, Seshadri R, et al. Surgical results of posterior fossa decompression for patients with Chiari I malformation. Child's nervous system : ChNS : official journal of the International Society for Pediatric Neurosurgery. 2004;20(5):349–356. doi: 10.1007/s00381-003-0883-1. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 37. Munshi I, Frim D, Stine-Reyes R, et al. Effects of posterior fossa decompression with and without duraplasty on Chiari malformation-associated hydromyelia. Neurosurgery. 2000;46(6):1384–1389. doi: 10.1097/00006123-200006000-00018. discussion 1389–1390. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 38. McGirt MJ, Attenello FJ, Atiba A, et al. Symptom recurrence after suboccipital decompression for pediatric Chiari I malformation: analysis of 256 consecutive cases. Child's nervous system : ChNS : official journal of the International Society for Pediatric Neurosurgery. 2008;24(11):1333–1339. doi: 10.1007/s00381-008-0651-3. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 39. Lee A, Yarbrough CK, Greenberg JK, et al. Comparison of posterior fossa decompression with or without duraplasty in children with Type I Chiari malformation. Child's nervous system : ChNS : official journal of the International Society for Pediatric Neurosurgery. 2014;30(8):1419–1424. doi: 10.1007/s00381-014-2424-5. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 40. Durham SR, Fjeld-Olenec K. Comparison of posterior fossa decompression with and without duraplasty for the surgical treatment of Chiari malformation Type I in pediatric patients: a meta-analysis. Journal of neurosurgery Pediatrics. 2008;2(1):42–49. doi: 10.3171/PED/2008/2/7/042. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 41. Alzate JC, Kothbauer KF, Jallo GI, et al. Treatment of Chiari I malformation in patients with and without syringomyelia: a consecutive series of 66 cases. Neurosurgical focus. 2001;11(1):E3. doi: 10.3171/foc.2001.11.1.4. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 42. Galarza M, Sood S, Ham S. Relevance of surgical strategies for the management of pediatric Chiari type I malformation. Child's nervous system : ChNS : official journal of the International Society for Pediatric Neurosurgery. 2007;23(6):691–696. doi: 10.1007/s00381-007-0297-6. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 43. Park JK, Gleason PL, Madsen JR, et al. Presentation and management of Chiari I malformation in children. Pediatric neurosurgery. 1997;26(4):190–196. doi: 10.1159/000121190. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 44. Caldarelli M, Novegno F, Vassimi L, et al. The role of limited posterior fossa craniectomy in the surgical treatment of Chiari malformation Type I: experience with a pediatric series. Journal of neurosurgery. 2007;106(3 Suppl):187–195. doi: 10.3171/ped.2007.106.3.187. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 45. Erdogan E, Cansever T, Secer HI, et al. The evaluation of surgical treatment options in the Chiari Malformation Type I. Turkish neurosurgery. 2010;20(3):303–313. doi: 10.5137/1019-5149.JTN.2648-09.2. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 46. Ramirez LF, Thisted R. Using a national health care data base to determine surgical complications in community hospitals: lumbar discectomy as an example. Neurosurgery. 1989;25(2):218–225. doi: 10.1097/00006123-198908000-00011. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 47. Yeh DD, Koch B, Crone KR. Intraoperative ultrasonography used to determine the extent of surgery necessary during posterior fossa decompression in children with Chiari malformation type I. Journal of neurosurgery. 2006;105(1 Suppl):26–32. doi: 10.3171/ped.2006.105.1.26. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 48. Aliaga L, Hekman KE, Yassari R, et al. A novel scoring system for assessing Chiari malformation type I treatment outcomes. Neurosurgery. 2012;70(3):656–664. doi: 10.1227/NEU.0b013e31823200a6. discussion 664–655. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 49. Yarbrough CK, Greenberg JK, Smyth MD, et al. External validation of the Chicago Chiari Outcome Scale. Journal of neurosurgery Pediatrics. 2014;13(6):679–684. doi: 10.3171/2014.3.PEDS13503. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 50. Rocque BG, George TM, Kestle J, et al. Treatment practices for Chiari malformation type I with syringomyelia: results of a survey of the American Society of Pediatric Neurosurgeons. Journal of neurosurgery Pediatrics. 2011;8(5):430–437. doi: 10.3171/2011.8.PEDS10427. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 51. Balagura S, Kuo DC. Spontaneous retraction of cerebellar tonsils after surgery for Arnold-Chiari malformation and posterior fossa cyst. Surgical neurology. 1988;29(2):137–140. doi: 10.1016/0090-3019(88)90071-7. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 52. Milhorat TH, Bolognese PA. Tailored operative technique for Chiari type I malformation using intraoperative color Doppler ultrasonography. Neurosurgery. 2003;53(4):899–905. doi: 10.1227/01.neu.0000083591.22113.cb. discussion 905-896. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 53. Raftopoulos C, Sanchez A, Matos C, et al. Hydrosyringomyelia-Chiari I complex. Prospective evaluation of a modified foramen magnum decompression procedure: preliminary results. Surgical neurology. 1993;39(2):163–169. doi: 10.1016/0090-3019(93)90097-k. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 54. Nakamura N, Iwasaki Y, Hida K, et al. Dural band pathology in syringomyelia with Chiari type I malformation. Neuropathology : official journal of the Japanese Society of Neuropathology. 2000;20(1):38–43. doi: 10.1046/j.1440-1789.2000.00281.x. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 55. Chauvet D, Carpentier A, George B. Dura splitting decompression in Chiari type 1 malformation: clinical experience and radiological findings. Neurosurgical review. 2009;32(4):465–470. doi: 10.1007/s10143-009-0214-4. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 56. Batzdorf U. Chiari I malformation with syringomyelia. Evaluation of surgical therapy by magnetic resonance imaging. Journal of neurosurgery. 1988;68(5):726–730. doi: 10.3171/jns.1988.68.5.0726. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 57. Belen D, Er U, Gurses L, et al. Delayed pseudomyelomeningocele: a rare complication after foramen magnum decompression for Chiari malformation. Surgical neurology. 2009;71(3):357–361. doi: 10.1016/j.surneu.2007.08.031. discussion 361. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 58. Dones J, De Jesus O, Colen CB, et al. Clinical outcomes in patients with Chiari I malformation: a review of 27 cases. Surgical neurology. 2003;60(2):142–147. doi: 10.1016/s0090-3019(03)00131-9. discussion 147–148. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 59. Sindou M, Chavez-Machuca J, Hashish H. Cranio-cervical decompression for Chiari type I-malformation, adding extreme lateral foramen magnum opening and expansile duroplasty with arachnoid preservation. Technique and long-term functional results in 44 consecutive adult cases -- comparison with literature data. Acta neurochirurgica. 2002;144(10):1005–1019. doi: 10.1007/s00701-002-1004-8. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 60. Klekamp J, Batzdorf U, Samii M, et al. The surgical treatment of Chiari I malformation. Acta neurochirurgica. 1996;138(7):788–801. doi: 10.1007/BF01411256. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 61. Isu T, Sasaki H, Takamura H, et al. Foramen magnum decompression with removal of the outer layer of the dura as treatment for syringomyelia occurring with Chiari I malformation. Neurosurgery. 1993;33(5):845–849. discussion 849–850. [ PubMed ] [ Google Scholar ]
+ 62. Badie B, Mendoza D, Batzdorf U. Posterior fossa volume and response to suboccipital decompression in patients with Chiari I malformation. Neurosurgery. 1995;37(2):214–218. doi: 10.1227/00006123-199508000-00004. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 63. Genitori L, Peretta P, Nurisso C, et al. Chiari type I anomalies in children and adolescents: minimally invasive management in a series of 53 cases. Child's nervous system : ChNS : official journal of the International Society for Pediatric Neurosurgery. 2000;16(10–11):707–718. doi: 10.1007/s003810000338. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 64. Hida K, Iwasaki Y, Koyanagi I, et al. Surgical indication and results of foramen magnum decompression versus syringosubarachnoid shunting for syringomyelia associated with Chiari I malformation. Neurosurgery. 1995;37(4):673–678. doi: 10.1227/00006123-199510000-00010. discussion 678–679. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 65. Lam B, Ryan CF. Arnold-Chiari malformation presenting as sleep apnea syndrome. Sleep medicine. 2000;1(2):139–144. doi: 10.1016/s1389-9457(99)00004-0. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 66. Botelho RV, Bittencourt LR, Rotta JM, et al. Adult Chiari malformation and sleep apnoea. Neurosurgical review. 2005;28(3):169–176. doi: 10.1007/s10143-005-0400-y. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 67. Botelho RV, Bittencourt LR, Rotta JM, et al. The effects of posterior fossa decompressive surgery in adult patients with Chiari malformation and sleep apnea. Journal of neurosurgery. 2010;112(4):800–807. doi: 10.3171/2009.7.JNS09174. [ DOI ] [ PubMed ] [ Google Scholar ]
+ Associated Data
+ This section collects any data citations, data availability statements, or supplementary materials included in this article. 
+ Supplementary Materials
+ Video 1: Tonsillopexy. Tonsils were mobilized from below the level of the dural opening and subsequently cauterized superiorly with bipolar electrocautery.
+ Download video file (94.9MB, avi) 
+ ACTIONS
+ View on publisher site 
+ PDF (1.3 MB) 
+ Cite 
+ Collections 
+ Permalink 
+ PERMALINK
+ Copy 
+ RESOURCES
+ Similar articles
+ Cited by other articles
+ Links to NCBI Databases
+ Cite
+ Copy 
+ Download .nbib 
+ .nbib 
+ Format: 
+ AMA
+ APA
+ MLA
+ NLM
+ Add to Collections
+ Create a new collection 
+ Add to an existing collection 
+ Name your collection
+ * 
+ Choose a collection
+ Unable to load your collection due to an error
+ Please try again 
+ Add
+ Cancel
+ Follow NCBI
+ NCBI on X (formerly known as Twitter) 
+ NCBI on Facebook 
+ NCBI on LinkedIn 
+ NCBI on GitHub 
+ NCBI RSS feed 
+ Connect with NLM
+ NLM on X (formerly known as Twitter) 
+ NLM on Facebook 
+ NLM on YouTube 
+ National Library of Medicine
+ 8600 Rockville Pike
+ Bethesda, MD 20894 
+ Web Policies
+ FOIA
+ HHS Vulnerability Disclosure
+ Help
+ Accessibility
+ Careers
+ NLM
+ NIH
+ HHS
+ USA.gov
+ Back to Top 

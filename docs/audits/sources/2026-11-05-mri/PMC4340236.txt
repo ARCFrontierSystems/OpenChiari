@@ -1,0 +1,164 @@
+
+ Effect of upright posture on tonsillar level in adolescent idiopathic scoliosis - PMC
+ Skip to main content
+ An official website of the United States government
+ Here's how you know 
+ Here's how you know 
+ Official websites use .gov 
+ A
+ .gov website belongs to an official
+ government organization in the United States.
+ Secure .gov websites use HTTPS 
+ A lock (
+ Lock 
+ Locked padlock icon
+ ) or https:// means you've safely
+ connected to the .gov website. Share sensitive
+ information only on official, secure websites.
+ Search
+ Log in 
+ Dashboard
+ Publications
+ Account settings
+ Log out
+ Search…
+ Search NCBI
+ Primary site navigation
+ Search
+ Logged in as:
+ Dashboard
+ Publications
+ Account settings
+ Log in
+ Search PMC Full-Text Archive 
+ Search in PMC 
+ Journal List
+ User Guide
+ PERMALINK
+ Copy 
+ As a library, NLM provides access to scientific literature. Inclusion in an NLM database does not imply endorsement of, or agreement with,
+ the contents by NLM or the National Institutes of Health.
+ Learn more:
+ PMC Disclaimer 
+ |
+ PMC Copyright Notice
+ Scoliosis 
+. 2015 Jan 19;10(Suppl 1):O51. doi: 10.1186/1748-7161-10-S1-O51 
+ Search in PMC 
+ Search in PubMed 
+ View in NLM Catalog 
+ Add to search 
+ Effect of upright posture on tonsillar level in adolescent idiopathic scoliosis
+ Winnie CW Chu 
+ Winnie CW Chu 
+ 1 Department of Imaging and Interventional Radiology, The Chinese University of Hong Kong, Hong Kong
+ Find articles by Winnie CW Chu 
+ 1, ✉ , Ryan KL Lee 
+ Ryan KL Lee 
+ 1 Department of Imaging and Interventional Radiology, The Chinese University of Hong Kong, Hong Kong
+ Find articles by Ryan KL Lee 
+ 1 , James F Griffith 
+ James F Griffith 
+ 1 Department of Imaging and Interventional Radiology, The Chinese University of Hong Kong, Hong Kong
+ Find articles by James F Griffith 
+ 1 , Joyce HY Leung 
+ Joyce HY Leung 
+ 1 Department of Imaging and Interventional Radiology, The Chinese University of Hong Kong, Hong Kong
+ Find articles by Joyce HY Leung 
+ 1 , Tsz-Ping Lam 
+ Tsz-Ping Lam 
+ 2 Department of Orthopedics and Traumatology, The Chinese University of Hong Kong, Hong Kong
+ Find articles by Tsz-Ping Lam 
+ 2 , Bobby KW Ng 
+ Bobby KW Ng 
+ 2 Department of Orthopedics and Traumatology, The Chinese University of Hong Kong, Hong Kong
+ Find articles by Bobby KW Ng 
+ 2 , Jack CY Cheng 
+ Jack CY Cheng 
+ 2 Department of Orthopedics and Traumatology, The Chinese University of Hong Kong, Hong Kong
+ Find articles by Jack CY Cheng 
+ 2 
+ Author information 
+ Article notes 
+ Copyright and License information 
+ 1 Department of Imaging and Interventional Radiology, The Chinese University of Hong Kong, Hong Kong
+ 2 Department of Orthopedics and Traumatology, The Chinese University of Hong Kong, Hong Kong
+ ✉ Corresponding author.
+ Supplement
+ IRSSD 2014 Meeting Abstracts
+ The publication charges for this supplement were funded by IRSSD 2014 Sapporo.
+ Conference
+ 29 June-2 July 2014
+ The 10th Meeting of the International Research Society of Spinal Deformities (IRSSD 2014 Sapporo)
+ Sapporo, Japan
+ Collection date 2015.
+ Copyright © 2015 Chu et al; licensee BioMed Central Ltd.
+ This is an Open Access article distributed under the terms of the Creative Commons Attribution License ( http://creativecommons.org/licenses/by/4.0 ), which permits unrestricted use, distribution, and reproduction in any medium, provided the original work is properly cited. The Creative Commons Public Domain Dedication waiver ( http://creativecommons.org/publicdomain/zero/1.0/ ) applies to the data made available in this article, unless otherwise stated.
+ PMC Copyright notice 
+ PMCID: PMC4340236
+ Introduction
+ In the supine position, the cerebellar tonsils in adolescent idiopathic scoliosis (AIS) patients are more low-lying than normal subjects. There is also a positive association between tonsillar descent in AIS patients and impairment of somatosensory cortical evoked potentials (SSEP). In this study, we investigated the effect of standing on tonsillar position in AIS patients and normal controls.
+ Aim
+ To investigate the effect of upright position on tonsillar level in patients with adolescent idiopathic scoliosis (AIS).
+ Methods
+ 25 patients with clinically diagnosed AIS (all females, mean age 14.9+/-2.3) and 18 normal age-matched controls (all females, mean age 15.3+/-3.4) were examined by 0.25T MRI (G-Sscan, Esaote, Italy) in both the supine and upright positions. The level of the inferior cerebellar tonsil tip relative to a reference plane connecting the basion to the opisthion (BO line) was measured in millimeters. A position above and below the BO line was assigned a positive value (i.e. no tonsillar descent) and a negative value (i.e. tonsillar descent) respectively.
+ Results
+ In AIS patients, the cerebellar tonsil position was significantly lower in the upright than the supine position (-0.7+/-1.5 vs +1.2+/-1.7, p<0.00001) while in normal subjects, there was no change in cerebellar tonsil position between upright and supine positions (mean +2.1+/-1.7 vs +2.2+/-1.8, p = 0.93). AIS patients also had a greater degree of tonsillar excursion between upright and supine positions compared to normal subjects (mean -1.9 +/-1.6 vs -0.1+/-1.7, p<0.00001). More AIS patients tended to have tonsillar descent in the upright position rather than the supine position though this did not reach statistical significance (28% in supine position vs 48% in standing position, p=0.15). There is slightly better correlation between tonsillar level and Cobb angle in upright position (r = 0.45, p = 0.01) than those in supine position (r= 0.31, p=0.03) in AIS patients.
+ Conclusion
+ AIS patients have more tonsillar descent in the upright position and a greater degree of tonsillar excursion between supine and upright positions compared to matched control subjects. Apart from supporting the hypothesis of relative cord tethering in AIS, the results also enhance the likelihood of more significant chronic dynamic compression of the brainstem and upper cervical cord in AIS. Whether this will lead to chronic insult with subclinical neurophysiological disturbance, affecting both dynamic postural balance and SSEP, and contributing to the etiopathogenesis of AIS, warrants further study.
+ Articles from Scoliosis are provided here courtesy of BMC 
+ ACTIONS
+ View on publisher site 
+ PDF (119.6 KB) 
+ Cite 
+ Collections 
+ Permalink 
+ PERMALINK
+ Copy 
+ RESOURCES
+ Similar articles
+ Cited by other articles
+ Links to NCBI Databases
+ Cite
+ Copy 
+ Download .nbib 
+ .nbib 
+ Format: 
+ AMA
+ APA
+ MLA
+ NLM
+ Add to Collections
+ Create a new collection 
+ Add to an existing collection 
+ Name your collection
+ * 
+ Choose a collection
+ Unable to load your collection due to an error
+ Please try again 
+ Add
+ Cancel
+ Follow NCBI
+ NCBI on X (formerly known as Twitter) 
+ NCBI on Facebook 
+ NCBI on LinkedIn 
+ NCBI on GitHub 
+ NCBI RSS feed 
+ Connect with NLM
+ NLM on X (formerly known as Twitter) 
+ NLM on Facebook 
+ NLM on YouTube 
+ National Library of Medicine
+ 8600 Rockville Pike
+ Bethesda, MD 20894 
+ Web Policies
+ FOIA
+ HHS Vulnerability Disclosure
+ Help
+ Accessibility
+ Careers
+ NLM
+ NIH
+ HHS
+ USA.gov
+ Back to Top 

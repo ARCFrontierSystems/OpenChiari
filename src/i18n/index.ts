@@ -38,6 +38,8 @@ export const routes = {
   evidence: '/evidence/',
   es: '/es/',
   tour: '/tour/',
+  mri: '/mri/',
+  prepSurgery: '/prep/#for=surgery',
 } as const;
 export type Routes = { [K in keyof typeof routes]: string };
 

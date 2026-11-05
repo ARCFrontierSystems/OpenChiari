@@ -1,0 +1,522 @@
+
+ Cardiac-related spinal cord tissue motion at the foramen magnum is elevated in Type I Chiari malformation patients and decreases post-decompression surgery - PMC
+ Skip to main content
+ An official website of the United States government
+ Here's how you know 
+ Here's how you know 
+ Official websites use .gov 
+ A
+ .gov website belongs to an official
+ government organization in the United States.
+ Secure .gov websites use HTTPS 
+ A lock (
+ Lock 
+ Locked padlock icon
+ ) or https:// means you've safely
+ connected to the .gov website. Share sensitive
+ information only on official, secure websites.
+ Search
+ Log in 
+ Dashboard
+ Publications
+ Account settings
+ Log out
+ Search…
+ Search NCBI
+ Primary site navigation
+ Search
+ Logged in as:
+ Dashboard
+ Publications
+ Account settings
+ Log in
+ Search PMC Full-Text Archive 
+ Search in PMC 
+ Journal List
+ User Guide
+ PERMALINK
+ Copy 
+ As a library, NLM provides access to scientific literature. Inclusion in an NLM database does not imply endorsement of, or agreement with,
+ the contents by NLM or the National Institutes of Health.
+ Learn more:
+ PMC Disclaimer 
+ |
+ PMC Copyright Notice
+ World Neurosurg 
+. Author manuscript; available in PMC: 2019 Aug 1.
+ Published in final edited form as: World Neurosurg. 2018 May 4;116:e298–e307. doi: 10.1016/j.wneu.2018.04.191 
+ Search in PMC 
+ Search in PubMed 
+ View in NLM Catalog 
+ Add to search 
+ Cardiac-related spinal cord tissue motion at the foramen magnum is elevated in Type I Chiari malformation patients and decreases post-decompression surgery
+ Braden J Lawrence 
+ Braden J Lawrence , BS, MBA 
+ 1 School of Medicine, University of Washington, Seattle, Washington
+ 4 Department of Neurological Surgery, University of Washington, Seattle, Washington
+ 8 Department of Biological Engineering, University of Idaho, Moscow, Idaho
+ Find articles by Braden J Lawrence 
+ 1, 4, 8 , Mark Luciano 
+ Mark Luciano , MD, PhD 
+ 2 Department of Neurosurgery, Johns Hopkins University, Baltimore, Maryland
+ Find articles by Mark Luciano 
+ 2 , John Tew 
+ John Tew , MD 
+ 3 Department of Neurosurgery, University of Cincinnati Neuroscience Institute and University of Cincinnati College of Medicine, and Mayfield Clinic, Cincinnati, Ohio
+ Find articles by John Tew 
+ 3 , Richard G Ellenbogen 
+ Richard G Ellenbogen , MD 
+ 4 Department of Neurological Surgery, University of Washington, Seattle, Washington
+ Find articles by Richard G Ellenbogen 
+ 4 , John N Oshinski 
+ John N Oshinski , PhD 
+ 5 Department of Radiology & Imaging Science and Biomedical Engineering, Emory University, Atlanta, Georgia
+ Find articles by John N Oshinski 
+ 5 , Francis Loth 
+ Francis Loth , PhD 
+ 6 Conquer Chiari Research Center, Department of Mechanical Engineering, University of Akron, Ohio
+ Find articles by Francis Loth 
+ 6 , Amanda P Culley 
+ Amanda P Culley , BS, MS 
+ 7 Department of Statistical Science, University of Idaho, Moscow, Idaho
+ Find articles by Amanda P Culley 
+ 7 , Bryn A Martin 
+ Bryn A Martin , PhD 
+ 8 Department of Biological Engineering, University of Idaho, Moscow, Idaho
+ Find articles by Bryn A Martin 
+ 8 
+ Author information 
+ Article notes 
+ Copyright and License information 
+ 1 School of Medicine, University of Washington, Seattle, Washington
+ 2 Department of Neurosurgery, Johns Hopkins University, Baltimore, Maryland
+ 3 Department of Neurosurgery, University of Cincinnati Neuroscience Institute and University of Cincinnati College of Medicine, and Mayfield Clinic, Cincinnati, Ohio
+ 4 Department of Neurological Surgery, University of Washington, Seattle, Washington
+ 5 Department of Radiology & Imaging Science and Biomedical Engineering, Emory University, Atlanta, Georgia
+ 6 Conquer Chiari Research Center, Department of Mechanical Engineering, University of Akron, Ohio
+ 7 Department of Statistical Science, University of Idaho, Moscow, Idaho
+ 8 Department of Biological Engineering, University of Idaho, Moscow, Idaho
+ ✉ Corresponding Author: Bryn A. Martin, PhD, Department of Biological Engineering, University of Idaho, 875 Perimeter Drive MS 0904, Moscow, ID 83844-0904, Phone: 208-885-6182, Fax: 208-885-7908, brynm@uidaho.edu 
+ Issue date 2018 Aug.
+ PMC Copyright notice 
+ PMCID: PMC6063776  NIHMSID: NIHMS965991  PMID: 29733988 
+ The publisher's version of this article is available at World Neurosurg 
+ Abstract
+ Objective
+ Type 1 Chiari malformation (CM-I) is a craniospinal disorder historically defined by cerebellar tonsillar position (TP) greater than 3-5mm below the foramen magnum (FM). This definition has come under question since quantitative measurements of cerebellar herniation do not always correspond with symptom severity. Researchers have proposed several additional radiographic diagnostic criteria based on dynamic motion of fluids and/or tissues. The present study objective was to determine if cardiac-related craniocaudal spinal cord tissue displacement is an accurate indicator of the presence of CM-I and if tissue displacement is altered with decompression.
+ Methods
+ A cohort of 20 symptomatic patients underwent decompression surgery. Fifteen healthy volunteers were recruited for comparison to the CM-I group. Axial phase-contrast magnetic resonance imaging (PC-MRI) measurements were collected pre- and post-surgery at the FM with cranial-caudal velocity encoding and 20 frames per cardiac cycle with retrospective reconstruction. Spinal cord motion (SCM) at the FM was quantified based on the peak-to-peak integral of average spinal cord velocity.
+ Results
+ Tissue motion for the pre-surgical group was significantly greater than controls (p=0.0009). Motion decreased following surgery (p=0.058) with an effect size of -0.151 mm and a standard error of 0.066 mm. Post-operatively, no statistical difference from controls in bulk displacement at the FM was found (p=0.200) after post hoc testing using Tukey's adjustment for multiple comparisons.
+ Conclusions
+ These results support SCM measurement by PC-MRI as a possible non-invasive radiographic diagnostic for CM-I. Dynamic measurement of SCM provides unique diagnostic information about CM-I alongside static quantification of TP and other intracranial morphometrics.
+ Introduction
+ Type I Chari Malformation (CM-I) is the most prevalent of the Chiari malformation subgroups and is commonly associated with syringomyelia and hydrocephalus. 1 CM-I is an afflictive craniospinal disorder that has historically been defined radiographically by caudal descent and herniation of the cerebellar tonsils into the spinal canal > 3-5mm beyond the basion-opisthion line (McRae's line), at the foramen magnum (FM). 2 - 10 The result is crowding of the posterior fossa with reduced posterior fossa volume for the cerebellomedullary tissue that can lead to stenosis and aberrancies in cerebrospinal fluid (CSF) dynamics at the craniovertebral junction (CVJ). 1 , 3 , 11 - 18 Clinical manifestations are a constellation of idiosyncratic and diverse symptomatology including, but not limited to a tussive headache, poor coordination and unsteady gait, severe head and neck pain, dizziness, vision and hearing problems. 1 , 4 , 19 
+ Treatment of CM-I is controversial given that the etiology of CM-I remains a mystery and that diagnostic criteria are dynamic and not uniformly agreed upon by all clinicians. 20 Effective treatment options for symptomatic CM-I patients are limited to posterior fossa decompression surgery based on the clinical indications defined by each surgeon. Conservative therapy includes medical management of symptoms as well as serial follow-up with a non-invasive option for asymptomatic or mildly symptomatic patients. 4 , 11 , 20 - 24 Most surgical interventions have two major goals. The goals are 1) a posterior fossa and upper cervical decompression reducing impedance to CSF flow at the FM and 2) improved volume for, and mobility of, tissue occupying the FM and nearby PCF. 11 , 23 , 25 , 26 Some treatment options for CM-I include, but are not limited to variations of posterior fossa decompression surgery: PCF decompressive surgery, cerebellar tonsillectomy, suboccipital decompression and laminectomy, dural splitting decompression, duraplasty expansion, extradural decompression, and enlargement of the PCF. 1 , 11 , 21 , 22 , 27 - 30 
+ Efficacy of treatment is often unreliable, with studies indicating 20-40% of operations failing to resolve CM-I symptoms. 11 , 22 , 31 - 36 As previously stated, the traditional definition of CM-I is cerebellar tonsillar position (TP) of >3-5mm below the foramen magnum (FM). 14 , 37 , 38 This measurement has come under question since herniation depth does not always correspond with symptom severity. 3 , 39 - 41 And, the indications for surgery based on clinical symptoms vary from institution to institution. Thus, there is a need for diagnostic markers that identify symptomatic CM-I and correspond to both specific symptoms and the severity of those symptoms. As an alternative to static morphometric analysis, dynamic MRI-based methods have been explored as a CM-I diagnostic such as phase-contrast MR imaging (PC-MRI) to quantify cerebrospinal fluid (CSF) velocities 10 , 14 , 42 - 47 and cardiac related neural tissue motion. 15 , 48 - 50 
+ Several imaging MR imaging modalities exist that allow users to quantify static and dynamic measurements in individuals. To date, only static measurements have fully translated to clinical use, but are often poorly correlated with clinical presentation and treatment outcome. 4 A classic example of this static measurement is TP at McRae's line. This linear 2D metric is reasonably easy to measure, however, it fails to account for 3D crowding and CSF flow within and around the PCF and CVJ. While Chiari-like TP may occur in 1 to 3 percent of the population 51 , 1 symptoms may occur in only 0.06 percent. 1 The poor correlation between the extent of cerebellar crowding and symptoms has led medical scientists to seek other features beyond the static anatomical picture seen on static T1 or T2-weighted MRI to predict symptoms and guide surgical treatment.
+ Dynamic measurements aim for a better representation of clinical presentation by incorporating additional parameters such as neural tissue motion and CSF velocities. Many dynamic MRI methods have been used for evaluating CM-I such as cine MRI, CSF flowmetry, and cerebellar tonsillar motion using cine PC-MRI. Studies using those methodologies have produced variable results as reviewed previously by Shaffer et al. 16 In specific, PC-MRI has found elevated and decreased CSF velocities in CM-I. A recent study by Leung, et al. demonstrated potential to help stratify Chiari and the impact of surgery by using cine MRI and motion tracking. 52 
+ The goal of the present study was to quantify craniocaudal spinal cord motion (SCM) in CM-I patients pre- and post- decompression surgery and compare findings to healthy controls. We hypothesized that: 1) SCM would be elevated in CM-I patients compared to controls, 2) that TP would positively correlate with SCM, and 3) that SCM would decrease post-decompression surgery. The rationale for examining spinal cord motion is that this data is often collected clinically to assess flow dynamics and this same scan can be used to assess the same or related parameters. This study particularly adds to previous studies by including the impact of surgery and relation to controls. While many dynamic MRI methods have not yet translated to clinical use, previous indices (static measurements) are unable to provide deeper understanding between anatomic and physiologic interplay.
+ Materials and Methods
+ Patients
+ This prospective study was approved by the University of Akron, Cleveland Clinic, University of Cincinnati and Emory University institutional review boards (UA IRB #20130226), and all subjects signed an informed written consent. 20 clinically diagnosed CM-I patients from 18-55 years of age with TP ≥ 3-5 mm were prospectively enrolled at Cleveland Clinic and Mayfield Clinic. Inclusion criteria for included subjects were those who met the diagnostic and clinical criteria. TP was used as an initial screening with further evaluation of Chiari crowding of the cisterna magna and restricted space at the CVJ. The clinical picture and diagnosis was confirmed by the treating surgeon based on all diagnostic information and patient presentation.
+ Patients were recruited from a pool of individuals scheduled to receive imaging or evaluation for CM-I. Controls were recruited from a random pool of individuals without a remarkable history or symptomatology. Patients were excluded if they presented with craniospinal deformity, Dandy-Walker malformation, Ehlers-Danlos syndrome, spinal fusion, previous decompression surgery, syringomyelia, or additional neurological disorders. All 20 CM-I patients received decompression surgery (19 female:1 male, age = 38 ± 10 years). 15 controls were included from 18-55 years of age with age controlled to the patient group (8 female/7 male, age = 36 ± 10 years). Controls with organ diseases, neurological conditions, and craniospinal deformity were excluded. Data obtained for all CM-I patients and controls took place from March 2011 to August 2014. A summary of CM-I patient clinical presentation is listed in Table 1 .
+ Table 1.
+ Summary of Clinical Presentation Symptoms in 20 CM-I Patients.
+ Clinically Reported Symptoms 
+ No. of Patients (%) 
+ Headache 
+ 100% 
+ Dizziness 
+ 35% 
+ Neck Pain 
+ 30% 
+ Gait Disturbance 
+ 30% 
+ Weakness 
+ 30% 
+ Hearing Loss 
+ 25% 
+ Swallowing Difficulty 
+ 25% 
+ Fatigue, Lethargy 
+ 15% 
+ Memory Loss 
+ 15% 
+ Vertigo 
+ 15% 
+ Extremity Pain 
+ 10% 
+ Sleep Apnea 
+ 5% 
+ Extremity Numbness 
+ 5% 
+ Open in a new tab 
+ Surgical Technique
+ The goal of the surgical technique was removal of primary brain compression and the creation of a CSF space around brain tissue. Two CM-I decompression techniques were utilized in this study: bony decompression with duraplasty (BD) and bony decompression with tonsillectomy and duraplasty (BDT). All 20 patients underwent decompression of the CVJ under general anesthesia in the prone position with 3-point Mayfield fixation and elevation of the head. Surgical preparation, draping, and administration of antibiotics and local anesthesia was carried out in a standard fashion. An incision was made from the inion and extended downward just beyond the apex of the herniated tonsils, followed by subperiosteal dissection and suboccipital craniectomy. Intraoperative ultrasound was utilized immediately following PCF decompression as an indicator of adequate decompression, tonsillar pulsatility, and improved CSF velocities. Since all subjects enrolled in this study were prepared to undergo surgical treatment, intraoperative ultrasound was the only key variable on whether or not they underwent more conservative or aggressive decompression. 76% of CM-I patients required dural opening and tonsillectomy (BDT), 24% required dural opening with duraplasty alone (BD). Tonsillectomy was performed to achieve minimal shrinkage of tonsils and optimal CSF flow. Closure of the dura was performed in a multilayer fashion using autologous pericranium with absorbable sutures to ensure watertight closure. Need for duraplasty was made by the surgeon's subjective interpretation of ultrasonography findings. Surgical treatment took place at Cleveland Clinic and Mayfield Clinic.
+ Symptom Assessment
+ The presence of the following specific symptoms and clinical signs were recorded at the baseline and follow-up MRI exam for all subjects enrolled in the study. Assessment of surgical outcome was based on comparison post-operative follow-up results with a standardized pre-surgical screening. This method categorically assessed chief complaint for each patient and whether or not specific symptoms were present pre- and post-decompression. We also noted other symptoms as reported by the patient that were not included in our initial screening assessment form. The patient's reported outcome was categorized as “Improved,” “Unchanged,” or “Worse” with respect to the patient's initial chief complaint. No surgical complications were noted for any patients. Clinical outcomes were categorized and scored by an external evaluator to eliminate operator bias.
+ Neuroimaging Studies
+ In vivo PC-MRI
+ An identical MRI protocol was obtained for all subjects enrolled in the study. Patients were scanned both pre- and post-operatively with a mean post-operative follow-up of 9 months. Transverse PC-MRI scans, with thru-plane (cranial-caudal) velocity encoding (VENC = 10 cm/s), slice thickness = 5 mm, were acquired at the FM level with imaging planes oriented perpendicular to the CSF flow direction and imaging parameters based on Martin et al ( Video 1 ). 13 , 26 The minimum repetition time available was used to optimize temporal resolution, and the minimum echo time available was used to optimize signal-to-noise ratio and reduce intra-voxel phase dispersion. All scans were ECG triggered with ∼20 phases retrospectively reconstructed. Scan time was approximately two minutes. All images were acquired using a 3-T MRI (Siemens Magnetom Trio TIM 3.0T syngo MR B17).
+ PC-MRI Post-Processing of Spinal Cord Motion (SCM)
+ SCM was quantified based on the integral of the average spinal cord velocities at the FM. The axial PC-MRI images were post-processed using an in-house code developed in MATLAB (Version R2013b, MathWorks, Natick, Ma). 53 A region of interest (ROI) within the spinal cord was manually selected. Pixels near the spinal cord tissue edges bordering CSF were omitted. The average velocity of all pixels in the ROI was computed and numerically integrated to obtain unsteady spinal cord motion over the cardiac cycle ( Figure 1 ). To achieve this, velocity at each time step was multiplied by the time increment to obtain displacement at each time step. Displacement was then integrated using trapezoidal rule with the trapz function in MATLAB (Version R2013b, MathWorks, Natick, Ma). Peak-to-peak magnitude of SCM was quantified as the difference between the maximum positive displacement and minimum negative displacement ( Figure 1 ). Eddy current offsetting was applied to the ROI velocities within the spinal cord to assure zero average velocity within the spinal cord tissue over the cardiac cycle.
+ Figure 1.
+ Open in a new tab 
+ A) Representative CM-I patient showing spinal cord ROI selection. B) Spinal cord displacement waveform with depiction of magnitude of spinal cord motion (SCM).
+ Anatomical MRI and Post-Processing Morphometric Quantification
+ To define the brain and craniovertebral anatomy, a high-resolution T1-MPRAGE was acquired at a resolution of 1.1 × 1.1 × 1.1 mm voxels with whole brain coverage (176 slices sagittal slices, FOV 270 × 250 in-plane). Neck elements were left on. Scan time was six minutes. A high-resolution T2 3D-SPACE pulse sequence was also acquired at a resolution of 0.5 × 0.5 × 1.5 mm voxels with whole brain coverage (144 coronal slices, FOV 240 × 210 in-plane). Scan time was five minutes. The motion of the neural tissue was compared with the TP, as tonsillar position below the FM is a standard radiographic marker of CM-I. TP was measured with respect to McRae's line by a single operator using OsiriX software (Version 8, Geneva, Switzerland). A positive value of TP indicated TP caudal to the FM. Since decompression surgery involved removal of part of the occiput, post-surgical TP was quantified with reference to the pre-surgical angle between the slope of the clivus and McRae's line.
+ Statistical Analysis
+ A total of 35 subjects were studied ( Table 2 ). Descriptive comparisons were calculated for pre-decompression (n = 20), post-decompression (n = 18), and healthy controls (n = 15) expressed as mean ± standard deviation ( Table 2 and Figure 3 ) using Microsoft Excel for Mac (Version 2016, Seattle, WA). To account for attrition and follow-up, multiple MR imaging sites, and a different number of individuals in surgical and control groups, we applied a linear mixed-effects (LME) model using Bates' approach. 54 The LME model was used to determine the relationship between CM-I patient and control groups and SCM while controlling for sex, age, and procedure as a covariates. We used subject and imaging site as random effects and used surgical group, sex, age, and procedure as fixed-effects. Analysis of residual plots revealed no obvious deviations from homoscedasticity or normality. The LME model was assessed using a parametric bootstrap method, as outlined by Halekoh and Højsgaard, with one million sample iterations. 55 SCM significance between the pre-op, post-op, and control groups was investigated with post-hoc Tukey contrasts with statistical correction for pairwise comparison of means. Linear correlation of TP to bulk axial SCM was quantified across all study groups using the Pearson product-moment correlation coefficient ( Figure 4 ). Significance was assessed at a Type I error rate of α = 0.05 for all comparisons. All statistical analyses were performed using R (Version 3.4.0, Vienna, Austria), lme4 (Bates et al., 2015), and pbkrtest (Halekoh and Højsgaard, 2014). 54 , 55 
+ Table 2. Descriptive Statistics for All Subjects.
+ Variable 
+ Mean ± SD (mm) 
+ Pre-Op (n=20) 
+ Post-Op (n=18) 
+ Control (n=15) 
+ Age 
+ 37.76 ± 9.97 
+ 37.76 ± 9.97 
+ 35.53 ± 9.35 
+ TP 
+ 8.31 ± 4.93 
+ 4.90 ± 4.80 
+ (0.41) ± 2.40 
+ SCM 
+ 0.53 ± 0.30 
+ 0.38 ± 0.20 
+ 0.23 ± 0.08 
+ Open in a new tab 
+ SCM = spinal cord motion; TP = tonsillar position
+ Figure 3.
+ Open in a new tab 
+ Linear correlation of cerebellar tonsillar position (TP) and magnitude of axial spinal cord motion (SCM) at the foramen magnum (FM) for all subjects (R2 = 0.24). TP greater than zero represents tonsillar position caudal to the FM.
+ Figure 4.
+ Open in a new tab 
+ Sagittal T2-weighted MR image of symptomatic CM-I patients one through five. A -pre-op scan, B - post-op scan for same patient.
+ Results
+ Bulk Spinal Cord Motion (SCM) in CM-I Patients Compared to Healthy Volunteers
+ The results for all subjects involved in the study are listed in Table 2 , and overall motion differences for pre-op patients, post-op patients, and healthy controls are plotted in Figure 2 . LME modelling demonstrated significance for the pre-op, post-op, and control group variable as assessed with a parametric bootstrap method set to one million simulations (p = 0.0024). SCM for the pre-surgical group (median = 0.45 mm, interquartile range (IQR) = 0.32 mm) was 231% greater than controls (median = 0.22 mm, IQR = 0.11 mm) and confirmed a statistically significant difference between pre-operative and control groups (p = 0.0009) after correcting for multiple comparisons. Motion at the FM decreased following surgery (median = 0.36 mm, IQR = 0.29 mm), but resulted in no statistically significant difference between the post-surgical and control groups at the 95% confidence level with correction for multiple comparison of groups (p = 0.20). Sex and age were controlled for as covariates in the LME model.
+ Figure 2.
+ Open in a new tab 
+ Comparison of the magnitude of spinal cord motion (SCM) at the Foramen Magnum (FM) for healthy control (white), CM-I preoperative (light gray), and CM-I post-operative (dark gray) groups. Asterisks indicate *p < 0.10 and **p < 0.001 according to linear mixed effects model analysis with post-hoc Tukey contrast.
+ Effect of Posterior Fossa Decompression (PFD) Surgery on Spinal Cord Motion (SCM) at the Foramen Magnum (FM)
+ Results show that the mean bulk axial SC motion at the FM for pre-operative patients was greater than the post-operative group and decreased by 30% following surgical decompression ( Table 2 ). Motion at the FM decreased following surgery (median = 0.38 mm, IQR = 0.29 mm), but failed to demonstrate a statistically significant difference between pre-surgical and post-surgical groups based on a significance level equal to 0.05 and correcting for multiple comparisons (p = 0.0578). The LME model demonstrated an estimated effect size of -0.1513 mm change in SCM with decompression surgery and a standard error of 0.0662 mm. A descriptive summary for all subjects involved in the study is listed in Table 2 with multiple comparison of means with Tukey contrast results listed in Table 3 . Graphical comparison of overall motion differences for pre-operative, post-operative, and control groups are depicted in Figure 2 .
+ Table 3. Summary of Linear Mixed-Effects (LME) Model Results with Post-Hoc Tukey Contrasts.
+ Object 
+ p-Value 
+ LME Model 
+ 0.0024 
+ Pre-Op vs. Control 
+ 0.0009 
+ Pre-Op vs. Post-Op 
+ 0.0578 
+ Post-Op vs. Control 
+ 0.2000 
+ Open in a new tab 
+ LME = linear mixed-effects
+ Relationship of Spinal Cord Motion (SCM) at the Foramen Magnum (FM) with Tonsillar Position (TP)
+ Axial bulk SCM at the level of FM was plotted against cerebellar tonsillar position (TP) for each patient in the pre-op, post-op, and control groups as shown in Figure 3 . Mean and standard deviation (mean ± SD) for tonsillar position measurements for symptomatic CM-I pre-op (n = 20), post-op (n = 18), control (n = 15) groups were 8.3 ± 4.9 mm, 4.9 ± 4.8 mm, and -0.41 ± 2.4 mm, respectively. Overall correlation (R 2 = 0.24) of bulk SCM at the FM with TP significantly lacked meaningful correlation when applying the Pearson correlation test across all subjects (p = 0.0003, 95% CI = 0.249 – 0.675).
+ Clinical Picture and Post-Operative Outcomes
+ Clinical presentation for the CM-I patient group is listed in Table 1 with long-term surgical outcomes summarized in Table 4 . Notably, 100% of CM-I patients experienced tussive headaches, and 35% experienced dizziness. Categories for outcome assessment were simplified to account for all symptoms associated with each patient and include the patient's perspective on surgical outcome. Improved is defined as a reduction in some or all of CM-I symptoms. Out of the 18 patients in the post-operative group, 13 patients reported an overall improvement in symptoms, four reported no improvements, and one reported worsening in symptoms. Two patients from the pre-operative group did not follow-up post-surgery. The mid-sagittal MRI anatomy pre- and post-decompression surgery is shown in Figure 4 for several subjects.
+ Table 4. Long-Term Outcome for 18 CM-I Patients.
+ Chief Complaint 
+ No. of Patients 
+ No. of Patients (%) 
+ SCM % Change 
+ TP % Change 
+ Improved 
+ 13 
+ 72.2% 
+ -26.0% 
+ -44.1% 
+ Unchanged 
+ 4 
+ 22.2% 
+ 0.9% 
+ -18.4% 
+ Worse 
+ 1 
+ 5.6% 
+ -4.6% 
+ 11.0% 
+ Open in a new tab 
+ SCM = spinal cord motion; TP = tonsillar position
+ Discussion
+ This study represents the first quantitative assessment of cardiac-related SCM using PC-MRI applied to CM-I patients pre- and post-decompression surgery. SCM was found to be significantly greater in CM-I patients than controls and decompression surgery reduced SCM. These results support the possible importance of SCM as a dynamic MRI diagnostic alongside static morphometrics to help characterize CM-I disease state.
+ Pathophysiological Importance of Tissue Motion
+ Several theories and explanations have been proposed for the pathophysiology of CM-I symptoms and related disorders. 13 , 56 Two primary theories help explain the progression of CM-I and related symptoms: the “hydrodynamic theory” proposed by Gardner and colleagues in 1958 and “cranial-spinal pressure dissociation hypothesis” later proposed by Williams in 1969. 57 - 59 The ball-valve or ball-in-cone “valve” theory proposed by Williams and further elucidated by Oldfield et al. 12 helps to explain the CSF and disturbances that occur when cerebellar tonsils descend and obstruct CSF around the craniocervical junction. Under stress or strain, such as Valsalva maneuver, tissue blockade at the CVJ leads to CSF flow cranially but not caudally, thereby leading to craniospinal pressure dissociations, and ultimately, tissue deformation. 13 , 60 , 61 
+ In vivo measurement of craniospinal pressure dissociation by invasive placement of pressure transducers has been found to be an indicator of CM pathophysiology and symptoms. 59 , 62 , 63 Our findings confirm increased SCM at the FM in CM-I patients in comparison to healthy controls and support the application of dynamic PC-MRI methods to clinical imaging methods. However, these results obtained at the FM indicate that while the SCM differences are significant, this measurement alone would not be sufficient to distinguish CM-I ( Figure 2 ). These results reaffirm the notion that tonsillar bulk motion acts as a dynamic ball-in-cone “valve” leading to increased pressure dissociation. 12 , 59 , 62 - 64 We found a lack of correlation of SCM and TP ( Figure 4 ). This can be expected since TP does not consistently correlate with symptom severity or definitively imply causation of bulk tissue motion. 3 , 39 - 41 TP is a static 1-dimensional simplification of the 3D dynamic problem of CM-I. Future studies could be conducted to determine if symptom severity and/or surgical outcome correlates with SCM.
+ Comparison of Results to Previous Studies
+ Neural tissue deformation in terms of bulk motion has been assessed in CM patients in a number of studies using a variety of MRI techniques ( Table 5 ). The results presented in this paper are consistent with the previous studies in Table 5 and also confirm Leung's findings of diminished motion in post-operative CM-I patients compared to pre-operative CM-I patients. 52 The present results also agree with Alperin's (2014) finding of elevated SCM in CM-I patients compared to controls using PC-MRI collected at the C2-C3 level. 10 Hofmann et al. and Pujol et al. used PC-MRI to quantify bulk cord and tonsil motion in terms of a motion index, and found that the motion index was significantly elevated in CM. 19 , 25 Alperin et al. (2005), and Cousins et al. assessed spinal cord and tonsil bulk motion and both found that motion was greater on average in CM patients than controls but not statistically different. 39 , 44 Similarly, Yiallourou et al. found elevated 2D tonsillar displacement in four CM patients compared to three controls. 48 Terae et al. used bolus tracking MRI measurements and visually interpreted greater motion of the spinal cord in CM patients. 65 Leung analyzed tissue motion using a cine MRI-based motion tracking algorithm and reported similar findings to the current study in pre-op, post-op, and control groups. 52 While their study reports similar trends in tissue motion, the study used cine balanced fast-field echo (bFFE) MRI for quantifying tissue motion via motion tracking algorithms, which is a uniquely different method than used in the present study. The study was also retrospective in nature with selection of patients from a clinical database. In collection, these studies indicate that SCM could be a useful tool to help quantify CM-I. It should be noted that the TP for pre-operative CM-I patients in this study was relatively mild on average (8.3 ± 4.9 mm) with a wide range of values. We found a relatively weak positive correlation of TP and SCM ( Figure 3 , R 2 = 0.24).
+ Table 5. Previous Studies on Neural Tissue Motion Quantification in Chiari.
+ Study 
+ MRI Method 
+ Tissue motion 
+ Location 
+ Healthy 
+ Patients 
+ Alperin et al., 2005 
+ PC-MRI 
+ C2 Spinal Cord 
+ 0.33 ± 0.13 mm 
+ 0.39 ± 0.17 mm 
+ Alperin et al., 2014 
+ PC-MRI 
+ C2 Spinal Cord 
+ 0.174 ± 0.047 mm 
+ 0.373 ± 0.198 mm * 
+ Leung et al., 2016 
+ Cine bFFE 
+ Sagittal Tonsil (SI) 
+ 0.30 ± 0.10 mm * 
+ 0.79 ± 0.45 mm * 
+ Cousins et al., 2009 
+ T2 as cine loop 
+ Sagittal Tonsil 
+ 0.43 ± 0.06 mm 
+ 0.57 ± 0.04 mm 
+ Hoffman et al., 2000 
+ PC-MRI 
+ C2 Spinal Cord 
+ 0.7 mL/s 
+ 1.3 mL/s * 
+ Lawrence et al., 2017 
+ PC-MRI 
+ FM Spinal Cord 
+ 0.23 ± 0.08 mm 
+ 0.53 ± 0.30 mm * 
+ Pujol et al., 1995 
+ PC-MRI 
+ Sagittal Tonsil 
+ 16 ± 7 index 
+ 46 ± 25 index * 
+ Terae et al., 1994 
+ Bolus tracking 
+ Spinal Cord 
+ None 
+ > Healthy 
+ Yiallourou et al., 2012 
+ Balanced TFE 
+ Sagittal Tonsil 
+ None 
+ > Healthy 
+ Open in a new tab 
+ * Significant difference in tissue motion found for patients versus controls (p < 0.05).
+ Relation of Neural Tissue Deformation and Damage
+ The delicate intracranial tissues absorb energy from ∼30 million heartbeats per year. Each heartbeat acts on the tissues with large arterial pressure oscillations of ∼40 mmHg. Under healthy conditions, the cerebrospinal fluid (CSF) acts to help absorb each pulsation by moving freely out of the intracranial space into the spine. However, in CM, CSF motion is constricted at the skull base due to cerebellar tonsil herniation that acts as a dynamic “valve”. 12 , 62 , 64 This constriction causes CSF pressure dissociation and abnormal repetitive tissue stress that leads to tissue deformation, damage and symptoms. 61 - 63 , 66 Although SCM is not a direct measure of tissue damage, SCM is likely correlated with tissue-level stress that leads to damage. This concept is supported by recent studies show cellular mechanosensitivity of central nervous system tissues to low level magnitude strains 67 - 69 and also corresponding microstructural alterations in CM-I patient brain tissue using diffusion tensor imaging. 70 - 73 
+ Need for Additional CM-I Diagnostics
+ Despite being first described over 100 years ago, there is confusion regarding the validity of the historical definition, etiology, diagnostic criteria and standard of treatment for CM-I, which have a negative impact on CM-I patient experiences and outcomes. 4 , 74 - 80 There is concern in the medical community that there will be unnecessary operations unless better CM-I diagnostic criteria are developed. The current clinical definition for CM-I is based on a static MRI measurement of tonsillar descent > 3-5 mm below the skull, 6 , 9 but is considered inadequate to diagnose CM-I. 81 An increasing number of asymptomatic, minimally symptomatic, and doubtfully symptomatic patients are being diagnosed. 24 , 78 , 82 Widespread use of MRI has shown that 1-3% of the U.S. population has radiographic indication of CM-I. 51 , 83 However, less than ∼1 in 30 of these people are regarded as true CM-I patients. 1 If left untreated, CM-I can progress to result in permanent CNS damage. The leading CM-I treatment is a highly invasive brain surgery with little consensus for operative techniques. 82 , 84 , 85 The AANS estimated that approximately 11,000 CM-I patients received surgical treatment in 2007 86 and 20-40% of these surgeries do not resolve symptoms. 31 , 32 , 87 The importance of improved diagnostic testing for CM-I was recognized by a 2010 congressional mandate to encourage aggressive development of an objective CM-I test. 88 Ideally, an adequate CM-I diagnostic would elucidate the following: a) stratify CM-I from related diseases, b) initial surgical decision, c) assessment of post-operative anatomical success in context of residual symptoms and d) decision for redo of decompression surgery. Our study results support that SCM may be investigated alongside other static and dynamic MRI-based diagnostics to understand their potential clinical utility.
+ Limitations
+ There are several limitations that need to be taken into account when interpreting the results of this study: 1) sex distribution in CM-I patient and control groups, 2) CM-I patient imaging follow-up, 3) asymptomatic CM-I patients, 4) PC-MRI post-processing method, 5) study size, and 6) correlation of motion changes with symptoms.
+ This study demonstrated significant differences in SCM in one out of three comparisons at a 95% confidence level. To validate results of SCM between groups, we accounted for sex distribution as a covariate when running an all-inclusive LME model. Since the pre- and post-surgery results were paired, we would not expect male/female group differences to have a significant impact. The principal factor affecting sex distribution in CM-I groups is the two female patients that failed to follow up after surgery, however this was accounted for in the LME model.
+ Furthermore, while the degree of change of SCM between pre-op and post-op groups was borderline significant, we integrated statistical corrections for multiple groups using the Tukey's adjustment for multiple comparisons, which conservatively increased final comparison p-values. Similar corrections for multiple groups and comparisons were not performed in other papers except Leung's. Failing to account for multiple testing error would certainly yield apparent significance between surgical groups. It should also be noted that the standard error was rather large relative to the overall effect size. The results after corrections can be expected in part due to the inherent variability of CM-I and decompression surgery, and heterogeneous nature of the study population in terms of TP and SCM. Applying the same methods in this paper to a larger sample size would help to give a more accurate report of surgical effect.
+ This study only analyzed symptomatic CM-I patients and did not include asymptomatic individuals who meet the diagnostic criteria for CM-I. Future studies should include asymptomatic CM-I patients, as this is an important group in the diagnostic problem. Post-processing of phase-contrast MR images was also only analyzed SCM at one axial level. Similar to CSF flow, tissue motion occurs in 3D. It is possible that the exact location of maximum motion magnitude was missed in some subjects due to slice placement. It should also be noted that the increased motion of the cerebral tonsils in CM-I may be a result of increased CSF flow at the CVJ as demonstrated previously by cine PC-MRI. 19 Future improvements on this method may include mid-sagittal velocity measurements as well as quantifying strain and tissue deformation.
+ While study size was sufficient to observe a significant difference across surgical and control groups, it would be beneficial to expand further the number of CM-I patients included in future studies. We were not able to enroll additional subjects in the study due to limited grant funding to support MR imaging session that was not in the normal clinical routine for patients and controls. The relatively few pre- and post-surgical CM-I patients enrolled in the study and coarse measure of clinical outcome (Improved, Unchanged, Worse), did not allow statistical analysis of relationship of SCM and clinical outcome. Additional outcome metrics such as the Chicago Chiari Outcome Scale 34 were not applied since such instruments were not developed prior to conception of this prospective study. Also, retrospective construction of clinical outcomes would not accurately score patient symptoms and surgical outcomes.
+ Conclusions
+ The study objective was to determine if cardiac-related craniocaudal spinal cord tissue displacement is an accurate indicator of the presence of CM-I and if tissue displacement is altered due to decompression surgery. These results support further exploration of SCM as a possible dynamic MRI based-parameter to help assess CM-I. Axial bulk SC displacement at the FM was elevated in pre-operative CM-I patients relative to controls and was observed to decrease following posterior fossa decompression surgery. There was no significant difference between pre-surgical and post-surgical, or post-surgical and control groups. Dynamic measurement of SCM provides unique diagnostic information about CM-I alongside static quantification of TP and other intracranial morphometrics.
+ Supplementary Material
+ Video 1 Video 1. Axial (left) and sagittal (right) phase-contrast MR scans of a symptomatic CM-I patient with 15.8mm tonsillar decent and 0.75mm axial spinal cord displacement across the cardiac cycle.
+ Download video file (6.6MB, mov) 
+ Highlights.
+ Spinal cord motion is an indicator of the presence of type 1 Chiari malformation.
+ Tissue motion for the pre-surgical group was significantly greater than controls.
+ Spinal cord tissue displacement is decreased with decompression surgery.
+ Acknowledgments
+ The authors thank Michael Majcher, Nicholas Shaffer, Jennifer Chisko, Daniel McQuaide and Kyla Lowenkamp for assistance with data processing on this project.
+ Funding: This work was supported by NIH NINDS grant 1R15NS071455-01 and NIH NIGMS grants P20GM103408 and 4U54GM104944-04, Conquer Chiari; and the University of Washington School of Medicine Medical Student Research Training Program (MSRTP).
+ Abbreviations
+ BD 
+ bony decompression
+ BDT 
+ bony decompression and tonsillectomy
+ bFFE 
+ balanced fast-field echo
+ CM 
+ Chiari malformation
+ CM-I 
+ Chiari malformation Type I
+ CSF 
+ cerebrospinal fluid
+ CV 
+ coefficient of variation
+ CVJ 
+ craniovertebral junction
+ FM 
+ foramen magnum
+ FOV 
+ field of view
+ IQR 
+ interquartile range
+ LME 
+ linear mixed-effects
+ MPRAGE 
+ magnetization-prepared rapid acquisition with gradient echo
+ PCF 
+ posterior cranial fossa
+ PC-MRI 
+ phase-contrast magnetic resonance imaging
+ ROI 
+ region of interest
+ SC 
+ spinal cord
+ SCM 
+ spinal cord motion
+ SPACE 
+ sampling perfection with application optimized contrasts using different flip angle evolution
+ TP 
+ tonsillar position
+ VENC 
+ velocity encoding
+ Footnotes
+ Disclosure: The authors declare that the article content was composed in the absence of any commercial or financial relationships that could be construed as a potential conflict of interest.
+ Publisher's Disclaimer: This is a PDF file of an unedited manuscript that has been accepted for publication. As a service to our customers we are providing this early version of the manuscript. The manuscript will undergo copyediting, typesetting, and review of the resulting proof before it is published in its final citable form. Please note that during the production process errors may be discovered which could affect the content, and all legal disclaimers that apply to the journal pertain.
+ References
+ 1. Speer MC, Enterline DS, Mehltretter L, et al. Review article: chiari type I malformation with or without syringomyelia: Prevalence and genetics. Journal of Genetic Counseling. 2003;12(4):297–311. doi: 10.1023/A:1023948921381. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 2. Meadows J, Kraut M, Guarnieri M, Haroun RI, Carson BS. Asymptomatic Chiari Type I malformations identified on magnetic resonance imaging. J Neurosurg. 2000 Jun;92(6):920–926. doi: 10.3171/jns.2000.92.6.0920. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 3. Sekula RF, Jr, Jannetta PJ, Casey KF, Marchan EM, Sekula LK, McCrady CS. Dimensions of the posterior fossa in patients symptomatic for Chiari I malformation but without cerebellar tonsillar descent. Cerebrospinal Fluid Res. 2005 Dec 18;2:11. doi: 10.1186/1743-8454-2-11. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 4. Milhorat TH, Chou MW, Trinidad EM, et al. Chiari I malformation redefined: clinical and radiographic findings for 364 symptomatic patients. Neurosurgery. 1999 May;44(5):1005–1017. doi: 10.1097/00006123-199905000-00042. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 5. Elster AD, Chen MY. Chiari I malformations: clinical and radiologic reappraisal. Radiology. 1992 May;183(2):347–353. doi: 10.1148/radiology.183.2.1561334. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 6. Barkovich AJ, Wippold FJ, Sherman JL, Citrin CM. Significance of cerebellar tonsillar position on MR. AJNR Am J Neuroradiol. 1986 Sep-Oct;7(5):795–799. [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 7. Smith BW, Strahle J, Bapuraj JR, Muraszko KM, Garton HJ, Maher CO. Distribution of cerebellar tonsil position: implications for understanding Chiari malformation. J Neurosurg. 2013 Sep;119(3):812–819. doi: 10.3171/2013.5.JNS121825. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 8. McRae DL. Bony abnormalities in the region of the foramen magnum: correlation of the anatomic and neurologic findings. Acta radiol. 1953 Aug-Sep;40(2-3):335–354. doi: 10.3109/00016925309176595. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 9. Aboulezz AO, Sartor K, Geyer CA, Gado MH. Position of cerebellar tonsils in the normal population and in patients with Chiari malformation: a quantitative approach with MR imaging. J Comput Assist Tomogr. 1985 Nov-Dec;9(6):1033–1036. doi: 10.1097/00004728-198511000-00005. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 10. Alperin N, Loftus JR, Oliu CJ, et al. Magnetic resonance imaging measures of posterior cranial fossa morphology and cerebrospinal fluid physiology in Chiari malformation type I. Neurosurgery. 2014 Nov;75(5):515–522. doi: 10.1227/NEU.0000000000000507. discussion 522. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 11. Ellenbogen RG, Armonda RA, Shaw DW, Winn HR. Toward a rational treatment of Chiari I malformation and syringomyelia. Neurosurg Focus. 2000 Mar 15;8(3):E6. doi: 10.3171/foc.2000.8.3.6. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 12. Oldfield EH, Muraszko K, Shawker TH, Patronas NJ. Pathophysiology of syringomyelia associated with Chiari I malformation of the cerebellar tonsils. Implications for diagnosis and treatment. J Neurosurg. 1994 Jan;80(1):3–15. doi: 10.3171/jns.1994.80.1.0003. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 13. Martin BA. Syringomyelia Hydrodynamics: An In Vitro Study Based on In Vivo Measurements. Journal of Biomechanical Engineering. 2005;127(7):1110. doi: 10.1115/1.2073687. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 14. Martin BA, Labuda R, Royston TJ, Oshinski JN, Iskandar B, Loth F. Spinal subarachnoid space pressure measurements in an in vitro spinal stenosis model: implications on syringomyelia theories. J Biomech Eng. 2010 Nov;132(11):111007. doi: 10.1115/1.4000089. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 15. Battal B, Kocaoglu M, Bulakbasi N, Husmen G, Tuba Sanal H, Tayfun C. Cerebrospinal fluid flow imaging by using phase-contrast MR technique. Br J Radiol. 2011 Aug;84(1004):758–765. doi: 10.1259/bjr/66206791. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 16. Shaffer N, Martin B, Loth F. Cerebrospinal fluid hydrodynamics in type I Chiari malformation. Neurol Res. 2011 Apr;33(3):247–260. doi: 10.1179/016164111X12962202723805. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 17. Shaffer N, Martin BA, Rocque B, et al. Cerebrospinal Fluid Flow Impedance is Elevated in Type I Chiari Malformation. J Biomech Eng. 2013 Dec 1; doi: 10.1115/1.4026316. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 18. Taylor DG, Mastorakos P, Jane JA, Jr, Oldfield EH. Two distinct populations of Chiari I malformation based on presence or absence of posterior fossa crowdedness on magnetic resonance imaging. J Neurosurg. 2017 Jun;126(6):1934–1940. doi: 10.3171/2016.6.JNS152998. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 19. Pujol J, Roig C, Capdevila A, et al. Motion of the cerebellar tonsils in Chiari type I malformation studied by cine phase-contrast MRI. Neurology. 1995 Sep;45(9):1746–1753. doi: 10.1212/wnl.45.9.1746. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 20. Strahle J, Muraszko KM, Kapurch J, Bapuraj JR, Garton HJ, Maher CO. Chiari malformation Type I and syrinx in children undergoing magnetic resonance imaging. J Neurosurg Pediatr. 2011 Aug;8(2):205–213. doi: 10.3171/2011.5.PEDS1121. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 21. Tubbs RS, Lyerly MJ, Loukas M, Shoja MM, Oakes WJ. The pediatric Chiari I malformation: a review. Childs Nerv Syst. 2007 Nov;23(11):1239–1250. doi: 10.1007/s00381-007-0428-0. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 22. Zhang ZQ, Chen YQ, Chen YA, Wu X, Wang YB, Li XG. Chiari I malformation associated with syringomyelia: a retrospective study of 316 surgically treated patients. Spinal Cord. 2008 May;46(5):358–363. doi: 10.1038/sj.sc.3102141. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 23. Koyanagi I, Houkin K. Pathogenesis of syringomyelia associated with Chiari type 1 malformation: review of evidences and proposal of a new hypothesis. Neurosurg Rev. 2010 Jul;33(3):271–284. doi: 10.1007/s10143-010-0266-5. discussion 284-275. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 24. Novegno F, Caldarelli M, Massa A, et al. The natural history of the Chiari Type I anomaly. J Neurosurg Pediatr. 2008 Sep;2(3):179–187. doi: 10.3171/PED/2008/2/9/179. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 25. Hofmann E, Warmuth-Metz M, Bendszus M, Solymosi L. Phase-contrast MR imaging of the cervical CSF and spinal cord: volumetric motion analysis in patients with Chiari I malformation. AJNR Am J Neuroradiol. 2000 Jan;21(1):151–158. [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 26. Martin BA, Kalata W, Shaffer N, Fischer P, Luciano M, Loth F. Hydrodynamic and longitudinal impedance analysis of cerebrospinal fluid dynamics at the craniovertebral junction in type I Chiari malformation. PLoS One. 2013;8(10):e75335. doi: 10.1371/journal.pone.0075335. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 27. Wetjen NM, Heiss JD, Oldfield EH. Time course of syringomyelia resolution following decompression of Chiari malformation Type I. J Neurosurg Pediatr. 2008 Feb;1(2):118–123. doi: 10.3171/PED/2008/1/2/118. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 28. Quon JL, Grant RA, DiLuna ML. Multimodal evaluation of CSF dynamics following extradural decompression for Chiari malformation Type I. J Neurosurg Spine. 2015 Jun;22(6):622–630. doi: 10.3171/2014.10.SPINE1433. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 29. Litvack ZN, Lindsay RA, Selden NR. Dura splitting decompression for Chiari I malformation in pediatric patients: clinical outcomes, healthcare costs, and resource utilization. Neurosurgery. 2013 Jun;72(6):922–928. doi: 10.1227/NEU.0b013e31828ca1ed. discussion 928-929. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 30. Kennedy BC, Kelly KM, Phan MQ, et al. Outcomes after suboccipital decompression without dural opening in children with Chiari malformation Type I. J Neurosurg Pediatr. 2015 Aug;16(2):150–158. doi: 10.3171/2014.12.PEDS14487. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 31. McGirt MJ, Attenello FJ, Atiba A, et al. Symptom recurrence after suboccipital decompression for pediatric Chiari I malformation: analysis of 256 consecutive cases. Childs Nerv Syst. 2008 Nov;24(11):1333–1339. doi: 10.1007/s00381-008-0651-3. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 32. Mueller D, Oro JJ. Prospective analysis of self-perceived quality of life before and after posterior fossa decompression in 112 patients with Chiari malformation with or without syringomyelia. Neurosurg Focus. 2005 Feb 15;18(2):ECP2. doi: 10.3171/foc.2005.18.2.11. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 33. Pillay PK, Awad IA, Little JR, Hahn JF. Symptomatic Chiari malformation in adults: a new classification based on magnetic resonance imaging with clinical and prognostic significance. Neurosurgery. 1991 May;28(5):639–645. [ PubMed ] [ Google Scholar ]
+ 34. Aliaga L, Hekman KE, Yassari R, et al. A novel scoring system for assessing Chiari malformation type I treatment outcomes. Neurosurgery. 2012 Mar;70(3):656–664. doi: 10.1227/NEU.0b013e31823200a6. discussion 664-655. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 35. Klekamp J. Surgical treatment of Chiari I malformation--analysis of intraoperative findings, complications, and outcome for 371 foramen magnum decompressions. Neurosurgery. 2012 Aug;71(2):365–380. doi: 10.1227/NEU.0b013e31825c3426. discussion 380. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 36. Klekamp J, Batzdorf U, Samii M, Bothe HW. The surgical treatment of Chiari I malformation. Acta Neurochir (Wien) 1996;138(7):788–801. doi: 10.1007/BF01411256. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 37. Langridge B, Phillips E, Choi D. Chiari Malformation Type 1: A Systematic Review of Natural History and Conservative Management. World Neurosurg. 2017 Apr 20; doi: 10.1016/j.wneu.2017.04.082. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 38. Martin BA, Yiallourou TI, Pahlavian SH, et al. Inter-operator Reliability of Magnetic Resonance Image-Based Computational Fluid Dynamics Prediction of Cerebrospinal Fluid Motion in the Cervical Spine. Ann Biomed Eng. 2016 May;44(5):1524–1537. doi: 10.1007/s10439-015-1449-6. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 39. Alperin N, Sivaramakrishnan A, Lichtor T. Magnetic resonance imaging-based measurements of cerebrospinal fluid and blood flow as indicators of intracranial compliance in patients with Chiari malformation. J Neurosurg. 2005 Jul;103(1):46–52. doi: 10.3171/jns.2005.103.1.0046. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 40. Tubbs RS, Beckman J, Naftel RP, et al. Institutional experience with 500 cases of surgically treated pediatric Chiari malformation Type I. J Neurosurg Pediatr. 2011 Mar;7(3):248–256. doi: 10.3171/2010.12.PEDS10379. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 41. Ventureyra EC, Aziz HA, Vassilyadi M. The role of cine flow MRI in children with Chiari I malformation. Childs Nerv Syst. 2003 Feb;19(2):109–113. doi: 10.1007/s00381-002-0701-1. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 42. Pahlavian SH, Loth F, Luciano M, Oshinski J, Martin BA. Neural Tissue Motion Impacts Cerebrospinal Fluid Dynamics at the Cervical Medullary Junction: A Patient-Specific Moving-Boundary Computational Model. Ann Biomed Eng. 2015 Dec;43(12):2911–2923. doi: 10.1007/s10439-015-1355-y. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 43. Radmanesh A, Greenberg JK, Chatterjee A, Smyth MD, Limbrick DD, Jr, Sharma A. Tonsillar pulsatility before and after surgical decompression for children with Chiari malformation type 1: an application for true fast imaging with steady state precession. Neuroradiology. 2015 Apr;57(4):387–393. doi: 10.1007/s00234-014-1481-5. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 44. Cousins J, Haughton V. Motion of the cerebellar tonsils in the foramen magnum during the cardiac cycle. AJNR Am J Neuroradiol. 2009 Sep;30(8):1587–1588. doi: 10.3174/ajnr.A1507. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 45. Ucar M, Tokgoz N, Koc AM, et al. Assessment of 3D T2-weighted high-sampling-efficiency technique (SPACE) for detection of cerebellar tonsillar motion: new useful sign for Chiari I malformation. Clin Imaging. 2015 Jan-Feb;39(1):42–50. doi: 10.1016/j.clinimag.2014.08.011. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 46. Alves T, Ibrahim ES, Martin BA, et al. Principles, Techniques, and Clinical Applications of Phase-Contrast Magnetic Resonance Cerebrospinal Fluid Imaging. Neurographics. 2017;7(3):199–210. [ Google Scholar ]
+ 47. Yildiz S, Thyagaraj S, Jin N, et al. Quantifying the influence of respiration and cardiac pulsations on cerebrospinal fluid dynamics using real-time phase-contrast MRI. J Magn Reson Imaging. 2017 Feb 02; doi: 10.1002/jmri.25591. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 48. Yiallourou TI, Kroger JR, Stergiopulos N, Maintz D, Martin BA, Bunck AC. Comparison of 4D phase-contrast MRI flow measurements to computational fluid dynamics simulations of cerebrospinal fluid motion in the cervical spine. PLoS One. 2012;7(12):e52284. doi: 10.1371/journal.pone.0052284. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 49. du Boulay G, Shah SH, Currie JC, Logue V. The mechanism of hydromyelia in Chiari type 1 malformations. Br J Radiol. 1974 Sep;47(561):579–587. doi: 10.1259/0007-1285-47-561-579. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 50. Lane B, Kricheff II. Cerebrospinal fluid pulsations at myelography: a videodensitometric study. Radiology. 1974 Mar;110(3):579–587. doi: 10.1148/110.3.579. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 51. Smith BW, Strahle J, Bapuraj JR, Muraszko KM, Garton HJ, Maher CO. Distribution of cerebellar tonsil position: implications for understanding Chiari malformation. J Neurosurg. 2013 Jun 14; doi: 10.3171/2013.5.JNS121825. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 52. Leung V, Magnussen JS, Stoodley MA, Bilston LE. Cerebellar and hindbrain motion in Chiari malformation with and without syringomyelia. J Neurosurg Spine. 2016 Apr;24(4):546–555. doi: 10.3171/2015.8.SPINE15325. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 53. Kalata W. Numerical simulation of cerebrospinal fluid motion within the spinal canal. 2002 [ Google Scholar ]
+ 54. Bates D, Mächler M, Bolker B, Walker S. Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical Software. 2015;67(1) [ Google Scholar ]
+ 55. Halekoh U, Højsgaard S. A kenward-roger approximation and parametric bootstrap methods for tests in linear mixed models–the R package pbkrtest. Journal of Statistical Software. 2014;59(9):1–32. [ Google Scholar ]
+ 56. Klekamp J. The pathophysiology of syringomyelia - historical overview and current concept. Acta Neurochir (Wien) 2002 Jul;144(7):649–664. doi: 10.1007/s00701-002-0944-3. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 57. Gardner WJ, Angel J. The mechanism of syringomyelia and its surgical correction. Clin Neurosurg. 1958;6:131–140. doi: 10.1093/neurosurgery/6.cn_suppl_1.131. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 58. Williams B. The distending force in the production of communicating syringomyelia. Lancet. 1969 Sep 27;2(7622):696. doi: 10.1016/s0140-6736(69)90406-1. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 59. Williams B. Further Thoughts on the Valvular Action of the Arnold‐Chiari Malformation. Developmental Medicine & Child Neurology. 1971;13(s25):105–112. [ Google Scholar ]
+ 60. Buell TJ, Heiss JD, Oldfield EH. Pathogenesis and Cerebrospinal Fluid Hydrodynamics of the Chiari I Malformation. Neurosurg Clin N Am. 2015 Oct;26(4):495–499. doi: 10.1016/j.nec.2015.06.003. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 61. Sansur CA, Heiss JD, DeVroom HL, Eskioglu E, Ennis R, Oldfield EH. Pathophysiology of headache associated with cough in patients with Chiari I malformation. J Neurosurg. 2003 Mar;98(3):453–458. doi: 10.3171/jns.2003.98.3.0453. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 62. Williams B. Simultaneous cerebral and spinal fluid pressure recordings. 2. Cerebrospinal dissociation with lesions at the foramen magnum. Acta Neurochir (Wien) 1981;59(1-2):123–142. doi: 10.1007/BF01411198. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 63. Williams B. Simultaneous cerebral and spinal fluid pressure recordings. I. Technique, physiology, and normal results. Acta Neurochir (Wien) 1981;58(3-4):167–185. doi: 10.1007/BF01407124. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 64. Greitz D. Unraveling the riddle of syringomyelia. Neurosurg Rev. 2006 Oct;29(4):251–263. doi: 10.1007/s10143-006-0029-5. discussion 264. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 65. Terae S, Miyasaka K, Abe S, Abe H, Tashiro K. Increased pulsatile movement of the hindbrain in syringomyelia associated with the Chiari malformation: cine-MRI with presaturation bolus tracking. Neuroradiology. 1994;36(2):125–129. doi: 10.1007/BF00588077. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 66. Williams B. Further Thoughts on Valvular Action of Arnold-Chiari Malformation. Developmental Medicine and Child Neurology. 1971;(6):105. [ Google Scholar ]
+ 67. Franze K, Janmey PA, Guck J. Mechanics in neuronal development and repair. Annual review of biomedical engineering. 2013;15:227–251. doi: 10.1146/annurev-bioeng-071811-150045. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 68. Goriely A, Geers MG, Holzapfel GA, et al. Mechanics of the brain: perspectives, challenges, and opportunities. Biomech Model Mechanobiol. 2015 Oct;14(5):931–965. doi: 10.1007/s10237-015-0662-4. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 69. Lee L. Riding the wave of ependymal cilia: Genetic susceptibility to hydrocephalus in primary ciliary dyskinesia. J Neurosci Res. 2013 May 17; doi: 10.1002/jnr.23238. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 70. Eshetu T, Meoded A, Jallo GI, Carson BS, Huisman TA, Poretti A. Diffusion tensor imaging in pediatric Chiari type I malformation. Dev Med Child Neurol. 2014 Aug;56(8):742–748. doi: 10.1111/dmcn.12494. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 71. Kurtcan S, Alkan A, Yetis H, et al. Diffusion tensor imaging findings of the brainstem in subjects with tonsillar ectopia. Acta Neurol Belg. 2017 May 17; doi: 10.1007/s13760-017-0792-9. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 72. Krishna V, Sammartino F, Yee P, et al. Diffusion tensor imaging assessment of microstructural brainstem integrity in Chiari malformation Type I. J Neurosurg. 2016 Nov;125(5):1112–1119. doi: 10.3171/2015.9.JNS151196. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 73. Kumar M, Rathore RK, Srivastava A, Yadav SK, Behari S, Gupta RK. Correlation of diffusion tensor imaging metrics with neurocognitive function in Chiari I malformation. World Neurosurg Jul- 2011 Aug;76(1-2):189–194. doi: 10.1016/j.wneu.2011.02.022. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 74. Mary Deciding What Is Right For Your Child. 2005 http://www.conquerchiari.org/subsonly/Volume3/Issue3(5)/PerspectivesNoSurgery3(5).asp . 
+ 75. Tubbs RS, Iskandar BJ, Bartolucci AA, Oakes WJ. A critical analysis of the Chiari 1.5 malformation. J Neurosurg. 2004 Nov;101(2 Suppl):179–183. doi: 10.3171/ped.2004.101.2.0179. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 76. Aranda L. No More Hospitals, No More Surgeries. 2005 http://www.conquerchiari.org/subsonly/Volume3/Issue3(5)/PerspectivesNoSurgery3(5).asp . 
+ 77. Royo-Salvador MB, Sole-Llenas J, Domenech JM, Gonzalez-Adrio R. Results of the section of the filum terminale in 20 patients with syringomyelia, scoliosis and Chiari malformation. Acta Neurochir (Wien) 2005 May;147(5):515–523. doi: 10.1007/s00701-005-0482-y. discussion 523. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 78. Schijman E, Steinbok P. International survey on the management of Chiari I malformation and syringomyelia. Childs Nerv Syst. 2004 May;20(5):341–348. doi: 10.1007/s00381-003-0882-2. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 79. Matsuoka T, Ahlberg PE, Kessaris N, et al. Neural crest origins of the neck and shoulder. Nature. 2005 Jul 21;436(7049):347–355. doi: 10.1038/nature03837. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 80. Labuda R, Loth F, Slavin K. National Institutes of Health Chiari Research Conference: state of the research and new directions. Neurol Res. 2011 Apr;33(3):227–231. doi: 10.1179/016164111X12962202723689. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 81. Tubbs RS, Bailey M, Barrow WC, Loukas M, Shoja MM, Oakes WJ. Morphometric analysis of the craniocervical juncture in children with Chiari I malformation and concomitant syringobulbia. Childs Nerv Syst. 2009 Jun;25(6):689–692. doi: 10.1007/s00381-009-0810-1. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 82. Navarro R, Olavarria G, Seshadri R, Gonzales-Portillo G, McLone DG, Tomita T. Surgical results of posterior fossa decompression for patients with Chiari I malformation. Childs Nerv Syst. 2004 May;20(5):349–356. doi: 10.1007/s00381-003-0883-1. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 83. Strahle J, Muraszko KM, Kapurch J, Bapuraj JR, Garton HJ, Maher CO. Natural history of Chiari malformation Type I following decision for conservative treatment. J Neurosurg Pediatr. 2011 Aug;8(2):214–221. doi: 10.3171/2011.5.PEDS1122. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 84. Mutchnick IS, Janjua RM, Moeller K, Moriarty TM. Decompression of Chiari malformation with and without duraplasty: morbidity versus recurrence Clinical article. Journal of Neurosurgery-Pediatrics. 2010 May;5(5):474–478. doi: 10.3171/2010.1.PEDS09218. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 85. Mutchnick IS, Janjua RM, Moeller K, Moriarty TM. Decompression of Chiari malformation with and without duraplasty: morbidity versus recurrence. J Neurosurg Pediatr. 2010 May;5(5):474–478. doi: 10.3171/2010.1.PEDS09218. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 86. Labuda R. Chiari Surgeries Becoming More Common… [web page] 2009 http://www.conquerchiari.org/subsonly/Volume3/Issue3(5)/PerspectivesNoSurgery3(5).asp . 
+ 87. Tubbs RS, McGirt MJ, Oakes WJ. Surgical experience in 130 pediatric patients with Chiari I malformations. J Neurosurg. 2003 Aug;99(2):291–296. doi: 10.3171/jns.2003.99.2.0291. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 88. 111th Congress HoR Departments of Labor, Health, and Human Services, and Education, and Related Agencies Appropriations Bill, 2010 (H R 3293) Vol HR 111-220. Vol. 120 Washington D.C., U.S.A.: U.S. Government Printing Office; 2009. [ Google Scholar ]
+ Associated Data
+ This section collects any data citations, data availability statements, or supplementary materials included in this article. 
+ Supplementary Materials
+ Video 1 Video 1. Axial (left) and sagittal (right) phase-contrast MR scans of a symptomatic CM-I patient with 15.8mm tonsillar decent and 0.75mm axial spinal cord displacement across the cardiac cycle.
+ Download video file (6.6MB, mov) 
+ ACTIONS
+ View on publisher site 
+ PDF (498.4 KB) 
+ Cite 
+ Collections 
+ Permalink 
+ PERMALINK
+ Copy 
+ RESOURCES
+ Similar articles
+ Cited by other articles
+ Links to NCBI Databases
+ Cite
+ Copy 
+ Download .nbib 
+ .nbib 
+ Format: 
+ AMA
+ APA
+ MLA
+ NLM
+ Add to Collections
+ Create a new collection 
+ Add to an existing collection 
+ Name your collection
+ * 
+ Choose a collection
+ Unable to load your collection due to an error
+ Please try again 
+ Add
+ Cancel
+ Follow NCBI
+ NCBI on X (formerly known as Twitter) 
+ NCBI on Facebook 
+ NCBI on LinkedIn 
+ NCBI on GitHub 
+ NCBI RSS feed 
+ Connect with NLM
+ NLM on X (formerly known as Twitter) 
+ NLM on Facebook 
+ NLM on YouTube 
+ National Library of Medicine
+ 8600 Rockville Pike
+ Bethesda, MD 20894 
+ Web Policies
+ FOIA
+ HHS Vulnerability Disclosure
+ Help
+ Accessibility
+ Careers
+ NLM
+ NIH
+ HHS
+ USA.gov
+ Back to Top 

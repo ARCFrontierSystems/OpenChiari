@@ -1,0 +1,187 @@
+
+ Controversies in Chiari I malformations - PMC
+ Skip to main content
+ An official website of the United States government
+ Here's how you know 
+ Here's how you know 
+ Official websites use .gov 
+ A
+ .gov website belongs to an official
+ government organization in the United States.
+ Secure .gov websites use HTTPS 
+ A lock (
+ Lock 
+ Locked padlock icon
+ ) or https:// means you've safely
+ connected to the .gov website. Share sensitive
+ information only on official, secure websites.
+ Search
+ Log in 
+ Dashboard
+ Publications
+ Account settings
+ Log out
+ Search…
+ Search NCBI
+ Primary site navigation
+ Search
+ Logged in as:
+ Dashboard
+ Publications
+ Account settings
+ Log in
+ Search PMC Full-Text Archive 
+ Search in PMC 
+ Journal List
+ User Guide
+ PERMALINK 
+ Copy 
+ As a library, NLM provides access to scientific literature. Inclusion in an NLM database does not imply endorsement of, or agreement with,
+ the contents by NLM or the National Institutes of Health. 
+ Learn more:
+ PMC Disclaimer 
+ |
+ PMC Copyright Notice
+ Surg Neurol Int . 2012 Jul 17;3(Suppl 3):S232–S237. doi: 10.4103/2152-7806.98580 
+ Search in PMC 
+ Search in PubMed 
+ View in NLM Catalog 
+ Add to search 
+ Controversies in Chiari I malformations 
+ Jamie Baisden 
+ Jamie Baisden 
+ 1 Department of Neurosurgery, The Medical College of Wisconsin, Milwaukee, WI, USA 
+ Find articles by Jamie Baisden 
+ 1, * 
+ Author information 
+ Article notes 
+ Copyright and License information 
+ 1 Department of Neurosurgery, The Medical College of Wisconsin, Milwaukee, WI, USA 
+ * Corresponding author 
+ Received 2012 May 23; Accepted 2012 May 23; Collection date 2012. 
+ Copyright: © 2012 Baisden J. 
+ This is an open-access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited. 
+ PMC Copyright notice 
+ PMCID: PMC3422094  PMID: 22905329 
+ Abstract 
+ Background: 
+ The diagnosis and management of Chiari I malformations (CMI) remains controversial, particularly since it is often an incidental finding on cervical MR scans performed for neck pain and/or headaches. Recently, some surgeons “over-operated” on asymptomatic patients with Chiari I malformations, or even on those without the requisite radiographic diagnostic features for Chiari I malformations: unfortunately, only a subset were admonished for indiscriminate surgery. Nevertheless, when this hindbrain malformation is truly symptomatic, contributing to impaired cerebrospinal fluid (CSF) circulation, various valid surgical management strategies may be adopted. Methods: 
+ This review focuses on the current literature regarding the clinical presentation, diagnosis, and surgical management of Chiari I malformation. Variations in the surgical technique are also presented and critiqued. Results: 
+ The recommended treatment for Chiari I malformations I consists of decompressive suboccipital craniectomy and duroplasty when abnormal cine-flow MRI is observed preoperatively and blockage of CSF flow persists intraoperatively despite bony decompression. Conclusions: 
+ Controversy continues regarding the optimal surgical technique to address Chiari malformations I. Proper diagnostic studies and patient selection are needed to optimize patient outcomes, while avoiding unnecessary surgical procedures. Keywords: Chiari malformation I, decompression, duroplasty, operative controversy, suboccipital craniectomy, surgical indications INTRODUCTION 
+ The clinical presentation of Chiari I malformation (CMI) patients is often highly variable. They often present with a multitude of seemingly unrelated complaints, and frequently have normal neurological examinations. Chiari I malformation is being diagnosed more frequently as an incidental finding on cervical MRIs performed for neck pain, or cranial MRIs obtained in the course of a workup for headache. 
+ Recently, some surgeons have “over-operated” on asymptomatic patients with CMI, while others have operated on CMI without meeting the requisite radiographic criteria. Unfortunately, only a subset of these spinal surgeons have been admonished for indiscriminate Chiari I surgery. 
+ Nevertheless, the majority of spine surgeon operate on these hindbrain malformations when they are truly symptomatic, e.g. contributing to impaired cerebrospinal fluid (CSF) circulation by crowding the foramen magnum. Here, we review and focus on the various valid controversial surgical management strategies that may be adopted to treat CMI [ Table 1 ]. 
+ Table 1. 
+ Summary Table for Chiari I Malformations 
+ Open in a new tab HETEROGENEITY OF CHIARI I MALFORMATIONS 
+ The Chiari malformation is a heterogeneous group of disorders characterized by herniation of the hindbrain into the foramen magnum. In CMI as the cerebellar tonsils encroach on the brain stem at the craniocervical junction, CSF flow is decreased and diverted along alternate pathways. This change in CSF flow dynamics contributes to the various clinical complaints characteristic for CMI. SYMPTOMS TYPICAL OF CHIARI I MALFORMATIONS I 
+ Clinical suspicion that CMI exists is key, since patients’ clinical complaints vary and fluctuate, and are often accompanied by a paucity of physical findings. CMI patients often present as young adults with a multiplicity of often vague complaints: headache, neck pain, generalized discomfort with nausea, vomiting, dizziness, fluctuating hearing loss, visual disturbances, paresthesias, weakness, fatigue, and gait difficulties. The physical examination may change from office visit to office visit, revealing on some occasions no focal abnormalities, to at other times, demonstrating nystagmus, cerebellar signs, or frank myelopathy. CHIARI I MALFORMATIONS WITH SYRINGOMYELIA 
+ Although CMI is not considered a degenerative condition, patients who develop accompanying syringomyelia may show progressive neurological deterioration. Of critical import, syringomyelia, seen in roughly 65–80% of CMI patients, typically responds with decreased syrinx size following effective surgical management of the CMI.[ 14 , 15 , 24 ] MR: DIAGNOSTIC TEST OF CHOICE FOR CHIARI I MALFORMATIONS 
+ Although the MR scan documenting cerebellar tonsillar herniation 5 mm below the foramen magnum typically raises the suspicion of CMI, CMI still remains a “clinical diagnosis”. MR GRADING SCALES FOR CHIARI I MALFORMATIONS 
+ The normal location of the cerebellar tonsils on a sagittal MR scan is defined as extending from 8 mm above to 2–3 mm below the foramen magnum. For patients with CMI, the cerebellar tonsils descend/herniate through the craniocervical junction. In symptomatic adults, tonsillar herniation is suspected/defined as 3–5 mm below the foramen magnum. As cerebellar tonsils are thought to ascend with progressive age, most patients present as young or middle-age adults.[ 17 ] AXIAL T2 MR DIAGNOSIS OF CMI 
+ CMI can be detected on cranial MRI or cervical MRI scans as long as the craniocervical junction is adequately visualized. The crowding of the medulla and upper cervical cord secondary to the descent of the cerebellar tonsils is best identified on axial views of T 2 W (weighted) MRI scans obtained through the level of the foramen magnum. CINE-PHASE CONTRAST MR FOR DIAGNOSING CMI 
+ Cine-phase-contrast MRI is a useful adjunct to determine CSF flow dynamics at the craniocervical junction in CMI patients, and may be utilized to decide whether posterior fossa decompression is warranted.[ 1 , 2 , 19 , 25 ] As this test demonstrates flow pattern abnormalities both dorsally and ventrally, it further facilitates appropriate operative planning (e.g. the optimal surgical approach). CHIARI I MALFORMATIONS: PRIMARY PATHOLOGY IS CSF FLOW OBSTRUCTION 
+ The primary pathology in CMI is attributed to CSF flow obstruction, rather than the absolute location of tonsillar descent below the foramen magnum. The primary goal of surgery, therefore, is to restore normal CSF flow dynamics at the craniocervical junction, and hence, decrease the signs/symptoms attributed to CMI. Although successful CMI surgery frequently does not resolve all of the clinical complaints, it does prevent the subsequent development and/or progression of syringomyelia. Hence, restoration of normal CSF flow both dorsally and ventrally on CMI patients as documented utilizing cine-flow MRI scans serves to improve clinical outcomes following appropriate surgical intervention.[ 15 , 16 ] INTRAOPERATIVE ULTRASOUND FOR CMI SURGERY 
+ Intraoperative ultrasound helps determine whether the dura and/or the arachnoid should be opened following posterior fossa/upper cervical decompression. The value of intraoperative ultrasound stems from its ability to visualize in “real time” the pistoning of the cerebellar tonsils, and determine whether they have been adequately decompressed and/or warrant duroplasty.[ 4 , 18 ] CONTROVERSIES REGARDING SURGICAL TECHNIQUES FOR CHIARI I MALFORMATIONS WITHOUT HYDROCEPHALUS 
+ The surgical treatment of CMI without hydrocephalus remains controversial. Mainstays of surgical treatment have included suboccipital craniectomy with or without C 1 /C 2 laminectomy or suboccipital decompressions (SOD). In addition, SOD may be performed with or without duroplasty, with or without the opening of the arachnoidal membrane, lysis of intradural adhesions, partial tonsillar resection, plugging of the obex, leaving the dura open, and/or posterior fossa reconstruction with cranioplasty. Clinical improvement, noted in the majority of patients treated surgically (83–100%), has been observed in conjunction with complication rates varying from 0 to 16.7%.[ 10 ] Improvement or reduction of the syringomyelia was also seen in 55–100% of patients.[ 10 ] DURAL OR ARACHNOID OPENING FOR PERFORMING CHIARI I MALFORMATIONS 
+ Each surgical modification for CMI increases the potential for improved surgical outcomes, but also subjects patients to certain additional surgical risks. In the Durham and Fjeld-Olenec meta-analysis, there was no statistical difference with respect to symptom improvement or syringomyelia (e.g. clinical outcomes) between posterior fossa decompression alone versus posterior fossa decompression with duroplasty.[ 6 ] However, although patients undergoing duroplasty were less likely to require reoperation for persistent symptoms, they were more prone to CSF-related complications. When Hankinson et al . performed an evidence-based review of pediatric patients with CMI and syringomyelia, they noted there were no Level I or IIa evidence-based studies comparing posterior fossa decompression to posterior fossa decompression with duroplasty.[ 10 ] DECOMPRESSION AND DURAL OPENING WITH DUROPLASTY FOR CHIARI I MALFORMATIONS WITHOUT SYRINGOMYELIA 
+ In Sindou and Gimbert's meta-analysis of 12 studies involving adult patients with CMI without syringomyelia, they noted an 84% clinical improvement rate in patients undergoing foramen magnum decompression accompanied by dural opening and/or duroplasty, but with preservation of the arachnoid (no superiority with arachnoid opening was identified) to enlarge the cisterna magna.[ 23 ] Clinical improvement was also noted for foramen magnum decompression, dural opening, arachnoid opening, and duroplasty; however, a higher complication rate was observed when the arachnoid was opened.[ 23 ] DECOMPRESSION AND DURAL OPENING WITH DUROPLASTY FOR CHIARI I MALFORMATIONS WITH SYRINGOMYELIA 
+ In CMI patients with syringomyelia, patients undergoing foramen magnum decompression with incision in the outer layer of dura or complete dural opening followed by duroplasty were significantly better ( P < 0.05) than those patients having foramen magnum decompression with dural and arachnoid opening but without duroplasty.[ 23 ] CRANIECTOMY SIZE FOR POSTERIOR FOSSA DECOMPRESSION FOR CHIARI I MALFORMATIONS 
+ The size of the decompressive craniectomy utilized to treat CMI is also controversial. Klekamp et al . compared small versus large craniotomies both with dural and arachnoid opening and duroplasty.[ 12 ] They determined that for the small craniectomy group, the syrinx size either decreased (87%) or was stable (11%). Alternatively, for the large craniectomy group the syrinx size either decreased (72%), remained stable (6%), or increased in size (22%).[ 12 ] Zhang et al . noted, in the short-term postoperative period (1–4 weeks), that the larger posterior fossa decompression appeared more effective than the smaller local decompressions ( P < 0.05).[ 27 ] However, for the larger PFD there was no significant difference between short- and long-term efficacy (6 months to 11 years), while the smaller PF craniectomy group showed clearly improved long-term efficacy ( P < 0.05).[ 20 ] They also determined more radiologic improvement in syringomyelia ( P < 0.05) and fewer postoperative complications in the smaller PFD versus those undergoing extended PFD ( P < 0.05).[ 27 ] RISKS OF CEREBROSPINAL FLUID FISTULAS (LEAKS) AFTER DUROPLASTY FOR CHIARI I MALFORMATIONS 
+ Following a posterior fossa decompression for CMI, the application of an expansile duroplasty is thought to decrease foramen magnum crowding, while facilitating the restoration of more normal CSF flow dynamics. However, the failure to prevent a CSF leak following duroplasty closure results in the most common complication; pseudomeningocele formation.[ 1 ] This results in incisional CSF leaks, chemical/aseptic, and bacterial meningitis, the development of hydrocephalus, and the potential for wound dehiscence. DUROPLASTY GRAFT MATERIAL UTILIZED FOR CHIARI I MALFORMATIONS 
+ Duroplasty following posterior fossa decompression with durotomy for CMI includes multiple biologic substitutes; these include autologous pericranial grafts, various cadaveric substitutes (dura, pericardium, and fascia lata), synthetic dural substitutes (e.g. silastic, gortex, and polyglactin mesh[ 18 ]), combined with collagen matrix (microfibrillar collagen).[ 1 ] OPTIMAL SUTURES FOR DUROPLASTY/DURAL REPAIR FOR CHIARI I MALFORMATIONS 
+ The optimal suture material for sewing in dural grafts is 7-0 Gortex suture (W.L. Gore Associates, Elkton, MD, USA). The repair should be performed utilizing interrupted sutures, as running stitches may loosen or pull out. Furthermore, the advantage of the 7-0 Gortex suture is that the needle is smaller than the suture itself; this means that the hole created by the needle is filled with the suture itself limiting the hole as a potential source of leakage. DURAL SUBSTITUTES POSE SEVERAL MAJOR RISKS WHEN UTILIZED IN CHIARI I MALFORMATIONS SURGERY 
+ Several major risks accompany the utilization of dural substitutes applied following durotomy for CMI surgery. When the Pediatric Section of the American Association of Neurologic Surgeons published the results of a survey on the treatment of CMI and syringomyelia, they concluded that autologous pericranium was the leading choice for duroplasty.[ 11 , 17 ] Alternatively, the use of cadaveric dura raised concerns for introducing Crentzfeldt–Jakob disease, subarachnoid scarring (inflammatory adhesions), and failure to restore more normal CSF dynamics. Furthermore, biologic and synthetic grafts increased the potential for recurrent Chiari malformation due to the extent of accompanying archnoidal adhesions. DURAL SEALANTS UTILIZED FOR CHIARI I MALFORMATIONS 
+ Sealants continue to evolve from onlay products such as cellulose strips, collagen sheets (microfibrillar collagen), fibrin glue, and fibrin sealants. Two fibrin glues, DuraSeal and BioGlue, are not FDA approved for this indication in the United States.[ 3 ] Although these two products are easy to use and are effective dural sealants, BioGlue is reported to be directly neurotoxic in its own insert, while DuraSeal has been associated with significant “mass effect” contributing to neurological deficits (e.g., two case studies of quadriplegia when used in the cervical spine, and paraplegia in the lumbar spine).[ 8 ] 
+ Alternatively, the fibrin sealant Tisseel (Baxter, Deerfield, IL, USA), although not FDA approved for use in the posterior fossa, has been safely utilized, although “off-label”, for decades in multiple clinical cranial and spinal studies. Alternatively, the second fibrin sealant, Evicel ( Ethicon, Somerville, NJ, USA), although also not FDA approved for this use, has predominantly been reviewed in the animal literature (rats, rabbits) rather than in clinical studies.[ 8 ] MICROFIBRILLAR COLLAGEN: AN ADJUNCT TO DURAL SEALANTS/CLOSURE FOLLOWING CMI SURGERY 
+ Zerris et al . performed a canine duroplasty study using three processed collagen dural substitutes. They determined that Dura-Guard, Duragen, and Durepair were all safe and effective in healing surgically created defects in the dura.[ 26 ] Danish and Samdani using clinical human trials of acellular human dermis (AlloDerm) and synthetic collagen matrix (Duragen) have shown that both products are suitable alternatives for duroplasty, with both demonstrating comparable complication rates.[ 5 ] However, Duragen had the advantage of significantly shorter operative times.[ 5 ] SHUNTING FOR SYRINGOMYELIA WITH CHIARI I MALFORMATIONS IN DISFAVOR 
+ Shunting of the obex and primary shunting for syringomyelia associated with CMI are now basically in disfavor.[ 21 ] Multiple studies have documented decreased syrinx size following proper posterior fossa decompressions; this averts the risk of neurologic injury potentially associated with either type of shunting.[ 6 , 10 , 13 , 16 ] In cases where syringomyelia persists, or is found to increase despite adequate posterior fossa decompression, syrinx to subarachnoid space, syringopleural, or syringoperitoneal shunting may still be considered. CRANIOPLASTY FOLLOWING POSTERIOR FOSSA DECOMPRESSION FOR CHIARI I MALFORMATIONS 
+ Expansive cranioplasty after posterior fossa decompression may provide protection, cosmesis, and potentially decreases headache.[ 18 ] Oro has advocated reconstruction of the skull by expansive cranioplasty to allow for a rigid surface for attachment of the suboccipital musculature to reduce the muscle-dural scarring.[ 18 ] Further studies are needed to determine the efficacy of cranioplasty. PATIENT SELECTION FOR CHIARI I MALFORMATIONS SURGERY 
+ The choice of patients for CMI surgery should include symptomatic individuals who demonstrate an abnormal MRI with foramen magnum crowding, an abnormal cine-flow MRI, or CMI with an associate syrinx. Operating on any CMI patient with low lying cerebellar tonsils in the absence of an abnormal cine-flow MRI will potentially result in an “unnecessary” operation. Multiple patients have been operated on for only headache and marginally low lying cerebellar tonsils, only to have their clinical symptoms persist postoperatively. Likewise multiple surgeons have been accused of performing “unnecessary” CMI surgeries. Some have even had their licenses suspended, particularly when clinical indications were minimal, or when operating on incidental but asymptomatic MRI findings (e.g. of CMI) discovered in the course of evaluating cervical radiculopathy.[ 9 , 7 , 22 ] SUMMARY 
+ Multiple controversies in the treatment of CMI still persist. Cine flow MRI appears to be a useful tool both preoperatively and postoperatively to determine the adequacy of posterior fossa decompression. The adjunctive utilization of intraoperative ultrasound may help further determine the need for dural opening and duroplasty. The bony extent of the cranial decompression, the need for duroplasty, the choice for the dural substitute material and/or dural sealant used, and the need for an expansile cranioplasty, all remain controversial. Footnotes 
+ Disclaimer: The author of this paper has received no outside funding and has nothing to disclose. 
+ Available FREE in open access from: http://www.surgicalneurologyint.com/text.asp?2012/3/4/232/98580 
+ REFERENCES 
+ 1. Battal B, Kocaoglu M, Bulakbasi N, Husmen G, Tuba Sanal H, Tayfun C. Cerebrospinal fluid flow imaging by using phase-contrast MR technique. Br J Radiol. 2011;84:758–65. doi: 10.1259/bjr/66206791. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+ 2. Caldarelli M, Di Rocco C. Diagnosis of Chiari I malformation and related syringomyelia radiological and neurophysiological studies. Childs Nerv Syst. 2004;20:332–5. doi: 10.1007/s00381-003-0880-4. [ DOI ] [ PubMed ] [ Google Scholar ] 
+ 3. CryoLife (Life Restoring Technologies): BioGlue® Surgical Adhesive Syringe, Instructions for Use. 
+ 4. Cui L-G, Jiang L, Zhang H-B, Liu B, Wang J-R, Jia J-W, Chen W. Monitoring of cerebrospinal fluid flow by intraoperative ultrasound in patients with Chiari I malformation. Clin Neurol Neurosurg. 2011;113:173–6. doi: 10.1016/j.clineuro.2010.10.011. [ DOI ] [ PubMed ] [ Google Scholar ] 
+ 5. Danish SF, Samdani A, Hanna A, Storm P, Sutton L. Experience with acellular human dura and bovine collagen matrix for duroplasty after posterior fossa decompression for Chiari malformations. J Neurosurg (1Suppl Pediatrics) 2006;104:16–20. doi: 10.3171/ped.2006.104.1.16. [ DOI ] [ PubMed ] [ Google Scholar ] 
+ 6. Durham SR, Fjeld-Olenec K. Comparison of posterior fossa decompression with and without duraplasty for the surgical treatment of Chiari malformation Type I in pediatric patients: A meta-analysis. J Neurosurg Pediatr. 2008;2:42–9. doi: 10.3171/PED/2008/2/7/042. [ DOI ] [ PubMed ] [ Google Scholar ] 
+ 7. Eltman F. Calif Expert Backs L.I. Brain Surgery Unit. Article in “Long Island Press”. 2010 Apr 27; [ Google Scholar ] 
+ 8. Epstein NE. Dural repair with four spinal sealants: Focused review of the manufacturers’ inserts and the current literature. Spine J. 2010;10:1065–8. doi: 10.1016/j.spinee.2010.09.017. [ DOI ] [ PubMed ] [ Google Scholar ] 
+ 9. Evans H. Independent investigation starts on 2 North Shore no-show brain doctors. Article in “Daily News-New York”. 2009 Jun 10; [ Google Scholar ] 
+ 10. Hankinson T, Shane Tubbs R, Wellons JC. Duraplasty or not? An evidence-based review of the pediatric Chiari I malformation. Childs Nerv Syst. 2011;27:35–40. doi: 10.1007/s00381-010-1295-7. [ DOI ] [ PubMed ] [ Google Scholar ] 
+ 11. Haroun RI, Guarnieri M, Meadow JJ, Kraut M, Carson BS. Current opinions for the treatment of syringomyelia and Chiari malformations: Survey of the Pediatric Section of the American Association of Neurological Surgeons. Pediatr Neurosurg. 2000;33:311–7. doi: 10.1159/000055977. [ DOI ] [ PubMed ] [ Google Scholar ] 
+ 12. Klekamp J, Batzdorf U, Samii M, Bothe HW. The surgical treatment of Chiari I malformation. Acta Neurochir. 1996;138:788–801. doi: 10.1007/BF01411256. [ DOI ] [ PubMed ] [ Google Scholar ] 
+ 13. Lee HS, Lee SH, Kim ES, Kim JS, Lee JI, Shin HJ, Eoh W. Surgical results of arachnoid-preserving posterior fossa decompression for Chiari I malformation with associated syringomyelia. J Clin Neurosci. 2012;19:557–60. doi: 10.1016/j.jocn.2011.06.034. [ DOI ] [ PubMed ] [ Google Scholar ] 
+ 14. Mauer UM, Gottschalk A, Mueller C, Weselek L, Kunz U, Schulz C. Standard and cardiac-gated phase-contrast magnetic resonance imaging in the clinical course of patients with Chiari malformation Type I. Neurosurg Focus. 2011;3:E5. doi: 10.3171/2011.7.FOCUS11105. [ DOI ] [ PubMed ] [ Google Scholar ] 
+ 15. McGirt MJ, Atiba A, Attenello FJ, Wasserman BA, Datoo G, Gathinji M, et al. Correlation of hindbrain CSF flow and outcome after surgical decompression for Chiari I malformation. Childs Nerv Syst. 2008;24:833–40. doi: 10.1007/s00381-007-0569-1. [ DOI ] [ PubMed ] [ Google Scholar ] 
+ 16. Menezes AH. Craniovertebral junction abnormalities with hindbrain herniation and syringomyelia: Regression of syringomyelia after removal of ventral craniovertebral junction compression. Clinical article. J Neurosurg. 2012;116:301–9. doi: 10.3171/2011.9.JNS11386. [ DOI ] [ PubMed ] [ Google Scholar ] 
+ 17. Mikulis DJ, Diaz O, Egglin TK, Sanchez R. Variance of the position of the cerebellar tonsils with age: Preliminary report. Radiology. 1992;183:725–8. doi: 10.1148/radiology.183.3.1584927. [ DOI ] [ PubMed ] [ Google Scholar ] 
+ 18. Oró JJ, Mueller DM. Posterioir fossa decompression and reconstruction in adolescents and adults with the Chiari I malformation. Neurol Res. 2011;33:261–71. doi: 10.1179/016164111X12962202723841. [ DOI ] [ PubMed ] [ Google Scholar ] 
+ 19. Panigrahi M, Reddy BP, Reddy AK, Reddy JJ. CSF flow study in Chiari I malformation. Childs Nerv Syst. 2004;20:336–40. doi: 10.1007/s00381-003-0881-3. [ DOI ] [ PubMed ] [ Google Scholar ] 
+ 20. Parker SR, Harris P, Cummings TJ, George T, Fuchs H, Grant G. Complications following decompression of Chiari malformation Type I in children: Dural graft or sealant? J Neurosurg Pediatr. 2011;8:177–83. doi: 10.3171/2011.5.PEDS10362. [ DOI ] [ PubMed ] [ Google Scholar ] 
+ 21. Rocque BG, George TM, Kestle J, Iskandar BJ. Treatment practices for Chiari malformation Type I with syringomyelia: Results of a survey of the American Society of Pediatric Neurosurgeons. J Neurosurg Pediatr. 2011;8:430–7. doi: 10.3171/2011.8.PEDS10427. [ DOI ] [ PubMed ] [ Google Scholar ] 
+ 22. Sandford J. Controversial neurosurgeon's license suspended again. Article in “Mountain Xpress”. 2009 Feb 26; [ Google Scholar ] 
+ 23. Sindou M, Gimbert E. Decompression for Chiari type I-malformation (with or without syringomyelia) by extreme lateral foramen magnum opening and expansile duraplasty with arachnoid preservation: Comparison with other technical modalities (Literature review) Adv Tech Stand Neurosurg. 2009;34:85–110. doi: 10.1007/978-3-211-78741-0_4. [ DOI ] [ PubMed ] [ Google Scholar ] 
+ 24. Speer MC, Enterline DS, Mehtretter L, Hammock P, Joseph J, Dickerson M, et al. Chiari Type I malformation with or without syringomyelia: Prevalence and genetics. J Genet Couns. 2003;12:297–311. doi: 10.1023/A:1023948921381. [ DOI ] [ PubMed ] [ Google Scholar ] 
+ 25. Ventureyra ECG, Aziz HA, Vassilyadi M. The role of cine flow MRI in children with Chiari I malformation. Childs Nerv Syst. 2003;19:109–13. doi: 10.1007/s00381-002-0701-1. [ DOI ] [ PubMed ] [ Google Scholar ] 
+ 26. Zerris VA, James KS, Roberts JB, Bell E, Heilman CB. Repair of the dura mater with processed collagen devices. J Biomed Mater Res B Appl Biomater. 2007;83B:580–8. doi: 10.1002/jbm.b.30831. [ DOI ] [ PubMed ] [ Google Scholar ] 
+ 27. Zhang Y, Zhang N, Qiu H, Zhou J, Li P, Ren M, et al. An efficacy analysis of posterior fossa decompression techniques in the treatment of Chiari malformation with associated syringomyelia. J Clin Neurosci. 2011;18:1346–9. doi: 10.1016/j.jocn.2011.01.026. [ DOI ] [ PubMed ] [ Google Scholar ] 
+ Articles from Surgical Neurology International are provided here courtesy of Scientific Scholar 
+ ACTIONS 
+ View on publisher site 
+ PDF (468.1 KB) 
+ Cite 
+ Collections 
+ Permalink 
+ PERMALINK 
+ Copy 
+ RESOURCES 
+ Similar articles
+ Cited by other articles
+ Links to NCBI Databases
+ Cite 
+ Copy 
+ Download .nbib 
+ .nbib 
+ Format: 
+ AMA
+ APA
+ MLA
+ NLM
+ Add to Collections 
+ Create a new collection 
+ Add to an existing collection 
+ Name your collection
+ * 
+ Choose a collection
+ Unable to load your collection due to an error 
+ Please try again 
+ Add
+ Cancel
+ Follow NCBI
+ NCBI on X (formerly known as Twitter) 
+ NCBI on Facebook 
+ NCBI on LinkedIn 
+ NCBI on GitHub 
+ NCBI RSS feed 
+ Connect with NLM
+ NLM on X (formerly known as Twitter) 
+ NLM on Facebook 
+ NLM on YouTube 
+ National Library of Medicine
+ 8600 Rockville Pike Bethesda, MD 20894 
+ Web Policies
+ FOIA
+ HHS Vulnerability Disclosure
+ Help
+ Accessibility
+ Careers
+ NLM
+ NIH
+ HHS
+ USA.gov
+ Back to Top 

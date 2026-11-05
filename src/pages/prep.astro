@@ -18,6 +18,7 @@ const credit = `${f.modelBefore.replace(/^\.\s*/, '')} ${f.zAnatomy} ${f.modelAf
 const all = t.groups.flatMap((g) => g.questions);
 const selected = all.filter((q) => q.checked);
 const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? forms.one : forms.other.replace('{n}', String(n)));
+const w = t.warning;
 ---
 
 <Base title={t.title}>
@@ -29,12 +30,32 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
 
     <div class="prep-layout">
       <form class="prep-form" aria-label={t.formLabel} data-prep-form autocomplete="off">
+        <fieldset class="quick" aria-describedby="quick-hint">
+          <legend>{t.quick.label}</legend>
+          <div class="quick-buttons">
+            {t.quick.items.map((q) => (
+              <button type="button" class="quick-button" data-quick={q.id} data-groups={q.groups.join(' ')} aria-pressed="false">{q.text}</button>
+            ))}
+          </div>
+          <small id="quick-hint">{t.quick.hint}</small>
+          <p class="quick-done" role="status" data-quick-done></p>
+        </fieldset>
         {t.groups.map((g, i) => (
           <details class="group" data-group={g.id} data-collapse-on-phone={i >= 2 ? '' : undefined} open={!('folded' in g && g.folded)} data-folded={'folded' in g && g.folded ? '' : undefined}>
             <summary>
               <span class="group-title">{g.title}</span>
-              <span class:list={['group-count', { 'only-narrow': !('folded' in g && g.folded) }]} aria-hidden="true">{'\u00A0· ' + g.questions.length}</span>
+              <span class="group-count" aria-hidden="true">{'\u00A0· ' + g.questions.length}</span>
             </summary>
+            {g.id === 'surgeryHome' && (
+              <aside class="warning" aria-labelledby="warning-title">
+                <h3 id="warning-title">{w.title}</h3>
+                <p>{w.intro}</p>
+                <p>{w.lead} <strong>{w.leadStrong}</strong></p>
+                <ul>{w.items.map((item) => <li>{item}</li>)}</ul>
+                <p>{w.other}</p>
+                <p class="emergency"><strong>{w.emergencyStrong}</strong> {w.emergencyRest}</p>
+              </aside>
+            )}
             <fieldset>
               <legend class="visually-hidden">{g.title}</legend>
               {g.questions.map((q) => (
@@ -127,8 +148,25 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
       <button type="button" class="button button-secondary" data-print-pack>{t.pack.print}</button>
     </section>
 
+    <section class="diary" aria-labelledby="diary-title">
+      <h2 id="diary-title" class="serif">{t.diary.title}</h2>
+      <p>{t.diary.intro}</p>
+      <button type="button" class="button button-secondary" data-print-diary>{t.diary.print}</button>
+    </section>
+
     <p class="page-note">{t.pageNote}</p>
   </div>
+
+  <!-- The printed symptom diary: a blank table to fill in by hand (nothing is typed or saved on the site). -->
+  <section class="print-diary" aria-hidden="true">
+    <h1 class="serif">{t.diary.title}</h1>
+    <p>{t.diary.intro}</p>
+    <table>
+      <thead><tr>{t.diary.columns.map((c) => <th scope="col">{c}</th>)}</tr></thead>
+      <tbody>{Array.from({ length: 10 }, () => <tr>{t.diary.columns.map(() => <td></td>)}</tr>)}</tbody>
+    </table>
+    <p class="sheet-footer mono">{t.diary.footer}</p>
+  </section>
 
   <!-- The printed packing list: printed only from its own button. -->
   <section class="print-pack" aria-hidden="true" data-print-pack-sheet>
@@ -155,6 +193,13 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
     <ol class="sheet-questions" data-sheet-list>
       {selected.map((q) => <li>{q.text}<div class="answer"></div></li>)}
     </ol>
+    <!-- On the sheet whenever a going-home question is ticked. -->
+    <div class="sheet-warning" data-sheet-warning hidden={!t.groups.find((g) => g.id === 'surgeryHome')!.questions.some((q) => q.checked)}>
+      <h2>{w.title}</h2>
+      <p>{w.intro} {w.lead} <strong>{w.leadStrong}</strong></p>
+      <ul>{w.items.map((item) => <li>{item}</li>)}</ul>
+      <p>{w.other} <strong>{w.emergencyStrong}</strong> {w.emergencyRest}</p>
+    </div>
     <div class="sheet-mention">
       <h2>{t.mention}</h2>
       <ul class="sheet-mention-list" data-sheet-mention></ul>
@@ -247,6 +292,7 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
     fillList(document.querySelector('[data-preview-list]')!, items, false);
     fillList(document.querySelector('[data-sheet-list]')!, items, true);
     document.querySelector('[data-sheet-count]')!.textContent = count(t.sheetCount, items.length);
+    document.querySelector<HTMLElement>('[data-sheet-warning]')!.hidden = !form.querySelector('details[data-group="surgeryHome"] input[data-question]:checked');
     document.querySelector('[data-selected-count]')!.textContent = count(t.selectedCount, items.length);
     const mentions = Array.from(mentionList.querySelectorAll<HTMLInputElement>('input[data-mention]'))
       .filter((box) => box.checked)
@@ -288,7 +334,46 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
     root.dataset.printing = 'pack';
     window.print();
   });
-  window.addEventListener('afterprint', () => delete root.dataset.printing);
+  // The symptom diary prints on its own, sideways, so the columns have room to write in.
+  const diaryPage = document.createElement('style');
+  document.head.append(diaryPage);
+  document.querySelector('[data-print-diary]')!.addEventListener('click', () => {
+    diaryPage.textContent = '@page { size: landscape; }';
+    root.dataset.printing = 'diary';
+    window.print();
+  });
+  window.addEventListener('afterprint', () => {
+    delete root.dataset.printing;
+    diaryPage.textContent = '';
+  });
+
+  // Quick-starts: one tap ticks the questions for that kind of appointment, opens their groups and folds the others.
+  // The visitor's own questions are left alone. A link can pick one: /prep/#for=surgery (Home, "Surgery is coming up").
+  const quickButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-quick]'));
+  function quickStart(id: string, announce = true) {
+    const button = quickButtons.find((b) => b.dataset.quick === id);
+    if (!button) return;
+    const groups = button.dataset.groups!.split(' ');
+    let n = 0;
+    form.querySelectorAll<HTMLDetailsElement>('details[data-group]').forEach((details) => {
+      const on = groups.includes(details.dataset.group!);
+      details.open = on;
+      details.querySelectorAll<HTMLInputElement>('input[data-question]').forEach((box) => {
+        box.checked = on;
+        if (on) n++;
+      });
+    });
+    quickButtons.forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+    if (announce) document.querySelector('[data-quick-done]')!.textContent = t.quick.done.replace('{n}', String(n)).replace('{name}', button.textContent!.trim());
+    update();
+  }
+  quickButtons.forEach((b) => b.addEventListener('click', () => quickStart(b.dataset.quick!)));
+  // Changing a tick by hand means the quick-start no longer describes the list.
+  form.addEventListener('change', (e) => {
+    if ((e.target as HTMLElement).matches('input[data-question]')) quickButtons.forEach((b) => b.setAttribute('aria-pressed', 'false'));
+  });
+  const fromLink = location.hash.match(/^#for=([a-z]+)$/);
+  if (fromLink) quickStart(fromLink[1], false);
 </script>
 
 <style>
@@ -354,14 +439,15 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
   .group[open] .group-count {
     display: none;
   }
-  .group[data-folded] summary::after {
+  /* Every group shows + when folded and − when open (quick-starts fold the groups they don't use). */
+  .group summary::after {
     content: '+';
     margin-left: auto;
     font-weight: 400;
     font-size: 1.3em;
     line-height: 1;
   }
-  .group[data-folded][open] summary::after {
+  .group[open] summary::after {
     content: '\2212';
   }
   .group fieldset {
@@ -634,9 +720,112 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
     font-size: 16px;
   }
 
+  /* When to call after surgery (Phase B, Nov 5): set apart, never folded away inside its group. */
+  .warning {
+    margin: 4px 0 var(--s-16);
+    padding: var(--s-16) var(--s-16) var(--s-12);
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--status-warn-text);
+    border-radius: var(--radius);
+  }
+  .warning h3 {
+    margin: 0 0 var(--s-8);
+    font-size: 18px;
+  }
+  .warning p {
+    margin: 0 0 var(--s-8);
+  }
+  .warning ul {
+    margin: 0 0 var(--s-8);
+    padding-left: 1.2em;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .warning .emergency {
+    margin: var(--s-8) 0 0;
+    padding-top: var(--s-8);
+    border-top: 1px solid var(--rule);
+  }
+
+  /* Quick-starts (Phase B, Nov 5) */
+  .quick {
+    margin: 0 0 var(--s-8);
+    padding: 0 0 var(--s-16);
+    border: 0;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-8);
+  }
+  .quick legend {
+    padding: 0;
+    margin-bottom: var(--s-8);
+    font-weight: 600;
+  }
+  .quick-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .quick-button {
+    min-height: var(--touch);
+    padding: 0 14px;
+    border: 1px solid var(--input-border);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--ink);
+    font: 400 15px var(--font-sans);
+    cursor: pointer;
+  }
+  .quick-button:hover {
+    border-color: var(--accent);
+  }
+  .quick-button[aria-pressed='true'] {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--paper);
+  }
+  .quick small {
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .quick-done {
+    margin: 0;
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+  .quick-done:empty {
+    display: none;
+  }
+  /* Symptom diary */
+  .diary {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--s-12);
+    padding-top: var(--s-32);
+    border-top: 1px solid var(--rule);
+  }
+  .diary h2 {
+    font-size: 26px;
+    margin: 0;
+  }
+  .diary p {
+    margin: 0;
+    max-width: 40em;
+  }
+  .diary .button {
+    background: var(--surface);
+    font: 500 15px var(--font-sans);
+    cursor: pointer;
+  }
+
   /* ---------- The printed sheet (PrepSheet mockup) ---------- */
   .print-sheet,
-  .print-pack {
+  .print-pack,
+  .print-diary {
     display: none;
   }
   @media print {
@@ -644,15 +833,76 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
       margin: 14mm 16mm;
     }
     :global(body > *:not(main)),
-    :global(main > *:not(.print-sheet):not(.print-pack)),
+    :global(main > *:not(.print-sheet):not(.print-pack):not(.print-diary)),
     :global(.skip-link) {
       display: none !important;
     }
     :global(body) {
       background: #ffffff !important;
     }
-    :global(:root[data-printing='pack']) .print-sheet {
+    :global(:root[data-printing='pack']) .print-sheet,
+    :global(:root[data-printing='diary']) .print-sheet {
       display: none !important;
+    }
+    :global(:root[data-printing='diary']) .print-diary {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      color: #1c1d21;
+      font-family: var(--font-sans);
+      font-size: 11pt;
+    }
+    .sheet-warning {
+      border: 1.5px solid #1c1d21;
+      padding: 8px 12px;
+      font-size: 10pt;
+      break-inside: avoid;
+    }
+    .sheet-warning[hidden] {
+      display: none;
+    }
+    .sheet-warning h2 {
+      font-size: 12pt;
+      margin: 0 0 4px;
+    }
+    .sheet-warning p,
+    .sheet-warning ul {
+      margin: 0 0 4px;
+    }
+    .sheet-warning ul {
+      padding-left: 1.2em;
+    }
+    .print-diary h1 {
+      font-size: 22pt;
+      margin: 0;
+      border-bottom: 2px solid #1c1d21;
+      padding-bottom: 8px;
+    }
+    .print-diary p {
+      margin: 0;
+    }
+    .print-diary table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+    .print-diary th {
+      text-align: left;
+      font-size: 10pt;
+      font-weight: 600;
+      padding: 6px;
+      border: 1px solid #1c1d21;
+      background: #f2f1ee;
+    }
+    .print-diary td {
+      height: 0.48in;
+      border: 1px solid #a9a8a2;
+    }
+    .print-diary th:first-child {
+      width: 15%;
+    }
+    .print-diary th:last-child {
+      width: 28%;
     }
     :global(:root[data-printing='pack']) .print-pack {
       display: flex;

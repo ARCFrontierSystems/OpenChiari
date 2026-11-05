@@ -31,6 +31,14 @@ const calm = getStrings(Astro.currentLocale).calm;
       <a class="button button-primary" href={routes.explorer}>{h.openExplorer}</a>
       <a class="button button-secondary not-calm" href={routes.tour}>{h.tour}</a>
       <p class="calm-explorer-note only-calm">{calm.explorerNote}</p>
+      <nav class="start-here" aria-labelledby="start-here">
+        <p id="start-here" class="start-label mono">{h.start.label}</p>
+        <ul>
+          {h.start.items.map((item) => (
+            <li><a href={routes[item.page as keyof typeof routes]}>{item.text}</a></li>
+          ))}
+        </ul>
+      </nav>
     </div>
 
     <figure class="figure hero-figure">
@@ -203,6 +211,29 @@ const calm = getStrings(Astro.currentLocale).calm;
     flex-wrap: wrap;
     gap: var(--s-12);
     margin-top: 28px;
+  }
+  /* "Start here": four ways in, by what brought someone to the site (Phase B, Nov 5). */
+  .start-here {
+    flex-basis: 100%;
+    margin-top: var(--s-8);
+  }
+  .start-label {
+    margin: 0 0 var(--s-4);
+    font-size: var(--text-mono);
+    color: var(--muted);
+  }
+  .start-here ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--s-24);
+  }
+  .start-here a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch);
   }
   .hero-figure {
     grid-area: figure;

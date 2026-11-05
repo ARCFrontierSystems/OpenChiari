@@ -614,7 +614,7 @@ test('Make your own on a phone: no sideways scrolling, and the preview stays in 
 
 test('Home: the tools include Helping your child, the Awareness kit and Connect with others', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('.tools li')).toHaveCount(9);
+  await expect(page.locator('.tools li')).toHaveCount(10);
   for (const href of ['/children/', '/kit/', '/support/#connect']) await expect(page.locator(`.tools a[href="${href}"]`)).toHaveCount(1);
 });
 
@@ -644,7 +644,7 @@ test('header: four tools in order, and More opens the rest by mouse and keyboard
   await expect(panel).toBeHidden();
   await more.click();
   await expect(more).toHaveAttribute('aria-expanded', 'true');
-  await expect(panel.locator('a')).toHaveText(['Helping your child', 'Awareness kit', 'Open model', 'Connect with others', 'Support Chiari organizations']);
+  await expect(panel.locator('a')).toHaveText(['Reading your MRI report', 'Helping your child', 'Awareness kit', 'Open model', 'Connect with others', 'Support Chiari organizations']);
   await page.keyboard.press('Escape');
   await expect(panel).toBeHidden();
   await expect(more).toBeFocused();
@@ -1070,13 +1070,13 @@ test('guided tour: five steps, each sets the view; Back, Next and Finish work, a
   await expect(page.locator('body.has-3d')).toBeAttached({ timeout: 30000 });
   const bar = page.getByRole('progressbar', { name: 'Tour progress' });
   const title = page.getByRole('heading', { level: 1 });
-  await expect(page.getByText('Step 1 of 5')).toBeVisible();
+  await expect(page.getByText('Step 1 of 6')).toBeVisible();
   await expect(title).toHaveText('Meet the model');
   await expect(page.getByRole('button', { name: 'Back' })).toBeHidden();
   await page.getByRole('button', { name: 'Next: typical anatomy' }).click();
   await page.getByRole('button', { name: 'Next: the tonsils sit too low' }).click();
   // Step 3 is the approved mockup step, word for word.
-  await expect(page.getByText('Step 3 of 5')).toBeVisible();
+  await expect(page.getByText('Step 3 of 6')).toBeVisible();
   await expect(title).toHaveText('The tonsils sit too low');
   await expect(page.getByText('The dashed line runs across the opening at the base of the skull. In Chiari, the tonsils, the lowest part of the cerebellum, extend below it, shown by the blue bracket.')).toBeVisible();
   await expect(page.getByRole('button', { name: 'Next: how fluid flows' })).toBeVisible();
@@ -1089,8 +1089,77 @@ test('guided tour: five steps, each sets the view; Back, Next and Finish work, a
   await page.getByRole('button', { name: 'Next: a syrinx' }).click();
   await expect(title).toHaveText('A syrinx');
   await expect(page.locator('[data-viewer]')).toHaveAttribute('aria-label', /syrinx/i);
+  // Step 6 (Nov 5): after surgery, with the Explorer's approved text.
+  await page.getByRole('button', { name: 'Next: after surgery' }).click();
+  await expect(title).toHaveText('After surgery');
+  await expect(page.getByText('Step 6 of 6')).toBeVisible();
+  await expect(page.locator('[data-viewer]')).toHaveAttribute('aria-label', /after decompression/i);
+  await expect(page.getByText('Results vary, and surgery isn\'t right for everyone.', { exact: false })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Finish tour' })).toHaveAttribute('href', '/explorer/');
   await expect(page.getByText('Illustration, not a medical image', { exact: false })).toBeVisible();
+});
+
+test('Home "Start here": four ways in, and "Surgery is coming up" opens Visit prep with the surgery questions ticked', async ({ page }) => {
+  await page.goto('/');
+  const start = page.getByRole('navigation', { name: 'Start here' });
+  await expect(start.getByRole('link')).toHaveText(['I just got my MRI report', 'Surgery is coming up', "It's my child", 'I want to explain it to someone']);
+  await start.getByRole('link', { name: 'Surgery is coming up' }).click();
+  await expect(page).toHaveURL(/\/prep\/#for=surgery$/);
+  await expect(page.locator('[data-quick="surgery"]')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('details[data-group="surgeryBefore"]')).toHaveAttribute('open', '');
+  await expect(page.locator('details[data-group="diagnosis"] input:checked')).toHaveCount(0);
+});
+
+test('Visit prep: quick-starts tick the right questions and say so; a blank symptom diary prints on its own', async ({ page }) => {
+  await page.goto('/prep/');
+  await page.locator('[data-quick="first"]').click();
+  await expect(page.locator('[data-quick-done]')).toHaveText('Ticked 7 questions for: A first visit.');
+  await expect(page.locator('details[data-group="surgeryBefore"] input:checked')).toHaveCount(0);
+  await expect(page.locator('[data-sheet-list] li')).toHaveCount(7);
+  // Your own questions stay, and ticking by hand clears the quick-start's pressed state.
+  await page.locator('#own-question').fill('Can I keep playing soccer?');
+  await page.locator('[data-own-add]').click();
+  await page.locator('[data-quick="home"]').click();
+  await expect(page.locator('[data-sheet-list]')).toContainText('Can I keep playing soccer?');
+  await page.locator('details[data-group="surgeryHome"] input[data-question]').first().uncheck();
+  await expect(page.locator('[data-quick][aria-pressed="true"]')).toHaveCount(0);
+  // The diary: a blank table, printed sideways, without the questions sheet.
+  await page.evaluate(() => (window.print = () => {}));
+  await page.locator('[data-print-diary]').click();
+  await page.emulateMedia({ media: 'print' });
+  await expect(page.locator('.print-diary')).toBeVisible();
+  await expect(page.locator('.print-sheet')).toBeHidden();
+  await expect(page.locator('.print-diary th')).toHaveText(['Date and time', 'What happened', 'How long it lasted', 'How strong (0–10)', 'What I was doing, and what helped']);
+  await expect(page.locator('.print-diary tbody tr')).toHaveCount(10);
+  await page.emulateMedia({ media: 'screen' });
+});
+
+test('Visit prep: "When to call after surgery" sits in the going-home group and prints when a going-home question is ticked', async ({ page }) => {
+  await page.goto('/prep/');
+  const box = page.locator('details[data-group="surgeryHome"] .warning');
+  await expect(box).toHaveCount(1);
+  await expect(box.locator('h3')).toHaveText('When to call after surgery');
+  await expect(box).toContainText('Call 911 or your local emergency number');
+  await expect(page.locator('[data-sheet-warning]')).toBeHidden();
+  await page.locator('[data-quick="home"]').click();
+  await page.evaluate(() => (window.print = () => {}));
+  await page.emulateMedia({ media: 'print' });
+  await expect(page.locator('[data-sheet-warning]')).toBeVisible();
+  await expect(page.locator('[data-sheet-warning]')).toContainText('call the surgical team right away');
+  await page.emulateMedia({ media: 'screen' });
+  await page.locator('[data-quick="first"]').click();
+  await expect(page.locator('[data-sheet-warning]')).toBeHidden();
+});
+
+test('Reading your MRI report: every term has a heading and a 3D link that opens the matching view', async ({ page }) => {
+  await page.goto('/mri/');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Reading your MRI report');
+  const terms = page.locator('.term');
+  expect(await terms.count()).toBeGreaterThan(8);
+  await expect(page.locator('.term-index a')).toHaveCount(await terms.count());
+  await page.locator('.term#syrinx .see-it').click();
+  await expect(page).toHaveURL(/\/explorer\/#syr\./);
+  await expect(page.locator('input[name="condition-wide"][value="syrinx"]')).toBeChecked();
 });
 
 test('Awareness kit: every graphic and printable downloads, and the ZIP carries the credit', async ({ page, request }) => {

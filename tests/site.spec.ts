@@ -460,7 +460,7 @@ test('Explain It: carries the view from the Explorer; the link is short and hold
   await page.goto(link);
   await expect(page.getByText('Someone shared this with you')).toBeVisible();
   await expect(page.locator('[data-shared-note]')).toBeHidden();
-  await expect(page.locator('[data-caption]')).toHaveText('Typical anatomy, back view. Illustration, not a medical image. Fluid flow simplified.');
+  await expect(page.locator('[data-caption]')).toHaveText('Typical anatomy, back view. Illustration, not a medical image. Fluid flow simplified. Tonsils shown at their lowest point, where MRI measures them.');
   await expect(page.getByRole('link', { name: 'Explore the full 3D model' })).toHaveAttribute('href', /\/explorer\/#typ\.back/);
   // In a page that scrolls, swiping up or down over the model scrolls the page; sideways turns it.
   await page.goto(link.replace('#typ.back', '#typ.back.x'));

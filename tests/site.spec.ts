@@ -531,9 +531,12 @@ test('links that leave the site open in a new tab, say so to screen readers, and
     for (const link of await outside.all()) {
       await expect(link).toHaveAttribute('target', '_blank');
       await expect(link).toHaveAttribute('rel', 'noopener noreferrer');
-      await expect(link.locator('.visually-hidden')).toHaveText(` ${note}`);
+      await expect(link).toHaveAttribute('aria-describedby', /new-tab-note/);
+      // The link's own words are unchanged; the note is a separate description.
+      expect(await link.textContent()).not.toContain(note);
     }
     for (const link of await page.locator('a[href^="/"]').all()) await expect(link).not.toHaveAttribute('target', '_blank');
+    await expect(page.locator('#new-tab-note')).toHaveText(note);
   }
 });
 

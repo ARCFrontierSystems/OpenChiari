@@ -38,8 +38,9 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
     <TranslationNotice dark />
 
     <header class="x-header">
-      <a class="x-back only-narrow-x" href={routes.home} aria-label={x.backHome}>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+      <a class="x-back" href={routes.home} aria-label={x.backHome}>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+        <span>{x.home}</span>
       </a>
       <a class="x-brand only-wide-x" href={routes.home}>
         <img class="x-logo" src="/brand/logo-header-dark.png" alt={s.siteName} width="267" height="112" />
@@ -726,12 +727,18 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
   .x .x-explain {
     color: var(--x-button-text);
   }
+  /* "Home", always visible at the top left (Matthew, Nov 5): outlined like the other header buttons. */
   .x-back {
-    width: var(--touch);
-    height: var(--touch);
-    display: flex;
+    min-height: var(--touch);
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
+    gap: 4px;
+    padding: 0 12px 0 8px;
+    color: var(--x-text);
+    text-decoration: none;
+    border: 1px solid var(--x-control-border);
+    border-radius: var(--radius);
+    font-size: var(--x-size-small);
   }
 
   /* ---------- Workspace ---------- */

@@ -371,28 +371,30 @@ Mockup: `design/mockups/TourPhone.dc.html`
 
 Mockup: `design/mockups/ExplainShare.dc.html`
 
+> **Changed 2026-11-05 at Matthew's request (wording pending his approval).** One note for everyone; "Who is it for?" and its four choices are removed. The link holds only the view (`openchiari.org/v/#c1.side.f.m`), and the note goes in the sender's own message, with the link under it. The starter note is made only of sentences already approved elsewhere in this file (Home intro; "What you're looking at" line 3; "How you can help"). Earlier wording is kept in comments.
+
 - Open Chiari
 - Back to the 3D Explorer
 - Preview of what they'll see
 - Chiari I · side view · fluid flow · measure
 - Explain It
 - Send someone a link that opens the model in this exact view, with a short note from you.
-- Who is it for?
-- Family
-- School
-- Work
-- Other
-- Picks a starter note you can edit, and a plain explanation suited to them.
+<!-- Removed 2026-11-05: "Who is it for?" / Family / School / Work / Other / "Picks a starter note you can edit, and a plain explanation suited to them." -->
 - Your note
-- This is what my doctor meant by Chiari. The low part of my brain is crowding the opening at the base of my skull, which is why coughing gives me headaches.
-- 158 / 280
+- In Chiari malformation, the lowest part of the cerebellum sits below the opening where the brain meets the spinal cord. That crowds the space where spinal fluid normally flows, which can cause headaches and other symptoms. Symptoms can come and go and are often invisible.
+<!-- was "This is what my doctor meant by Chiari. The low part of my brain is crowding the opening at the base of my skull, which is why coughing gives me headaches." -->
+- Sent as your message, with the link under it. Change it however you like.
+- 272 / 280
 - Let them rotate and explore on their own
 - Your link
-- Copy
+- Copy note and link
+- Copied your note and the link.
+- Share
 - Text message
 - Email
 - QR code
-- The link holds only the view and your note. Nothing is saved on our side. Anyone with the link can see the note, so leave out anything private.
+- The link holds only the view. Your note goes in your own message, not in the link, and nothing is saved on our side.
+<!-- was "The link holds only the view and your note. Nothing is saved on our side. Anyone with the link can see the note, so leave out anything private." -->
 
 ## Explain It, recipient view (phone)
 
@@ -400,7 +402,7 @@ Mockup: `design/mockups/ExplainView.dc.html`
 
 - Open Chiari
 - Someone shared this with you
-- This is what my doctor meant by Chiari. The low part of my brain is crowding the opening at the base of my skull, which is why coughing gives me headaches.
+<!-- 2026-11-05: the note is no longer shown here; the person already read it in the message. Links made before then still show their note. -->
 - Chiari I, side view. Drag to turn the model. Illustration, not a medical image.
 - What you're looking at
 - The dashed line runs across the opening where the brain meets the spinal cord.
@@ -865,7 +867,8 @@ Mockup: `design/mockups/Privacy.dc.html`
 - Your identity
 - No accounts, sign-ins, names or email addresses.
 - Explain It notes
-- Your note and chosen view live after the # in the link. Browsers don't send that part to our server, and our analytics are set up not to record it. Anyone with the link can read the note.
+- Your note goes in the message you send, not in the link. The link holds only the chosen view, after the #. Browsers don't send that part to our server, and our analytics are set up not to record it.
+<!-- 2026-11-05 (pending Matthew's approval): was "Your note and chosen view live after the # in the link. Browsers don't send that part to our server, and our analytics are set up not to record it. Anyone with the link can read the note." -->
 - Visit prep questions
 - Built and printed entirely in your browser. Nothing you tick or type leaves your device.
 - Your location

@@ -649,7 +649,7 @@
       },
       {
         "term": "Explain It notes",
-        "text": "Your note and chosen view live after the # in the link. Browsers don't send that part to our server, and our analytics are set up not to record it. Anyone with the link can read the note."
+        "text": "Your note goes in the message you send, not in the link. The link holds only the chosen view, after the #. Browsers don't send that part to our server, and our analytics are set up not to record it."
       },
       {
         "term": "Visit prep questions",
@@ -759,33 +759,23 @@
     "exploreFull": "Explore the full 3D model"
   },
   "explain": {
-    "_note": "Text from docs/COPY.md 'Explain It, create a link' and 'Explain It, recipient view'. Only the family starter note and the Chiari I explanation are approved so far; the same note is the starter for every audience until Matthew approves the drafts.",
+    "_note": "Text from docs/COPY.md 'Explain It, create a link' and 'Explain It, recipient view'. Nov 5, 2026: Matthew asked for one note for everyone (no 'Who is it for?'), a short link that holds only the view, and the note sent in the message. starterNote is made only of sentences already approved in COPY.md (Home intro, the third 'What you're looking at' line, and 'How you can help'). noteHint, copy, share, copied and privacy are new wording awaiting Matthew's approval.",
     "title": "Explain It",
     "backToExplorer": "Back to the 3D Explorer",
     "previewTitle": "Preview of what they'll see",
     "intro": "Send someone a link that opens the model in this exact view, with a short note from you.",
-    "whoFor": "Who is it for?",
-    "audiences": {
-      "fam": "Family",
-      "sch": "School",
-      "work": "Work",
-      "oth": "Other"
-    },
-    "audienceHint": "Picks a starter note you can edit, and a plain explanation suited to them.",
     "noteLabel": "Your note",
-    "starterNotes": {
-      "fam": "This is what my doctor meant by Chiari. The low part of my brain is crowding the opening at the base of my skull, which is why coughing gives me headaches.",
-      "sch": "This is what my doctor meant by Chiari. The low part of my brain is crowding the opening at the base of my skull, which is why coughing gives me headaches.",
-      "work": "This is what my doctor meant by Chiari. The low part of my brain is crowding the opening at the base of my skull, which is why coughing gives me headaches.",
-      "oth": "This is what my doctor meant by Chiari. The low part of my brain is crowding the opening at the base of my skull, which is why coughing gives me headaches."
-    },
+    "noteHint": "Sent as your message, with the link under it. Change it however you like.",
+    "starterNote": "In Chiari malformation, the lowest part of the cerebellum sits below the opening where the brain meets the spinal cord. That crowds the space where spinal fluid normally flows, which can cause headaches and other symptoms. Symptoms can come and go and are often invisible.",
     "explore": "Let them rotate and explore on their own",
     "yourLink": "Your link",
-    "copy": "Copy",
+    "copy": "Copy note and link",
+    "copied": "Copied your note and the link.",
     "sms": "Text message",
     "email": "Email",
     "qr": "QR code",
-    "privacy": "The link holds only the view and your note. Nothing is saved on our side. Anyone with the link can see the note, so leave out anything private.",
+    "share": "Share",
+    "privacy": "The link holds only the view. Your note goes in your own message, not in the link, and nothing is saved on our side.",
     "sharedWithYou": "Someone shared this with you",
     "dragHint": "Drag to turn the model.",
     "lookingTitle": "What you're looking at",

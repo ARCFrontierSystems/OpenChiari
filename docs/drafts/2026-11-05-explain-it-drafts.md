@@ -1,5 +1,7 @@
 # Explain It: draft text for Matthew's approval (November 5, 2026)
 
+> **Superseded the same day.** Matthew chose one note for everyone (no School, Work or Other) that explains Chiari in plain English, sent in the message with a short link. See COPY.md, "Explain It, create a link". The source gap below still applies.
+
 **Status: draft. None of this is on the site.** Until you approve it, every audience uses the approved Family note, and the recipient page shows only approved text.
 
 ## What's missing

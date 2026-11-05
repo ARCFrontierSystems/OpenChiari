@@ -3,6 +3,24 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: Explain It: short links, note in the message
+
+- **Matthew's request:**
+  - links were long and showed the note;
+  - the starter note shouldn't start "This is what my doctor meant";
+  - the School, Work and Other choices made no real difference.
+- **Done:**
+  - **"Who is it for?" removed.** There is one note for everyone. It explains Chiari in plain English and is made only of sentences already approved in COPY.md.
+  - **Short links.** The link now holds only the view, for example `openchiari.org/v/#c1.side.f.m` (`src/explorer/share.ts`). The note is never in the link.
+  - **The note travels in the message.** Text message, Email and Copy send the note with the link under it. Phones also get a Share button that opens their share sheet.
+  - **Recipient page.** `/v/` shows the model and explanation without the note, since they read it in the message.
+  - **Old links still work.** Links made before today still open, with their note.
+- **New wording awaiting Matthew's approval:**
+  - the note hint;
+  - "Copy note and link", "Copied your note and the link." and "Share";
+  - the privacy line under the link, and the Privacy page's "Explain It notes".
+- **Checks:** 91 tests pass, including the accessibility scan of `/v/`.
+
 ## 2026-11-05: openchiari.org is live; Explain It published
 
 - **Explain It published:** merged in pull request #2, and the Deploy run succeeded.

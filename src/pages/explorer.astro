@@ -344,7 +344,7 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
         a.addEventListener('click', () => {
           const st = store.get();
           const v = (document.querySelector('[data-viewer]') as (HTMLElement & { viewer?: { orbit(): Orbit } }) | null)?.viewer;
-          a.href = `/explain/#${encodeView({ state: st, orbit: st.camera === 'custom' ? v?.orbit() ?? null : null, explore: true, audience: 'fam' })}`;
+          a.href = `/explain/#${encodeView({ state: st, orbit: st.camera === 'custom' ? v?.orbit() ?? null : null, explore: true })}`;
         }),
       );
 

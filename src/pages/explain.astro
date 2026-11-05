@@ -127,6 +127,8 @@ const t = s.explain;
   // ----- The model: 2D figure until the 3D view is ready (or if it can't run) -----
   const host = section.querySelector<HTMLElement>('[data-viewer]')!;
   const figure = section.querySelector<HTMLElement>('[data-figure]')!;
+  // Screen readers hear what the view shows (the same description the 3D view gets once it has loaded).
+  host.setAttribute('aria-label', `${strings.figure.ariaPrefix}${strings.figure.aria[store.get().condition]}. ${x.viewNames[store.get().camera]}.`);
   let viewer: { orbit(): Orbit } | null = null;
   /** Rewrites the link (make-a-link mode only; set below). */
   let refreshLink = () => {};
@@ -181,7 +183,7 @@ const t = s.explain;
     // The approved Chiari I explanation refers to the dashed line and the blue bracket, so it's used only when the
     // Measure marks are shown; otherwise each view's own approved note from the Explorer explains it.
     const looking = section.querySelector<HTMLElement>('[data-looking]')!;
-    if ((st.condition === 'chiari' || st.condition === 'syrinx') && st.measure) {
+    if ((st.condition === 'chiari' || st.condition === 'syrinx') && st.measure && (st.camera === 'side' || st.camera === 'custom')) {
       const ol = document.createElement('ol');
       for (const line of t.lookingChiari) ol.appendChild(document.createElement('li')).textContent = line;
       looking.appendChild(ol);

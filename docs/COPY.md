@@ -72,7 +72,7 @@ Mockup: `design/mockups/Main.dc.html`
 - Free to download and embed for foundations, nurses and teachers.
 - 06
 - Support Chiari organizations
-- Donate to or volunteer with the groups funding research and running registries.
+- Donate to or volunteer with the groups funding research and supporting families. <!-- Approved by Matthew 2026-11-05 after the check-up audits (docs/audits/2026-11-05-checkup-accuracy-audit.md, docs/audits/2026-11-05-site-checkup.md). -->
 - Not medical advice.
 - Talk to your doctor about your own care.
 <!-- 2026-11-04 accuracy audit: was "This site is for education. Talk to your doctor about your own diagnosis and care." -->
@@ -331,7 +331,7 @@ Mockup: `design/mockups/Compare.dc.html`
 - After decompression
 - Tonsils usually sit at or above the dashed line (a few millimeters below can be normal). The fluid space behind them is open.
 - Right view condition
-- Tonsils extend below the line (blue bracket) and fill the space where fluid should pass. Red marks show where flow is often restricted.
+- Tonsils extend below the line (blue bracket) and often crowd the space where fluid should pass. Red marks show where flow is often restricted. <!-- Approved by Matthew 2026-11-05 after the check-up audits (docs/audits/2026-11-05-checkup-accuracy-audit.md, docs/audits/2026-11-05-site-checkup.md). -->
 
 ## 3D Explorer (phone)
 
@@ -381,7 +381,7 @@ Step 3 is the mockup text above. Steps 1, 2, 4 and 5 reuse approved sentences. T
 - The tonsils sit too low
 - (step 3 text above)
 - How fluid flows
-- Cerebrospinal fluid is clear fluid that cushions the brain and spinal cord. With each heartbeat it pulses back and forth between the skull and the spinal canal. In Chiari, the tonsils extend below the line (blue bracket) and fill the space where fluid should pass. Red marks show where flow is often restricted.
+- Cerebrospinal fluid is clear fluid that cushions the brain and spinal cord. With each heartbeat it pulses back and forth between the skull and the spinal canal. In Chiari, the tonsils extend below the line (blue bracket) and often crowd the space where fluid should pass. Red marks show where flow is often restricted. <!-- Approved by Matthew 2026-11-05 after the check-up audits (docs/audits/2026-11-05-checkup-accuracy-audit.md, docs/audits/2026-11-05-site-checkup.md). -->
 - A syrinx
 - A syrinx is a fluid-filled cavity inside the spinal cord. It often develops alongside Chiari, most often in the neck part of the spinal cord.
 - Next: [title of the next step]
@@ -402,7 +402,7 @@ Mockup: `design/mockups/ExplainShare.dc.html`
 - Send someone a link that opens the model in this exact view, with a short note from you.
 <!-- Removed 2026-11-05: "Who is it for?" / Family / School / Work / Other / "Picks a starter note you can edit, and a plain explanation suited to them." -->
 - Your note
-- In Chiari malformation, the lowest part of the cerebellum sits below the opening where the brain meets the spinal cord. That crowds the space where spinal fluid normally flows, which can cause headaches and other symptoms. Symptoms can come and go, often with few outward signs.
+- In Chiari malformation, the lowest part of the cerebellum sits below the opening where the brain meets the spinal cord. This can crowd the space where spinal fluid flows, which can cause headaches and other symptoms. Symptoms can come and go, often with few outward signs. <!-- Approved by Matthew 2026-11-05 after the check-up audits (docs/audits/2026-11-05-checkup-accuracy-audit.md, docs/audits/2026-11-05-site-checkup.md). -->
 <!-- 2026-11-05 (approved by Matthew after the independent source check; the shorter "often with few outward signs" keeps the note under 280 characters, also approved): was "Symptoms can come and go and are often invisible." -->
 <!-- was "This is what my doctor meant by Chiari. The low part of my brain is crowding the opening at the base of my skull, which is why coughing gives me headaches." -->
 - Sent as your message, with the link under it. Change it however you like.
@@ -429,7 +429,7 @@ Mockup: `design/mockups/ExplainView.dc.html`
 - What you're looking at
 - The dashed line runs across the opening where the brain meets the spinal cord.
 - The lowest part of the cerebellum, the tonsils, sits below that line. The blue bracket shows how far.
-- That crowds the space where spinal fluid normally flows, which can cause headaches and other symptoms.
+- This can crowd the space where spinal fluid flows, which can cause headaches and other symptoms. <!-- Approved by Matthew 2026-11-05 after the check-up audits (docs/audits/2026-11-05-checkup-accuracy-audit.md, docs/audits/2026-11-05-site-checkup.md). -->
 - How you can help
 - Symptoms can come and go, and there are often few outward signs. Believing them, and making room for rest, can mean a lot.
 <!-- 2026-11-05 (approved by Matthew after the independent source check): was "Symptoms can come and go and are often invisible. Believing them, and making room for rest, helps more than you might think." -->
@@ -681,7 +681,7 @@ Mockup: `design/mockups/Support.dc.html`
 - Español
 - Calm mode
 - Support the groups doing the work
-- These nonprofits fund research, run patient registries and support families. Open Chiari doesn't take donations; every link below goes straight to the organization's own page.
+- These nonprofits fund research and support families, and one keeps an international patient registry. Open Chiari doesn't take donations; every link below goes straight to the organization's own page. <!-- Approved by Matthew 2026-11-05 after the check-up audits (docs/audits/2026-11-05-checkup-accuracy-audit.md, docs/audits/2026-11-05-site-checkup.md). -->
 - Bobby Jones Chiari & Syringomyelia Foundation
 - Maintains an international patient registry (new enrollment currently paused), hosts a yearly research colloquium, and funds Chiari research grants and fellowships.
 - Research · Patient registry · Education
@@ -694,7 +694,7 @@ Mockup: `design/mockups/Support.dc.html`
 - ASAP: American Syringomyelia & Chiari Alliance Project
 - Supports patients and families, publishes a newsletter, and has helped fund research into the genetics of Chiari.
 - Patient support · Research funding
-- Descriptions and links checked November 2026. [Before launch: confirm with each organization.]
+- Descriptions and links checked November 2026. <!-- Approved by Matthew 2026-11-05 after the check-up audits (docs/audits/2026-11-05-checkup-accuracy-audit.md, docs/audits/2026-11-05-site-checkup.md). --> <!-- The confirmation with each organization stays open in EVIDENCE.md "Still open". -->
 - Other ways to help
 - Join a research study
 - Studies recruiting now, updated daily.
@@ -747,13 +747,13 @@ Mockup: `design/mockups/Kit.dc.html`
 - openchiari.org · #ChiariAwarenessMonth
 - Square social post
 - 1080 × 1080 · PNG
-- Chiari symptoms often don't show. Ask how you can help.
+- Chiari symptoms often have few outward signs. Ask how you can help. <!-- Approved by Matthew 2026-11-05 after the check-up audits (docs/audits/2026-11-05-checkup-accuracy-audit.md, docs/audits/2026-11-05-site-checkup.md). -->
 <!-- 2026-11-05 (approved by Matthew after the independent source check): was "Chiari is often invisible. Ask how you can help." -->
 - September · Chiari Awareness Month
 - Quote card
 - Square and story sizes · PNG
 - I have Chiari malformation.
-- Scan to see what that means in 3D.
+- Scan to see Chiari malformation in 3D. <!-- Approved by Matthew 2026-11-05 after the check-up audits (docs/audits/2026-11-05-checkup-accuracy-audit.md, docs/audits/2026-11-05-site-checkup.md). -->
 - [QR]
 - Explain It wallet card
 - Printable, 8 per page · PDF
@@ -852,11 +852,11 @@ Mockup: `design/mockups/About.dc.html`
 - How the content is made
 - Medical facts are adapted from the
 - NINDS fact sheet
-- and peer-reviewed research, listed on each page.
+- and other published sources, listed in the evidence notes. <!-- Approved by Matthew 2026-11-05 after the check-up audits (docs/audits/2026-11-05-checkup-accuracy-audit.md, docs/audits/2026-11-05-site-checkup.md). -->
 - The 3D model is built from
 - Z-Anatomy
 - and BodyParts3D, open anatomy data.
-- Text and every 3D view are checked against the published sources listed in the evidence notes, by automatic measurements and independent audits, before they're published. They have not been reviewed by a medical professional. Last check: November 4, 2026.
+- Text and every 3D view are checked against the published sources listed in the evidence notes, by automatic measurements and independent audits, before they're published. They have not been reviewed by a medical professional. Last check: November 5, 2026. <!-- Approved by Matthew 2026-11-05 after the check-up audits (docs/audits/2026-11-05-checkup-accuracy-audit.md, docs/audits/2026-11-05-site-checkup.md). --> <!-- Matthew, Nov 5: new or changed medical text and 3D views go public only after the independent audit (CLAUDE.md rule 1a). -->
 <!-- Placeholder filled 2026-11-04 (Matthew): the date of the last independent audit. -->
 <!-- Changed 2026-11-04: Matthew decided not to use a medical reviewer (was "Text and every 3D view are checked by [reviewer name, credentials] before they're published. Last review: [date]."). -->
 - AI tools helped write the code and first drafts; every page is checked by a person.
@@ -874,7 +874,7 @@ Mockup: `design/mockups/About.dc.html`
 - Not medical advice
 - Open Chiari explains; your doctor diagnoses and treats.
 - Corrections
-- Spot something wrong or out of date? Email with the page and what to fix. Corrections are made as quickly as possible and noted in the changelog.
+- Spot something wrong or out of date? Email with the page and what to fix. Corrections are made as quickly as possible, and every change is listed in the site's public code history. <!-- Approved by Matthew 2026-11-05 after the check-up audits (docs/audits/2026-11-05-checkup-accuracy-audit.md, docs/audits/2026-11-05-site-checkup.md). -->
 - Contact
 - For corrections, organizations, researchers and press.
 - hello@openchiari.org
@@ -984,3 +984,13 @@ Visible labels:
 - fluid cavity in the cord
 - Bone removed
 - skull edge and C1 arch
+
+## New wording from the check-up (2026-11-05, approved by Matthew)
+
+Non-medical, approved with the check-up fixes ("All approved, and fix the rest of the check up items and wordings to your recommendations").
+
+- 3D Explorer, next to Nerves and Blood vessels (greyed out): Not in this model yet
+- Evidence notes, under the title: The evidence notes list every medical sentence and every 3D shape on the site with the source it rests on. They are the working file the site is built from, so they also name files and checks used by the people who maintain it.
+- Evidence notes, Spanish pages only: These notes are in English, like the sources they cite.
+- About, Corrections: …Corrections are made as quickly as possible, and every change is listed in the site's public code history.
+- Translation notice (Spanish pages): see `src/i18n/es.json` "translation"; English equivalents in `src/i18n/en.json`.

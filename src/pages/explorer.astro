@@ -79,7 +79,10 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
             {LAYERS.map((id) => (
               <>
                 <input id={`layer-${id}`} type="checkbox" data-layer-on={id} checked={st.layers[id].on} disabled={!SIMPLE_LAYERS.includes(id)} />
-                <label for={`layer-${id}`}>{x.layerNames[id]}</label>
+                <label for={`layer-${id}`}>
+                  {x.layerNames[id]}
+                  {!SIMPLE_LAYERS.includes(id) && <span class="x-na">{x.notInModel}</span>}
+                </label>
                 <input type="range" min="0" max="100" step="5" value={st.layers[id].opacity} data-layer-opacity={id} aria-label={x.layerNames[id] + x.opacitySuffix} disabled={!SIMPLE_LAYERS.includes(id)} />
               </>
             ))}
@@ -125,7 +128,6 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
         ></div>
         <p id="viewer-keys" class="visually-hidden">{x.keysHelp}</p>
         <p class="visually-hidden" aria-live="polite" data-view-description></p>
-        <div class="x-labels only-wide-x" data-labels hidden></div>
         <div class="x-figure only-wide-x" data-figure="wide" set:html={figureWide} />
         <div class="x-figure x-figure-narrow only-narrow-x" data-figure="narrow" set:html={figureNarrow} />
 
@@ -140,6 +142,8 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
           ))}
           <button type="button" class="x-camera-reset" data-camera-reset aria-label={x.resetCamera} set:html={RESET_ICON} />
         </div>
+        <!-- After the view tools, so the keyboard reaches Fluid flow, Labels, Measure and the camera first. -->
+        <div class="x-labels only-wide-x" data-labels hidden></div>
         <div class="x-tools-narrow only-narrow-x" role="group" aria-label={x.viewTools}>
           <button type="button" class="x-tool" data-toggle="flow" aria-pressed={(st.flow) ? 'true' : 'false'}>{x.flowShort}</button>
           <button type="button" class="x-tool" data-toggle="measure" aria-pressed={(st.measure) ? 'true' : 'false'}>{x.measure}</button>
@@ -196,6 +200,11 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"></path></svg>
         </button>
         <div id="parts-narrow" class="x-parts-narrow" hidden>
+          <div class="x-card" aria-live="polite" data-card-narrow>
+            <p class="x-h"><span data-part-num>{part.num}</span> · {x.selected}</p>
+            <h2 class="x-card-title" data-part-name>{part.name}</h2>
+            <p class="x-card-text" data-part-text>{part.text}</p>
+          </div>
           <ul class="x-parts">
             {x.parts.map((p) => (
               <li data-part-conditions={p.conditions?.join(' ')} hidden={!!p.conditions && !p.conditions.includes(st.condition)}>
@@ -205,11 +214,6 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
               </li>
             ))}
           </ul>
-          <div class="x-card" aria-live="polite">
-            <p class="x-h"><span data-part-num>{part.num}</span> · {x.selected}</p>
-            <h2 class="x-card-title" data-part-name>{part.name}</h2>
-            <p class="x-card-text" data-part-text>{part.text}</p>
-          </div>
         </div>
         <p class="x-caption-narrow">
           {x.captionIllustration} · {x.captionFlow} · <a href={routes.evidence + '#' + EVIDENCE_SECTION[st.condition]} data-evidence>{x.evidence}</a>
@@ -260,7 +264,13 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
       $$<HTMLButtonElement>('[data-model]').forEach((button) =>
         button.addEventListener('click', () => store.set({ model: button.dataset.model as ViewState['model'] })),
       );
-      $$<HTMLButtonElement>('[data-part]').forEach((button) => button.addEventListener('click', () => store.set({ part: button.dataset.part! })));
+      $$<HTMLButtonElement>('[data-part]').forEach((button) =>
+        button.addEventListener('click', () => {
+          store.set({ part: button.dataset.part! });
+          // Phones: bring the part's description into view (it sits above the list).
+          if (button.closest('#parts-narrow')) document.querySelector('[data-card-narrow]')?.scrollIntoView({ block: 'nearest' });
+        }),
+      );
 
       // Search the structures list
       const search = document.querySelector<HTMLInputElement>('[data-part-search]');
@@ -620,6 +630,11 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
   }
 
   /* Layers */
+  .x-na {
+    display: block;
+    font-size: var(--x-size-caption);
+    color: var(--x-faint);
+  }
   .x-layers {
     display: grid;
     grid-template-columns: 20px minmax(0, 1fr) 84px;
@@ -637,6 +652,12 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
     display: flex;
     align-items: center;
     cursor: pointer;
+  }
+  .x-layers label:has(.x-na) {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    line-height: 1.2;
   }
   .x input[type='range'] {
     width: 100%;
@@ -1032,13 +1053,20 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
     .x-figure {
       inset: 8px 8px 8px 8px;
     }
+    /* A row along the top of the view, above the head, so the buttons don't cover the skull. */
     .x-tools-narrow {
       position: absolute;
-      top: 10px;
-      right: 10px;
+      top: 8px;
+      right: 8px;
+      left: 8px;
       display: flex;
-      flex-direction: column;
+      justify-content: flex-end;
+      flex-wrap: wrap;
       gap: 6px;
+    }
+    /* With the Layers panel open, the buttons under it are hidden (the panel has its own Close button). */
+    .workspace:has(.x-left.is-open) .x-tools-narrow {
+      visibility: hidden;
     }
     .x-sheet {
       grid-row: 2;
@@ -1048,8 +1076,8 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
       display: flex;
       flex-direction: column;
       gap: var(--s-12);
-      max-height: 62vh;
-      max-height: 62svh;
+      max-height: 50vh;
+      max-height: 50svh;
       overflow-y: auto;
     }
     .x-cond-grid {
@@ -1120,7 +1148,7 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
       min-height: var(--touch);
     }
     .x-parts-narrow .x-card {
-      padding: var(--s-16) 0 0;
+      padding: var(--s-8) 0 var(--s-12);
     }
     .x-caption-narrow {
       margin: 0;

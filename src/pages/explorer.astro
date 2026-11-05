@@ -21,6 +21,8 @@ const figureNarrow = anatomyFigureSvg({ condition: st.condition, flow: st.flow, 
 const part = x.parts.find((p) => p.id === st.part)!;
 const cond = x.conditions[st.condition];
 const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1';
+// "Evidence notes for this view": each view opens its own section of the Evidence notes page (docs/EVIDENCE.md).
+const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', chiari: '3d-model-shapes', syrinx: 'syrinx', surgery: 'after-decompression' };
 ---
 
 <!doctype html>
@@ -144,7 +146,7 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
         <div class="x-footnotes only-wide-x">
           <p class="x-hint" data-3d-only>{x.hint}</p>
           <p class="x-caption">
-            {x.captionIllustration} · {x.captionFlow} · <a href={routes.evidence}>{x.evidence}</a>
+            {x.captionIllustration} · {x.captionFlow} · <a href={routes.evidence + '#' + EVIDENCE_SECTION[st.condition]} data-evidence>{x.evidence}</a>
           </p>
         </div>
       </main>
@@ -206,7 +208,7 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
           </div>
         </div>
         <p class="x-caption-narrow">
-          {x.captionIllustration} · {x.captionFlow} · <a href={routes.evidence}>{x.evidence}</a>
+          {x.captionIllustration} · {x.captionFlow} · <a href={routes.evidence + '#' + EVIDENCE_SECTION[st.condition]} data-evidence>{x.evidence}</a>
         </p>
       </section>
     </div>
@@ -224,6 +226,7 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
       bindCalmSwitches();
 
       const x = strings.explorer;
+      const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', chiari: '3d-model-shapes', syrinx: 'syrinx', surgery: 'after-decompression' };
       // A view passed in the link after the # (from Explain It) opens here as it was; nothing is sent anywhere.
       const shared = decodeView(location.hash);
       const store = createStore(shared?.state);
@@ -377,6 +380,7 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
         $$<HTMLInputElement>('[data-cut]').forEach((r) => (r.value = String(st.cut)));
         $$('[data-model]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.model === st.model)));
         $$('[data-model-toggle]').forEach((b) => b.setAttribute('aria-pressed', String(st.model === 'realistic')));
+        $$<HTMLAnchorElement>('[data-evidence]').forEach((link) => (link.hash = EVIDENCE_SECTION[st.condition]));
         $$('[data-part]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.part === st.part)));
 
         // Part 11 (syrinx, bone removed) only exists in its own view; elsewhere go back to the tonsil.

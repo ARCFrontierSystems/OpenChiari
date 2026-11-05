@@ -221,8 +221,7 @@
     "notBuilt": "Not built yet. This page comes in a later step of the build.",
     "backHome": "Back to home",
     "pages": {
-      "kit": "Awareness kit",
-      "evidence": "Evidence notes"
+      "kit": "Awareness kit"
     }
   },
   "explorer": {
@@ -393,7 +392,8 @@
       "near": "Cut part way, near side removed",
       "midline": "Cut at the midline",
       "far": "Cut past the midline, toward the far side"
-    }
+    },
+    "evidencePage": "Evidence notes"
   },
   "prep": {
     "title": "Prepare for your next appointment",

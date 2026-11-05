@@ -1,6 +1,8 @@
 # A citable copy of the model (Zenodo)
 
-**Status: prepared, not published.** Publishing makes a permanent public record that can't be deleted (only new versions can be added), so Matthew decides when.
+**Status (Nov 5): draft created on Zenodo with the archive uploaded (checksum matches), waiting for Matthew to press Publish.** Draft: https://zenodo.org/deposit/23983233 · reserved DOI: 10.5281/zenodo.23983233 (it works once published). Matthew chose option A and agreed to be named as creator.
+
+Earlier status: prepared, not published. Publishing makes a permanent public record that can't be deleted (only new versions can be added), so Matthew decides when.
 
 ## What it is
 
@@ -46,3 +48,7 @@ Add the DOI to:
 - the introduction pack for the research group.
 
 Each later change to the model goes up as a new version under the same "concept" DOI.
+
+## Notes
+
+- This cloud environment's network stops uploads above about 4 to 8 MB with a "502" error, but the 20 MB archive did arrive complete: Zenodo's checksum matches the local file. Check the checksum before re-uploading.

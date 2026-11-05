@@ -616,7 +616,7 @@
           },
           {
             "id": "comfortItem",
-            "text": "Para un niño: ¿puede llevar su objeto de consuelo al quirófano?",
+            "text": "Para un niño: ¿puede llevar su peluche o cobija favorita al quirófano?",
             "checked": false
           },
           {
@@ -648,7 +648,7 @@
         "questions": [
           {
             "id": "call",
-            "text": "¿Qué debería hacer que lo llame o que vuelva al hospital?",
+            "text": "¿En qué casos debo llamarle o volver al hospital?",
             "checked": false
           },
           {
@@ -733,13 +733,13 @@
     "sheetFooter": "Hecho con Open Chiari · openchiari.org · No es consejo médico",
     "diagramCaption": "Chiari I. Las amígdalas cerebelosas se muestran en su punto más bajo, donde se miden en la resonancia magnética. Ilustración, no es una imagen médica.",
     "pack": {
-      "title": "Qué llevar para una estancia en el hospital",
+      "title": "Qué llevar para una estadía en el hospital",
       "intro": "Es posible que su hospital le envíe su propia lista. Siga primero la del hospital.",
       "items": [
         "Tarjeta del seguro médico e identificación con foto",
         "Documentos de custodia, si corresponde",
         "Sus medicamentos o una lista de ellos (pregunte en el hospital cuáles llevar)",
-        "Lentes, audífonos, una máquina CPAP u otro equipo que use",
+        "Lentes, aparatos auditivos, una máquina CPAP u otro equipo que use",
         "Cepillo de dientes y otros artículos de aseo",
         "Ropa cómoda para volver a casa",
         "Pantuflas antideslizantes",
@@ -1286,7 +1286,7 @@
       "title": "Prepararse juntos",
       "tips": [
         {
-          "lead": "Sea honesto, con palabras que su hijo conozca.",
+          "lead": "Hable con honestidad, con palabras que su hijo conozca.",
           "text": "Los niños más pequeños suelen necesitar menos detalles que los mayores. Los adolescentes quizá quieran saber más y participar en las decisiones."
         },
         {
@@ -1295,7 +1295,7 @@
         },
         {
           "lead": "Llámelo un sueño especial.",
-          "text": "La medicina para la cirugía da un sueño especial, así que no verá, oirá ni sentirá nada, y el equipo médico lo despertará cuando termine. Evite decir \"dormir\" como se dice de las mascotas: algunos niños lo asocian con mascotas que nunca despertaron."
+          "text": "La medicina para la cirugía da un sueño especial, así que no verá, oirá ni sentirá nada, y el equipo médico lo despertará cuando termine. Evite decir \"lo van a dormir\": algunos niños conocen esa frase por mascotas que nunca despertaron."
         },
         {
           "lead": "No prometa \"nada de dolor\" ni \"nada de agujas\".",
@@ -1303,22 +1303,22 @@
         },
         {
           "lead": "Está bien decir \"no sé\".",
-          "text": "Anote la pregunta y pregúntenla juntos al equipo médico."
+          "text": "Anote la pregunta y háganla juntos al equipo médico."
         },
         {
           "lead": "Acepte sus sentimientos.",
           "text": "Dígale que está bien sentir miedo, o incluso enojo."
         },
         {
-          "lead": "Esté preparado para cambios.",
+          "lead": "Prepárese para posibles cambios.",
           "text": "A veces la cirugía se retrasa o se cancela por emergencias."
         },
         {
           "lead": "Lleve algo de casa.",
-          "text": "Su cobija o peluche favorito puede ayudar. Pregunte si puede entrar con él al quirófano."
+          "text": "Su cobija o peluche favorito puede ayudar. Pregunte si su hijo puede llevarlo al quirófano."
         },
         {
-          "lead": "Jueguen y dibújenlo.",
+          "lead": "Jueguen y dibujen juntos.",
           "text": "Representar una visita al hospital con juguetes, o dibujarla, puede mostrarle cómo se siente su hijo."
         },
         {
@@ -1355,7 +1355,7 @@
         },
         {
           "figure": "",
-          "text": "Cuando despiertes, es posible que te duela la parte de atrás de la cabeza y del cuello. Tus enfermeras y médicos tienen medicinas para ayudarte. Te quedarás en el hospital hasta que tus médicos digan que estás listo para volver a casa. Tu persona adulta te dirá más o menos cuánto tiempo, y estará contigo todo lo que pueda. Puedes llevar tu cobija o peluche favorito."
+          "text": "Cuando despiertes, es posible que te duela la parte de atrás de la cabeza y del cuello. Tus enfermeras y médicos tienen medicinas para ayudarte. Te quedarás en el hospital hasta que tus médicos digan que ya puedes volver a casa. Los adultos que te cuidan te dirán más o menos cuánto tiempo, y estarán contigo todo lo que puedan. Puedes llevar tu cobija o peluche favorito."
         },
         {
           "figure": "",
@@ -1375,7 +1375,7 @@
     "school": {
       "title": "Una hoja para la escuela",
       "intro": "Llene lo que quiera y luego imprímala para un maestro o la enfermera de la escuela. Todos los campos son opcionales.",
-      "name": "Nombre del niño",
+      "name": "Nombre de pila del niño",
       "forWhom": "Para",
       "forHint": "Maestro o enfermera de la escuela",
       "date": "Fecha de la cirugía",

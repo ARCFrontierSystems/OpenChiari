@@ -90,7 +90,7 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
 
         <section class="x-section" aria-labelledby="cut-heading">
           <h2 class="x-h" id="cut-heading">{x.cutaway}</h2>
-          <div class="x-seg x-planes" role="group" aria-label={x.cutPlanes.label} data-3d-only>
+          <div class="x-segmented x-planes" role="group" aria-label={x.cutPlanes.label} data-3d-only>
             {(['sagittal', 'coronal', 'axial'] as const).map((pl) => (
               <button type="button" data-plane={pl} aria-pressed={pl === st.plane ? 'true' : 'false'}>{x.cutPlanes[pl]}</button>
             ))}
@@ -1336,7 +1336,8 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
   .x-accuracy-list :global(.x-acc-key) {
     color: var(--x-muted);
   }
-  .x-planes {
+  .x-segmented.x-planes {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     margin-bottom: var(--s-8);
   }
   .x-plane-hint {

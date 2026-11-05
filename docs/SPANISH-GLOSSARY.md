@@ -70,6 +70,8 @@ stay in English; "Explain It" is followed by "(Explíquelo)" where it is introdu
 | Open model | Modelo abierto | COPY.md |
 | Awareness kit | Kit de concientización | COPY.md |
 | Chiari Awareness | Concientización sobre Chiari | Make your own label (Nov 5) |
+| sagittal / coronal / axial (MRI and cut directions) | sagital / coronal / axial; plain labels: de lado / frontal / transversal | Back-translation check 7 |
+| skull opening (short form of foramen magnum) | abertura del cráneo | es.json usage |
 | Chiari Awareness Month | Mes de Concientización sobre Chiari | Kit eyebrow |
 | Poster | Póster (plural pósteres) | Kit; not "cartel" (back-translation check 5) |
 | Sticker | Calcomanía | Kit |

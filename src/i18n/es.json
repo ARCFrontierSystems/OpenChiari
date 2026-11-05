@@ -632,9 +632,9 @@
     "cutPlanes": {
       "label": "Dirección del corte",
       "sagittal": "De lado",
-      "coronal": "De frente",
+      "coronal": "Frontal",
       "axial": "Transversal",
-      "hint": "La resonancia usa las mismas tres direcciones: sagital (de lado), coronal (de frente) y axial (transversal).",
+      "hint": "La resonancia usa las mismas tres direcciones: sagital (de lado), coronal (frontal) y axial (transversal).",
       "ends": {
         "coronal": [
           "Adelante",

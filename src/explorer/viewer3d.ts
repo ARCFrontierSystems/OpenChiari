@@ -19,6 +19,7 @@ import { LineSegments2 } from 'three/examples/jsm/lines/LineSegments2.js';
 import { LineSegmentsGeometry } from 'three/examples/jsm/lines/LineSegmentsGeometry.js';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import type { Store, ViewState, LayerId, CameraView } from './state';
 import { anatomyFigureSvg, FLOW, type FigureStrings, type FigureLayer } from '../lib/anatomy-figure';
 import { isCalm, onCalmChange } from '../lib/calm';
@@ -159,6 +160,23 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   camera.add(keyLight);
   scene.add(camera);
 
+  // Studio quality (3D roadmap step 1, Nov 5): on computers, the realistic model gets physically based materials lit
+  // by a soft studio environment made in the browser (no download), plus a rim light from behind that separates
+  // structures from the background and from each other. Phones and tablets keep the lighter matte shading.
+  // Only the shading changes: the shapes, and so every measurement, stay exactly the same.
+  const studio = !touchScreen;
+  let studioEnv: THREE.Texture | null = null;
+  if (studio) {
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    studioEnv = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    pmrem.dispose();
+    const rimLight = new THREE.DirectionalLight(0xfff4ea, 0.55);
+    rimLight.position.set(0.5, 0.35, -1);
+    camera.add(rimLight);
+  }
+  /** How shiny each tissue looks (1 = fully matte). Bone and skin are dry; brain is soft; fluid is wet. */
+  const ROUGHNESS: Record<string, number> = { skin: 0.9, bone: 0.78, brain: 0.62, csf: 0.3 };
+
   // Depth range: the camera's near and far limits hug the model (its bounding sphere), so the depth buffer can tell
   // apart surfaces about 1 mm apart, such as the tonsils and the fluid around them, even on devices with a coarse
   // (16-bit) depth buffer. A fixed 10 mm to 3 m range could not.
@@ -211,9 +229,15 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     mesh.geometry.computeVertexNormals();
     // The realistic model uses simpler (matte) shading, which costs a phone much less per pixel and looks the same
     // on these non-shiny surfaces; the Simple model keeps its original shading.
-    mesh.material = new (model === 'realistic' ? THREE.MeshLambertMaterial : THREE.MeshStandardMaterial)({
-      color,
-      ...(model === 'realistic' ? {} : { roughness: 0.85, metalness: 0 }),
+    const studioMaterial = model === 'realistic' && studio && studioEnv;
+    mesh.material = new (model === 'realistic' && !studioMaterial ? THREE.MeshLambertMaterial : THREE.MeshStandardMaterial)({
+      // Studio shading reflects more light than the matte one, so its base colors are a little deeper to look the same.
+      color: studioMaterial ? color.clone().multiplyScalar(0.8) : color,
+      ...(model === 'realistic'
+        ? studioMaterial
+          ? { roughness: ROUGHNESS[String(extras.layer)] ?? 0.7, metalness: 0, envMap: studioEnv, envMapIntensity: 0.12 }
+          : {}
+        : { roughness: 0.85, metalness: 0 }),
       side: THREE.DoubleSide,
       clippingPlanes: [plane],
       transparent: baseOpacity < 1,

@@ -3,6 +3,23 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+
+## 2026-11-05: 3D roadmap published
+
+- **PR #18 (live):**
+  - studio shading for the realistic model on computers;
+  - close-up of the skull opening; zoom to, show only and hide a part; links keep the part; MRI page terms open their structure;
+  - one-tap Typical/Chiari switch with a fade; flow pause and slow; side by side on the realistic model;
+  - "How close is this to real anatomy?" (Matthew approved the wording);
+  - the headline font is preloaded, so Home's largest paint is back under 2.5 s.
+- **PR #19 (Matthew approved):**
+  - "What a side-view MRI looks like": a healthy volunteer's T2 MRI (OpenNeuro ds004507, CC0) with seven markers, independently checked; EVIDENCE row 31;
+  - coronal and axial cuts (realistic model only).
+- **Not done, on purpose:**
+  - MNI152 overlay: the scan ends 14 mm below the skull opening;
+  - markers for the tonsils and the skull opening: a radiologist's call;
+  - TotalSegmentator bone geometry and an illustrator's close-up: deferred, and not needed now (Matthew asked; the medical reviewer matters more).
+
 ## 2026-11-05: Phase B (path for the newly diagnosed) and Phase D (consistency pass), approved
 
 Matthew approved the MRI page and the warning box ("Approved") and asked for the consistency pass "with your recommendations".

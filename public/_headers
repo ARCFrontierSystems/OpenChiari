@@ -1,0 +1,4 @@
+# Cloudflare Pages response headers. The browser may run only the site's own scripts, so nothing from another
+# address can load in a visitor's browser (CLAUDE.md rule 2), whatever is switched on in the Cloudflare dashboard.
+/*
+  Content-Security-Policy: script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'

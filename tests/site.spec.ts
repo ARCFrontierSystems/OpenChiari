@@ -438,6 +438,37 @@ test('Support: Connect with others links to outside communities, with the not-ch
   await expect(section.locator('a[hreflang="es"]')).toHaveAttribute('href', 'https://femacpa.com/');
 });
 
+test('the hosting rules let browsers run only the site\'s own scripts, and the 3D Explorer still works under them', async ({ browser }) => {
+  const { readFileSync } = await import('node:fs');
+  const rules = readFileSync(new URL('../dist/_headers', import.meta.url), 'utf8');
+  const csp = rules.match(/Content-Security-Policy: (.+)/)?.[1] ?? '';
+  expect(csp).toContain("script-src 'self'");
+  expect(csp).not.toMatch(/https?:/);
+  // Serve the pages with that rule, plus a stand-in for a script Cloudflare could add, and check only it is refused.
+  const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  await context.route('**/*', async (route) => {
+    if (!route.request().url().startsWith('http://127.0.0.1') && !route.request().url().startsWith('http://localhost')) return route.abort();
+    const response = await route.fetch();
+    const headers = response.headers();
+    if (!(headers['content-type'] ?? '').includes('text/html')) return route.fulfill({ response });
+    const body = (await response.text()).replace('</body>', '<script defer src="https://static.cloudflareinsights.com/beacon.min.js"></script></body>');
+    await route.fulfill({ response, headers: { ...headers, 'content-security-policy': csp }, body });
+  });
+  const page = await context.newPage();
+  const refused: string[] = [];
+  const errors: string[] = [];
+  page.on('console', (m) => m.text().includes('Content Security Policy') && refused.push(m.text()));
+  page.on('pageerror', (e) => errors.push(e.message));
+  await page.goto('/explorer/#c1');
+  await expect(page.locator('body')).toHaveClass(/has-3d/, { timeout: 30000 });
+  await page.goto('/prep/');
+  await page.goto('/children/');
+  expect(errors).toEqual([]);
+  expect(refused.length).toBeGreaterThan(0);
+  expect(refused.every((m) => m.includes('cloudflareinsights'))).toBe(true);
+  await context.close();
+});
+
 test.describe('Helping your child', () => {
   test('the school sheet prints what was typed, as text only, and nothing is stored or sent', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });

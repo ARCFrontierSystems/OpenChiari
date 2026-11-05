@@ -989,7 +989,7 @@ Visible labels:
 
 Non-medical, approved with the check-up fixes ("All approved, and fix the rest of the check up items and wordings to your recommendations").
 
-- 3D Explorer, next to Nerves and Blood vessels (greyed out): Not in this model yet
+- ~~3D Explorer, next to Nerves and Blood vessels (greyed out): Not in this model yet~~ (removed Nov 5, 2026, with those layers)
 - Evidence notes, under the title: The evidence notes list every medical sentence and every 3D shape on the site with the source it rests on. They are the working file the site is built from, so they also name files and checks used by the people who maintain it.
 - Evidence notes, Spanish pages only: These notes are in English, like the sources they cite.
 - About, Corrections: …Corrections are made as quickly as possible, and every change is listed in the site's public code history.

@@ -11,7 +11,7 @@ import TranslationNotice from '../components/TranslationNotice.astro';
 import Head from '../components/Head.astro';
 import Footer from '../components/Footer.astro';
 import { anatomyFigureSvg, CONDITIONS } from '../lib/anatomy-figure';
-import { initialState, LAYERS, SIMPLE_LAYERS, CAMERA_PRESETS } from '../explorer/state';
+import { initialState, LAYERS, CAMERA_PRESETS } from '../explorer/state';
 const RESET_ICON = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v4h4"></path></svg>';
 import { getStrings, getRoutes, otherLanguagePath } from '../i18n';
 const routes = getRoutes(Astro.currentLocale);
@@ -79,12 +79,9 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
           <div class="x-layers">
             {LAYERS.map((id) => (
               <>
-                <input id={`layer-${id}`} type="checkbox" data-layer-on={id} checked={st.layers[id].on} disabled={!SIMPLE_LAYERS.includes(id)} />
-                <label for={`layer-${id}`}>
-                  {x.layerNames[id]}
-                  {!SIMPLE_LAYERS.includes(id) && <span class="x-na">{x.notInModel}</span>}
-                </label>
-                <input type="range" min="0" max="100" step="5" value={st.layers[id].opacity} data-layer-opacity={id} aria-label={x.layerNames[id] + x.opacitySuffix} disabled={!SIMPLE_LAYERS.includes(id)} />
+                <input id={`layer-${id}`} type="checkbox" data-layer-on={id} checked={st.layers[id].on} />
+                <label for={`layer-${id}`}>{x.layerNames[id]}</label>
+                <input type="range" min="0" max="100" step="5" value={st.layers[id].opacity} data-layer-opacity={id} aria-label={x.layerNames[id] + x.opacitySuffix} />
               </>
             ))}
           </div>
@@ -870,11 +867,6 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
   .x-cough[hidden] {
     display: none;
   }
-  .x-na {
-    display: block;
-    font-size: var(--x-size-caption);
-    color: var(--x-faint);
-  }
   .x-layers {
     display: grid;
     grid-template-columns: 20px minmax(0, 1fr) 84px;
@@ -895,12 +887,6 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
     align-items: center;
     line-height: 1.25;
     cursor: pointer;
-  }
-  .x-layers label:has(.x-na) {
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    line-height: 1.2;
   }
   .x input[type='range'] {
     width: 100%;

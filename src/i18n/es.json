@@ -312,9 +312,7 @@
       "skin": "Piel",
       "bone": "Cráneo y columna",
       "brain": "Cerebro",
-      "csf": "Líquido cefalorraquídeo",
-      "nerves": "Nervios",
-      "vessels": "Vasos sanguíneos"
+      "csf": "Líquido cefalorraquídeo"
     },
     "opacitySuffix": ": opacidad",
     "cutaway": "Corte",
@@ -448,7 +446,6 @@
       "far": "Corte pasada la línea media, hacia el lado opuesto"
     },
     "evidencePage": "Notas de evidencia",
-    "notInModel": "Aún no están en este modelo",
     "cough": {
       "title": "¿Por qué toser puede provocar un dolor de cabeza?",
       "text": [
@@ -1306,7 +1303,7 @@
     "download": "Descargar",
     "letter": "Carta",
     "orgsTitle": "Para organizaciones",
-    "orgsText": "¿Quiere su propia versión? Use \"Haga el suyo\" más abajo para agregar sus palabras, su logotipo y sus colores. Nada de lo que agregue se envía a ningún lugar.",
+    "orgsText": "¿Quiere su propia versión? Use \"Haga su propio diseño\" más abajo para agregar sus palabras, su logotipo y sus colores. Nada de lo que agregue se envía a ningún lugar.",
     "contact": "Contactar a Open Chiari",
     "license": "Los gráficos del kit se pueden usar y compartir libremente, CC BY-SA 4.0. Los gráficos que muestran el modelo 3D también llevan el crédito de Z-Anatomy y BodyParts3D.",
     "explain": {
@@ -1329,35 +1326,35 @@
         "everyone": {
           "title": "Calcomanías para todos",
           "messages": [
-            "Guerrero contra Chiari",
+            "Luchando contra Chiari",
             "Cerebro valiente",
             "Un día a la vez",
             "Descansar también es fuerza",
             "Sigo siendo yo",
             "Pregúntame sobre Chiari",
             "No estás solo",
-            "Morado por Chiari",
+            "De morado por Chiari",
             "Invisible, no imaginario"
           ]
         },
         "surgery": {
           "title": "Calcomanías para después de la cirugía",
           "messages": [
-            "Club del cierre",
-            "Orgullo de mi cicatriz",
+            "Club del zíper",
+            "Mi cicatriz, mi orgullo",
             "Cada cicatriz cuenta una historia",
             "Hice algo difícil",
-            "Niño valiente",
+            "Súper valiente",
             "Sanar toma tiempo",
             "Modo recuperación",
-            "Héroe del hospital",
+            "Estrella del hospital",
             "Cerebro valiente"
           ]
         }
       }
     },
     "builder": {
-      "title": "Haga el suyo",
+      "title": "Haga su propio diseño",
       "intro": "Elija un diseño y un mensaje, agregue sus propias palabras, un logotipo o una foto, y descárguelo. Todo ocurre en su dispositivo: nada de lo que agregue se envía ni se guarda.",
       "design": "Diseño",
       "designs": {

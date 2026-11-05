@@ -3,6 +3,10 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: Nerves and Blood vessels layers removed
+
+Matthew decided ("Let's just remove them. I don't think those options will ever be necessary"). They were greyed out as "Not in this model yet" because no model has them. Removed from the Explorer, the strings and the code. Old shared links that switched them off still open: unknown layers are ignored. SPEC.md's layer list has a note.
+
 ## 2026-11-05: Published (PR #10, Matthew: "Go ahead")
 
 Live and checked on openchiari.org:

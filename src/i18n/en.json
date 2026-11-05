@@ -312,9 +312,7 @@
       "skin": "Skin",
       "bone": "Skull and spine",
       "brain": "Brain",
-      "csf": "Spinal fluid",
-      "nerves": "Nerves",
-      "vessels": "Blood vessels"
+      "csf": "Spinal fluid"
     },
     "opacitySuffix": " opacity",
     "cutaway": "Cut-away",
@@ -448,7 +446,6 @@
       "far": "Cut past the midline, toward the far side"
     },
     "evidencePage": "Evidence notes",
-    "notInModel": "Not in this model yet",
     "cough": {
       "title": "Why can coughing bring on a headache?",
       "text": [

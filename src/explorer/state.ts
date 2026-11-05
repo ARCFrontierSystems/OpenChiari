@@ -6,10 +6,9 @@
  */
 import type { Condition } from '../lib/anatomy-figure';
 
-export type LayerId = 'skin' | 'bone' | 'brain' | 'csf' | 'nerves' | 'vessels';
-export const LAYERS: LayerId[] = ['skin', 'bone', 'brain', 'csf', 'nerves', 'vessels'];
-/** Layers the Simple model has. Nerves and blood vessels aren't in the figure or EVIDENCE.md yet. */
-export const SIMPLE_LAYERS: LayerId[] = ['skin', 'bone', 'brain', 'csf'];
+// Nerves and blood vessels were planned as layers but removed on Nov 5, 2026 (Matthew): no model has them.
+export type LayerId = 'skin' | 'bone' | 'brain' | 'csf';
+export const LAYERS: LayerId[] = ['skin', 'bone', 'brain', 'csf'];
 
 export interface Layer {
   on: boolean;
@@ -45,8 +44,6 @@ export const initialState: ViewState = {
     bone: { on: true, opacity: 100 },
     brain: { on: true, opacity: 100 },
     csf: { on: true, opacity: 100 },
-    nerves: { on: false, opacity: 100 },
-    vessels: { on: false, opacity: 100 },
   },
   cut: 50,
   // The realistic model is Phase 2 and stays hidden until it passes the accuracy checks (CLAUDE.md rule 1a).

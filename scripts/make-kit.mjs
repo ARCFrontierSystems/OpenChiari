@@ -121,7 +121,9 @@ const pages = {
   // awareness ribbon behind the words in a tint of its own color (low contrast, so the words stay easy to read).
   stickers: (sheet, w, h) => {
     const st = k.stickers;
-    const words = [...st.sheets[sheet].messages, ...Array(12).fill('')].slice(0, 12);
+    // A short last word stays on the line before it, so it isn't left alone.
+    const keep = (m) => m.replace(/ (\S{1,3})$/, '\u00a0$1');
+    const words = [...st.sheets[sheet].messages.map(keep), ...Array(12).fill('')].slice(0, 12);
     const styles = [
       { css: 'background:#5B027E;color:#fff', ribbon: '#7A2A9C' },
       { css: 'background:#EBD7F4;color:#3E0157', ribbon: '#D9BCE8' },

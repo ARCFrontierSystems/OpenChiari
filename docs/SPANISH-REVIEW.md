@@ -16,7 +16,7 @@ Known deliberate differences: the Explain It starter note says the same thing in
 limit; "(en inglés)" is added where content stays in English (official study listings, the downloadable figure set);
 Support adds "Sus sitios web pueden estar solo en inglés."
 
-Please check the **medical sentences** first (205 rows), then the rest (646 rows).
+Please check the **medical sentences** first (205 rows), then the rest (643 rows).
 Made by `scripts/make-spanish-review.mjs`; rebuild it after any text change.
 
 ## Medical sentences
@@ -312,8 +312,6 @@ Made by `scripts/make-spanish-review.mjs`; rebuild it after any text change.
 | `explorer.layerNames.bone` | Skull and spine | Cráneo y columna | Skull and spine |
 | `explorer.layerNames.brain` | Brain | Cerebro | Brain |
 | `explorer.layerNames.csf` | Spinal fluid | Líquido cefalorraquídeo | Cerebrospinal fluid |
-| `explorer.layerNames.nerves` | Nerves | Nervios | Nerves |
-| `explorer.layerNames.vessels` | Blood vessels | Vasos sanguíneos | Blood vessels |
 | `explorer.opacitySuffix` |  opacity | : opacidad | : opacity |
 | `explorer.cutaway` | Cut-away | Corte | Cut |
 | `explorer.cutawayAria` | Cut-away depth | Profundidad del corte | Cut depth |
@@ -357,7 +355,6 @@ Made by `scripts/make-spanish-review.mjs`; rebuild it after any text change.
 | `explorer.cutNames.midline` | Cut at the midline | Corte en la línea media | Cut at the midline |
 | `explorer.cutNames.far` | Cut past the midline, toward the far side | Corte pasada la línea media, hacia el lado opuesto | Cut past the midline, toward the opposite side |
 | `explorer.evidencePage` | Evidence notes | Notas de evidencia | Evidence notes |
-| `explorer.notInModel` | Not in this model yet | Aún no están en este modelo | Not yet in this model |
 | `explorer.cough.title` | Why can coughing bring on a headache? | ¿Por qué toser puede provocar un dolor de cabeza? |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `explorer.cough.text.0` | A cough briefly raises the pressure in your chest, which pushes some spinal fluid up from the spine into the head. Normally it then flows back down. | Al toser, la presión en el pecho sube por un momento, y eso empuja algo de líquido cefalorraquídeo desde la columna hacia la cabeza. Normalmente, después vuelve a bajar. |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `explorer.cough.text.1` | One explanation is that, in some people with Chiari I, the low tonsils get in the way as the fluid flows back, so just after a cough they are pushed further down into the opening. | Una explicación es que, en algunas personas con Chiari I, las amígdalas cerebelosas bajas estorban el paso del líquido cuando vuelve a bajar, por lo que justo después de toser son empujadas más hacia abajo, dentro de la abertura. |  **(changed since the back-translation; it reads the earlier Spanish)** |
@@ -738,7 +735,7 @@ Made by `scripts/make-spanish-review.mjs`; rebuild it after any text change.
 | `kit.download` | Download | Descargar | Download |
 | `kit.letter` | Letter | Carta | Letter |
 | `kit.orgsTitle` | For organizations | Para organizaciones | For organizations |
-| `kit.orgsText` | Want your own version? Use "Make your own" below to add your words, logo and colors. Nothing you add is sent anywhere. | ¿Quiere su propia versión? Use "Haga el suyo" más abajo para agregar sus palabras, su logotipo y sus colores. Nada de lo que agregue se envía a ningún lugar. | Do you need the kit with your colors or a version for a particular event? Write to us and we'll make it for you, free. **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.orgsText` | Want your own version? Use "Make your own" below to add your words, logo and colors. Nothing you add is sent anywhere. | ¿Quiere su propia versión? Use "Haga su propio diseño" más abajo para agregar sus palabras, su logotipo y sus colores. Nada de lo que agregue se envía a ningún lugar. | Do you need the kit with your colors or a version for a particular event? Write to us and we'll make it for you, free. **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.contact` | Contact Open Chiari | Contactar a Open Chiari | Contact Open Chiari |
 | `kit.license` | Kit graphics are free to use and share, CC BY-SA 4.0. Graphics showing the 3D model also carry the Z-Anatomy and BodyParts3D credit. | Los gráficos del kit se pueden usar y compartir libremente, CC BY-SA 4.0. Los gráficos que muestran el modelo 3D también llevan el crédito de Z-Anatomy y BodyParts3D. | The kit graphics can be used and shared freely, CC BY-SA 4.0. The graphics that show the 3D model also carry the credit for Z-Anatomy and BodyParts3D. |
 | `kit.explain.headline` | What is Chiari malformation? | ¿Qué es la malformación de Chiari? |  **(changed since the back-translation; it reads the earlier Spanish)** |
@@ -753,26 +750,26 @@ Made by `scripts/make-spanish-review.mjs`; rebuild it after any text change.
 | `kit.stickers.blank` | Write your own | Escriba lo suyo |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.stickers.site` | openchiari.org | openchiari.org |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.stickers.sheets.everyone.title` | Stickers for everyone | Calcomanías para todos |  **(changed since the back-translation; it reads the earlier Spanish)** |
-| `kit.stickers.sheets.everyone.messages.0` | Chiari warrior | Guerrero contra Chiari |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.stickers.sheets.everyone.messages.0` | Chiari warrior | Luchando contra Chiari |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.stickers.sheets.everyone.messages.1` | Brave brain | Cerebro valiente |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.stickers.sheets.everyone.messages.2` | One day at a time | Un día a la vez |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.stickers.sheets.everyone.messages.3` | Rest is strength | Descansar también es fuerza |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.stickers.sheets.everyone.messages.4` | Still me | Sigo siendo yo |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.stickers.sheets.everyone.messages.5` | Ask me about Chiari | Pregúntame sobre Chiari |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.stickers.sheets.everyone.messages.6` | You are not alone | No estás solo |  **(changed since the back-translation; it reads the earlier Spanish)** |
-| `kit.stickers.sheets.everyone.messages.7` | Purple for Chiari | Morado por Chiari |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.stickers.sheets.everyone.messages.7` | Purple for Chiari | De morado por Chiari |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.stickers.sheets.everyone.messages.8` | Invisible, not imaginary | Invisible, no imaginario |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.stickers.sheets.surgery.title` | Stickers for after surgery | Calcomanías para después de la cirugía |  **(changed since the back-translation; it reads the earlier Spanish)** |
-| `kit.stickers.sheets.surgery.messages.0` | Zipper club | Club del cierre |  **(changed since the back-translation; it reads the earlier Spanish)** |
-| `kit.stickers.sheets.surgery.messages.1` | Proud of my scar | Orgullo de mi cicatriz |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.stickers.sheets.surgery.messages.0` | Zipper club | Club del zíper |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.stickers.sheets.surgery.messages.1` | Proud of my scar | Mi cicatriz, mi orgullo |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.stickers.sheets.surgery.messages.2` | Every scar tells a story | Cada cicatriz cuenta una historia |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.stickers.sheets.surgery.messages.3` | I did a hard thing | Hice algo difícil |  **(changed since the back-translation; it reads the earlier Spanish)** |
-| `kit.stickers.sheets.surgery.messages.4` | Brave kid | Niño valiente |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.stickers.sheets.surgery.messages.4` | Brave kid | Súper valiente |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.stickers.sheets.surgery.messages.5` | Healing takes time | Sanar toma tiempo |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.stickers.sheets.surgery.messages.6` | Recovery mode | Modo recuperación |  **(changed since the back-translation; it reads the earlier Spanish)** |
-| `kit.stickers.sheets.surgery.messages.7` | Hospital hero | Héroe del hospital |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.stickers.sheets.surgery.messages.7` | Hospital hero | Estrella del hospital |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.stickers.sheets.surgery.messages.8` | Brave brain | Cerebro valiente |  **(changed since the back-translation; it reads the earlier Spanish)** |
-| `kit.builder.title` | Make your own | Haga el suyo |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.title` | Make your own | Haga su propio diseño |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.builder.intro` | Choose a design and message, add your own words, a logo or photo, and download it. Everything happens on your device: nothing you add is sent or saved. | Elija un diseño y un mensaje, agregue sus propias palabras, un logotipo o una foto, y descárguelo. Todo ocurre en su dispositivo: nada de lo que agregue se envía ni se guarda. |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.builder.design` | Design | Diseño |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.builder.designs.square` | Square post | Publicación cuadrada |  **(changed since the back-translation; it reads the earlier Spanish)** |

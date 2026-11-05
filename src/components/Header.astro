@@ -18,18 +18,14 @@ const navItems = [
   { href: routes.prep, label: t.nav.prep },
   { href: routes.studies, label: t.nav.studies },
 ];
-// "More": the other tools, in the Home page's groups (minus the four above).
+// "More": the other tools, in the Home page's order (minus the four above), as plain links. The group headings stay
+// on Home only (Matthew, Nov 5).
 const tools = getStrings(Astro.currentLocale).home.tools;
 const inMenu = ['explorer', 'prep', 'explain', 'studies'];
-const moreGroups = tools.groups
-  .map((g) => ({
-    title: g.title,
-    items: g.pages.filter((page) => !inMenu.includes(page)).map((page) => ({
-      href: routes[page as keyof typeof routes],
-      label: tools.items.find((tool) => tool.page === page)!.title,
-    })),
-  }))
-  .filter((g) => g.items.length);
+const moreItems = tools.groups
+  .flatMap((g) => g.pages)
+  .filter((page) => !inMenu.includes(page))
+  .map((page) => ({ href: routes[page as keyof typeof routes], label: tools.items.find((tool) => tool.page === page)!.title }));
 const current = Astro.url.pathname;
 // The language link opens this same page in the other language.
 const otherLang = Astro.currentLocale === 'es' ? 'en' : 'es';
@@ -54,13 +50,8 @@ const otherHref = otherLanguagePath(current);
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
         </button>
         <div class="more-panel" id="more-panel" hidden>
-          {moreGroups.map((g) => (
-            <div class="more-group">
-              <p class="more-title">{g.title}</p>
-              {g.items.map((item) => (
-                <a href={item.href} aria-current={current === item.href ? 'page' : undefined}>{item.label}</a>
-              ))}
-            </div>
+          {moreItems.map((item) => (
+            <a href={item.href} aria-current={current === item.href ? 'page' : undefined}>{item.label}</a>
           ))}
         </div>
       </div>
@@ -91,13 +82,8 @@ const otherHref = otherLanguagePath(current);
     {navItems.map((item) => (
       <a href={item.href} aria-current={current === item.href ? 'page' : undefined}>{item.label}</a>
     ))}
-    {moreGroups.map((g) => (
-      <>
-        <p class="menu-title">{g.title}</p>
-        {g.items.map((item) => (
-          <a href={item.href} aria-current={current === item.href ? 'page' : undefined}>{item.label}</a>
-        ))}
-      </>
+    {moreItems.map((item, i) => (
+      <a class:list={{ 'menu-more-first': i === 0 }} href={item.href} aria-current={current === item.href ? 'page' : undefined}>{item.label}</a>
     ))}
     <a href={otherHref} lang={otherLang} hreflang={otherLang} data-other-lang>{t.espanol}</a>
     <label class="menu-switch">
@@ -288,11 +274,9 @@ const otherHref = otherLanguagePath(current);
   .menu a:last-child {
     border-bottom: 0;
   }
-  .menu-title {
-    margin: var(--s-12) 0 0;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--muted);
+  /* One stronger line between the four main tools and the rest. */
+  .menu .menu-more-first {
+    border-top: 2px solid var(--rule);
   }
   /* "More" (desktop): a button and a small panel under it. */
   .more {
@@ -331,20 +315,9 @@ const otherHref = otherLanguagePath(current);
     border-radius: var(--radius);
     display: flex;
     flex-direction: column;
-    gap: var(--s-8);
   }
   .more-panel[hidden] {
     display: none;
-  }
-  .more-group {
-    display: flex;
-    flex-direction: column;
-  }
-  .more-title {
-    margin: 0;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--muted);
   }
   .more-panel a {
     display: flex;

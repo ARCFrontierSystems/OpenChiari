@@ -153,10 +153,12 @@ export function anatomyFigureSvg(options: FigureOptions, t: FigureStrings): stri
   // Back of each vertebra (lamina and spinous process), closing the spinal canal.
   add(true, [shapes.spinous2, shapes.spinous3, shapes.spinous4, shapes.spinous5].map(bonePath).join(''), 'bone');
   // The skin incision, while the operation is under way (stages 1 to 3): the back skin line from the level of the inion
-  // (where the tentorium meets the back of the skull, y 382) down to the C2 spinous process (y 522), about 7 cm.
+  // (where the tentorium meets the back of the skull, y 382) down to the C2 spinous process (y 522): about 7 cm top to
+  // bottom, about 8 cm along the skin (PMC4821417: "from the inion to the spinous process of C2"; Mayfield: about 3 inches).
+  // It belongs to the skin, so it goes when the Skin layer is off.
   if (stage >= 1 && stage <= 3) {
     const id = `incision-${++clipCount}`;
-    parts.push(`<clipPath id="${id}"><rect x="430" y="382" width="120" height="140"/></clipPath><path d="${SKIN}" fill="none" stroke="#9A3412" stroke-width="3.5" stroke-linecap="round" clip-path="url(#${id})"/>`);
+    add(true, `<clipPath id="${id}"><rect x="430" y="382" width="120" height="140"/></clipPath><path d="${SKIN}" fill="none" stroke="#9A3412" stroke-width="3.5" stroke-linecap="round" clip-path="url(#${id})"/>`, 'skin');
   }
   // Flow marks sit in the fluid: the neck canal is narrow (about 2 mm in front of the cord, 3 mm behind).
   const front = FLOW.front.map(([x, y]) => chevron(x, y, 2.5));

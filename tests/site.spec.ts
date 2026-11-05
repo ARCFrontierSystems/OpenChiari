@@ -416,6 +416,9 @@ test('What happens in surgery: steps through from Chiari I to after decompressio
   await expect(panel.locator('[data-surgery-label]')).toHaveText('Step 1 of 5 · Before surgery');
   await expect(page.locator('input[name="condition-wide"][value="surgery"]')).toBeChecked();
   await expect(page.locator('li:has(> [data-part="removed"])').first()).toBeHidden();
+  await page.locator('[data-part="cerebellum"]').first().click();
+  await expect(page.locator('li:has(> [data-part="removed"])').first()).toBeHidden();
+  await expect(page.locator('[data-viewer]').first()).toHaveAttribute('aria-label', /Before surgery/);
   for (let i = 0; i < 4; i++) await panel.locator('[data-surgery-next]').click();
   await expect(panel.locator('[data-surgery-label]')).toHaveText('Step 5 of 5 · Afterward');
   await expect(panel.locator('[data-surgery-next]')).toBeDisabled();
@@ -433,9 +436,10 @@ test('Support: Connect with others links to outside communities, with the not-ch
   await page.goto('/support/');
   const section = page.locator('#connect');
   await expect(section.locator('li')).toHaveCount(4);
-  await expect(section).toContainText("Open Chiari doesn't check it");
+  await expect(section).toContainText("isn't checked by Open Chiari");
+  await expect(section).toContainText("isn't a recommendation");
   await expect(section.locator('a[href="https://chiarisupport.org/"]')).toBeVisible();
-  await expect(section.locator('a[hreflang="es"]')).toHaveAttribute('href', 'https://femacpa.com/');
+  await expect(section.locator('a[hreflang="es"]')).toHaveAttribute('href', 'https://femacpa.com/quienes-somos');
 });
 
 test('the hosting rules let browsers run only the site\'s own scripts, and the 3D Explorer still works under them', async ({ browser }) => {

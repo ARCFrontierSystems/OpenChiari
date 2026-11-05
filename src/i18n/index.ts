@@ -76,7 +76,7 @@ export const externalLinks = {
   bensFriends: 'https://chiarisupport.org/',
   bjcsfInspire: 'https://www.inspire.com/groups/chiari-syringomyelia/',
   asapSupport: 'https://asap.org/find-support/',
-  femacpa: 'https://femacpa.com/',
+  femacpa: 'https://femacpa.com/quienes-somos',
   ctgov: 'https://clinicaltrials.gov',
   ctgovSearch: 'https://clinicaltrials.gov/search?cond=Chiari%20OR%20Syringomyelia&aggFilters=status:rec',
   ctgovStudy: 'https://clinicaltrials.gov/study/',

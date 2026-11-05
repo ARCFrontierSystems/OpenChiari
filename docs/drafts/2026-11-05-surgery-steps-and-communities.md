@@ -2,6 +2,29 @@
 
 **Status: draft. Built for preview, not published.** Each part needs an independent audit (CLAUDE.md rule 1a) and Matthew's approval.
 
+## Revised after the independent audit (this is the wording proposed for approval)
+
+The audit (`docs/audits/2026-11-05-surgery-steps-and-communities-audit.md`) passed both parts with changes. All its fixes are applied; the first draft below is kept for the record.
+
+**Surgery play-through**
+- Intro: "Surgeons don't all do the same operation. Some remove bone only, some also open the brain's covering and add a patch, and some also shrink the tonsils. This shows one common version. Your surgeon can tell you which steps apply to you." The Stanford source for shrinking the tonsils is saved at `docs/audits/sources/2026-11-05-surgery-and-children/stanford-childrens-chiari-treatment.txt`.
+- Step 4: "tough covering" is now "protective covering", Mayfield's word.
+- Caption: "Animation simplified. The incision line is approximate; its length varies."
+- Code fixes:
+  - screen readers hear each step's own description, not the finished operation;
+  - "11 Bone removed" stays out of the parts list until the bone step;
+  - the incision line goes away when the Skin layer is off;
+  - the length note now reads about 8 cm along the skin.
+
+**Connect with others**
+- Intro: "…These communities are run by other organizations, not by Open Chiari, and being listed here isn't a recommendation. What these sites and their members share isn't checked by Open Chiari and isn't medical advice."
+- Privacy note: "Before you post, read each site's privacy policy. On some sites, posts can be read by anyone on the internet." This follows Chiari Support's own statement that "Posts … can be read by anyone on the internet".
+- Inspire: "Bobby Jones CSF says you choose how anonymous you are." It is credited to Bobby Jones CSF because Inspire's own group page couldn't be opened. **Matthew: please open that link once in your own browser.**
+- ASAP: "…and help finding a local group that meets in person."
+- FEMACPA now links to the page that was opened (`femacpa.com/quienes-somos`).
+
+---
+
 Matthew asked for both on Nov 5:
 - "Can we also include number 1 as a sort of video? You can press play and it will show the procedure done to the 3D model."
 - "Can we also have links to other Chiari communities…"

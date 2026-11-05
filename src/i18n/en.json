@@ -443,7 +443,7 @@
     "sizeNote": "The usual cutoff, about 5 mm, is half a centimeter, about the height of 3 stacked quarters. The model shows about 12 mm, a little over 1 centimeter, about the height of 7 stacked quarters. How far the tonsils extend doesn't always match how someone feels.",
     "surgery": {
       "title": "What happens in surgery, step by step",
-      "intro": "Surgeons don't all do the same operation. Some remove bone only, and some also shrink the tonsils. Your surgeon can tell you which steps apply to you.",
+      "intro": "Surgeons don't all do the same operation. Some remove bone only, some also open the brain's covering and add a patch, and some also shrink the tonsils. This shows one common version. Your surgeon can tell you which steps apply to you.",
       "play": "Play",
       "pause": "Pause",
       "back": "Back",
@@ -465,14 +465,14 @@
         },
         {
           "title": "The patch",
-          "text": "Often the surgeon also opens the brain's tough covering (the dura) and sews in a patch, like letting out a waistband, to make more room for spinal fluid. Then the muscles and skin are closed."
+          "text": "Often the surgeon also opens the brain's protective covering (the dura) and sews in a patch, like letting out a waistband, to make more room for spinal fluid. Then the muscles and skin are closed."
         },
         {
           "title": "Afterward",
           "text": "On scans after surgery, the fluid space behind the cerebellum is often larger, and the tonsils often rise only partly."
         }
       ],
-      "caption": "Animation simplified. The incision line is approximate."
+      "caption": "Animation simplified. The incision line is approximate; its length varies."
     }
   },
   "evidence": {
@@ -819,8 +819,8 @@
     "notAffiliated": "Open Chiari is not affiliated with these organizations and receives nothing from donations.",
     "connect": {
       "title": "Connect with others",
-      "intro": "Talking with people who have been through it can help. These communities are run by other organizations, not by Open Chiari. What members share there is their own experience, not medical advice, and Open Chiari doesn't check it.",
-      "privacy": "Before you post, look at each site's privacy settings. Some posts can be seen by anyone.",
+      "intro": "Talking with people who have been through it can help. These communities are run by other organizations, not by Open Chiari, and being listed here isn't a recommendation. What these sites and their members share isn't checked by Open Chiari and isn't medical advice.",
+      "privacy": "Before you post, read each site's privacy policy. On some sites, posts can be read by anyone on the internet.",
       "groups": [
         {
           "id": "bensfriends",
@@ -833,14 +833,14 @@
           "id": "inspire",
           "name": "Bobby Jones CSF Support Community",
           "kind": "Online community on Inspire",
-          "text": "An online community for patients and families living with Chiari malformation, syringomyelia and related disorders. You choose how anonymous you are.",
+          "text": "An online community for patients and families living with Chiari malformation, syringomyelia and related disorders. Bobby Jones CSF says you choose how anonymous you are.",
           "link": "Visit the community"
         },
         {
           "id": "asap",
           "name": "ASAP support groups",
           "kind": "Video, phone and in person",
-          "text": "Monthly support groups over Zoom, monthly phone support groups, and a list of local groups that meet in person.",
+          "text": "Monthly support groups over Zoom, monthly phone support groups, and help finding a local group that meets in person.",
           "link": "Find a group"
         },
         {

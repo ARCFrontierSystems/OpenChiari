@@ -367,7 +367,10 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
         ventricle: 'csf', csf: 'csf', foramen: 'bone', c2: 'bone', syrinx: 'brain', removed: 'bone',
       };
       /** Text description of the current 3D view: condition, direction and cut. */
+      // Part way through "What happens in surgery", the view is described by its step, not as the finished operation.
+      let stageDescription = '';
       const describe = (st: ViewState) => {
+        if (stageDescription && st.condition === 'surgery') return `${strings.figure.ariaPrefix}${stageDescription}`;
         const cut = st.cut === 50 ? 'midline' : st.cut === 0 ? 'whole' : st.cut < 50 ? 'near' : 'far';
         return `${strings.figure.ariaPrefix}${strings.figure.aria[st.condition]}. ${x.viewNames[st.camera]}. ${x.cutNames[cut]}.`;
       };
@@ -439,16 +442,20 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
               });
             };
             const show = (n: number) => {
+              stageDescription = `${steps[n].title}. ${steps[n].text}`;
               if (store.get().condition !== 'surgery') store.set({ condition: 'surgery' });
               step = n;
               sv.viewer?.setSurgeryStage(n);
+              viewerHost.setAttribute('aria-label', describe(store.get()));
               render();
               if (n === steps.length - 1) pauseTimer();
             };
             const stop = () => {
               pauseTimer();
               step = null;
+              stageDescription = '';
               sv.viewer?.setSurgeryStage(null);
+              viewerHost.setAttribute('aria-label', describe(store.get()));
               render();
             };
             playButtons().forEach((b) =>
@@ -481,6 +488,8 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
             store.subscribe((st) => {
               if (st.condition !== 'surgery' && step !== null) stop();
               placePanels(st.condition);
+              // Other controls redraw the parts list; keep "11 Bone removed" in step with the play-through.
+              queueMicrotask(render);
             });
             placePanels(store.get().condition);
             render();

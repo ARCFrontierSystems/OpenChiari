@@ -119,7 +119,19 @@ export interface ViewerOptions {
 
 export async function createViewer(host: HTMLElement, store: Store, figureStrings: FigureStrings, options: ViewerOptions = {}) {
   const renderer = new THREE.WebGLRenderer({ antialias: true, stencil: true, powerPreference: 'low-power' });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  // Sharpness: up to 2 device pixels per CSS pixel at rest. On touch screens (phones and tablets) the model is drawn at
+  // 1 while a finger is turning or zooming it, which needs far less of the phone's graphics power, then sharp again as
+  // soon as the finger lifts.
+  const restRatio = Math.min(window.devicePixelRatio, 2);
+  const touchScreen = window.matchMedia('(pointer: coarse)').matches;
+  renderer.setPixelRatio(restRatio);
+  function setMoving(moving: boolean) {
+    const ratio = moving && touchScreen ? Math.min(restRatio, 1) : restRatio;
+    if (renderer.getPixelRatio() !== ratio) {
+      renderer.setPixelRatio(ratio);
+      requestRender();
+    }
+  }
   renderer.localClippingEnabled = true;
   renderer.setClearColor(BACKGROUND);
   renderer.domElement.setAttribute('aria-hidden', 'true');
@@ -439,8 +451,12 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   controls.addEventListener('start', () => {
     stopTween();
     userMoving = true;
+    setMoving(true);
   });
-  controls.addEventListener('end', () => (userMoving = false));
+  controls.addEventListener('end', () => {
+    userMoving = false;
+    setMoving(false);
+  });
   controls.addEventListener('change', () => {
     if (userMoving && store.get().camera !== 'custom') store.set({ camera: 'custom' });
     requestRender();
@@ -464,9 +480,28 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     controls.update();
   }
 
+  // The viewer's size, read only when it changes (reading it on every frame makes the browser redo its layout).
+  let hostW = host.clientWidth || 1, hostH = host.clientHeight || 1;
+  let labelsCssShown = true;
+  let labelsWasHidden: boolean | null = null;
+  /** Whether the label column is showing: re-measured only when it's switched on or off, or the viewer resizes. */
+  function labelsShowing() {
+    if (!labelsHost || labelsHost.hidden) {
+      labelsWasHidden = true;
+      return false;
+    }
+    if (labelsWasHidden !== false) {
+      labelsCssShown = labelsHost.offsetParent !== null;
+      labelsWasHidden = false;
+    }
+    return labelsCssShown;
+  }
   function resize() {
     const w = host.clientWidth, h = host.clientHeight;
     if (!w || !h) return;
+    hostW = w;
+    hostH = h;
+    labelsWasHidden = null;
     renderer.setSize(w, h, false);
     renderer.domElement.style.width = '100%';
     renderer.domElement.style.height = '100%';
@@ -721,8 +756,8 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   /** When labels are showing, shift the picture left so the label column doesn't cover the head. */
   const LABEL_SPACE = 236; // px
   function updateLabelSpace() {
-    const showing = !!labelsHost && !labelsHost.hidden && labelsHost.offsetParent !== null;
-    const w = host.clientWidth || 1;
+    const showing = labelsShowing();
+    const w = hostW;
     // Shift the picture left by half the label column: film offset = 2 * shift / width * film width * tan(fov / 2) * aspect.
     const tan = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
     const offset = showing ? ((2 * (LABEL_SPACE / 2)) / w) * camera.getFilmWidth() * tan * camera.aspect : 0;
@@ -735,10 +770,11 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     }
   }
   function placeLabels() {
-    if (!labelsHost || !labelSvg || labelsHost.hidden) return;
+    if (!labelsHost || !labelSvg || !labelsShowing()) return;
     const st = store.get();
-    const w = host.clientWidth, h = host.clientHeight;
-    labelSvg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+    const w = hostW, h = hostH;
+    const box = `0 0 ${w} ${h}`;
+    if (labelSvg.getAttribute('viewBox') !== box) labelSvg.setAttribute('viewBox', box);
     const shownDefs = [...labelEls.values()].filter(({ def }) => st.layers[def.layer].on && (!def.conditions || def.conditions.includes(st.condition)));
     const top = options.labelMargins?.top ?? 76, bottom = h - (options.labelMargins?.bottom ?? 56);
     const gap = shownDefs.length > 1 ? Math.min(46, (bottom - top) / (shownDefs.length - 1)) : 0;

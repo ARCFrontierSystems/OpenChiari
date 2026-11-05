@@ -3,6 +3,16 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: Smoother 3D on phones, part 2
+
+- **Matthew:** the 3D model still stutters on phones.
+- **Done (src/explorer/viewer3d.ts):**
+  - **Lower resolution while moving.** On touch screens, the model is drawn at half resolution while a finger turns or zooms it, then sharp again the moment the finger lifts. That is about a quarter of the pixels while moving.
+  - **No page measuring on every frame.** Before, the viewer measured the page on every frame, which forced the browser to redo its layout. It now measures only when the viewer resizes or the labels are switched on or off.
+  - **No label work when labels are hidden.** When the label column is hidden (as on phones), the labels are no longer positioned on every frame.
+  - A test checks the resolution drops while moving and comes back afterwards.
+- **Not tested on a real phone from here.** Matthew to try it once it's live.
+
 ## 2026-11-05: Visit prep mention list; smoother scrolling on phones
 
 - **Visit prep (Matthew):** "Things I want to mention" had no Add button.

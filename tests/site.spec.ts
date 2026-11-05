@@ -517,3 +517,21 @@ test('Research studies: the list, its filters and Near sorting work on the devic
   }
   expect(sent).toEqual([]);
 });
+
+test('phones: the 3D view draws at lower resolution only while a finger turns it, then sharp again', async ({ browser }) => {
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, hasTouch: true, isMobile: true });
+  const page = await ctx.newPage();
+  await page.goto('/explorer/');
+  await expect(page.locator('.x-view.has-3d')).toBeVisible({ timeout: 30000 });
+  const canvas = page.locator('[data-viewer] canvas');
+  const box = (await canvas.boundingBox())!;
+  const width = () => canvas.evaluate((el: HTMLCanvasElement) => el.width);
+  expect(await width()).toBe(Math.round(box.width * 2));
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(box.x + box.width / 2 + 40, box.y + box.height / 2, { steps: 5 });
+  expect(await width()).toBe(Math.round(box.width));
+  await page.mouse.up();
+  await expect.poll(width).toBe(Math.round(box.width * 2));
+  await ctx.close();
+});

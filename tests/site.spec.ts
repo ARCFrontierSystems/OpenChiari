@@ -487,10 +487,29 @@ test('Awareness kit, Make your own: messages only from the approved list, downlo
   page.on('request', (r) => requests.push(r.url()));
   const before = await page.evaluate(() => ({ local: { ...localStorage }, session: { ...sessionStorage }, cookies: document.cookie }));
 
-  // The main message can only be one of the approved lines (a list, not a text box).
-  await expect(page.locator('select[data-field="message"] option')).toHaveCount(6);
+  // The main message can only be one of the approved lines (cards to pick from, not a text box), each standing alone.
+  const messages = page.locator('input[name="message"]');
+  await expect(messages).toHaveCount(6);
+  await expect(page.locator('.message-text')).toHaveText([
+    'What is Chiari malformation?',
+    'I have Chiari malformation.',
+    'Chiari symptoms often have few outward signs. Ask how you can help.',
+    /^Chiari malformation looks different/,
+    /^Most people with Chiari malformation are born/,
+    /^The classic sign of Chiari malformation is/,
+  ]);
+  // "What is Chiari malformation?" always comes with its answer, and the preview says so in words.
+  await expect(page.locator('[data-builder-canvas]')).toHaveAttribute('aria-label', /What is Chiari malformation\? The lowest part of the back of the brain/);
+  // Paper size is only for the designs you print.
+  await expect(page.getByText('Paper size')).toBeHidden();
+  // The counter counts down.
+  await expect(page.locator('[data-counter]')).toHaveText('120 of 120 letters left');
   await page.locator('[data-field="own"]').fill('<b>Walking for Emma</b>');
   await page.locator('[data-field="name"]').fill('Sample group');
+  await expect(page.locator('[data-counter]')).toHaveText('97 of 120 letters left');
+  // The picture of Chiari, when added, brings its caption and the model credit into the description.
+  await page.locator('[data-field="figure"]').check();
+  await expect(page.locator('[data-builder-canvas]')).toHaveAttribute('aria-label', /With the picture of Chiari\./);
   const [download] = await Promise.all([page.waitForEvent('download'), page.locator('[data-builder-download]').click()]);
   expect(download.suggestedFilename()).toBe('open-chiari-square.png');
 
@@ -508,6 +527,14 @@ test('Awareness kit, Make your own: messages only from the approved list, downlo
   await page.emulateMedia({ media: 'screen' });
 
   await page.locator('input[name="design"][value="stickers"]').check();
+  await expect(page.getByText('Paper size')).toBeVisible();
+  // Stickers start with words, offer the approved phrases, and keep to 3 lines.
+  await expect(page.locator('[data-sticker-text]').first()).toHaveText('Chiari warrior');
+  await page.locator('[data-starter="Brave brain"]').click();
+  await expect(page.locator('[data-sticker-text]').first()).toHaveText('Brave brain');
+  await page.locator('[data-field="sticker"]').fill('Team Emma');
+  await page.locator('[data-field="sticker"]').pressSequentially('\nb\nc\nd');
+  expect((await page.locator('[data-field="sticker"]').inputValue()).split('\n')).toHaveLength(3);
   await page.locator('[data-field="sticker"]').fill('Team Emma');
   await expect(page.locator('[data-sticker-text]')).toHaveCount(12);
   await expect(page.locator('[data-sticker-text]').first()).toHaveText('Team Emma');
@@ -515,6 +542,19 @@ test('Awareness kit, Make your own: messages only from the approved list, downlo
   const after = await page.evaluate(() => ({ local: { ...localStorage }, session: { ...sessionStorage }, cookies: document.cookie }));
   expect(after).toEqual(before);
   expect(requests.filter((u) => !u.startsWith('blob:'))).toEqual([]);
+});
+
+test('Make your own on a phone: no sideways scrolling, and the preview stays in view while you fill it in', async ({ page }) => {
+  for (const path of ['/kit/', '/es/kit/']) {
+    await page.setViewportSize({ width: 360, height: 740 });
+    await page.goto(path);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(360);
+    await page.locator('[data-field="when"]').scrollIntoViewIfNeeded();
+    await expect(page.locator('[data-builder-canvas]')).toBeInViewport();
+    const size = page.locator('[data-preview-size]');
+    await size.click();
+    await expect(size).toHaveAttribute('aria-pressed', 'true');
+  }
 });
 
 test('Home: the tools include Helping your child, the Awareness kit and Connect with others', async ({ page }) => {

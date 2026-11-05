@@ -3,6 +3,20 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: Make your own, reworked (wording approved by Matthew)
+
+Matthew asked for a rework and approved all of the audit's recommendations. He found that the message options read as continuations of "What is Chiari malformation?".
+- **Wording (draft, `docs/drafts/2026-11-05-make-your-own.md`):** every message names Chiari itself; "What is Chiari malformation?" always comes with its approved answer; the headache line adds the approved "Not everyone with Chiari gets these headaches." Independent check passed (`docs/audits/2026-11-05-make-your-own-audit.md`); Spanish labels: back-translation check 5. EVIDENCE rows 2, 4 and 6 now list the sources opened on Nov 5.
+- **Tool:** three steps (what to make, your words, look and save); picture cards for the designs; the messages as cards showing the whole sentence; a letter counter; sticker starter phrases and 3-line limit; color swatches; logo thumbnail; an optional picture of Chiari on posts and stories (beside the message on a square post); the ribbon and "Chiari Awareness" on every graphic; the poster takes the chosen color in its top band; readable dark stickers; the preview describes itself to screen readers.
+- **Fixed:** sideways scrolling on phones; "Paper size" showing for downloads; the print preview not filling its frame; long lines cut off without warning; the preview below the whole form on phones (now a bar at the top, with "See it bigger").
+- Tests: 200 pass.
+
+Matthew approved the wording ("Ok on the make your own rework"). Next: publish and check live.
+
+## 2026-11-05: Published: More menu as plain links (PR #14)
+
+Checked on openchiari.org: the More list has no group headings, and the phone menu has one divider before the extra pages. Home keeps its three headed groups.
+
 ## 2026-11-05: Published: navigation (PR #13)
 
 Checked on openchiari.org:

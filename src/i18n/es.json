@@ -1317,7 +1317,7 @@
         "format": "Para imprimir, 8 por página · PDF"
       },
       "poster": {
-        "title": "Cartel y folleto para eventos",
+        "title": "Póster y folleto para eventos",
         "format": "Carta y A4 · PDF, con espacio para logotipo"
       },
       "stickersEveryone": {
@@ -1385,43 +1385,85 @@
     "builder": {
       "title": "Haga su propio diseño",
       "intro": "Elija un diseño y un mensaje, agregue sus propias palabras, un logotipo o una foto, y descárguelo. Todo ocurre en su dispositivo: nada de lo que agregue se envía ni se guarda.",
-      "design": "Diseño",
+      "step1": "¿Qué quiere hacer?",
       "designs": {
-        "square": "Publicación cuadrada",
-        "story": "Historia",
-        "poster": "Póster",
-        "stickers": "Hoja de calcomanías"
+        "square": {
+          "label": "Publicación cuadrada",
+          "hint": "Para Instagram y Facebook"
+        },
+        "story": {
+          "label": "Historia",
+          "hint": "Vertical, para historias"
+        },
+        "poster": {
+          "label": "Póster",
+          "hint": "Para imprimir"
+        },
+        "stickers": {
+          "label": "Calcomanías",
+          "hint": "Para imprimir"
+        }
       },
+      "step2": "Sus palabras",
       "message": "Mensaje",
-      "messageHint": "Los datos médicos solo vienen de esta lista, para que cada imagen sea correcta.",
+      "messageHint": "Los datos médicos solo vienen de esta lista, para que cada gráfico sea correcto.",
       "messages": [
-        "¿Qué es la malformación de Chiari?",
-        "Los síntomas de Chiari a menudo dan pocas señales visibles. Pregunte cómo puede ayudar.",
-        "Tengo malformación de Chiari.",
-        "Chiari es diferente en cada persona, y muchas personas con el tipo I no tienen ningún síntoma.",
-        "La mayoría de las personas nacen con las diferencias del cráneo que la causan. Algunas nunca tienen síntomas; otras los notan por primera vez en la adolescencia o en la edad adulta.",
-        "El síntoma clásico es un dolor de cabeza en la parte de atrás de la cabeza después de toser, estornudar o hacer un esfuerzo."
+        {
+          "text": "¿Qué es la malformación de Chiari?",
+          "answer": "La parte más baja de la parte de atrás del cerebro se extiende por debajo de la abertura en la base del cráneo."
+        },
+        {
+          "text": "Tengo malformación de Chiari."
+        },
+        {
+          "text": "Los síntomas de Chiari a menudo dan pocas señales visibles. Pregunte cómo puede ayudar."
+        },
+        {
+          "text": "La malformación de Chiari es diferente en cada persona, y muchas personas con el tipo I no tienen ningún síntoma."
+        },
+        {
+          "text": "La mayoría de las personas con malformación de Chiari nacen con las diferencias del cráneo que la causan. Algunas nunca tienen síntomas; otras los notan por primera vez en la adolescencia o en la edad adulta."
+        },
+        {
+          "text": "El síntoma clásico de la malformación de Chiari es un dolor de cabeza en la parte de atrás de la cabeza después de toser, estornudar o hacer un esfuerzo. No todas las personas con Chiari tienen estos dolores de cabeza."
+        }
       ],
       "own": "Su propia frase (opcional)",
-      "ownHint": "Por ejemplo: Camino por mi hija Emma",
+      "ownHint": "Por ejemplo: Caminamos por mi hija Emma",
+      "counter": "Quedan {left} de {max} letras",
+      "yours": "Sus propias palabras aparecen en un recuadro aparte, para que quede claro que son suyas.",
       "name": "Nombre, grupo o evento (opcional)",
       "when": "Fecha y lugar (opcional)",
       "stickerText": "Sus palabras para las calcomanías",
       "stickerHint": "Hasta 3 líneas cortas. Aparecen en las 12 calcomanías.",
-      "image": "Logotipo o foto (opcional)",
-      "imageHint": "Se queda en su dispositivo.",
-      "removeImage": "Quitar",
+      "starters": "O empiece con una de nuestras frases:",
+      "stickerDefault": "Luchando contra Chiari",
+      "step3": "Aspecto y descarga",
       "color": "Colores",
       "colors": {
         "purple": "Morado",
         "light": "Claro",
         "dark": "Oscuro"
       },
+      "figure": "Mostrar la imagen de Chiari",
+      "figureHint": "Se agrega la imagen con su leyenda y el crédito del modelo 3D.",
+      "image": "Logotipo o foto (opcional)",
+      "imageHint": "Se queda en su dispositivo.",
+      "imageAlt": "Su logotipo o foto",
+      "removeImage": "Quitar",
       "size": "Tamaño del papel",
       "download": "Descargar imagen",
       "print": "Imprimir o guardar como PDF",
       "preview": "Vista previa",
-      "yours": "Sus propias palabras aparecen en un recuadro aparte, para que quede claro que son suyas."
+      "enlarge": "Verla más grande",
+      "shrink": "Verla más pequeña",
+      "describe": {
+        "message": "Mensaje",
+        "own": "Su frase",
+        "figure": "Con la imagen de Chiari.",
+        "image": "Con su logotipo o foto."
+      },
+      "label": "Concientización sobre Chiari"
     }
   },
   "children": {

@@ -16,7 +16,7 @@ Known deliberate differences: the Explain It starter note says the same thing in
 limit; "(en inglés)" is added where content stays in English (official study listings, the downloadable figure set);
 Support adds "Sus sitios web pueden estar solo en inglés."
 
-Please check the **medical sentences** first (205 rows), then the rest (643 rows).
+Please check the **medical sentences** first (205 rows), then the rest (678 rows).
 Made by `scripts/make-spanish-review.mjs`; rebuild it after any text change.
 
 ## Medical sentences
@@ -247,6 +247,7 @@ Made by `scripts/make-spanish-review.mjs`; rebuild it after any text change.
 | `header.calm` | Calm mode | Modo tranquilo | Calm mode |
 | `header.dim` | Dim | Modo oscuro |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `header.dimLabel` | Dim mode: dark colors, less light | Modo oscuro: colores oscuros, menos luz |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `header.more` | More | Más |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `translation.label` | About this translation | Sobre esta traducción | About this translation |
 | `translation.notice` | Translation pending review by a medical translator. It was made with the help of AI tools, and the English version is the reference. | Traducción pendiente de revisión por un traductor médico. Se hizo con ayuda de herramientas de inteligencia artificial, y la versión en inglés es la de referencia. | Translation pending review by a medical translator. It was made with the help of artificial intelligence tools, and the English version is the reference version. |
 | `translation.noticeShort` | Translation pending review by a medical translator. | Traducción pendiente de revisión por un traductor médico. | Translation pending review by a medical translator. |
@@ -284,6 +285,18 @@ Made by `scripts/make-spanish-review.mjs`; rebuild it after any text change.
 | `home.tools.items.6.title` | Helping your child | Cómo ayudar a su hijo |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `home.tools.items.7.title` | Awareness kit | Kit de concientización |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `home.tools.items.8.title` | Connect with others | Conectar con otras personas |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `home.tools.groups.0.title` | Understand and prepare | Comprender y prepararse |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `home.tools.groups.0.pages.0` | explorer | explorer |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `home.tools.groups.0.pages.1` | prep | prep |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `home.tools.groups.0.pages.2` | children | children |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `home.tools.groups.1.title` | Share and spread awareness | Compartir y concientizar |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `home.tools.groups.1.pages.0` | explain | explain |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `home.tools.groups.1.pages.1` | kit | kit |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `home.tools.groups.1.pages.2` | model | model |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `home.tools.groups.2.title` | Connect and get involved | Conectar y participar |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `home.tools.groups.2.pages.0` | connect | connect |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `home.tools.groups.2.pages.1` | studies | studies |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `home.tools.groups.2.pages.2` | support | support |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `footer.factsBefore` | Facts adapted from the | Información adaptada de la | Information adapted from the |
 | `footer.ninds` | NINDS fact sheet | hoja informativa del NINDS | NINDS fact sheet |
 | `footer.modelBefore` | . 3D model by Open Chiari, CC BY-SA 4.0, adapted from | . Modelo 3D de Open Chiari, CC BY-SA 4.0, adaptado de | . 3D model by Open Chiari, CC BY-SA 4.0, adapted from |
@@ -292,6 +305,7 @@ Made by `scripts/make-spanish-review.mjs`; rebuild it after any text change.
 | `footer.personalProject` | A personal project by Matthew Borgfeld. | Un proyecto personal de Matthew Borgfeld. | A personal project of Matthew Borgfeld. |
 | `footer.moreNavLabel` | More | Más | More |
 | `footer.links.children` | Helping your child | Cómo ayudar a su hijo |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `footer.links.model` | Open model | Modelo abierto |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `footer.links.support` | Support | Apoyo | Support |
 | `footer.links.kit` | Awareness kit | Kit de concientización | Awareness kit |
 | `footer.links.impact` | Impact | Impacto | Impact |
@@ -383,6 +397,7 @@ Made by `scripts/make-spanish-review.mjs`; rebuild it after any text change.
 | `explorer.surgery.steps.4.title` | Afterward | Después |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `explorer.surgery.steps.4.text` | On scans after surgery, the fluid space behind the cerebellum is often larger, and the tonsils often rise only partly. | En los estudios de imagen después de la cirugía, el espacio del líquido detrás del cerebelo a menudo es más grande, y las amígdalas cerebelosas a menudo suben solo en parte. |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `explorer.surgery.caption` | Animation simplified. The incision line is approximate; its length varies. | Animación simplificada. La línea de la incisión es aproximada; su longitud varía. |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `explorer.home` | Home | Inicio |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `evidence.inEnglish` | These notes are in English, like the sources they cite. | Estas notas están en inglés, igual que las fuentes que citan. | These notes are in English, the same as the sources they cite. |
 | `evidence.intro` | The evidence notes list every medical sentence and every 3D shape on the site with the source it rests on. They are the working file the site is built from, so they also name files and checks used by the people who maintain it. | Las notas de evidencia indican cada frase médica y cada forma 3D del sitio con la fuente en la que se basa. Son el archivo de trabajo con el que se hace el sitio, así que también mencionan archivos y comprobaciones que usan las personas que lo mantienen. | The evidence notes give each medical sentence and each 3D shape on the site with the source it is based on. They are the working file the site is made with, so they also mention files and checks used by the people who maintain it. |
 | `prep.title` | Prepare for your next appointment | Prepárese para su próxima cita | Prepare for your next appointment |
@@ -726,7 +741,7 @@ Made by `scripts/make-spanish-review.mjs`; rebuild it after any text change.
 | `kit.items.quote.format` | Square and story sizes · PNG | Tamaños cuadrado y de historia · PNG | Square and story sizes · PNG |
 | `kit.items.card.title` | Explain It wallet card | Tarjeta de bolsillo de Explain It | Explain It pocket card |
 | `kit.items.card.format` | Printable, 8 per page · PDF | Para imprimir, 8 por página · PDF | For printing, 8 per page · PDF |
-| `kit.items.poster.title` | Event poster and handout | Cartel y folleto para eventos | Poster and flyer for events |
+| `kit.items.poster.title` | Event poster and handout | Póster y folleto para eventos | Poster and flyer for events **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.items.poster.format` | Letter and A4 · PDF, with logo space | Carta y A4 · PDF, con espacio para logotipo | Letter and A4 · PDF, with space for logo |
 | `kit.items.stickersEveryone.title` | Stickers for everyone | Calcomanías para todos |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.items.stickersEveryone.format` | Letter and A4 · PDF, for full-sheet sticker paper | Carta y A4 · PDF, para papel adhesivo de hoja completa |  **(changed since the back-translation; it reads the earlier Spanish)** |
@@ -771,37 +786,57 @@ Made by `scripts/make-spanish-review.mjs`; rebuild it after any text change.
 | `kit.stickers.sheets.surgery.messages.8` | Brave brain | Cerebro valiente |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.builder.title` | Make your own | Haga su propio diseño |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.builder.intro` | Choose a design and message, add your own words, a logo or photo, and download it. Everything happens on your device: nothing you add is sent or saved. | Elija un diseño y un mensaje, agregue sus propias palabras, un logotipo o una foto, y descárguelo. Todo ocurre en su dispositivo: nada de lo que agregue se envía ni se guarda. |  **(changed since the back-translation; it reads the earlier Spanish)** |
-| `kit.builder.design` | Design | Diseño |  **(changed since the back-translation; it reads the earlier Spanish)** |
-| `kit.builder.designs.square` | Square post | Publicación cuadrada |  **(changed since the back-translation; it reads the earlier Spanish)** |
-| `kit.builder.designs.story` | Story | Historia |  **(changed since the back-translation; it reads the earlier Spanish)** |
-| `kit.builder.designs.poster` | Poster | Póster |  **(changed since the back-translation; it reads the earlier Spanish)** |
-| `kit.builder.designs.stickers` | Sticker sheet | Hoja de calcomanías |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.step1` | What do you want to make? | ¿Qué quiere hacer? |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.designs.square.label` | Square post | Publicación cuadrada |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.designs.square.hint` | For Instagram and Facebook | Para Instagram y Facebook |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.designs.story.label` | Story | Historia |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.designs.story.hint` | Tall, for stories | Vertical, para historias |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.designs.poster.label` | Poster | Póster |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.designs.poster.hint` | To print | Para imprimir |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.designs.stickers.label` | Stickers | Calcomanías |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.designs.stickers.hint` | To print | Para imprimir |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.step2` | Your words | Sus palabras |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.builder.message` | Message | Mensaje |  **(changed since the back-translation; it reads the earlier Spanish)** |
-| `kit.builder.messageHint` | Medical facts come only from this list, so every graphic stays accurate. | Los datos médicos solo vienen de esta lista, para que cada imagen sea correcta. |  **(changed since the back-translation; it reads the earlier Spanish)** |
-| `kit.builder.messages.0` | What is Chiari malformation? | ¿Qué es la malformación de Chiari? |  **(changed since the back-translation; it reads the earlier Spanish)** |
-| `kit.builder.messages.1` | Chiari symptoms often have few outward signs. Ask how you can help. | Los síntomas de Chiari a menudo dan pocas señales visibles. Pregunte cómo puede ayudar. |  **(changed since the back-translation; it reads the earlier Spanish)** |
-| `kit.builder.messages.2` | I have Chiari malformation. | Tengo malformación de Chiari. |  **(changed since the back-translation; it reads the earlier Spanish)** |
-| `kit.builder.messages.3` | Chiari looks different for everyone, and many people with Type I have no symptoms at all. | Chiari es diferente en cada persona, y muchas personas con el tipo I no tienen ningún síntoma. |  **(changed since the back-translation; it reads the earlier Spanish)** |
-| `kit.builder.messages.4` | Most people are born with the skull differences that lead to it. Some never have symptoms; others first notice them as teens or adults. | La mayoría de las personas nacen con las diferencias del cráneo que la causan. Algunas nunca tienen síntomas; otras los notan por primera vez en la adolescencia o en la edad adulta. |  **(changed since the back-translation; it reads the earlier Spanish)** |
-| `kit.builder.messages.5` | The classic sign is a headache at the back of the head after coughing, sneezing or straining. | El síntoma clásico es un dolor de cabeza en la parte de atrás de la cabeza después de toser, estornudar o hacer un esfuerzo. |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.messageHint` | Medical facts come only from this list, so every graphic stays accurate. | Los datos médicos solo vienen de esta lista, para que cada gráfico sea correcto. |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.messages.0.text` | What is Chiari malformation? | ¿Qué es la malformación de Chiari? |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.messages.0.answer` | The lowest part of the back of the brain extends below the opening at the base of the skull. | La parte más baja de la parte de atrás del cerebro se extiende por debajo de la abertura en la base del cráneo. |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.messages.1.text` | I have Chiari malformation. | Tengo malformación de Chiari. |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.messages.2.text` | Chiari symptoms often have few outward signs. Ask how you can help. | Los síntomas de Chiari a menudo dan pocas señales visibles. Pregunte cómo puede ayudar. |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.messages.3.text` | Chiari malformation looks different for everyone, and many people with Type I have no symptoms at all. | La malformación de Chiari es diferente en cada persona, y muchas personas con el tipo I no tienen ningún síntoma. |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.messages.4.text` | Most people with Chiari malformation are born with the skull differences that lead to it. Some never have symptoms; others first notice them as teens or adults. | La mayoría de las personas con malformación de Chiari nacen con las diferencias del cráneo que la causan. Algunas nunca tienen síntomas; otras los notan por primera vez en la adolescencia o en la edad adulta. |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.messages.5.text` | The classic sign of Chiari malformation is a headache at the back of the head after coughing, sneezing or straining. Not everyone with Chiari gets these headaches. | El síntoma clásico de la malformación de Chiari es un dolor de cabeza en la parte de atrás de la cabeza después de toser, estornudar o hacer un esfuerzo. No todas las personas con Chiari tienen estos dolores de cabeza. |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.builder.own` | Your own line (optional) | Su propia frase (opcional) |  **(changed since the back-translation; it reads the earlier Spanish)** |
-| `kit.builder.ownHint` | For example: Walking for my daughter Emma | Por ejemplo: Camino por mi hija Emma |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.ownHint` | For example: Walking for my daughter Emma | Por ejemplo: Caminamos por mi hija Emma |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.counter` | {left} of {max} letters left | Quedan {left} de {max} letras |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.yours` | Your own words appear in a separate box, so it is clear they are yours. | Sus propias palabras aparecen en un recuadro aparte, para que quede claro que son suyas. |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.builder.name` | Name, group or event (optional) | Nombre, grupo o evento (opcional) |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.builder.when` | Date and place (optional) | Fecha y lugar (opcional) |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.builder.stickerText` | Your sticker words | Sus palabras para las calcomanías |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.builder.stickerHint` | Up to 3 short lines. Shown on all 12 stickers. | Hasta 3 líneas cortas. Aparecen en las 12 calcomanías. |  **(changed since the back-translation; it reads the earlier Spanish)** |
-| `kit.builder.image` | Logo or photo (optional) | Logotipo o foto (opcional) |  **(changed since the back-translation; it reads the earlier Spanish)** |
-| `kit.builder.imageHint` | It stays on your device. | Se queda en su dispositivo. |  **(changed since the back-translation; it reads the earlier Spanish)** |
-| `kit.builder.removeImage` | Remove | Quitar |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.starters` | Or start from one of ours: | O empiece con una de nuestras frases: |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.stickerDefault` | Chiari warrior | Luchando contra Chiari |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.step3` | Look and save | Aspecto y descarga |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.builder.color` | Colors | Colores |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.builder.colors.purple` | Purple | Morado |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.builder.colors.light` | Light | Claro |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.builder.colors.dark` | Dark | Oscuro |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.figure` | Show the picture of Chiari | Mostrar la imagen de Chiari |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.figureHint` | Adds the picture with its caption and model credit. | Se agrega la imagen con su leyenda y el crédito del modelo 3D. |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.image` | Logo or photo (optional) | Logotipo o foto (opcional) |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.imageHint` | It stays on your device. | Se queda en su dispositivo. |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.imageAlt` | Your logo or photo | Su logotipo o foto |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.removeImage` | Remove | Quitar |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.builder.size` | Paper size | Tamaño del papel |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.builder.download` | Download image | Descargar imagen |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.builder.print` | Print or save as PDF | Imprimir o guardar como PDF |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `kit.builder.preview` | Preview | Vista previa |  **(changed since the back-translation; it reads the earlier Spanish)** |
-| `kit.builder.yours` | Your own words appear in a separate box, so it is clear they are yours. | Sus propias palabras aparecen en un recuadro aparte, para que quede claro que son suyas. |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.enlarge` | See it bigger | Verla más grande |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.shrink` | See it smaller | Verla más pequeña |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.describe.message` | Message | Mensaje |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.describe.own` | Your line | Su frase |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.describe.figure` | With the picture of Chiari. | Con la imagen de Chiari. |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.describe.image` | With your logo or photo. | Con su logotipo o foto. |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `kit.builder.label` | Chiari Awareness | Concientización sobre Chiari |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `children.title` | Helping your child through Chiari surgery | Cómo ayudar a su hijo con la cirugía de Chiari |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `children.navLabel` | Helping your child | Cómo ayudar a su hijo |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `children.intro` | Ideas from children's hospitals for getting a child ready, a picture story to read together, a coloring page, and a sheet for school. Nothing you type here is saved or sent. | Ideas de hospitales infantiles para preparar a un niño, un cuento con dibujos para leer juntos, una página para colorear y una hoja para la escuela. Nada de lo que escriba aquí se guarda ni se envía. |  **(changed since the back-translation; it reads the earlier Spanish)** |

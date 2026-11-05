@@ -22,6 +22,8 @@ const credit = `${f.modelBefore.replace(/^\.\s*/, '')} ${f.zAnatomy} ${f.modelAf
 const caption = s.home.figCaption.narrow;
 const notAdvice = `${f.notAdvice} ${f.notAdviceRest.wide}`;
 const spanishNotice = Astro.currentLocale === 'es' ? s.translation.noticeShort : '';
+// Sticker starters: the approved phrases from the two ready-made sheets, without repeats.
+const starters = [...new Set([...k.stickers.sheets.everyone.messages, ...k.stickers.sheets.surgery.messages])];
 const items = [
   { id: 'social', preview: base + 'preview-social.png', alt: `${k.explain.headline} ${k.explain.lines.join(' ')} ${fig} ${k.explain.footer}`, files: [{ href: base + 'social-post.png', label: 'PNG' }] },
   {
@@ -89,84 +91,139 @@ const items = [
       <h2 id="make-title" class="serif">{b.title}</h2>
       <p class="builder-intro">{b.intro}</p>
       <div class="builder-layout">
-        <form class="builder-form" data-builder autocomplete="off">
-          <fieldset>
-            <legend>{b.design}</legend>
-            {Object.entries(b.designs).map(([id, label], i) => (
-              <label class="choice"><input type="radio" name="design" value={id} checked={i === 0} /> {label}</label>
-            ))}
-          </fieldset>
-          <label class="field" data-for="graphic">
-            <span>{b.message}</span>
-            <select data-field="message">
-              {b.messages.map((m) => <option value={m}>{m}</option>)}
-            </select>
-            <small>{b.messageHint}</small>
-          </label>
-          <label class="field" data-for="graphic">
-            <span>{b.own}</span>
-            <input type="text" maxlength="120" placeholder={b.ownHint} data-field="own" />
-            <small>{b.yours}</small>
-          </label>
-          <label class="field" data-for="graphic">
-            <span>{b.name}</span>
-            <input type="text" maxlength="80" data-field="name" />
-          </label>
-          <label class="field" data-for="graphic">
-            <span>{b.when}</span>
-            <input type="text" maxlength="80" data-field="when" />
-          </label>
-          <label class="field" data-for="stickers" hidden>
-            <span>{b.stickerText}</span>
-            <textarea rows="3" maxlength="60" data-field="sticker"></textarea>
-            <small>{b.stickerHint}</small>
-          </label>
-          <div class="field" data-for="graphic">
-            <label for="builder-image">{b.image}</label>
-            <input id="builder-image" type="file" accept="image/png, image/jpeg, image/webp" data-field="image" />
-            <small>{b.imageHint}</small>
-            <button type="button" class="button button-secondary" data-remove-image hidden>{b.removeImage}</button>
+        <div class="builder-preview" data-preview>
+          <div class="preview-bar">
+            <p class="preview-title">{b.preview}</p>
+            <button type="button" class="preview-size" data-preview-size aria-pressed="false">{b.enlarge}</button>
           </div>
-          <fieldset>
-            <legend>{b.color}</legend>
-            {Object.entries(b.colors).map(([id, label], i) => (
-              <label class="choice"><input type="radio" name="theme" value={id} checked={i === 0} /> {label}</label>
-            ))}
-          </fieldset>
-          <fieldset data-for="print" hidden>
-            <legend>{b.size}</legend>
-            <label class="choice"><input type="radio" name="paper" value="letter" checked /> {k.letter}</label>
-            <label class="choice"><input type="radio" name="paper" value="A4" /> A4</label>
-          </fieldset>
-          <div class="builder-actions">
-            <button type="button" class="button button-primary" data-builder-download>{b.download}</button>
-            <button type="button" class="button button-primary" data-builder-print hidden>{b.print}</button>
-          </div>
-        </form>
-        <div class="builder-preview" aria-label={b.preview}>
-          <canvas data-builder-canvas role="img" aria-label={b.preview}></canvas>
-          <div class="sheet-frame" data-sheet-frame hidden>
-            <div class="sheet" data-sheet>
-              <div class="poster" data-poster hidden>
-                <img class="poster-image" data-poster-image alt="" hidden />
-                <p class="poster-title serif" data-out="message"></p>
-                <div class="poster-figure"><AnatomyFigure condition="chiari" flow={false} labels={false} measure={true} /></div>
-                <div class="poster-own" data-out-wrap="own"><p data-out="own"></p></div>
-                <p class="poster-meta" data-out="name"></p>
-                <p class="poster-meta" data-out="when"></p>
-                <div class="poster-foot">
-                  <p class="mono poster-site">openchiari.org</p>
-                  <p><strong>{f.notAdvice}</strong> {f.notAdviceRest.wide} {caption}</p>
-                  <p>{credit}</p>
-                  {spanishNotice && <p>{spanishNotice}</p>}
+          <div class="preview-stage">
+            <canvas data-builder-canvas role="img" aria-label={b.preview}></canvas>
+            <div class="sheet-frame" data-sheet-frame hidden>
+              <div class="sheet" data-sheet>
+                <div class="poster" data-poster hidden>
+                  <div class="poster-band">
+                    <p class="poster-label"><span class="poster-ribbon" set:html={ribbonSvg('currentColor')} />{b.label}</p>
+                    <img class="poster-image" data-poster-image alt={b.imageAlt} hidden />
+                  </div>
+                  <div class="poster-body">
+                    <p class="poster-title serif" data-out="message"></p>
+                    <p class="poster-answer" data-out="answer"></p>
+                    <div class="poster-figure" data-poster-figure><AnatomyFigure condition="chiari" flow={false} labels={false} measure={true} /></div>
+                    <div class="poster-own" data-out-wrap="own"><p data-out="own"></p></div>
+                    <p class="poster-meta" data-out="name"></p>
+                    <p class="poster-meta" data-out="when"></p>
+                    <div class="poster-foot">
+                      <p class="mono poster-site">openchiari.org</p>
+                      <p><strong>{f.notAdvice}</strong> {f.notAdviceRest.wide} <span data-poster-credit>{caption}</span></p>
+                      <p data-poster-credit>{credit}</p>
+                      {spanishNotice && <p>{spanishNotice}</p>}
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="sticker-sheet" data-stickers hidden>
-                {Array.from({ length: 12 }, () => <div class="sticker"><span class="sticker-ribbon" set:html={ribbonSvg('currentColor')} /><p data-sticker-text></p></div>)}
+                <div class="sticker-sheet" data-stickers hidden>
+                  {Array.from({ length: 12 }, () => <div class="sticker"><span class="sticker-ribbon" set:html={ribbonSvg('currentColor')} /><p data-sticker-text></p></div>)}
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+        <form class="builder-form" data-builder autocomplete="off">
+          <fieldset class="step">
+            <legend class="step-title"><span class="step-num" aria-hidden="true">1</span>{b.step1}</legend>
+            <div class="design-cards">
+              {Object.entries(b.designs).map(([id, d], i) => (
+                <label class="card design-card">
+                  <input type="radio" name="design" value={id} checked={i === 0} />
+                  <span class={`design-shape shape-${id}`} aria-hidden="true"></span>
+                  <span class="card-text"><span class="card-label">{d.label}</span><span class="card-hint">{d.hint}</span></span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <div class="step">
+            <h3 class="step-title"><span class="step-num" aria-hidden="true">2</span>{b.step2}</h3>
+            <fieldset class="field" data-for="graphic">
+              <legend>{b.message}</legend>
+              <small id="message-hint">{b.messageHint}</small>
+              <div class="message-cards">
+                {b.messages.map((m, i) => (
+                  <label class="card message-card">
+                    <input type="radio" name="message" value={String(i)} checked={i === 0} aria-describedby="message-hint" />
+                    <span class="card-text">
+                      <span class="message-text">{m.text}</span>
+                      {'answer' in m && m.answer && <span class="message-answer">{m.answer}</span>}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+            <div class="field" data-for="graphic">
+              <label for="builder-own">{b.own}</label>
+              <input id="builder-own" type="text" maxlength="120" placeholder={b.ownHint} data-field="own" aria-describedby="own-yours own-count" />
+              <small id="own-yours">{b.yours}</small>
+              <small id="own-count" class="counter" data-counter></small>
+            </div>
+            <div class="field" data-for="graphic">
+              <label for="builder-name">{b.name}</label>
+              <input id="builder-name" type="text" maxlength="80" data-field="name" />
+            </div>
+            <div class="field" data-for="graphic">
+              <label for="builder-when">{b.when}</label>
+              <input id="builder-when" type="text" maxlength="80" data-field="when" />
+            </div>
+            <div class="field" data-for="stickers" hidden>
+              <label for="builder-sticker">{b.stickerText}</label>
+              <textarea id="builder-sticker" rows="3" maxlength="60" data-field="sticker" aria-describedby="sticker-hint">{b.stickerDefault}</textarea>
+              <small id="sticker-hint">{b.stickerHint}</small>
+              <p class="starters-title" id="starters-title">{b.starters}</p>
+              <div class="starters" role="group" aria-labelledby="starters-title">
+                {starters.map((phrase) => <button type="button" class="starter" data-starter={phrase}>{phrase}</button>)}
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <h3 class="step-title"><span class="step-num" aria-hidden="true">3</span>{b.step3}</h3>
+            <fieldset class="field">
+              <legend>{b.color}</legend>
+              <div class="swatches">
+                {Object.entries(b.colors).map(([id, label], i) => (
+                  <label class="swatch">
+                    <input type="radio" name="theme" value={id} checked={i === 0} />
+                    <span class={`swatch-chip chip-${id}`} aria-hidden="true"></span>
+                    {label}
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+            <div class="field" data-for="figure">
+              <label class="check"><input type="checkbox" data-field="figure" aria-describedby="figure-hint" /> {b.figure}</label>
+              <small id="figure-hint">{b.figureHint}</small>
+            </div>
+            <div class="field" data-for="image">
+              <label for="builder-image">{b.image}</label>
+              <input id="builder-image" type="file" accept="image/png, image/jpeg, image/webp" data-field="image" aria-describedby="image-hint" />
+              <small id="image-hint">{b.imageHint}</small>
+              <div class="image-chosen" data-image-chosen hidden>
+                <img data-image-thumb alt={b.imageAlt} />
+                <button type="button" class="button button-secondary" data-remove-image>{b.removeImage}</button>
+              </div>
+            </div>
+            <fieldset class="field" data-for="print" hidden>
+              <legend>{b.size}</legend>
+              <div class="inline-choices">
+                <label class="choice"><input type="radio" name="paper" value="letter" checked /> {k.letter}</label>
+                <label class="choice"><input type="radio" name="paper" value="A4" /> A4</label>
+              </div>
+            </fieldset>
+            <div class="builder-actions">
+              <button type="button" class="button button-primary" data-builder-download>{b.download}</button>
+              <button type="button" class="button button-primary" data-builder-print hidden>{b.print}</button>
+            </div>
+          </div>
+        </form>
       </div>
     </section>
 
@@ -184,7 +241,8 @@ const items = [
 
 <script>
   import strings from '../i18n/client';
-  import { drawGraphic, type Shape, type Theme } from '../lib/kit-builder';
+  import { drawGraphic, loadFigure, type Shape, type Theme } from '../lib/kit-builder';
+  import { anatomyFigureSvg } from '../lib/anatomy-figure';
 
   // Everything below runs on the visitor's device. Nothing is uploaded, sent or stored.
   const b = strings.kit.builder;
@@ -193,48 +251,101 @@ const items = [
   const form = document.querySelector<HTMLFormElement>('[data-builder]')!;
   const canvas = document.querySelector<HTMLCanvasElement>('[data-builder-canvas]')!;
   const frame = document.querySelector<HTMLElement>('[data-sheet-frame]')!;
+  const preview = document.querySelector<HTMLElement>('[data-preview]')!;
+  const sizeButton = document.querySelector<HTMLButtonElement>('[data-preview-size]')!;
   const root = document.documentElement;
+  const credit = `${f.modelBefore.replace(/^\.\s*/, '')} ${f.zAnatomy} ${f.modelAfter}`;
   let image: ImageBitmap | null = null;
   let imageUrl = '';
+  let figure: HTMLImageElement | null = null;
+  // The picture is off at first for posts and stories, and on for the poster; each design remembers its own choice.
+  const figureOn: Record<string, boolean> = { square: false, story: false, poster: true };
+  let lastDesign = '';
   form.addEventListener('submit', (e) => e.preventDefault());
 
-  const value = (name: string) => form.querySelector<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(`[data-field="${name}"]`)!.value.trim();
+  const field = <T extends HTMLElement>(name: string) => form.querySelector<T>(`[data-field="${name}"]`)!;
+  const value = (name: string) => field<HTMLInputElement | HTMLTextAreaElement>(name).value.trim();
   const picked = (name: string) => form.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`)!.value;
+  const message = () => b.messages[Number(picked('message'))] as { text: string; answer?: string };
+  const show = (selector: string, on: boolean) => form.querySelectorAll<HTMLElement>(selector).forEach((el) => (el.hidden = !on));
+
+  /** The scaled print sheet fills the preview's width (8.5 in = 816 px). */
+  const fitSheet = () => frame.style.setProperty('--sheet-scale', String(frame.clientWidth / 816));
+  new ResizeObserver(fitSheet).observe(frame);
+
+  function counter() {
+    const input = field<HTMLInputElement>('own');
+    const max = input.maxLength;
+    form.querySelector<HTMLElement>('[data-counter]')!.textContent = b.counter.replace('{left}', String(max - input.value.length)).replace('{max}', String(max));
+  }
+
+  /** What the preview shows, in words, for screen readers. */
+  function describe(design: string, theme: string, showFigure: boolean): string {
+    const parts = [`${b.preview}: ${b.designs[design as keyof typeof b.designs].label}, ${b.colors[theme as keyof typeof b.colors]}.`];
+    if (design === 'stickers') parts.push(value('sticker').replace(/\n+/g, ' '));
+    else {
+      const m = message();
+      parts.push(`${b.describe.message}: ${m.text}${m.answer ? ' ' + m.answer : ''}`);
+      if (value('own')) parts.push(`${b.describe.own}: ${value('own')}`);
+      parts.push(...[value('name'), value('when')].filter(Boolean));
+      if (showFigure) parts.push(b.describe.figure);
+      if (image) parts.push(b.describe.image);
+    }
+    return parts.join(' ');
+  }
 
   async function render() {
     const design = picked('design');
     const theme = picked('theme') as Theme;
     const graphic = design === 'square' || design === 'story';
-    form.querySelectorAll<HTMLElement>('[data-for="graphic"]').forEach((el) => (el.hidden = design === 'stickers'));
-    form.querySelector<HTMLElement>('[data-for="stickers"]')!.hidden = design !== 'stickers';
-    form.querySelector<HTMLElement>('[data-for="print"]')!.hidden = graphic;
+    const figureBox = field<HTMLInputElement>('figure');
+    if (design !== lastDesign && design in figureOn) figureBox.checked = figureOn[design];
+    lastDesign = design;
+    const showFigure = design !== 'stickers' && figureBox.checked;
+    show('[data-for="graphic"], [data-for="figure"], [data-for="image"]', design !== 'stickers');
+    show('[data-for="stickers"]', design === 'stickers');
+    show('[data-for="print"]', !graphic);
     document.querySelector<HTMLElement>('[data-builder-download]')!.hidden = !graphic;
     document.querySelector<HTMLElement>('[data-builder-print]')!.hidden = graphic;
     canvas.hidden = !graphic;
     frame.hidden = graphic;
+    preview.dataset.design = design;
     frame.dataset.theme = theme;
     frame.dataset.design = design;
+    counter();
+    const description = describe(design, theme, showFigure);
+    canvas.setAttribute('aria-label', description);
     if (graphic) {
+      if (showFigure && !figure) figure = await loadFigure(anatomyFigureSvg({ condition: 'chiari', flow: false, labels: false, measure: true }, strings.figure));
+      const m = message();
       await drawGraphic(canvas, {
         shape: design as Shape,
         theme,
-        message: value('message'),
+        label: b.label,
+        message: m.text,
+        answer: m.answer,
         own: value('own'),
         name: value('name'),
         when: value('when'),
         image,
+        figure: showFigure ? figure : null,
         site: 'openchiari.org',
-        small: [`${f.notAdvice} ${f.notAdviceRest.wide}`, spanish ? strings.translation.noticeShort : ''].filter(Boolean).join(' '),
+        small: [`${f.notAdvice} ${f.notAdviceRest.wide}`, showFigure ? `${strings.home.figCaption.narrow} ${credit}` : '', spanish ? strings.translation.noticeShort : ''].filter(Boolean).join(' '),
       });
       return;
     }
+    fitSheet();
     // Poster and stickers are pages to print; their text is set as text only, never as HTML.
     document.querySelector<HTMLElement>('[data-poster]')!.hidden = design !== 'poster';
     document.querySelector<HTMLElement>('[data-stickers]')!.hidden = design !== 'stickers';
-    for (const key of ['message', 'own', 'name', 'when']) {
-      document.querySelectorAll<HTMLElement>(`[data-out="${key}"]`).forEach((el) => (el.textContent = value(key)));
+    const m = message();
+    const out: Record<string, string> = { message: m.text, answer: m.answer ?? '', own: value('own'), name: value('name'), when: value('when') };
+    for (const key of Object.keys(out)) {
+      document.querySelectorAll<HTMLElement>(`[data-out="${key}"]`).forEach((el) => (el.textContent = out[key]));
     }
     document.querySelector<HTMLElement>('[data-out-wrap="own"]')!.hidden = !value('own');
+    document.querySelector<HTMLElement>('[data-poster-figure]')!.hidden = !showFigure;
+    document.querySelectorAll<HTMLElement>('[data-poster-credit]').forEach((el) => (el.hidden = !showFigure));
     const posterImage = document.querySelector<HTMLImageElement>('[data-poster-image]')!;
     posterImage.hidden = !imageUrl;
     if (imageUrl) posterImage.src = imageUrl;
@@ -242,25 +353,57 @@ const items = [
     document.querySelectorAll<HTMLElement>('[data-sticker-text]').forEach((el) => (el.textContent = words));
   }
 
-  form.addEventListener('input', () => void render());
-  form.addEventListener('change', () => void render());
+  form.addEventListener('input', (e) => {
+    const target = e.target as HTMLElement;
+    // Stickers: at most 3 lines.
+    if (target.matches('[data-field="sticker"]')) {
+      const area = target as HTMLTextAreaElement;
+      const kept = area.value.split('\n').slice(0, 3).join('\n');
+      if (kept !== area.value) area.value = kept;
+    }
+    void render();
+  });
+  form.addEventListener('change', (e) => {
+    const target = e.target as HTMLInputElement;
+    if (target.matches('[data-field="figure"]')) figureOn[picked('design')] = target.checked;
+    void render();
+  });
+  form.querySelectorAll<HTMLButtonElement>('[data-starter]').forEach((button) =>
+    button.addEventListener('click', () => {
+      field<HTMLTextAreaElement>('sticker').value = button.dataset.starter!;
+      void render();
+    }),
+  );
 
-  form.querySelector<HTMLInputElement>('[data-field="image"]')!.addEventListener('change', async (e) => {
+  const chosen = document.querySelector<HTMLElement>('[data-image-chosen]')!;
+  const thumb = document.querySelector<HTMLImageElement>('[data-image-thumb]')!;
+  field<HTMLInputElement>('image').addEventListener('change', async (e) => {
     const file = (e.target as HTMLInputElement).files?.[0];
     if (!file) return;
     image = await createImageBitmap(file);
     if (imageUrl) URL.revokeObjectURL(imageUrl);
     imageUrl = URL.createObjectURL(file);
-    document.querySelector<HTMLElement>('[data-remove-image]')!.hidden = false;
+    thumb.src = imageUrl;
+    chosen.hidden = false;
     void render();
   });
   document.querySelector('[data-remove-image]')!.addEventListener('click', () => {
     image = null;
     if (imageUrl) URL.revokeObjectURL(imageUrl);
     imageUrl = '';
-    form.querySelector<HTMLInputElement>('[data-field="image"]')!.value = '';
-    document.querySelector<HTMLElement>('[data-remove-image]')!.hidden = true;
+    field<HTMLInputElement>('image').value = '';
+    chosen.hidden = true;
+    field<HTMLInputElement>('image').focus();
     void render();
+  });
+
+  // Phones: the preview stays in a small bar at the top while you fill in the steps; this button shows it full size.
+  sizeButton.addEventListener('click', () => {
+    const big = sizeButton.getAttribute('aria-pressed') !== 'true';
+    sizeButton.setAttribute('aria-pressed', String(big));
+    sizeButton.textContent = big ? b.shrink : b.enlarge;
+    preview.classList.toggle('is-big', big);
+    fitSheet();
   });
 
   document.querySelector('[data-builder-download]')!.addEventListener('click', async () => {
@@ -396,7 +539,7 @@ const items = [
     }
   }
 
-  /* ---------- Make your own ---------- */
+  /* ---------- Make your own (reworked Nov 5: three steps, preview beside the form, a bar on phones) ---------- */
   .builder {
     margin-top: var(--s-56);
     border-top: 2px solid var(--ink);
@@ -410,60 +553,76 @@ const items = [
     color: var(--ink-2);
     margin: var(--s-8) 0 var(--s-24);
   }
+  .builder [hidden] {
+    display: none !important;
+  }
   .builder-layout {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--s-32);
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--s-40);
+    align-items: start;
   }
   .builder-form {
-    flex: 1 1 340px;
-    max-width: 520px;
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: var(--s-32);
   }
-  .builder-form fieldset {
+  .builder-preview {
+    grid-column: 2;
+    grid-row: 1;
+    position: sticky;
+    top: var(--s-16);
+    min-width: 0;
+  }
+  .step {
     margin: 0;
     padding: 0;
     border: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px 16px;
-  }
-  .builder-form legend,
-  .field > span,
-  .field > label {
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-  .builder-form legend {
-    width: 100%;
-  }
-  .choice {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    min-height: var(--touch);
-    cursor: pointer;
-  }
-  .choice input {
-    accent-color: var(--accent);
-    width: 18px;
-    height: 18px;
-    margin: 0;
-  }
-  .field {
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: var(--s-16);
   }
-  .field[hidden] {
-    display: none;
+  .step-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0;
+    margin: 0 0 var(--s-4);
+    font: 600 20px/1.3 var(--font-sans);
+  }
+  .step-num {
+    flex: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--awareness);
+    color: var(--paper);
+    font-size: 15px;
+  }
+  .field {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .field > label,
+  .field > legend {
+    font-weight: 600;
+    padding: 0;
   }
   .field input[type='text'],
-  .field select,
   .field textarea {
+    width: 100%;
     min-height: var(--touch);
     padding: 0 12px;
     border: 1px solid var(--input-border);
@@ -475,39 +634,207 @@ const items = [
   .field textarea {
     padding: 10px 12px;
     line-height: 1.4;
+    resize: vertical;
   }
   .field input[type='file'] {
+    max-width: 100%;
     min-height: var(--touch);
     font: inherit;
   }
-  .field small {
+  .field small,
+  .starters-title {
     color: var(--muted);
     font-size: 14px;
+    margin: 0;
   }
-  .field .button,
+  .counter {
+    font-variant-numeric: tabular-nums;
+  }
+  /* Cards: a radio button you can see the whole of. */
+  .card {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--surface);
+    cursor: pointer;
+  }
+  .card:hover {
+    border-color: var(--muted);
+  }
+  .card:has(input:checked) {
+    border-color: var(--awareness);
+    box-shadow: inset 0 0 0 1px var(--awareness);
+  }
+  .card input {
+    flex: none;
+    accent-color: var(--awareness);
+    width: 18px;
+    height: 18px;
+    margin: 2px 0 0;
+  }
+  .card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .card-label {
+    font-weight: 600;
+  }
+  .card-hint,
+  .message-answer {
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .design-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .design-card {
+    align-items: center;
+  }
+  /* A small outline of each design's shape. */
+  .design-shape {
+    flex: none;
+    display: block;
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--awareness);
+    border-radius: 3px;
+  }
+  .shape-story {
+    width: 20px;
+    height: 34px;
+  }
+  .shape-poster {
+    width: 26px;
+    height: 34px;
+    border-top-width: 7px;
+  }
+  .shape-stickers {
+    border: 0;
+    background: radial-gradient(circle at 25% 25%, var(--awareness) 22%, transparent 24%), radial-gradient(circle at 75% 25%, var(--awareness) 22%, transparent 24%), radial-gradient(circle at 25% 75%, var(--awareness) 22%, transparent 24%), radial-gradient(circle at 75% 75%, var(--awareness) 22%, transparent 24%);
+  }
+  .message-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .message-text {
+    line-height: 1.4;
+  }
+  .starters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .starter {
+    min-height: 40px;
+    padding: 0 12px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--ink);
+    font: 400 15px var(--font-sans);
+    cursor: pointer;
+  }
+  .starter:hover {
+    border-color: var(--awareness);
+    color: var(--awareness);
+  }
+  .swatches,
+  .inline-choices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+  }
+  .swatch,
+  .choice,
+  .check {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: var(--touch);
+    font-weight: 400;
+    cursor: pointer;
+  }
+  .swatch input,
+  .choice input,
+  .check input {
+    accent-color: var(--awareness);
+    width: 18px;
+    height: 18px;
+    margin: 0;
+  }
+  .swatch-chip {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid var(--rule);
+  }
+  .chip-purple {
+    background: #5b027e;
+  }
+  .chip-light {
+    background: #f5f5f3;
+    box-shadow: inset 0 0 0 5px #ebd7f4;
+  }
+  .chip-dark {
+    background: #17181c;
+  }
+  .image-chosen {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .image-chosen img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
   .builder-actions .button {
     align-self: flex-start;
   }
-  .builder-actions .button[hidden],
-  .field .button[hidden] {
+  /* Preview */
+  .preview-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-16);
+    margin-bottom: var(--s-8);
+  }
+  .preview-title {
+    margin: 0;
+    font-weight: 600;
+  }
+  .preview-size {
     display: none;
+    min-height: 40px;
+    padding: 0 12px;
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--ink);
+    font: 400 15px var(--font-sans);
+    cursor: pointer;
   }
-  .builder-preview {
-    flex: 1 1 340px;
-    max-width: 520px;
-  }
-  .builder-preview canvas {
+  .preview-stage canvas {
     display: block;
     width: 100%;
     height: auto;
-    max-height: 80vh;
+    max-height: calc(100vh - 120px);
     object-fit: contain;
     border: 1px solid var(--rule);
   }
-  .builder-preview canvas[hidden] {
-    display: none;
-  }
-  /* The print sheet, shown scaled down as a preview. */
+  /* The print sheet, shown scaled to the preview's width. */
   .sheet-frame {
     position: relative;
     width: 100%;
@@ -515,9 +842,6 @@ const items = [
     overflow: hidden;
     border: 1px solid var(--rule);
     background: #fff;
-  }
-  .sheet-frame[hidden] {
-    display: none;
   }
   .sheet {
     position: absolute;
@@ -530,28 +854,131 @@ const items = [
     background: #fff;
     color: #1c1d21;
   }
+
+  @media (max-width: 520px) {
+    .design-cards {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .design-card {
+      padding: 8px 12px;
+    }
+    .card-text:has(.card-hint) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0 8px;
+    }
+  }
+  /* Phones and narrow windows: the preview is a bar at the top that stays in view while you fill in the steps. */
+  @media (max-width: 860px) {
+    .builder-layout {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--s-24);
+    }
+    .builder-form {
+      grid-row: 2;
+    }
+    .builder-preview {
+      grid-column: 1;
+      top: 0;
+      z-index: 5;
+      padding: var(--s-8) 0;
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+    }
+    .preview-size {
+      display: inline-block;
+    }
+    .preview-stage {
+      display: flex;
+      justify-content: center;
+    }
+    .preview-stage canvas {
+      width: auto;
+      max-width: 100%;
+      max-height: 28vh;
+    }
+    .sheet-frame {
+      width: calc(28vh * 8.5 / 11);
+      max-width: 100%;
+    }
+    .is-big .preview-stage canvas {
+      max-height: 75vh;
+    }
+    .is-big .sheet-frame {
+      width: min(100%, calc(75vh * 8.5 / 11));
+    }
+  }
+
+  /* Poster: a colored band at the top (the color picked), a white page below for printing. */
   .poster {
     height: 100%;
-    padding: 0.7in;
     display: flex;
     flex-direction: column;
-    gap: 0.18in;
   }
-  .poster[hidden],
-  .sticker-sheet[hidden],
-  .poster [hidden] {
-    display: none;
+  .poster-band {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.3in;
+    padding: 0.45in 0.7in;
+    background: #5b027e;
+    color: #fff;
+  }
+  [data-theme='light'] .poster-band {
+    background: #ebd7f4;
+    color: #3e0157;
+  }
+  [data-theme='dark'] .poster-band {
+    background: #17181c;
+    color: #ecEae4;
+  }
+  .poster-label {
+    display: flex;
+    align-items: center;
+    gap: 0.08in;
+    margin: 0;
+    font: 600 16pt var(--font-sans);
+  }
+  .poster-ribbon {
+    display: inline-flex;
+    width: 0.5in;
+    height: 0.5in;
+    color: #cb98e1;
+  }
+  [data-theme='light'] .poster-ribbon {
+    color: #5b027e;
+  }
+  .poster-ribbon :global(svg) {
+    width: 100%;
+    height: 100%;
   }
   .poster-image {
-    max-height: 1.2in;
-    max-width: 3in;
+    max-height: 1in;
+    max-width: 2.6in;
     object-fit: contain;
-    align-self: flex-start;
+  }
+  .poster-body {
+    flex: 1;
+    min-height: 0;
+    padding: 0.45in 0.7in 0.6in;
+    display: flex;
+    flex-direction: column;
+    gap: 0.16in;
   }
   .poster-title {
-    font-size: 38pt;
+    font-size: 36pt;
     line-height: 1.1;
     margin: 0;
+  }
+  .poster-answer {
+    margin: 0;
+    font-size: 17pt;
+    line-height: 1.35;
+    color: #3a3b40;
+  }
+  .poster-answer:empty {
+    display: none;
   }
   .poster-figure {
     flex: 1;
@@ -580,6 +1007,7 @@ const items = [
     display: none;
   }
   .poster-foot {
+    margin-top: auto;
     font-size: 8.5pt;
     line-height: 1.4;
     color: #5e5f66;
@@ -602,6 +1030,7 @@ const items = [
     align-content: center;
   }
   .sticker {
+    position: relative;
     border-radius: 50%;
     outline: 1px dashed #a9a8a2;
     outline-offset: 0.04in;
@@ -613,9 +1042,6 @@ const items = [
     background: #5b027e;
     color: #fff;
   }
-  .sticker {
-    position: relative;
-  }
   .sticker-ribbon {
     position: absolute;
     inset: 0.22in;
@@ -624,12 +1050,6 @@ const items = [
   .sticker-ribbon :global(svg) {
     width: 100%;
     height: 100%;
-  }
-  [data-theme='light'] .sticker-ribbon {
-    color: #d9bce8;
-  }
-  [data-theme='dark'] .sticker-ribbon {
-    color: #2c2433;
   }
   .sticker p {
     position: relative;
@@ -642,13 +1062,16 @@ const items = [
     background: #ebd7f4;
     color: #3e0157;
   }
+  [data-theme='light'] .sticker-ribbon {
+    color: #d9bce8;
+  }
+  /* Dark stickers: a purple-tinted ribbon you can see, and white words. */
   [data-theme='dark'] .sticker {
     background: #17181c;
-    color: #ecEae4;
+    color: #ffffff;
   }
-  [data-theme='dark'] .poster,
-  [data-theme='purple'] .poster {
-    border-top: 0.18in solid #5b027e;
+  [data-theme='dark'] .sticker-ribbon {
+    color: #4a2a5e;
   }
 
   @media print {
@@ -657,6 +1080,7 @@ const items = [
     :global(:root[data-printing='kit'] .kit > *:not(.builder)),
     :global(:root[data-printing='kit'] .builder > *:not(.builder-layout)),
     :global(:root[data-printing='kit'] .builder-form),
+    :global(:root[data-printing='kit'] .preview-bar),
     :global(:root[data-printing='kit'] .skip-link) {
       display: none !important;
     }
@@ -669,10 +1093,16 @@ const items = [
       margin: 0;
       border: 0;
     }
+    :global(:root[data-printing='kit']) .builder-layout {
+      display: block;
+    }
     :global(:root[data-printing='kit']) .builder-preview {
-      max-width: none;
+      position: static;
+      padding: 0;
+      border: 0;
     }
     :global(:root[data-printing='kit']) .sheet-frame {
+      width: auto !important;
       border: 0;
       aspect-ratio: auto;
       overflow: visible;

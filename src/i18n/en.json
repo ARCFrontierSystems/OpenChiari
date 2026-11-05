@@ -1385,43 +1385,85 @@
     "builder": {
       "title": "Make your own",
       "intro": "Choose a design and message, add your own words, a logo or photo, and download it. Everything happens on your device: nothing you add is sent or saved.",
-      "design": "Design",
+      "step1": "What do you want to make?",
       "designs": {
-        "square": "Square post",
-        "story": "Story",
-        "poster": "Poster",
-        "stickers": "Sticker sheet"
+        "square": {
+          "label": "Square post",
+          "hint": "For Instagram and Facebook"
+        },
+        "story": {
+          "label": "Story",
+          "hint": "Tall, for stories"
+        },
+        "poster": {
+          "label": "Poster",
+          "hint": "To print"
+        },
+        "stickers": {
+          "label": "Stickers",
+          "hint": "To print"
+        }
       },
+      "step2": "Your words",
       "message": "Message",
       "messageHint": "Medical facts come only from this list, so every graphic stays accurate.",
       "messages": [
-        "What is Chiari malformation?",
-        "Chiari symptoms often have few outward signs. Ask how you can help.",
-        "I have Chiari malformation.",
-        "Chiari looks different for everyone, and many people with Type I have no symptoms at all.",
-        "Most people are born with the skull differences that lead to it. Some never have symptoms; others first notice them as teens or adults.",
-        "The classic sign is a headache at the back of the head after coughing, sneezing or straining."
+        {
+          "text": "What is Chiari malformation?",
+          "answer": "The lowest part of the back of the brain extends below the opening at the base of the skull."
+        },
+        {
+          "text": "I have Chiari malformation."
+        },
+        {
+          "text": "Chiari symptoms often have few outward signs. Ask how you can help."
+        },
+        {
+          "text": "Chiari malformation looks different for everyone, and many people with Type I have no symptoms at all."
+        },
+        {
+          "text": "Most people with Chiari malformation are born with the skull differences that lead to it. Some never have symptoms; others first notice them as teens or adults."
+        },
+        {
+          "text": "The classic sign of Chiari malformation is a headache at the back of the head after coughing, sneezing or straining. Not everyone with Chiari gets these headaches."
+        }
       ],
       "own": "Your own line (optional)",
       "ownHint": "For example: Walking for my daughter Emma",
+      "counter": "{left} of {max} letters left",
+      "yours": "Your own words appear in a separate box, so it is clear they are yours.",
       "name": "Name, group or event (optional)",
       "when": "Date and place (optional)",
       "stickerText": "Your sticker words",
       "stickerHint": "Up to 3 short lines. Shown on all 12 stickers.",
-      "image": "Logo or photo (optional)",
-      "imageHint": "It stays on your device.",
-      "removeImage": "Remove",
+      "starters": "Or start from one of ours:",
+      "stickerDefault": "Chiari warrior",
+      "step3": "Look and save",
       "color": "Colors",
       "colors": {
         "purple": "Purple",
         "light": "Light",
         "dark": "Dark"
       },
+      "figure": "Show the picture of Chiari",
+      "figureHint": "Adds the picture with its caption and model credit.",
+      "image": "Logo or photo (optional)",
+      "imageHint": "It stays on your device.",
+      "imageAlt": "Your logo or photo",
+      "removeImage": "Remove",
       "size": "Paper size",
       "download": "Download image",
       "print": "Print or save as PDF",
       "preview": "Preview",
-      "yours": "Your own words appear in a separate box, so it is clear they are yours."
+      "enlarge": "See it bigger",
+      "shrink": "See it smaller",
+      "describe": {
+        "message": "Message",
+        "own": "Your line",
+        "figure": "With the picture of Chiari.",
+        "image": "With your logo or photo."
+      },
+      "label": "Chiari Awareness"
     }
   },
   "children": {

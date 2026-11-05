@@ -117,6 +117,14 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
           </label>
         ))}
       </fieldset>
+      <div class="own pack-own">
+        <label for="pack-own" class="field-label">{t.pack.addOwn}</label>
+        <div class="own-row">
+          <input id="pack-own" type="text" autocomplete="off" maxlength="120" data-pack-input />
+          <button type="button" class="button button-secondary" data-pack-add>{t.add}</button>
+        </div>
+        <div class="own-list" data-pack-own-list></div>
+      </div>
       <button type="button" class="button button-secondary" data-print-pack>{t.pack.print}</button>
     </section>
 
@@ -186,8 +194,9 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
       .map((box) => box.dataset.text!);
   }
 
-  /** Adds what was typed as a ticked item (untick to leave it off the sheet). kind: a question or a thing to mention. */
-  function addItem(input: HTMLInputElement, list: HTMLElement, kind: 'text' | 'mention') {
+  /** Adds what was typed as a ticked item (untick to leave it off the sheet). kind: a question, a thing to mention, or
+   *  something to pack. */
+  function addItem(input: HTMLInputElement, list: HTMLElement, kind: 'text' | 'mention' | 'packItem') {
     const text = input.value.trim();
     if (!text) return;
     const label = document.createElement('label');
@@ -207,6 +216,7 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
   for (const [input, list, button, kind] of [
     [ownInput, ownList, '[data-own-add]', 'text'],
     [mentionInput, mentionList, '[data-mention-add]', 'mention'],
+    [document.querySelector<HTMLInputElement>('[data-pack-input]')!, document.querySelector<HTMLElement>('[data-pack-own-list]')!, '[data-pack-add]', 'packItem'],
   ] as const) {
     document.querySelector(button)!.addEventListener('click', () => addItem(input, list, kind));
     input.addEventListener('keydown', (e) => {
@@ -525,6 +535,12 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
     display: flex;
     flex-direction: column;
   }
+  .pack-own {
+    margin-top: 4px;
+  }
+  .pack > .button {
+    margin-top: 8px;
+  }
   .pack .button {
     align-self: flex-start;
     background: var(--surface);
@@ -607,6 +623,7 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
   /* Calm mode: larger buttons (DESIGN.md: at least 56 px). */
   :global(:root[data-calm='on']) .add-row .button,
   :global(:root[data-calm='on']) [data-own-add],
+  :global(:root[data-calm='on']) [data-pack-add],
   :global(:root[data-calm='on']) [data-mention-add] {
     min-height: 56px;
   }

@@ -750,7 +750,8 @@
         "Su hoja de preguntas de esta página"
       ],
       "print": "Imprimir la lista",
-      "formLabel": "Lista de cosas para llevar"
+      "formLabel": "Lista de cosas para llevar",
+      "addOwn": "Agregue su propio artículo"
     },
     "child": {
       "before": "¿Está preparando a un niño para la cirugía? Vea",

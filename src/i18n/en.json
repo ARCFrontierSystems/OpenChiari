@@ -750,7 +750,8 @@
         "Your questions sheet from this page"
       ],
       "print": "Print packing list",
-      "formLabel": "Packing list"
+      "formLabel": "Packing list",
+      "addOwn": "Add your own item"
     },
     "child": {
       "before": "Getting a child ready for surgery? See",

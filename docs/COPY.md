@@ -1132,3 +1132,7 @@ After the independent audits (`docs/audits/2026-11-05-surgery-and-children-audit
   - **ASAP support groups** (Video, phone and in person): Monthly support groups over Zoom, monthly phone support groups, and help finding a local group that meets in person. (Find a group)
   - **FEMACPA (Spain)** (In Spanish): The Spanish federation of Chiari patient associations. It offers support after diagnosis. (Visit FEMACPA)
 - Before you post, read each site's privacy policy. On some sites, posts can be read by anyone on the internet. Links checked November 2026.
+
+## Packing list: add your own items (2026-11-05, asked for by Matthew)
+
+- Under the packing list: "Add your own item" with an Add button (Spanish: "Agregue su propio artículo" / "Agregar"). The items are ticked, printed with the list as plain text, and never stored or sent. Non-medical.

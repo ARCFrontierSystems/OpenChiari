@@ -106,7 +106,7 @@ const lastRun = fmtDate(q.lastRun);
     margin-bottom: var(--s-40);
   }
   .page-intro h1 {
-    font-size: var(--h1);
+    font-size: var(--h1-page);
     line-height: 1.08;
     margin-bottom: var(--s-16);
   }
@@ -127,7 +127,7 @@ const lastRun = fmtDate(q.lastRun);
     margin-bottom: var(--s-24);
   }
   .block h2 {
-    font-size: 28px;
+    font-size: var(--h2-section);
   }
   .block-head .mono {
     font-size: var(--text-mono);
@@ -251,7 +251,7 @@ const lastRun = fmtDate(q.lastRun);
   .orgs {
     background: var(--surface);
     border: 1px solid var(--rule);
-    border-left: 3px solid var(--awareness);
+    border-left: 3px solid var(--accent);
     padding: var(--s-24);
   }
   .orgs h2 {
@@ -264,7 +264,7 @@ const lastRun = fmtDate(q.lastRun);
   }
   @media (max-width: 860px) {
     .page-intro h1 {
-      font-size: 34px;
+      font-size: var(--h1-page);
     }
     .open {
       grid-template-columns: minmax(0, 1fr);

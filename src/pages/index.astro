@@ -374,13 +374,11 @@ const calm = getStrings(Astro.currentLocale).calm;
     grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
     gap: var(--s-16) var(--s-40);
   }
+  /* Group labels in the mono sentence-case style used for eyebrows elsewhere (DESIGN.md: no uppercase labels). */
   .tools-group {
     margin: 0 0 var(--s-8);
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
+    font: 400 var(--text-mono) var(--font-mono);
     color: var(--muted);
-    text-transform: uppercase;
   }
   .tools {
     list-style: none;

@@ -55,7 +55,7 @@ const routes = getRoutes(Astro.currentLocale);
     max-width: 50rem;
   }
   .page-intro h1 {
-    font-size: var(--h1);
+    font-size: var(--h1-page);
     line-height: 1.08;
     margin-bottom: var(--s-16);
   }
@@ -142,7 +142,7 @@ const routes = getRoutes(Astro.currentLocale);
   }
   @media (max-width: 720px) {
     .page-intro h1 {
-      font-size: 34px;
+      font-size: var(--h1-page);
     }
   }
   :global(:root[data-calm='on']) .term p {

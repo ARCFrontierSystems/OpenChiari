@@ -50,7 +50,7 @@ const spanish = Astro.currentLocale === 'es';
     padding-bottom: var(--s-72);
   }
   .ev h1 {
-    font-size: var(--h1);
+    font-size: var(--h1-page);
     line-height: 1.08;
     margin-bottom: var(--s-24);
   }
@@ -65,7 +65,7 @@ const spanish = Astro.currentLocale === 'es';
   }
   .md :global(h2) {
     font-family: var(--font-serif);
-    font-size: 28px;
+    font-size: var(--h2-section);
     margin: var(--s-48) 0 var(--s-16);
     padding-top: var(--s-24);
     border-top: 1px solid var(--rule);
@@ -128,7 +128,7 @@ const spanish = Astro.currentLocale === 'es';
   }
   @media (max-width: 720px) {
     .ev h1 {
-      font-size: 34px;
+      font-size: var(--h1-page);
     }
     .md :global(th),
     .md :global(td) {

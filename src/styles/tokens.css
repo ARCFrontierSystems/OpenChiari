@@ -74,6 +74,9 @@
   --leading: 1.6;
   --h1: 54px;
   --h2: 36px;
+  /* One size for every page title and section heading (consistency pass, Nov 5); Home keeps --h1. */
+  --h1-page: 42px;
+  --h2-section: 28px;
 
   /* Spacing scale */
   --s-4: 4px;
@@ -105,6 +108,8 @@
     --leading: 1.55;
     --h1: 34px;
     --h2: 26px;
+    --h1-page: 32px;
+    --h2-section: 24px;
     --gutter: 20px;
     --button-height: 52px;
   }

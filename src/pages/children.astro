@@ -240,7 +240,7 @@ const pages = t.story.pages.map((p, i) => ({ ...p, n: t.story.pageLabel.replace(
     gap: 10px;
   }
   .page-intro h1 {
-    font-size: 42px;
+    font-size: var(--h1-page);
     line-height: 1.1;
   }
   .page-intro p,
@@ -256,7 +256,7 @@ const pages = t.story.pages.map((p, i) => ({ ...p, n: t.story.pageLabel.replace(
     gap: 12px;
   }
   section h2 {
-    font-size: 30px;
+    font-size: var(--h2-section);
   }
   .ready ul {
     margin: 0;
@@ -409,11 +409,11 @@ const pages = t.story.pages.map((p, i) => ({ ...p, n: t.story.pageLabel.replace(
       gap: var(--s-32);
     }
     .page-intro h1 {
-      font-size: 30px;
+      font-size: var(--h1-page);
       line-height: 1.15;
     }
     section h2 {
-      font-size: 26px;
+      font-size: var(--h2-section);
     }
   }
   :global(:root[data-calm='on']) .page-text {

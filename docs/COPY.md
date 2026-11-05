@@ -1160,3 +1160,9 @@ Draft and sources: `docs/drafts/2026-11-05-kit-and-home.md`. There is no new med
 - **Helping your child:** For after surgery, there are printable stickers too: stickers for after surgery.
 - **Home, Tools:** 07 Helping your child: Getting a child ready for Chiari surgery: tips, a picture story, coloring pages and a sheet for school. · 08 Awareness kit: Free posts, posters and stickers to share, or make your own with your words and logo. · 09 Connect with others: Forums and support groups for people with Chiari and their families.
 
+
+## Navigation (2026-11-05): Matthew ("go with all of your suggestions"; Explain It after 3D Explorer)
+
+- Top menu: 3D Explorer · Explain It · Visit prep · Research studies · More ("Más"). "More" opens the other tools in the Home groups: Helping your child · Awareness kit · Open model · Connect with others · Support Chiari organizations.
+- Home: the Tools sit in a compact band right below the opening picture, in three groups: "Understand and prepare" (Comprender y prepararse), "Share and spread awareness" (Compartir y concientizar), "Connect and get involved" (Conectar y participar). Each tool shows its short description. The explanation follows straight after.
+- Footer adds Open model.

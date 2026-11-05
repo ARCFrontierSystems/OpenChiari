@@ -45,6 +45,29 @@ const calm = getStrings(Astro.currentLocale).calm;
     </figure>
   </section>
 
+  <section class="tools-band" aria-labelledby="tools">
+    <div class="container">
+      <h2 class="visually-hidden" id="tools">{h.tools.title}</h2>
+      <div class="tool-groups">
+        {h.tools.groups.map((group) => (
+          <div class="tool-group">
+            <h3 class="tools-group">{group.title}</h3>
+            <ul class="tools">
+              {group.pages.map((page) => h.tools.items.find((tool) => tool.page === page)!).map((tool) => (
+                <li>
+                  <a class="tool" href={routes[tool.page as keyof typeof routes]}>
+                    <span class="tool-title">{tool.title}</span>
+                    <span class="tool-desc">{tool.narrow}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <section class="band band-surface" aria-labelledby="what-is">
     <div class="container band-inner">
       <h2 class="section-title" id="what-is">{h.whatIs.title}</h2>
@@ -115,26 +138,6 @@ const calm = getStrings(Astro.currentLocale).calm;
     </div>
   </section>
 
-  <section class="band" aria-labelledby="tools">
-    <div class="container band-inner">
-      <h2 class="section-title" id="tools">{h.tools.title}</h2>
-      <ul class="tools">
-        {h.tools.items.map((tool) => (
-          <li>
-            <a class="tool" href={routes[tool.page as keyof typeof routes]}>
-              <span class="tool-num mono">{tool.num}</span>
-              <span class="tool-text">
-                <span class="tool-title">{tool.title}</span>
-                <span class="tool-desc">
-                  <span class="only-wide">{tool.wide}</span><span class="only-narrow">{tool.narrow}</span>
-                </span>
-              </span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
 </Base>
 
 <style>
@@ -329,37 +332,45 @@ const calm = getStrings(Astro.currentLocale).calm;
     color: var(--ink-2);
   }
 
-  /* Tools: numbered list with hairline rules */
+  /* Tools: a compact band under the opening picture, three groups side by side (Nov 5). */
+  .tools-band {
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: var(--s-24) 0;
+  }
+  .tool-groups {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+    gap: var(--s-16) var(--s-40);
+  }
+  .tools-group {
+    margin: 0 0 var(--s-8);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
   .tools {
     list-style: none;
+    margin: 0;
     padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
     border-top: 1px solid var(--ink);
   }
   .tools li {
     border-bottom: 1px solid var(--rule);
   }
   .tool {
-    padding: var(--s-24) var(--s-24) var(--s-24) 0;
+    padding: 10px 0;
+    min-height: var(--touch);
     display: flex;
-    gap: var(--s-20);
-    height: 100%;
+    flex-direction: column;
+    gap: 2px;
     color: var(--ink);
     text-decoration: none;
   }
-  .tool-num {
-    font-size: 13px;
-    color: var(--muted);
-    padding-top: 4px;
-  }
-  .tool-text {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-4);
-  }
   .tool-title {
-    font-size: 19px;
+    font-size: 17px;
     font-weight: 600;
     color: var(--accent);
   }
@@ -368,6 +379,7 @@ const calm = getStrings(Astro.currentLocale).calm;
     text-decoration: underline;
   }
   .tool-desc {
+    font-size: 14px;
     color: var(--ink-2);
   }
 
@@ -377,7 +389,7 @@ const calm = getStrings(Astro.currentLocale).calm;
   }
   :global(:root[data-calm='on']) .eyebrow,
   :global(:root[data-calm='on']) .list-label,
-  :global(:root[data-calm='on']) .tool-num {
+  :global(:root[data-calm='on']) .tools-group {
     font-size: 15px;
   }
   :global(:root[data-calm='on']) .lede {
@@ -517,22 +529,8 @@ const calm = getStrings(Astro.currentLocale).calm;
       font-size: 19px;
     }
 
-    .tool {
-      padding: var(--s-16) 0;
-      gap: 14px;
-    }
-    .tool-num {
-      font-size: 12px;
-      padding-top: 3px;
-    }
-    .tool-text {
-      gap: 0;
-    }
     .tool-title {
       font-size: 16px;
-    }
-    .tool-desc {
-      font-size: 15px;
     }
 
     /* Calm mode on phones (HomeCalm mockup) */

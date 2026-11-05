@@ -540,6 +540,28 @@ test('links that leave the site open in a new tab, say so to screen readers, and
   }
 });
 
+test('header: four tools in order, and More opens the rest by mouse and keyboard, closing with Escape', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/');
+  await expect(page.locator('.nav-wide > a')).toHaveText(['3D Explorer', 'Explain It', 'Visit prep', 'Research studies']);
+  const more = page.locator('.more-button');
+  const panel = page.locator('#more-panel');
+  await expect(panel).toBeHidden();
+  await more.click();
+  await expect(more).toHaveAttribute('aria-expanded', 'true');
+  await expect(panel.locator('a')).toHaveText(['Helping your child', 'Awareness kit', 'Open model', 'Connect with others', 'Support Chiari organizations']);
+  await page.keyboard.press('Escape');
+  await expect(panel).toBeHidden();
+  await expect(more).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(panel).toBeVisible();
+  await page.mouse.click(10, 600);
+  await expect(panel).toBeHidden();
+  // Home: the tools come right after the opening picture, before the explanation.
+  const order = await page.locator('main > section').evaluateAll((s) => s.map((el) => el.getAttribute('aria-labelledby') ?? el.className));
+  expect(order.indexOf('tools')).toBe(1);
+});
+
 test.describe('Helping your child', () => {
   test('the school sheet prints what was typed, as text only, and nothing is stored or sent', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });

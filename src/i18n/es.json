@@ -17,7 +17,8 @@
     "espanol": "English",
     "calm": "Modo tranquilo",
     "dim": "Modo oscuro",
-    "dimLabel": "Modo oscuro: colores oscuros, menos luz"
+    "dimLabel": "Modo oscuro: colores oscuros, menos luz",
+    "more": "Más"
   },
   "translation": {
     "label": "Sobre esta traducción",
@@ -167,60 +168,86 @@
           "narrow": "Compare la anatomía típica, Chiari, siringe y después de la cirugía."
         },
         {
-          "num": "02",
+          "num": "04",
           "page": "explain",
           "title": "Explain It (Explíquelo)",
           "wide": "Envíe a su familia, a los maestros o a su empleador un enlace a la vista que corresponde a su diagnóstico.",
           "narrow": "Envíe un enlace a la vista que corresponde a su diagnóstico."
         },
         {
-          "num": "03",
+          "num": "08",
           "page": "studies",
           "title": "Estudios de investigación",
           "wide": "Estudios sobre Chiari y siringomielia que buscan participantes, actualizados a diario.",
           "narrow": "Estudios que buscan participantes, actualizados a diario."
         },
         {
-          "num": "04",
+          "num": "02",
           "page": "prep",
           "title": "Prepare su cita médica",
           "wide": "Haga una lista de preguntas de una página para su próxima cita. No se guarda nada.",
           "narrow": "Una lista de preguntas para imprimir. No se guarda nada."
         },
         {
-          "num": "05",
+          "num": "06",
           "page": "model",
           "title": "Modelo abierto",
           "wide": "Gratis para descargar e insertar en sitios web, para fundaciones, enfermeros y maestros.",
           "narrow": "Gratis para descargar e insertar."
         },
         {
-          "num": "06",
+          "num": "09",
           "page": "support",
           "title": "Apoye a las organizaciones de Chiari",
           "wide": "Done o sea voluntario en los grupos que financian la investigación y apoyan a las familias.",
           "narrow": "Done o sea voluntario en sus propios sitios web."
         },
         {
-          "num": "07",
+          "num": "03",
           "page": "children",
           "title": "Cómo ayudar a su hijo",
           "wide": "Cómo preparar a un niño para la cirugía de Chiari: consejos, un cuento con dibujos, páginas para colorear y una hoja para la escuela.",
           "narrow": "Consejos, un cuento con dibujos y una hoja para la escuela."
         },
         {
-          "num": "08",
+          "num": "05",
           "page": "kit",
           "title": "Kit de concientización",
           "wide": "Publicaciones, pósteres y calcomanías gratis para compartir, o haga los suyos con sus palabras y su logotipo.",
           "narrow": "Publicaciones, pósteres y calcomanías gratis para compartir."
         },
         {
-          "num": "09",
+          "num": "07",
           "page": "connect",
           "title": "Conectar con otras personas",
           "wide": "Foros y grupos de apoyo para personas con Chiari y sus familias.",
           "narrow": "Foros y grupos de apoyo."
+        }
+      ],
+      "groups": [
+        {
+          "title": "Comprender y prepararse",
+          "pages": [
+            "explorer",
+            "prep",
+            "children"
+          ]
+        },
+        {
+          "title": "Compartir y concientizar",
+          "pages": [
+            "explain",
+            "kit",
+            "model"
+          ]
+        },
+        {
+          "title": "Conectar y participar",
+          "pages": [
+            "connect",
+            "studies",
+            "support"
+          ]
         }
       ]
     }
@@ -240,6 +267,7 @@
     "moreNavLabel": "Más",
     "links": {
       "children": "Cómo ayudar a su hijo",
+      "model": "Modelo abierto",
       "support": "Apoyo",
       "kit": "Kit de concientización",
       "impact": "Impacto",

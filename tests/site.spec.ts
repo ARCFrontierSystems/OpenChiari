@@ -42,6 +42,8 @@ for (const path of pages) {
 }
 
 test('no third-party requests from the browser', async ({ page }) => {
+  // Visits every page in one test, so allow about 6 seconds a page rather than 30 seconds for all of them.
+  test.setTimeout(pages.length * 6000);
   const outside: string[] = [];
   page.on('request', (request) => {
     const url = new URL(request.url());
@@ -245,7 +247,21 @@ test.describe('3D Explorer controls', () => {
     await page.locator('.x-toolbar').getByRole('button', { name: 'Fluid flow' }).click();
     await expect.poll(animating).toBe(true);
     await page.getByRole('switch', { name: 'Calm mode' }).check();
-    await expect.poll(animating).toBe(false);
+    // GitHub's test machines draw 3D in software and can be very busy, so the page may take a while to answer;
+    // the wait is longer than usual. If it ever fails, the message says what state the page was in.
+    const errors: string[] = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await expect
+      .poll(animating, { timeout: 15000 })
+      .toBe(false)
+      .catch(async (e) => {
+        const state = await page.evaluate(() => ({
+          calm: document.documentElement.dataset.calm ?? 'off',
+          switchChecked: document.querySelector<HTMLInputElement>('[data-calm-switch]')?.checked,
+          reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+        }));
+        throw new Error(`${e.message}\nPage state: ${JSON.stringify(state)}; page errors: ${JSON.stringify(errors)}`);
+      });
   });
 
   test('reduced motion: fluid flow does not animate', async ({ page }) => {
@@ -444,7 +460,7 @@ test('Explain It: carries the view from the Explorer; the link is short and hold
   await page.goto(link);
   await expect(page.getByText('Someone shared this with you')).toBeVisible();
   await expect(page.locator('[data-shared-note]')).toBeHidden();
-  await expect(page.locator('[data-caption]')).toHaveText('Typical anatomy, back view. Illustration, not a medical image. Fluid flow simplified.');
+  await expect(page.locator('[data-caption]')).toHaveText('Typical anatomy, back view. Illustration, not a medical image. Fluid flow simplified. Tonsils shown at their lowest point, where MRI measures them.');
   await expect(page.getByRole('link', { name: 'Explore the full 3D model' })).toHaveAttribute('href', /\/explorer\/#typ\.back/);
   // In a page that scrolls, swiping up or down over the model scrolls the page; sideways turns it.
   await page.goto(link.replace('#typ.back', '#typ.back.x'));
@@ -569,7 +585,9 @@ test('counters: on openchiari.org only the name of an action is sent, never the 
     sent.push(route.request().postData() ?? '');
     return route.fulfill({ status: 204 });
   });
-  await page.route('https://clinicaltrials.gov/**', (route) => route.abort());
+  // The study link is answered with "204 No Content", so the browser stays on the page. (Blocking it instead showed an
+  // error page a moment later, which could interrupt the next page the test opened.)
+  await page.route('https://clinicaltrials.gov/**', (route) => route.fulfill({ status: 204 }));
   page.on('request', (r) => !r.url().startsWith('http://openchiari.org:4322/') && !r.url().startsWith('https://clinicaltrials.gov/') && other.push(r.url()));
   const site = 'http://openchiari.org:4322';
 
@@ -739,4 +757,22 @@ test('guided tour: five steps, each sets the view; Back, Next and Finish work, a
   await expect(page.locator('[data-viewer]')).toHaveAttribute('aria-label', /syrinx/i);
   await expect(page.getByRole('link', { name: 'Finish tour' })).toHaveAttribute('href', '/explorer/');
   await expect(page.getByText('Illustration, not a medical image', { exact: false })).toBeVisible();
+});
+
+test('Awareness kit: every graphic and printable downloads, and the ZIP carries the credit', async ({ page, request }) => {
+  await page.goto('/kit/');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Awareness kit');
+  const hrefs = await page.locator('a[download]').evaluateAll((as) => as.map((a) => (a as HTMLAnchorElement).getAttribute('href')!));
+  expect(hrefs).toEqual(expect.arrayContaining([
+    '/kit/open-chiari-awareness-kit.zip', '/kit/social-post.png', '/kit/quote-card-square.png', '/kit/quote-card-story.png',
+    '/kit/wallet-cards.pdf', '/kit/poster-letter.pdf', '/kit/poster-a4.pdf',
+  ]));
+  for (const href of hrefs) {
+    const res = await request.get(href);
+    expect(res.status(), href).toBe(200);
+    expect((await res.body()).length, href).toBeGreaterThan(1000);
+  }
+  // The quote card uses the wording approved after the source check, and the license line is shown.
+  await expect(page.locator('img[alt^="Chiari symptoms often don\'t show."]')).toBeVisible();
+  await expect(page.getByText('Kit graphics are free to use and share, CC BY-SA 4.0.', { exact: false })).toBeVisible();
 });

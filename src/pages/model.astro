@@ -12,6 +12,7 @@ import AnatomyFigure from '../components/AnatomyFigure.astro';
 import { getStrings, externalLinks } from '../i18n';
 
 const t = getStrings().model;
+const x = getStrings().explorer;
 const files: Record<string, string> = {
   gltf: '/downloads/openchiari-model-gltf.zip',
   blender: '/downloads/openchiari-model-blender.zip',
@@ -41,7 +42,7 @@ const embedCode = `<iframe src="https://openchiari.org/embed/#v=c1&switch=1&labe
       </div>
       <figure class="fig">
         <AnatomyFigure condition="syrinx" flow={true} labels={false} measure={false} />
-        <figcaption><span class="mono">{t.figNum}</span> {t.figCaption}</figcaption>
+        <figcaption><span class="mono">{t.figNum}</span> {t.figCaption} {x.captionIllustration}. {x.captionFlow}. {x.captionTonsils}.</figcaption>
       </figure>
     </div>
 

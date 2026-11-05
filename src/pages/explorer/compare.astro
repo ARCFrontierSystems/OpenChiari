@@ -74,9 +74,9 @@ const note = (c: string) => (t.notes as Record<string, string>)[c] ?? x.conditio
     </main>
 
     <footer class="cmp-foot">
-      <p>{x.captionIllustration} · {x.captionFlow} · <a href={routes.evidence}>{x.evidence}</a></p>
+      <p>{x.captionIllustration} · {x.captionFlow} · {x.captionTonsils} · <a href={routes.evidence}>{x.evidence}</a></p>
       <p>
-        <strong>{f.notAdvice}</strong> {f.factsBefore} <a href={externalLinks.ninds}>{f.ninds}</a>{f.modelBefore}{' '}
+        <strong>{f.notAdvice}</strong> {f.notAdviceRest.wide} {f.factsBefore} <a href={externalLinks.ninds}>{f.ninds}</a>{f.modelBefore}{' '}
         <a href={externalLinks.zAnatomy}>{f.zAnatomy}</a> {f.modelAfter}
       </p>
     </footer>

@@ -33,6 +33,7 @@ const t = s.explain;
           <div class="labels" data-labels hidden></div>
           <div class="figure" data-figure></div>
         </div>
+        <p class="preview-caption">{s.explorer.captionIllustration} · {s.explorer.captionFlow} · {s.explorer.captionTonsils}</p>
       </div>
 
       <div class="form">
@@ -174,6 +175,7 @@ const t = s.explain;
     if (interactive) caption.push(t.dragHint);
     caption.push(`${x.captionIllustration}.`);
     if (st.flow) caption.push(`${x.captionFlow}.`);
+    caption.push(`${x.captionTonsils}.`);
     section.querySelector('[data-caption]')!.textContent = caption.join(' ');
     // The approved Chiari I explanation refers to the dashed line and the blue bracket, so it's used only when the
     // Measure marks are shown; otherwise each view's own approved note from the Explorer explains it.
@@ -304,6 +306,13 @@ const t = s.explain;
     min-width: 0;
     background: var(--surface);
     border: 1px solid var(--rule);
+  }
+  .preview-caption {
+    margin: 0;
+    padding: var(--s-8) var(--s-16);
+    border-top: 1px solid var(--rule);
+    font-size: var(--text-small);
+    color: var(--muted);
   }
   .preview-bar {
     display: flex;

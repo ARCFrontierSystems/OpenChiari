@@ -1,7 +1,7 @@
 /**
  * Impact page quality report: measures the built site and writes src/data/quality.json.
  * - Lighthouse on the home page, phone and desktop: accessibility and speed scores.
- * - The axe accessibility scans of every page (the "accessibility:" tests): passed, or issues found.
+ * - The axe accessibility scans of every page (the "accessibility: /…" tests): passed, or issues found.
  * Usage: npm run build && npx astro preview --port 4323 & node scripts/quality.mjs http://localhost:4323
  * Never fails the publish: anything it can't measure stays "not measured yet".
  */
@@ -27,12 +27,14 @@ for (const [form, extra] of [['phone', []], ['desktop', ['--preset=desktop']]]) 
 try {
   let report;
   try {
-    report = execFileSync('npx', ['playwright', 'test', '-g', '^accessibility:', '--reporter=json'], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, timeout: 900000 });
+    report = execFileSync('npx', ['playwright', 'test', '-g', 'accessibility: /', '--reporter=json'], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, timeout: 900000 });
   } catch (error) {
     report = error.stdout; // failing tests exit non-zero; the report is still there
   }
   const stats = JSON.parse(report).stats;
-  data.wcag = stats.unexpected === 0 && stats.expected > 0 ? 'pass' : 'issues';
+  // No scans run means "not measured", never "issues": the page must only report what was actually checked.
+  if (stats.expected + stats.unexpected === 0) throw new Error('no accessibility scans ran');
+  data.wcag = stats.unexpected === 0 ? 'pass' : 'issues';
   console.log(`Accessibility scans: ${stats.expected} passed, ${stats.unexpected} with issues.`);
 } catch (error) {
   console.warn(`::warning::Accessibility scans didn't run: ${error.message}`);

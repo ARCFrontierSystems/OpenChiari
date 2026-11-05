@@ -22,6 +22,8 @@ const captionFor = (c: string) => (c === 'typical' ? caption : `${x.captionIllus
 // The model credit exactly as CLAUDE.md rule 3 gives it (from the footer's pieces).
 const credit = `${f.modelBefore.replace(/^\.\s*/, '')} ${f.zAnatomy} ${f.modelAfter}`;
 const sheetFooter = s.prep.sheetFooter;
+// The after-surgery sticker sheet (Awareness kit), in the page's language.
+const kitStickers = `${Astro.currentLocale === 'es' ? '/kit/es/' : '/kit/'}stickers-surgery-letter.pdf`;
 const pages = t.story.pages.map((p, i) => ({ ...p, n: t.story.pageLabel.replace('{n}', String(i + 1)) }));
 ---
 
@@ -78,6 +80,7 @@ const pages = t.story.pages.map((p, i) => ({ ...p, n: t.story.pageLabel.replace(
       </div>
       <p class="source">{t.color.key} {captionFor('chiari')}</p>
       <button type="button" class="button button-secondary" data-print-part="color">{t.color.print}</button>
+      <p>{t.stickers.before} <a href={kitStickers}>{t.stickers.link}</a>{t.stickers.after}</p>
     </section>
 
     <section class="school" aria-labelledby="school-title">

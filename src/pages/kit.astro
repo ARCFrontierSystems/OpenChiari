@@ -6,6 +6,7 @@
  */
 import Base from '../layouts/Base.astro';
 import AnatomyFigure from '../components/AnatomyFigure.astro';
+import { ribbonSvg } from '../lib/ribbon';
 import { getStrings, getRoutes } from '../i18n';
 const routes = getRoutes(Astro.currentLocale);
 
@@ -42,15 +43,15 @@ const items = [
       { href: base + 'poster-a4.pdf', label: 'A4' },
     ],
   },
-  {
-    id: 'stickers',
-    preview: base + 'preview-stickers.png',
-    alt: `${k.stickers.title}: ${k.stickers.messages.join(', ')}. ${k.stickers.blank}.`,
+  ...(['everyone', 'surgery'] as const).map((sheet) => ({
+    id: sheet === 'everyone' ? ('stickersEveryone' as const) : ('stickersSurgery' as const),
+    preview: base + `preview-stickers-${sheet}.png`,
+    alt: `${k.stickers.sheets[sheet].title}: ${k.stickers.sheets[sheet].messages.join(', ')}. ${k.stickers.blank}.`,
     files: [
-      { href: base + 'stickers-letter.pdf', label: k.letter },
-      { href: base + 'stickers-a4.pdf', label: 'A4' },
+      { href: base + `stickers-${sheet}-letter.pdf`, label: k.letter },
+      { href: base + `stickers-${sheet}-a4.pdf`, label: 'A4' },
     ],
-  },
+  })),
 ] as const;
 ---
 
@@ -161,7 +162,7 @@ const items = [
                 </div>
               </div>
               <div class="sticker-sheet" data-stickers hidden>
-                {Array.from({ length: 12 }, () => <div class="sticker"><p data-sticker-text></p></div>)}
+                {Array.from({ length: 12 }, () => <div class="sticker"><span class="sticker-ribbon" set:html={ribbonSvg('currentColor')} /><p data-sticker-text></p></div>)}
               </div>
             </div>
           </div>
@@ -612,7 +613,26 @@ const items = [
     background: #5b027e;
     color: #fff;
   }
+  .sticker {
+    position: relative;
+  }
+  .sticker-ribbon {
+    position: absolute;
+    inset: 0.22in;
+    color: #7a2a9c;
+  }
+  .sticker-ribbon :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+  [data-theme='light'] .sticker-ribbon {
+    color: #d9bce8;
+  }
+  [data-theme='dark'] .sticker-ribbon {
+    color: #2c2433;
+  }
   .sticker p {
+    position: relative;
     margin: 0;
     font: 600 22pt/1.1 var(--font-serif, 'Source Serif 4', serif);
     white-space: pre-line;

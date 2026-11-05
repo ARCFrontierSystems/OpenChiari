@@ -1,7 +1,7 @@
 // Builds the Awareness kit (Chiari Awareness Month, September) into public/kit/, from design/mockups/Kit.dc.html:
 //   social-post.png              square social post, 1080 × 1080: what Chiari is, in plain English
-//   stickers-letter.pdf          12 round stickers for full-sheet sticker paper, US Letter, with cut lines
-//   stickers-a4.pdf              the same, A4
+//   stickers-everyone-*.pdf      12 round stickers for full-sheet sticker paper (Letter and A4), with cut lines
+//   stickers-surgery-*.pdf       the same, for after surgery; both with the purple awareness ribbon behind the words
 //   quote-card-square.png        quote card, 1080 × 1080
 //   quote-card-story.png         quote card, 1080 × 1920 (stories)
 //   wallet-cards.pdf             Explain It wallet cards, 8 per US Letter page, cut lines, QR code to the 3D view
@@ -21,6 +21,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import qrcode from 'qrcode-generator';
 import { anatomyFigureSvg } from '../src/lib/anatomy-figure.ts';
+import { ribbonSvg } from '../src/lib/ribbon.ts';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const locale = process.argv.includes('--locale') ? process.argv[process.argv.indexOf('--locale') + 1] : 'en';
@@ -115,22 +116,29 @@ const pages = {
       <div style="width:2in;height:1in;border:1.5px dashed #A9A8A2;display:flex;align-items:center;justify-content:center;color:#A9A8A2;font-size:11pt">${k.logoSpace}</div>
     </div>
   </div>`,
-  // 12 round stickers (2.25 in) for full-sheet sticker paper, 3 across and 4 down, with dashed cut circles.
-  // The messages are kit.stickers.messages, then blank ones to write on. Three styles take turns.
-  stickers: (w, h) => {
+  // 12 round stickers (2.25 in) for full-sheet sticker paper, 3 across and 4 down, with dashed cut circles. One sheet
+  // per set (kit.stickers.sheets); its messages, then blank ones to write on. Three styles take turns, each with the
+  // awareness ribbon behind the words in a tint of its own color (low contrast, so the words stay easy to read).
+  stickers: (sheet, w, h) => {
     const st = k.stickers;
-    const words = [...st.messages, ...Array(12).fill('')].slice(0, 12);
+    const words = [...st.sheets[sheet].messages, ...Array(12).fill('')].slice(0, 12);
     const styles = [
-      'background:#5B027E;color:#fff',
-      'background:#EBD7F4;color:#3E0157',
-      'background:#fff;color:#5B027E;box-shadow:inset 0 0 0 0.08in #5B027E',
+      { css: 'background:#5B027E;color:#fff', ribbon: '#7A2A9C' },
+      { css: 'background:#EBD7F4;color:#3E0157', ribbon: '#D9BCE8' },
+      { css: 'background:#fff;color:#5B027E;box-shadow:inset 0 0 0 0.08in #5B027E', ribbon: '#F1E4F7' },
     ];
     return `<div style="width:${w};height:${h};display:flex;align-items:center;justify-content:center;background:#fff">
       <div style="display:grid;grid-template-columns:repeat(3,2.25in);grid-auto-rows:2.25in;gap:0.25in">
-        ${words.map((m, i) => `<div style="position:relative;width:2.25in;height:2.25in;border-radius:50%;outline:1px dashed #A9A8A2;outline-offset:0.04in;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0.3in;${m ? styles[i % 3] : 'background:#fff;color:#A9A8A2;box-shadow:inset 0 0 0 1.5px #CB98E1'}">
-          ${m ? `<p class="serif" style="font-size:${m.length > 14 ? 20 : 25}pt;line-height:1.08;margin:0">${m}</p>
+        ${words.map((m, i) => {
+          const s = styles[i % 3];
+          return `<div style="position:relative;overflow:visible;width:2.25in;height:2.25in;border-radius:50%;outline:1px dashed #A9A8A2;outline-offset:0.04in;${m ? s.css : 'background:#fff;color:#A9A8A2;box-shadow:inset 0 0 0 1.5px #CB98E1'}">
+          <div style="position:absolute;inset:0.22in;display:flex;align-items:center;justify-content:center">${ribbonSvg(m ? s.ribbon : '#F4EAF8').replace('<svg ', '<svg style="width:100%;height:100%" ')}</div>
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0.32in">
+          ${m ? `<p class="serif" style="font-size:${m.length > 16 ? 18 : m.length > 12 ? 21 : 25}pt;line-height:1.08;margin:0">${m}</p>
           <p class="mono" style="font-size:7pt;margin:0.1in 0 0;opacity:0.85">${st.site}</p>` : `<p style="font-size:9pt;margin:0">${st.blank}</p>`}
-        </div>`).join('')}
+          </div>
+        </div>`;
+        }).join('')}
       </div>
     </div>`;
   },
@@ -160,8 +168,10 @@ await png('quote-card-story.png', pages.quoteStory, 1080, 1920);
 await pdf('wallet-cards.pdf', pages.cards, 'Letter');
 await pdf('poster-letter.pdf', pages.poster('8.5in', '11in'), 'Letter');
 await pdf('poster-a4.pdf', pages.poster('210mm', '297mm'), 'A4');
-await pdf('stickers-letter.pdf', pages.stickers('8.5in', '11in'), 'Letter');
-await pdf('stickers-a4.pdf', pages.stickers('210mm', '297mm'), 'A4');
+for (const sheet of ['everyone', 'surgery']) {
+  await pdf(`stickers-${sheet}-letter.pdf`, pages.stickers(sheet, '8.5in', '11in'), 'Letter');
+  await pdf(`stickers-${sheet}-a4.pdf`, pages.stickers(sheet, '210mm', '297mm'), 'A4');
+}
 
 // Small pictures of each item for the kit page (the PDFs shown as their first page).
 async function preview(name, html, width, height, scale) {
@@ -175,14 +185,15 @@ await preview('preview-social.png', pages.social, 1080, 1080, 0.5);
 await preview('preview-quote.png', pages.quoteSquare, 1080, 1080, 0.5);
 await preview('preview-cards.png', pages.cards, 816, 1056, 0.62);
 await preview('preview-poster.png', pages.poster('8.5in', '11in'), 816, 1056, 0.62);
-await preview('preview-stickers.png', pages.stickers('8.5in', '11in'), 816, 1056, 0.62);
+await preview('preview-stickers-everyone.png', pages.stickers('everyone', '8.5in', '11in'), 816, 1056, 0.62);
+await preview('preview-stickers-surgery.png', pages.stickers('surgery', '8.5in', '11in'), 816, 1056, 0.62);
 await browser.close();
 
 // The ZIP: every file, plus the credit and license, so the credit travels with the graphics.
 const work = mkdtempSync(join(tmpdir(), 'oc-kit-'));
 const dir = join(work, 'open-chiari-awareness-kit');
 mkdirSync(dir);
-for (const f of ['social-post.png', 'quote-card-square.png', 'quote-card-story.png', 'wallet-cards.pdf', 'poster-letter.pdf', 'poster-a4.pdf', 'stickers-letter.pdf', 'stickers-a4.pdf']) copyFileSync(join(out, f), join(dir, f));
+for (const f of ['social-post.png', 'quote-card-square.png', 'quote-card-story.png', 'wallet-cards.pdf', 'poster-letter.pdf', 'poster-a4.pdf', 'stickers-everyone-letter.pdf', 'stickers-everyone-a4.pdf', 'stickers-surgery-letter.pdf', 'stickers-surgery-a4.pdf']) copyFileSync(join(out, f), join(dir, f));
 writeFileSync(join(dir, 'CREDIT.txt'), [k.license, '', credit, '', s.model.footnote, '', ...(spanish ? [s.translation.notice, ''] : []), spanish ? 'https://openchiari.org/es/kit/' : 'https://openchiari.org/kit/', ''].join('\n'));
 copyFileSync(join(root, 'LICENSE-MODEL.md'), join(dir, 'LICENSE.md'));
 rmSync(join(out, 'open-chiari-awareness-kit.zip'), { force: true });

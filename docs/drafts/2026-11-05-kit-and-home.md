@@ -24,27 +24,39 @@
 
 The Chiari I figure, the approved caption, "Not medical advice. Talk to your doctor about your own care." and the model credit stay as before. The post has no month in it, so it works in September or any other time.
 
-## 2. Stickers (new): "Letter and A4 · PDF, for full-sheet sticker paper"
+## 2. Stickers (new): two sheets, each "Letter and A4 · PDF, for full-sheet sticker paper"
+
+Matthew asked for two sheets, so that "Zipper club" reaches only people who chose the after-surgery set. He also asked for the purple awareness ribbon behind the words, drawn for Open Chiari (not clip art) in a soft tint of each sticker's color.
 
 > Print on full-sheet sticker paper at 100% size, then cut along the dashed circles.
 
-Twelve round stickers, 2.25 inches across, with "openchiari.org" in small type:
+Each sheet has 12 round stickers, 2.25 inches across, with "openchiari.org" in small type, and 3 blanks ("Write your own").
+
+**Stickers for everyone:**
 - Chiari warrior
 - Brave brain
-- Zipper club
 - One day at a time
 - Rest is strength
 - Still me
 - Ask me about Chiari
+- You are not alone
+- Purple for Chiari
+- Invisible, not imaginary
+
+**Stickers for after surgery:**
+- Zipper club
+- Proud of my scar
+- Every scar tells a story
 - I did a hard thing
 - Brave kid
-- You are not alone
+- Healing takes time
+- Recovery mode
+- Hospital hero
+- Brave brain
 
-There are also 2 blank ones ("Write your own").
+The Helping your child page gets a new line under the coloring page: "For after surgery, there are printable stickers too: [stickers for after surgery]."
 
-Notes:
-- "Zipper club" is what many people with surgery scars call themselves. Some find it fun and some don't, so Matthew should decide whether it stays.
-- None of the stickers states a fact or promises anything.
+None of the stickers states a medical fact or promises anything. "Healing takes time" and "Invisible, not imaginary" are general encouragement.
 
 ## 3. Make your own (new section on the Awareness kit page)
 

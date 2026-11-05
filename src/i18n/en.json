@@ -1294,8 +1294,12 @@
         "title": "Event poster and handout",
         "format": "Letter and A4 · PDF, with logo space"
       },
-      "stickers": {
-        "title": "Stickers",
+      "stickersEveryone": {
+        "title": "Stickers for everyone",
+        "format": "Letter and A4 · PDF, for full-sheet sticker paper"
+      },
+      "stickersSurgery": {
+        "title": "Stickers for after surgery",
         "format": "Letter and A4 · PDF, for full-sheet sticker paper"
       }
     },
@@ -1319,20 +1323,38 @@
       "title": "Stickers",
       "format": "Letter and A4 · PDF, for full-sheet sticker paper",
       "how": "Print on full-sheet sticker paper at 100% size, then cut along the dashed circles.",
-      "messages": [
-        "Chiari warrior",
-        "Brave brain",
-        "Zipper club",
-        "One day at a time",
-        "Rest is strength",
-        "Still me",
-        "Ask me about Chiari",
-        "I did a hard thing",
-        "Brave kid",
-        "You are not alone"
-      ],
       "blank": "Write your own",
-      "site": "openchiari.org"
+      "site": "openchiari.org",
+      "sheets": {
+        "everyone": {
+          "title": "Stickers for everyone",
+          "messages": [
+            "Chiari warrior",
+            "Brave brain",
+            "One day at a time",
+            "Rest is strength",
+            "Still me",
+            "Ask me about Chiari",
+            "You are not alone",
+            "Purple for Chiari",
+            "Invisible, not imaginary"
+          ]
+        },
+        "surgery": {
+          "title": "Stickers for after surgery",
+          "messages": [
+            "Zipper club",
+            "Proud of my scar",
+            "Every scar tells a story",
+            "I did a hard thing",
+            "Brave kid",
+            "Healing takes time",
+            "Recovery mode",
+            "Hospital hero",
+            "Brave brain"
+          ]
+        }
+      }
     },
     "builder": {
       "title": "Make your own",
@@ -1497,6 +1519,11 @@
       "print": "Print the school sheet",
       "callIf": "Please call me right away if"
     },
-    "pageNote": "Not medical advice. Nothing you type on this page is stored or sent."
+    "pageNote": "Not medical advice. Nothing you type on this page is stored or sent.",
+    "stickers": {
+      "before": "For after surgery, there are printable stickers too:",
+      "link": "stickers for after surgery",
+      "after": "."
+    }
   }
 }

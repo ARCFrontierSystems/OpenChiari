@@ -977,3 +977,38 @@ test('3D-printable plaques: offered on the Open model page, with credit, license
   const body = await res.body();
   for (const name of ['openchiari-midline-typical.stl', 'openchiari-midline-chiari.stl', 'README.txt', 'LICENSE.md']) expect(body.includes(Buffer.from(name))).toBe(true);
 });
+
+test('How do you say it: the pronunciations are on Home, in both languages', async ({ page }) => {
+  await page.goto('/');
+  const say = page.locator('.say');
+  await expect(say.getByRole('heading', { name: 'How do you say it?' })).toBeVisible();
+  for (const s of ['key-AR-ee', 'key-AR-ee mal-fore-MAY-shun', 'suh-ring-go-my-EE-lee-uh', 'SEER-inks']) await expect(say.getByText(s, { exact: true })).toBeVisible();
+  await expect(say).toContainText('Hans Chiari first described Chiari malformations at the end of the 1800s.');
+  await page.goto('/es/');
+  await expect(page.locator('.say')).toContainText('(en inglés)');
+});
+
+test('Explorer: the size line shows with the 12 mm views, and the cough plays and is announced', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/explorer/');
+  await expect(page.locator('.x-view.has-3d')).toBeVisible({ timeout: 30000 });
+  const size = page.locator('.x-card-wide [data-size-note]');
+  await expect(size).toBeVisible(); // Chiari I, Measure on
+  await expect(size).toHaveText(/^The usual cutoff, about 5 mm, is half a centimeter, about the height of 3 stacked quarters\./);
+  await page.getByRole('radio', { name: 'Typical anatomy' }).first().check({ force: true });
+  await expect(size).toBeHidden();
+  const panel = page.locator('.x-cough-wide');
+  await expect(panel).toBeVisible();
+  await panel.locator('summary').click();
+  await expect(panel).toContainText("Researchers don't all agree on how this works");
+  await expect(panel).toContainText('Animation simplified.');
+  const button = panel.getByRole('button', { name: 'Cough' });
+  await button.click();
+  await expect(panel.locator('[data-cough-status]')).toHaveText('During the cough: some spinal fluid moves up from the spine into the head.');
+  await expect(panel.locator('[data-cough-status]')).toHaveText('Then it flows back down.', { timeout: 10000 });
+  await expect(button).toBeEnabled({ timeout: 10000 });
+  // Not offered for the syrinx and after-surgery views.
+  await page.getByRole('radio', { name: 'Chiari I with syrinx' }).first().check({ force: true });
+  await expect(panel).toBeHidden();
+  await expect(size).toBeVisible();
+});

@@ -175,12 +175,20 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
             </li>
           ))}
         </ul>
+        <details class="x-cough x-cough-wide" data-cough-panel hidden={!['typical', 'chiari'].includes(st.condition)}>
+          <summary>{x.cough.title}</summary>
+          {x.cough.text.map((line) => <p>{line}</p>)}
+          <button type="button" class="x-tool" data-cough>{x.cough.button}</button>
+          <p class="x-cough-caption">{x.cough.caption} {x.captionIllustration} · {x.captionFlow}</p>
+          <p class="visually-hidden" aria-live="polite" data-cough-status></p>
+        </details>
         <div class="x-card x-card-wide" aria-live="polite">
           <ListenButton target=".x-card-wide" dark />
           <p class="x-h"><span data-part-num>{part.num}</span> · {x.selected}</p>
           <h2 class="x-card-title" data-part-name>{part.name}</h2>
           <p class="x-card-text" data-part-text>{part.text}</p>
           <p class="x-card-note" data-cond-note>{cond.note}</p>
+          <p class="x-size-note" data-size-note hidden={!(['chiari', 'syrinx'].includes(st.condition) && st.measure)}>{x.sizeNote}</p>
         </div>
       </aside>
 
@@ -198,8 +206,16 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
           <ListenButton target=".x-sheet-note" dark />
           <p class="x-h" data-cond-title>{cond.label}</p>
           <p data-cond-note-short>{cond.noteShort}</p>
+          <p class="x-size-note" data-size-note hidden={!(['chiari', 'syrinx'].includes(st.condition) && st.measure)}>{x.sizeNote}</p>
         </div>
         <button type="button" class="x-tool x-ar-narrow" data-ar hidden>{x.ar}</button>
+        <details class="x-cough x-cough-narrow" data-cough-panel hidden={!['typical', 'chiari'].includes(st.condition)}>
+          <summary>{x.cough.title}</summary>
+          {x.cough.text.map((line) => <p>{line}</p>)}
+          <button type="button" class="x-tool" data-cough>{x.cough.button}</button>
+          <p class="x-cough-caption">{x.cough.caption} {x.captionIllustration} · {x.captionFlow}</p>
+          <p class="visually-hidden" aria-live="polite" data-cough-status></p>
+        </details>
         <button type="button" class="x-parts-toggle" aria-expanded="false" aria-controls="parts-narrow" data-parts-toggle>
           <span>{x.partsButton}</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"></path></svg>
@@ -347,6 +363,20 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
           view.classList.add('has-3d');
           document.body.classList.add('has-3d');
           count('explore');
+          // Why can coughing bring on a headache? One press: the fluid marks move up into the head and ease back.
+          document.querySelectorAll<HTMLButtonElement>('[data-cough]').forEach((button) =>
+            button.addEventListener('click', async () => {
+              const status = button.closest('[data-cough-panel]')!.querySelector<HTMLElement>('[data-cough-status]')!;
+              const v = (viewerHost as HTMLElement & { viewer?: { cough(cb: (phase: string) => void): Promise<void> } }).viewer;
+              if (!v) return;
+              button.disabled = true;
+              await v.cough((phase) => {
+                if (phase === 'up') status.textContent = x.cough.up;
+                if (phase === 'back') status.textContent = x.cough.back;
+              });
+              button.disabled = false;
+            }),
+          );
           // "See it in your room": only where the phone or tablet can show it (src/explorer/ar.ts).
           import('../explorer/ar').then(async ({ arSupport, openAr }) => {
             const kind = await arSupport();
@@ -440,6 +470,9 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
         setText('[data-cond-note]', cond.note);
         setText('[data-cond-title]', cond.label);
         setText('[data-cond-note-short]', cond.noteShort);
+        // The size line goes with the 12 mm views and their measure bracket; the cough panel with Typical and Chiari I.
+        $$('[data-size-note]').forEach((el) => (el.hidden = !(['chiari', 'syrinx'].includes(st.condition) && st.measure)));
+        $$('[data-cough-panel]').forEach((el) => (el.hidden = !['typical', 'chiari'].includes(st.condition)));
       });
     </script>
   </body>
@@ -657,6 +690,36 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
   }
 
   /* Layers */
+  .x-size-note {
+    margin: 0;
+    color: var(--x-text-2);
+  }
+  .x-cough {
+    border-top: 1px solid var(--x-border);
+    padding: var(--s-12) var(--s-20);
+  }
+  .x-cough summary {
+    min-height: var(--touch);
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .x-cough p {
+    margin: 0 0 var(--s-8);
+    color: var(--x-text-2);
+    line-height: 1.5;
+  }
+  .x-cough [data-cough] {
+    margin: var(--s-4) 0 var(--s-8);
+  }
+  .x-cough .x-cough-caption {
+    font-size: var(--x-size-caption);
+    color: var(--x-faint);
+  }
+  .x-cough[hidden] {
+    display: none;
+  }
   .x-na {
     display: block;
     font-size: var(--x-size-caption);

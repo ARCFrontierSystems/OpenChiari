@@ -1014,3 +1014,19 @@ Non-medical. The model shown is the existing Simple model (approved), cut at the
 - Over the camera picture (Android): the view's name, "Illustration, not a medical image. Tonsils shown at their lowest point, where MRI measures them.", and: Point your phone at a table or the floor, then tap to place the model. It is life size; walk around it. Spanish: Apunte el teléfono hacia una mesa o el piso y toque la pantalla para colocar el modelo. Tiene tamaño real; camine a su alrededor. On iPhone, Apple's banner shows the name and the same caption.
 - Privacy, "What is never collected", new item: **Your camera:** "See it in your room" uses your phone's camera on the phone itself. The picture never leaves your device, and the site never sees it.
 - Open model, downloads table, new row: 3D-printable plaques, typical and Chiari I · STL · Printing to hold and show. Its README (in the ZIP) describes the plaques, how to print them, the captions, "Not medical advice. Talk to your doctor about your own care." and the model credit.
+
+## New features, release 3 (2026-11-05): approved by Matthew ("All three approved")
+
+After the independent audit (`docs/audits/2026-11-05-new-features-audit.md`) and its fixes. EVIDENCE.md rows 18 to 22 and the pronunciation rows. Spanish: translated, pending medical-translator review.
+
+- Home, "How do you say it?": Chiari: key-AR-ee · Chiari malformation: key-AR-ee mal-fore-MAY-shun · Syringomyelia: suh-ring-go-my-EE-lee-uh · Syrinx: SEER-inks. "Capital letters show the part you say loudest. Hans Chiari first described Chiari malformations at the end of the 1800s."
+- 3D Explorer, Chiari I and syrinx views with Measure on: The usual cutoff, about 5 mm, is half a centimeter, about the height of 3 stacked quarters. The model shows about 12 mm, a little over 1 centimeter, about the height of 7 stacked quarters. How far the tonsils extend doesn't always match how someone feels. <!-- Coin comparison (option A, stacked quarters) chosen and approved by Matthew 2026-11-05; quarter size from the U.S. Mint, opened by Matthew. -->
+- 3D Explorer, Typical and Chiari I views, "Why can coughing bring on a headache?":
+  - A cough briefly raises the pressure in your chest, which pushes some spinal fluid up from the spine into the head. Normally it then flows back down.
+  - One explanation is that, in some people with Chiari I, the low tonsils get in the way as the fluid flows back, so just after a cough they are pushed further down into the opening.
+  - Researchers don't all agree on how this works, or whether it's why coughing can bring on the classic headache. Not everyone with Chiari gets these headaches.
+  - Button: Cough. Caption: Animation simplified. (with "Illustration, not a medical image · Fluid flow simplified")
+  - Screen readers, while it plays: "During the cough: some spinal fluid moves up from the spine into the head." then "Then it flows back down." (from the first sentence)
+
+Releases 1 and 2 wording above: approved by Matthew on 2026-11-05 ("Approved").
+

@@ -70,6 +70,29 @@
         "narrow": "Usually with an MRI scan and a doctor's exam, sometimes by chance."
       }
     },
+    "say": {
+      "title": "How do you say it?",
+      "items": [
+        {
+          "term": "Chiari",
+          "say": "key-AR-ee"
+        },
+        {
+          "term": "Chiari malformation",
+          "say": "key-AR-ee mal-fore-MAY-shun"
+        },
+        {
+          "term": "Syringomyelia",
+          "say": "suh-ring-go-my-EE-lee-uh"
+        },
+        {
+          "term": "Syrinx",
+          "say": "SEER-inks"
+        }
+      ],
+      "key": "Capital letters show the part you say loudest.",
+      "history": "Hans Chiari first described Chiari malformations at the end of the 1800s."
+    },
     "feel": {
       "title": "What it can feel like",
       "intro": "Chiari looks different for everyone, and many people with Type I have no symptoms at all.",
@@ -403,7 +426,20 @@
       "far": "Cut past the midline, toward the far side"
     },
     "evidencePage": "Evidence notes",
-    "notInModel": "Not in this model yet"
+    "notInModel": "Not in this model yet",
+    "cough": {
+      "title": "Why can coughing bring on a headache?",
+      "text": [
+        "A cough briefly raises the pressure in your chest, which pushes some spinal fluid up from the spine into the head. Normally it then flows back down.",
+        "One explanation is that, in some people with Chiari I, the low tonsils get in the way as the fluid flows back, so just after a cough they are pushed further down into the opening.",
+        "Researchers don't all agree on how this works, or whether it's why coughing can bring on the classic headache. Not everyone with Chiari gets these headaches."
+      ],
+      "button": "Cough",
+      "caption": "Animation simplified.",
+      "up": "During the cough: some spinal fluid moves up from the spine into the head.",
+      "back": "Then it flows back down."
+    },
+    "sizeNote": "The usual cutoff, about 5 mm, is half a centimeter, about the height of 3 stacked quarters. The model shows about 12 mm, a little over 1 centimeter, about the height of 7 stacked quarters. How far the tonsils extend doesn't always match how someone feels."
   },
   "evidence": {
     "inEnglish": "These notes are in English, like the sources they cite.",

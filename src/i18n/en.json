@@ -759,7 +759,7 @@
     "exploreFull": "Explore the full 3D model"
   },
   "explain": {
-    "_note": "Text from docs/COPY.md 'Explain It, create a link' and 'Explain It, recipient view'. Nov 5, 2026: Matthew asked for one note for everyone (no 'Who is it for?'), a short link that holds only the view, and the note sent in the message. starterNote is made only of sentences already approved in COPY.md (Home intro, the third 'What you're looking at' line, and 'How you can help'). noteHint, copy, share, copied and privacy are new wording awaiting Matthew's approval.",
+    "_note": "Text from docs/COPY.md 'Explain It, create a link' and 'Explain It, recipient view'. Nov 5, 2026: Matthew asked for one note for everyone (no 'Who is it for?'), a short link that holds only the view, and the note sent in the message. starterNote is made only of sentences already approved in COPY.md (Home intro, the third 'What you're looking at' line, and 'How you can help'). All of it approved by Matthew on Nov 5, 2026.",
     "title": "Explain It",
     "backToExplorer": "Back to the 3D Explorer",
     "previewTitle": "Preview of what they'll see",

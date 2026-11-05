@@ -371,7 +371,7 @@ Mockup: `design/mockups/TourPhone.dc.html`
 
 Mockup: `design/mockups/ExplainShare.dc.html`
 
-> **Changed 2026-11-05 at Matthew's request (wording pending his approval).** One note for everyone; "Who is it for?" and its four choices are removed. The link holds only the view (`openchiari.org/v/#c1.side.f.m`), and the note goes in the sender's own message, with the link under it. The starter note is made only of sentences already approved elsewhere in this file (Home intro; "What you're looking at" line 3; "How you can help"). Earlier wording is kept in comments.
+> **Changed 2026-11-05 at Matthew's request; wording approved by Matthew the same day.** One note for everyone; "Who is it for?" and its four choices are removed. The link holds only the view (`openchiari.org/v/#c1.side.f.m`), and the note goes in the sender's own message, with the link under it. The starter note is made only of sentences already approved elsewhere in this file (Home intro; "What you're looking at" line 3; "How you can help"). Earlier wording is kept in comments.
 
 - Open Chiari
 - Back to the 3D Explorer
@@ -868,7 +868,7 @@ Mockup: `design/mockups/Privacy.dc.html`
 - No accounts, sign-ins, names or email addresses.
 - Explain It notes
 - Your note goes in the message you send, not in the link. The link holds only the chosen view, after the #. Browsers don't send that part to our server, and our analytics are set up not to record it.
-<!-- 2026-11-05 (pending Matthew's approval): was "Your note and chosen view live after the # in the link. Browsers don't send that part to our server, and our analytics are set up not to record it. Anyone with the link can read the note." -->
+<!-- 2026-11-05 (approved by Matthew): was "Your note and chosen view live after the # in the link. Browsers don't send that part to our server, and our analytics are set up not to record it. Anyone with the link can read the note." -->
 - Visit prep questions
 - Built and printed entirely in your browser. Nothing you tick or type leaves your device.
 - Your location

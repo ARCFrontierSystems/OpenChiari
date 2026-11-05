@@ -14,7 +14,7 @@ Matthew's preference: when a step is done, lay out what the next step will cover
   - **Resizing on every scroll step.** The Explorer's height followed the phone's address bar (`dvh`), so the 3D view was resized and redrawn on every scroll step. It now uses `svh`, which stays fixed.
   - **The flow pulse kept animating.** It now pauses while the page scrolls.
   - **Swipes over the model didn't scroll the page.** On Explain It and embeds, an up-or-down swipe over the model now scrolls the page and a sideways swipe turns it. A look-only shared model no longer stops the page from scrolling at all.
-- **Two-minute tour:** still opens the Explorer (the approved stand-in). Only step 3 of the five tour steps has approved text; the tour is Phase 4. Asked Matthew whether to hide the button until then.
+- **Two-minute tour:** still opens the Explorer (the approved stand-in). Only step 3 of the five tour steps has approved text; the tour is Phase 4. Matthew: keep it as it is until Phase 4.
 
 ## 2026-11-05: Explain It: short links, note in the message
 
@@ -28,7 +28,7 @@ Matthew's preference: when a step is done, lay out what the next step will cover
   - **The note travels in the message.** Text message, Email and Copy send the note with the link under it. Phones also get a Share button that opens their share sheet.
   - **Recipient page.** `/v/` shows the model and explanation without the note, since they read it in the message.
   - **Old links still work.** Links made before today still open, with their note.
-- **New wording awaiting Matthew's approval:**
+- **New wording, approved by Matthew the same day:**
   - the note hint;
   - "Copy note and link", "Copied your note and the link." and "Share";
   - the privacy line under the link, and the Privacy page's "Explain It notes".

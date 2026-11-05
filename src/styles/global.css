@@ -205,3 +205,38 @@ a:hover {
 .anatomy-figure .fig-mono {
   font-family: var(--font-mono);
 }
+
+/* "See it in your room" on Android (src/explorer/ar.ts): the words over the camera picture. */
+.ar-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  pointer-events: none;
+  font-family: var(--font-sans);
+  color: var(--x-text);
+}
+.ar-text {
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  background: rgba(17, 18, 21, 0.75);
+}
+.ar-text p {
+  margin: 0 0 4px;
+}
+.ar-title {
+  font-weight: 600;
+}
+.ar-close {
+  align-self: center;
+  min-height: var(--touch);
+  padding: 0 24px;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--x-button-bg);
+  color: var(--x-button-text);
+  font: 500 16px var(--font-sans);
+  pointer-events: auto;
+}

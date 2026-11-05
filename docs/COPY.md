@@ -1005,3 +1005,12 @@ Non-medical. Shown to Matthew with screenshots before publishing.
 - Listen / Stop (tooltip: "Listen: your device reads this part aloud"). Spanish: Escuchar / Detener.
 - Explain It: Picture; "The picture was saved to your downloads." Spanish: Imagen; "La imagen se guardó en sus descargas."
 - Privacy, "Saved on your device" (replaces the earlier text): Calm mode, Dim mode and your language choice are remembered in your own browser so they stay on next time. So the site also works without a signal, your browser keeps a copy of its pages and files; nothing you type or choose is in it. Clearing your browser data removes all of this. None of it is ever sent to the site.
+
+## New features, release 2 (2026-11-05): wording pending Matthew's approval
+
+Non-medical. The model shown is the existing Simple model (approved), cut at the midline like the Explorer.
+
+- 3D Explorer button: See it in your room. Spanish: Véalo en su habitación.
+- Over the camera picture (Android): the view's name, "Illustration, not a medical image. Tonsils shown at their lowest point, where MRI measures them.", and: Point your phone at a table or the floor, then tap to place the model. It is life size; walk around it. Spanish: Apunte el teléfono hacia una mesa o el piso y toque la pantalla para colocar el modelo. Tiene tamaño real; camine a su alrededor. On iPhone, Apple's banner shows the name and the same caption.
+- Privacy, "What is never collected", new item: **Your camera:** "See it in your room" uses your phone's camera on the phone itself. The picture never leaves your device, and the site never sees it.
+- Open model, downloads table, new row: 3D-printable plaques, typical and Chiari I · STL · Printing to hold and show. Its README (in the ZIP) describes the plaques, how to print them, the captions, "Not medical advice. Talk to your doctor about your own care." and the model credit.

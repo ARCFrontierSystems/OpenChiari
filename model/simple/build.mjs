@@ -663,6 +663,119 @@ function checkClosed(tris) {
   return { open, flipped };
 }
 
+// ---------------------------------------------------------------- 3D-printable plaques (--print)
+// `node model/simple/build.mjs --print` writes public/downloads/print/*.stl instead of the web model: for Typical
+// and Chiari I, a solid plaque of the midline view from the skull base to the upper neck, life size (about 150 by
+// 115 mm, 12 mm thick), so they can be laid side by side. It prints as one piece on a single-color printer: on its
+// face, bone stands 1.5 mm proud, spinal fluid is 2 mm deep, soft tissue 0.8 mm, brain and cord flush, and the
+// McRae line is a 1 mm wide, 2 mm deep groove. The outlines are the figure's own (the same fields as the web model, at the midline),
+// so the EVIDENCE.md positions carry over; the check at the end measures the tonsil against the McRae line.
+if (process.argv.includes('--print')) {
+  const byName = Object.fromEntries(structures.map((s) => [s.name, s]));
+  const PRINT_OUT = new URL('../../public/downloads/print/', import.meta.url);
+  mkdirSync(PRINT_OUT, { recursive: true });
+  const BOX = [236, 326, 540, 562]; // figure units: x 236–540, y 326–562 (skull base to upper neck)
+  const BACK = -24, RELIEF = { bone: 3, brain: 0, csf: -4, soft: -1.6, groove: -4 };
+  const lineDist = (x, y) => {
+    const [ax, ay] = S.mcrae.basion, [bx2, by2] = S.mcrae.opisthion;
+    const dx = bx2 - ax, dy = by2 - ay;
+    const t = Math.max(0, Math.min(1, ((x - ax) * dx + (y - ay) * dy) / (dx * dx + dy * dy)));
+    return Math.hypot(x - (ax + t * dx), y - (ay + t * dy));
+  };
+  for (const cond of ['typical', 'chiari']) {
+    const inside = (names) => names.map((n) => byName[n].field);
+    const bone = inside(['skull', 'c1', 'c2', 'c3', 'discs']);
+    const brain = inside(['brainstem', 'cerebellum', 'cerebrum', 'thalamus', `tonsil-${cond}`, 'cord']);
+    const csf = inside([`csf-${cond}`, 'ventricle-fourth']);
+    const any = (fs, x, y) => fs.some((f) => f(x, y, 0) > 0);
+    // What the midline face shows at (x, y), as a height: bone first, then brain (the tonsil fills the fluid space in
+    // Chiari I), then fluid, then soft tissue.
+    const height = (x, y) => {
+      if (lineDist(x, y) < 1) return RELIEF.groove;
+      if (any(bone, x, y)) return RELIEF.bone;
+      if (any(brain, x, y)) return RELIEF.brain;
+      if (any(csf, x, y)) return RELIEF.csf;
+      return RELIEF.soft;
+    };
+    // Heights are looked up once per column, not per voxel.
+    const step = 1;
+    const hx = Math.ceil((BOX[2] - BOX[0]) / step) + 3, hy = Math.ceil((BOX[3] - BOX[1]) / step) + 3;
+    const H = new Float32Array(hx * hy);
+    for (let j = 0; j < hy; j++) for (let i = 0; i < hx; i++) H[i + hx * j] = height(BOX[0] - step + i * step, BOX[1] - step + j * step);
+    const hAt = (x, y) => H[Math.round((x - BOX[0] + step) / step) + hx * Math.round((y - BOX[1] + step) / step)] ?? RELIEF.soft;
+    const field = (x, y, z) =>
+      Math.min(x - BOX[0], BOX[2] - x, y - BOX[1], BOX[3] - y, skinField(x, y, Math.min(z, 0)), hAt(x, y) - z, z - BACK);
+    const mesh = smooth(extract(field, [BOX[0] - 2, BOX[1] - 2, BACK - 2], [BOX[2] + 2, BOX[3] + 2, 5], 0.5), 2);
+    for (let t = 0; t < mesh.tris.length; t += 3) [mesh.tris[t + 1], mesh.tris[t + 2]] = [mesh.tris[t + 2], mesh.tris[t + 1]];
+    const pos = toMm(mesh.pos);
+    // Fewer triangles (about 1 in 8, with at most about 0.05 mm of change), so the file is a reasonable download.
+    await MeshoptSimplifier.ready;
+    const tris = MeshoptSimplifier.simplify(mesh.tris, pos, 3, Math.floor(mesh.tris.length / 8 / 3) * 3, 0.05 / 150, ['LockBorder'])[0];
+    // Lying face up on the print bed: z (the face) up, back at 0.
+    let zMin = Infinity;
+    for (let i = 2; i < pos.length; i += 3) zMin = Math.min(zMin, pos[i]);
+    const check = checkClosed(tris);
+    // Binary STL.
+    const n = tris.length / 3;
+    const out = Buffer.alloc(84 + n * 50);
+    out.write('Open Chiari, CC BY-SA 4.0. Midline plaque, ' + cond + '. Not medical advice.', 0, 'ascii');
+    out.writeUInt32LE(n, 80);
+    for (let t = 0; t < n; t++) {
+      const v = [0, 1, 2].map((e) => [pos[tris[t * 3 + e] * 3], pos[tris[t * 3 + e] * 3 + 1], pos[tris[t * 3 + e] * 3 + 2] - zMin]);
+      const u = [v[1][0] - v[0][0], v[1][1] - v[0][1], v[1][2] - v[0][2]], w = [v[2][0] - v[0][0], v[2][1] - v[0][1], v[2][2] - v[0][2]];
+      const nx = u[1] * w[2] - u[2] * w[1], ny = u[2] * w[0] - u[0] * w[2], nz = u[0] * w[1] - u[1] * w[0];
+      const len = Math.hypot(nx, ny, nz) || 1;
+      const o = 84 + t * 50;
+      [nx / len, ny / len, nz / len, ...v.flat()].forEach((val, k) => out.writeFloatLE(val, o + k * 4));
+    }
+    const file = new URL(`openchiari-midline-${cond}.stl`, PRINT_OUT).pathname;
+    writeFileSync(file, out);
+    // Measurement check: the tonsil's lowest point at the midline, against the McRae line (EVIDENCE.md: Typical
+    // about 1 mm above, Chiari I about 12 mm below).
+    let lowest = -Infinity, at = 0;
+    const tonsil = byName[`tonsil-${cond}`].field;
+    for (let x = 360; x <= 420; x += 0.25) for (let y = 400; y <= 500; y += 0.25) if (tonsil(x, y, 0) > 0 && y > lowest) [lowest, at] = [y, x];
+    const below = (lowest - mcraeY(at)) / S.unitsPerMm;
+    console.log(`${cond}: ${n} triangles, open edges ${check.open}, same-direction edges ${check.flipped}; tonsil tip ${Math.abs(below).toFixed(1)} mm ${below > 0 ? 'below' : 'above'} the McRae line; wrote ${file}`);
+  }
+  // One download: both plaques, the credit and license, and printing tips (public/downloads/openchiari-print.zip).
+  const { execFileSync } = await import('node:child_process');
+  const { copyFileSync, rmSync, mkdtempSync } = await import('node:fs');
+  const { tmpdir } = await import('node:os');
+  const { join } = await import('node:path');
+  const strings = JSON.parse(readFileSync(new URL('../../src/i18n/en.json', import.meta.url), 'utf8'));
+  const f = strings.footer, x = strings.explorer;
+  const work = mkdtempSync(join(tmpdir(), 'oc-print-'));
+  const dir = join(work, 'openchiari-print');
+  mkdirSync(dir);
+  for (const cond of ['typical', 'chiari']) copyFileSync(new URL(`openchiari-midline-${cond}.stl`, PRINT_OUT).pathname, join(dir, `openchiari-midline-${cond}.stl`));
+  writeFileSync(join(dir, 'README.txt'), [
+    'Open Chiari: 3D-printable midline plaques',
+    '',
+    'Two plaques of the midline view, skull base to upper neck, life size (about 150 x 120 mm, 12 mm thick):',
+    'openchiari-midline-typical.stl (typical anatomy) and openchiari-midline-chiari.stl (Chiari I). Lay them side by side.',
+    'Bone stands 1.5 mm proud, spinal fluid spaces are 2 mm deep, soft tissue 0.8 mm, brain and spinal cord flush,',
+    'and the McRae line (across the opening at the base of the skull) is a groove.',
+    '',
+    'Printing: lay each plaque flat, face up; no supports needed. 0.2 mm layers work; a light-colored filament shows the',
+    'relief best. They also scale down well (for example 60%) for a smaller, cheaper print.',
+    '',
+    `${x.captionIllustration}. ${x.captionTonsils}. ${f.notAdvice} ${f.notAdviceRest.wide}`,
+    '',
+    `${f.modelBefore.replace(/^\.\s*/, '')} ${f.zAnatomy} ${f.modelAfter}`,
+    'Made by model/simple/build.mjs --print, from the same shapes as the 3D Explorer. https://openchiari.org/model/',
+    '',
+  ].join('\n'));
+  copyFileSync(new URL('../../LICENSE-MODEL.md', import.meta.url).pathname, join(dir, 'LICENSE.md'));
+  const zipPath = new URL('../openchiari-print.zip', PRINT_OUT).pathname;
+  rmSync(zipPath, { force: true });
+  execFileSync('zip', ['-q', '-X', '-r', zipPath, 'openchiari-print'], { cwd: work });
+  rmSync(work, { recursive: true, force: true });
+  rmSync(PRINT_OUT.pathname, { recursive: true, force: true });
+  console.log('wrote', zipPath);
+  process.exit(0);
+}
+
 let totalTris = 0;
 for (const s of structures) {
   const t0 = Date.now();

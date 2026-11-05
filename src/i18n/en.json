@@ -285,6 +285,8 @@
     "flowShort": "Flow",
     "labels": "Labels",
     "measure": "Measure",
+    "ar": "See it in your room",
+    "arHint": "Point your phone at a table or the floor, then tap to place the model. It is life size; walk around it.",
     "close": "Close",
     "viewerLabel": "Anatomy view",
     "captionIllustration": "Illustration, not a medical image",
@@ -671,6 +673,10 @@
         "text": "The \"Near\" box on Research studies sorts the list on your device and is never sent."
       },
       {
+        "term": "Your camera",
+        "text": "\"See it in your room\" uses your phone's camera on the phone itself. The picture never leaves your device, and the site never sees it."
+      },
+      {
         "term": "Health information",
         "text": "None, anywhere on the site."
       }
@@ -758,6 +764,12 @@
         "file": "Figure set, labeled",
         "format": "PNG and PDF",
         "bestFor": "Handouts and slides"
+      },
+      {
+        "id": "print",
+        "file": "3D-printable plaques, typical and Chiari I",
+        "format": "STL",
+        "bestFor": "Printing to hold and show"
       }
     ],
     "download": "Download",

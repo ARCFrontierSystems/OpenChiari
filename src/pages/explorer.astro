@@ -136,6 +136,7 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
           <button type="button" class="x-tool" data-toggle="flow" aria-pressed={(st.flow) ? 'true' : 'false'}>{x.flow}</button>
           <button type="button" class="x-tool" data-toggle="labels" aria-pressed={(st.labels) ? 'true' : 'false'}>{x.labels}</button>
           <button type="button" class="x-tool" data-toggle="measure" aria-pressed={(st.measure) ? 'true' : 'false'}>{x.measure}</button>
+          <button type="button" class="x-tool" data-ar hidden>{x.ar}</button>
         </div>
         <div class="x-camera only-wide-x" role="group" aria-label={x.camera} data-3d-only>
           {CAMERA_PRESETS.map((v) => (
@@ -198,6 +199,7 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
           <p class="x-h" data-cond-title>{cond.label}</p>
           <p data-cond-note-short>{cond.noteShort}</p>
         </div>
+        <button type="button" class="x-tool x-ar-narrow" data-ar hidden>{x.ar}</button>
         <button type="button" class="x-parts-toggle" aria-expanded="false" aria-controls="parts-narrow" data-parts-toggle>
           <span>{x.partsButton}</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"></path></svg>
@@ -345,6 +347,28 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
           view.classList.add('has-3d');
           document.body.classList.add('has-3d');
           count('explore');
+          // "See it in your room": only where the phone or tablet can show it (src/explorer/ar.ts).
+          import('../explorer/ar').then(async ({ arSupport, openAr }) => {
+            const kind = await arSupport();
+            if (!kind) return;
+            const host = viewerHost as HTMLElement & { viewer?: { arModel(): Promise<import('three').Group> } };
+            document.querySelectorAll<HTMLButtonElement>('[data-ar]').forEach((button) => {
+              button.hidden = false;
+              button.addEventListener('click', async () => {
+                if (!host.viewer) return;
+                button.disabled = true;
+                try {
+                  const st = store.get();
+                  const caption = [x.captionIllustration, x.captionTonsils].join('. ') + '.';
+                  await openAr(kind, await host.viewer.arModel(), { title: x.conditions[st.condition].label, caption, hint: x.arHint, close: x.close });
+                } catch (error) {
+                  console.warn('Room view not available.', error);
+                } finally {
+                  button.disabled = false;
+                }
+              });
+            });
+          });
           $$<HTMLButtonElement>('[data-camera]').forEach((b) => b.addEventListener('click', () => store.set({ camera: b.dataset.camera as ViewState['camera'] })));
           $$<HTMLButtonElement>('[data-camera-reset]').forEach((b) => b.addEventListener('click', () => viewer.reset()));
           let spoken = '';
@@ -1121,6 +1145,9 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
       margin: 0;
       line-height: 1.5;
       color: var(--x-text-2);
+    }
+    .x-ar-narrow {
+      width: 100%;
     }
     .x-parts-toggle {
       min-height: var(--touch);

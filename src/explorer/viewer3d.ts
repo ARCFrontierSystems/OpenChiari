@@ -1209,9 +1209,62 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     requestRender();
   }
   // Camera helpers on the element, used by tests (and the camera buttons in step 6).
+  /** "See it in your room": a copy of one Simple structure, cut at the midline like the Explorer's main view
+   *  (only the half that stays, z <= 0), in millimetres. The shapes themselves are unchanged. */
+  function clipAtMidline(mesh: THREE.Mesh): THREE.BufferGeometry | null {
+    mesh.updateMatrixWorld();
+    const geom = mesh.geometry;
+    const pos = geom.getAttribute('position');
+    const index = geom.getIndex();
+    const count = index ? index.count : pos.count;
+    const corner = (i: number) => new THREE.Vector3().fromBufferAttribute(pos, index ? index.getX(i) : i).applyMatrix4(mesh.matrixWorld);
+    const out: number[] = [];
+    for (let i = 0; i + 2 < count; i += 3) {
+      const tri = [corner(i), corner(i + 1), corner(i + 2)];
+      // Keep the part of the triangle on the near side of the cut (Sutherland-Hodgman against z = 0).
+      const poly: THREE.Vector3[] = [];
+      for (let k = 0; k < 3; k++) {
+        const a = tri[k], b = tri[(k + 1) % 3];
+        if (a.z <= 0) poly.push(a);
+        if (a.z <= 0 !== b.z <= 0) poly.push(a.clone().lerp(b, a.z / (a.z - b.z)));
+      }
+      for (let k = 1; k + 1 < poly.length; k++) out.push(...poly[0].toArray(), ...poly[k].toArray(), ...poly[k + 1].toArray());
+    }
+    if (!out.length) return null;
+    const result = new THREE.BufferGeometry();
+    result.setAttribute('position', new THREE.Float32BufferAttribute(out, 3));
+    result.computeVertexNormals();
+    return result;
+  }
+
   (host as HTMLElement & { viewer?: unknown }).viewer = {
     look,
     reset: frame,
+    /** "See it in your room": the Simple model as now shown (condition and layers), cut at the midline with the
+     *  figure on the cut face, in millimetres. Used for the phone's augmented-reality view (src/explorer/ar.ts). */
+    async arModel(): Promise<THREE.Group> {
+      const st = store.get();
+      sectionKey = '';
+      await drawSection(st);
+      const group = new THREE.Group();
+      for (const p of parts) {
+        if (p.model !== 'simple') continue;
+        const layer = st.layers[p.layer];
+        if (!layer.on || (p.conditions && !p.conditions.includes(st.condition))) continue;
+        const opacity = p.ghost ? p.opacity * SKIN_SEE_THROUGH : p.opacity;
+        if (opacity <= 0) continue;
+        const geom = clipAtMidline(p.mesh);
+        if (!geom) continue;
+        const color = (p.mesh.material as THREE.MeshStandardMaterial).color.clone();
+        group.add(new THREE.Mesh(geom, new THREE.MeshStandardMaterial({ color, roughness: 0.85, metalness: 0, transparent: opacity < 1, opacity })));
+      }
+      const faceTexture = new THREE.CanvasTexture(sectionCanvas);
+      faceTexture.colorSpace = THREE.SRGBColorSpace;
+      const face = new THREE.Mesh(section.geometry.clone(), new THREE.MeshStandardMaterial({ map: faceTexture, roughness: 1, metalness: 0, transparent: true, alphaTest: 0.02 }));
+      face.position.copy(section.position);
+      group.add(face);
+      return group;
+    },
     /** Explain It picture: the view as it is now, drawn fresh at full sharpness (the labels are not part of it). */
     snapshot(): HTMLCanvasElement {
       const ratio = renderer.getPixelRatio();

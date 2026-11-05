@@ -921,3 +921,59 @@ test('offline: the offline helper saves the site and opens pages without a conne
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Vea lo que pasa en la base del cráneo.');
   await ctx.close();
 });
+
+test('See it in your room: shown only where the device supports it; the model is cut at the midline and becomes an AR file', async ({ page }) => {
+  await page.goto('/explorer/');
+  await expect(page.locator('.x-view.has-3d')).toBeVisible({ timeout: 30000 });
+  await expect(page.locator('[data-ar]').first()).toBeHidden(); // no AR on this test browser
+  // The model for the room view: the half that stays at the midline cut, in millimetres.
+  const model = await page.evaluate(async () => {
+    const host = document.querySelector('[data-viewer]') as HTMLElement & { viewer: { arModel(): Promise<{ children: { geometry: { attributes: { position: { array: Float32Array } } } }[] }> } };
+    const group = await host.viewer.arModel();
+    let maxZ = -Infinity, n = 0;
+    for (const child of group.children) {
+      const a = child.geometry.attributes.position.array;
+      for (let i = 2; i < a.length; i += 3) maxZ = Math.max(maxZ, a[i]);
+      n++;
+    }
+    return { n, maxZ };
+  });
+  expect(model.n).toBeGreaterThan(10);
+  expect(model.maxZ).toBeLessThan(0.1);
+
+  // On an iPhone (pretended here), the button makes a USDZ file for Apple's viewer.
+  await page.addInitScript(() => {
+    const supports = DOMTokenList.prototype.supports;
+    DOMTokenList.prototype.supports = function (token: string) {
+      return token === 'ar' || supports.call(this, token);
+    };
+    HTMLAnchorElement.prototype.click = function () {
+      if (this.rel === 'ar') (window as unknown as { arLink: string }).arLink = this.href;
+    };
+  });
+  await page.reload();
+  await expect(page.locator('.x-view.has-3d')).toBeVisible({ timeout: 30000 });
+  const button = page.locator('.x-toolbar [data-ar]');
+  await expect(button).toBeVisible();
+  await expect(button).toHaveText('See it in your room');
+  await button.click();
+  await expect.poll(() => page.evaluate(() => (window as unknown as { arLink?: string }).arLink ?? ''), { timeout: 30000 }).toMatch(/^blob:/);
+  const file = await page.evaluate(async () => {
+    const link = (window as unknown as { arLink: string }).arLink;
+    const buf = new Uint8Array(await (await fetch(link.split('#')[0])).arrayBuffer());
+    return { size: buf.length, zip: buf[0] === 0x50 && buf[1] === 0x4b, banner: decodeURIComponent(link.split('#')[1]) };
+  });
+  expect(file.zip).toBe(true);
+  expect(file.size).toBeGreaterThan(100000);
+  expect(file.banner).toContain('Illustration, not a medical image');
+});
+
+test('3D-printable plaques: offered on the Open model page, with credit, license and both plaques', async ({ page, request }) => {
+  await page.goto('/model/');
+  const link = page.locator('a[href="/downloads/openchiari-print.zip"]');
+  await expect(link).toBeVisible();
+  const res = await request.get('/downloads/openchiari-print.zip');
+  expect(res.status()).toBe(200);
+  const body = await res.body();
+  for (const name of ['openchiari-midline-typical.stl', 'openchiari-midline-chiari.stl', 'README.txt', 'LICENSE.md']) expect(body.includes(Buffer.from(name))).toBe(true);
+});

@@ -285,6 +285,8 @@
     "flowShort": "Flujo",
     "labels": "Nombres",
     "measure": "Medir",
+    "ar": "Véalo en su habitación",
+    "arHint": "Apunte el teléfono hacia una mesa o el piso y toque la pantalla para colocar el modelo. Tiene tamaño real; camine a su alrededor.",
     "close": "Cerrar",
     "viewerLabel": "Vista de la anatomía",
     "captionIllustration": "Ilustración, no es una imagen médica",
@@ -671,6 +673,10 @@
         "text": "El cuadro \"Cerca de\" en Estudios de investigación ordena la lista en su dispositivo y nunca se envía."
       },
       {
+        "term": "Su cámara",
+        "text": "\"Véalo en su habitación\" usa la cámara de su teléfono solo en el propio teléfono. La imagen nunca sale de su dispositivo y el sitio nunca la ve."
+      },
+      {
         "term": "Información de salud",
         "text": "Ninguna, en ninguna parte del sitio."
       }
@@ -758,6 +764,12 @@
         "file": "Juego de figuras con nombres (en inglés)",
         "format": "PNG y PDF",
         "bestFor": "Folletos y presentaciones"
+      },
+      {
+        "id": "print",
+        "file": "Placas para imprimir en 3D, típica y Chiari I",
+        "format": "STL",
+        "bestFor": "Imprimir para tocar y mostrar"
       }
     ],
     "download": "Descargar",

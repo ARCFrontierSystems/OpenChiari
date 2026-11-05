@@ -24,7 +24,8 @@ Matthew's preference: when a step is done, lay out what the next step will cover
   - the model can be turned by hand, and in Calm mode the camera jumps instead of gliding;
   - Home's "Take the 2-minute tour" now opens it;
   - step 3 is the approved mockup text. Steps 1, 2, 4 and 5 reuse approved sentences;
-  - **awaiting Matthew's approval:** the step titles for 1, 2, 4 and 5; "Finish tour"; "Tour progress"; and two small rephrasings ("The foramen magnum is the opening…", "Cerebrospinal fluid is clear fluid…").
+  - **approved by Matthew (Nov 5):** the step titles for 1, 2, 4 and 5; "Finish tour"; "Tour progress"; and two small rephrasings, recorded in COPY.md.
+- **Cookies:** Matthew asked whether a cookie banner is needed. No: the site sets no cookies. Calm mode and language use device storage only for a setting the visitor chose, and the counter stores nothing about anyone.
 - **Phase 4, step 1: side by side (`/explorer/compare/`):**
   - built from the Compare mockup, with text from COPY.md;
   - two Simple models, each with its own condition and note (the syrinx and after-surgery notes are the Explorer's approved short notes);

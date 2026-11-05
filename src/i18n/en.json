@@ -912,7 +912,7 @@
     }
   },
   "tour": {
-    "_note": "From docs/COPY.md 'Guided tour, step 3 (phone)': 'Guided tour', 'Exit tour', 'Step 3 of 5', step 3's title and text, 'Back', 'Next: how fluid flows'. Steps 1, 2, 4 and 5 reuse approved sentences (Home, Explorer notes, structure cards, side-by-side note); their titles, 'Finish tour' and 'Tour progress' are drafts awaiting Matthew's approval.",
+    "_note": "From docs/COPY.md 'Guided tour, step 3 (phone)': 'Guided tour', 'Exit tour', 'Step 3 of 5', step 3's title and text, 'Back', 'Next: how fluid flows'. Steps 1, 2, 4 and 5 reuse approved sentences (Home, Explorer notes, structure cards, side-by-side note); their titles, 'Finish tour' and 'Tour progress' were approved by Matthew on Nov 5, 2026.",
     "title": "Guided tour",
     "exit": "Exit tour",
     "progress": "Tour progress",

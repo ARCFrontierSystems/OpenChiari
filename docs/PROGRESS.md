@@ -6,7 +6,7 @@ Matthew's preference: when a step is done, lay out what the next step will cover
 ## 2026-11-05: Email set up
 
 - **Done by Matthew:** Cloudflare Email Routing forwards hello@openchiari.org (the address shown on the site) to a site-only inbox, plus support@openchiari.org to the same inbox (not shown on the site). The inbox address is kept out of the repository.
-- **Still to check:** a test message from another account to each address arrives.
+- **Tested by Matthew:** a test message to each address arrived.
 - **Replies** come from the forwarding inbox. Sending as hello@ directly would need a paid Cloudflare plan or a mail provider.
 
 ## 2026-11-05: New features, release 3 (medical text)

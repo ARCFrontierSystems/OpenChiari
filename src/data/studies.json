@@ -32,36 +32,6 @@
       "lastUpdated": "2026-09-08"
     },
     {
-      "nct": "NCT03856034",
-      "title": "Laparotomy Versus Percutaneous Endoscopic Correction of Myelomeningocele",
-      "status": "RECRUITING",
-      "type": "trial",
-      "children": false,
-      "adults": true,
-      "conditions": [
-        "chiari"
-      ],
-      "sponsor": "USFetus",
-      "officialSummary": "The purpose of this study is to evaluate the feasibility of a fetoscopic surgical technique for antenatal correction of fetal myelomeningocele. Two surgical approaches will be utilized.",
-      "sites": [
-        {
-          "facility": "University of Southern California / Huntington Memorial Hospital",
-          "city": "Los Angeles",
-          "state": "California",
-          "zip": "91105",
-          "country": "United States"
-        },
-        {
-          "facility": "Wellington Regional Medical Center",
-          "city": "Wellington",
-          "state": "Florida",
-          "zip": "33141",
-          "country": "United States"
-        }
-      ],
-      "lastUpdated": "2019-11-13"
-    },
-    {
       "nct": "NCT06724029",
       "title": "Neurosurgical Outcome Network",
       "status": "RECRUITING",

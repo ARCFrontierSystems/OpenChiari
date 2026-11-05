@@ -27,8 +27,8 @@ Matthew's preference: when a step is done, lay out what the next step will cover
 - **First real list (Nov 5):** 6 recruiting studies.
   - 2 are about Chiari: neurofluid dynamics in Chiari I (Amiens), and the Neurosurgical Outcome Network (Italy).
   - 3 are about syringomyelia (Beijing).
-  - 1 is fetal surgery for myelomeningocele, which lists Chiari II. Asked Matthew whether to keep it.
-- **New UI wording awaiting Matthew's approval:**
+  - 1 is fetal surgery for myelomeningocele, which lists Chiari II. Matthew: leave it out. It's now in `leftOut` in `src/data/study-summaries.json`, with the reason, and the daily refresh skips it. The page lists 5.
+- **New UI wording, approved by Matthew the same day:**
   - "From the official listing"
   - "No studies match these filters."
   - the unavailable message
@@ -36,6 +36,7 @@ Matthew's preference: when a step is done, lay out what the next step will cover
   - "Filters"
   - "City, state or ZIP"
 - **Checks:** all tests pass, including the accessibility scan of `/studies/` and a test of the filters, Near sorting and that nothing is sent.
+- **Next:** plain summaries for the 5 studies once Matthew allows clinicaltrials.gov in this environment's network settings; each is checked by a fresh agent, then approved by Matthew.
 
 ## 2026-11-05: Realistic model: clearer highlight, easy to reach on phones
 

@@ -5,6 +5,7 @@
  * Runs before every publish, and publishing runs every morning (.github/workflows/deploy.yml), so the list is at most
  * a day old. Visitors' browsers never contact ClinicalTrials.gov; they get this file as part of the site.
  *
+ * Studies Matthew decided not to list (leftOut in src/data/study-summaries.json) are skipped.
  * Only facts from the registry are kept (title, status, type, ages, sites, sponsor, the official summary). Plain
  * summaries written by Open Chiari live separately in src/data/study-summaries.json and appear only once Matthew has
  * approved them. Studies that don't have one yet are listed at the end, so they can be written.
@@ -104,9 +105,11 @@ try {
   process.exit(0);
 }
 
+const curated = existsSync(SUMMARIES) ? JSON.parse(readFileSync(SUMMARIES, 'utf8')) : {};
+const leftOut = curated.leftOut ?? {};
 const studies = raw
   .map(toStudy)
-  .filter((s) => s.nct && s.status === 'RECRUITING' && s.conditions.length && s.type !== 'other')
+  .filter((s) => s.nct && s.status === 'RECRUITING' && s.conditions.length && s.type !== 'other' && !leftOut[s.nct])
   .sort((a, b) => a.title.localeCompare(b.title));
 const data = {
   source: 'ClinicalTrials.gov API v2',
@@ -116,7 +119,7 @@ const data = {
 };
 writeFileSync(OUT, JSON.stringify(data, null, 2) + '\n');
 
-const approved = existsSync(SUMMARIES) ? JSON.parse(readFileSync(SUMMARIES, 'utf8')).studies ?? {} : {};
+const approved = curated.studies ?? {};
 const waiting = studies.filter((s) => !approved[s.nct]);
 console.log(`${studies.length} recruiting studies written (processed ${data.processed}).`);
 const report = waiting.length

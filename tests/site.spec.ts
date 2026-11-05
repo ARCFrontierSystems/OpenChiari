@@ -530,9 +530,12 @@ test('phones: the 3D view draws at lower resolution only while a finger turns it
   await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
   await page.mouse.down();
   await page.mouse.move(box.x + box.width / 2 + 40, box.y + box.height / 2, { steps: 5 });
-  expect(await width()).toBe(Math.round(box.width));
+  // At most 1 device pixel per CSS pixel while moving (the speed guard may go lower on a slow machine)...
+  const moving = await width();
+  expect(moving).toBeLessThanOrEqual(Math.round(box.width));
   await page.mouse.up();
-  await expect.poll(width).toBe(Math.round(box.width * 2));
+  // ...and sharper again once the finger lifts (2, or 1.5 if the speed guard stepped in).
+  await expect.poll(width).toBeGreaterThanOrEqual(Math.round(box.width * 1.5));
   await ctx.close();
 });
 

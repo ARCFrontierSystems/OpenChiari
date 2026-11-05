@@ -1,4 +1,10 @@
 {
-  "_note": "Plain-language study summaries written by Open Chiari. Each entry goes live only after a fresh agent has checked it against the official ClinicalTrials.gov listing (report in docs/audits/) and Matthew has approved it (CLAUDE.md rules 1 and 1a). Until then the card shows the first two sentences of the official summary, marked as such. Fields: summary (what the study is trying to learn, two sentences), whatYoudDo (short), remote (true only when the listing says people can take part from home), approved (date Matthew approved), listingChecked (the listing's last-update date the summary was checked against).",
-  "studies": {}
+  "_note": "Plain-language study summaries written by Open Chiari. Each entry goes live only after a fresh agent has checked it against the official ClinicalTrials.gov listing (report in docs/audits/) and Matthew has approved it (CLAUDE.md rules 1 and 1a). Until then the card shows the first two sentences of the official summary, marked as such. Fields: summary (what the study is trying to learn, two sentences), whatYoudDo (short), remote (true only when the listing says people can take part from home), approved (date Matthew approved), listingChecked (the listing's last-update date the summary was checked against). leftOut: studies Matthew decided not to list, with the reason; the daily refresh skips them.",
+  "studies": {},
+  "leftOut": {
+    "NCT03856034": {
+      "reason": "Fetal surgery for spina bifida (myelomeningocele), listed under Chiari II; for pregnant women, not people with Chiari I.",
+      "decided": "2026-11-05"
+    }
+  }
 }

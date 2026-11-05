@@ -788,7 +788,7 @@
     "exploreFull": "Explore the full 3D model"
   },
   "studies": {
-    "_note": "Text from docs/COPY.md 'Research studies' (desktop and phone). New UI wording not in the mockups (officialLabel, noMatch, unavailable, moreSites, filters, countOne/countOther, placeholder) awaits Matthew's approval.",
+    "_note": "Text from docs/COPY.md 'Research studies' (desktop and phone). New UI wording not in the mockups (officialLabel, noMatch, unavailable, moreSites, filters, countOne/countOther, placeholder) approved by Matthew on Nov 5, 2026.",
     "title": "Research studies looking for people with Chiari",
     "navTitle": "Research studies",
     "intro": {

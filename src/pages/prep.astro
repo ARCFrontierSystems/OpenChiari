@@ -49,11 +49,11 @@ const w = t.warning;
             {g.id === 'surgeryHome' && (
               <aside class="warning" aria-labelledby="warning-title">
                 <h3 id="warning-title">{w.title}</h3>
+                <p class="emergency"><strong>{w.emergencyStrong}</strong> {w.emergencyRest}</p>
                 <p>{w.intro}</p>
                 <p>{w.lead} <strong>{w.leadStrong}</strong></p>
                 <ul>{w.items.map((item) => <li>{item}</li>)}</ul>
                 <p>{w.other}</p>
-                <p class="emergency"><strong>{w.emergencyStrong}</strong> {w.emergencyRest}</p>
               </aside>
             )}
             <fieldset>
@@ -196,9 +196,10 @@ const w = t.warning;
     <!-- On the sheet whenever a going-home question is ticked. -->
     <div class="sheet-warning" data-sheet-warning hidden={!t.groups.find((g) => g.id === 'surgeryHome')!.questions.some((q) => q.checked)}>
       <h2>{w.title}</h2>
+      <p><strong>{w.emergencyStrong}</strong> {w.emergencyRest}</p>
       <p>{w.intro} {w.lead} <strong>{w.leadStrong}</strong></p>
       <ul>{w.items.map((item) => <li>{item}</li>)}</ul>
-      <p>{w.other} <strong>{w.emergencyStrong}</strong> {w.emergencyRest}</p>
+      <p>{w.other}</p>
     </div>
     <div class="sheet-mention">
       <h2>{t.mention}</h2>
@@ -744,9 +745,9 @@ const w = t.warning;
     gap: 4px;
   }
   .warning .emergency {
-    margin: var(--s-8) 0 0;
-    padding-top: var(--s-8);
-    border-top: 1px solid var(--rule);
+    margin: 0 0 var(--s-12);
+    padding-bottom: var(--s-12);
+    border-bottom: 1px solid var(--rule);
   }
 
   /* Quick-starts (Phase B, Nov 5) */

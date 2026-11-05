@@ -842,20 +842,20 @@
       "leadStrong": "llamar de inmediato al equipo quirúrgico:",
       "items": [
         "fiebre o escalofríos (pregunte a partir de qué temperatura);",
-        "enrojecimiento, hinchazón, sangrado o más dolor en la herida, cualquier líquido o pus que salga de ella, o que la herida se abra;",
-        "líquido transparente que sale de la herida, de la nariz o del oído, o que gotea por la garganta, o una hinchazón blanda bajo la herida;",
+        "enrojecimiento, hinchazón, sangrado o más dolor en la incisión, cualquier líquido o pus que salga de ella, o que la incisión se abra;",
+        "líquido transparente que sale de la incisión, de la nariz o del oído, o que gotea por la garganta, o una hinchazón blanda bajo la incisión;",
         "un dolor de cabeza que empeora, o que no mejora con el medicamento que le dieron;",
-        "dolor o rigidez fuerte en el cuello que no le deja bajar la barbilla hasta el pecho;",
+        "dolor fuerte o rigidez en el cuello que no le deja bajar la barbilla hasta el pecho;",
         "vómitos;",
         "debilidad nueva o peor en los brazos o las piernas, o dificultad para caminar, mantener el equilibrio o hablar;",
-        "problemas nuevos para ver, como visión doble;",
-        "confusión, o mucho más sueño de lo habitual;",
+        "problemas nuevos o peores para ver, como visión doble o puntos ciegos;",
+        "confusión, o más sueño de lo habitual;",
         "una pantorrilla hinchada y dolorida en una pierna;",
-        "efectos secundarios de un medicamento (no lo deje sin preguntar primero)."
+        "efectos secundarios de un medicamento (no deje de tomarlo sin preguntar primero)."
       ],
       "other": "Llámelos también por cualquier otra cosa que le preocupe.",
       "emergencyStrong": "Llame al 911 o al número de emergencias de su país",
-      "emergencyRest": "si hay dificultad para respirar, dolor en el pecho, una convulsión, confusión repentina, o si la persona está muy difícil de despertar. Si cree que es una emergencia, no espere."
+      "emergencyRest": "si hay dificultad para respirar, dolor en el pecho, una convulsión, un desmayo, confusión repentina, debilidad o cambios en la vista que aparecen de repente, si la persona no puede hablar, un dolor fuerte y repentino (como un dolor de cabeza fuerte y repentino), un sangrado que no para, o si es muy difícil despertar a la persona. Si cree que es una emergencia, no espere."
     },
     "addOwn": "Agregue su propia pregunta",
     "add": "Agregar",
@@ -1716,8 +1716,8 @@
   "mri": {
     "_note": "Pendiente de la aprobación de Matthew y de la revisión de un traductor médico.",
     "title": "Cómo leer el informe de su resonancia",
-    "metaDescription": "Palabras que puede ver en un informe de resonancia sobre la malformación de Chiari, en lenguaje sencillo y enlazadas al modelo 3D.",
-    "intro": "Palabras que puede ver en un informe de resonancia sobre Chiari, en lenguaje sencillo, cada una con un enlace para verla en el modelo 3D. Esta página no puede decirle qué significa su estudio. Un médico mira la imagen junto con sus síntomas.",
+    "metaDescription": "Palabras que puede ver en un informe de resonancia magnética sobre la malformación de Chiari, en lenguaje sencillo, la mayoría enlazadas al modelo 3D.",
+    "intro": "Palabras que puede ver en un informe de resonancia magnética sobre Chiari, en lenguaje sencillo, la mayoría con un enlace para verla en el modelo 3D. Esta página no puede decirle qué significa su estudio. El médico revisa las imágenes junto con los síntomas que usted tiene.",
     "note": "Los informes están escritos para médicos, y distintos radiólogos usan palabras distintas para lo mismo.",
     "indexTitle": "Términos en esta página",
     "alsoLabel": "También aparece como",
@@ -1747,7 +1747,7 @@
         "also": "descenso amigdalino, amígdalas cerebelosas bajas, herniación amigdalina",
         "text": [
           "Distintas maneras de decir que las amígdalas cerebelosas están más abajo de lo habitual.",
-          "Algunos informes usan \"ectopia\" o \"amígdalas cerebelosas bajas\" para un descenso pequeño que no se llama Chiari, y otros usan las palabras de la misma manera. El número en milímetros dice más que la palabra.",
+          "Algunos informes usan \"ectopia\" o \"amígdalas cerebelosas bajas\" para un descenso pequeño que no se llama Chiari; otros usan todas estas palabras para lo mismo. El número en milímetros dice más que la palabra.",
           "En un informe sobre Chiari, \"herniación\" suele describir este mismo hallazgo: cuánto bajan las amígdalas cerebelosas por debajo de la abertura. Pregunte a su médico qué significa su informe para usted."
         ],
         "view": "c1.side.m"
@@ -1766,8 +1766,8 @@
         "name": "\"7 mm por debajo del agujero magno\"",
         "also": "por debajo del foramen magno, de la línea de McRae o de la línea basión-opistión",
         "text": [
-          "Cuánto bajan las puntas de las amígdalas cerebelosas por debajo de una línea trazada a lo ancho de la abertura del cráneo. Unos 5 mm es el límite habitual; unos pocos milímetros por debajo todavía pueden ser normales.",
-          "Algunas personas con un descenso claro no tienen síntomas, y algunas con menos de 5 mm sí los tienen. Los médicos también miran la forma de las amígdalas cerebelosas, el flujo del líquido cefalorraquídeo y si hay una siringe. El número por sí solo no decide quién necesita cirugía."
+          "Cuánto bajan las puntas de las amígdalas cerebelosas por debajo de una línea trazada a lo ancho de la abertura del cráneo. Unos 5 mm es el límite habitual para llamarlo Chiari I; unos pocos milímetros por debajo todavía pueden ser normales.",
+          "Algunas personas con un descenso claro no tienen síntomas, y algunas con menos de 5 mm sí los tienen. Los médicos también miran la forma de las amígdalas cerebelosas, el flujo del líquido cefalorraquídeo (LCR) y si hay una siringe. El número por sí solo no decide quién necesita cirugía."
         ],
         "view": "c1.side.m"
       },
@@ -1782,11 +1782,11 @@
       },
       {
         "id": "crowding",
-        "name": "Estrechez en el agujero magno",
+        "name": "Apiñamiento en el agujero magno",
         "also": "borramiento de los espacios de LCR",
         "text": [
           "El espacio alrededor de las amígdalas cerebelosas por donde fluye el líquido cefalorraquídeo está apretado, así que el líquido tiene menos espacio para pasar.",
-          "\"Borramiento\" significa que el espacio está estrechado o cerrado, así que en la imagen se ve poco o nada de líquido ahí."
+          "\"Borramiento\" significa que el espacio está estrechado o cerrado."
         ],
         "view": "c1.side.f.m"
       },
@@ -1795,14 +1795,14 @@
         "name": "LCR",
         "also": "líquido cefalorraquídeo",
         "text": [
-          "Líquido transparente que amortigua el cerebro y la médula espinal. Con cada latido del corazón va y viene entre el cráneo y el canal de la columna."
+          "Un líquido transparente que amortigua el cerebro y la médula espinal. Con cada latido del corazón, se mueve de un lado a otro entre el cráneo y el canal espinal."
         ],
         "view": "typ.side.f"
       },
       {
         "id": "flow",
         "name": "Estudio de flujo de LCR",
-        "also": "resonancia cine, resonancia de contraste de fase",
+        "also": "cine-RM, resonancia magnética de flujo, resonancia de contraste de fase",
         "text": [
           "Una resonancia especial que muestra cómo el líquido cefalorraquídeo va y viene con los latidos del corazón. Algunos médicos la usan para ver si el flujo está más lento o bloqueado en la abertura del cráneo."
         ],
@@ -1813,7 +1813,7 @@
         "name": "Siringe",
         "also": "siringomielia, siringohidromielia, hidromielia",
         "text": [
-          "Una siringe es una cavidad llena de líquido dentro de la médula espinal. A menudo se forma junto con Chiari, sobre todo en la parte de la médula espinal que está en el cuello.",
+          "Una siringe es una cavidad llena de líquido dentro de la médula espinal. A menudo aparece junto con Chiari, sobre todo en la parte de la médula espinal que está en el cuello.",
           "Siringomielia significa tener una siringe. Hidromielia, en sentido estricto, significa que el canal central de líquido de la médula espinal, que es muy fino, se ha ensanchado. En la resonancia a menudo es difícil distinguirlas, así que los informes pueden decir \"siringohidromielia\". Pregunte a su médico a cuál se refiere su informe."
         ],
         "view": "syr.side"
@@ -1821,9 +1821,9 @@
       {
         "id": "fossa",
         "name": "Fosa posterior",
-        "also": "fosa posterior pequeña o estrecha",
+        "also": "fosa posterior pequeña, estrecha o con apiñamiento",
         "text": [
-          "El espacio en la parte de atrás y de abajo del cráneo donde están el cerebelo y el tronco encefálico. En Chiari I a menudo es más pequeño o tiene una forma distinta de lo habitual, lo que aprieta el cerebro."
+          "El espacio en la parte de atrás y de abajo del cráneo donde están el cerebelo y el tronco encefálico. En Chiari I a menudo es más pequeño o tiene una forma distinta de lo habitual, lo que deja menos espacio para el cerebro."
         ]
       },
       {

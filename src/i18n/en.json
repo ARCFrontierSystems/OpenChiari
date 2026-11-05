@@ -848,14 +848,14 @@
         "severe neck pain or stiffness that stops you from bending your chin down to your chest;",
         "vomiting (throwing up);",
         "new or worse weakness in the arms or legs, or trouble walking, keeping your balance or speaking;",
-        "new problems seeing, such as double vision;",
-        "confusion, or being much sleepier than usual;",
+        "new or worse problems seeing, such as double vision or blind spots;",
+        "confusion, or being sleepier than usual;",
         "a swollen, sore calf in one leg;",
         "side effects from a medicine (don't stop it without asking first)."
       ],
       "other": "Call them about anything else that worries you, too.",
       "emergencyStrong": "Call 911 or your local emergency number",
-      "emergencyRest": "for trouble breathing, chest pain, a seizure, sudden confusion, or if the person is very hard to wake up. If you think it's an emergency, don't wait."
+      "emergencyRest": "for trouble breathing, chest pain, a seizure, fainting, sudden confusion, sudden weakness or change in vision, being unable to speak, sudden severe pain such as a sudden, severe headache, bleeding that won't stop, or if the person is very hard to wake up. If you think it's an emergency, don't wait."
     },
     "addOwn": "Add your own question",
     "add": "Add",
@@ -1716,8 +1716,8 @@
   "mri": {
     "_note": "Pending Matthew's approval. Draft and sources: docs/drafts/2026-11-05-mri-report-and-warning-signs.md; check: docs/audits/2026-11-05-mri-and-warning-signs-audit.md.",
     "title": "Reading your MRI report",
-    "metaDescription": "Words you might see on an MRI report about Chiari malformation, in plain language, each linked to the 3D model.",
-    "intro": "Words you might see on an MRI report about Chiari, in plain language, each with a link to see it in the 3D model. This page can't tell you what your scan means. A doctor looks at the scan together with your symptoms.",
+    "metaDescription": "Words you might see on an MRI report about Chiari malformation, in plain language, most linked to the 3D model.",
+    "intro": "Words you might see on an MRI report about Chiari, in plain language, most with a link to see it in the 3D model. This page can't tell you what your scan means. A doctor looks at the scan together with your symptoms.",
     "note": "Reports are written for doctors, and different radiologists use different words for the same thing.",
     "indexTitle": "Terms on this page",
     "alsoLabel": "Also written as",
@@ -1747,7 +1747,7 @@
         "also": "tonsillar descent, low-lying tonsils, tonsillar herniation",
         "text": [
           "Different ways of saying the tonsils sit lower than usual.",
-          "Some reports use \"ectopia\" or \"low-lying\" for a small drop that isn't called Chiari, and others use the words the same way. The number in millimeters says more than the word.",
+          "Some reports use \"ectopia\" or \"low-lying\" for a small drop that isn't called Chiari; others use all of these words for the same thing. The number in millimeters says more than the word.",
           "On a Chiari report, \"herniation\" usually describes this same finding: how far the tonsils sit below the opening. Ask your doctor what your report means for you."
         ],
         "view": "c1.side.m"
@@ -1766,7 +1766,7 @@
         "name": "\"7 mm below the foramen magnum\"",
         "also": "below the McRae line, below the basion–opisthion line",
         "text": [
-          "How far the tips of the tonsils reach below a line drawn across the skull opening. About 5 mm is the usual cutoff; a few millimeters below can still be normal.",
+          "How far the tips of the tonsils reach below a line drawn across the skull opening. About 5 mm is the usual cutoff for calling it Chiari I; a few millimeters below can still be normal.",
           "Some people with a clear descent have no symptoms, and some with less than 5 mm do. Doctors also look at the shape of the tonsils, spinal fluid flow, and whether a syrinx is present. The number alone doesn't decide who needs surgery."
         ],
         "view": "c1.side.m"
@@ -1786,7 +1786,7 @@
         "also": "effacement of the CSF spaces",
         "text": [
           "The space around the tonsils where spinal fluid flows is squeezed, so there's less room for fluid to pass.",
-          "\"Effacement\" means the space is narrowed or squeezed shut, so little or no fluid shows there on the scan."
+          "\"Effacement\" means the space is narrowed or squeezed shut."
         ],
         "view": "c1.side.f.m"
       },

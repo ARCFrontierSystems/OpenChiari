@@ -1,6 +1,6 @@
 # Reading your MRI report, and warning signs after surgery: wording for Matthew's approval (November 5, 2026)
 
-**Status: checked, waiting for Matthew's approval.** Part of Phase B, "a path for the newly diagnosed", which Matthew approved on Nov 5 ("implement your refined recommendations… I agree with the order").
+**Status: checked twice, waiting for Matthew's approval.** Second check: `docs/audits/2026-11-05-mri-and-warning-signs-recheck.md`; evidence rows 29 and 30. Part of Phase B, "a path for the newly diagnosed", which Matthew approved on Nov 5 ("implement your refined recommendations… I agree with the order").
 
 Both pieces are **new medical text**. The first draft was checked with the sources open (`docs/audits/2026-11-05-mri-and-warning-signs-audit.md`, text copies of the sources in `docs/audits/sources/2026-11-05-mri/`).
 
@@ -19,12 +19,21 @@ Both pieces are **new medical text**. The first draft was checked with the sourc
   - Every item comes from opened discharge instructions (MedlinePlus "Brain surgery – discharge", Mayfield Clinic "Chiari decompression surgery").
   - The 911 line is from MedlinePlus's emergency pages. Seizure and being very hard to wake are put under 911, the cautious choice.
   - Numbness, trouble swallowing and "a headache worse when sitting up" are left out until a discharge sheet that lists them can be opened.
+- **Second check:**
+  - the 911 line now names more emergencies: fainting, sudden weakness or change in vision, being unable to speak, sudden severe pain, and bleeding that won't stop. Otherwise someone with stroke-like signs might call the surgeon's office instead.
+  - the 911 line moved to the top of the box;
+  - "much sleepier" is now "sleepier";
+  - "new problems seeing" is now "new or worse";
+  - the "effacement" sentence is shortened to what the source says;
+  - the intro now says "most" terms have a 3D link;
+  - Spanish now uses the glossary terms (incisión, canal espinal, cine-RM, apiñamiento).
+
 
 ## Part 1. Reading your MRI report (new page, /mri/)
 
 **Reading your MRI report**
 
-> Words you might see on an MRI report about Chiari, in plain language, each with a link to see it in the 3D model. This page can't tell you what your scan means. A doctor looks at the scan together with your symptoms.
+> Words you might see on an MRI report about Chiari, in plain language, most with a link to see it in the 3D model. This page can't tell you what your scan means. A doctor looks at the scan together with your symptoms.
 >
 > **Not medical advice.** Reports are written for doctors, and different radiologists use different words for the same thing.
 
@@ -38,7 +47,7 @@ Both pieces are **new medical text**. The first draft was checked with the sourc
 
 3. **Tonsillar ectopia** (also written as: tonsillar descent, low-lying tonsils, tonsillar herniation)
    Different ways of saying the tonsils sit lower than usual.
-   Some reports use "ectopia" or "low-lying" for a small drop that isn't called Chiari, and others use the words the same way. The number in millimeters says more than the word.
+   Some reports use "ectopia" or "low-lying" for a small drop that isn't called Chiari; others use all of these words for the same thing. The number in millimeters says more than the word.
    On a Chiari report, "herniation" usually describes this same finding: how far the tonsils sit below the opening. Ask your doctor what your report means for you.
    → See it in 3D
 
@@ -47,7 +56,7 @@ Both pieces are **new medical text**. The first draft was checked with the sourc
    → See it in 3D
 
 5. **"7 mm below the foramen magnum"** (also written as: below the McRae line, below the basion–opisthion line)
-   How far the tips of the tonsils reach below a line drawn across the skull opening. About 5 mm is the usual cutoff; a few millimeters below can still be normal.
+   How far the tips of the tonsils reach below a line drawn across the skull opening. About 5 mm is the usual cutoff for calling it Chiari I; a few millimeters below can still be normal.
    Some people with a clear descent have no symptoms, and some with less than 5 mm do. Doctors also look at the shape of the tonsils, spinal fluid flow, and whether a syrinx is present. The number alone doesn't decide who needs surgery.
    → See it in 3D
 
@@ -57,7 +66,7 @@ Both pieces are **new medical text**. The first draft was checked with the sourc
 
 7. **Crowding at the foramen magnum** (also written as: effacement of the CSF spaces)
    The space around the tonsils where spinal fluid flows is squeezed, so there's less room for fluid to pass.
-   "Effacement" means the space is narrowed or squeezed shut, so little or no fluid shows there on the scan.
+   "Effacement" means the space is narrowed or squeezed shut.
    → See it in 3D
 
 8. **CSF** (also written as: cerebrospinal fluid)
@@ -90,6 +99,8 @@ Bottom: Have questions about your report? Turn them into a sheet for your doctor
 
 > **When to call after surgery**
 >
+> **Call 911 or your local emergency number** for trouble breathing, chest pain, a seizure, fainting, sudden confusion, sudden weakness or change in vision, being unable to speak, sudden severe pain such as a sudden, severe headache, bleeding that won't stop, or if the person is very hard to wake up. If you think it's an emergency, don't wait.
+>
 > Before you go home, your surgical team should tell you what to watch for and who to call, day or night. Follow their instructions first.
 >
 > Discharge instructions after Chiari surgery often list these as reasons to **call the surgical team right away:**
@@ -100,29 +111,27 @@ Bottom: Have questions about your report? Turn them into a sheet for your doctor
 > - severe neck pain or stiffness that stops you from bending your chin down to your chest;
 > - vomiting (throwing up);
 > - new or worse weakness in the arms or legs, or trouble walking, keeping your balance or speaking;
-> - new problems seeing, such as double vision;
-> - confusion, or being much sleepier than usual;
+> - new or worse problems seeing, such as double vision or blind spots;
+> - confusion, or being sleepier than usual;
 > - a swollen, sore calf in one leg;
 > - side effects from a medicine (don't stop it without asking first).
 >
 > Call them about anything else that worries you, too.
->
-> **Call 911 or your local emergency number** for trouble breathing, chest pain, a seizure, sudden confusion, or if the person is very hard to wake up. If you think it's an emergency, don't wait.
 
-## Spanish (pending back-translation check and medical-translator review)
+## Spanish (back-translation checked; pending medical-translator review)
 
 - **Malformación de Chiari tipo I**: La parte más baja de la parte de atrás del cerebro se extiende por debajo de la abertura en la base del cráneo.
 - **Amígdalas cerebelosas**: Las dos partes más bajas del cerebelo, en la parte de abajo de la parte de atrás del cerebro (no las amígdalas de la garganta). El cerebelo ayuda a controlar el equilibrio y la coordinación.
-- **Ectopia amigdalina**: Distintas maneras de decir que las amígdalas cerebelosas están más abajo de lo habitual. Algunos informes usan "ectopia" o "amígdalas cerebelosas bajas" para un descenso pequeño que no se llama Chiari, y otros usan las palabras de la misma manera. El número en milímetros dice más que la palabra. En un informe sobre Chiari, "herniación" suele describir este mismo hallazgo: cuánto bajan las amígdalas cerebelosas por debajo de la abertura. Pregunte a su médico qué significa su informe para usted.
+- **Ectopia amigdalina**: Distintas maneras de decir que las amígdalas cerebelosas están más abajo de lo habitual. Algunos informes usan "ectopia" o "amígdalas cerebelosas bajas" para un descenso pequeño que no se llama Chiari; otros usan todas estas palabras para lo mismo. El número en milímetros dice más que la palabra. En un informe sobre Chiari, "herniación" suele describir este mismo hallazgo: cuánto bajan las amígdalas cerebelosas por debajo de la abertura. Pregunte a su médico qué significa su informe para usted.
 - **Agujero magno**: La abertura en la base del cráneo donde el tronco encefálico se convierte en la médula espinal.
-- **"7 mm por debajo del agujero magno"**: Cuánto bajan las puntas de las amígdalas cerebelosas por debajo de una línea trazada a lo ancho de la abertura del cráneo. Unos 5 mm es el límite habitual; unos pocos milímetros por debajo todavía pueden ser normales. Algunas personas con un descenso claro no tienen síntomas, y algunas con menos de 5 mm sí los tienen. Los médicos también miran la forma de las amígdalas cerebelosas, el flujo del líquido cefalorraquídeo y si hay una siringe. El número por sí solo no decide quién necesita cirugía.
+- **"7 mm por debajo del agujero magno"**: Cuánto bajan las puntas de las amígdalas cerebelosas por debajo de una línea trazada a lo ancho de la abertura del cráneo. Unos 5 mm es el límite habitual para llamarlo Chiari I; unos pocos milímetros por debajo todavía pueden ser normales. Algunas personas con un descenso claro no tienen síntomas, y algunas con menos de 5 mm sí los tienen. Los médicos también miran la forma de las amígdalas cerebelosas, el flujo del líquido cefalorraquídeo (LCR) y si hay una siringe. El número por sí solo no decide quién necesita cirugía.
 - **Amígdalas cerebelosas en forma de clavija**: Las amígdalas cerebelosas son puntiagudas en lugar de redondeadas, algo común en Chiari I.
-- **Estrechez en el agujero magno**: El espacio alrededor de las amígdalas cerebelosas por donde fluye el líquido cefalorraquídeo está apretado, así que el líquido tiene menos espacio para pasar. "Borramiento" significa que el espacio está estrechado o cerrado, así que en la imagen se ve poco o nada de líquido ahí.
-- **LCR**: Líquido transparente que amortigua el cerebro y la médula espinal. Con cada latido del corazón va y viene entre el cráneo y el canal de la columna.
+- **Apiñamiento en el agujero magno**: El espacio alrededor de las amígdalas cerebelosas por donde fluye el líquido cefalorraquídeo está apretado, así que el líquido tiene menos espacio para pasar. "Borramiento" significa que el espacio está estrechado o cerrado.
+- **LCR**: Un líquido transparente que amortigua el cerebro y la médula espinal. Con cada latido del corazón, se mueve de un lado a otro entre el cráneo y el canal espinal.
 - **Estudio de flujo de LCR**: Una resonancia especial que muestra cómo el líquido cefalorraquídeo va y viene con los latidos del corazón. Algunos médicos la usan para ver si el flujo está más lento o bloqueado en la abertura del cráneo.
-- **Siringe**: Una siringe es una cavidad llena de líquido dentro de la médula espinal. A menudo se forma junto con Chiari, sobre todo en la parte de la médula espinal que está en el cuello. Siringomielia significa tener una siringe. Hidromielia, en sentido estricto, significa que el canal central de líquido de la médula espinal, que es muy fino, se ha ensanchado. En la resonancia a menudo es difícil distinguirlas, así que los informes pueden decir "siringohidromielia". Pregunte a su médico a cuál se refiere su informe.
-- **Fosa posterior**: El espacio en la parte de atrás y de abajo del cráneo donde están el cerebelo y el tronco encefálico. En Chiari I a menudo es más pequeño o tiene una forma distinta de lo habitual, lo que aprieta el cerebro.
+- **Siringe**: Una siringe es una cavidad llena de líquido dentro de la médula espinal. A menudo aparece junto con Chiari, sobre todo en la parte de la médula espinal que está en el cuello. Siringomielia significa tener una siringe. Hidromielia, en sentido estricto, significa que el canal central de líquido de la médula espinal, que es muy fino, se ha ensanchado. En la resonancia a menudo es difícil distinguirlas, así que los informes pueden decir "siringohidromielia". Pregunte a su médico a cuál se refiere su informe.
+- **Fosa posterior**: El espacio en la parte de atrás y de abajo del cráneo donde están el cerebelo y el tronco encefálico. En Chiari I a menudo es más pequeño o tiene una forma distinta de lo habitual, lo que deja menos espacio para el cerebro.
 - **Hidrocefalia**: Una acumulación de demasiado líquido cefalorraquídeo en los espacios llenos de líquido en lo profundo del cerebro (los ventrículos). Es mucho menos común en Chiari I que en Chiari II.
 - **Después de la cirugía**: Craniectomía suboccipital: retirar un pequeño trozo de hueso de la parte de atrás del cráneo, junto a la abertura. Laminectomía de C1: retirar la parte de atrás del primer hueso del cuello. Duroplastia: abrir la membrana que cubre el cerebro (la duramadre) y coserle un parche para dar más espacio. "Cambios posoperatorios" significa que la imagen muestra cambios por la cirugía, como el lugar donde se retiró hueso. Su cirujano puede explicarle cualquier otra cosa que mencione el informe.
 
-**Cuándo llamar después de la cirugía**: Antes de volver a casa, su equipo quirúrgico debería decirle qué vigilar y a quién llamar, de día o de noche. Siga primero sus instrucciones. Las instrucciones para el alta después de una cirugía de Chiari a menudo incluyen estas razones para llamar de inmediato al equipo quirúrgico: fiebre o escalofríos (pregunte a partir de qué temperatura); enrojecimiento, hinchazón, sangrado o más dolor en la herida, cualquier líquido o pus que salga de ella, o que la herida se abra; líquido transparente que sale de la herida, de la nariz o del oído, o que gotea por la garganta, o una hinchazón blanda bajo la herida; un dolor de cabeza que empeora, o que no mejora con el medicamento que le dieron; dolor o rigidez fuerte en el cuello que no le deja bajar la barbilla hasta el pecho; vómitos; debilidad nueva o peor en los brazos o las piernas, o dificultad para caminar, mantener el equilibrio o hablar; problemas nuevos para ver, como visión doble; confusión, o mucho más sueño de lo habitual; una pantorrilla hinchada y dolorida en una pierna; efectos secundarios de un medicamento (no lo deje sin preguntar primero). Llámelos también por cualquier otra cosa que le preocupe. Llame al 911 o al número de emergencias de su país si hay dificultad para respirar, dolor en el pecho, una convulsión, confusión repentina, o si la persona está muy difícil de despertar. Si cree que es una emergencia, no espere.
+**Cuándo llamar después de la cirugía**: Llame al 911 o al número de emergencias de su país si hay dificultad para respirar, dolor en el pecho, una convulsión, un desmayo, confusión repentina, debilidad o cambios en la vista que aparecen de repente, si la persona no puede hablar, un dolor fuerte y repentino (como un dolor de cabeza fuerte y repentino), un sangrado que no para, o si es muy difícil despertar a la persona. Si cree que es una emergencia, no espere. Antes de volver a casa, su equipo quirúrgico debería decirle qué vigilar y a quién llamar, de día o de noche. Siga primero sus instrucciones. Las instrucciones para el alta después de una cirugía de Chiari a menudo incluyen estas razones para llamar de inmediato al equipo quirúrgico: fiebre o escalofríos (pregunte a partir de qué temperatura); enrojecimiento, hinchazón, sangrado o más dolor en la incisión, cualquier líquido o pus que salga de ella, o que la incisión se abra; líquido transparente que sale de la incisión, de la nariz o del oído, o que gotea por la garganta, o una hinchazón blanda bajo la incisión; un dolor de cabeza que empeora, o que no mejora con el medicamento que le dieron; dolor fuerte o rigidez en el cuello que no le deja bajar la barbilla hasta el pecho; vómitos; debilidad nueva o peor en los brazos o las piernas, o dificultad para caminar, mantener el equilibrio o hablar; problemas nuevos o peores para ver, como visión doble o puntos ciegos; confusión, o más sueño de lo habitual; una pantorrilla hinchada y dolorida en una pierna; efectos secundarios de un medicamento (no deje de tomarlo sin preguntar primero). Llámelos también por cualquier otra cosa que le preocupe.

@@ -484,7 +484,8 @@
       "side": "Side",
       "back": "Back",
       "below": "Below",
-      "front": "Front"
+      "front": "Front",
+      "close": "Close-up"
     },
     "resetCamera": "Reset camera",
     "viewerRole": "3D model",
@@ -494,6 +495,7 @@
       "back": "Back view",
       "below": "View from below",
       "front": "Front view",
+      "close": "Close-up of the skull opening",
       "custom": "Turned view"
     },
     "cutNames": {
@@ -549,7 +551,14 @@
       ],
       "caption": "Animation simplified. The incision line is approximate; its length varies."
     },
-    "home": "Home"
+    "home": "Home",
+    "partActions": {
+      "partTools": "This part",
+      "zoom": "Zoom to this part",
+      "only": "Show only this part",
+      "hide": "Hide this part",
+      "all": "Show all parts"
+    }
   },
   "evidence": {
     "inEnglish": "These notes are in English, like the sources they cite.",
@@ -1731,7 +1740,7 @@
         "text": [
           "The lowest part of the back of the brain extends below the opening at the base of the skull."
         ],
-        "view": "c1.side.m"
+        "view": "c1.side.m.ptonsil"
       },
       {
         "id": "tonsils",
@@ -1740,7 +1749,7 @@
         "text": [
           "The two lowest parts of the cerebellum, at the bottom of the back of the brain (not the tonsils in your throat). The cerebellum helps control balance and coordination."
         ],
-        "view": "c1.side.l"
+        "view": "c1.side.l.ptonsil"
       },
       {
         "id": "ectopia",
@@ -1751,7 +1760,7 @@
           "Some reports use \"ectopia\" or \"low-lying\" for a small drop that isn't called Chiari; others use all of these words for the same thing. The number in millimeters says more than the word.",
           "On a Chiari report, \"herniation\" usually describes this same finding: how far the tonsils sit below the opening. Ask your doctor what your report means for you."
         ],
-        "view": "c1.side.m"
+        "view": "c1.side.m.ptonsil"
       },
       {
         "id": "foramen",
@@ -1760,7 +1769,7 @@
         "text": [
           "The opening at the base of the skull where the brainstem becomes the spinal cord."
         ],
-        "view": "typ.side.l"
+        "view": "typ.side.l.pforamen"
       },
       {
         "id": "mm",
@@ -1770,7 +1779,7 @@
           "How far the tips of the tonsils reach below a line drawn across the skull opening. About 5 mm is the usual cutoff for calling it Chiari I; a few millimeters below can still be normal.",
           "Some people with a clear descent have no symptoms, and some with less than 5 mm do. Doctors also look at the shape of the tonsils, spinal fluid flow, and whether a syrinx is present. The number alone doesn't decide who needs surgery."
         ],
-        "view": "c1.side.m"
+        "view": "c1.side.m.ptonsil"
       },
       {
         "id": "peg",
@@ -1779,7 +1788,7 @@
         "text": [
           "The tonsils are pointed rather than rounded, which is common in Chiari I."
         ],
-        "view": "c1.side"
+        "view": "c1.side.ptonsil"
       },
       {
         "id": "crowding",
@@ -1789,7 +1798,7 @@
           "The space around the tonsils where spinal fluid flows is squeezed, so there's less room for fluid to pass.",
           "\"Effacement\" means the space is narrowed or squeezed shut."
         ],
-        "view": "c1.side.f.m"
+        "view": "c1.side.f.m.pcsf"
       },
       {
         "id": "csf",
@@ -1798,7 +1807,7 @@
         "text": [
           "Clear fluid that cushions the brain and spinal cord. With each heartbeat it pulses back and forth between the skull and the spinal canal."
         ],
-        "view": "typ.side.f"
+        "view": "typ.side.f.pcsf"
       },
       {
         "id": "flow",
@@ -1807,7 +1816,7 @@
         "text": [
           "A special MRI that shows how spinal fluid moves back and forth with the heartbeat. Some doctors use it to see whether flow is slowed or blocked at the skull opening."
         ],
-        "view": "c1.side.f"
+        "view": "c1.side.f.pcsf"
       },
       {
         "id": "syrinx",
@@ -1817,7 +1826,7 @@
           "A syrinx is a fluid-filled cavity inside the spinal cord. It often develops alongside Chiari, most often in the neck part of the spinal cord.",
           "Syringomyelia means having a syrinx. Hydromyelia technically means the spinal cord's thin central fluid channel has widened. The two are often hard to tell apart on MRI, so reports may say \"syringohydromyelia\". Ask your doctor which one your report means."
         ],
-        "view": "syr.side"
+        "view": "syr.side.psyrinx"
       },
       {
         "id": "fossa",
@@ -1843,7 +1852,7 @@
           "Suboccipital craniectomy: removing a small piece of bone at the back of the skull, next to the opening. C1 laminectomy: removing the back part of the first neck bone. Duraplasty: opening the brain's covering (the dura) and sewing in a patch to make more room.",
           "\"Postoperative changes\" means the scan shows changes from the surgery, such as where bone was removed. Your surgeon can explain anything else the report mentions."
         ],
-        "view": "dec.side.f"
+        "view": "dec.side.f.premoved"
       }
     ],
     "nextBefore": "Have questions about your report? Turn them into a sheet for your doctor with",

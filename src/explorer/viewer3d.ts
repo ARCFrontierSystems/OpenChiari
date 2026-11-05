@@ -83,6 +83,7 @@ const PRESET_ANGLES: Record<Exclude<CameraView, 'custom'>, [number, number]> = {
   back: [90, 0],
   below: [0, -80],
   front: [-90, 0],
+  close: [28, -12],
 };
 
 export function webglAvailable(): boolean {
@@ -858,10 +859,23 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     const t = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
     return Math.max(160 / t, 140 / (t * (w / Math.max(1, h))));
   }
+  /** A structure's anchor point (its label's point on the midline), in model mm. */
+  function anchorPoint(part: string) {
+    const [fx, fy] = labelAnchor(part, store.get().condition);
+    return new THREE.Vector3((fx - ORIGIN.x) / FIGURE_UNITS_PER_MM, -(fy - ORIGIN.y) / FIGURE_UNITS_PER_MM, 0);
+  }
   function goToPreset(view: CameraView) {
     if (view === 'custom') return;
     const [az, el] = PRESET_ANGLES[view];
-    moveCamera(az, el);
+    // The close-up looks at the skull opening from a little behind and below, near enough to see the tonsils clearly.
+    if (view === 'close') moveCamera(az, el, defaultDistance() * 0.42, anchorPoint('foramen'));
+    else moveCamera(az, el);
+  }
+  /** Glide to the selected structure and bring it close (or jump, in Calm mode). */
+  function focusPart(part: string) {
+    const [az, el] = anglesNow();
+    moveCamera(az, el, defaultDistance() * 0.5, anchorPoint(part));
+    if (store.get().camera !== 'custom') store.set({ camera: 'custom' });
   }
   /** Back to the starting view: side, whole head in view. */
   function resetCamera() {
@@ -894,6 +908,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       case '2': store.set({ camera: 'back' }); break;
       case '3': store.set({ camera: 'below' }); break;
       case '4': store.set({ camera: 'front' }); break;
+      case '5': store.set({ camera: 'close' }); break;
       case '0': case 'Home': resetCamera(); break;
       default: handled = false;
     }
@@ -1226,7 +1241,9 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     for (const p of parts) {
       const layer = st.layers[p.layer];
       const model = st.model === 'realistic' && realistic === 'ready' ? 'realistic' : 'simple';
-      const shown = p.model === model && layer.on && (inView(p, st.condition) || !!stageFade?.fadeOut.has(p.name));
+      // Show only / hide the selected structure (the skull counts as bone, never as the selected part).
+      const focusOk = st.focus === 'all' || (st.focus === 'only' ? isSelected(p, st.part) : !isSelected(p, st.part));
+      const shown = p.model === model && layer.on && focusOk && (inView(p, st.condition) || !!stageFade?.fadeOut.has(p.name));
       const opacity = p.baseOpacity * (layer.opacity / 100);
       p.opacity = opacity;
       p.mesh.visible = shown && opacity > 0;
@@ -1239,7 +1256,8 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     // The figure on the midline cut face belongs to the Simple model.
     const simpleShown = !(st.model === 'realistic' && realistic === 'ready');
     if (st.model === 'realistic') void loadRealistic();
-    section.visible = midline && simpleShown;
+    // The flat midline picture shows every structure, so it steps aside while one structure is shown alone or hidden.
+    section.visible = midline && simpleShown && st.focus === 'all';
     if (section.visible) void drawSection(st);
     if (st.part !== lastPart) {
       lastPart = st.part;
@@ -1491,6 +1509,8 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     look,
     reset: resetCamera,
     pick,
+    /** Glide to a structure and bring it close. */
+    focusPart,
     /** For tests and the screen reader text. */
     get partCount() {
       return parts.length;

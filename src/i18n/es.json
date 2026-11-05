@@ -484,7 +484,8 @@
       "side": "Lado",
       "back": "Atrás",
       "below": "Abajo",
-      "front": "Frente"
+      "front": "Frente",
+      "close": "De cerca"
     },
     "resetCamera": "Restablecer la cámara",
     "viewerRole": "Modelo 3D",
@@ -494,6 +495,7 @@
       "back": "Vista desde atrás",
       "below": "Vista desde abajo",
       "front": "Vista de frente",
+      "close": "Vista de cerca de la abertura del cráneo",
       "custom": "Vista girada"
     },
     "cutNames": {
@@ -549,7 +551,14 @@
       ],
       "caption": "Animación simplificada. La línea de la incisión es aproximada; su longitud varía."
     },
-    "home": "Inicio"
+    "home": "Inicio",
+    "partActions": {
+      "partTools": "Esta parte",
+      "zoom": "Acercar a esta parte",
+      "only": "Mostrar solo esta parte",
+      "hide": "Ocultar esta parte",
+      "all": "Mostrar todas las partes"
+    }
   },
   "evidence": {
     "inEnglish": "Estas notas están en inglés, igual que las fuentes que citan.",
@@ -1731,7 +1740,7 @@
         "text": [
           "La parte más baja de la parte de atrás del cerebro se extiende por debajo de la abertura en la base del cráneo."
         ],
-        "view": "c1.side.m"
+        "view": "c1.side.m.ptonsil"
       },
       {
         "id": "tonsils",
@@ -1740,7 +1749,7 @@
         "text": [
           "Las dos partes más bajas del cerebelo, en la parte de abajo de la parte de atrás del cerebro (no las amígdalas de la garganta). El cerebelo ayuda a controlar el equilibrio y la coordinación."
         ],
-        "view": "c1.side.l"
+        "view": "c1.side.l.ptonsil"
       },
       {
         "id": "ectopia",
@@ -1751,7 +1760,7 @@
           "Algunos informes usan \"ectopia\" o \"amígdalas cerebelosas bajas\" para un descenso pequeño que no se llama Chiari; otros usan todas estas palabras para lo mismo. El número en milímetros dice más que la palabra.",
           "En un informe sobre Chiari, \"herniación\" suele describir este mismo hallazgo: cuánto bajan las amígdalas cerebelosas por debajo de la abertura. Pregunte a su médico qué significa su informe para usted."
         ],
-        "view": "c1.side.m"
+        "view": "c1.side.m.ptonsil"
       },
       {
         "id": "foramen",
@@ -1760,7 +1769,7 @@
         "text": [
           "La abertura en la base del cráneo donde el tronco encefálico se convierte en la médula espinal."
         ],
-        "view": "typ.side.l"
+        "view": "typ.side.l.pforamen"
       },
       {
         "id": "mm",
@@ -1770,7 +1779,7 @@
           "Cuánto bajan las puntas de las amígdalas cerebelosas por debajo de una línea trazada a lo ancho de la abertura del cráneo. Unos 5 mm es el límite habitual para llamarlo Chiari I; unos pocos milímetros por debajo todavía pueden ser normales.",
           "Algunas personas con un descenso claro no tienen síntomas, y algunas con menos de 5 mm sí los tienen. Los médicos también miran la forma de las amígdalas cerebelosas, el flujo del líquido cefalorraquídeo (LCR) y si hay una siringe. El número por sí solo no decide quién necesita cirugía."
         ],
-        "view": "c1.side.m"
+        "view": "c1.side.m.ptonsil"
       },
       {
         "id": "peg",
@@ -1779,7 +1788,7 @@
         "text": [
           "Las amígdalas cerebelosas son puntiagudas en lugar de redondeadas, algo común en Chiari I."
         ],
-        "view": "c1.side"
+        "view": "c1.side.ptonsil"
       },
       {
         "id": "crowding",
@@ -1789,7 +1798,7 @@
           "El espacio alrededor de las amígdalas cerebelosas por donde fluye el líquido cefalorraquídeo está apretado, así que el líquido tiene menos espacio para pasar.",
           "\"Borramiento\" significa que el espacio está estrechado o cerrado."
         ],
-        "view": "c1.side.f.m"
+        "view": "c1.side.f.m.pcsf"
       },
       {
         "id": "csf",
@@ -1798,7 +1807,7 @@
         "text": [
           "Un líquido transparente que amortigua el cerebro y la médula espinal. Con cada latido del corazón, se mueve de un lado a otro entre el cráneo y el canal espinal."
         ],
-        "view": "typ.side.f"
+        "view": "typ.side.f.pcsf"
       },
       {
         "id": "flow",
@@ -1807,7 +1816,7 @@
         "text": [
           "Una resonancia especial que muestra cómo el líquido cefalorraquídeo va y viene con los latidos del corazón. Algunos médicos la usan para ver si el flujo está más lento o bloqueado en la abertura del cráneo."
         ],
-        "view": "c1.side.f"
+        "view": "c1.side.f.pcsf"
       },
       {
         "id": "syrinx",
@@ -1817,7 +1826,7 @@
           "Una siringe es una cavidad llena de líquido dentro de la médula espinal. A menudo aparece junto con Chiari, sobre todo en la parte de la médula espinal que está en el cuello.",
           "Siringomielia significa tener una siringe. Hidromielia, en sentido estricto, significa que el canal central de líquido de la médula espinal, que es muy fino, se ha ensanchado. En la resonancia a menudo es difícil distinguirlas, así que los informes pueden decir \"siringohidromielia\". Pregunte a su médico a cuál se refiere su informe."
         ],
-        "view": "syr.side"
+        "view": "syr.side.psyrinx"
       },
       {
         "id": "fossa",
@@ -1843,7 +1852,7 @@
           "Craniectomía suboccipital: retirar un pequeño trozo de hueso de la parte de atrás del cráneo, junto a la abertura. Laminectomía de C1: retirar la parte de atrás del primer hueso del cuello. Duroplastia: abrir la membrana que cubre el cerebro (la duramadre) y coserle un parche para dar más espacio.",
           "\"Cambios posoperatorios\" significa que la imagen muestra cambios por la cirugía, como el lugar donde se retiró hueso. Su cirujano puede explicarle cualquier otra cosa que mencione el informe."
         ],
-        "view": "dec.side.f"
+        "view": "dec.side.f.premoved"
       }
     ],
     "nextBefore": "¿Tiene preguntas sobre su informe? Conviértalas en una hoja para su médico con",

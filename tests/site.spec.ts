@@ -1163,6 +1163,30 @@ test('Reading your MRI report: every term has a heading and a 3D link that opens
   await expect(page.locator('input[name="condition-wide"][value="syrinx"]')).toBeChecked();
 });
 
+test('Explorer: close-up view, zoom to a part, show only or hide a part, and links that keep the part', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/explorer/');
+  await expect(page.locator('body')).toHaveClass(/has-3d/, { timeout: 30000 });
+  await page.locator('.x-view [data-camera="close"]').first().click();
+  await expect(page.locator('.x-view [data-camera="close"]').first()).toHaveAttribute('aria-pressed', 'true');
+  const card = page.locator('.x-card-wide');
+  await card.locator('[data-focus="only"]').click();
+  await expect(card.locator('[data-focus="only"]')).toHaveAttribute('aria-pressed', 'true');
+  await expect(card.locator('[data-focus="all"]')).toBeVisible();
+  await card.locator('[data-focus="all"]').click();
+  await expect(card.locator('[data-focus="all"]')).toBeHidden();
+  await card.locator('[data-part-zoom]').click();
+  // A link keeps the selected part and "show only" (opened fresh, as someone receiving it would).
+  const other = await page.context().newPage();
+  await other.setViewportSize({ width: 1280, height: 900 });
+  await other.goto('/explorer/#syr.side.psyrinx.io');
+  await expect(other.locator('.x-card-wide [data-part-name]')).toHaveText('Syrinx');
+  await expect(other.locator('.x-card-wide [data-focus="only"]')).toHaveAttribute('aria-pressed', 'true');
+  // The MRI page's terms open their structure.
+  await other.goto('/mri/');
+  await expect(other.locator('#foramen .see-it')).toHaveAttribute('href', '/explorer/#typ.side.l.pforamen');
+});
+
 test('Awareness kit: every graphic and printable downloads, and the ZIP carries the credit', async ({ page, request }) => {
   await page.goto('/kit/');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Awareness kit');

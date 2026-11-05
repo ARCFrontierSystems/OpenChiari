@@ -21,7 +21,7 @@ export const NOTE_MAX = 280;
 
 const CONDITION_CODES: Record<Condition, string> = { typical: 'typ', chiari: 'c1', syrinx: 'syr', surgery: 'dec' };
 const CODE_CONDITIONS = Object.fromEntries(Object.entries(CONDITION_CODES).map(([k, v]) => [v, k])) as Record<string, Condition>;
-const CAMERAS: CameraView[] = ['side', 'back', 'below', 'front', 'custom'];
+const CAMERAS: CameraView[] = ['side', 'back', 'below', 'front', 'close', 'custom'];
 
 /** Camera as azimuth and elevation (degrees) and zoom (1 = the whole head fits). */
 export interface Orbit {
@@ -52,6 +52,9 @@ export function encodeView(view: { state: ViewState; orbit: Orbit | null; explor
   if (st.cut !== 50) parts.push('c' + st.cut);
   const hidden = LAYERS.filter((id) => !st.layers[id].on && initialState.layers[id].on);
   if (hidden.length) parts.push('h' + hidden.join('+'));
+  // The selected structure, and whether it's shown alone or hidden (3D roadmap step 2).
+  if (st.part !== initialState.part) parts.push('p' + st.part);
+  if (st.focus !== 'all') parts.push('i' + (st.focus === 'only' ? 'o' : 'h'));
   return parts.join('.');
 }
 
@@ -102,6 +105,10 @@ export function decodeView(hash: string): SharedView | null {
   const value = (key: string) => tokens.find((t) => t.length > 1 && t.startsWith(key))?.slice(1) ?? null;
   const o = (value('o') ?? '').split(',').map(Number);
   if (o.length === 3) o[2] /= 100;
+  const part = value('p');
+  if (part && /^[a-z0-9]+$/.test(part)) state.part = part;
+  const focus = value('i');
+  if (focus === 'o' || focus === 'h') state.focus = focus === 'o' ? 'only' : 'hide';
   const view = finish(state, camera, o, value('c'), value('h') ?? '');
   return { ...view, explore: tokens.includes('x'), note: null };
 }

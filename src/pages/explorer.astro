@@ -178,6 +178,12 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
           <p class="x-h"><span data-part-num>{part.num}</span> · {x.selected}</p>
           <h2 class="x-card-title" data-part-name>{part.name}</h2>
           <p class="x-card-text" data-part-text>{part.text}</p>
+          <div class="x-part-actions" role="group" aria-label={x.partActions.partTools}>
+            <button type="button" class="x-tool" data-part-zoom data-3d-only>{x.partActions.zoom}</button>
+            <button type="button" class="x-tool" data-focus="only" aria-pressed={st.focus === 'only' ? 'true' : 'false'} data-3d-only>{x.partActions.only}</button>
+            <button type="button" class="x-tool" data-focus="hide" aria-pressed={st.focus === 'hide' ? 'true' : 'false'} data-3d-only>{x.partActions.hide}</button>
+            <button type="button" class="x-tool" data-focus="all" hidden={st.focus === 'all'} data-3d-only>{x.partActions.all}</button>
+          </div>
           <p class="x-card-note" data-cond-note>{cond.note}</p>
           <p class="x-size-note" data-size-note hidden={!(['chiari', 'syrinx'].includes(st.condition) && st.measure)}>{x.sizeNote}</p>
         </div>
@@ -253,6 +259,12 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
             <p class="x-h"><span data-part-num>{part.num}</span> · {x.selected}</p>
             <h2 class="x-card-title" data-part-name>{part.name}</h2>
             <p class="x-card-text" data-part-text>{part.text}</p>
+            <div class="x-part-actions" role="group" aria-label={x.partActions.partTools}>
+              <button type="button" class="x-tool" data-part-zoom data-3d-only>{x.partActions.zoom}</button>
+              <button type="button" class="x-tool" data-focus="only" aria-pressed={st.focus === 'only' ? 'true' : 'false'} data-3d-only>{x.partActions.only}</button>
+              <button type="button" class="x-tool" data-focus="hide" aria-pressed={st.focus === 'hide' ? 'true' : 'false'} data-3d-only>{x.partActions.hide}</button>
+              <button type="button" class="x-tool" data-focus="all" hidden={st.focus === 'all'} data-3d-only>{x.partActions.all}</button>
+            </div>
           </div>
           <ul class="x-parts">
             {x.parts.map((p) => (
@@ -293,6 +305,17 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
       $$<HTMLInputElement>('input[name^="condition-"]').forEach((radio) =>
         radio.addEventListener('change', () => radio.checked && store.set({ condition: radio.value as Condition })),
       );
+      // Show only / hide the selected part, and show everything again.
+      $$<HTMLButtonElement>('[data-focus]').forEach((button) =>
+        button.addEventListener('click', () => {
+          const want = button.dataset.focus as ViewState['focus'];
+          store.set({ focus: store.get().focus === want ? 'all' : want });
+        }),
+      );
+      store.subscribe((st) => {
+        $$<HTMLButtonElement>('[data-focus="only"], [data-focus="hide"]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.focus === st.focus)));
+        $$<HTMLButtonElement>('[data-focus="all"]').forEach((b) => (b.hidden = st.focus === 'all'));
+      });
       $$<HTMLButtonElement>('[data-toggle]').forEach((button) =>
         button.addEventListener('click', () => {
           const key = button.dataset.toggle as 'flow' | 'labels' | 'measure';
@@ -521,6 +544,7 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
           });
           $$<HTMLButtonElement>('[data-camera]').forEach((b) => b.addEventListener('click', () => store.set({ camera: b.dataset.camera as ViewState['camera'] })));
           $$<HTMLButtonElement>('[data-camera-reset]').forEach((b) => b.addEventListener('click', () => viewer.reset()));
+          $$<HTMLButtonElement>('[data-part-zoom]').forEach((b) => b.addEventListener('click', () => viewer.focusPart(store.get().part)));
           let spoken = '';
           let timer = 0;
           store.subscribe((st) => {
@@ -1170,6 +1194,15 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
     font-size: var(--x-size-caption);
     font-weight: 400;
     color: var(--x-faint);
+  }
+  .x-part-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: var(--s-8) 0;
+  }
+  .x-part-actions [hidden] {
+    display: none;
   }
   .x-card {
     margin-top: auto;

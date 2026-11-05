@@ -56,8 +56,6 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
           </details>
         ))}
 
-        <p class="child-link">{t.child.before} <a href={r.children}>{t.child.link}</a>{t.child.after}</p>
-
         <div class="own">
           <label for="own-question" class="field-label">{t.addOwn}</label>
           <div class="own-row">
@@ -108,6 +106,7 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
     <section class="pack" aria-labelledby="pack-title" data-pack>
       <h2 id="pack-title" class="serif">{t.pack.title}</h2>
       <p>{t.pack.intro}</p>
+      <p class="child-link">{t.child.before} <a href={r.children}>{t.child.link}</a>{t.child.after}</p>
       <fieldset>
         <legend class="visually-hidden">{t.pack.formLabel}</legend>
         {t.pack.items.map((item) => (
@@ -511,8 +510,6 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
   }
   .child-link {
     margin: 0;
-    padding-top: 14px;
-    border-top: 1px solid var(--rule);
   }
   .pack {
     max-width: 700px;

@@ -360,7 +360,9 @@ test.describe('Doctor visit prep', () => {
     await before.locator('summary').click();
     await page.getByLabel('How will my pain be managed after surgery?').check();
     await expect(page.locator('[data-sheet-count]')).toHaveText('Your sheet · 7 questions');
-    await expect(page.locator('.child-link a')).toHaveAttribute('href', '/children/');
+    // The link to Helping your child sits with the packing list, not among the questions.
+    await expect(page.locator('[data-pack] .child-link a')).toHaveAttribute('href', '/children/');
+    await expect(page.locator('[data-prep-form] .child-link')).toHaveCount(0);
 
     await page.getByLabel('Non-slip slippers').uncheck();
     await page.getByLabel('Add your own item').fill('<b>Reading glasses</b>');

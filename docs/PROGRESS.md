@@ -3,6 +3,14 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: Explain It drafts for approval
+
+- **Drafted** starter notes for School, Work and Other, and "How you can help" for School and Work. They are in `docs/drafts/2026-11-05-explain-it-drafts.md`. They are not on the site; until Matthew approves them, every audience uses the approved Family text.
+- **Recommendation:** no new "What you're looking at" text. Views other than Chiari I with measure show their approved Explorer note.
+- **Gap found:** the approved line "Symptoms can come and go and are often invisible" has no EVIDENCE.md row. It is logged under "Still open".
+- **Blocked:** NINDS, StatPearls, JAN, NORD and other medical sites can't be opened from this environment today, so no new sources were added.
+- **Next:** Matthew approves or edits the drafts and decides how to open the sources; then publish Explain It (merge to main). After that, Phase 3 step 4: Research studies.
+
 ## 2026-11-04: Phase 3, step 3: Explain It
 
 - **Live site (Matthew):** the site is on Cloudflare Pages. Merging into `main` publishes it automatically (`.github/workflows/deploy.yml`, with the two Cloudflare secrets in GitHub). First published November 4, 2026.

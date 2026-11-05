@@ -3,6 +3,27 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: Awareness kit; tour published; wording after the source check
+
+- **Published (PR #4):** side by side, the guided tour, and the wording Matthew approved after the independent source check:
+  - "Symptoms can come and go, and there are often few outward signs."
+  - "…can mean a lot."
+  - the shorter "often with few outward signs" in the 280-character Explain It note.
+- **Counting is on:** with the token's D1 Edit permission, the publish created the counter database ("Counting is on").
+- **Quality report:** accessibility 100/100 on phone and desktop; speed 94 on phone and 100 on desktop; all 64 page scans pass.
+- **Phase 4, step 3: Awareness kit (`/kit/`):**
+  - built from the Kit mockup, with text from COPY.md;
+  - `scripts/make-kit.mjs` makes the files in `public/kit/`:
+    - square social post, 1080 × 1080;
+    - quote cards, square and story sizes;
+    - Explain It wallet cards, 8 per US Letter page with cut lines, each with a QR code to the shared 3D view of Chiari I;
+    - event poster and handout, Letter and A4, using the approved Home "What it is" and "Who has it" text, with the figure, logo space, "Not medical advice" and the model credit;
+    - a ZIP of everything with CREDIT.txt and LICENSE.md;
+  - the quote card uses the reworded "Chiari symptoms often don't show. Ask how you can help.";
+  - every page now exists, so the "Not built yet" stand-in page is gone. Only the Spanish page still uses the stand-in, waiting for the translator;
+  - test: every kit file downloads. 108 tests pass.
+- **Next:** full Spanish site, which waits on the medical translator.
+
 ## 2026-11-05: Evidence notes page; Phase 4 begins with side by side
 
 - **Evidence notes (`/evidence/`):**

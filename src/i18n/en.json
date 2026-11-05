@@ -219,10 +219,7 @@
   },
   "stub": {
     "notBuilt": "Not built yet. This page comes in a later step of the build.",
-    "backHome": "Back to home",
-    "pages": {
-      "kit": "Awareness kit"
-    }
+    "backHome": "Back to home"
   },
   "explorer": {
     "title": "3D Explorer",
@@ -947,5 +944,43 @@
         "text": "A syrinx is a fluid-filled cavity inside the spinal cord. It often develops alongside Chiari, most often in the neck part of the spinal cord."
       }
     ]
+  },
+  "kit": {
+    "_note": "Text from docs/COPY.md 'Awareness kit'. The quote card uses the wording Matthew approved on Nov 5, 2026 after the independent source check. Image descriptions (alt text) and 'Download' labels are new, non-medical wording.",
+    "eyebrow": "Chiari Awareness Month · September",
+    "title": "Awareness kit",
+    "intro": "Free graphics and printables for patients, families and organizations. Use them as they are, or add your organization's logo in the space provided.",
+    "zip": "Download the full kit (ZIP)",
+    "socialHeadline": "1 picture of Chiari, explained.",
+    "socialFooter": "openchiari.org · #ChiariAwarenessMonth",
+    "quote": "Chiari symptoms often don't show. Ask how you can help.",
+    "quoteFooter": "September · Chiari Awareness Month",
+    "cardLine1": "I have Chiari malformation.",
+    "cardLine2": "Scan to see what that means in 3D.",
+    "posterTitle": "What is Chiari malformation?",
+    "logoSpace": "your logo",
+    "items": {
+      "social": {
+        "title": "Square social post",
+        "format": "1080 × 1080 · PNG"
+      },
+      "quote": {
+        "title": "Quote card",
+        "format": "Square and story sizes · PNG"
+      },
+      "card": {
+        "title": "Explain It wallet card",
+        "format": "Printable, 8 per page · PDF"
+      },
+      "poster": {
+        "title": "Event poster and handout",
+        "format": "Letter and A4 · PDF, with logo space"
+      }
+    },
+    "download": "Download",
+    "orgsTitle": "For organizations",
+    "orgsText": "Need the kit in your colors, or a version for a specific event? Get in touch and it's made for you, free.",
+    "contact": "Contact Open Chiari",
+    "license": "Kit graphics are free to use and share, CC BY-SA 4.0. Graphics showing the 3D model also carry the Z-Anatomy and BodyParts3D credit."
   }
 }

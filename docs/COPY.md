@@ -400,7 +400,7 @@ Mockup: `design/mockups/ExplainShare.dc.html`
 <!-- Removed 2026-11-05: "Who is it for?" / Family / School / Work / Other / "Picks a starter note you can edit, and a plain explanation suited to them." -->
 - Your note
 - In Chiari malformation, the lowest part of the cerebellum sits below the opening where the brain meets the spinal cord. That crowds the space where spinal fluid normally flows, which can cause headaches and other symptoms. Symptoms can come and go, often with few outward signs.
-<!-- 2026-11-05 (approved by Matthew after the independent source check; the shorter "often with few outward signs" keeps the note under 280 characters, awaiting Matthew's OK): was "Symptoms can come and go and are often invisible." -->
+<!-- 2026-11-05 (approved by Matthew after the independent source check; the shorter "often with few outward signs" keeps the note under 280 characters, also approved): was "Symptoms can come and go and are often invisible." -->
 <!-- was "This is what my doctor meant by Chiari. The low part of my brain is crowding the opening at the base of my skull, which is why coughing gives me headaches." -->
 - Sent as your message, with the link under it. Change it however you like.
 - 272 / 280

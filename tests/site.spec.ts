@@ -740,3 +740,21 @@ test('guided tour: five steps, each sets the view; Back, Next and Finish work, a
   await expect(page.getByRole('link', { name: 'Finish tour' })).toHaveAttribute('href', '/explorer/');
   await expect(page.getByText('Illustration, not a medical image', { exact: false })).toBeVisible();
 });
+
+test('Awareness kit: every graphic and printable downloads, and the ZIP carries the credit', async ({ page, request }) => {
+  await page.goto('/kit/');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Awareness kit');
+  const hrefs = await page.locator('a[download]').evaluateAll((as) => as.map((a) => (a as HTMLAnchorElement).getAttribute('href')!));
+  expect(hrefs).toEqual(expect.arrayContaining([
+    '/kit/open-chiari-awareness-kit.zip', '/kit/social-post.png', '/kit/quote-card-square.png', '/kit/quote-card-story.png',
+    '/kit/wallet-cards.pdf', '/kit/poster-letter.pdf', '/kit/poster-a4.pdf',
+  ]));
+  for (const href of hrefs) {
+    const res = await request.get(href);
+    expect(res.status(), href).toBe(200);
+    expect((await res.body()).length, href).toBeGreaterThan(1000);
+  }
+  // The quote card uses the wording approved after the source check, and the license line is shown.
+  await expect(page.locator('img[alt^="Chiari symptoms often don\'t show."]')).toBeVisible();
+  await expect(page.getByText('Kit graphics are free to use and share, CC BY-SA 4.0.', { exact: false })).toBeVisible();
+});

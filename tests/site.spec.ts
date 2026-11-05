@@ -45,7 +45,7 @@ test('no third-party requests from the browser', async ({ page }) => {
   const outside: string[] = [];
   page.on('request', (request) => {
     const url = new URL(request.url());
-    if (url.origin !== 'http://localhost:4322') outside.push(request.url());
+    if (url.origin !== 'http://127.0.0.1:4322') outside.push(request.url());
   });
   for (const path of pages) await page.goto(path, { waitUntil: 'networkidle' });
   expect(outside).toEqual([]);

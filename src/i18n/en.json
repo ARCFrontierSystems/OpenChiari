@@ -15,7 +15,9 @@
       "support": "Support"
     },
     "espanol": "Español",
-    "calm": "Calm mode"
+    "calm": "Calm mode",
+    "dim": "Dim",
+    "dimLabel": "Dim mode: dark colors, less light"
   },
   "translation": {
     "label": "About this translation",
@@ -30,6 +32,11 @@
     "lede": "In Chiari malformation, the lowest part of the cerebellum sits below the opening where the brain meets the spinal cord.",
     "figCaption": "Still image. Chiari I: the tonsil extends below the dashed line. Tonsils shown at their lowest point, where MRI measures them. Illustration, not a medical image.",
     "explorerNote": "In Calm mode, the model only moves when you move it."
+  },
+  "listen": {
+    "listen": "Listen",
+    "stop": "Stop",
+    "label": "Listen: your device reads this part aloud"
   },
   "home": {
     "eyebrow": "Chiari malformation, Type I",
@@ -278,6 +285,8 @@
     "flowShort": "Flow",
     "labels": "Labels",
     "measure": "Measure",
+    "ar": "See it in your room",
+    "arHint": "Point your phone at a table or the floor, then tap to place the model. It is life size; walk around it.",
     "close": "Close",
     "viewerLabel": "Anatomy view",
     "captionIllustration": "Illustration, not a medical image",
@@ -664,12 +673,16 @@
         "text": "The \"Near\" box on Research studies sorts the list on your device and is never sent."
       },
       {
+        "term": "Your camera",
+        "text": "\"See it in your room\" uses your phone's camera on the phone itself. The picture never leaves your device, and the site never sees it."
+      },
+      {
         "term": "Health information",
         "text": "None, anywhere on the site."
       }
     ],
     "savedTitle": "Saved on your device",
-    "saved": "Calm mode and your language choice are remembered in your own browser so they stay on next time. Clearing your browser data removes them. They're never sent to the site.",
+    "saved": "Calm mode, Dim mode and your language choice are remembered in your own browser so they stay on next time. So the site also works without a signal, your browser keeps a copy of its pages and files; nothing you type or choose is in it. Clearing your browser data removes all of this. None of it is ever sent to the site.",
     "outsideTitle": "Outside services",
     "outside": [
       {
@@ -751,6 +764,12 @@
         "file": "Figure set, labeled",
         "format": "PNG and PDF",
         "bestFor": "Handouts and slides"
+      },
+      {
+        "id": "print",
+        "file": "3D-printable plaques, typical and Chiari I",
+        "format": "STL",
+        "bestFor": "Printing to hold and show"
       }
     ],
     "download": "Download",
@@ -780,6 +799,8 @@
     "email": "Email",
     "qr": "QR code",
     "share": "Share",
+    "picture": "Picture",
+    "pictureSaved": "The picture was saved to your downloads.",
     "privacy": "The link holds only the view. Your note goes in your own message, not in the link, and nothing is saved on our side.",
     "sharedWithYou": "Someone shared this with you",
     "dragHint": "Drag to turn the model.",

@@ -123,3 +123,24 @@
   --text-base: 19px;
   --button-height: 56px;
 }
+
+/*
+ * Dim mode (Matthew, 2026-11-05): dark, low-light colors for headache days, from the 3D Explorer's dark palette
+ * above, so no new colors. Turned on by its own switch, or by the system's dark-mode setting (src/lib/dim.ts).
+ * Listed after Calm mode, so with both on the colors are Dim's and the sizes Calm's.
+ */
+:root[data-dim='on'] {
+  color-scheme: dark;
+  --paper: #111215;
+  --surface: #17181C;
+  --ink: #D2D0CA;
+  --ink-2: #A3A1A9;
+  --muted: #A3A1A9;
+  --rule: #2A2C31;
+  --input-border: #3A3C42;
+  --accent: #7FB3D3;
+  --accent-hover: #ECEAE4;
+  --awareness: #CB98E1;
+  --status-good: #7FB3D3;
+  --status-warn-text: #D2D0CA;
+}

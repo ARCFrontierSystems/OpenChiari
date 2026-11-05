@@ -29,7 +29,8 @@ const otherHref = otherLanguagePath(current);
 <header class="site-header">
   <div class="bar container">
     <a class="brand" href={routes.home}>
-      <img class="brand-logo" src="/brand/logo-header.png" alt={getStrings(Astro.currentLocale).siteName} width="267" height="112" />
+      <img class="brand-logo logo-light" src="/brand/logo-header.png" alt={getStrings(Astro.currentLocale).siteName} width="267" height="112" />
+      <img class="brand-logo logo-dim" src="/brand/logo-header-dark.png" alt={getStrings(Astro.currentLocale).siteName} width="267" height="112" />
     </a>
 
     <nav class="nav-wide" aria-label={t.mainNavLabel}>
@@ -39,6 +40,11 @@ const otherHref = otherLanguagePath(current);
     </nav>
 
     <a class="lang nav-wide-only" href={otherHref} lang={otherLang} hreflang={otherLang} data-other-lang>{t.espanol}</a>
+
+    <label class="dim-toggle nav-wide-only">
+      <input type="checkbox" role="switch" data-dim-switch aria-label={t.dimLabel} />
+      <span aria-hidden="true">{t.dim}</span>
+    </label>
 
     <label class="calm-toggle">
       <input type="checkbox" role="switch" data-calm-switch aria-label={t.calm} />
@@ -59,13 +65,19 @@ const otherHref = otherLanguagePath(current);
       <a href={item.href} aria-current={current === item.href ? 'page' : undefined}>{item.label}</a>
     ))}
     <a href={otherHref} lang={otherLang} hreflang={otherLang} data-other-lang>{t.espanol}</a>
+    <label class="menu-switch">
+      <input type="checkbox" role="switch" data-dim-switch aria-label={t.dimLabel} />
+      <span aria-hidden="true">{t.dim}</span>
+    </label>
   </nav>
 </header>
 
 <script>
   import { bindCalmSwitches } from '../lib/calm';
+  import { bindDimSwitches } from '../lib/dim';
 
   bindCalmSwitches();
+  bindDimSwitches();
 
   const button = document.querySelector<HTMLButtonElement>('.menu-button');
   const menu = document.getElementById('site-menu');
@@ -154,6 +166,38 @@ const otherHref = otherLanguagePath(current);
   }
   .calm-label-on {
     display: none;
+  }
+  .dim-toggle,
+  .menu-switch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: var(--touch);
+    font-size: 14px;
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+  .dim-toggle input,
+  .menu-switch input {
+    width: 36px;
+    height: 20px;
+    margin: 0;
+    accent-color: var(--accent);
+    cursor: pointer;
+  }
+  .menu-switch {
+    min-height: 48px;
+    font-size: 16px;
+    color: var(--ink);
+  }
+  .logo-dim {
+    display: none;
+  }
+  :global(:root[data-dim='on']) .logo-light {
+    display: none;
+  }
+  :global(:root[data-dim='on']) .logo-dim {
+    display: block;
   }
   .menu-button {
     display: none;

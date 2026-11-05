@@ -15,7 +15,9 @@
       "support": "Apoyo"
     },
     "espanol": "English",
-    "calm": "Modo tranquilo"
+    "calm": "Modo tranquilo",
+    "dim": "Modo oscuro",
+    "dimLabel": "Modo oscuro: colores oscuros, menos luz"
   },
   "translation": {
     "label": "Sobre esta traducción",
@@ -30,6 +32,11 @@
     "lede": "En la malformación de Chiari, la parte más baja del cerebelo queda por debajo de la abertura donde el cerebro se une con la médula espinal.",
     "figCaption": "Imagen fija. Chiari I: la amígdala cerebelosa se extiende por debajo de la línea punteada. Las amígdalas cerebelosas se muestran en su punto más bajo, donde se miden en la resonancia magnética. Ilustración, no es una imagen médica.",
     "explorerNote": "En el modo tranquilo, el modelo solo se mueve cuando usted lo mueve."
+  },
+  "listen": {
+    "listen": "Escuchar",
+    "stop": "Detener",
+    "label": "Escuchar: su dispositivo lee esta parte en voz alta"
   },
   "home": {
     "eyebrow": "Malformación de Chiari, tipo I",
@@ -278,6 +285,8 @@
     "flowShort": "Flujo",
     "labels": "Nombres",
     "measure": "Medir",
+    "ar": "Véalo en su habitación",
+    "arHint": "Apunte el teléfono hacia una mesa o el piso y toque la pantalla para colocar el modelo. Tiene tamaño real; camine a su alrededor.",
     "close": "Cerrar",
     "viewerLabel": "Vista de la anatomía",
     "captionIllustration": "Ilustración, no es una imagen médica",
@@ -664,12 +673,16 @@
         "text": "El cuadro \"Cerca de\" en Estudios de investigación ordena la lista en su dispositivo y nunca se envía."
       },
       {
+        "term": "Su cámara",
+        "text": "\"Véalo en su habitación\" usa la cámara de su teléfono solo en el propio teléfono. La imagen nunca sale de su dispositivo y el sitio nunca la ve."
+      },
+      {
         "term": "Información de salud",
         "text": "Ninguna, en ninguna parte del sitio."
       }
     ],
     "savedTitle": "Lo que se guarda en su dispositivo",
-    "saved": "El modo tranquilo y el idioma que elija se recuerdan en su propio navegador, para que sigan así la próxima vez. Si borra los datos de su navegador, se eliminan. Nunca se envían al sitio.",
+    "saved": "El modo tranquilo, el modo oscuro y el idioma que elija se recuerdan en su propio navegador, para que sigan así la próxima vez. Para que el sitio también funcione sin señal, su navegador guarda una copia de sus páginas y archivos; no contiene nada de lo que usted escriba o elija. Si borra los datos de su navegador, todo esto se elimina. Nada de esto se envía nunca al sitio.",
     "outsideTitle": "Servicios externos",
     "outside": [
       {
@@ -751,6 +764,12 @@
         "file": "Juego de figuras con nombres (en inglés)",
         "format": "PNG y PDF",
         "bestFor": "Folletos y presentaciones"
+      },
+      {
+        "id": "print",
+        "file": "Placas para imprimir en 3D, típica y Chiari I",
+        "format": "STL",
+        "bestFor": "Imprimir para tocar y mostrar"
       }
     ],
     "download": "Descargar",
@@ -780,6 +799,8 @@
     "email": "Correo electrónico",
     "qr": "Código QR",
     "share": "Compartir",
+    "picture": "Imagen",
+    "pictureSaved": "La imagen se guardó en sus descargas.",
     "privacy": "El enlace solo contiene la vista. Su nota va en su propio mensaje, no en el enlace, y no guardamos nada.",
     "sharedWithYou": "Alguien compartió esto con usted",
     "dragHint": "Arrastre para girar el modelo.",

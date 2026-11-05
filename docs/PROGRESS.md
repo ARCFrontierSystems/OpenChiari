@@ -3,6 +3,26 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: New features, releases 1 and 2 (PR #8, waiting for Matthew's approval)
+
+- **Matthew asked for all the suggested features.** Decisions: AR inside the browser on Android; two printable halves; Dim mode with its own switch that follows the phone's dark mode.
+- **Release 1:**
+  - Dim mode (`src/lib/dim.ts`, tokens.css);
+  - Read aloud (`src/lib/speak.ts`, `ListenButton.astro`);
+  - offline saving (manifest, `scripts/sw-template.js`, made at build time; about 0.8 MB on the first visit);
+  - Explain It picture (`src/lib/view-picture.ts`).
+- **Release 2:**
+  - "See it in your room" (`src/explorer/ar.ts`; Apple's AR Quick Look on iPhone, WebXR in the page on Android; the Simple model cut at the midline);
+  - 3D-printable midline plaques of Typical and Chiari I, life size, single-color relief (`model/simple/build.mjs --print`, `public/downloads/openchiari-print.zip`). The tonsil measures 1.1 mm above / 12.6 mm below the McRae line, matching EVIDENCE.md.
+- **Wording pending approval** (COPY.md "New features, release 1/2"): labels, the room-view hint, the Privacy "Saved on your device" paragraph and a new "Your camera" item.
+- **Release 3 (medical text):**
+  - drafts with sources in `docs/drafts/2026-11-05-new-features.md`;
+  - pronunciation sourced (Merriam-Webster Medical, Mayfield, KidsHealth);
+  - the cough text made more cautious because a 2025 preprint disagrees about flow (medRxiv blocks automated readers);
+  - coin sizes need the U.S. Mint page opened by a person;
+  - independent audit and Matthew's approval still to come.
+- **Environment:** a personal "OpenChiari" environment, with the medical sites, the new sources and openchiari.org (Matthew approved).
+
 ## 2026-11-05: Check-up wording and walk-through fixes (PR #7)
 
 - **Matthew approved** all the check-up wording recommendations and asked for the rest of the check-up items to be fixed (details in the PR and COPY.md; new EVIDENCE.md row 17).
@@ -15,7 +35,7 @@ Matthew's preference: when a step is done, lay out what the next step will cover
   - the Spanish wallet card line fits, and the Spanish quote and wallet cards carry the pending-review notice;
   - the Impact date is recorded in COPY.md.
 - **CI:** both workflows now always use the newest Node 22 (Astro needs 22.23.4; one GitHub machine had 22.23.3).
-- **Waiting for Matthew:** approval of the new see-through skull from the back, front and below (before and after pictures, Simple and Realistic), since he approved the realistic views on Nov 4. Publish after that.
+- **Approved and published:** Matthew approved the new see-through skull from the back, front and below (before-and-after pictures, Simple and Realistic) and said "Approved, publish it"; PR #7 merged and published on Nov 5.
 
 ## 2026-11-05: Phase 4: the full Spanish site, published with a notice
 

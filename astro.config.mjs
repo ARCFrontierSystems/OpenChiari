@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import { cpSync, existsSync, readFileSync } from 'node:fs';
+import { cpSync, existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
+import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 // The realistic model (Phase 2): Matthew approved it for the public site on 2026-11-04, after it passed the accuracy
@@ -26,6 +27,38 @@ const realisticModel = {
   },
 };
 
+// Offline helper (public/sw.js is made here, from scripts/sw-template.js): after the build, list every page and the
+// files they need, leaving out the downloads, the kit's print files and the large realistic model (kept only once
+// someone opens it). The version changes with every build, so phones pick up new text and fixes.
+/** @type {import('astro').AstroIntegration} */
+const offline = {
+  name: 'offline-helper',
+  hooks: {
+    'astro:build:done': ({ dir }) => {
+      const root = fileURLToPath(dir);
+      /** @type {string[]} */
+      const files = [];
+      /** @param {string} folder */
+      const walk = (folder) => {
+        for (const name of readdirSync(folder)) {
+          const path = join(folder, name);
+          if (statSync(path).isDirectory()) walk(path);
+          else files.push('/' + relative(root, path).split('\\').join('/'));
+        }
+      };
+      walk(root);
+      const keep = files
+        // Left out up front (kept once used): downloads, kit files, print files, the 3D models, and the large logos and
+        // link-preview picture, so the first visit stays light on a phone plan.
+        .filter((f) => !/^\/(downloads|models|kit)\//.test(f) && !/\.(zip|pdf)$/.test(f) && !/^\/brand\/(logo\.png|logo-dark\.png|share\.png|icon-(180|512)\.png)$/.test(f) && f !== '/sw.js')
+        .map((f) => (f.endsWith('/index.html') ? f.slice(0, -'index.html'.length) : f));
+      const template = readFileSync(fileURLToPath(new URL('./scripts/sw-template.js', import.meta.url)), 'utf8');
+      const version = Date.now().toString(36);
+      writeFileSync(join(root, 'sw.js'), template.replace('__VERSION__', version).replace('__FILES__', JSON.stringify(keep)));
+    },
+  },
+};
+
 // Static site. English at the root, Spanish under /es/ (built in Phase 4).
 export default defineConfig({
   site: 'https://openchiari.org',
@@ -36,7 +69,7 @@ export default defineConfig({
     locales: ['en', 'es'],
     routing: { prefixDefaultLocale: false },
   },
-  integrations: [realisticModel],
+  integrations: [realisticModel, offline],
   // Local previews only: the counter tests open the preview under the name openchiari.org (tests/site.spec.ts).
   vite: { preview: { allowedHosts: ['openchiari.org'] } },
 });

@@ -145,12 +145,13 @@ export function anatomyFigureSvg(options: FigureOptions, t: FigureStrings): stri
   if (labels) {
     // Each leader runs from a point on its structure to its label (label rows every 40 units from y 168).
     const leaders = ['M262 262 L548 164', 'M300 265 L548 204', 'M440 390 L548 244', 'M360 394 L548 284', 'M326 370 L548 324', `M386 ${tonsilMid} L548 364`, 'M372 445 L548 404', 'M342 480 L548 444', 'M351 620 L548 484', 'M318 500 L548 524'];
-    parts.push(`<g font-size="12.5" fill="${ink}" aria-hidden="true"><g stroke="${leader}" stroke-width="0.75" fill="none">${leaders.map((d) => `<path d="${d}"/>`).join('')}</g>`);
+    parts.push(`<g class="fig-labels" font-size="12.5" fill="${ink}" aria-hidden="true"><g stroke="${leader}" stroke-width="0.75" fill="none">${leaders.map((d) => `<path d="${d}"/>`).join('')}</g>`);
     parts.push(lbl(168, '01', L.cerebrum), lbl(208, '02', L.callosum), lbl(248, '03', L.cerebellum), lbl(288, '04', L.fourthVentricle), lbl(328, '05', L.brainstem), lbl(368, '06', L.tonsil, true), lbl(408, '07', L.foramen), note(424, surgery ? L.foramenNoteSurgery : L.foramenNote), lbl(448, '08', L.cord), lbl(488, '09', L.csf), lbl(528, '10', L.c2));
     add(c === 'syrinx', `<path d="M337 585 L548 564" stroke="${leader}" stroke-width="0.75" fill="none"/>${lbl(568, '11', L.syrinx, true)}${note(584, L.syrinxNote)}`);
     add(surgery, `<path d="M420 440 L548 564" stroke="${leader}" stroke-width="0.75" fill="none"/><text x="556" y="568" font-weight="600" fill="#9A3412"><tspan class="fig-mono" font-weight="400">11${sp}</tspan>${esc(L.boneRemoved)}</text>${note(584, L.boneRemovedNote)}`);
     parts.push('</g>');
   }
   const aria = esc(t.ariaPrefix + t.aria[c]);
-  return `<svg class="anatomy-figure${className ? ' ' + esc(className) : ''}" viewBox="${viewBox}" role="img" aria-label="${aria}" xmlns="http://www.w3.org/2000/svg">${parts.join('')}</svg>`;
+  // A figure drawn for a light page gets "fig-on-light", so Dim mode can recolor its labels (global.css).
+  return `<svg class="anatomy-figure${dark ? '' : ' fig-on-light'}${className ? ' ' + esc(className) : ''}" viewBox="${viewBox}" role="img" aria-label="${aria}" xmlns="http://www.w3.org/2000/svg">${parts.join('')}</svg>`;
 }

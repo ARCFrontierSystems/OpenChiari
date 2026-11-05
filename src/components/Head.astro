@@ -31,6 +31,8 @@ const spanish = new URL(isSpanish ? here : otherLanguagePath(here), site).href;
 <meta name="theme-color" content={themeColor} />
 <link rel="icon" href="/brand/icon-32.png" type="image/png" sizes="32x32" />
 <link rel="apple-touch-icon" href="/brand/icon-180.png" />
+<!-- Lets people save the site to their phone and use it without a signal (public/sw.js, made at build time). -->
+<link rel="manifest" href="/manifest.webmanifest" />
 <!-- What a shared link shows (the logo on white). Absolute addresses, as link previews need them. -->
 <meta property="og:site_name" content={t.siteName} />
 <meta property="og:title" content={pageTitle} />
@@ -55,12 +57,19 @@ const spanish = new URL(isSpanish ? here : otherLanguagePath(here), site).href;
     try { saved = localStorage.getItem('openchiari-calm'); } catch (e) {}
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (saved === 'on' || (saved !== 'off' && reduce)) document.documentElement.dataset.calm = 'on';
+    // Dim mode, the same way: saved choice wins; with none, follow the system's dark-mode setting. Same key as src/lib/dim.ts.
+    var dim = null;
+    try { dim = localStorage.getItem('openchiari-dim'); } catch (e) {}
+    var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (dim === 'on' || (dim !== 'off' && dark)) document.documentElement.dataset.dim = 'on';
   })();
 </script>
 <script>
   // Visits: totals only, never anything about the visitor (src/lib/count.ts).
   import { countVisit } from '../lib/count';
   countVisit();
+  // The offline helper, on the real site only (tests and previews run without it).
+  if ('serviceWorker' in navigator && location.hostname === 'openchiari.org') navigator.serviceWorker.register('/sw.js').catch(() => {});
   // Switching language keeps the view after the # (the same model view opens in the other language).
   document.addEventListener('click', (event) => {
     const link = (event.target as Element | null)?.closest?.<HTMLAnchorElement>('a[data-other-lang]');

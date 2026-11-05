@@ -61,7 +61,11 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
           <div class="own-list" data-own-list></div>
 
           <label for="mention" class="field-label">{t.mention}</label>
-          <textarea id="mention" rows="3" autocomplete="off" maxlength="600" data-mention></textarea>
+          <div class="own-row">
+            <input id="mention" type="text" autocomplete="off" maxlength="200" data-mention-input />
+            <button type="button" class="button button-secondary" data-mention-add>{t.add}</button>
+          </div>
+          <div class="own-list" data-mention-list></div>
         </div>
       </form>
 
@@ -111,7 +115,7 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
     </ol>
     <div class="sheet-mention">
       <h2>{t.mention}</h2>
-      <p class="sheet-mention-text" data-sheet-mention></p>
+      <ul class="sheet-mention-list" data-sheet-mention></ul>
       <div class="line"></div>
       <div class="line"></div>
     </div>
@@ -126,7 +130,8 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
   const form = document.querySelector<HTMLFormElement>('[data-prep-form]')!;
   const ownInput = document.querySelector<HTMLInputElement>('[data-own-input]')!;
   const ownList = document.querySelector<HTMLElement>('[data-own-list]')!;
-  const mention = document.querySelector<HTMLTextAreaElement>('[data-mention]')!;
+  const mentionInput = document.querySelector<HTMLInputElement>('[data-mention-input]')!;
+  const mentionList = document.querySelector<HTMLElement>('[data-mention-list]')!;
   const diagram = document.querySelector<HTMLInputElement>('[data-diagram]')!;
   const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? forms.one : forms.other.replace('{n}', String(n)));
 
@@ -145,30 +150,36 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
       .map((box) => box.dataset.text!);
   }
 
-  function addOwn() {
-    const text = ownInput.value.trim();
+  /** Adds what was typed as a ticked item (untick to leave it off the sheet). kind: a question or a thing to mention. */
+  function addItem(input: HTMLInputElement, list: HTMLElement, kind: 'text' | 'mention') {
+    const text = input.value.trim();
     if (!text) return;
     const label = document.createElement('label');
     label.className = 'question';
     const box = document.createElement('input');
     box.type = 'checkbox';
     box.checked = true;
-    box.dataset.text = text;
+    box.dataset[kind] = text;
     const span = document.createElement('span');
     span.textContent = text; // text only: never interpreted as HTML
     label.append(box, span);
-    ownList.append(label);
-    ownInput.value = '';
-    ownInput.focus();
+    list.append(label);
+    input.value = '';
+    input.focus();
     update();
   }
-  document.querySelector('[data-own-add]')!.addEventListener('click', addOwn);
-  ownInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      addOwn();
-    }
-  });
+  for (const [input, list, button, kind] of [
+    [ownInput, ownList, '[data-own-add]', 'text'],
+    [mentionInput, mentionList, '[data-mention-add]', 'mention'],
+  ] as const) {
+    document.querySelector(button)!.addEventListener('click', () => addItem(input, list, kind));
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        addItem(input, list, kind);
+      }
+    });
+  }
 
   function fillList(list: HTMLOListElement, items: string[], withAnswers: boolean) {
     list.replaceChildren(
@@ -192,13 +203,17 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
     fillList(document.querySelector('[data-sheet-list]')!, items, true);
     document.querySelector('[data-sheet-count]')!.textContent = count(t.sheetCount, items.length);
     document.querySelector('[data-selected-count]')!.textContent = count(t.selectedCount, items.length);
-    document.querySelector('[data-sheet-mention]')!.textContent = mention.value.trim();
+    const mentions = Array.from(mentionList.querySelectorAll<HTMLInputElement>('input[data-mention]'))
+      .filter((box) => box.checked)
+      .map((box) => box.dataset.mention!);
+    document.querySelector('[data-sheet-mention]')!.replaceChildren(
+      ...mentions.map((text) => Object.assign(document.createElement('li'), { textContent: text })),
+    );
     sheet.classList.toggle('no-diagram', !diagram.checked);
     // Keep the sheet on one page: less answer space as the list grows.
     sheet.dataset.density = items.length <= 7 ? 'roomy' : items.length <= 10 ? 'medium' : 'tight';
   }
   form.addEventListener('change', update);
-  mention.addEventListener('input', update);
   diagram.addEventListener('change', update);
   update();
 
@@ -583,11 +598,12 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
       font-size: 12pt;
       font-weight: 600;
     }
-    .sheet-mention-text:empty {
+    .sheet-mention-list:empty {
       display: none;
     }
-    .sheet-mention-text {
-      white-space: pre-wrap;
+    .sheet-mention-list {
+      margin: 0;
+      padding-left: 1.2em;
     }
     .sheet-mention .line {
       height: 26px;

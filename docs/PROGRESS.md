@@ -3,6 +3,47 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: Visit prep mention list; smoother scrolling on phones
+
+- **Visit prep (Matthew):** "Things I want to mention" had no Add button.
+  - It is now a type-and-Add list, like "Add your own question".
+  - Each item has a tick box, so it can be left off the sheet.
+  - The items print as a list on the sheet.
+  - No new text.
+- **3D stutter while scrolling on phones (Matthew).** I couldn't reproduce this on a real phone here. Three likely causes are fixed:
+  - **Resizing on every scroll step.** The Explorer's height followed the phone's address bar (`dvh`), so the 3D view was resized and redrawn on every scroll step. It now uses `svh`, which stays fixed.
+  - **The flow pulse kept animating.** It now pauses while the page scrolls.
+  - **Swipes over the model didn't scroll the page.** On Explain It and embeds, an up-or-down swipe over the model now scrolls the page and a sideways swipe turns it. A look-only shared model no longer stops the page from scrolling at all.
+- **Two-minute tour:** still opens the Explorer (the approved stand-in). Only step 3 of the five tour steps has approved text; the tour is Phase 4. Matthew: keep it as it is until Phase 4.
+
+## 2026-11-05: Explain It: short links, note in the message
+
+- **Matthew's request:**
+  - links were long and showed the note;
+  - the starter note shouldn't start "This is what my doctor meant";
+  - the School, Work and Other choices made no real difference.
+- **Done:**
+  - **"Who is it for?" removed.** There is one note for everyone. It explains Chiari in plain English and is made only of sentences already approved in COPY.md.
+  - **Short links.** The link now holds only the view, for example `openchiari.org/v/#c1.side.f.m` (`src/explorer/share.ts`). The note is never in the link.
+  - **The note travels in the message.** Text message, Email and Copy send the note with the link under it. Phones also get a Share button that opens their share sheet.
+  - **Recipient page.** `/v/` shows the model and explanation without the note, since they read it in the message.
+  - **Old links still work.** Links made before today still open, with their note.
+- **New wording, approved by Matthew the same day:**
+  - the note hint;
+  - "Copy note and link", "Copied your note and the link." and "Share";
+  - the privacy line under the link, and the Privacy page's "Explain It notes".
+- **Checks:** 91 tests pass, including the accessibility scan of `/v/`.
+
+## 2026-11-05: openchiari.org is live; Explain It published
+
+- **Explain It published:** merged in pull request #2, and the Deploy run succeeded.
+- **openchiari.org works (Matthew confirmed).** Attaching the domain to the Pages project wasn't enough. The domain had no DNS records, so browsers got "can't be reached".
+  - Fix: two CNAME records in Cloudflare DNS, `@` and `www`, both pointing to `openchiari.pages.dev` with the proxy on.
+- **Still waiting on Matthew:**
+  - approval of the Explain It drafts;
+  - a source for "Symptoms can come and go and are often invisible" (or allowing those sites in this environment's network settings).
+- **Next:** Phase 3 step 4, Research studies.
+
 ## 2026-11-05: Explain It drafts for approval
 
 - **Drafted** starter notes for School, Work and Other, and "How you can help" for School and Work. They are in `docs/drafts/2026-11-05-explain-it-drafts.md`. They are not on the site; until Matthew approves them, every audience uses the approved Family text.

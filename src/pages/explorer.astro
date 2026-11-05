@@ -344,7 +344,7 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
         a.addEventListener('click', () => {
           const st = store.get();
           const v = (document.querySelector('[data-viewer]') as (HTMLElement & { viewer?: { orbit(): Orbit } }) | null)?.viewer;
-          a.href = `/explain/#${encodeView({ state: st, orbit: st.camera === 'custom' ? v?.orbit() ?? null : null, explore: true, audience: 'fam' })}`;
+          a.href = `/explain/#${encodeView({ state: st, orbit: st.camera === 'custom' ? v?.orbit() ?? null : null, explore: true })}`;
         }),
       );
 
@@ -523,7 +523,10 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
   .workspace {
     display: grid;
     grid-template-columns: 272px minmax(0, 1fr) 320px;
-    height: calc(100dvh - 53px);
+    height: calc(100vh - 53px);
+    /* svh: the screen height with the address bar showing. Unlike dvh it doesn't change while a phone scrolls,
+       so the 3D view isn't resized and redrawn on every scroll step. */
+    height: calc(100svh - 53px);
     min-height: 600px;
   }
   .x-left {
@@ -972,7 +975,8 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
       position: relative;
       grid-template-columns: minmax(0, 1fr);
       grid-template-rows: minmax(0, 1fr) auto;
-      height: calc(100dvh - 57px);
+      height: calc(100vh - 57px);
+      height: calc(100svh - 57px);
       min-height: 560px;
     }
     /* The left panel becomes the "Layers" panel, opened from the viewport. */
@@ -1018,7 +1022,8 @@ const linkIcon = 'M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 
       display: flex;
       flex-direction: column;
       gap: var(--s-12);
-      max-height: 62dvh;
+      max-height: 62vh;
+      max-height: 62svh;
       overflow-y: auto;
     }
     .x-cond-grid {

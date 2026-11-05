@@ -1,6 +1,6 @@
 # Surgery questions, packing list and a page for children: draft text for Matthew's approval (November 5, 2026)
 
-**Status: draft. None of this is on the site, in COPY.md or in EVIDENCE.md yet.** Each part needs an independent audit (CLAUDE.md rule 1a) and Matthew's approval. Copies of every page actually opened are in `docs/audits/sources/2026-11-05-surgery-and-children/`.
+**Status: approved by Matthew on Nov 5 ("All approved"), as revised after the independent audit; recorded in COPY.md and EVIDENCE.md. Was: draft. None of this is on the site, in COPY.md or in EVIDENCE.md yet.** Each part needs an independent audit (CLAUDE.md rule 1a) and Matthew's approval. Copies of every page actually opened are in `docs/audits/sources/2026-11-05-surgery-and-children/`.
 
 ## Revised after the independent audit (this is the wording proposed for approval)
 

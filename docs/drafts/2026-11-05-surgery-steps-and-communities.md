@@ -1,6 +1,6 @@
 # "What happens in surgery" play-through and "Connect with others": draft text for Matthew's approval (November 5, 2026)
 
-**Status: draft. Built for preview, not published.** Each part needs an independent audit (CLAUDE.md rule 1a) and Matthew's approval.
+**Status: approved by Matthew on Nov 5 ("All approved"), as revised after the independent audit; recorded in COPY.md and EVIDENCE.md. Was: draft. Built for preview, not published.** Each part needs an independent audit (CLAUDE.md rule 1a) and Matthew's approval.
 
 ## Revised after the independent audit (this is the wording proposed for approval)
 

@@ -218,7 +218,7 @@
     "personalProject": "Un proyecto personal de Matthew Borgfeld.",
     "moreNavLabel": "Más",
     "links": {
-      "children": "Helping your child",
+      "children": "Cómo ayudar a su hijo",
       "support": "Apoyo",
       "kit": "Kit de concientización",
       "impact": "Impacto",
@@ -442,37 +442,37 @@
     },
     "sizeNote": "El límite habitual, unos 5 mm, es medio centímetro, más o menos la altura de 3 monedas de 25 centavos de EE. UU. apiladas. El modelo muestra unos 12 mm, algo más de 1 centímetro, más o menos la altura de 7 de esas monedas apiladas. Lo que bajan las amígdalas cerebelosas no siempre coincide con cómo se siente una persona.",
     "surgery": {
-      "title": "What happens in surgery, step by step",
-      "intro": "Surgeons don't all do the same operation. Some remove bone only, some also open the brain's covering and add a patch, and some also shrink the tonsils. This shows one common version. Your surgeon can tell you which steps apply to you.",
-      "play": "Play",
-      "pause": "Pause",
-      "back": "Back",
-      "next": "Next",
-      "stop": "Show the usual view",
-      "stepLabel": "Step {n} of {total}",
+      "title": "Qué pasa en la cirugía, paso a paso",
+      "intro": "No todos los cirujanos hacen la misma operación. Algunos solo retiran hueso, otros también abren la membrana que cubre el cerebro y colocan un parche, y otros además reducen las amígdalas cerebelosas. Esto muestra una versión común. Su cirujano puede decirle qué pasos se aplican en su caso.",
+      "play": "Reproducir",
+      "pause": "Pausa",
+      "back": "Atrás",
+      "next": "Siguiente",
+      "stop": "Mostrar la vista habitual",
+      "stepLabel": "Paso {n} de {total}",
       "steps": [
         {
-          "title": "Before surgery",
-          "text": "In Chiari I, the tonsils extend below the opening at the base of the skull. This can crowd the space where spinal fluid flows."
+          "title": "Antes de la cirugía",
+          "text": "En Chiari I, las amígdalas cerebelosas se extienden por debajo de la abertura en la base del cráneo. Esto puede reducir el espacio por donde fluye el líquido cefalorraquídeo."
         },
         {
-          "title": "The incision",
-          "text": "The person is asleep under anesthesia. The surgeon makes a cut down the middle of the back of the head and upper neck, and moves the muscles aside to reach the bone."
+          "title": "La incisión",
+          "text": "La persona está dormida con anestesia. El cirujano hace un corte por el centro de la parte de atrás de la cabeza y la parte alta del cuello, y aparta los músculos para llegar al hueso."
         },
         {
-          "title": "Bone removed",
-          "text": "A small piece of bone is removed at the back of the skull opening, and often the back of the first neck bone (vertebra), to make more room."
+          "title": "Hueso retirado",
+          "text": "Se retira un pequeño trozo de hueso de la parte de atrás de la abertura del cráneo y, a menudo, la parte de atrás del primer hueso del cuello (vértebra), para hacer más espacio."
         },
         {
-          "title": "The patch",
-          "text": "Often the surgeon also opens the brain's protective covering (the dura) and sews in a patch, like letting out a waistband, to make more room for spinal fluid. Then the muscles and skin are closed."
+          "title": "El parche",
+          "text": "A menudo el cirujano también abre la membrana protectora del cerebro (la duramadre) y cose un parche, como cuando se suelta la cintura de un pantalón, para dar más espacio al líquido cefalorraquídeo. Luego se cierran los músculos y la piel."
         },
         {
-          "title": "Afterward",
-          "text": "On scans after surgery, the fluid space behind the cerebellum is often larger, and the tonsils often rise only partly."
+          "title": "Después",
+          "text": "En los estudios de imagen después de la cirugía, el espacio del líquido detrás del cerebelo a menudo es más grande, y las amígdalas cerebelosas a menudo suben solo en parte."
         }
       ],
-      "caption": "Animation simplified. The incision line is approximate; its length varies."
+      "caption": "Animación simplificada. La línea de la incisión es aproximada; su longitud varía."
     }
   },
   "evidence": {
@@ -581,131 +581,131 @@
       },
       {
         "id": "surgeryBefore",
-        "title": "Before surgery",
+        "title": "Antes de la cirugía",
         "folded": true,
         "questions": [
           {
             "id": "why",
-            "text": "Why do you recommend surgery, and what are the benefits and risks for me?",
+            "text": "¿Por qué me recomienda la cirugía, y cuáles son los beneficios y los riesgos para mí?",
             "checked": false
           },
           {
             "id": "steps",
-            "text": "Which steps will my surgery include? For example, will you remove bone only, or also open the covering of the brain and add a patch?",
+            "text": "¿Qué pasos incluirá mi cirugía? Por ejemplo, ¿solo retirará hueso, o también abrirá la membrana que cubre el cerebro y colocará un parche?",
             "checked": false
           },
           {
             "id": "length",
-            "text": "How long will the surgery take, and how long will I stay in the hospital?",
+            "text": "¿Cuánto durará la cirugía y cuánto tiempo estaré en el hospital?",
             "checked": false
           },
           {
             "id": "eating",
-            "text": "When do I need to stop eating and drinking before surgery?",
+            "text": "¿Cuándo debo dejar de comer y beber antes de la cirugía?",
             "checked": false
           },
           {
             "id": "icu",
-            "text": "Will I spend time in intensive care after surgery?",
+            "text": "¿Pasaré tiempo en cuidados intensivos después de la cirugía?",
             "checked": false
           },
           {
             "id": "parentStay",
-            "text": "For a child: can a parent stay overnight, and be there when they wake up?",
+            "text": "Para un niño: ¿puede uno de los padres quedarse durante la noche y estar presente cuando despierte?",
             "checked": false
           },
           {
             "id": "comfortItem",
-            "text": "For a child: can their comfort item go into the operating room?",
+            "text": "Para un niño: ¿puede llevar su objeto de consuelo al quirófano?",
             "checked": false
           },
           {
             "id": "pain",
-            "text": "How will my pain be managed after surgery?",
+            "text": "¿Cómo se controlará mi dolor después de la cirugía?",
             "checked": false
           },
           {
             "id": "medicines",
-            "text": "Should I stop or change any of my medicines before surgery?",
+            "text": "¿Debo dejar de tomar o cambiar alguno de mis medicamentos antes de la cirugía?",
             "checked": false
           },
           {
             "id": "back",
-            "text": "How soon can I go back to school, work or my usual activities?",
+            "text": "¿Cuándo puedo volver a la escuela, al trabajo o a mis actividades habituales?",
             "checked": false
           },
           {
             "id": "again",
-            "text": "Could I need another surgery later?",
+            "text": "¿Podría necesitar otra cirugía más adelante?",
             "checked": false
           }
         ]
       },
       {
         "id": "surgeryHome",
-        "title": "Before going home from the hospital",
+        "title": "Antes de salir del hospital",
         "folded": true,
         "questions": [
           {
             "id": "call",
-            "text": "What should make me call you or come back to the hospital?",
+            "text": "¿Qué debería hacer que lo llame o que vuelva al hospital?",
             "checked": false
           },
           {
             "id": "incision",
-            "text": "How do I care for my incision, and when can I shower?",
+            "text": "¿Cómo cuido mi incisión y cuándo puedo ducharme?",
             "checked": false
           },
           {
             "id": "homeMedicines",
-            "text": "Which medicines should I take at home, and for how long?",
+            "text": "¿Qué medicamentos debo tomar en casa y por cuánto tiempo?",
             "checked": false
           },
           {
             "id": "limits",
-            "text": "What should I avoid, and for how long? When can I lift things, drive or play sports?",
+            "text": "¿Qué debo evitar y por cuánto tiempo? ¿Cuándo puedo levantar cosas, manejar o hacer deporte?",
             "checked": false
           },
           {
             "id": "whoToCall",
-            "text": "Who do I call with questions, including at night and on weekends?",
+            "text": "¿A quién llamo si tengo preguntas, también de noche y los fines de semana?",
             "checked": false
           },
           {
             "id": "followupVisit",
-            "text": "When is my follow-up visit, and will I need another MRI?",
+            "text": "¿Cuándo es mi cita de seguimiento y necesitaré otra resonancia magnética?",
             "checked": false
           }
         ]
       },
       {
         "id": "surgeryAfter",
-        "title": "Follow-up after surgery",
+        "title": "Seguimiento después de la cirugía",
         "folded": true,
         "questions": [
           {
             "id": "expected",
-            "text": "Is my recovery going as expected?",
+            "text": "¿Mi recuperación va como se esperaba?",
             "checked": false
           },
           {
             "id": "improve",
-            "text": "Which of my symptoms are likely to get better, and how long might that take?",
+            "text": "¿Cuáles de mis síntomas es probable que mejoren, y cuánto podría tardar?",
             "checked": false
           },
           {
             "id": "scans",
-            "text": "Do I need more scans to check the fluid space, or my syrinx if I have one?",
+            "text": "¿Necesito más estudios de imagen para revisar el espacio del líquido, o mi siringe si la tengo?",
             "checked": false
           },
           {
             "id": "activities",
-            "text": "Can I go back to all my usual activities now?",
+            "text": "¿Ya puedo volver a todas mis actividades habituales?",
             "checked": false
           },
           {
             "id": "therapy",
-            "text": "Would physical therapy or another specialist help me?",
+            "text": "¿Me ayudaría la fisioterapia u otro especialista?",
             "checked": false
           }
         ]
@@ -733,28 +733,28 @@
     "sheetFooter": "Hecho con Open Chiari · openchiari.org · No es consejo médico",
     "diagramCaption": "Chiari I. Las amígdalas cerebelosas se muestran en su punto más bajo, donde se miden en la resonancia magnética. Ilustración, no es una imagen médica.",
     "pack": {
-      "title": "Packing for a hospital stay",
-      "intro": "Your hospital may send its own list. Follow theirs first.",
+      "title": "Qué llevar para una estancia en el hospital",
+      "intro": "Es posible que su hospital le envíe su propia lista. Siga primero la del hospital.",
       "items": [
-        "Health insurance card and photo ID",
-        "Custody papers, if they apply",
-        "Your medicines, or a list of them (ask the hospital which to bring)",
-        "Glasses, hearing aids, a CPAP machine or other equipment you use",
-        "Toothbrush and other toiletries",
-        "Comfortable clothes for going home",
-        "Non-slip slippers",
-        "Phone and chargers",
-        "Books, a tablet or games, and headphones",
-        "For a child: a favorite blanket or stuffed animal",
-        "For the parent: snacks and a water bottle",
-        "Your questions sheet from this page"
+        "Tarjeta del seguro médico e identificación con foto",
+        "Documentos de custodia, si corresponde",
+        "Sus medicamentos o una lista de ellos (pregunte en el hospital cuáles llevar)",
+        "Lentes, audífonos, una máquina CPAP u otro equipo que use",
+        "Cepillo de dientes y otros artículos de aseo",
+        "Ropa cómoda para volver a casa",
+        "Pantuflas antideslizantes",
+        "Teléfono y cargadores",
+        "Libros, una tableta o juegos, y audífonos para escuchar",
+        "Para un niño: su cobija o peluche favorito",
+        "Para los padres: refrigerios y una botella de agua",
+        "Su hoja de preguntas de esta página"
       ],
-      "print": "Print packing list",
-      "formLabel": "Packing list"
+      "print": "Imprimir la lista",
+      "formLabel": "Lista de cosas para llevar"
     },
     "child": {
-      "before": "Getting a child ready for surgery? See",
-      "link": "Helping your child",
+      "before": "¿Está preparando a un niño para la cirugía? Vea",
+      "link": "Cómo ayudar a su hijo",
       "after": "."
     }
   },
@@ -818,40 +818,40 @@
     ],
     "notAffiliated": "Open Chiari no está afiliado a estas organizaciones y no recibe nada de las donaciones. Sus sitios web pueden estar solo en inglés.",
     "connect": {
-      "title": "Connect with others",
-      "intro": "Talking with people who have been through it can help. These communities are run by other organizations, not by Open Chiari, and being listed here isn't a recommendation. What these sites and their members share isn't checked by Open Chiari and isn't medical advice.",
-      "privacy": "Before you post, read each site's privacy policy. On some sites, posts can be read by anyone on the internet.",
+      "title": "Conectar con otras personas",
+      "intro": "Hablar con personas que han pasado por lo mismo puede ayudar. Estas comunidades las dirigen otras organizaciones, no Open Chiari, y aparecer aquí no es una recomendación. Lo que comparten estos sitios y sus miembros no lo revisa Open Chiari y no es consejo médico.",
+      "privacy": "Antes de publicar, lea la política de privacidad de cada sitio. En algunos sitios, cualquier persona en internet puede leer las publicaciones.",
       "groups": [
         {
           "id": "bensfriends",
           "name": "Chiari Support (Ben's Friends)",
-          "kind": "Online forum",
-          "text": "A support forum for patients, families and friends, part of Ben's Friends, a network of patient communities for rare diseases. Members can be as young as 12.",
-          "link": "Visit Chiari Support"
+          "kind": "Foro en línea, en inglés",
+          "text": "Un foro de apoyo para pacientes, familias y amigos, parte de Ben's Friends, una red de comunidades de pacientes con enfermedades raras. Los miembros pueden tener desde 12 años.",
+          "link": "Visitar Chiari Support"
         },
         {
           "id": "inspire",
-          "name": "Bobby Jones CSF Support Community",
-          "kind": "Online community on Inspire",
-          "text": "An online community for patients and families living with Chiari malformation, syringomyelia and related disorders. Bobby Jones CSF says you choose how anonymous you are.",
-          "link": "Visit the community"
+          "name": "Comunidad de apoyo de Bobby Jones CSF",
+          "kind": "Comunidad en línea en Inspire, en inglés",
+          "text": "Una comunidad en línea para pacientes y familias que viven con malformación de Chiari, siringomielia y trastornos relacionados. Bobby Jones CSF dice que usted decide qué tan anónimo quiere ser.",
+          "link": "Visitar la comunidad"
         },
         {
           "id": "asap",
-          "name": "ASAP support groups",
-          "kind": "Video, phone and in person",
-          "text": "Monthly support groups over Zoom, monthly phone support groups, and help finding a local group that meets in person.",
-          "link": "Find a group"
+          "name": "Grupos de apoyo de ASAP",
+          "kind": "Por video, por teléfono y en persona, en inglés",
+          "text": "Grupos de apoyo mensuales por Zoom, grupos de apoyo mensuales por teléfono y ayuda para encontrar un grupo local que se reúne en persona.",
+          "link": "Buscar un grupo"
         },
         {
           "id": "femacpa",
-          "name": "FEMACPA (Spain)",
-          "kind": "In Spanish",
-          "text": "The Spanish federation of Chiari patient associations. It offers support after diagnosis.",
-          "link": "Visit FEMACPA"
+          "name": "FEMACPA (España)",
+          "kind": "En español",
+          "text": "La federación española de asociaciones de pacientes con Chiari. Ofrece apoyo después del diagnóstico.",
+          "link": "Visitar FEMACPA"
         }
       ],
-      "checked": "Links checked November 2026."
+      "checked": "Enlaces revisados en noviembre de 2026."
     }
   },
   "about": {
@@ -1279,126 +1279,126 @@
     "license": "Los gráficos del kit se pueden usar y compartir libremente, CC BY-SA 4.0. Los gráficos que muestran el modelo 3D también llevan el crédito de Z-Anatomy y BodyParts3D."
   },
   "children": {
-    "title": "Helping your child through Chiari surgery",
-    "navLabel": "Helping your child",
-    "intro": "Ideas from children's hospitals for getting a child ready, a picture story to read together, a coloring page, and a sheet for school. Nothing you type here is saved or sent.",
+    "title": "Cómo ayudar a su hijo con la cirugía de Chiari",
+    "navLabel": "Cómo ayudar a su hijo",
+    "intro": "Ideas de hospitales infantiles para preparar a un niño, un cuento con dibujos para leer juntos, una página para colorear y una hoja para la escuela. Nada de lo que escriba aquí se guarda ni se envía.",
     "ready": {
-      "title": "Getting ready together",
+      "title": "Prepararse juntos",
       "tips": [
         {
-          "lead": "Be honest, in words your child knows.",
-          "text": "Younger children usually need fewer details than older kids. Teens may want to know more and to help make decisions."
+          "lead": "Sea honesto, con palabras que su hijo conozca.",
+          "text": "Los niños más pequeños suelen necesitar menos detalles que los mayores. Los adolescentes quizá quieran saber más y participar en las decisiones."
         },
         {
-          "lead": "Say why.",
-          "text": "The surgery is to help a part of their body do its job."
+          "lead": "Explique el porqué.",
+          "text": "La cirugía es para ayudar a que una parte de su cuerpo haga su trabajo."
         },
         {
-          "lead": "Call it a special sleep.",
-          "text": "The medicine for surgery gives a special sleep, so they won't see, hear or feel anything, and the care team wakes them when it's over. Avoid \"put to sleep\": some children know it from pets that never woke up."
+          "lead": "Llámelo un sueño especial.",
+          "text": "La medicina para la cirugía da un sueño especial, así que no verá, oirá ni sentirá nada, y el equipo médico lo despertará cuando termine. Evite decir \"dormir\" como se dice de las mascotas: algunos niños lo asocian con mascotas que nunca despertaron."
         },
         {
-          "lead": "Don't promise \"no pain\" or \"no needles.\"",
-          "text": "Instead, say the nurses and doctors have medicine and ways to help."
+          "lead": "No prometa \"nada de dolor\" ni \"nada de agujas\".",
+          "text": "En cambio, dígale que las enfermeras y los médicos tienen medicinas y maneras de ayudar."
         },
         {
-          "lead": "It's fine to say \"I don't know.\"",
-          "text": "Write the question down and ask the care team together."
+          "lead": "Está bien decir \"no sé\".",
+          "text": "Anote la pregunta y pregúntenla juntos al equipo médico."
         },
         {
-          "lead": "Accept their feelings.",
-          "text": "Let them know it's OK to feel scared, or even mad."
+          "lead": "Acepte sus sentimientos.",
+          "text": "Dígale que está bien sentir miedo, o incluso enojo."
         },
         {
-          "lead": "Be ready for changes.",
-          "text": "Sometimes surgery is delayed or cancelled because of emergencies."
+          "lead": "Esté preparado para cambios.",
+          "text": "A veces la cirugía se retrasa o se cancela por emergencias."
         },
         {
-          "lead": "Bring something from home.",
-          "text": "A favorite blanket or stuffed animal can help. Ask whether it can go into the operating room."
+          "lead": "Lleve algo de casa.",
+          "text": "Su cobija o peluche favorito puede ayudar. Pregunte si puede entrar con él al quirófano."
         },
         {
-          "lead": "Play and draw it.",
-          "text": "Acting out a hospital visit with toys, or drawing it, can show you how your child feels."
+          "lead": "Jueguen y dibújenlo.",
+          "text": "Representar una visita al hospital con juguetes, o dibujarla, puede mostrarle cómo se siente su hijo."
         },
         {
-          "lead": "Ask if the hospital has a child life specialist.",
-          "text": "They are trained to talk with children in a comforting way."
+          "lead": "Pregunte si el hospital tiene un especialista en vida infantil (child life).",
+          "text": "Están capacitados para hablar con los niños de una manera reconfortante."
         },
         {
-          "lead": "Look after yourself too.",
-          "text": "Children pick up on how you feel. Accept help when it's offered. Talking with a counselor or social worker can help too."
+          "lead": "Cuídese usted también.",
+          "text": "Los niños perciben cómo se siente usted. Acepte la ayuda que le ofrezcan. Hablar con un consejero o un trabajador social también puede ayudar."
         }
       ],
-      "source": "Adapted from SickKids AboutKidsHealth and Nemours KidsHealth."
+      "source": "Adaptado de SickKids AboutKidsHealth y Nemours KidsHealth."
     },
     "story": {
-      "title": "A picture story to read together",
-      "intro": "Read it with your child, and skip any page you like. Change any words to match what your care team tells you.",
-      "pageLabel": "Page {n}",
+      "title": "Un cuento con dibujos para leer juntos",
+      "intro": "Léalo con su hijo y sáltese las páginas que quiera. Cambie las palabras que haga falta para que coincidan con lo que le diga su equipo médico.",
+      "pageLabel": "Página {n}",
       "pages": [
         {
           "figure": "typical",
-          "text": "This is a picture of the inside of a head and neck, as if we could look in from the side."
+          "text": "Este es un dibujo del interior de una cabeza y un cuello, como si pudiéramos mirar desde un lado."
         },
         {
           "figure": "typical",
-          "text": "Your brain is inside your skull. Near the back is a part called the cerebellum. It helps you balance and move smoothly. Your brain and spinal cord are cushioned by a clear liquid."
+          "text": "Tu cerebro está dentro de tu cráneo. Cerca de la parte de atrás hay una parte que se llama cerebelo. Te ayuda a mantener el equilibrio y a moverte con suavidad. Tu cerebro y tu médula espinal están protegidos por un líquido transparente."
         },
         {
           "figure": "chiari",
-          "text": "In Chiari, the bottom of the cerebellum reaches down a little too low, through the opening where the skull meets the neck. There isn't quite enough room there. You didn't do anything to cause it."
+          "text": "En Chiari, la parte de abajo del cerebelo baja un poco más de lo normal, por la abertura donde el cráneo se une con el cuello. Ahí no hay suficiente espacio. Tú no hiciste nada para causarlo."
         },
         {
           "figure": "surgery",
-          "text": "Doctors can make more room. During surgery you'll be in a special sleep from medicine, so you won't see, hear or feel anything. The surgeon takes away a small piece of bone at the back of the head, and often a little from the top of the neck. Many times they also add a patch to make more space."
+          "text": "Los médicos pueden hacer más espacio. Durante la cirugía tendrás un sueño especial gracias a una medicina, así que no verás, oirás ni sentirás nada. El cirujano quita un pedacito de hueso de la parte de atrás de la cabeza y, a menudo, un poco de la parte de arriba del cuello. Muchas veces también pone un parche para hacer más espacio."
         },
         {
           "figure": "",
-          "text": "When you wake up, the back of your head and neck may feel sore. Your nurses and doctors have medicine to help. You'll stay in the hospital until your doctors say you're ready to go home. Your grown-up will tell you about how long, and will be with you as much as they can. You can bring your favorite blanket or stuffed animal."
+          "text": "Cuando despiertes, es posible que te duela la parte de atrás de la cabeza y del cuello. Tus enfermeras y médicos tienen medicinas para ayudarte. Te quedarás en el hospital hasta que tus médicos digan que estás listo para volver a casa. Tu persona adulta te dirá más o menos cuánto tiempo, y estará contigo todo lo que pueda. Puedes llevar tu cobija o peluche favorito."
         },
         {
           "figure": "",
-          "text": "Then you'll rest at home for a while before going back to school. You can ask questions anytime. Every question is a good one."
+          "text": "Después descansarás en casa un tiempo antes de volver a la escuela. Puedes hacer preguntas cuando quieras. Todas las preguntas son buenas."
         }
       ],
-      "print": "Print the story"
+      "print": "Imprimir el cuento"
     },
     "color": {
-      "title": "Color it in",
-      "intro": "Two drawings to print and color: before and after surgery.",
-      "before": "Before surgery",
-      "after": "After surgery",
-      "key": "A suggested key (any colors are fine): bone, brain, spinal cord, the clear liquid.",
-      "print": "Print the coloring page"
+      "title": "Para colorear",
+      "intro": "Dos dibujos para imprimir y colorear: antes y después de la cirugía.",
+      "before": "Antes de la cirugía",
+      "after": "Después de la cirugía",
+      "key": "Colores sugeridos (cualquier color está bien): hueso, cerebro, médula espinal, el líquido transparente.",
+      "print": "Imprimir la página para colorear"
     },
     "school": {
-      "title": "A sheet for school",
-      "intro": "Fill in what you like, then print it for a teacher or the school nurse. Every box is optional.",
-      "name": "Child's first name",
-      "forWhom": "For",
-      "forHint": "Teacher or school nurse",
-      "date": "Surgery date",
-      "timeAway": "Expected time away from school",
-      "limits": "Limits from the surgeon (for example, sports, PE, lifting)",
-      "careTeamHint": "From the care team",
-      "helps": "Things that may help when they're back",
+      "title": "Una hoja para la escuela",
+      "intro": "Llene lo que quiera y luego imprímala para un maestro o la enfermera de la escuela. Todos los campos son opcionales.",
+      "name": "Nombre del niño",
+      "forWhom": "Para",
+      "forHint": "Maestro o enfermera de la escuela",
+      "date": "Fecha de la cirugía",
+      "timeAway": "Tiempo previsto fuera de la escuela",
+      "limits": "Límites indicados por el cirujano (por ejemplo, deportes, educación física, levantar peso)",
+      "careTeamHint": "Según el equipo médico",
+      "helps": "Cosas que pueden ayudar cuando regrese",
       "helpItems": [
-        "Rest breaks",
-        "A pass to the nurse",
-        "Extra time for missed work",
-        "Help carrying books or a heavy bag"
+        "Pausas para descansar",
+        "Un pase para ir con la enfermera",
+        "Más tiempo para el trabajo atrasado",
+        "Ayuda para cargar libros o una mochila pesada"
       ],
-      "other": "Other",
-      "contact": "Parent or caregiver contact",
-      "sheetTitle": "About {name}'s Chiari surgery",
-      "sheetTitleDefault": "About my child's Chiari surgery",
-      "lead": "{name} is having, or has had, surgery for Chiari I malformation.",
-      "leadDefault": "My child is having, or has had, surgery for Chiari I malformation.",
-      "explain": "In Chiari I, the lowest part of the back of the brain extends below the opening at the base of the skull. The surgery makes more room there.",
-      "print": "Print the school sheet",
-      "callIf": "Please call me right away if"
+      "other": "Otro",
+      "contact": "Contacto de los padres o cuidadores",
+      "sheetTitle": "Sobre la cirugía de Chiari de {name}",
+      "sheetTitleDefault": "Sobre la cirugía de Chiari de mi hijo",
+      "lead": "{name} va a tener, o ya tuvo, una cirugía por malformación de Chiari tipo I.",
+      "leadDefault": "Mi hijo va a tener, o ya tuvo, una cirugía por malformación de Chiari tipo I.",
+      "explain": "En Chiari I, la parte más baja de la parte de atrás del cerebro se extiende por debajo de la abertura en la base del cráneo. La cirugía hace más espacio ahí.",
+      "print": "Imprimir la hoja para la escuela",
+      "callIf": "Por favor llámeme de inmediato si"
     },
-    "pageNote": "Not medical advice. Nothing you type on this page is stored or sent."
+    "pageNote": "No es consejo médico. Nada de lo que escriba en esta página se guarda ni se envía."
   }
 }

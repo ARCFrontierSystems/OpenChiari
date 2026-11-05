@@ -392,6 +392,17 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     'tonsil-chiari': (s) => s < 4, 'tonsil-surgery': (s) => s >= 4,
     'csf-chiari': (s) => s < 4, 'csf-surgery': (s) => s >= 4,
   };
+  // Moving from one stage to the next, the parts that change fade over FADE_MS (none in Calm mode): video-like.
+  const FADE_MS = 1100;
+  let stageFade: { start: number; fadeIn: Set<string>; fadeOut: Set<string> } | null = null;
+  const fadeProgress = () => (stageFade ? Math.min(1, (performance.now() - stageFade.start) / FADE_MS) : 1);
+  /** How much of a structure shows while a stage change fades in or out (1 = fully). */
+  function stageMix(name: string): number {
+    if (!stageFade) return 1;
+    const t = fadeProgress();
+    const eased = t * t * (3 - 2 * t);
+    return stageFade.fadeIn.has(name) ? eased : stageFade.fadeOut.has(name) ? 1 - eased : 1;
+  }
   /** Whether a structure belongs in the view: its condition, or, part way through surgery, its stage. */
   function inView(p: { name: string; conditions: string[] | null }, condition: string): boolean {
     if (surgeryStage !== null && condition === 'surgery' && p.name in STAGE_PARTS) return STAGE_PARTS[p.name](surgeryStage);
@@ -400,6 +411,8 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
 
   let sectionKey = '';
   let sectionJob = 0;
+  // The surgery stage the cut face shows (undefined until first drawn), so a new stage can fade in over it.
+  let sectionStage: number | null | undefined;
   async function drawSection(st: ViewState) {
     const layers: Partial<Record<FigureLayer, number>> = {};
     for (const id of ['skin', 'bone', 'brain', 'csf'] as FigureLayer[]) {
@@ -419,6 +432,34 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     const t1 = performance.now();
     if (job !== sectionJob) return;
     const ctx = sectionCanvas.getContext('2d')!;
+    // A new surgery stage fades in over the last one (not in Calm mode).
+    if (stageFade && surgeryStage !== null && sectionStage !== surgeryStage && sectionStage !== undefined) {
+      const before = document.createElement('canvas');
+      before.width = sectionCanvas.width;
+      before.height = sectionCanvas.height;
+      before.getContext('2d')!.drawImage(sectionCanvas, 0, 0);
+      sectionStage = surgeryStage;
+      const fadeStart = performance.now();
+      await new Promise<void>((done) => {
+        const step = () => {
+          if (job !== sectionJob) return done();
+          const t = Math.min(1, (performance.now() - fadeStart) / FADE_MS);
+          ctx.clearRect(0, 0, sectionCanvas.width, sectionCanvas.height);
+          ctx.globalAlpha = 1;
+          ctx.drawImage(before, 0, 0);
+          ctx.globalAlpha = t * t * (3 - 2 * t);
+          ctx.drawImage(img, 0, 0, sectionCanvas.width, sectionCanvas.height);
+          ctx.globalAlpha = 1;
+          sectionTexture.needsUpdate = true;
+          requestRender();
+          if (t < 1) requestAnimationFrame(step);
+          else done();
+        };
+        step();
+      });
+      if (job !== sectionJob) return;
+    }
+    sectionStage = surgeryStage;
     ctx.clearRect(0, 0, sectionCanvas.width, sectionCanvas.height);
     ctx.drawImage(img, 0, 0, sectionCanvas.width, sectionCanvas.height);
     timing.sectionDecode = Math.round(t1 - t0);
@@ -631,7 +672,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     const showThrough = cutDepth(st.cut) <= 0.01 || skinOpacity < 0.6;
     for (const m of measureMats) m.depthTest = !showThrough;
     for (const p of parts) {
-      const opacity = drawnOpacity(p, fade, bone);
+      const opacity = drawnOpacity(p, fade, bone) * stageMix(p.name);
       const see = opacity < 1;
       const mat = p.mesh.material as THREE.MeshStandardMaterial;
       if (mat.transparent !== see) mat.needsUpdate = true;
@@ -1161,7 +1202,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     for (const p of parts) {
       const layer = st.layers[p.layer];
       const model = st.model === 'realistic' && realistic === 'ready' ? 'realistic' : 'simple';
-      const shown = p.model === model && layer.on && inView(p, st.condition);
+      const shown = p.model === model && layer.on && (inView(p, st.condition) || !!stageFade?.fadeOut.has(p.name));
       const opacity = p.baseOpacity * (layer.opacity / 100);
       p.opacity = opacity;
       p.mesh.visible = shown && opacity > 0;
@@ -1281,6 +1322,27 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     reset: frame,
     /** "What happens in surgery": show the After decompression view at a stage (0 to 4), or null for the usual view. */
     setSurgeryStage(stage: number | null) {
+      const before = surgeryStage;
+      const names = (s: number | null) =>
+        new Set(Object.keys(STAGE_PARTS).filter((n) => (s === null ? parts.some((p) => p.name === n && p.conditions?.includes('surgery')) : STAGE_PARTS[n](s))));
+      // Fade only between two stages of the play-through, and never in Calm mode.
+      if (before !== null && stage !== null && before !== stage && !stillOnly()) {
+        const was = names(before), now = names(stage);
+        stageFade = {
+          start: performance.now(),
+          fadeIn: new Set([...now].filter((n) => !was.has(n))),
+          fadeOut: new Set([...was].filter((n) => !now.has(n))),
+        };
+        const tick = () => {
+          requestRender();
+          if (fadeProgress() < 1) requestAnimationFrame(tick);
+          else {
+            stageFade = null;
+            apply(store.get());
+          }
+        };
+        requestAnimationFrame(tick);
+      } else stageFade = null;
       surgeryStage = stage;
       apply(store.get());
       placeLabels();

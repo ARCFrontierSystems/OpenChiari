@@ -1,0 +1,244 @@
+---
+/**
+ * Impact. Layout from design/mockups/Impact.dc.html. Text from src/i18n/en.json (docs/COPY.md "Impact").
+ *
+ * Built when the site is published (every morning):
+ * - the totals come from Open Chiari's own counters (functions/api/count.js), read by scripts/fetch-totals.mjs into
+ *   src/data/impact.json. Totals only: nothing about any visitor exists to show;
+ * - the quality report comes from scripts/quality.mjs (Lighthouse on the home page, phone and desktop, and the axe
+ *   accessibility scans of every page) in src/data/quality.json.
+ * Anything not counted or measured yet says so, rather than showing a made-up number.
+ */
+import Base from '../layouts/Base.astro';
+import { getStrings, routes } from '../i18n';
+import impact from '../data/impact.json';
+import quality from '../data/quality.json';
+
+const t = getStrings().impact;
+const fmtDate = (iso: string | null) =>
+  iso ? new Date(`${iso.slice(0, 10)}T12:00:00Z`).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }) : null;
+const fmtNum = (n: number | null | undefined) => (typeof n === 'number' ? n.toLocaleString('en-US') : null);
+const totals = impact.totals as Record<string, number | null>;
+const q = quality as {
+  lastRun: string | null;
+  phone: { accessibility: number | null; speed: number | null };
+  desktop: { accessibility: number | null; speed: number | null };
+  wcag: 'pass' | 'issues' | null;
+};
+const score = (n: number | null) => (typeof n === 'number' ? t.score.replace('{n}', String(n)) : t.notMeasured);
+const lastRun = fmtDate(q.lastRun);
+---
+
+<Base title={t.title}>
+  <div class="impact container">
+    <div class="page-intro">
+      <h1 class="serif">{t.title}</h1>
+      <p>{t.intro}</p>
+    </div>
+
+    <section class="block" aria-labelledby="use-title">
+      <div class="block-head">
+        <h2 id="use-title" class="serif">{t.useTitle}</h2>
+        <p class="mono">{t.launched.replace('{date}', t.launchDate)}</p>
+      </div>
+      <dl class="totals">
+        {Object.entries(t.totals).map(([id, label]) => (
+          <div>
+            <dt>{label}</dt>
+            <dd class={fmtNum(totals[id]) ? 'serif' : 'none'} data-total={id}>{fmtNum(totals[id]) ?? t.notCounted}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="note">{t.totalsNote}</p>
+    </section>
+
+    <section class="block" aria-labelledby="quality-title">
+      <div class="block-head">
+        <h2 id="quality-title" class="serif">{t.qualityTitle}</h2>
+        {lastRun && <p class="mono">{t.qualityRun.replace('{date}', lastRun)}</p>}
+      </div>
+      <div class="table-wrap" tabindex="0">
+        <table>
+          <thead>
+            <tr><th scope="col">{t.columns.check}</th><th scope="col">{t.columns.phone}</th><th scope="col">{t.columns.desktop}</th><th scope="col">{t.columns.means}</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">{t.accessibility}</th><td>{score(q.phone.accessibility)}</td><td>{score(q.desktop.accessibility)}</td><td>{t.accessibilityMeans}</td></tr>
+            <tr><th scope="row">{t.speed}</th><td>{score(q.phone.speed)}</td><td>{score(q.desktop.speed)}</td><td>{t.speedMeans}</td></tr>
+            <tr>
+              <th scope="row">{t.standard}</th>
+              <td colspan="2">{t.standardValue.replace('{result}', q.wcag === 'pass' ? t.wcagPass : q.wcag === 'issues' ? t.wcagIssues : t.notMeasured.toLowerCase())}</td>
+              <td>{t.standardMeans}</td>
+            </tr>
+            <tr><th scope="row">{t.accuracy}</th><td colspan="2">{t.accuracyValue}</td><td>{t.accuracyMeans}</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block open" aria-labelledby="open-title">
+      <div>
+        <h2 id="open-title" class="serif">{t.openTitle}</h2>
+        <p>{t.openText}</p>
+        <dl class="facts">
+          <dt>{t.code}</dt><dd>{t.codeLink} {t.codeLicense}</dd>
+          <dt>{t.model}</dt><dd><a href={routes.model}>{t.modelLicense}</a></dd>
+          <dt>{t.hosting}</dt><dd>{t.hostingText}</dd>
+          <dt>{t.personalData}</dt><dd>{t.personalDataText}</dd>
+        </dl>
+      </div>
+      <aside class="orgs" aria-labelledby="orgs-title">
+        <h2 id="orgs-title">{t.orgsTitle}</h2>
+        <p>{t.orgsText}</p>
+        <a class="button button-secondary" href={routes.about}>{t.contact}</a>
+      </aside>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .impact {
+    padding-top: var(--s-48);
+    padding-bottom: var(--s-72);
+  }
+  .page-intro {
+    margin-bottom: var(--s-40);
+  }
+  .page-intro h1 {
+    font-size: var(--h1);
+    line-height: 1.08;
+    margin-bottom: var(--s-16);
+  }
+  .page-intro p {
+    max-width: 44em;
+    color: var(--ink-2);
+  }
+  .block {
+    padding: var(--s-32) 0;
+    border-top: 1px solid var(--rule);
+  }
+  .block-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--s-8) var(--s-24);
+    margin-bottom: var(--s-24);
+  }
+  .block h2 {
+    font-size: 28px;
+  }
+  .block-head .mono {
+    font-size: var(--text-mono);
+    color: var(--muted);
+  }
+  .totals {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: var(--s-16);
+    margin: 0 0 var(--s-16);
+  }
+  .totals div {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: var(--s-16) var(--s-20);
+    display: flex;
+    flex-direction: column-reverse;
+    gap: var(--s-4);
+  }
+  .totals dt {
+    font-size: var(--text-small);
+    color: var(--muted);
+  }
+  .totals dd {
+    margin: 0;
+    font-size: 34px;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  .totals dd.none {
+    font-size: var(--text-base);
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .note {
+    font-size: var(--text-small);
+    color: var(--muted);
+  }
+  .table-wrap {
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    font-size: var(--text-small);
+  }
+  th,
+  td {
+    text-align: left;
+    padding: var(--s-12) var(--s-16);
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  thead th {
+    font-weight: 600;
+    color: var(--muted);
+  }
+  tbody th {
+    font-weight: 600;
+  }
+  .open {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: var(--s-40);
+    align-items: start;
+  }
+  .open p {
+    color: var(--ink-2);
+    max-width: 44em;
+    margin: var(--s-16) 0 var(--s-24);
+  }
+  .facts {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: var(--s-8) var(--s-24);
+    margin: 0;
+  }
+  .facts dt {
+    color: var(--muted);
+  }
+  .facts dd {
+    margin: 0;
+  }
+  .orgs {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--awareness);
+    padding: var(--s-24);
+  }
+  .orgs h2 {
+    font-size: 18px;
+    font-weight: 600;
+    font-family: var(--font-sans);
+  }
+  .orgs p {
+    margin: var(--s-8) 0 var(--s-16);
+  }
+  @media (max-width: 860px) {
+    .page-intro h1 {
+      font-size: 34px;
+    }
+    .open {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>
+<style>
+  .table-wrap:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+</style>

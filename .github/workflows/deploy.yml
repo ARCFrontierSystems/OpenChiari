@@ -56,9 +56,39 @@ jobs:
         id: studies
         if: steps.secrets.outputs.ok == 'true'
         run: npm run studies:fetch
+      - name: Read the Impact page totals from Open Chiari's own counters
+        if: steps.secrets.outputs.ok == 'true'
+        run: node scripts/fetch-totals.mjs
       - name: Build
         if: steps.secrets.outputs.ok == 'true'
         run: npm run build
+      # Quality report for the Impact page: Lighthouse on the home page (phone and desktop) and the accessibility scans
+      # of every page, measured on this build. Never stops the publish; anything not measured says so on the page.
+      - name: Measure the quality report
+        if: steps.secrets.outputs.ok == 'true'
+        continue-on-error: true
+        run: |
+          npx playwright install --with-deps chromium
+          npx astro preview --port 4323 &
+          for i in $(seq 1 30); do curl -sf http://localhost:4323/ >/dev/null && break; sleep 2; done
+          CI=1 node scripts/quality.mjs http://localhost:4323
+      - name: Build again with the quality report
+        if: steps.secrets.outputs.ok == 'true'
+        run: npm run build
+      # Open Chiari's counters (functions/api/count.js) keep their totals in a Cloudflare D1 database, created here on
+      # the first run. This needs the API token to also have the permission Account > D1 > Edit; without it the
+      # step is skipped and the site publishes with counting switched off.
+      - name: Counter database (created on the first run)
+        if: steps.secrets.outputs.ok == 'true'
+        continue-on-error: true
+        run: |
+          set -e
+          npx --yes wrangler@4 d1 info openchiari-counts >/dev/null 2>&1 || npx --yes wrangler@4 d1 create openchiari-counts
+          id=$(npx --yes wrangler@4 d1 list --json | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>{const db=JSON.parse(s).find(d=>d.name==='openchiari-counts');process.stdout.write(db?db.uuid:'')})")
+          test -n "$id"
+          npx --yes wrangler@4 d1 execute openchiari-counts --remote --file=counts/schema.sql --yes
+          printf 'name = "%s"\npages_build_output_dir = "dist"\ncompatibility_date = "2026-10-01"\n\n[[d1_databases]]\nbinding = "COUNTS"\ndatabase_name = "openchiari-counts"\ndatabase_id = "%s"\n' "$PROJECT" "$id" > wrangler.toml
+          echo "Counting is on."
       - name: Create the Pages project (first run only)
         if: steps.secrets.outputs.ok == 'true'
         run: npx --yes wrangler@4 pages project create "$PROJECT" --production-branch=main || echo "Project already exists."

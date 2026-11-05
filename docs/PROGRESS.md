@@ -3,6 +3,25 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: Surgery questions, "Helping your child", and a citable copy (built, not published)
+
+Matthew chose these three ("Go with 2, 3, and 4").
+
+- **Visit prep:**
+  - three folded question groups: "Before surgery", "Before going home from the hospital", "Follow-up after surgery";
+  - a "Packing for a hospital stay" list that prints on its own sheet;
+  - a link to the new page.
+- **Helping your child** (`/children/`):
+  - tips for parents from SickKids and KidsHealth;
+  - a six-page picture story with the site's figures (Listen works on it);
+  - a coloring page of the figure as black-and-white line art, one large drawing per printed page;
+  - a fill-in school sheet that prints. Nothing typed is stored or sent, which the tests check.
+- **Citable copy:** `scripts/make-dataset.mjs` builds a 20 MB archive of the model, figures, plaques, scripts, EVIDENCE.md and audits. `.zenodo.json` and `CITATION.cff` describe it, and `docs/ZENODO.md` explains how to publish.
+- **Wording:** drafted with opened sources (`docs/drafts/2026-11-05-surgery-and-children.md`). The independent audit (`docs/audits/2026-11-05-surgery-and-children-audit.md`) passed it with changes, and all its fixes are applied.
+- **Waiting for Matthew:**
+  - approval of the wording, then EVIDENCE rows, COPY.md and the Spanish (translation and back-translation check);
+  - whether to publish on Zenodo, and how.
+
 ## 2026-11-05: Email set up
 
 - **Done by Matthew:** Cloudflare Email Routing forwards hello@openchiari.org (the address shown on the site) to a site-only inbox, plus support@openchiari.org to the same inbox (not shown on the site). The inbox address is kept out of the repository.

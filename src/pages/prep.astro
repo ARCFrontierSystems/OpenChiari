@@ -8,9 +8,10 @@
  */
 import Base from '../layouts/Base.astro';
 import AnatomyFigure from '../components/AnatomyFigure.astro';
-import { getStrings } from '../i18n';
+import { getStrings, getRoutes } from '../i18n';
 
 const t = getStrings(Astro.currentLocale).prep;
+const r = getRoutes(Astro.currentLocale);
 const f = getStrings(Astro.currentLocale).footer;
 // The model credit exactly as CLAUDE.md rule 3 gives it (from the footer's pieces).
 const credit = `${f.modelBefore.replace(/^\.\s*/, '')} ${f.zAnatomy} ${f.modelAfter}`;
@@ -29,10 +30,10 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
     <div class="prep-layout">
       <form class="prep-form" aria-label={t.formLabel} data-prep-form autocomplete="off">
         {t.groups.map((g, i) => (
-          <details class="group" data-group={g.id} data-collapse-on-phone={i >= 2 ? '' : undefined} open>
+          <details class="group" data-group={g.id} data-collapse-on-phone={i >= 2 ? '' : undefined} open={!('folded' in g && g.folded)}>
             <summary>
               <span class="group-title">{g.title}</span>
-              <span class="group-count only-narrow" aria-hidden="true">{'\u00A0· ' + g.questions.length}</span>
+              <span class:list={['group-count', { 'only-narrow': !('folded' in g && g.folded) }]} aria-hidden="true">{'\u00A0· ' + g.questions.length}</span>
             </summary>
             <fieldset>
               <legend class="visually-hidden">{g.title}</legend>
@@ -54,6 +55,8 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
             </fieldset>
           </details>
         ))}
+
+        <p class="child-link">{t.child.before} <a href={r.children}>{t.child.link}</a>{t.child.after}</p>
 
         <div class="own">
           <label for="own-question" class="field-label">{t.addOwn}</label>
@@ -102,8 +105,33 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
       </aside>
     </div>
 
+    <section class="pack" aria-labelledby="pack-title" data-pack>
+      <h2 id="pack-title" class="serif">{t.pack.title}</h2>
+      <p>{t.pack.intro}</p>
+      <fieldset>
+        <legend class="visually-hidden">{t.pack.formLabel}</legend>
+        {t.pack.items.map((item) => (
+          <label class="question">
+            <input type="checkbox" data-pack-item={item} checked />
+            <span>{item}</span>
+          </label>
+        ))}
+      </fieldset>
+      <button type="button" class="button button-secondary" data-print-pack>{t.pack.print}</button>
+    </section>
+
     <p class="page-note">{t.pageNote}</p>
   </div>
+
+  <!-- The printed packing list: printed only from its own button. -->
+  <section class="print-pack" aria-hidden="true" data-print-pack-sheet>
+    <h1 class="serif">{t.pack.title}</h1>
+    <p>{t.pack.intro}</p>
+    <ul data-pack-sheet-list>
+      {t.pack.items.map((item) => <li>{item}</li>)}
+    </ul>
+    <p class="sheet-footer mono">{t.sheetFooter}</p>
+  </section>
 
   <!-- The printed sheet (PrepSheet mockup). Hidden on screen; it is the only thing that prints. -->
   <section class="print-sheet" aria-hidden="true" data-print-sheet>
@@ -238,6 +266,20 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
       window.print();
     }),
   );
+
+  // The packing list prints on its own sheet, with only the ticked items.
+  const root = document.documentElement;
+  document.querySelector('[data-print-pack]')!.addEventListener('click', () => {
+    const items = Array.from(document.querySelectorAll<HTMLInputElement>('[data-pack-item]'))
+      .filter((box) => box.checked)
+      .map((box) => box.dataset.packItem!);
+    document.querySelector('[data-pack-sheet-list]')!.replaceChildren(
+      ...items.map((text) => Object.assign(document.createElement('li'), { textContent: text })),
+    );
+    root.dataset.printing = 'pack';
+    window.print();
+  });
+  window.addEventListener('afterprint', () => delete root.dataset.printing);
 </script>
 
 <style>
@@ -294,6 +336,13 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
     cursor: pointer;
   }
   .group summary::-webkit-details-marker {
+    display: none;
+  }
+  .group-count {
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .group[open] .group-count {
     display: none;
   }
   .group fieldset {
@@ -440,6 +489,38 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
     font-size: 14px;
     color: var(--muted);
   }
+  .child-link {
+    margin: 0;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+  }
+  .pack {
+    max-width: 700px;
+    border-top: 2px solid var(--ink);
+    padding-top: var(--s-16);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .pack h2 {
+    font-size: 28px;
+  }
+  .pack p {
+    color: var(--ink-2);
+  }
+  .pack fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .pack .button {
+    align-self: flex-start;
+    background: var(--surface);
+    font: 500 15px var(--font-sans);
+    cursor: pointer;
+  }
 
   /* ---------- Phone (PrepPhone mockup) ---------- */
   @media (max-width: 720px) {
@@ -530,7 +611,8 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
   }
 
   /* ---------- The printed sheet (PrepSheet mockup) ---------- */
-  .print-sheet {
+  .print-sheet,
+  .print-pack {
     display: none;
   }
   @media print {
@@ -538,12 +620,45 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
       margin: 14mm 16mm;
     }
     :global(body > *:not(main)),
-    :global(main > *:not(.print-sheet)),
+    :global(main > *:not(.print-sheet):not(.print-pack)),
     :global(.skip-link) {
       display: none !important;
     }
     :global(body) {
       background: #ffffff !important;
+    }
+    :global(:root[data-printing='pack']) .print-sheet {
+      display: none !important;
+    }
+    :global(:root[data-printing='pack']) .print-pack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      color: #1c1d21;
+      font-family: var(--font-sans);
+      font-size: 12pt;
+    }
+    .print-pack h1 {
+      font-size: 24pt;
+      border-bottom: 2px solid #1c1d21;
+      padding-bottom: 10px;
+    }
+    .print-pack ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .print-pack :global(li)::before {
+      content: '';
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin-right: 10px;
+      border: 1.5px solid #1c1d21;
+      vertical-align: -1px;
     }
     .print-sheet {
       display: flex;

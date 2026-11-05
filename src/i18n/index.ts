@@ -26,6 +26,7 @@ export const routes = {
   compare: '/explorer/compare/',
   studies: '/studies/',
   prep: '/prep/',
+  children: '/children/',
   model: '/model/',
   support: '/support/',
   kit: '/kit/',

@@ -1,0 +1,541 @@
+---
+/**
+ * Helping your child through Chiari surgery: tips for parents, a picture story, a coloring page and a sheet for school.
+ * Text from src/i18n/en.json, drafted in docs/drafts/2026-11-05-surgery-and-children.md with its sources.
+ *
+ * Privacy: like Visit prep, everything happens in this page. Nothing typed is stored (no localStorage, no cookies)
+ * or sent (no form submission, no network request). tests/site.spec.ts checks this.
+ */
+import Base from '../layouts/Base.astro';
+import AnatomyFigure from '../components/AnatomyFigure.astro';
+import ListenButton from '../components/ListenButton.astro';
+import { getStrings } from '../i18n';
+import type { Condition } from '../lib/anatomy-figure';
+
+const s = getStrings(Astro.currentLocale);
+const t = s.children;
+const f = s.footer;
+const x = s.explorer;
+const caption = `${x.captionIllustration}.`;
+// Figures with low or partly risen tonsils carry the midline note too (CLAUDE.md rule 1).
+const captionFor = (c: string) => (c === 'typical' ? caption : `${x.captionIllustration} · ${x.captionTonsils}.`);
+// The model credit exactly as CLAUDE.md rule 3 gives it (from the footer's pieces).
+const credit = `${f.modelBefore.replace(/^\.\s*/, '')} ${f.zAnatomy} ${f.modelAfter}`;
+const sheetFooter = s.prep.sheetFooter;
+const pages = t.story.pages.map((p, i) => ({ ...p, n: t.story.pageLabel.replace('{n}', String(i + 1)) }));
+---
+
+<Base title={t.title}>
+  <div class="children container">
+    <div class="page-intro">
+      <h1 class="serif">{t.title}</h1>
+      <p>{t.intro}</p>
+    </div>
+
+    <section class="ready" aria-labelledby="ready-title">
+      <h2 id="ready-title" class="serif">{t.ready.title}</h2>
+      <ul>
+        {t.ready.tips.map((tip) => (
+          <li><strong>{tip.lead}</strong> {tip.text}</li>
+        ))}
+      </ul>
+      <p class="source">{t.ready.source}</p>
+    </section>
+
+    <section class="story" aria-labelledby="story-title" data-story>
+      <h2 id="story-title" class="serif">{t.story.title}</h2>
+      <p>{t.story.intro}</p>
+      <ListenButton target="[data-story-pages]" />
+      <ol class="story-pages" data-story-pages>
+        {pages.map((p) => (
+          <li class:list={['story-page', { 'no-figure': !p.figure }]}>
+            {p.figure && (
+              <figure>
+                <AnatomyFigure condition={p.figure as Condition} flow={false} labels={false} measure={false} />
+                <figcaption>{captionFor(p.figure)}</figcaption>
+              </figure>
+            )}
+            <p class="page-n mono" aria-hidden="true">{p.n}</p>
+            <p class="page-text">{p.text}</p>
+          </li>
+        ))}
+      </ol>
+      <button type="button" class="button button-secondary" data-print-part="story">{t.story.print}</button>
+    </section>
+
+    <section class="color" aria-labelledby="color-title">
+      <h2 id="color-title" class="serif">{t.color.title}</h2>
+      <p>{t.color.intro}</p>
+      <div class="color-pair" data-color-preview>
+        <figure>
+          <AnatomyFigure condition="chiari" flow={false} labels={false} measure={false} lineArt />
+          <figcaption>{t.color.before}</figcaption>
+        </figure>
+        <figure>
+          <AnatomyFigure condition="surgery" flow={false} labels={false} measure={false} lineArt />
+          <figcaption>{t.color.after}</figcaption>
+        </figure>
+      </div>
+      <p class="source">{t.color.key} {captionFor('chiari')}</p>
+      <button type="button" class="button button-secondary" data-print-part="color">{t.color.print}</button>
+    </section>
+
+    <section class="school" aria-labelledby="school-title">
+      <h2 id="school-title" class="serif">{t.school.title}</h2>
+      <p>{t.school.intro}</p>
+      <form class="school-form" data-school-form autocomplete="off">
+        <label class="field">
+          <span>{t.school.name}</span>
+          <input type="text" maxlength="60" data-field="name" />
+        </label>
+        <label class="field">
+          <span>{t.school.forWhom}</span>
+          <input type="text" maxlength="80" placeholder={t.school.forHint} data-field="for" />
+        </label>
+        <label class="field">
+          <span>{t.school.date}</span>
+          <input type="text" maxlength="40" data-field="date" />
+        </label>
+        <label class="field">
+          <span>{t.school.timeAway}</span>
+          <input type="text" maxlength="80" placeholder={t.school.careTeamHint} data-field="away" />
+        </label>
+        <label class="field">
+          <span>{t.school.limits}</span>
+          <textarea rows="2" maxlength="300" placeholder={t.school.careTeamHint} data-field="limits"></textarea>
+        </label>
+        <fieldset class="field">
+          <legend>{t.school.helps}</legend>
+          {t.school.helpItems.map((item) => (
+            <label class="check">
+              <input type="checkbox" data-help={item} />
+              <span>{item}</span>
+            </label>
+          ))}
+          <label class="field inline">
+            <span>{t.school.other}</span>
+            <input type="text" maxlength="120" data-field="other" />
+          </label>
+        </fieldset>
+        <label class="field">
+          <span>{t.school.callIf}</span>
+          <textarea rows="2" maxlength="300" placeholder={t.school.careTeamHint} data-field="callIf"></textarea>
+        </label>
+        <label class="field">
+          <span>{t.school.contact}</span>
+          <input type="text" maxlength="120" data-field="contact" />
+        </label>
+      </form>
+      <button type="button" class="button button-secondary" data-print-part="school">{t.school.print}</button>
+    </section>
+
+    <p class="page-note">{t.pageNote}</p>
+  </div>
+
+  <!-- Printed versions: each prints only from its own button (the page sets data-printing on <html>). -->
+  <section class="print-part print-story" aria-hidden="true" data-print-only="story">
+    <h1 class="serif">{t.story.title}</h1>
+    {pages.map((p) => (
+      <div class="print-story-page">
+        {p.figure && <AnatomyFigure condition={p.figure as Condition} flow={false} labels={false} measure={false} />}
+        <p>{p.text}</p>
+      </div>
+    ))}
+    <p class="print-small">{captionFor('chiari')} {credit}</p>
+    <p class="print-small mono">{sheetFooter}</p>
+  </section>
+
+  <section class="print-part print-color" aria-hidden="true" data-print-only="color">
+    {[['chiari', t.color.before], ['surgery', t.color.after]].map(([c, label]) => (
+      <div class="print-color-page">
+        <h1 class="serif">{t.color.title}: {label}</h1>
+        <AnatomyFigure condition={c as Condition} flow={false} labels={false} measure={false} lineArt />
+        <p>{t.color.key}</p>
+        <p class="print-small">{captionFor('chiari')} {credit}</p>
+        <p class="print-small mono">{sheetFooter}</p>
+      </div>
+    ))}
+  </section>
+
+  <section class="print-part print-school" aria-hidden="true" data-print-only="school">
+    <div class="school-head">
+      <div>
+        <h1 class="serif" data-school-title>{t.school.sheetTitleDefault}</h1>
+        <p data-school-for-line><strong>{t.school.forWhom}:</strong> <span data-school-out="for"></span></p>
+      </div>
+      <figure>
+        <AnatomyFigure condition="chiari" flow={false} labels={false} measure={false} />
+        <figcaption>{captionFor('chiari')}</figcaption>
+      </figure>
+    </div>
+    <p data-school-lead>{t.school.leadDefault}</p>
+    <p>{t.school.explain}</p>
+    <dl>
+      <dt>{t.school.date}</dt><dd data-school-out="date"></dd>
+      <dt>{t.school.timeAway}</dt><dd data-school-out="away"></dd>
+      <dt>{t.school.limits}</dt><dd data-school-out="limits"></dd>
+      <dt>{t.school.helps}</dt><dd><ul data-school-helps></ul></dd>
+      <dt>{t.school.callIf}</dt><dd data-school-out="callIf"></dd>
+      <dt>{t.school.contact}</dt><dd data-school-out="contact"></dd>
+    </dl>
+    <p class="print-small">{credit}</p>
+    <p class="print-small mono">{sheetFooter}</p>
+  </section>
+</Base>
+
+<script>
+  import strings from '../i18n/client';
+
+  const t = strings.children.school;
+  const root = document.documentElement;
+  const form = document.querySelector<HTMLFormElement>('[data-school-form]')!;
+  // Nothing is ever submitted anywhere.
+  form.addEventListener('submit', (e) => e.preventDefault());
+
+  const value = (name: string) => form.querySelector<HTMLInputElement | HTMLTextAreaElement>(`[data-field="${name}"]`)!.value.trim();
+
+  /** Copies what was typed into the printed school sheet, as text only (never as HTML). */
+  function fillSchoolSheet() {
+    const name = value('name');
+    document.querySelector('[data-school-title]')!.textContent = name ? t.sheetTitle.replace('{name}', name) : t.sheetTitleDefault;
+    document.querySelector('[data-school-lead]')!.textContent = name ? t.lead.replace('{name}', name) : t.leadDefault;
+    for (const key of ['for', 'date', 'away', 'limits', 'callIf', 'contact']) {
+      document.querySelector(`[data-school-out="${key}"]`)!.textContent = value(key);
+    }
+    const helps = Array.from(form.querySelectorAll<HTMLInputElement>('[data-help]'))
+      .filter((box) => box.checked)
+      .map((box) => box.dataset.help!);
+    const other = value('other');
+    if (other) helps.push(other);
+    document.querySelector('[data-school-helps]')!.replaceChildren(
+      ...helps.map((text) => Object.assign(document.createElement('li'), { textContent: text })),
+    );
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('[data-print-part]').forEach((button) =>
+    button.addEventListener('click', () => {
+      if (button.dataset.printPart === 'school') fillSchoolSheet();
+      root.dataset.printing = button.dataset.printPart;
+      window.print();
+    }),
+  );
+  window.addEventListener('afterprint', () => delete root.dataset.printing);
+</script>
+
+<style>
+  .children {
+    padding-top: var(--s-56);
+    padding-bottom: var(--s-72);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-48);
+  }
+  .page-intro {
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .page-intro h1 {
+    font-size: 42px;
+    line-height: 1.1;
+  }
+  .page-intro p,
+  section > p {
+    color: var(--ink-2);
+    max-width: 700px;
+  }
+  section {
+    border-top: 2px solid var(--ink);
+    padding-top: var(--s-16);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  section h2 {
+    font-size: 30px;
+  }
+  .ready ul {
+    margin: 0;
+    padding-left: 1.2em;
+    max-width: 760px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .source {
+    font-size: 14px;
+    color: var(--muted) !important;
+  }
+
+  /* Story */
+  .story-pages {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--s-16);
+  }
+  .story-page {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: var(--s-16);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .story-page figure {
+    margin: 0;
+  }
+  .story-page figure :global(svg) {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 240px;
+  }
+  .story-page figcaption {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .page-n {
+    margin: 0;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .page-text {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+  .story-page.no-figure {
+    justify-content: center;
+  }
+
+  /* Coloring page */
+  .color-pair {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-16);
+  }
+  .color-pair figure {
+    margin: 0;
+    flex: 1 1 240px;
+    max-width: 340px;
+    background: #ffffff;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 8px;
+  }
+  .color-pair :global(svg) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .color-pair figcaption {
+    font-weight: 600;
+    color: #1c1d21;
+    padding: 4px;
+  }
+
+  /* School sheet form */
+  .school-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 560px;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  .field > span,
+  .field legend {
+    font-weight: 600;
+  }
+  .field input,
+  .field textarea {
+    min-height: var(--touch);
+    padding: 0 12px;
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--ink);
+    font: 400 16px var(--font-sans);
+  }
+  .field textarea {
+    padding: 10px 12px;
+    line-height: 1.5;
+    resize: vertical;
+  }
+  .field.inline {
+    margin-top: 6px;
+  }
+  .check {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    min-height: var(--touch);
+    cursor: pointer;
+  }
+  .check input {
+    accent-color: var(--accent);
+    width: 20px;
+    height: 20px;
+    margin: 0;
+  }
+  .button {
+    align-self: flex-start;
+    background: var(--surface);
+    font: 500 15px var(--font-sans);
+    cursor: pointer;
+  }
+  .page-note {
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  @media (max-width: 720px) {
+    .children {
+      padding-top: 28px;
+      gap: var(--s-32);
+    }
+    .page-intro h1 {
+      font-size: 30px;
+      line-height: 1.15;
+    }
+    section h2 {
+      font-size: 26px;
+    }
+  }
+  :global(:root[data-calm='on']) .page-text {
+    font-size: 20px;
+  }
+  :global(:root[data-calm='on']) .button {
+    min-height: 56px;
+  }
+
+  /* ---------- Printing: only the part whose button was pressed ---------- */
+  .print-part {
+    display: none;
+  }
+  @media print {
+    @page {
+      margin: 14mm 16mm;
+    }
+    :global(body > *:not(main)),
+    :global(main > *:not(.print-part)),
+    :global(.skip-link) {
+      display: none !important;
+    }
+    :global(body) {
+      background: #ffffff !important;
+    }
+    :global(:root[data-printing='story']) .print-story,
+    :global(:root[data-printing='color']) .print-color,
+    :global(:root[data-printing='school']) .print-school {
+      display: flex;
+    }
+    .print-part {
+      flex-direction: column;
+      gap: 12px;
+      color: #1c1d21;
+      font-family: var(--font-sans);
+      font-size: 12pt;
+      line-height: 1.45;
+      border: 0;
+      padding: 0;
+    }
+    .print-part h1 {
+      font-size: 22pt;
+      border-bottom: 2px solid #1c1d21;
+      padding-bottom: 8px;
+    }
+    .print-small {
+      font-size: 7.5pt;
+      color: #5e5f66;
+      margin: 0;
+    }
+    .print-story-page {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      break-inside: avoid;
+      min-height: 52mm;
+      border-bottom: 1px solid #dcdbd6;
+      padding-bottom: 8px;
+    }
+    .print-story-page :global(svg) {
+      width: 58mm;
+      height: auto;
+      flex: none;
+    }
+    .print-story-page p {
+      font-size: 15pt;
+      margin: 0;
+    }
+    .print-color-page {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      break-after: page;
+    }
+    .print-color-page:last-child {
+      break-after: auto;
+    }
+    .print-color-page :global(svg) {
+      width: 100%;
+      max-height: 190mm;
+      height: auto;
+    }
+    .school-head {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      border-bottom: 2px solid #1c1d21;
+      padding-bottom: 12px;
+    }
+    .school-head > div {
+      flex: 1 1 auto;
+    }
+    .school-head h1 {
+      border: 0;
+      padding: 0;
+    }
+    .school-head figure {
+      width: 110px;
+      flex: none;
+      margin: 0;
+      border: 1px solid #dcdbd6;
+    }
+    .school-head figcaption {
+      font-size: 7pt;
+      color: #5e5f66;
+      padding: 2px 4px;
+    }
+    .print-school dl {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .print-school dt {
+      font-weight: 600;
+      margin-top: 10px;
+    }
+    .print-school dd {
+      margin: 4px 0 0;
+      min-height: 26px;
+      border-bottom: 1px solid #c9c8c2;
+      white-space: pre-wrap;
+    }
+    .print-school dd ul {
+      margin: 0;
+      padding-left: 1.2em;
+    }
+  }
+</style>

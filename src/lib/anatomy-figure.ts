@@ -21,6 +21,8 @@ export interface FigureOptions {
   measure?: boolean;
   dark?: boolean;
   className?: string;
+  /** Black outlines on white, for a coloring page: every fill turns white; dark lines turn black, pale ones vanish. */
+  lineArt?: boolean;
   /** Opacity of each layer, 0 to 1 (0 hides it). Leave out for the full figure. Used by the 3D cut face. */
   layers?: Partial<Record<FigureLayer, number>>;
 }
@@ -59,6 +61,17 @@ const rect = ({ rect: [x, y, w, h, r] }: Rect, fill: string, stroke = '') =>
   `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" fill="${fill}"${stroke ? ` stroke="${stroke}" stroke-width="1.5"` : ''}/>`;
 const bonePath = (d: string) => `<path d="${d}" fill="#E7DFCF" stroke="#A69B85" stroke-width="1.5" stroke-linejoin="round"/>`;
 const CSF = (d: string) => `<path d="${d}" fill="#9CC3DA" fill-opacity="0.75"/>`;
+/** Turns a colored figure into line art: fills white, dark strokes black, light strokes white (so they disappear). */
+function toLineArt(svg: string): string {
+  const light = (hex: string) => {
+    const n = parseInt(hex.slice(1), 16);
+    return (0.2126 * (n >> 16) + 0.7152 * ((n >> 8) & 255) + 0.0722 * (n & 255)) / 255 > 0.74;
+  };
+  return svg
+    .replace(/ fill-opacity="[^"]*"/g, '')
+    .replace(/fill="(#[0-9A-Fa-f]{6})"/g, 'fill="#FFFFFF"')
+    .replace(/stroke="(#[0-9A-Fa-f]{6})"/g, (_, hex: string) => `stroke="${light(hex) ? '#FFFFFF' : '#1C1D21'}"`);
+}
 const chevron = (x: number, y: number, w = 5) => `M${x - w} ${y - 3} L${x} ${y + 3} L${x + w} ${y - 3}`;
 
 /** Flow chevrons (figure units): in front of the cord, and behind it ([x, y, half-width]). Shared with the 3D view. */
@@ -69,7 +82,7 @@ export const FLOW = {
 };
 
 export function anatomyFigureSvg(options: FigureOptions, t: FigureStrings): string {
-  const { condition: c = 'chiari', flow = true, labels = true, measure = true, dark = false, className = '', layers = {} } = options;
+  const { condition: c = 'chiari', flow = true, labels = true, measure = true, dark = false, className = '', layers = {}, lineArt = false } = options;
   const L = t.labels;
   const low = c === 'chiari' || c === 'syrinx';
   const surgery = c === 'surgery';
@@ -153,5 +166,6 @@ export function anatomyFigureSvg(options: FigureOptions, t: FigureStrings): stri
   }
   const aria = esc(t.ariaPrefix + t.aria[c]);
   // A figure drawn for a light page gets "fig-on-light", so Dim mode can recolor its labels (global.css).
-  return `<svg class="anatomy-figure${dark ? '' : ' fig-on-light'}${className ? ' ' + esc(className) : ''}" viewBox="${viewBox}" role="img" aria-label="${aria}" xmlns="http://www.w3.org/2000/svg">${parts.join('')}</svg>`;
+  const svg = `<svg class="anatomy-figure${dark ? '' : ' fig-on-light'}${className ? ' ' + esc(className) : ''}" viewBox="${viewBox}" role="img" aria-label="${aria}" xmlns="http://www.w3.org/2000/svg">${parts.join('')}</svg>`;
+  return lineArt ? toLineArt(svg) : svg;
 }

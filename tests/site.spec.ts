@@ -3,7 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { readFileSync } from 'node:fs';
 
 // Every page that exists so far. Add new pages here as they're built.
-const englishPages = ['/', '/explorer/', '/explorer/compare/', '/tour/', '/evidence/', '/explain/', '/v/#c1.side.f.m.x', '/explain/#v=c1.side.flow.m&x=1&a=fam&n=Hello', '/studies/', '/prep/', '/model/', '/embed/', '/support/', '/kit/', '/impact/', '/about/', '/privacy/'];
+const englishPages = ['/', '/explorer/', '/explorer/compare/', '/tour/', '/evidence/', '/explain/', '/v/#c1.side.f.m.x', '/explain/#v=c1.side.flow.m&x=1&a=fam&n=Hello', '/studies/', '/prep/', '/children/', '/model/', '/embed/', '/support/', '/kit/', '/impact/', '/about/', '/privacy/'];
 // The Spanish site: the same pages under /es/ (src/pages/es/), text from src/i18n/es.json.
 const spanishPages = englishPages.filter((p) => !p.includes('&n=')).map((p) => `/es${p}`);
 const pages = [...englishPages, ...spanishPages];
@@ -337,8 +337,9 @@ test.describe('Doctor visit prep', () => {
     await expect(page.getByLabel('Things I want to mention')).toHaveValue('');
     await page.getByLabel('Include a small diagram of Chiari').uncheck();
 
-    // Tick everything, then check the printed sheet is still one page on Letter and A4.
-    for (const box of await page.locator('[data-prep-form] input[type="checkbox"]').all()) await box.check();
+    // Tick everything in the everyday groups, then check the printed sheet is still one page on Letter and A4.
+    // (The surgery groups start folded; ticking them all as well makes a longer sheet.)
+    for (const box of await page.locator('[data-prep-form] details:not([data-group^="surgery"]) input[type="checkbox"], [data-own-list] input, [data-mention-list] input').all()) await box.check();
     await page.emulateMedia({ media: 'print' });
     await expect(page.locator('[data-print-sheet]')).toBeVisible();
     await expect(page.locator('[data-sheet-list] li')).toHaveCount(13);
@@ -349,6 +350,28 @@ test.describe('Doctor visit prep', () => {
       const pdf = (await page.pdf({ format })).toString('latin1');
       expect(pdf.match(/\/Type\s*\/Page[^s]/g)?.length, `${format} pages`).toBe(1);
     }
+  });
+
+  test('surgery groups start folded and add to the sheet; the packing list prints on its own', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/prep/');
+    const before = page.locator('details[data-group="surgeryBefore"]');
+    await expect(before).not.toHaveAttribute('open', '');
+    await before.locator('summary').click();
+    await page.getByLabel('How will my pain be managed after surgery?').check();
+    await expect(page.locator('[data-sheet-count]')).toHaveText('Your sheet · 7 questions');
+    await expect(page.locator('.child-link a')).toHaveAttribute('href', '/children/');
+
+    await page.getByLabel('Non-slip slippers').uncheck();
+    await page.evaluate(() => (window.print = () => {}));
+    await page.locator('[data-print-pack]').click();
+    await page.emulateMedia({ media: 'print' });
+    await expect(page.locator('[data-print-pack-sheet]')).toBeVisible();
+    await expect(page.locator('[data-print-sheet]')).toBeHidden();
+    await expect(page.locator('[data-pack-sheet-list] li')).toHaveCount(11);
+    await expect(page.locator('[data-pack-sheet-list]')).not.toContainText('Non-slip slippers');
+    const pdf = (await page.pdf({ format: 'Letter' })).toString('latin1');
+    expect(pdf.match(/\/Type\s*\/Page[^s]/g)?.length).toBe(1);
   });
 
   test('nothing is stored or sent', async ({ page }) => {
@@ -369,6 +392,51 @@ test.describe('Doctor visit prep', () => {
     expect(after).toEqual(before);
     expect(requests).toEqual([]);
     await expect(page).toHaveURL(/\/prep\/$/);
+  });
+});
+
+test.describe('Helping your child', () => {
+  test('the school sheet prints what was typed, as text only, and nothing is stored or sent', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    const requests: string[] = [];
+    await page.goto('/children/', { waitUntil: 'networkidle' });
+    page.on('request', (r) => requests.push(r.url()));
+    const before = await page.evaluate(() => ({ local: { ...localStorage }, session: { ...sessionStorage }, cookies: document.cookie }));
+
+    await page.getByLabel("Child's first name").fill('<b>Sam</b>');
+    await page.getByLabel('Surgery date').fill('December 2');
+    await page.getByLabel('Rest breaks').check();
+    await page.getByLabel('Other', { exact: true }).fill('A seat near the door');
+    await page.evaluate(() => (window.print = () => {}));
+    await page.locator('[data-print-part="school"]').click();
+    await page.emulateMedia({ media: 'print' });
+    await expect(page.locator('[data-print-only="school"]')).toBeVisible();
+    await expect(page.locator('[data-print-only="story"]')).toBeHidden();
+    await expect(page.locator('[data-school-title]')).toHaveText("About <b>Sam</b>'s Chiari surgery");
+    await expect(page.locator('[data-school-helps] li')).toHaveText(['Rest breaks', 'A seat near the door']);
+    await expect(page.locator('[data-print-only="school"]')).toContainText('3D model by Open Chiari');
+    const pdf = (await page.pdf({ format: 'Letter' })).toString('latin1');
+    expect(pdf.match(/\/Type\s*\/Page[^s]/g)?.length).toBe(1);
+
+    const after = await page.evaluate(() => ({ local: { ...localStorage }, session: { ...sessionStorage }, cookies: document.cookie }));
+    expect(after).toEqual(before);
+    expect(requests).toEqual([]);
+    await expect(page).toHaveURL(/\/children\/$/);
+  });
+
+  test('the story and coloring page carry the required captions, and the coloring page is line art', async ({ page }) => {
+    await page.goto('/children/');
+    await expect(page.locator('.story-page figcaption').first()).toHaveText('Illustration, not a medical image.');
+    await expect(page.locator('.story-page figcaption').nth(2)).toContainText('Tonsils shown at their lowest point');
+    const fills = await page.locator('[data-color-preview] svg [fill]').evaluateAll((els) =>
+      [...new Set(els.map((e) => e.getAttribute('fill')).filter((f) => f !== 'none'))],
+    );
+    expect(fills).toEqual(['#FFFFFF']);
+    await page.evaluate(() => (window.print = () => {}));
+    await page.locator('[data-print-part="color"]').click();
+    await page.emulateMedia({ media: 'print' });
+    const pdf = (await page.pdf({ format: 'Letter' })).toString('latin1');
+    expect(pdf.match(/\/Type\s*\/Page[^s]/g)?.length).toBe(2);
   });
 });
 

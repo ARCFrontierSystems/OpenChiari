@@ -218,6 +218,7 @@
     "personalProject": "A personal project by Matthew Borgfeld.",
     "moreNavLabel": "More",
     "links": {
+      "children": "Helping your child",
       "support": "Support",
       "kit": "Awareness kit",
       "impact": "Impact",
@@ -544,6 +545,137 @@
             "checked": true
           }
         ]
+      },
+      {
+        "id": "surgeryBefore",
+        "title": "Before surgery",
+        "folded": true,
+        "questions": [
+          {
+            "id": "why",
+            "text": "Why do you recommend surgery, and what are the benefits and risks for me?",
+            "checked": false
+          },
+          {
+            "id": "steps",
+            "text": "Which steps will my surgery include? For example, will you remove bone only, or also open the covering of the brain and add a patch?",
+            "checked": false
+          },
+          {
+            "id": "length",
+            "text": "How long will the surgery take, and how long will I stay in the hospital?",
+            "checked": false
+          },
+          {
+            "id": "eating",
+            "text": "When do I need to stop eating and drinking before surgery?",
+            "checked": false
+          },
+          {
+            "id": "icu",
+            "text": "Will I spend time in intensive care after surgery?",
+            "checked": false
+          },
+          {
+            "id": "parentStay",
+            "text": "For a child: can a parent stay overnight, and be there when they wake up?",
+            "checked": false
+          },
+          {
+            "id": "comfortItem",
+            "text": "For a child: can their comfort item go into the operating room?",
+            "checked": false
+          },
+          {
+            "id": "pain",
+            "text": "How will my pain be managed after surgery?",
+            "checked": false
+          },
+          {
+            "id": "medicines",
+            "text": "Should I stop or change any of my medicines before surgery?",
+            "checked": false
+          },
+          {
+            "id": "back",
+            "text": "How soon can I go back to school, work or my usual activities?",
+            "checked": false
+          },
+          {
+            "id": "again",
+            "text": "Could I need another surgery later?",
+            "checked": false
+          }
+        ]
+      },
+      {
+        "id": "surgeryHome",
+        "title": "Before going home from the hospital",
+        "folded": true,
+        "questions": [
+          {
+            "id": "call",
+            "text": "What should make me call you or come back to the hospital?",
+            "checked": false
+          },
+          {
+            "id": "incision",
+            "text": "How do I care for my incision, and when can I shower?",
+            "checked": false
+          },
+          {
+            "id": "homeMedicines",
+            "text": "Which medicines should I take at home, and for how long?",
+            "checked": false
+          },
+          {
+            "id": "limits",
+            "text": "What should I avoid, and for how long? When can I lift things, drive or play sports?",
+            "checked": false
+          },
+          {
+            "id": "whoToCall",
+            "text": "Who do I call with questions, including at night and on weekends?",
+            "checked": false
+          },
+          {
+            "id": "followupVisit",
+            "text": "When is my follow-up visit, and will I need another MRI?",
+            "checked": false
+          }
+        ]
+      },
+      {
+        "id": "surgeryAfter",
+        "title": "Follow-up after surgery",
+        "folded": true,
+        "questions": [
+          {
+            "id": "expected",
+            "text": "Is my recovery going as expected?",
+            "checked": false
+          },
+          {
+            "id": "improve",
+            "text": "Which of my symptoms are likely to get better, and how long might that take?",
+            "checked": false
+          },
+          {
+            "id": "scans",
+            "text": "Do I need more scans to check the fluid space, or my syrinx if I have one?",
+            "checked": false
+          },
+          {
+            "id": "activities",
+            "text": "Can I go back to all my usual activities now?",
+            "checked": false
+          },
+          {
+            "id": "therapy",
+            "text": "Would physical therapy or another specialist help me?",
+            "checked": false
+          }
+        ]
       }
     ],
     "addOwn": "Add your own question",
@@ -566,7 +698,32 @@
     "pageNote": "Not medical advice. Your choices on this page are never stored or sent.",
     "sheetMeta": "Chiari malformation · Date: ____________ · Doctor: ______________________",
     "sheetFooter": "Made with Open Chiari · openchiari.org · Not medical advice",
-    "diagramCaption": "Chiari I. Tonsils shown at their lowest point, where MRI measures them. Illustration, not a medical image."
+    "diagramCaption": "Chiari I. Tonsils shown at their lowest point, where MRI measures them. Illustration, not a medical image.",
+    "pack": {
+      "title": "Packing for a hospital stay",
+      "intro": "Your hospital may send its own list. Follow theirs first.",
+      "items": [
+        "Health insurance card and photo ID",
+        "Custody papers, if they apply",
+        "Your medicines, or a list of them (ask the hospital which to bring)",
+        "Glasses, hearing aids, a CPAP machine or other equipment you use",
+        "Toothbrush and other toiletries",
+        "Comfortable clothes for going home",
+        "Non-slip slippers",
+        "Phone and chargers",
+        "Books, a tablet or games, and headphones",
+        "For a child: a favorite blanket or stuffed animal",
+        "For the parent: snacks and a water bottle",
+        "Your questions sheet from this page"
+      ],
+      "print": "Print packing list",
+      "formLabel": "Packing list"
+    },
+    "child": {
+      "before": "Getting a child ready for surgery? See",
+      "link": "Helping your child",
+      "after": "."
+    }
   },
   "support": {
     "title": "Support the groups doing the work",
@@ -1051,5 +1208,128 @@
     "orgsText": "Need the kit in your colors, or a version for a specific event? Get in touch and it's made for you, free.",
     "contact": "Contact Open Chiari",
     "license": "Kit graphics are free to use and share, CC BY-SA 4.0. Graphics showing the 3D model also carry the Z-Anatomy and BodyParts3D credit."
+  },
+  "children": {
+    "title": "Helping your child through Chiari surgery",
+    "navLabel": "Helping your child",
+    "intro": "Ideas from children's hospitals for getting a child ready, a picture story to read together, a coloring page, and a sheet for school. Nothing you type here is saved or sent.",
+    "ready": {
+      "title": "Getting ready together",
+      "tips": [
+        {
+          "lead": "Be honest, in words your child knows.",
+          "text": "Younger children usually need fewer details than older kids. Teens may want to know more and to help make decisions."
+        },
+        {
+          "lead": "Say why.",
+          "text": "The surgery is to help a part of their body do its job."
+        },
+        {
+          "lead": "Call it a special sleep.",
+          "text": "The medicine for surgery gives a special sleep, so they won't see, hear or feel anything, and the care team wakes them when it's over. Avoid \"put to sleep\": some children know it from pets that never woke up."
+        },
+        {
+          "lead": "Don't promise \"no pain\" or \"no needles.\"",
+          "text": "Instead, say the nurses and doctors have medicine and ways to help."
+        },
+        {
+          "lead": "It's fine to say \"I don't know.\"",
+          "text": "Write the question down and ask the care team together."
+        },
+        {
+          "lead": "Accept their feelings.",
+          "text": "Let them know it's OK to feel scared, or even mad."
+        },
+        {
+          "lead": "Be ready for changes.",
+          "text": "Sometimes surgery is delayed or cancelled because of emergencies."
+        },
+        {
+          "lead": "Bring something from home.",
+          "text": "A favorite blanket or stuffed animal can help. Ask whether it can go into the operating room."
+        },
+        {
+          "lead": "Play and draw it.",
+          "text": "Acting out a hospital visit with toys, or drawing it, can show you how your child feels."
+        },
+        {
+          "lead": "Ask if the hospital has a child life specialist.",
+          "text": "They are trained to talk with children in a comforting way."
+        },
+        {
+          "lead": "Look after yourself too.",
+          "text": "Children pick up on how you feel. Accept help when it's offered. Talking with a counselor or social worker can help too."
+        }
+      ],
+      "source": "Adapted from SickKids AboutKidsHealth and Nemours KidsHealth."
+    },
+    "story": {
+      "title": "A picture story to read together",
+      "intro": "Read it with your child, and skip any page you like. Change any words to match what your care team tells you.",
+      "pageLabel": "Page {n}",
+      "pages": [
+        {
+          "figure": "typical",
+          "text": "This is a picture of the inside of a head and neck, as if we could look in from the side."
+        },
+        {
+          "figure": "typical",
+          "text": "Your brain is inside your skull. Near the back is a part called the cerebellum. It helps you balance and move smoothly. Your brain and spinal cord are cushioned by a clear liquid."
+        },
+        {
+          "figure": "chiari",
+          "text": "In Chiari, the bottom of the cerebellum reaches down a little too low, through the opening where the skull meets the neck. There isn't quite enough room there. You didn't do anything to cause it."
+        },
+        {
+          "figure": "surgery",
+          "text": "Doctors can make more room. During surgery you'll be in a special sleep from medicine, so you won't see, hear or feel anything. The surgeon takes away a small piece of bone at the back of the head, and often a little from the top of the neck. Many times they also add a patch to make more space."
+        },
+        {
+          "figure": "",
+          "text": "When you wake up, the back of your head and neck may feel sore. Your nurses and doctors have medicine to help. You'll stay in the hospital until your doctors say you're ready to go home. Your grown-up will tell you about how long, and will be with you as much as they can. You can bring your favorite blanket or stuffed animal."
+        },
+        {
+          "figure": "",
+          "text": "Then you'll rest at home for a while before going back to school. You can ask questions anytime. Every question is a good one."
+        }
+      ],
+      "print": "Print the story"
+    },
+    "color": {
+      "title": "Color it in",
+      "intro": "Two drawings to print and color: before and after surgery.",
+      "before": "Before surgery",
+      "after": "After surgery",
+      "key": "A suggested key (any colors are fine): bone, brain, spinal cord, the clear liquid.",
+      "print": "Print the coloring page"
+    },
+    "school": {
+      "title": "A sheet for school",
+      "intro": "Fill in what you like, then print it for a teacher or the school nurse. Every box is optional.",
+      "name": "Child's first name",
+      "forWhom": "For",
+      "forHint": "Teacher or school nurse",
+      "date": "Surgery date",
+      "timeAway": "Expected time away from school",
+      "limits": "Limits from the surgeon (for example, sports, PE, lifting)",
+      "careTeamHint": "From the care team",
+      "helps": "Things that may help when they're back",
+      "helpItems": [
+        "Rest breaks",
+        "A pass to the nurse",
+        "Extra time for missed work",
+        "Help carrying books or a heavy bag"
+      ],
+      "other": "Other",
+      "contact": "Parent or caregiver contact",
+      "sheetTitle": "About {name}'s Chiari surgery",
+      "sheetTitleDefault": "About my child's Chiari surgery",
+      "lead": "{name} is having, or has had, surgery for Chiari I malformation.",
+      "leadDefault": "My child is having, or has had, surgery for Chiari I malformation.",
+      "explain": "In Chiari I, the lowest part of the back of the brain extends below the opening at the base of the skull. The surgery makes more room there.",
+      "print": "Print the school sheet",
+      "callIf": "Please call me right away if"
+    },
+    "pageNote": "Not medical advice. Nothing you type on this page is stored or sent."
   }
 }

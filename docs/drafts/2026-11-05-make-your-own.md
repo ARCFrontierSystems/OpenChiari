@@ -1,6 +1,6 @@
 # Make your own, reworked: wording for Matthew's approval (November 5, 2026)
 
-**Status: draft, waiting for Matthew's approval. Independent check: passed (`docs/audits/2026-11-05-make-your-own-audit.md`); Spanish labels: back-translation check 5.** Matthew asked on Nov 5 to rework "Make your own" and to implement all of the audit's recommendations. He added: "I don't like the other wording options, out of context, they just read as a continuation of the first card's text option."
+**Status: approved by Matthew on Nov 5 ("Ok on the make your own rework"), including the added headache sentence; recorded in COPY.md. Was: draft. Independent check: passed (`docs/audits/2026-11-05-make-your-own-audit.md`); Spanish labels: back-translation check 5.** Matthew asked on Nov 5 to rework "Make your own" and to implement all of the audit's recommendations. He added: "I don't like the other wording options, out of context, they just read as a continuation of the first card's text option."
 
 He's right. The message list was cut from the ready-made square post, where the lines follow "What is Chiari malformation?" in order. On their own, "Most people are born with the skull differences that lead to **it**" and "**The** classic sign is…" don't say what "it" is.
 

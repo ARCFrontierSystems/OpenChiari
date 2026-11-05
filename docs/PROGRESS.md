@@ -3,7 +3,7 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
-## 2026-11-05: Make your own, reworked (waiting for Matthew's approval of the wording)
+## 2026-11-05: Make your own, reworked (wording approved by Matthew)
 
 Matthew asked for a rework and approved all of the audit's recommendations. He found that the message options read as continuations of "What is Chiari malformation?".
 - **Wording (draft, `docs/drafts/2026-11-05-make-your-own.md`):** every message names Chiari itself; "What is Chiari malformation?" always comes with its approved answer; the headache line adds the approved "Not everyone with Chiari gets these headaches." Independent check passed (`docs/audits/2026-11-05-make-your-own-audit.md`); Spanish labels: back-translation check 5. EVIDENCE rows 2, 4 and 6 now list the sources opened on Nov 5.
@@ -11,7 +11,7 @@ Matthew asked for a rework and approved all of the audit's recommendations. He f
 - **Fixed:** sideways scrolling on phones; "Paper size" showing for downloads; the print preview not filling its frame; long lines cut off without warning; the preview below the whole form on phones (now a bar at the top, with "See it bigger").
 - Tests: 200 pass.
 
-Next: Matthew approves the wording (or not), then publish and check live.
+Matthew approved the wording ("Ok on the make your own rework"). Next: publish and check live.
 
 ## 2026-11-05: Published: More menu as plain links (PR #14)
 

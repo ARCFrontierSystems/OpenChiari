@@ -1161,6 +1161,16 @@ Draft and sources: `docs/drafts/2026-11-05-kit-and-home.md`. There is no new med
 - **Home, Tools:** 07 Helping your child: Getting a child ready for Chiari surgery: tips, a picture story, coloring pages and a sheet for school. · 08 Awareness kit: Free posts, posters and stickers to share, or make your own with your words and logo. · 09 Connect with others: Forums and support groups for people with Chiari and their families.
 
 
+## Make your own, reworked (2026-11-05): approved by Matthew ("Ok on the make your own rework")
+
+Draft and sources: `docs/drafts/2026-11-05-make-your-own.md`; check: `docs/audits/2026-11-05-make-your-own-audit.md`; Spanish labels: back-translation check 5. Replaces the "Make your own" lines above. Spanish: pending medical-translator review.
+
+- **Messages (each stands alone):** What is Chiari malformation? / The lowest part of the back of the brain extends below the opening at the base of the skull. | I have Chiari malformation. | Chiari symptoms often have few outward signs. Ask how you can help. | Chiari malformation looks different for everyone, and many people with Type I have no symptoms at all. | Most people with Chiari malformation are born with the skull differences that lead to it. Some never have symptoms; others first notice them as teens or adults. | The classic sign of Chiari malformation is a headache at the back of the head after coughing, sneezing or straining. Not everyone with Chiari gets these headaches.
+- **Spanish messages:** ¿Qué es la malformación de Chiari? / La parte más baja de la parte de atrás del cerebro se extiende por debajo de la abertura en la base del cráneo. | Tengo malformación de Chiari. | Los síntomas de Chiari a menudo dan pocas señales visibles. Pregunte cómo puede ayudar. | La malformación de Chiari es diferente en cada persona, y muchas personas con el tipo I no tienen ningún síntoma. | La mayoría de las personas con malformación de Chiari nacen con las diferencias del cráneo que la causan. Algunas nunca tienen síntomas; otras los notan por primera vez en la adolescencia o en la edad adulta. | El síntoma clásico de la malformación de Chiari es un dolor de cabeza en la parte de atrás de la cabeza después de toser, estornudar o hacer un esfuerzo. No todas las personas con Chiari tienen estos dolores de cabeza.
+- **Label on every graphic:** Chiari Awareness (ribbon beside it) · Spanish: Concientización sobre Chiari
+- **Steps:** 1. What do you want to make? (Square post: For Instagram and Facebook, Story: Tall, for stories, Poster: To print, Stickers: To print) · 2. Your words · 3. Look and save
+- **New labels:** {left} of {max} letters left · Or start from one of ours: (the approved sticker phrases) · Show the picture of Chiari: Adds the picture with its caption and model credit. · See it bigger / See it smaller · Sticker words start as "Chiari warrior".
+
 ## Navigation (2026-11-05): Matthew ("go with all of your suggestions"; Explain It after 3D Explorer)
 
 - Top menu: 3D Explorer · Explain It · Visit prep · Research studies · More ("Más"). "More" opens the other tools in the Home groups: Helping your child · Awareness kit · Open model · Connect with others · Support Chiari organizations.

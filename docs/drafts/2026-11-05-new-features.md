@@ -7,6 +7,62 @@
 - medRxiv blocked the request (Cloudflare "Sorry, you have been blocked"), so the cough preprint still could not be read. Part 3 was reworded to allow for it.
 - The U.S. Mint page still shows a bot challenge.
 
+## Revised after the independent audit (for Matthew's approval)
+
+The audit (`docs/audits/2026-11-05-new-features-audit.md`) found:
+- Pronunciation: PASS WITH CHANGES.
+- Sizes: PASS WITH CHANGES (centimeters).
+- Cough: FAIL as drafted; the sentences pass after the changes below, and the animation is simplified.
+
+This is the wording proposed now. Every change follows the audit's suggested fixes, which are supported by the opened sources. The older drafts below are kept for the record.
+
+### 1. How do you say it?
+
+> **How do you say it?**
+> - **Chiari:** key-AR-ee
+> - **Chiari malformation:** key-AR-ee mal-fore-MAY-shun
+> - **Syringomyelia:** suh-ring-go-my-EE-lee-uh
+> - **Syrinx:** SEER-inks
+>
+> Capital letters show the part you say loudest.
+>
+> Hans Chiari first described Chiari malformations at the end of the 1800s.
+
+Sources:
+- Mayfield Clinic: "key-AR-ee".
+- KidsHealth: "key-AR-ee mal-fore-MAY-shun".
+- Merriam-Webster Medical (syringomyelia, syrinx; one main stress only, per its key).
+- PMC7655446 (Hans Chiari).
+
+Other published versions of syringomyelia exist: KidsHealth "ser-in-go-my-ILL-ee-uh" and Mayfield "sir-RING-o-my-elia". Only Merriam-Webster's is shown. Spanish: none published; for the translator.
+
+### 2. Real-world sizes (centimeters; shown only in the Chiari I and syrinx views, with Measure on)
+
+> The usual cutoff, about 5 mm, is half a centimeter. The model shows about 12 mm, a little over 1 centimeter. How far the tonsils extend doesn't always match how someone feels.
+
+The coin comparison (a U.S. quarter) waits until a person opens the U.S. Mint page and confirms 24.26 mm across and 1.75 mm thick.
+
+### 3. Why can coughing bring on a headache?
+
+> 1. A cough briefly raises the pressure in your chest, which pushes some spinal fluid up from the spine into the head. Normally it then flows back down.
+> 2. One explanation is that, in some people with Chiari I, the low tonsils get in the way as the fluid flows back, so just after a cough they are pushed further down into the opening.
+> 3. Researchers don't all agree on how this works, or whether it's why coughing can bring on the classic headache. Not everyone with Chiari gets these headaches.
+
+**Animation (simplified):**
+- One press of a "Cough" button: the spinal fluid marks move up through the opening into the head, the same way in the Typical and Chiari I views, then ease back to the usual heartbeat pulse.
+- Nothing else moves: no tonsil movement, no travelling pressure band, no numbers, no pain signs.
+- The measure bracket is hidden while it plays.
+- Calm mode: still frames.
+- Screen readers hear what is happening.
+
+**Caption:** "Animation simplified." plus the usual "Illustration, not a medical image · Fluid flow simplified".
+
+**Sources:**
+- Sentence 1: Bezuidenhout 2018 and Vandenbulcke 2024 (opened).
+- Sentence 2: Bhadelia 2016 ("immediately after coughing"), as one explanation (opened).
+- Sentence 3: Bhadelia 2011 ("a difference of opinion as to the exact mechanism"), Vandenbulcke 2024 ("not well understood"; about one-third of patients) (opened).
+- The 2025 preprint that disagrees could not be opened (medRxiv blocks automated readers); a person reading it could confirm the wording.
+
 ## Summary
 
 | Feature | Ready for approval and audit? | Why |

@@ -585,7 +585,9 @@ test('counters: on openchiari.org only the name of an action is sent, never the 
     sent.push(route.request().postData() ?? '');
     return route.fulfill({ status: 204 });
   });
-  await page.route('https://clinicaltrials.gov/**', (route) => route.abort());
+  // The study link is answered with "204 No Content", so the browser stays on the page. (Blocking it instead showed an
+  // error page a moment later, which could interrupt the next page the test opened.)
+  await page.route('https://clinicaltrials.gov/**', (route) => route.fulfill({ status: 204 }));
   page.on('request', (r) => !r.url().startsWith('http://openchiari.org:4322/') && !r.url().startsWith('https://clinicaltrials.gov/') && other.push(r.url()));
   const site = 'http://openchiari.org:4322';
 

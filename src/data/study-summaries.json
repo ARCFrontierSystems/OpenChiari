@@ -5,6 +5,10 @@
     "NCT03856034": {
       "reason": "Fetal surgery for spina bifida (myelomeningocele), listed under Chiari II; for pregnant women, not people with Chiari I.",
       "decided": "2026-11-05"
+    },
+    "NCT06375759": {
+      "reason": "Its exclusion criteria list Chiari malformation; it is for syringomyelia after a spinal injury or infection.",
+      "decided": "2026-11-05"
     }
   }
 }

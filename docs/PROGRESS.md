@@ -36,7 +36,11 @@ Matthew's preference: when a step is done, lay out what the next step will cover
   - "Filters"
   - "City, state or ZIP"
 - **Checks:** all tests pass, including the accessibility scan of `/studies/` and a test of the filters, Near sorting and that nothing is sent.
-- **Next:** plain summaries for the 5 studies once Matthew allows clinicaltrials.gov in this environment's network settings; each is checked by a fresh agent, then approved by Matthew.
+- **Matthew allowed clinicaltrials.gov; the full listings were opened.**
+  - NCT06375759 (Beijing bypass surgery) excludes people with Chiari, so Matthew had it left out.
+  - **The 2-year rule (Matthew):** a study whose status its team hasn't confirmed in the last 2 years is hidden automatically. ClinicalTrials.gov calls such a status "unknown". This hides the betaine and thalidomide trials, last confirmed in early 2024.
+  - The list is now 2 studies, both including Chiari I: Amiens (France) and the Neurosurgical Outcome Network (Italy).
+- **Next:** plain summaries are drafted in `docs/drafts/2026-11-05-study-summaries.md`. A fresh agent is checking them against the saved listings in `docs/audits/sources/2026-11-05-studies/`; then Matthew approves.
 
 ## 2026-11-05: Realistic model: clearer highlight, easy to reach on phones
 

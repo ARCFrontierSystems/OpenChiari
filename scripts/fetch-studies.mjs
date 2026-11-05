@@ -5,7 +5,9 @@
  * Runs before every publish, and publishing runs every morning (.github/workflows/deploy.yml), so the list is at most
  * a day old. Visitors' browsers never contact ClinicalTrials.gov; they get this file as part of the site.
  *
- * Studies Matthew decided not to list (leftOut in src/data/study-summaries.json) are skipped.
+ * Studies Matthew decided not to list (leftOut in src/data/study-summaries.json) are skipped, and so is any study whose
+ * status hasn't been confirmed by its team in the last 2 years: ClinicalTrials.gov itself calls such a status
+ * "unknown" (Matthew's rule, November 5, 2026).
  * Only facts from the registry are kept (title, status, type, ages, sites, sponsor, the official summary). Plain
  * summaries written by Open Chiari live separately in src/data/study-summaries.json and appear only once Matthew has
  * approved them. Studies that don't have one yet are listed at the end, so they can be written.
@@ -78,6 +80,7 @@ function toStudy(raw) {
     officialSummary: firstSentences(p.descriptionModule?.briefSummary ?? ''),
     sites,
     lastUpdated: p.statusModule?.lastUpdatePostDateStruct?.date ?? null,
+    verified: p.statusModule?.statusVerifiedDate ?? null,
   };
 }
 
@@ -106,10 +109,18 @@ try {
 }
 
 const curated = existsSync(SUMMARIES) ? JSON.parse(readFileSync(SUMMARIES, 'utf8')) : {};
+/** Confirmed within the last 2 years ("2024-02" or "2024-02-15"; a month counts as its last day). */
+export function recentlyVerified(verified, today = new Date()) {
+  if (!verified) return false;
+  const [y, m, d] = verified.split('-').map(Number);
+  const when = d ? new Date(Date.UTC(y, m - 1, d)) : new Date(Date.UTC(y, m, 0));
+  const limit = new Date(Date.UTC(today.getUTCFullYear() - 2, today.getUTCMonth(), today.getUTCDate()));
+  return when >= limit;
+}
 const leftOut = curated.leftOut ?? {};
 const studies = raw
   .map(toStudy)
-  .filter((s) => s.nct && s.status === 'RECRUITING' && s.conditions.length && s.type !== 'other' && !leftOut[s.nct])
+  .filter((s) => s.nct && s.status === 'RECRUITING' && s.conditions.length && s.type !== 'other' && !leftOut[s.nct] && recentlyVerified(s.verified))
   .sort((a, b) => a.title.localeCompare(b.title));
 const data = {
   source: 'ClinicalTrials.gov API v2',

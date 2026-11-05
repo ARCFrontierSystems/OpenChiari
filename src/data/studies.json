@@ -29,7 +29,8 @@
           "country": "France"
         }
       ],
-      "lastUpdated": "2026-09-08"
+      "lastUpdated": "2026-09-08",
+      "verified": "2026-07"
     },
     {
       "nct": "NCT06724029",
@@ -122,76 +123,8 @@
           "country": "Italy"
         }
       ],
-      "lastUpdated": "2026-03-30"
-    },
-    {
-      "nct": "NCT06375759",
-      "title": "Subarachnoid-Subarachnoid (S-S) Bypass Versus Adhesion Lysis in Spinal Arachnoiditis and Syringomyelia",
-      "status": "RECRUITING",
-      "type": "trial",
-      "children": false,
-      "adults": true,
-      "conditions": [
-        "syringomyelia"
-      ],
-      "sponsor": "Xuanwu Hospital, Beijing",
-      "officialSummary": "To determine whether Subarachnoid-Subarachnoid (S-S) Bypass results in better patient outcomes with fewer complications and improved quality of life compared to intradural adhesion lysis in individuals with Spinal Arachnoiditis and Syringomyelia.",
-      "sites": [
-        {
-          "facility": "Fengzeng Jian",
-          "city": "Beijing",
-          "state": "Beijing Municipality",
-          "zip": "100053",
-          "country": "China"
-        }
-      ],
-      "lastUpdated": "2024-04-19"
-    },
-    {
-      "nct": "NCT06308367",
-      "title": "The Therapeutic Effect of Betaine in Syringomyelia",
-      "status": "RECRUITING",
-      "type": "trial",
-      "children": false,
-      "adults": true,
-      "conditions": [
-        "syringomyelia"
-      ],
-      "sponsor": "Xuanwu Hospital, Beijing",
-      "officialSummary": "Purpose: This clinical trial aims to evaluate the indications, therapeutic effects and side effects of betaine in refractory syringomyelia. Primary outcome measure: The primary endpoint is the change of ASIA at week 12.",
-      "sites": [
-        {
-          "facility": "Fengzeng Jian",
-          "city": "Beijing",
-          "state": "Beijing Municipality",
-          "zip": "100053",
-          "country": "China"
-        }
-      ],
-      "lastUpdated": "2024-03-13"
-    },
-    {
-      "nct": "NCT06268093",
-      "title": "The Therapeutic Effect of Thalidomide in Syringomyelia",
-      "status": "RECRUITING",
-      "type": "trial",
-      "children": false,
-      "adults": true,
-      "conditions": [
-        "syringomyelia"
-      ],
-      "sponsor": "Xuanwu Hospital, Beijing",
-      "officialSummary": "Purpose: This phase II clinical trial aims to evaluate the indications, therapeutic effects and side effects of thalidomide in refractory syringomyelia. Primary outcome measure: The primary endpoint is the change of ASIA at week 12.",
-      "sites": [
-        {
-          "facility": "Fengzeng Jian",
-          "city": "Beijing",
-          "state": "Beijing City",
-          "zip": "100032",
-          "country": "China"
-        }
-      ],
-      "lastUpdated": "2024-02-20"
+      "lastUpdated": "2026-03-30",
+      "verified": "2026-03"
     }
   ]
 }

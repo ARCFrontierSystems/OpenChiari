@@ -91,7 +91,7 @@
   - Bone window about 26 × 30 mm.
   - Clivus 43.7 mm.
   - Spinal canal at C3 about 14.8 mm.
-- **Realistic model `model/realistic/check.mjs`:** run on the raw exports in `/tmp/claude-0/za/view2/`. Those files are not in the repository; this audit assumes they are the source of the published files, which are unchanged in this diff. Result: see the note under "Not done". The saved Nov 4 results in the same folder say "All measurements match docs/EVIDENCE.md." for all four conditions.
+- **Realistic model `model/realistic/check.mjs`:** run on the raw exports in `/tmp/claude-0/za/view2/`. Those files are not in the repository; this audit assumes they are the source of the published files, which are unchanged in this diff. Today's runs of Typical, Chiari I and syrinx each gave "All measurements match docs/EVIDENCE.md." The surgery run was still going when this report was written (see "Not done"). The saved Nov 4 results in the same folder say "All measurements match docs/EVIDENCE.md." for all four conditions.
 
 **Explain It page (`explain.astro`)**
 - Rendered `/v/`:
@@ -104,5 +104,5 @@
 ## Not done
 
 - NINDS and MedlinePlus could not be opened (blocked by this session's network settings). StatPearls and PubMed Central were not tried, because the earlier audit hit a robot check there.
-- The realistic check for Chiari I, syrinx and after surgery was still running when this report was written. Typical passed today ("All measurements match docs/EVIDENCE.md."). The viewer change cannot affect these measurements, because they are taken from the model files, which did not change.
+- The realistic check for After decompression was still running when this report was written. No problems had been reported up to that point, and its Nov 4 result passed. Typical, Chiari I and syrinx passed today. The viewer change cannot affect these measurements, because they are taken from the model files, which did not change.
 - Front-view renders were not compared. The same fade applies there.

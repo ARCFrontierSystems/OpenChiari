@@ -3,6 +3,20 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: Realistic model: clearer highlight, easy to reach on phones
+
+- **Highlight (Matthew: selected parts were hard to see on the realistic model).**
+  - The selected structure is now laid over the view as an even blue shape (`--accent`, 55%), so its whole outline shows even where other structures cover it.
+  - A light line marks where the cut passes through it, and its surface glows blue.
+  - Fixed: the structure selected before the realistic model finished loading (the tonsils, by default) was never highlighted.
+  - The Simple model is unchanged.
+- **Phones.**
+  - A **Realistic** switch now sits with Flow, Measure and Layers. Before, it was hidden inside the Layers panel.
+  - It loads the lighter phone version (about 145,000 triangles, 0.55 MB).
+  - It is drawn at lower resolution while a finger moves it.
+  - New speed guard: if a phone still draws fewer than about 20 frames a second while turning, the model is drawn a little coarser so it stays smooth.
+- **Checks:** 94 tests pass, including the phone Realistic switch.
+
 ## 2026-11-05: Smoother 3D on phones, part 2
 
 - **Matthew:** the 3D model still stutters on phones.

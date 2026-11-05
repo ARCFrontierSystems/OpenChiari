@@ -15,6 +15,9 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { LineSegments2 } from 'three/examples/jsm/lines/LineSegments2.js';
+import { LineSegmentsGeometry } from 'three/examples/jsm/lines/LineSegmentsGeometry.js';
+import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import type { Store, ViewState, LayerId, CameraView } from './state';
 import { anatomyFigureSvg, FLOW, type FigureStrings, type FigureLayer } from '../lib/anatomy-figure';
@@ -122,11 +125,12 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   // Sharpness: up to 2 device pixels per CSS pixel at rest. On touch screens (phones and tablets) the model is drawn at
   // 1 while a finger is turning or zooming it, which needs far less of the phone's graphics power, then sharp again as
   // soon as the finger lifts.
-  const restRatio = Math.min(window.devicePixelRatio, 2);
+  let restRatio = Math.min(window.devicePixelRatio, 2);
+  let movingRatio = 1;
   const touchScreen = window.matchMedia('(pointer: coarse)').matches;
   renderer.setPixelRatio(restRatio);
   function setMoving(moving: boolean) {
-    const ratio = moving && touchScreen ? Math.min(restRatio, 1) : restRatio;
+    const ratio = moving && touchScreen ? Math.min(restRatio, movingRatio) : restRatio;
     if (renderer.getPixelRatio() !== ratio) {
       renderer.setPixelRatio(ratio);
       requestRender();
@@ -218,6 +222,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       const capColor = color.clone().multiplyScalar(0.92).convertLinearToSRGB();
       const capAlpha = { value: baseOpacity };
       mesh.userData.capAlpha = capAlpha;
+
       // One pass for both sides, so 'inside' is the real inside even when see-through.
       (mesh.material as THREE.MeshStandardMaterial).forceSinglePass = true;
       (mesh.material as THREE.MeshStandardMaterial).onBeforeCompile = (shader) => {
@@ -338,6 +343,8 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
       await renderer.compileAsync(scene, camera);
       realistic = 'ready';
       options.onRealistic?.('ready');
+      // The structure picked before the model arrived gets its highlight on the new parts too.
+      applyHighlight(store.get().part);
       apply(store.get());
     } catch (error) {
       console.warn('Realistic model unavailable, staying with Simple.', error);
@@ -502,12 +509,35 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     hostW = w;
     hostH = h;
     labelsWasHidden = null;
+    outlineMaterial.resolution.set(w, h);
     renderer.setSize(w, h, false);
     renderer.domElement.style.width = '100%';
     renderer.domElement.style.height = '100%';
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
     requestRender();
+  }
+
+  // ----- Speed guard -----
+  // If a phone still can't keep up while the model is being turned (slower than about 20 frames a second), it draws
+  // a little coarser while moving (0.75) and a little less sharp at rest (1.5), so the model stays smooth. This
+  // happens at most once per visit and never steps back up.
+  let lastFrame = 0;
+  const slowFrames: number[] = [];
+  function watchSpeed() {
+    const now = performance.now();
+    const gap = now - lastFrame;
+    lastFrame = now;
+    if (!userMoving || !touchScreen || gap > 250) return;
+    slowFrames.push(gap);
+    if (slowFrames.length < 30) return;
+    const sorted = [...slowFrames].sort((a, b) => a - b);
+    slowFrames.length = 0;
+    if (sorted[15] > 50 && movingRatio === 1) {
+      movingRatio = 0.75;
+      restRatio = Math.min(restRatio, 1.5);
+      setMoving(true);
+    }
   }
 
   // ----- Rendering on demand, paused when not visible -----
@@ -519,6 +549,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     requestAnimationFrame(() => {
       pending = false;
       if (visible && !document.hidden) {
+        watchSpeed();
         applyOpacity();
         updateLabelSpace();
         fitDepthRange();
@@ -573,13 +604,89 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   }
 
   // ----- Highlight the selected structure in the model -----
+  // The site's highlight blue (--accent). The surface glows blue. On the realistic model, whose structures sit behind
+  // and inside one another, the selected one is also laid over the view as an even blue shape, so its whole outline
+  // shows even where other structures cover it, with a light line where the cut passes through it.
   const HIGHLIGHT = new THREE.Color('#1F5F8B');
+  const OUTLINE = new THREE.Color('#ECEAE4'); // --x-text
+  const BLACK = new THREE.Color(0x000000);
+  let highlighted = '';
+  function isSelected(p: Part, part: string) {
+    return p.partId === part && p.name !== 'skull' && p.name !== 'skull-surgery';
+  }
+  // Each pixel of the blue shape is drawn once (the stencil marks it), so folds don't make it patchy.
+  const overlayMaterial = new THREE.MeshBasicMaterial({
+    color: HIGHLIGHT,
+    transparent: true,
+    opacity: 0.55,
+    depthTest: false,
+    depthWrite: false,
+    side: THREE.DoubleSide,
+    clippingPlanes: [plane],
+    stencilWrite: true,
+    stencilRef: 1,
+    stencilFunc: THREE.NotEqualStencilFunc,
+    stencilZPass: THREE.ReplaceStencilOp,
+  });
+  const overlays: THREE.Mesh[] = [];
   function applyHighlight(part: string) {
+    highlighted = part;
+    for (const o of overlays.splice(0)) o.removeFromParent();
     for (const p of parts) {
       const mat = p.mesh.material as THREE.MeshStandardMaterial;
-      const on = p.partId === part && p.name !== 'skull' && p.name !== 'skull-surgery';
-      mat.emissive.copy(on ? HIGHLIGHT : new THREE.Color(0x000000));
-      mat.emissiveIntensity = on ? 0.45 : 0;
+      const on = isSelected(p, part);
+      mat.emissive.copy(on ? HIGHLIGHT : BLACK);
+      mat.emissiveIntensity = on ? 0.6 : 0;
+      if (on && p.model === 'realistic') {
+        const o = new THREE.Mesh(p.mesh.geometry, overlayMaterial);
+        o.renderOrder = 2800;
+        o.onAfterRender = (r) => r.clearStencil();
+        p.mesh.add(o);
+        overlays.push(o);
+      }
+    }
+    updateOutline();
+  }
+
+  // The outline: where the cut plane passes through the selected structure (realistic model only).
+  const outlineMaterial = new LineMaterial({ color: OUTLINE.getHex(), linewidth: 2, depthTest: false, transparent: true });
+  const outline = new LineSegments2(new LineSegmentsGeometry(), outlineMaterial);
+  outline.renderOrder = 2900;
+  outline.visible = false;
+  outline.frustumCulled = false;
+  scene.add(outline);
+  const triA = new THREE.Vector3(), triB = new THREE.Vector3(), triC = new THREE.Vector3();
+  function updateOutline() {
+    const st = store.get();
+    const depth = cutDepth(st.cut);
+    const points: number[] = [];
+    if (realisticShown()) {
+      for (const p of parts) {
+        if (p.model !== 'realistic' || !p.mesh.visible || !isSelected(p, highlighted)) continue;
+        const pos = p.mesh.geometry.getAttribute('position');
+        const index = p.mesh.geometry.getIndex();
+        const count = index ? index.count : pos.count;
+        p.mesh.updateWorldMatrix(true, false);
+        const m = p.mesh.matrixWorld;
+        const vert = (i: number, v: THREE.Vector3) => v.fromBufferAttribute(pos, index ? index.getX(i) : i).applyMatrix4(m);
+        for (let i = 0; i < count; i += 3) {
+          vert(i, triA);
+          vert(i + 1, triB);
+          vert(i + 2, triC);
+          // Where the triangle crosses the plane z = depth, the crossing is one piece of the outline.
+          const cross: THREE.Vector3[] = [];
+          for (const [a, b] of [[triA, triB], [triB, triC], [triC, triA]] as const) {
+            const da = a.z - depth, db = b.z - depth;
+            if ((da < 0) !== (db < 0)) cross.push(a.clone().lerp(b, da / (da - db)));
+          }
+          if (cross.length === 2) points.push(cross[0].x, cross[0].y, depth + 0.2, cross[1].x, cross[1].y, depth + 0.2);
+        }
+      }
+    }
+    outline.visible = points.length > 0;
+    if (outline.visible) {
+      outline.geometry.dispose();
+      outline.geometry = new LineSegmentsGeometry().setPositions(points);
     }
   }
 
@@ -1008,6 +1115,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     if (labelsHost) labelsHost.hidden = !st.labels;
     overlayPlane.constant = cutDepth(st.cut) + 1;
     buildFlow(st.condition, simpleShown ? null : realisticLandmarks);
+    updateOutline();
     // Flow marks follow the fluid spaces of the model on show (the figure's, or the realistic model's own).
     flowGroup.visible = st.flow && st.layers.csf.on && (simpleShown || !!realisticLandmarks?.flow);
     if (flowGroup.visible && !stillOnly()) startFlowLoop();

@@ -535,3 +535,20 @@ test('phones: the 3D view draws at lower resolution only while a finger turns it
   await expect.poll(width).toBe(Math.round(box.width * 2));
   await ctx.close();
 });
+
+test('phones: the Realistic switch is with the view tools, and loads the lighter model', async ({ browser }) => {
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, hasTouch: true, isMobile: true });
+  const page = await ctx.newPage();
+  const models: string[] = [];
+  page.on('request', (r) => r.url().endsWith('.glb') && models.push(r.url()));
+  await page.goto('/explorer/');
+  await expect(page.locator('.x-view.has-3d')).toBeVisible({ timeout: 30000 });
+  const toggle = page.locator('[data-model-toggle]');
+  await expect(toggle).toBeVisible();
+  await expect(toggle).toHaveAttribute('aria-pressed', 'false');
+  await toggle.click();
+  await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+  await expect(toggle).toHaveAttribute('aria-busy', 'false', { timeout: 60000 });
+  expect(models.some((u) => u.endsWith('/realistic-phone.glb'))).toBe(true);
+  await ctx.close();
+});

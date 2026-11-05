@@ -3,13 +3,14 @@
  * Site footer: medical disclaimer, sources and model credit, more links.
  * The disclaimer and credit must appear on every page (CLAUDE.md rules 1 and 3).
  */
-import { getStrings, routes, externalLinks } from '../i18n';
+import { getStrings, getRoutes, externalLinks, otherLanguagePath } from '../i18n';
+const routes = getRoutes(Astro.currentLocale);
 
 interface Props {
   dark?: boolean;
 }
 const { dark = false } = Astro.props;
-const t = getStrings().footer;
+const t = getStrings(Astro.currentLocale).footer;
 const links = [
   { href: routes.support, label: t.links.support },
   { href: routes.kit, label: t.links.kit },
@@ -18,7 +19,9 @@ const links = [
   { href: routes.about, label: t.links.about },
   { href: routes.privacy, label: t.links.privacy },
 ];
-const espanol = getStrings().header.espanol;
+const espanol = getStrings(Astro.currentLocale).header.espanol;
+const otherLang = Astro.currentLocale === 'es' ? 'en' : 'es';
+const otherHref = otherLanguagePath(Astro.url.pathname);
 ---
 
 <footer class:list={['site-footer', { dark }]}>
@@ -31,7 +34,7 @@ const espanol = getStrings().header.espanol;
     </p>
     <nav class="more" aria-label={t.moreNavLabel}>
       {links.map((link) => <a href={link.href}>{link.label}</a>)}
-      <a href={routes.es} lang="es" hreflang="es">{espanol}</a>
+      <a href={otherHref} lang={otherLang} hreflang={otherLang} data-other-lang>{espanol}</a>
     </nav>
   </div>
 </footer>

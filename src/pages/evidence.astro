@@ -11,13 +11,17 @@ import Base from '../layouts/Base.astro';
 import { getStrings } from '../i18n';
 import { Content } from '../../docs/EVIDENCE.md';
 
-const t = getStrings().explorer;
+const s = getStrings(Astro.currentLocale);
+const t = s.explorer;
+// The evidence file itself is in English (its sources are too); Spanish pages say so above it.
+const spanish = Astro.currentLocale === 'es';
 ---
 
 <Base title={t.evidencePage}>
   <div class="ev container">
     <h1 class="serif">{t.evidencePage}</h1>
-    <div class="md">
+    {spanish && <p class="lang-note">{s.evidence.inEnglish}</p>}
+    <div class="md" lang={spanish ? 'en' : undefined}>
       <Content />
     </div>
   </div>
@@ -33,6 +37,11 @@ const t = getStrings().explorer;
     font-size: var(--h1);
     line-height: 1.08;
     margin-bottom: var(--s-24);
+  }
+  .lang-note {
+    max-width: 44em;
+    margin-bottom: var(--s-24);
+    color: var(--ink-2);
   }
   /* The file's own title is the page title above. */
   .md :global(h1) {

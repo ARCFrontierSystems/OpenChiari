@@ -1,0 +1,994 @@
+{
+  "_note": "Spanish UI text, pending medical-translator review (CLAUDE.md 'Translations'). Same keys as en.json; medical terms from docs/SPANISH-GLOSSARY.md. The side-by-side review file is docs/SPANISH-REVIEW.md. 'wide' = desktop wording, 'narrow' = phone wording.",
+  "siteName": "Open Chiari",
+  "metaDescription": "En la malformación de Chiari, la parte más baja del cerebelo queda por debajo de la abertura donde el cerebro se une con la médula espinal. Explórela en 3D, gratis.",
+  "skipLink": "Saltar al contenido",
+  "header": {
+    "mainNavLabel": "Principal",
+    "menu": "Menú",
+    "nav": {
+      "explorer": "Explorador 3D",
+      "explain": "Explain It",
+      "studies": "Estudios de investigación",
+      "prep": "Prepare su cita",
+      "model": "Modelo abierto",
+      "support": "Apoyo"
+    },
+    "espanol": "English",
+    "calm": "Modo tranquilo"
+  },
+  "translation": {
+    "label": "Sobre esta traducción",
+    "notice": "Traducción pendiente de revisión por un traductor médico. Se hizo con ayuda de herramientas de inteligencia artificial, y la versión en inglés es la de referencia.",
+    "noticeShort": "Traducción pendiente de revisión por un traductor médico.",
+    "link": "Ver en inglés"
+  },
+  "calm": {
+    "on": "Tranquilo activado",
+    "noteStrong": "El modo tranquilo está activado.",
+    "noteRest": "Sin movimiento ni rotación automática, texto más grande y colores más suaves. Puede desactivarlo cuando quiera.",
+    "lede": "En la malformación de Chiari, la parte más baja del cerebelo queda por debajo de la abertura donde el cerebro se une con la médula espinal.",
+    "figCaption": "Imagen fija. Chiari I: la amígdala cerebelosa se extiende por debajo de la línea punteada. Las amígdalas cerebelosas se muestran en su punto más bajo, donde se miden en la resonancia magnética. Ilustración, no es una imagen médica.",
+    "explorerNote": "En el modo tranquilo, el modelo solo se mueve cuando usted lo mueve."
+  },
+  "home": {
+    "eyebrow": "Malformación de Chiari, tipo I",
+    "title": "Vea lo que pasa en la base del cráneo.",
+    "lede": {
+      "wide": "En la malformación de Chiari, la parte más baja del cerebelo queda por debajo de la abertura donde el cerebro se une con la médula espinal. Explórela en 3D, gratis y en lenguaje sencillo.",
+      "narrow": "En la malformación de Chiari, la parte más baja del cerebelo queda por debajo de la abertura donde el cerebro se une con la médula espinal. Explórela en 3D, gratis."
+    },
+    "openExplorer": "Abrir el explorador 3D",
+    "tour": "Hacer el recorrido de 2 minutos",
+    "figNumber": "Fig. 1",
+    "figCaption": {
+      "wide": "Vista de la línea media en Chiari I. La amígdala cerebelosa (06) se extiende por debajo de la línea punteada que cruza la abertura del cráneo. En realidad, las amígdalas cerebelosas están justo a cada lado de la línea media; aquí se muestran donde se miden en la resonancia magnética, en su punto más bajo. Ilustración, no es una imagen médica.",
+      "narrow": "Chiari I. La amígdala cerebelosa se extiende por debajo de la línea punteada. Las amígdalas cerebelosas se muestran en su punto más bajo, donde se miden en la resonancia magnética. Ilustración, no es una imagen médica."
+    },
+    "whatIs": {
+      "title": "¿Qué es la malformación de Chiari?",
+      "whatItIs": {
+        "title": "Qué es",
+        "wide": "Las amígdalas cerebelosas, la parte más baja del cerebelo, se extienden por debajo del agujero magno, la abertura en la base del cráneo. El cerebelo ayuda a controlar el equilibrio y la coordinación. A menudo, la malformación está relacionada con que la parte posterior e inferior del cráneo es más pequeña o tiene otra forma, lo que deja poco espacio al cerebro. Con menos frecuencia, aparece más adelante en la vida por otras causas.",
+        "narrow": "Las amígdalas cerebelosas, la parte más baja del cerebelo, se extienden por debajo de la abertura en la base del cráneo. A menudo, la malformación está relacionada con que la parte posterior e inferior del cráneo es más pequeña o tiene otra forma, lo que deja poco espacio al cerebro. Con menos frecuencia, aparece más adelante en la vida por otras causas."
+      },
+      "whoHasIt": {
+        "title": "Quién la tiene",
+        "wide": "La mayoría de las personas nacen con las diferencias del cráneo que la causan. Algunas nunca tienen síntomas; otras los notan por primera vez en la adolescencia o en la edad adulta.",
+        "narrow": "La mayoría de las personas nacen con las diferencias del cráneo que la causan. Algunas nunca tienen síntomas; otras los notan por primera vez en la adolescencia o en la edad adulta."
+      },
+      "howFound": {
+        "title": "Cómo se detecta",
+        "wide": "Por lo general, con una resonancia magnética y un examen médico; a veces, por casualidad, durante un estudio por otro motivo. El médico revisa las imágenes junto con sus síntomas.",
+        "narrow": "Por lo general, con una resonancia magnética y un examen médico; a veces, por casualidad."
+      }
+    },
+    "feel": {
+      "title": "Qué se puede sentir",
+      "intro": "Chiari es diferente en cada persona, y muchas personas con el tipo I no tienen ningún síntoma.",
+      "classic": {
+        "wide": "El síntoma clásico es un dolor de cabeza en la parte de atrás de la cabeza que aparece después de toser, estornudar o hacer un esfuerzo.",
+        "narrow": "El síntoma clásico es un dolor de cabeza en la parte de atrás de la cabeza después de toser, estornudar o hacer un esfuerzo."
+      },
+      "listLabel": "Otros síntomas que describen las personas",
+      "symptoms": [
+        {
+          "wide": "Dolor de cuello",
+          "narrow": "Dolor de cuello"
+        },
+        {
+          "wide": "Mareos y problemas de equilibrio",
+          "narrow": "Mareos y problemas de equilibrio"
+        },
+        {
+          "wide": "Entumecimiento u hormigueo en las manos y los pies",
+          "narrow": "Entumecimiento u hormigueo en manos y pies"
+        },
+        {
+          "wide": "Debilidad o dificultad para hacer movimientos finos con las manos",
+          "narrow": "Debilidad o dificultad para hacer movimientos finos con las manos"
+        },
+        {
+          "wide": "Dificultad para tragar o para hablar",
+          "narrow": "Dificultad para tragar o para hablar"
+        },
+        {
+          "wide": "Problemas para respirar o para dormir, como la apnea del sueño",
+          "narrow": "Problemas para respirar o para dormir"
+        },
+        {
+          "wide": "Zumbido en los oídos",
+          "narrow": "Zumbido en los oídos"
+        },
+        {
+          "wide": "Visión borrosa o doble",
+          "narrow": "Visión borrosa o doble"
+        },
+        {
+          "wide": "Una curvatura de la columna (escoliosis), sobre todo en niños",
+          "narrow": "Una curvatura de la columna (escoliosis)"
+        }
+      ],
+      "noSymptoms": "Muchas personas con el tipo I no tienen ningún síntoma."
+    },
+    "myths": {
+      "title": "Ideas equivocadas comunes",
+      "items": [
+        {
+          "myth": "\"Es solo un dolor de cabeza fuerte\".",
+          "wide": "Chiari es una diferencia en la estructura que puede afectar el equilibrio, los nervios y el flujo del líquido cefalorraquídeo, no solo causar dolores de cabeza.",
+          "narrow": "También puede afectar el equilibrio, los nervios y el flujo del líquido cefalorraquídeo."
+        },
+        {
+          "myth": "\"La medida lo dice todo\".",
+          "wide": "Tradicionalmente, los médicos usan como límite unos 5 mm por debajo de la abertura. Lo que bajan las amígdalas cerebelosas no siempre coincide con cómo se siente una persona. Algunas personas con un descenso claro no tienen síntomas, y algunas con menos de 5 mm sí los tienen. Los médicos también observan la forma de las amígdalas cerebelosas, el flujo del líquido cefalorraquídeo y si hay una siringe.",
+          "narrow": "Lo que bajan las amígdalas cerebelosas no siempre coincide con cómo se siente una persona. Los médicos también observan su forma, el flujo del líquido y si hay una siringe."
+        }
+      ]
+    },
+    "tools": {
+      "title": "Herramientas",
+      "items": [
+        {
+          "num": "01",
+          "page": "explorer",
+          "title": "Explorador 3D",
+          "wide": "Compare la anatomía típica con Chiari, con siringe y después de la cirugía. Retire capas y corte el modelo.",
+          "narrow": "Compare la anatomía típica, Chiari, siringe y después de la cirugía."
+        },
+        {
+          "num": "02",
+          "page": "explain",
+          "title": "Explain It (Explíquelo)",
+          "wide": "Envíe a su familia, a sus maestros o a su empleador un enlace a la vista que corresponde a su diagnóstico.",
+          "narrow": "Envíe un enlace a la vista que corresponde a su diagnóstico."
+        },
+        {
+          "num": "03",
+          "page": "studies",
+          "title": "Estudios de investigación",
+          "wide": "Estudios sobre Chiari y siringomielia que buscan participantes, actualizados a diario.",
+          "narrow": "Estudios que buscan participantes, actualizados a diario."
+        },
+        {
+          "num": "04",
+          "page": "prep",
+          "title": "Prepare su cita médica",
+          "wide": "Haga una lista de preguntas de una página para su próxima cita. No se guarda nada.",
+          "narrow": "Una lista de preguntas para imprimir. No se guarda nada."
+        },
+        {
+          "num": "05",
+          "page": "model",
+          "title": "Modelo abierto",
+          "wide": "Gratis para descargar e insertar en sitios web, para fundaciones, enfermeros y maestros.",
+          "narrow": "Gratis para descargar e insertar."
+        },
+        {
+          "num": "06",
+          "page": "support",
+          "title": "Apoye a las organizaciones de Chiari",
+          "wide": "Done o sea voluntario en los grupos que financian la investigación y mantienen registros de pacientes.",
+          "narrow": "Done o sea voluntario en sus propios sitios web."
+        }
+      ]
+    }
+  },
+  "footer": {
+    "notAdvice": "No es consejo médico.",
+    "notAdviceRest": {
+      "wide": "Hable con su médico sobre su propia atención médica.",
+      "narrow": "Hable con su médico sobre su propia atención médica."
+    },
+    "factsBefore": "Información adaptada de la",
+    "ninds": "hoja informativa del NINDS",
+    "modelBefore": ". Modelo 3D de Open Chiari, CC BY-SA 4.0, adaptado de",
+    "zAnatomy": "Z-Anatomy",
+    "modelAfter": "(CC BY-SA 4.0) y BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 JP).",
+    "personalProject": "Un proyecto personal de Matthew Borgfeld.",
+    "moreNavLabel": "Más",
+    "links": {
+      "support": "Apoyo",
+      "kit": "Kit de concientización",
+      "impact": "Impacto",
+      "openSource": "Código abierto",
+      "about": "Acerca de y contacto",
+      "privacy": "Privacidad"
+    }
+  },
+  "figure": {
+    "ariaPrefix": "Corte de la línea media de la cabeza y el cuello, ",
+    "aria": {
+      "typical": "anatomía típica: las amígdalas cerebelosas están por encima de la abertura en la base del cráneo",
+      "chiari": "Chiari I: las amígdalas cerebelosas se extienden por debajo de la abertura en la base del cráneo y a menudo reducen el espacio del líquido cefalorraquídeo",
+      "syrinx": "Chiari I con siringe, una cavidad llena de líquido dentro de la médula espinal",
+      "surgery": "después de la cirugía de descompresión: se retiró hueso de la parte de atrás de la abertura del cráneo y la parte de atrás de la primera vértebra, lo que abre el espacio del líquido"
+    },
+    "labels": {
+      "cerebrum": "Cerebro",
+      "callosum": "Cuerpo calloso",
+      "cerebellum": "Cerebelo",
+      "fourthVentricle": "Cuarto ventrículo",
+      "brainstem": "Tronco encefálico",
+      "tonsil": "Amígdala cerebelosa",
+      "foramen": "Agujero magno",
+      "foramenNote": "abertura en la base del cráneo",
+      "foramenNoteSurgery": "línea punteada: donde estaban sus bordes",
+      "cord": "Médula espinal",
+      "csf": "Líquido cefalorraquídeo (LCR)",
+      "c2": "Vértebra C2",
+      "syrinx": "Siringe",
+      "syrinxNote": "cavidad de líquido en la médula espinal",
+      "boneRemoved": "Hueso retirado",
+      "boneRemovedNote": "borde del cráneo y arco de C1"
+    }
+  },
+  "explorer": {
+    "title": "Explorador 3D",
+    "backHome": "Volver al inicio",
+    "explain": "Explain It",
+    "explainAria": "Explain It: compartir esta vista",
+    "condition": "Afección",
+    "conditions": {
+      "typical": {
+        "label": "Anatomía típica",
+        "short": "Típica",
+        "note": "Las amígdalas cerebelosas suelen estar a la altura de la línea punteada que cruza la abertura del cráneo o por encima de ella (unos pocos milímetros por debajo todavía puede ser normal), y el líquido cefalorraquídeo circula libremente a su alrededor.",
+        "noteShort": "Las amígdalas cerebelosas suelen estar a la altura de la abertura del cráneo o por encima (unos pocos milímetros por debajo puede ser normal); el líquido circula libremente."
+      },
+      "chiari": {
+        "label": "Chiari I",
+        "short": "Chiari I",
+        "note": "Las amígdalas cerebelosas se extienden por debajo de la abertura, al menos unos 5 mm según la definición habitual. En un estudio de 160 personas con Chiari I, el promedio fue de unos 12 mm, pero varió de 5 a 25 mm, y la cifra por sí sola no decide quién necesita cirugía. A menudo tienen forma puntiaguda en lugar de redondeada. El espacio del líquido detrás de ellas a menudo queda reducido, y en muchas personas el flujo del líquido se hace más lento o se bloquea ahí.",
+        "noteShort": "Las amígdalas cerebelosas se extienden por debajo de la abertura y a menudo reducen el espacio del líquido; en muchas personas el flujo se hace más lento ahí."
+      },
+      "syrinx": {
+        "label": "Chiari I con siringe",
+        "short": "Con siringe",
+        "note": "Una siringe es una cavidad llena de líquido dentro de la médula espinal. A menudo aparece junto con Chiari, sobre todo en la parte de la médula espinal que está en el cuello.",
+        "noteShort": "Se formó una cavidad llena de líquido dentro de la médula espinal."
+      },
+      "surgery": {
+        "label": "Después de la descompresión",
+        "short": "Después de la cirugía",
+        "note": "Los cirujanos retiran un pequeño trozo de hueso de la parte de atrás de la abertura del cráneo y, a menudo, la parte de atrás de la primera vértebra. A menudo también abren la membrana que cubre el cerebro y le colocan un parche para dar más espacio al líquido cefalorraquídeo. Las amígdalas cerebelosas a menudo suben solo en parte. La cirugía mejora o estabiliza los síntomas en la mayoría de las personas, aunque el daño que ya ocurrió puede no revertirse por completo, y algunas personas necesitan más de una operación. Los resultados varían, y la cirugía no es adecuada para todos.",
+        "noteShort": "Se retira hueso de la parte de atrás de la abertura para dar espacio. La mayoría de las personas mejoran o se estabilizan, pero los resultados varían, algunas necesitan otra operación y la cirugía no es adecuada para todos."
+      }
+    },
+    "layers": "Capas",
+    "layerNames": {
+      "skin": "Piel",
+      "bone": "Cráneo y columna",
+      "brain": "Cerebro",
+      "csf": "Líquido cefalorraquídeo",
+      "nerves": "Nervios",
+      "vessels": "Vasos sanguíneos"
+    },
+    "opacitySuffix": ": opacidad",
+    "cutaway": "Corte",
+    "cutawayAria": "Profundidad del corte",
+    "cutWhole": "Entero",
+    "cutMidline": "Línea media",
+    "cutFar": "Lado opuesto",
+    "model": "Modelo",
+    "realistic": "Realista",
+    "simple": "Sencillo",
+    "viewTools": "Herramientas de la vista",
+    "flow": "Flujo del líquido",
+    "flowShort": "Flujo",
+    "labels": "Nombres",
+    "measure": "Medir",
+    "close": "Cerrar",
+    "viewerLabel": "Vista de la anatomía",
+    "captionIllustration": "Ilustración, no es una imagen médica",
+    "captionFlow": "Flujo del líquido simplificado",
+    "captionTonsils": "Las amígdalas cerebelosas se muestran en su punto más bajo, donde se miden en la resonancia magnética",
+    "evidence": "Notas de evidencia de esta vista",
+    "structures": "Estructuras",
+    "search": "Buscar partes",
+    "selected": "seleccionada",
+    "partsButton": "Lista de partes · toque una parte del modelo",
+    "parts": [
+      {
+        "id": "cerebrum",
+        "num": "01",
+        "name": "Cerebro",
+        "text": "La parte más grande del encéfalo, encargada del pensamiento, el movimiento y los sentidos."
+      },
+      {
+        "id": "callosum",
+        "num": "02",
+        "name": "Cuerpo calloso",
+        "text": "Una banda gruesa de fibras nerviosas que une las mitades izquierda y derecha del cerebro."
+      },
+      {
+        "id": "cerebellum",
+        "num": "03",
+        "name": "Cerebelo",
+        "text": "La parte de atrás del encéfalo que ayuda a controlar el equilibrio y la coordinación."
+      },
+      {
+        "id": "ventricle",
+        "num": "04",
+        "name": "Cuarto ventrículo",
+        "text": "Un pequeño espacio lleno de líquido entre el tronco encefálico y el cerebelo, por donde pasa el líquido cefalorraquídeo."
+      },
+      {
+        "id": "brainstem",
+        "num": "05",
+        "name": "Tronco encefálico",
+        "text": "Une el cerebro con la médula espinal y controla funciones automáticas como la respiración, el ritmo cardíaco y la deglución."
+      },
+      {
+        "id": "tonsil",
+        "num": "06",
+        "name": "Amígdala cerebelosa",
+        "text": "Las dos partes más bajas del cerebelo. En Chiari, se extienden por debajo de la abertura en la base del cráneo y a menudo tienen forma puntiaguda (de clavija) en lugar de redondeada. En realidad, están justo a cada lado de la línea media y a menudo bajan de forma desigual; el modelo las muestra en su punto más bajo, donde se miden en la resonancia magnética."
+      },
+      {
+        "id": "foramen",
+        "num": "07",
+        "name": "Agujero magno",
+        "text": "La abertura en la base del cráneo donde el tronco encefálico se convierte en la médula espinal."
+      },
+      {
+        "id": "cord",
+        "num": "08",
+        "name": "Médula espinal",
+        "text": "Lleva las señales entre el cerebro y el resto del cuerpo."
+      },
+      {
+        "id": "csf",
+        "num": "09",
+        "name": "Líquido cefalorraquídeo (LCR)",
+        "text": "Un líquido transparente que amortigua el cerebro y la médula espinal. Con cada latido del corazón, se mueve de un lado a otro entre el cráneo y el canal espinal."
+      },
+      {
+        "id": "c2",
+        "num": "10",
+        "name": "Vértebra C2",
+        "text": "El segundo hueso del cuello. Su saliente hacia arriba, la apófisis odontoides, está justo delante de la médula espinal."
+      },
+      {
+        "id": "syrinx",
+        "num": "11",
+        "name": "Siringe",
+        "conditions": [
+          "syrinx"
+        ],
+        "text": "Una cavidad llena de líquido dentro de la médula espinal. A menudo aparece junto con Chiari, sobre todo en la parte de la médula espinal que está en el cuello."
+      },
+      {
+        "id": "removed",
+        "num": "11",
+        "name": "Hueso retirado",
+        "conditions": [
+          "surgery"
+        ],
+        "text": "Los cirujanos retiran un pequeño trozo de hueso de la parte de atrás de la abertura del cráneo y, a menudo, la parte de atrás de la primera vértebra."
+      }
+    ],
+    "viewOptions": "Vista y capas",
+    "hint": "Arrastre para girar · Desplácese para acercar o alejar · Mayús y arrastrar para mover",
+    "camera": "Cámara",
+    "cameraViews": {
+      "side": "Lado",
+      "back": "Atrás",
+      "below": "Abajo",
+      "front": "Frente"
+    },
+    "resetCamera": "Restablecer la cámara",
+    "viewerRole": "Modelo 3D",
+    "keysHelp": "Las flechas giran el modelo. Mayús y las flechas lo mueven. Más y menos acercan y alejan. Pulse 1 para la vista de lado, 2 para atrás, 3 para abajo, 4 para el frente y 0 para restablecer.",
+    "viewNames": {
+      "side": "Vista de lado",
+      "back": "Vista desde atrás",
+      "below": "Vista desde abajo",
+      "front": "Vista de frente",
+      "custom": "Vista girada"
+    },
+    "cutNames": {
+      "whole": "Modelo entero",
+      "near": "Corte parcial, sin el lado cercano",
+      "midline": "Corte en la línea media",
+      "far": "Corte pasada la línea media, hacia el lado opuesto"
+    },
+    "evidencePage": "Notas de evidencia"
+  },
+  "evidence": {
+    "inEnglish": "Estas notas están en inglés, igual que las fuentes que citan."
+  },
+  "prep": {
+    "title": "Prepárese para su próxima cita",
+    "intro": {
+      "wide": "Marque las preguntas que quiere hacer, agregue las suyas e imprima una hoja de una página. Todo se queda en su dispositivo; no se guarda ni se envía nada.",
+      "narrow": "Marque lo que quiere preguntar. No se guarda ni se envía nada."
+    },
+    "formLabel": "Elija las preguntas",
+    "groups": [
+      {
+        "id": "diagnosis",
+        "title": "Sobre mi diagnóstico",
+        "questions": [
+          {
+            "id": "type",
+            "text": "¿Qué tipo de Chiari tengo?",
+            "checked": true
+          },
+          {
+            "id": "mri",
+            "text": "¿Me puede dar una copia del informe y las imágenes de mi resonancia magnética?",
+            "checked": true
+          },
+          {
+            "id": "syrinx",
+            "text": "¿Tengo una siringe?",
+            "checked": false
+          }
+        ]
+      },
+      {
+        "id": "symptoms",
+        "title": "Mis síntomas",
+        "questions": [
+          {
+            "id": "which",
+            "text": "¿Cuáles de mis síntomas cree usted que vienen de Chiari?",
+            "narrow": "¿Cuáles de mis síntomas cree usted que vienen de Chiari?",
+            "checked": true
+          },
+          {
+            "id": "er",
+            "text": "¿Qué cambios deberían hacer que lo llame o que vaya a la sala de emergencias?",
+            "narrow": "¿Qué debería hacer que lo llame o que vaya a emergencias?",
+            "checked": true
+          }
+        ]
+      },
+      {
+        "id": "tests",
+        "title": "Pruebas y seguimiento",
+        "questions": [
+          {
+            "id": "cine",
+            "text": "¿Necesito una resonancia magnética de flujo (cine-RM) u otras pruebas?",
+            "checked": false
+          },
+          {
+            "id": "followup",
+            "text": "¿Necesito estudios de control y, si es así, cada cuánto?",
+            "checked": false
+          }
+        ]
+      },
+      {
+        "id": "treatment",
+        "title": "Tratamiento",
+        "questions": [
+          {
+            "id": "options",
+            "text": "¿Cuáles son mis opciones de tratamiento, incluido el seguimiento?",
+            "checked": true
+          },
+          {
+            "id": "candidate",
+            "text": "¿La cirugía de descompresión es una opción para mí? ¿Por qué sí o por qué no?",
+            "checked": false
+          },
+          {
+            "id": "experience",
+            "text": "¿Cuántas de estas cirugías ha hecho usted y cómo es la recuperación?",
+            "checked": false
+          }
+        ]
+      },
+      {
+        "id": "daily",
+        "title": "Vida diaria e investigación",
+        "questions": [
+          {
+            "id": "avoid",
+            "text": "¿Hay actividades que debería evitar?",
+            "checked": false
+          },
+          {
+            "id": "studies",
+            "text": "¿Hay estudios de investigación en los que podría participar?",
+            "checked": true
+          }
+        ]
+      }
+    ],
+    "addOwn": "Agregue su propia pregunta",
+    "add": "Agregar",
+    "mention": "Cosas que quiero mencionar",
+    "sheetCount": {
+      "one": "Su hoja · 1 pregunta",
+      "other": "Su hoja · {n} preguntas"
+    },
+    "selectedCount": {
+      "one": "1 pregunta seleccionada",
+      "other": "{n} preguntas seleccionadas"
+    },
+    "sheetTitle": "Preguntas para mi médico",
+    "answerSpace": "Al imprimir, se agrega espacio para las respuestas debajo de cada pregunta.",
+    "print": "Imprimir la hoja",
+    "previewPrint": "Ver e imprimir",
+    "pdf": "Guardar como PDF",
+    "diagram": "Incluir un pequeño diagrama de Chiari",
+    "pageNote": "No es consejo médico. Lo que elija en esta página nunca se guarda ni se envía.",
+    "sheetMeta": "Malformación de Chiari · Fecha: ____________ · Médico: ______________________",
+    "sheetFooter": "Hecho con Open Chiari · openchiari.org · No es consejo médico",
+    "diagramCaption": "Chiari I. Las amígdalas cerebelosas se muestran en su punto más bajo, donde se miden en la resonancia magnética. Ilustración, no es una imagen médica."
+  },
+  "support": {
+    "title": "Apoye a los grupos que hacen el trabajo",
+    "intro": {
+      "wide": "Estas organizaciones sin fines de lucro financian la investigación, mantienen registros de pacientes y apoyan a las familias. Open Chiari no acepta donaciones; cada enlace de abajo lleva directamente a la página de la organización.",
+      "narrow": "Open Chiari no acepta donaciones. Cada enlace lleva a la página de la organización."
+    },
+    "orgs": [
+      {
+        "id": "bjcsf",
+        "name": "Bobby Jones Chiari & Syringomyelia Foundation",
+        "text": {
+          "wide": "Mantiene un registro internacional de pacientes (las nuevas inscripciones están en pausa), organiza un coloquio anual de investigación y financia becas y subvenciones para la investigación de Chiari.",
+          "narrow": "Registro internacional de pacientes (inscripciones en pausa), un coloquio anual de investigación, y becas y subvenciones para la investigación."
+        },
+        "tags": "Investigación · Registro de pacientes · Educación",
+        "second": "Registro e investigación"
+      },
+      {
+        "id": "conquer",
+        "name": "Conquer Chiari",
+        "text": {
+          "wide": "Financia la investigación de Chiari, publica materiales educativos para pacientes y apoyó el registro de pacientes Chiari1000 (ya cerrado).",
+          "narrow": "Financia la investigación y publica materiales educativos para pacientes."
+        },
+        "tags": "Financiación de la investigación · Educación",
+        "second": "Más información"
+      },
+      {
+        "id": "asap",
+        "name": "ASAP: American Syringomyelia & Chiari Alliance Project",
+        "text": {
+          "wide": "Apoya a pacientes y familias, publica un boletín y ha ayudado a financiar la investigación sobre la genética de Chiari.",
+          "narrow": "Apoyo a pacientes y familias, un boletín y financiación de la investigación."
+        },
+        "tags": "Apoyo a pacientes · Financiación de la investigación",
+        "second": "Más información"
+      }
+    ],
+    "donate": "Donar en el sitio web de la organización",
+    "checked": "Descripciones y enlaces revisados en noviembre de 2026. [Antes del lanzamiento: confirmar con cada organización.]",
+    "otherTitle": "Otras formas de ayudar",
+    "other": [
+      {
+        "id": "studies",
+        "title": "Participe en un estudio de investigación",
+        "text": "Estudios que buscan participantes ahora, actualizados a diario."
+      },
+      {
+        "id": "kit",
+        "title": "Difunda información en septiembre",
+        "text": "Gráficos y tarjetas gratis para el Mes de Concientización sobre Chiari."
+      },
+      {
+        "id": "explain",
+        "title": "Comparta un enlace de Explain It",
+        "text": "Ayude hoy a una persona a entender Chiari."
+      }
+    ],
+    "notAffiliated": "Open Chiari no está afiliado a estas organizaciones y no recibe nada de las donaciones. Sus sitios web pueden estar solo en inglés."
+  },
+  "about": {
+    "title": "Acerca de Open Chiari",
+    "intro": "Open Chiari es un sitio web gratuito e independiente que ayuda a las personas a ver y entender la malformación de Chiari, y les indica las organizaciones y las investigaciones que hacen avanzar este campo.",
+    "howTitle": "Cómo se hace el contenido",
+    "how": {
+      "factsBefore": "La información médica está adaptada de la",
+      "ninds": "hoja informativa del NINDS",
+      "factsAfter": "y de investigaciones revisadas por pares, que se indican en cada página.",
+      "modelBefore": "El modelo 3D está hecho a partir de",
+      "zAnatomy": "Z-Anatomy",
+      "modelAfter": "y BodyParts3D, datos de anatomía abiertos.",
+      "checks": "Los textos y cada vista 3D se comparan con las fuentes publicadas que aparecen en las notas de evidencia, mediante mediciones automáticas y auditorías independientes, antes de publicarse. No han sido revisados por un profesional médico. Última comprobación: 4 de noviembre de 2026.",
+      "ai": "Herramientas de inteligencia artificial ayudaron a escribir el código y los primeros borradores; una persona revisa cada página."
+    },
+    "principlesTitle": "Principios",
+    "principles": [
+      {
+        "term": "Gratis, siempre",
+        "text": "Sin muros de pago, anuncios ni planes premium."
+      },
+      {
+        "term": "Sin datos personales",
+        "text": "Sin cuentas y sin cookies.",
+        "link": "Lea la política de privacidad",
+        "href": "privacy"
+      },
+      {
+        "term": "Código abierto",
+        "text": "El código y el modelo son públicos, para que cualquiera pueda mantener el proyecto.",
+        "link": "Vea el código",
+        "href": "openSource"
+      },
+      {
+        "term": "Independiente",
+        "text": "Sin afiliación con ninguna empresa, hospital ni organización sin fines de lucro, y sin dinero de donaciones."
+      },
+      {
+        "term": "No es consejo médico",
+        "text": "Open Chiari explica; su médico diagnostica y trata."
+      }
+    ],
+    "correctionsTitle": "Correcciones",
+    "corrections": "¿Ve algo incorrecto o desactualizado? Escríbanos con la página y lo que hay que corregir. Las correcciones se hacen lo antes posible y se anotan en el registro de cambios.",
+    "contactTitle": "Contacto",
+    "contact": "Para correcciones, organizaciones, investigadores y prensa.",
+    "email": "hello@openchiari.org",
+    "noMedical": "Por favor, no envíe información médica. Open Chiari no puede dar consejos médicos.",
+    "madeByTitle": "Hecho por",
+    "madeBy": "Matthew Borgfeld, como proyecto independiente."
+  },
+  "privacy": {
+    "title": "Privacidad",
+    "updated": "Última actualización: 5 de noviembre de 2026",
+    "short": "En resumen: Open Chiari no sabe quién es usted, no usa cookies y nunca recopila información de salud.",
+    "countedTitle": "Lo que se cuenta",
+    "counted": {
+      "before": "Para mostrar los totales en la",
+      "impact": "página de Impacto",
+      "after": ", el sitio cuenta las visitas y algunas acciones: abrir el modelo 3D, crear un enlace de Explain It y abrir la ficha de un estudio. Para contar se usa el contador propio de Open Chiari, que no usa cookies ni crea un perfil suyo. Su navegador envía solo el nombre de la acción, y el contador suma 1 a un total. No guarda su dirección, dispositivo, navegador, país, la página de la que viene ni el enlace. Cuando el modelo 3D se muestra en otro sitio web, se anota la dirección de ese sitio, para que la página de Impacto pueda contar los sitios que lo usan."
+    },
+    "neverTitle": "Lo que nunca se recopila",
+    "never": [
+      {
+        "term": "Su identidad",
+        "text": "Sin cuentas, inicios de sesión, nombres ni direcciones de correo electrónico."
+      },
+      {
+        "term": "Las notas de Explain It",
+        "text": "Su nota va en el mensaje que usted envía, no en el enlace. El enlace solo contiene la vista elegida, después del #. Los navegadores no envían esa parte a nuestro servidor, y el contador nunca la recibe."
+      },
+      {
+        "term": "Las preguntas para su cita",
+        "text": "Se crean e imprimen por completo en su navegador. Nada de lo que marque o escriba sale de su dispositivo."
+      },
+      {
+        "term": "Su ubicación",
+        "text": "El cuadro \"Cerca de\" en Estudios de investigación ordena la lista en su dispositivo y nunca se envía."
+      },
+      {
+        "term": "Información de salud",
+        "text": "Ninguna, en ninguna parte del sitio."
+      }
+    ],
+    "savedTitle": "Lo que se guarda en su dispositivo",
+    "saved": "El modo tranquilo y el idioma que elija se recuerdan en su propio navegador, para que sigan así la próxima vez. Si borra los datos de su navegador, se eliminan. Nunca se envían al sitio.",
+    "outsideTitle": "Servicios externos",
+    "outside": [
+      {
+        "term": "Alojamiento:",
+        "text": "Cloudflare Pages, que maneja el tráfico del sitio como cualquier servicio de alojamiento web."
+      },
+      {
+        "term": "Fuentes tipográficas y archivos 3D:",
+        "text": "se sirven desde el propio Open Chiari, no desde Google ni otras empresas."
+      },
+      {
+        "term": "Estudios de investigación:",
+        "text": "el sitio los obtiene una vez al día de ClinicalTrials.gov, que administra la Biblioteca Nacional de Medicina de los EE. UU., así que su navegador nunca se conecta con ellos."
+      },
+      {
+        "term": "Enlaces externos:",
+        "text": "las páginas para donar, las fichas de los estudios y otros sitios tienen sus propias políticas de privacidad."
+      }
+    ],
+    "emailTitle": "Correo electrónico",
+    "email": {
+      "before": "Si escribe a",
+      "address": "hello@openchiari.org",
+      "after": ", su mensaje se usa solo para responderle y no se comparte. Por favor, no incluya información médica."
+    },
+    "changesTitle": "Cambios",
+    "changes": "Si esta política cambia, también cambia la fecha de arriba, y cualquier cambio importante se anuncia en la página de inicio durante 30 días.",
+    "_note": "Traducción de la política aprobada en inglés el 5 de noviembre de 2026 (pendiente de revisión). La versión en inglés es la de referencia."
+  },
+  "model": {
+    "title": "Use el modelo en su propio sitio web",
+    "intro": "El modelo de Chiari es gratis para fundaciones, clínicas, maestros y cualquier persona que explique Chiari. Inserte el visor en su sitio o descargue los archivos para sus propios proyectos.",
+    "licenseLabel": "Licencia",
+    "license": "CC BY-SA 4.0",
+    "basedOnLabel": "Basado en",
+    "zAnatomy": "Z-Anatomy",
+    "basedOnRest": "(CC BY-SA 4.0) y BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 JP)",
+    "viewsLabel": "Vistas incluidas",
+    "views": "Típica, Chiari I, Chiari I con siringe, después de la descompresión",
+    "checksLabel": "Comprobaciones de exactitud",
+    "checks": "Medido según fuentes publicadas; no revisado por un profesional médico",
+    "figNum": "Fig. 2",
+    "figCaption": "Chiari I con siringe, una de las cuatro vistas incluidas.",
+    "embedTitle": "Inserte el visor",
+    "startingView": "Vista inicial",
+    "viewOptions": {
+      "chiari": "Chiari I",
+      "typical": "Anatomía típica",
+      "syrinx": "Chiari I con siringe",
+      "surgery": "Después de la descompresión"
+    },
+    "showSwitch": "Mostrar el selector de afección",
+    "showLabels": "Mostrar los nombres",
+    "startCalm": "Empezar en modo tranquilo",
+    "iframeTitle": "Modelo 3D de la malformación de Chiari",
+    "copyEmbed": "Copiar el código para insertar",
+    "downloadTitle": "Descargar",
+    "columns": {
+      "file": "Archivo",
+      "format": "Formato",
+      "bestFor": "Ideal para",
+      "size": "Tamaño"
+    },
+    "downloads": [
+      {
+        "id": "gltf",
+        "file": "Modelo web, las cuatro vistas",
+        "format": "glTF",
+        "bestFor": "Sitios web y aplicaciones"
+      },
+      {
+        "id": "blender",
+        "file": "Fuente editable",
+        "format": "Blender",
+        "bestFor": "Modificar el modelo"
+      },
+      {
+        "id": "figures",
+        "file": "Juego de figuras con nombres (en inglés)",
+        "format": "PNG y PDF",
+        "bestFor": "Folletos y presentaciones"
+      }
+    ],
+    "download": "Descargar",
+    "creditTitle": "Cómo dar crédito",
+    "creditIntro": "Mantenga esta línea dondequiera que use el modelo, y comparta cualquier versión modificada con la misma licencia.",
+    "creditLine": "Modelo de Chiari de Open Chiari (openchiari.org), CC BY-SA 4.0, adaptado de Z-Anatomy (CC BY-SA 4.0) y BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 JP)",
+    "footnote": "No es consejo médico. Ilustraciones con fines educativos, no son imágenes médicas.",
+    "copied": "Copiado"
+  },
+  "embed": {
+    "exploreFull": "Explorar el modelo 3D completo"
+  },
+  "explain": {
+    "_note": "Traducción de 'Explain It' (pendiente de revisión). starterNote: la nota en inglés no cabe en 280 caracteres en español; esta versión dice lo mismo en menos palabras (277 caracteres). Ver docs/SPANISH-REVIEW.md.",
+    "title": "Explain It (Explíquelo)",
+    "backToExplorer": "Volver al explorador 3D",
+    "previewTitle": "Vista previa de lo que verán",
+    "intro": "Envíe a alguien un enlace que abre el modelo exactamente en esta vista, con una nota breve suya.",
+    "noteLabel": "Su nota",
+    "noteHint": "Se envía como su mensaje, con el enlace debajo. Cámbiela como quiera.",
+    "starterNote": "En la malformación de Chiari, la parte más baja del cerebelo queda bajo la abertura en la base del cráneo y reduce el espacio por donde circula el líquido cefalorraquídeo. Puede causar dolor de cabeza y otros síntomas que pueden ir y venir, a menudo con pocas señales visibles.",
+    "explore": "Permitir que giren y exploren el modelo por su cuenta",
+    "yourLink": "Su enlace",
+    "copy": "Copiar la nota y el enlace",
+    "copied": "Se copiaron su nota y el enlace.",
+    "sms": "Mensaje de texto",
+    "email": "Correo electrónico",
+    "qr": "Código QR",
+    "share": "Compartir",
+    "privacy": "El enlace solo contiene la vista. Su nota va en su propio mensaje, no en el enlace, y no guardamos nada.",
+    "sharedWithYou": "Alguien compartió esto con usted",
+    "dragHint": "Arrastre para girar el modelo.",
+    "lookingTitle": "Lo que está viendo",
+    "lookingChiari": [
+      "La línea punteada cruza la abertura donde el cerebro se une con la médula espinal.",
+      "La parte más baja del cerebelo, las amígdalas cerebelosas, queda por debajo de esa línea. El corchete azul muestra cuánto.",
+      "Eso reduce el espacio por donde normalmente circula el líquido cefalorraquídeo, lo que puede causar dolores de cabeza y otros síntomas."
+    ],
+    "helpTitle": "Cómo puede ayudar",
+    "help": "Los síntomas pueden ir y venir, y a menudo hay pocas señales visibles. Creerle a la persona y darle espacio para descansar puede significar mucho.",
+    "exploreFull": "Explorar el modelo 3D completo"
+  },
+  "studies": {
+    "_note": "Traducción de 'Research studies' (pendiente de revisión). Los títulos y la ficha oficial de cada estudio siguen en inglés, como en ClinicalTrials.gov; los resúmenes de Open Chiari se muestran en español cuando hay una versión en español (src/data/study-summaries.json, campo 'es').",
+    "title": "Estudios de investigación que buscan personas con Chiari",
+    "navTitle": "Estudios de investigación",
+    "intro": {
+      "wide": "Cada estudio de esta lista aparece en ClinicalTrials.gov, el registro del gobierno de los EE. UU. que administra la Biblioteca Nacional de Medicina, y está buscando participantes ahora. La investigación avanza cuando los pacientes participan.",
+      "narrow": "Publicados en ClinicalTrials.gov y buscando participantes ahora."
+    },
+    "updated": "Se actualiza a diario · última actualización: {date}",
+    "updatedNarrow": "Se actualiza a diario · {n} estudios",
+    "filterLabel": "Filtrar estudios",
+    "filters": "Filtros",
+    "condition": "Afección",
+    "conditions": {
+      "chiari": "Malformación de Chiari",
+      "syringomyelia": "Siringomielia"
+    },
+    "whoCanJoin": "Quién puede participar",
+    "ages": {
+      "any": "Cualquier edad",
+      "adults": "Adultos",
+      "children": "Niños",
+      "both": "Niños y adultos"
+    },
+    "near": "Cerca de",
+    "nearPlaceholder": "Ciudad, estado o código postal",
+    "nearHint": "Solo se usa para ordenar la lista en su dispositivo.",
+    "remoteFilter": "Se puede participar desde casa",
+    "countOne": "1 estudio busca participantes",
+    "countOther": "{n} estudios buscan participantes",
+    "status": {
+      "RECRUITING": "Buscando participantes"
+    },
+    "types": {
+      "observational": "Observacional",
+      "trial": "Ensayo clínico"
+    },
+    "remote": "A distancia",
+    "remoteLine": "Se participa desde casa",
+    "moreSites": "+ {n} más",
+    "officialLabel": "De la ficha oficial (en inglés)",
+    "englishOnly": "Resumen en inglés",
+    "whatYoudDo": "Lo que haría usted",
+    "runBy": "A cargo de",
+    "listing": "Ficha",
+    "listingLink": "{nct} en ClinicalTrials.gov (en inglés)",
+    "noMatch": "Ningún estudio coincide con estos filtros.",
+    "unavailable": "La lista de estudios no está disponible en este momento. Puede buscar estudios sobre Chiari que buscan participantes en ClinicalTrials.gov (en inglés).",
+    "beforeTitle": "Antes de participar en un estudio",
+    "before": {
+      "wide": "Hable con su médico y pregúntele al equipo del estudio en qué consiste, cuánto le costará y cómo se usan sus datos. Open Chiari simplifica los resúmenes; la ficha oficial es la que vale.",
+      "narrow": "Hable con su médico y pregúntele al equipo del estudio en qué consiste. La ficha oficial es la que vale."
+    },
+    "registryBefore": "Vea también el",
+    "registry": "registro de pacientes de la Bobby Jones Chiari & Syringomyelia Foundation",
+    "registryAfter": "(las inscripciones están en pausa por ahora).",
+    "creditBefore": "No es consejo médico. Datos de los estudios de",
+    "creditSource": "ClinicalTrials.gov",
+    "creditAfter": ", procesados el {date}. Resúmenes simplificados por Open Chiari."
+  },
+  "impact": {
+    "_note": "Traducción de 'Impact' (pendiente de revisión).",
+    "title": "Impacto",
+    "intro": "Cómo se usa Open Chiari, qué tan bien funciona y cómo cualquiera puede hacerse cargo de él. Se cuenta sin cookies ni datos personales.",
+    "useTitle": "Uso desde el lanzamiento",
+    "launched": "Lanzado el {date} · se actualiza a diario",
+    "launchDate": "4 de noviembre de 2026",
+    "totals": {
+      "visit": "Visitas",
+      "explore": "Modelos 3D explorados",
+      "explain": "Enlaces de Explain It creados",
+      "study": "Fichas de estudios abiertas",
+      "embedSites": "Sitios que insertan el modelo"
+    },
+    "notCounted": "Aún sin contar",
+    "totalsNote": "Solo totales. Open Chiari nunca registra quién es usted, lo que dice su nota de Explain It ni qué preguntas imprime.",
+    "qualityTitle": "Informe de calidad",
+    "qualityRun": "Se prueba automáticamente en cada actualización · última prueba: {date}",
+    "columns": {
+      "check": "Prueba",
+      "phone": "Teléfono",
+      "desktop": "Computadora",
+      "means": "Qué significa"
+    },
+    "accessibility": "Accesibilidad",
+    "accessibilityMeans": "Se puede usar con lectores de pantalla, con el teclado y con baja visión",
+    "speed": "Velocidad",
+    "speedMeans": "Qué tan rápido cargan las páginas con una conexión típica",
+    "score": "{n} / 100",
+    "notMeasured": "Aún sin medir",
+    "standard": "Norma de accesibilidad",
+    "standardValue": "WCAG 2.2 AA · {result}",
+    "wcagPass": "superó las pruebas automáticas",
+    "wcagIssues": "problemas encontrados por las pruebas automáticas",
+    "standardMeans": "La norma actual del W3C; también cubre WCAG 2.1 AA, el nivel de las normas de la ADA en los EE. UU.",
+    "accuracy": "Comprobaciones de exactitud",
+    "accuracyValue": "4 de noviembre de 2026 · superadas",
+    "accuracyMeans": "Textos y vistas 3D comparados con fuentes publicadas; no revisados por un profesional médico",
+    "openTitle": "Código abierto: nada queda abandonado",
+    "openText": "Cada línea de código y cada archivo del modelo son públicos: el código con la licencia MIT y el modelo 3D con CC BY-SA 4.0. Cualquier organización puede poner en marcha su propia copia, cambiarla o hacerse cargo de ella, sin costo y sin depender de una sola persona o empresa.",
+    "code": "Código",
+    "codeLink": "github.com/ARCFrontierSystems/OpenChiari",
+    "codeLicense": "· Licencia MIT",
+    "model": "Modelo 3D",
+    "modelLicense": "CC BY-SA 4.0",
+    "hosting": "Alojamiento",
+    "hostingText": "Alojamiento estático gratuito; incluye una guía paso a paso",
+    "personalData": "Datos personales",
+    "personalDataText": "No se guarda ninguno, así que no hay nada que trasladar",
+    "orgsTitle": "Para organizaciones de Chiari",
+    "orgsText": "¿Quiere Open Chiari en su propio sitio, con sus colores, o una herramienta hecha a su medida? Hablemos.",
+    "contact": "Contactar a Open Chiari",
+    "footer": "Un proyecto personal de Matthew Borgfeld. No es consejo médico."
+  },
+  "compare": {
+    "_note": "Texto de docs/COPY.md '3D Explorer, side by side', traducido (pendiente de revisión). Las notas de siringe y después de la cirugía son las notas cortas del explorador (explorer.conditions.*.noteShort).",
+    "title": "Lado a lado",
+    "rotateTogether": "Girar juntos",
+    "back": "Volver a una sola vista",
+    "left": "Afección de la vista izquierda",
+    "right": "Afección de la vista derecha",
+    "notes": {
+      "typical": "Las amígdalas cerebelosas suelen estar a la altura de la línea punteada o por encima (unos pocos milímetros por debajo puede ser normal). El espacio del líquido detrás de ellas está abierto.",
+      "chiari": "Las amígdalas cerebelosas se extienden por debajo de la línea (corchete azul) y ocupan el espacio por donde debería pasar el líquido. Las marcas rojas muestran dónde el flujo a menudo está restringido."
+    }
+  },
+  "tour": {
+    "_note": "Traducción del recorrido guiado (pendiente de revisión).",
+    "title": "Recorrido guiado",
+    "exit": "Salir del recorrido",
+    "progress": "Avance del recorrido",
+    "stepOf": "Paso {n} de {total}",
+    "back": "Atrás",
+    "next": "Siguiente: {title}",
+    "finish": "Terminar el recorrido",
+    "steps": [
+      {
+        "id": "meet",
+        "title": "Conozca el modelo",
+        "text": "Esta vista muestra la cabeza y el cuello cortados por la mitad, a lo largo de la línea media. El cerebelo ayuda a controlar el equilibrio y la coordinación. El agujero magno es la abertura en la base del cráneo donde el tronco encefálico se convierte en la médula espinal."
+      },
+      {
+        "id": "typical",
+        "title": "Anatomía típica",
+        "text": "Las amígdalas cerebelosas suelen estar a la altura de la línea punteada que cruza la abertura del cráneo o por encima de ella (unos pocos milímetros por debajo todavía puede ser normal), y el líquido cefalorraquídeo circula libremente a su alrededor."
+      },
+      {
+        "id": "low",
+        "title": "Las amígdalas cerebelosas están demasiado bajas",
+        "text": "La línea punteada cruza la abertura en la base del cráneo. En Chiari, las amígdalas cerebelosas, la parte más baja del cerebelo, se extienden por debajo de ella, como muestra el corchete azul."
+      },
+      {
+        "id": "flow",
+        "title": "Cómo circula el líquido",
+        "text": "El líquido cefalorraquídeo es un líquido transparente que amortigua el cerebro y la médula espinal. Con cada latido del corazón, se mueve de un lado a otro entre el cráneo y el canal espinal. En Chiari, las amígdalas cerebelosas se extienden por debajo de la línea (corchete azul) y ocupan el espacio por donde debería pasar el líquido. Las marcas rojas muestran dónde el flujo a menudo está restringido."
+      },
+      {
+        "id": "syrinx",
+        "title": "Una siringe",
+        "text": "Una siringe es una cavidad llena de líquido dentro de la médula espinal. A menudo aparece junto con Chiari, sobre todo en la parte de la médula espinal que está en el cuello."
+      }
+    ]
+  },
+  "kit": {
+    "_note": "Traducción del kit de concientización (pendiente de revisión). Los archivos en español se hacen con scripts/make-kit.mjs en public/kit/es/.",
+    "eyebrow": "Mes de Concientización sobre Chiari · septiembre",
+    "title": "Kit de concientización",
+    "intro": "Gráficos e imprimibles gratis para pacientes, familias y organizaciones. Úselos tal como están o agregue el logotipo de su organización en el espacio indicado.",
+    "zip": "Descargar el kit completo (ZIP)",
+    "socialHeadline": "Chiari, explicado en 1 imagen.",
+    "socialFooter": "openchiari.org · #ChiariAwarenessMonth",
+    "quote": "Los síntomas de Chiari a menudo no se ven. Pregunte cómo puede ayudar.",
+    "quoteFooter": "Septiembre · Mes de Concientización sobre Chiari",
+    "cardLine1": "Tengo malformación de Chiari.",
+    "cardLine2": "Escanee para ver en 3D lo que eso significa.",
+    "posterTitle": "¿Qué es la malformación de Chiari?",
+    "logoSpace": "su logotipo",
+    "items": {
+      "social": {
+        "title": "Publicación cuadrada para redes sociales",
+        "format": "1080 × 1080 · PNG"
+      },
+      "quote": {
+        "title": "Tarjeta con frase",
+        "format": "Tamaños cuadrado y de historia · PNG"
+      },
+      "card": {
+        "title": "Tarjeta de bolsillo de Explain It",
+        "format": "Para imprimir, 8 por página · PDF"
+      },
+      "poster": {
+        "title": "Cartel y folleto para eventos",
+        "format": "Carta y A4 · PDF, con espacio para logotipo"
+      }
+    },
+    "download": "Descargar",
+    "letter": "Carta",
+    "orgsTitle": "Para organizaciones",
+    "orgsText": "¿Necesita el kit con sus colores o una versión para un evento en particular? Escríbanos y se lo hacemos, gratis.",
+    "contact": "Contactar a Open Chiari",
+    "license": "Los gráficos del kit se pueden usar y compartir libremente, CC BY-SA 4.0. Los gráficos que muestran el modelo 3D también llevan el crédito de Z-Anatomy y BodyParts3D."
+  }
+}

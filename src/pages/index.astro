@@ -5,10 +5,11 @@
  */
 import Base from '../layouts/Base.astro';
 import AnatomyFigure from '../components/AnatomyFigure.astro';
-import { getStrings, routes } from '../i18n';
+import { getStrings, getRoutes } from '../i18n';
+const routes = getRoutes(Astro.currentLocale);
 
-const h = getStrings().home;
-const calm = getStrings().calm;
+const h = getStrings(Astro.currentLocale).home;
+const calm = getStrings(Astro.currentLocale).calm;
 ---
 
 <Base>

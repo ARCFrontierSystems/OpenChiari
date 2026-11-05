@@ -6,11 +6,13 @@
  * The model can still be turned by hand at any step. Without WebGL, the 2D figure follows the steps instead.
  * Always shown (CLAUDE.md rules 1 and 3): the captions, "Not medical advice" and the model credit.
  */
+import TranslationNotice from '../components/TranslationNotice.astro';
 import Head from '../components/Head.astro';
 import { anatomyFigureSvg } from '../lib/anatomy-figure';
-import { getStrings, routes, externalLinks } from '../i18n';
+import { getStrings, getRoutes, externalLinks } from '../i18n';
+const routes = getRoutes(Astro.currentLocale);
 
-const s = getStrings();
+const s = getStrings(Astro.currentLocale);
 const t = s.tour;
 const x = s.explorer;
 const f = s.footer;
@@ -19,11 +21,12 @@ const first = t.steps[0];
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={Astro.currentLocale ?? 'en'}>
   <head>
     <Head title={t.title} themeColor="#111215" />
   </head>
   <body class="tour">
+    <TranslationNotice dark />
     <header>
       <div class="tour-bar">
         <span class="tour-name">{t.title}</span>
@@ -66,7 +69,7 @@ const first = t.steps[0];
       import { createStore, initialState, type ViewState } from '../explorer/state';
       import { anatomyFigureSvg } from '../lib/anatomy-figure';
       import { count } from '../lib/count';
-      import strings from '../i18n/en.json';
+      import strings from '../i18n/client';
 
       const t = strings.tour;
       const x = strings.explorer;

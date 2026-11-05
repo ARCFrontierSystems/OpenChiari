@@ -6,14 +6,16 @@
  * take effect on the model in steps 4 to 6.
  * All text from src/i18n/en.json (medical text word for word from docs/COPY.md).
  */
+import TranslationNotice from '../components/TranslationNotice.astro';
 import Head from '../components/Head.astro';
 import Footer from '../components/Footer.astro';
 import { anatomyFigureSvg, CONDITIONS } from '../lib/anatomy-figure';
 import { initialState, LAYERS, SIMPLE_LAYERS, CAMERA_PRESETS } from '../explorer/state';
 const RESET_ICON = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v4h4"></path></svg>';
-import { getStrings, routes } from '../i18n';
+import { getStrings, getRoutes, otherLanguagePath } from '../i18n';
+const routes = getRoutes(Astro.currentLocale);
 
-const s = getStrings();
+const s = getStrings(Astro.currentLocale);
 const x = s.explorer;
 const st = initialState;
 const figureWide = anatomyFigureSvg({ condition: st.condition, flow: st.flow, labels: st.labels, measure: st.measure, dark: true }, s.figure);
@@ -26,12 +28,13 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={Astro.currentLocale ?? 'en'}>
   <head>
     <Head title={x.title} themeColor="#17181C" />
   </head>
   <body class="x">
     <a class="skip-link" href="#viewer">{s.skipLink}</a>
+    <TranslationNotice dark />
 
     <header class="x-header">
       <a class="x-back only-narrow-x" href={routes.home} aria-label={x.backHome}>
@@ -43,7 +46,7 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
       <span class="x-sep only-wide-x" aria-hidden="true">/</span>
       <h1 class="x-title">{x.title}</h1>
       <span class="x-spacer"></span>
-      <a class="x-lang only-wide-x" href={routes.es} lang="es" hreflang="es">{s.header.espanol}</a>
+      <a class="x-lang only-wide-x" href={otherLanguagePath(Astro.url.pathname)} lang={Astro.currentLocale === 'es' ? 'en' : 'es'} hreflang={Astro.currentLocale === 'es' ? 'en' : 'es'} data-other-lang>{s.header.espanol}</a>
       <label class="x-calm">
         <input type="checkbox" role="switch" data-calm-switch aria-label={s.header.calm} />
         <span class="x-calm-off" aria-hidden="true">{s.header.calm}</span>
@@ -222,7 +225,7 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
       import { decodeView, encodeView, type Orbit } from '../explorer/share';
       import { count } from '../lib/count';
       import { anatomyFigureSvg, type Condition } from '../lib/anatomy-figure';
-      import strings from '../i18n/en.json';
+      import strings from '../i18n/client';
 
       bindCalmSwitches();
 

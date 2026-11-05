@@ -14,7 +14,7 @@ import { getStrings, externalLinks } from '../i18n';
 import data from '../data/studies.json';
 import plain from '../data/study-summaries.json';
 
-const t = getStrings().studies;
+const t = getStrings(Astro.currentLocale).studies;
 
 interface Site {
   facility: string;
@@ -40,13 +40,16 @@ interface Plain {
   whatYoudDo?: string;
   remote?: boolean;
   approved: string;
+  /** The Spanish version of the summary (pending medical-translator review, like all Spanish text). */
+  es?: { summary: string; whatYoudDo?: string };
 }
+const spanish = Astro.currentLocale === 'es';
 
 const leftOut = ((plain as { leftOut?: Record<string, unknown> }).leftOut ?? {}) as Record<string, unknown>;
 const studies = ((data.studies as unknown as Study[]) ?? []).filter((s) => !leftOut[s.nct]);
 const approved = (plain.studies ?? {}) as Record<string, Plain>;
 const processed = data.processed
-  ? new Date(`${data.processed}T12:00:00Z`).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })
+  ? new Date(`${data.processed}T12:00:00Z`).toLocaleDateString(Astro.currentLocale === 'es' ? 'es-US' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })
   : null;
 const count = (n: number) => (n === 1 ? t.countOne : t.countOther.replace('{n}', String(n)));
 
@@ -62,9 +65,12 @@ const cards = studies.map((st) => {
   const p = approved[st.nct];
   return {
     ...st,
-    summary: p?.summary ?? st.officialSummary,
+    summary: (spanish && p?.es?.summary) || p?.summary || st.officialSummary,
     official: !p,
-    whatYoudDo: p?.whatYoudDo ?? '',
+    // On Spanish pages: true when the summary is shown in English (official text, or no Spanish version yet).
+    english: spanish && !p?.es?.summary,
+    whatYoudDo: (spanish && p?.es ? p.es.whatYoudDo : p?.whatYoudDo) ?? '',
+    whatYoudDoEnglish: spanish && !!p?.whatYoudDo && !p?.es?.whatYoudDo,
     remote: !!p?.remote,
     age: ageKey(st),
     location: locationLabel(st),
@@ -137,19 +143,20 @@ const cards = studies.map((st) => {
                     {c.remote ? <span>{t.remote}</span> : c.location && <span class="only-wide">{c.location}</span>}
                   </p>
                   <h2 class="serif">
-                    <a href={externalLinks.ctgovStudy + c.nct} rel="noopener">{c.title}</a>
+                    <a href={externalLinks.ctgovStudy + c.nct} rel="noopener" lang={spanish ? 'en' : undefined}>{c.title}</a>
                   </h2>
                   {c.summary && (
                     <p class="summary">
                       {c.official && <span class="official mono">{t.officialLabel}</span>}
-                      {c.summary}
+                      {!c.official && c.english && <span class="official mono">{t.englishOnly}</span>}
+                      <span lang={c.english ? 'en' : undefined}>{c.summary}</span>
                     </p>
                   )}
                   <dl class="only-wide">
                     {c.whatYoudDo && (
                       <>
                         <dt>{t.whatYoudDo}</dt>
-                        <dd>{c.whatYoudDo}</dd>
+                        <dd lang={c.whatYoudDoEnglish ? 'en' : undefined}>{c.whatYoudDo}</dd>
                       </>
                     )}
                     {c.sponsor && (
@@ -191,7 +198,7 @@ const cards = studies.map((st) => {
 </Base>
 
 <script>
-  import strings from '../i18n/en.json';
+  import strings from '../i18n/client';
   import { count } from '../lib/count';
 
   const t = strings.studies;

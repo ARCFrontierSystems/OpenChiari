@@ -10,7 +10,7 @@ import Base from '../layouts/Base.astro';
 import AnatomyFigure from '../components/AnatomyFigure.astro';
 import { getStrings } from '../i18n';
 
-const t = getStrings().prep;
+const t = getStrings(Astro.currentLocale).prep;
 const all = t.groups.flatMap((g) => g.questions);
 const selected = all.filter((q) => q.checked);
 const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? forms.one : forms.other.replace('{n}', String(n)));
@@ -124,7 +124,7 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
 </Base>
 
 <script>
-  import strings from '../i18n/en.json';
+  import strings from '../i18n/client';
 
   const t = strings.prep;
   const form = document.querySelector<HTMLFormElement>('[data-prep-form]')!;

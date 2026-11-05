@@ -1,11 +1,21 @@
 import en from './en.json';
+import esJson from './es.json';
 
-// Spanish (es.json) is added with the Spanish Home page in a later phase.
+// English at the site root, Spanish under /es/ (astro.config.mjs). Every page reads its language from its address
+// (Astro.currentLocale), so the same page file serves both; src/pages/es/ holds one small file per page that shows it.
+// The Spanish text (es.json) is pending medical-translator review (CLAUDE.md "Translations"); every Spanish page says so.
 export type Strings = typeof en;
-export type Locale = 'en';
+export type Locale = 'en' | 'es';
+// Typed as the English table, so the type check fails if any Spanish text is missing.
+const es: Strings = esJson;
+const tables: Record<Locale, Strings> = { en, es };
 
-export function getStrings(_locale: Locale = 'en'): Strings {
-  return en;
+export function toLocale(locale?: string): Locale {
+  return locale === 'es' ? 'es' : 'en';
+}
+
+export function getStrings(locale?: string): Strings {
+  return tables[toLocale(locale)];
 }
 
 // One place for every page address, so links stay consistent as pages are built.
@@ -27,6 +37,23 @@ export const routes = {
   es: '/es/',
   tour: '/tour/',
 } as const;
+export type Routes = { [K in keyof typeof routes]: string };
+
+/** A site address in the given language: '/explorer/' becomes '/es/explorer/' in Spanish. */
+export function localePath(path: string, locale?: string): string {
+  return toLocale(locale) === 'es' && path.startsWith('/') && !path.startsWith('/es/') ? `/es${path}` : path;
+}
+
+/** Every page address in the given language. */
+export function getRoutes(locale?: string): Routes {
+  return Object.fromEntries(Object.entries(routes).map(([k, v]) => [k, k === 'es' ? v : localePath(v, locale)])) as Routes;
+}
+
+/** The same page in the other language ('/es/prep/' and '/prep/'). */
+export function otherLanguagePath(pathname: string): string {
+  if (pathname === '/es' || pathname.startsWith('/es/')) return pathname.slice(3) || '/';
+  return `/es${pathname}`;
+}
 
 export const externalLinks = {
   ninds: 'https://www.ninds.nih.gov/publications/chiari-malformation',

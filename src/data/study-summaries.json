@@ -1,5 +1,5 @@
 {
-  "_note": "Plain-language study summaries written by Open Chiari. Each entry goes live only after a fresh agent has checked it against the official ClinicalTrials.gov listing (report in docs/audits/) and Matthew has approved it (CLAUDE.md rules 1 and 1a). Until then the card shows the first two sentences of the official summary, marked as such. Fields: summary (what the study is trying to learn, two sentences), whatYoudDo (short), remote (true only when the listing says people can take part from home), approved (date Matthew approved), listingChecked (the listing's last-update date the summary was checked against). leftOut: studies Matthew decided not to list, with the reason; the daily refresh skips them.",
+  "_note": "Plain-language study summaries written by Open Chiari. Each entry goes live only after a fresh agent has checked it against the official ClinicalTrials.gov listing (report in docs/audits/) and Matthew has approved it (CLAUDE.md rules 1 and 1a). Until then the card shows the first two sentences of the official summary, marked as such. Fields: summary (what the study is trying to learn, two sentences), whatYoudDo (short), remote (true only when the listing says people can take part from home), approved (date Matthew approved), listingChecked (the listing's last-update date the summary was checked against). leftOut: studies Matthew decided not to list, with the reason; the daily refresh skips them. es: the Spanish version of summary and whatYoudDo (translated from the approved English, pending medical-translator review like all Spanish text); Spanish pages show the English summary, marked 'Resumen en inglés', when there is no es version yet.",
   "studies": {
     "NCT06502431": {
       "summary": "Researchers want to understand how spinal fluid and blood move in the head and neck in Chiari I. They use a special MRI that measures flow, comparing adults with and without symptoms to people without Chiari.",
@@ -7,7 +7,11 @@
       "remote": false,
       "approved": "2026-11-05",
       "listingChecked": "2026-09-08",
-      "audit": "docs/audits/2026-11-05-study-summaries-audit.md"
+      "audit": "docs/audits/2026-11-05-study-summaries-audit.md",
+      "es": {
+        "summary": "Los investigadores quieren entender cómo se mueven el líquido cefalorraquídeo y la sangre en la cabeza y el cuello en Chiari I. Usan una resonancia magnética especial que mide el flujo y comparan a adultos con y sin síntomas con personas sin Chiari.",
+        "whatYoudDo": "Estudios de flujo adicionales que se agregan a una resonancia magnética, en un solo día. Para adultos de 18 a 50 años sin cirugías previas del cerebro o la columna y sin antecedentes de otras afecciones de los nervios o del corazón (pregunte al equipo del estudio qué cuenta). No es para personas que no pueden hacerse una resonancia magnética ni para personas embarazadas o que estén amamantando. Se invita a las personas con Chiari después de una consulta de neurocirugía en el hospital de Amiens, y el equipo vuelve a revisar las imágenes para confirmar el Chiari I."
+      }
     },
     "NCT06724029": {
       "summary": "Researchers want to learn what predicts how people do after brain and spine surgery, across many conditions including Chiari I. The study doesn't change anyone's treatment; it only collects health information before surgery and afterwards.",
@@ -15,7 +19,11 @@
       "remote": false,
       "approved": "2026-11-05",
       "listingChecked": "2026-03-30",
-      "audit": "docs/audits/2026-11-05-study-summaries-audit.md"
+      "audit": "docs/audits/2026-11-05-study-summaries-audit.md",
+      "es": {
+        "summary": "Los investigadores quieren saber qué predice cómo les va a las personas después de una cirugía del cerebro o la columna, en muchas afecciones, entre ellas Chiari I. El estudio no cambia el tratamiento de nadie; solo recopila información de salud antes de la cirugía y después.",
+        "whatYoudDo": "Se recopila su información de salud antes de la cirugía y durante el seguimiento posterior; la frecuencia y la duración dependen de la afección, y la ficha no lo indica. Para adultos a quienes se les hará una neurocirugía en uno de los hospitales de Italia que todavía aceptan participantes nuevos (la ficha oficial muestra cuáles)."
+      }
     }
   },
   "leftOut": {

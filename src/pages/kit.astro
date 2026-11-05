@@ -83,6 +83,12 @@ const items = [
               <a href={f.href} download>{k.download} {f.label}</a>
             ))}
           </p>
+          {(item.id === 'social' || item.id === 'quote') && (
+            <p class="alt-copy">
+              <button type="button" class="link-button" data-copy-alt={item.alt}>{k.copyAlt}</button>
+              <span class="alt-done" role="status" data-alt-done></span>
+            </p>
+          )}
         </li>
       ))}
     </ul>
@@ -221,6 +227,10 @@ const items = [
             <div class="builder-actions">
               <button type="button" class="button button-primary" data-builder-download>{b.download}</button>
               <button type="button" class="button button-primary" data-builder-print hidden>{b.print}</button>
+              <p class="alt-copy" data-for-graphic-alt>
+                <button type="button" class="link-button" data-copy-alt data-builder-alt>{k.copyAlt}</button>
+                <span class="alt-done" role="status" data-alt-done></span>
+              </p>
             </div>
           </div>
         </form>
@@ -294,6 +304,14 @@ const items = [
     return parts.join(' ');
   }
 
+  /** The image description to paste when posting (no "Preview:", just what the graphic shows). */
+  function altText(showFigure: boolean): string {
+    const m = message();
+    return [`${b.label}.`, m.text, m.answer ?? '', value('own'), value('name'), value('when'), showFigure ? strings.figure.ariaPrefix + strings.figure.aria.chiari + '.' : '', 'openchiari.org']
+      .filter(Boolean)
+      .join(' ');
+  }
+
   async function render() {
     const design = picked('design');
     const theme = picked('theme') as Theme;
@@ -315,6 +333,8 @@ const items = [
     counter();
     const description = describe(design, theme, showFigure);
     canvas.setAttribute('aria-label', description);
+    document.querySelector<HTMLElement>('[data-builder-alt]')!.dataset.copyAlt = altText(showFigure);
+    document.querySelector<HTMLElement>('[data-for-graphic-alt]')!.hidden = !graphic;
     if (graphic) {
       if (showFigure && !figure) figure = await loadFigure(anatomyFigureSvg({ condition: 'chiari', flow: false, labels: false, measure: true }, strings.figure));
       const m = message();
@@ -428,6 +448,20 @@ const items = [
     window.print();
   });
   window.addEventListener('afterprint', () => delete root.dataset.printing);
+
+  // "Copy image description": the words go to the clipboard, and a short note says where to paste them.
+  const kitStrings = strings.kit;
+  document.querySelectorAll<HTMLButtonElement>('[data-copy-alt]').forEach((button) =>
+    button.addEventListener('click', async () => {
+      const done = button.parentElement!.querySelector<HTMLElement>('[data-alt-done]')!;
+      try {
+        await navigator.clipboard.writeText(button.dataset.copyAlt ?? '');
+        done.textContent = kitStrings.copiedAlt;
+      } catch {
+        done.textContent = button.dataset.copyAlt ?? '';
+      }
+    }),
+  );
 
   void render();
 </script>
@@ -800,8 +834,37 @@ const items = [
     border-radius: var(--radius);
     background: var(--surface);
   }
+  .builder-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-8);
+  }
   .builder-actions .button {
     align-self: flex-start;
+  }
+  .alt-copy {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+  .link-button {
+    min-height: var(--touch);
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--accent);
+    font: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .alt-done {
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+  .alt-done:empty {
+    display: none;
   }
   /* Preview */
   .preview-bar {

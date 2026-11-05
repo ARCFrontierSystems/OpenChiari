@@ -449,6 +449,61 @@ test('Support: Connect with others links to outside communities, with the not-ch
   await expect(section.locator('a[hreflang="es"]')).toHaveAttribute('href', 'https://femacpa.com/quienes-somos');
 });
 
+test('hosting rules: standard protections on every page, and only the embed may sit inside other sites', () => {
+  const rules = readFileSync(new URL('../dist/_headers', import.meta.url), 'utf8');
+  for (const line of ['X-Content-Type-Options: nosniff', 'Referrer-Policy: same-origin', 'X-Frame-Options: SAMEORIGIN', 'browsing-topics=()']) expect(rules).toContain(line);
+  // The AR view needs the device's spatial tracking; it must not be switched off.
+  expect(rules).not.toContain('xr-spatial-tracking');
+  expect(rules).toMatch(/\/embed\/\*\n  ! X-Frame-Options/);
+  expect(rules).toMatch(/\/es\/embed\/\*\n  ! X-Frame-Options/);
+});
+
+test('search engines: one address per page, a sitemap with both languages, and the embed and shared views kept out', async ({ page, request }) => {
+  await page.goto('/kit/');
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://openchiari.org/kit/');
+  await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
+  for (const path of ['/embed/', '/es/embed/', '/v/']) {
+    await page.goto(path);
+    await expect(page.locator('meta[name="robots"][content="noindex"]')).toHaveCount(1);
+  }
+  const sitemap = await (await request.get('/sitemap.xml')).text();
+  for (const loc of ['https://openchiari.org/', 'https://openchiari.org/kit/', 'https://openchiari.org/es/kit/', 'https://openchiari.org/explorer/compare/']) expect(sitemap).toContain(`<loc>${loc}</loc>`);
+  expect(sitemap).not.toMatch(/<loc>[^<]*\/(embed|v)\/<\/loc>/);
+  expect(sitemap).toContain('hreflang="es" href="https://openchiari.org/es/prep/"');
+  const robots = await (await request.get('/robots.txt')).text();
+  expect(robots).toContain('Sitemap: https://openchiari.org/sitemap.xml');
+});
+
+test('About says plainly how pages are checked: AI-assisted reviews, approved by a patient, not yet by a medical professional', async ({ page }) => {
+  await page.goto('/about/');
+  await expect(page.locator('main')).toContainText('AI-assisted reviews');
+  await expect(page.locator('main')).toContainText('a patient and not a doctor');
+  await expect(page.locator('main')).toContainText('Nothing on the site has been reviewed by a medical professional yet.');
+  await expect(page.locator('main')).not.toContainText('independent audits');
+  await page.goto('/es/about/');
+  await expect(page.locator('main')).toContainText('un paciente y no un médico');
+});
+
+test('Awareness kit: copy-ready image descriptions for the graphics people post, and printables tagged for screen readers', async ({ page, context, request }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/kit/');
+  await expect(page.locator('.items [data-copy-alt]')).toHaveCount(2);
+  await page.locator('.items [data-copy-alt]').first().click();
+  await expect(page.locator('.items [data-alt-done]').first()).toContainText('Paste it as the image description');
+  expect(await page.evaluate(() => navigator.clipboard.readText())).toContain('What is Chiari malformation?');
+  // Make your own: the description follows what you made, and isn't offered for print designs.
+  await page.locator('[data-field="own"]').fill('Walking for Emma');
+  await page.locator('[data-builder-alt]').click();
+  expect(await page.evaluate(() => navigator.clipboard.readText())).toMatch(/^Chiari Awareness\. What is Chiari malformation\? .* Walking for Emma openchiari\.org$/);
+  await page.locator('input[name="design"][value="poster"]').check();
+  await expect(page.locator('[data-builder-alt]')).toBeHidden();
+  for (const file of ['/kit/stickers-everyone-letter.pdf', '/kit/es/poster-a4.pdf']) {
+    const pdf = (await (await request.get(file)).body()).toString('latin1');
+    expect(pdf, file).toContain('/StructTreeRoot');
+  }
+});
+
 test('the hosting rules let browsers run only the site\'s own scripts, and the 3D Explorer still works under them', async ({ browser }) => {
   const { readFileSync } = await import('node:fs');
   const rules = readFileSync(new URL('../dist/_headers', import.meta.url), 'utf8');
@@ -675,7 +730,7 @@ test('Support links only to the organizations themselves; About says how content
   for (const host of outside) expect(['bobbyjonescsf.org', 'conquerchiari.org', 'www.conquerchiari.org', 'asap.org', 'chiarisupport.org', 'www.inspire.com', 'femacpa.com']).toContain(host);
   await expect(page.locator('main form')).toHaveCount(0);
   await page.goto('/about/');
-  await expect(page.getByText('They have not been reviewed by a medical professional.', { exact: false })).toBeVisible();
+  await expect(page.getByText('Nothing on the site has been reviewed by a medical professional yet.', { exact: false })).toBeVisible();
 });
 
 test('Open model: the embed builder writes the code, and the downloads are there', async ({ page, request }) => {

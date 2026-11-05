@@ -3,6 +3,21 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: Phase A, trust and foundations (waiting for Matthew's OK on the About wording)
+
+Matthew reviewed an outside (ChatGPT) audit with Claude's assessment and approved the refined plan and its order ("implement your refined recommendations… I agree with the order"). Phase A:
+- **About, how pages are checked:** now says the checks are "separate AI-assisted reviews that open those sources", that Matthew is "a patient and not a doctor" who approves every page, and "Nothing on the site has been reviewed by a medical professional yet." (Was: "independent audits" and "every page is checked by a person", which could be read as professional review.) Spanish too.
+- **Search engines:** a canonical address on every page; sitemap.xml with both languages; robots.txt; the embed and shared views (/v/) marked noindex.
+- **Hosting rules:** nosniff, Referrer-Policy same-origin, Permissions-Policy (no location, microphone, payment, USB or ad topics; AR left working), X-Frame-Options SAMEORIGIN except the embed.
+- **Printables:** the kit's PDFs are tagged (structure and reading order for screen readers). The model downloads' figure PDF will be tagged the next time the downloads are rebuilt.
+- **Outside links:** a weekly check of all 95 outside links (.github/workflows/links.yml); gone links fail the run, bot-blocked sites are listed to open by hand.
+- **Kit:** "Copy image description" for the square post, the quote card and Make your own's posts and stories.
+- Tests: 204 pass.
+
+## 2026-11-05: Published: Make your own, reworked (PR #15)
+
+Checked on openchiari.org: 6 standalone messages, the picture of Chiari draws, no sideways scrolling on a 390 px phone in English or Spanish, no errors, no requests to other addresses.
+
 ## 2026-11-05: Make your own, reworked (wording approved by Matthew)
 
 Matthew asked for a rework and approved all of the audit's recommendations. He found that the message options read as continuations of "What is Chiari malformation?".

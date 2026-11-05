@@ -25,8 +25,8 @@ const figure = anatomyFigureSvg({ condition: 'chiari', flow: true, labels: false
 <!doctype html>
 <html lang={Astro.currentLocale ?? 'en'}>
   <head>
+    <!-- Head adds "noindex" here: the embed lives inside other sites. -->
     <Head title={s.model.iframeTitle} themeColor="#17181C" />
-    <meta name="robots" content="noindex" />
   </head>
   <body class="e">
     <header>

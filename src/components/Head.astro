@@ -22,12 +22,18 @@ const here = Astro.url.pathname;
 const isSpanish = Astro.currentLocale === 'es';
 const english = new URL(isSpanish ? otherLanguagePath(here) : here, site).href;
 const spanish = new URL(isSpanish ? here : otherLanguagePath(here), site).href;
+// The one address search engines should use for this page (always with the closing slash).
+const canonical = new URL(here.endsWith('/') ? here : here + '/', site).href;
+// The embed (inside other sites) and the shared views (/v/, opened from Explain It links) repeat the Explorer.
+const noindex = /^\/(es\/)?(embed|v)\//.test(here.endsWith('/') ? here : here + '/');
 ---
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{pageTitle}</title>
 <meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex" />}
 <meta name="theme-color" content={themeColor} />
 <link rel="icon" href="/brand/icon-32.png" type="image/png" sizes="32x32" />
 <link rel="apple-touch-icon" href="/brand/icon-180.png" />

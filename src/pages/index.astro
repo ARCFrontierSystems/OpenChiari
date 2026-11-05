@@ -53,29 +53,6 @@ const calm = getStrings(Astro.currentLocale).calm;
     </figure>
   </section>
 
-  <section class="tools-band" aria-labelledby="tools">
-    <div class="container">
-      <h2 class="visually-hidden" id="tools">{h.tools.title}</h2>
-      <div class="tool-groups">
-        {h.tools.groups.map((group) => (
-          <div class="tool-group">
-            <h3 class="tools-group">{group.title}</h3>
-            <ul class="tools">
-              {group.pages.map((page) => h.tools.items.find((tool) => tool.page === page)!).map((tool) => (
-                <li>
-                  <a class="tool" href={routes[tool.page as keyof typeof routes]}>
-                    <span class="tool-title">{tool.title}</span>
-                    <span class="tool-desc">{tool.narrow}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
   <section class="band band-surface" aria-labelledby="what-is">
     <div class="container band-inner">
       <h2 class="section-title" id="what-is">{h.whatIs.title}</h2>
@@ -146,6 +123,30 @@ const calm = getStrings(Astro.currentLocale).calm;
     </div>
   </section>
 
+
+  <!-- Tools: back at the bottom (Matthew, Nov 5). The top menu, "More" and "Start here" cover the way in. -->
+  <section class="band tools-band" aria-labelledby="tools">
+    <div class="container">
+      <h2 class="section-title" id="tools">{h.tools.title}</h2>
+      <div class="tool-groups">
+        {h.tools.groups.map((group) => (
+          <div class="tool-group">
+            <h3 class="tools-group">{group.title}</h3>
+            <ul class="tools">
+              {group.pages.map((page) => h.tools.items.find((tool) => tool.page === page)!).map((tool) => (
+                <li>
+                  <a class="tool" href={routes[tool.page as keyof typeof routes]}>
+                    <span class="tool-title">{tool.title}</span>
+                    <span class="tool-desc"><span class="only-wide">{tool.wide}</span><span class="only-narrow">{tool.narrow}</span></span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 </Base>
 
 <style>
@@ -364,10 +365,8 @@ const calm = getStrings(Astro.currentLocale).calm;
   }
 
   /* Tools: a compact band under the opening picture, three groups side by side (Nov 5). */
-  .tools-band {
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-    padding: var(--s-24) 0;
+  .tool-groups {
+    margin-top: var(--s-24);
   }
   .tool-groups {
     display: grid;

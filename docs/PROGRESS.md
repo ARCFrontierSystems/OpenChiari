@@ -3,7 +3,50 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
-## 2026-11-05: Phase A, trust and foundations (waiting for Matthew's OK on the About wording)
+## 2026-11-05: Phase B (path for the newly diagnosed) and Phase D (consistency pass), approved
+
+Matthew approved the MRI page and the warning box ("Approved") and asked for the consistency pass "with your recommendations".
+
+**Phase B:**
+- Home "Start here";
+- Visit prep quick-starts (also from /prep/#for=surgery) and a printable symptom diary;
+- tour step 6, "After surgery";
+- "Reading your MRI report" (/mri/), checked twice, EVIDENCE row 29;
+- "When to call after surgery", with the 911 line first, EVIDENCE row 30;
+- outreach drafts in docs/outreach/.
+
+**Phase D** (docs/audits/2026-11-05-consistency-pass.md):
+- **Fixes:**
+  - the Explorer's phone panel flows with the page;
+  - Explain It on phones starts with its title, and its share buttons sit two to a row;
+  - the Impact table becomes cards on phones;
+  - the kit's "For organizations" box sits above Make your own.
+- **Consistency:**
+  - one size for page titles and section headings, with tighter heading line height;
+  - full study cards and Support links on phones;
+  - the accent color for controls and callouts;
+  - mono group labels.
+- **Names:** "Visit prep" everywhere in menus and cards; "Support Chiari organizations" in the footer; "Explain It" in Spanish menus and cards; "After surgery" in the Explorer at every size.
+- **Wording:** page notes no longer repeat "Not medical advice", and the Evidence intro is in plain words.
+- **Navigation:**
+  - a Next step at the end of Visit prep, Helping your child, Open model, Privacy, Evidence and the MRI page;
+  - "On this page" on Helping your child;
+  - a scroll cue on the Evidence tables;
+  - the Explorer's part card above the question panels.
+- **Left as is:** Calm stays in the phone header (one tap away), Dim in the menu.
+- **Home tools back at the bottom** (Matthew: "put it back where it originally was"). The top menu, "More" and "Start here" cover the way in.
+
+Tests: 208 pass.
+
+## 2026-11-05: Published: Phase A, trust and foundations (PR #16; About wording approved)
+
+Checked on openchiari.org:
+- robots.txt and a sitemap of 30 pages;
+- nosniff, Referrer-Policy same-origin, Permissions-Policy and X-Frame-Options SAMEORIGIN (none on the embed);
+- the About page says "AI-assisted reviews" and "a patient and not a doctor";
+- the kit's "Copy image description".
+
+## 2026-11-05: Phase A, trust and foundations (details)
 
 Matthew reviewed an outside (ChatGPT) audit with Claude's assessment and approved the refined plan and its order ("implement your refined recommendations… I agree with the order"). Phase A:
 - **About, how pages are checked:** now says the checks are "separate AI-assisted reviews that open those sources", that Matthew is "a patient and not a doctor" who approves every page, and "Nothing on the site has been reviewed by a medical professional yet." (Was: "independent audits" and "every page is checked by a person", which could be read as professional review.) Spanish too.

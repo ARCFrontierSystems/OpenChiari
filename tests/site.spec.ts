@@ -652,9 +652,10 @@ test('header: four tools in order, and More opens the rest by mouse and keyboard
   await expect(panel).toBeVisible();
   await page.mouse.click(10, 600);
   await expect(panel).toBeHidden();
-  // Home: the tools come right after the opening picture, before the explanation.
+  // Home: the tools are back at the bottom (Nov 5); the explanation comes right after the opening picture.
   const order = await page.locator('main > section').evaluateAll((s) => s.map((el) => el.getAttribute('aria-labelledby') ?? el.className));
-  expect(order.indexOf('tools')).toBe(1);
+  expect(order.at(-1)).toBe('tools');
+  expect(order.indexOf('what-is')).toBe(1);
 });
 
 test.describe('Helping your child', () => {

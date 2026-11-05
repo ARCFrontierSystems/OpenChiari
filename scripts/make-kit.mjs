@@ -63,14 +63,14 @@ const qr = (text) => {
 const pages = {
   social: `<div class="social" style="width:1080px;height:1080px;padding:64px 72px;display:flex;flex-direction:column;background:#F5F5F3">
     <img src="${logo}" style="height:80px;align-self:flex-start" alt="">
-    <p class="serif" style="font-size:68px;line-height:1.08;margin:28px 0 0">${k.explain.headline}</p>
-    <div style="display:flex;gap:40px;flex:1;min-height:0;margin:28px 0 20px;align-items:center">
+    <p class="serif" style="font-size:${spanish ? 58 : 68}px;line-height:1.08;margin:28px 0 0">${k.explain.headline}</p>
+    <div style="display:flex;gap:40px;flex:1;min-height:0;margin:${spanish ? 22 : 28}px 0 20px;align-items:center">
       <div class="figure" style="width:400px;height:100%;flex:none">${figure({ measure: true })}</div>
       <div style="display:flex;flex-direction:column;gap:22px">
-        ${k.explain.lines.slice(0, 3).map((l) => `<p style="font-size:29px;line-height:1.32;margin:0">${l}</p>`).join('')}
+        ${k.explain.lines.slice(0, 3).map((l) => `<p style="font-size:${spanish ? 24 : 29}px;line-height:1.3;margin:0">${l}</p>`).join('')}
       </div>
     </div>
-    <p class="serif" style="font-size:38px;line-height:1.2;margin:0;color:#5B027E">${k.explain.lines[3]}</p>
+    <p class="serif" style="font-size:${spanish ? 34 : 38}px;line-height:1.2;margin:0;color:#5B027E">${k.explain.lines[3]}</p>
     <p style="font-size:28px;margin:18px 0 0;color:#5B027E;font-weight:600">${k.explain.footer}</p>
     <p style="font-size:15px;line-height:1.35;margin:12px 0 0;color:#5E5F66">${caption} ${notAdvice} ${credit}${spanish ? ' ' + s.translation.noticeShort : ''}</p>
   </div>`,

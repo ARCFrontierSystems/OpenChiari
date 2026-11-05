@@ -1142,3 +1142,21 @@ After the independent audits (`docs/audits/2026-11-05-surgery-and-children-audit
 - Matthew Borgfeld, as an independent project. Matthew has Chiari malformation and had surgery for it at the age of 5. He made Open Chiari so that people facing the same diagnosis, and the families of children who have it, can see what's happening and go into appointments with better questions. He is a patient, not a doctor: the medical content rests on the published sources in the evidence notes.
 - Spanish: Matthew Borgfeld, como proyecto independiente. Matthew tiene malformación de Chiari y fue operado por ella a los 5 años. Creó Open Chiari para que las personas que enfrentan el mismo diagnóstico, y las familias de niños que la tienen, puedan ver lo que está pasando y llegar a sus citas con mejores preguntas. Es paciente, no médico: el contenido médico se basa en las fuentes publicadas que aparecen en las notas de evidencia.
 - Personal, not medical: no evidence row needed. Matthew chose to share this publicly.
+
+## Awareness kit additions and Home tools (2026-11-05): approved by Matthew ("All approved, do the Spanish and publish")
+
+Draft and sources: `docs/drafts/2026-11-05-kit-and-home.md`. There is no new medical text: the square post and the builder's message list reuse sentences already approved. Spanish: translated, pending medical-translator review.
+
+- **Square social post:** What is Chiari malformation? / The lowest part of the back of the brain extends below the opening at the base of the skull. / Most people are born with the skull differences that lead to it. Some never have symptoms; others first notice them as teens or adults. / The classic sign is a headache at the back of the head after coughing, sneezing or straining. / Chiari symptoms often have few outward signs. Ask how you can help. / See it in 3D at openchiari.org · #ChiariAwareness
+- **Stickers:** Print on full-sheet sticker paper at 100% size, then cut along the dashed circles.
+  - Stickers for everyone: Chiari warrior · Brave brain · One day at a time · Rest is strength · Still me · Ask me about Chiari · You are not alone · Purple for Chiari · Invisible, not imaginary (and 3 × "Write your own")
+  - Stickers for after surgery: Zipper club · Proud of my scar · Every scar tells a story · I did a hard thing · Brave kid · Healing takes time · Recovery mode · Hospital hero · Brave brain (and 3 × "Write your own")
+  - The purple awareness ribbon is drawn behind the words (src/lib/ribbon.ts).
+- **Make your own:** Choose a design and message, add your own words, a logo or photo, and download it. Everything happens on your device: nothing you add is sent or saved.
+  - Message: Medical facts come only from this list, so every graphic stays accurate. List: What is Chiari malformation? | Chiari symptoms often have few outward signs. Ask how you can help. | I have Chiari malformation. | Chiari looks different for everyone, and many people with Type I have no symptoms at all. | Most people are born with the skull differences that lead to it. Some never have symptoms; others first notice them as teens or adults. | The classic sign is a headache at the back of the head after coughing, sneezing or straining.
+  - Your own line (optional) ("For example: Walking for my daughter Emma"), Your own words appear in a separate box, so it is clear they are yours. · Name, group or event (optional) · Date and place (optional) · Logo or photo (optional) (It stays on your device.) · Your sticker words (Up to 3 short lines. Shown on all 12 stickers.)
+  - Fixed on every graphic: openchiari.org and "Not medical advice. Talk to your doctor about your own care." The poster also carries the Chiari I caption and the model credit.
+- **For organizations:** Want your own version? Use "Make your own" below to add your words, logo and colors. Nothing you add is sent anywhere.
+- **Helping your child:** For after surgery, there are printable stickers too: stickers for after surgery.
+- **Home, Tools:** 07 Helping your child: Getting a child ready for Chiari surgery: tips, a picture story, coloring pages and a sheet for school. · 08 Awareness kit: Free posts, posters and stickers to share, or make your own with your words and logo. · 09 Connect with others: Forums and support groups for people with Chiari and their families.
+

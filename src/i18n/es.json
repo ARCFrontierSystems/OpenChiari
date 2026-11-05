@@ -204,23 +204,23 @@
         {
           "num": "07",
           "page": "children",
-          "title": "Helping your child",
-          "wide": "Getting a child ready for Chiari surgery: tips, a picture story, coloring pages and a sheet for school.",
-          "narrow": "Tips, a picture story and a sheet for school."
+          "title": "Cómo ayudar a su hijo",
+          "wide": "Cómo preparar a un niño para la cirugía de Chiari: consejos, un cuento con dibujos, páginas para colorear y una hoja para la escuela.",
+          "narrow": "Consejos, un cuento con dibujos y una hoja para la escuela."
         },
         {
           "num": "08",
           "page": "kit",
-          "title": "Awareness kit",
-          "wide": "Free posts, posters and stickers to share, or make your own with your words and logo.",
-          "narrow": "Free posts, posters and stickers to share."
+          "title": "Kit de concientización",
+          "wide": "Publicaciones, pósteres y calcomanías gratis para compartir, o haga los suyos con sus palabras y su logotipo.",
+          "narrow": "Publicaciones, pósteres y calcomanías gratis para compartir."
         },
         {
           "num": "09",
           "page": "connect",
-          "title": "Connect with others",
-          "wide": "Forums and support groups for people with Chiari and their families.",
-          "narrow": "Forums and support groups."
+          "title": "Conectar con otras personas",
+          "wide": "Foros y grupos de apoyo para personas con Chiari y sus familias.",
+          "narrow": "Foros y grupos de apoyo."
         }
       ]
     }
@@ -1279,7 +1279,7 @@
     "logoSpace": "su logotipo",
     "items": {
       "social": {
-        "title": "Square social post: what Chiari is",
+        "title": "Publicación cuadrada: qué es Chiari",
         "format": "1080 × 1080 · PNG"
       },
       "quote": {
@@ -1295,107 +1295,107 @@
         "format": "Carta y A4 · PDF, con espacio para logotipo"
       },
       "stickersEveryone": {
-        "title": "Stickers for everyone",
-        "format": "Letter and A4 · PDF, for full-sheet sticker paper"
+        "title": "Calcomanías para todos",
+        "format": "Carta y A4 · PDF, para papel adhesivo de hoja completa"
       },
       "stickersSurgery": {
-        "title": "Stickers for after surgery",
-        "format": "Letter and A4 · PDF, for full-sheet sticker paper"
+        "title": "Calcomanías para después de la cirugía",
+        "format": "Carta y A4 · PDF, para papel adhesivo de hoja completa"
       }
     },
     "download": "Descargar",
     "letter": "Carta",
     "orgsTitle": "Para organizaciones",
-    "orgsText": "Want your own version? Use \"Make your own\" below to add your words, logo and colors. Nothing you add is sent anywhere.",
+    "orgsText": "¿Quiere su propia versión? Use \"Haga el suyo\" más abajo para agregar sus palabras, su logotipo y sus colores. Nada de lo que agregue se envía a ningún lugar.",
     "contact": "Contactar a Open Chiari",
     "license": "Los gráficos del kit se pueden usar y compartir libremente, CC BY-SA 4.0. Los gráficos que muestran el modelo 3D también llevan el crédito de Z-Anatomy y BodyParts3D.",
     "explain": {
-      "headline": "What is Chiari malformation?",
+      "headline": "¿Qué es la malformación de Chiari?",
       "lines": [
-        "The lowest part of the back of the brain extends below the opening at the base of the skull.",
-        "Most people are born with the skull differences that lead to it. Some never have symptoms; others first notice them as teens or adults.",
-        "The classic sign is a headache at the back of the head after coughing, sneezing or straining.",
-        "Chiari symptoms often have few outward signs. Ask how you can help."
+        "La parte más baja de la parte de atrás del cerebro se extiende por debajo de la abertura en la base del cráneo.",
+        "La mayoría de las personas nacen con las diferencias del cráneo que la causan. Algunas nunca tienen síntomas; otras los notan por primera vez en la adolescencia o en la edad adulta.",
+        "El síntoma clásico es un dolor de cabeza en la parte de atrás de la cabeza después de toser, estornudar o hacer un esfuerzo.",
+        "Los síntomas de Chiari a menudo dan pocas señales visibles. Pregunte cómo puede ayudar."
       ],
-      "footer": "See it in 3D at openchiari.org · #ChiariAwareness"
+      "footer": "Véalo en 3D en openchiari.org · #ChiariAwareness"
     },
     "stickers": {
-      "title": "Stickers",
-      "format": "Letter and A4 · PDF, for full-sheet sticker paper",
-      "how": "Print on full-sheet sticker paper at 100% size, then cut along the dashed circles.",
-      "blank": "Write your own",
+      "title": "Calcomanías",
+      "format": "Carta y A4 · PDF, para papel adhesivo de hoja completa",
+      "how": "Imprima en papel adhesivo de hoja completa al 100 % del tamaño y luego recorte por los círculos punteados.",
+      "blank": "Escriba lo suyo",
       "site": "openchiari.org",
       "sheets": {
         "everyone": {
-          "title": "Stickers for everyone",
+          "title": "Calcomanías para todos",
           "messages": [
-            "Chiari warrior",
-            "Brave brain",
-            "One day at a time",
-            "Rest is strength",
-            "Still me",
-            "Ask me about Chiari",
-            "You are not alone",
-            "Purple for Chiari",
-            "Invisible, not imaginary"
+            "Guerrero contra Chiari",
+            "Cerebro valiente",
+            "Un día a la vez",
+            "Descansar también es fuerza",
+            "Sigo siendo yo",
+            "Pregúntame sobre Chiari",
+            "No estás solo",
+            "Morado por Chiari",
+            "Invisible, no imaginario"
           ]
         },
         "surgery": {
-          "title": "Stickers for after surgery",
+          "title": "Calcomanías para después de la cirugía",
           "messages": [
-            "Zipper club",
-            "Proud of my scar",
-            "Every scar tells a story",
-            "I did a hard thing",
-            "Brave kid",
-            "Healing takes time",
-            "Recovery mode",
-            "Hospital hero",
-            "Brave brain"
+            "Club del cierre",
+            "Orgullo de mi cicatriz",
+            "Cada cicatriz cuenta una historia",
+            "Hice algo difícil",
+            "Niño valiente",
+            "Sanar toma tiempo",
+            "Modo recuperación",
+            "Héroe del hospital",
+            "Cerebro valiente"
           ]
         }
       }
     },
     "builder": {
-      "title": "Make your own",
-      "intro": "Choose a design and message, add your own words, a logo or photo, and download it. Everything happens on your device: nothing you add is sent or saved.",
-      "design": "Design",
+      "title": "Haga el suyo",
+      "intro": "Elija un diseño y un mensaje, agregue sus propias palabras, un logotipo o una foto, y descárguelo. Todo ocurre en su dispositivo: nada de lo que agregue se envía ni se guarda.",
+      "design": "Diseño",
       "designs": {
-        "square": "Square post",
-        "story": "Story",
-        "poster": "Poster",
-        "stickers": "Sticker sheet"
+        "square": "Publicación cuadrada",
+        "story": "Historia",
+        "poster": "Póster",
+        "stickers": "Hoja de calcomanías"
       },
-      "message": "Message",
-      "messageHint": "Medical facts come only from this list, so every graphic stays accurate.",
+      "message": "Mensaje",
+      "messageHint": "Los datos médicos solo vienen de esta lista, para que cada imagen sea correcta.",
       "messages": [
-        "What is Chiari malformation?",
-        "Chiari symptoms often have few outward signs. Ask how you can help.",
-        "I have Chiari malformation.",
-        "Chiari looks different for everyone, and many people with Type I have no symptoms at all.",
-        "Most people are born with the skull differences that lead to it. Some never have symptoms; others first notice them as teens or adults.",
-        "The classic sign is a headache at the back of the head after coughing, sneezing or straining."
+        "¿Qué es la malformación de Chiari?",
+        "Los síntomas de Chiari a menudo dan pocas señales visibles. Pregunte cómo puede ayudar.",
+        "Tengo malformación de Chiari.",
+        "Chiari es diferente en cada persona, y muchas personas con el tipo I no tienen ningún síntoma.",
+        "La mayoría de las personas nacen con las diferencias del cráneo que la causan. Algunas nunca tienen síntomas; otras los notan por primera vez en la adolescencia o en la edad adulta.",
+        "El síntoma clásico es un dolor de cabeza en la parte de atrás de la cabeza después de toser, estornudar o hacer un esfuerzo."
       ],
-      "own": "Your own line (optional)",
-      "ownHint": "For example: Walking for my daughter Emma",
-      "name": "Name, group or event (optional)",
-      "when": "Date and place (optional)",
-      "stickerText": "Your sticker words",
-      "stickerHint": "Up to 3 short lines. Shown on all 12 stickers.",
-      "image": "Logo or photo (optional)",
-      "imageHint": "It stays on your device.",
-      "removeImage": "Remove",
-      "color": "Colors",
+      "own": "Su propia frase (opcional)",
+      "ownHint": "Por ejemplo: Camino por mi hija Emma",
+      "name": "Nombre, grupo o evento (opcional)",
+      "when": "Fecha y lugar (opcional)",
+      "stickerText": "Sus palabras para las calcomanías",
+      "stickerHint": "Hasta 3 líneas cortas. Aparecen en las 12 calcomanías.",
+      "image": "Logotipo o foto (opcional)",
+      "imageHint": "Se queda en su dispositivo.",
+      "removeImage": "Quitar",
+      "color": "Colores",
       "colors": {
-        "purple": "Purple",
-        "light": "Light",
-        "dark": "Dark"
+        "purple": "Morado",
+        "light": "Claro",
+        "dark": "Oscuro"
       },
-      "size": "Paper size",
-      "download": "Download image",
-      "print": "Print or save as PDF",
-      "preview": "Preview",
-      "yours": "Your own words appear in a separate box, so it is clear they are yours."
+      "size": "Tamaño del papel",
+      "download": "Descargar imagen",
+      "print": "Imprimir o guardar como PDF",
+      "preview": "Vista previa",
+      "yours": "Sus propias palabras aparecen en un recuadro aparte, para que quede claro que son suyas."
     }
   },
   "children": {
@@ -1521,8 +1521,8 @@
     },
     "pageNote": "No es consejo médico. Nada de lo que escriba en esta página se guarda ni se envía.",
     "stickers": {
-      "before": "For after surgery, there are printable stickers too:",
-      "link": "stickers for after surgery",
+      "before": "Para después de la cirugía, también hay calcomanías para imprimir:",
+      "link": "calcomanías para después de la cirugía",
       "after": "."
     }
   }

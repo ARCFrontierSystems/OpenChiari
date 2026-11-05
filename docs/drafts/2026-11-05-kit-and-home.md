@@ -1,6 +1,6 @@
 # Awareness kit additions and Home tools: wording for Matthew's approval (November 5, 2026)
 
-**Status: draft, built for preview, not published.** Matthew asked for these on Nov 5:
+**Status: approved by Matthew on Nov 5 ("All approved, do the Spanish and publish"); recorded in COPY.md. Was: draft.** Matthew asked for these on Nov 5:
 - "Make your own" (so people can customize the kit without asking for one);
 - a plain-English square post;
 - printable stickers;

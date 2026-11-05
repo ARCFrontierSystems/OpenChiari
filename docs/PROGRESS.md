@@ -3,6 +3,20 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: Published: kit additions, Home tools, Explorer Home button, new-tab links, layers removed (PR #12)
+
+Checked on openchiari.org:
+- 9 Home tools;
+- the "Make your own" download works;
+- the new square post and both sticker sheets, in English and Spanish, are online;
+- the 10 outside links on Support open in a new tab;
+- the Explorer has the Home button and 4 layers;
+- no requests to other addresses and no page errors.
+
+Earlier the same day: Matthew's 3D view stopped working until he updated his browser. It worked in an up-to-date browser throughout.
+
+**Next idea:** the research-group introduction pack.
+
 ## 2026-11-05: Nerves and Blood vessels layers removed
 
 Matthew decided ("Let's just remove them. I don't think those options will ever be necessary"). They were greyed out as "Not in this model yet" because no model has them. Removed from the Explorer, the strings and the code. Old shared links that switched them off still open: unknown layers are ignored. SPEC.md's layer list has a note.

@@ -346,7 +346,10 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
       );
       store.subscribe((st) => {
         if (st.condition !== 'typical') lastNotTypical = st.condition;
-        const label = st.condition === 'typical' ? x.switcher.toCondition.replace('{name}', x.conditions[lastNotTypical].short) : x.switcher.toTypical;
+        // "Show Chiari I", "Show Chiari I with syrinx", "Show after surgery": the full name, lower-cased unless it starts with Chiari.
+        const full = x.conditions[lastNotTypical].label;
+        const name = full.startsWith('Chiari') ? full : full.charAt(0).toLowerCase() + full.slice(1);
+        const label = st.condition === 'typical' ? x.switcher.toCondition.replace('{name}', name) : x.switcher.toTypical;
         $$<HTMLButtonElement>('[data-switcher]').forEach((b) => b.textContent !== label && (b.textContent = label));
         // Pause and Slow only mean something while the flow shows.
         $$<HTMLButtonElement>('[data-flow-pause], [data-flow-slow]').forEach((b) => (b.hidden = !st.flow));

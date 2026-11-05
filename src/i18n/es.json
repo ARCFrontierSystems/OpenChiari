@@ -554,13 +554,13 @@
     "home": "Inicio",
     "partActions": {
       "partTools": "Esta parte",
-      "zoom": "Acercar a esta parte",
+      "zoom": "Acercar la vista a esta parte",
       "only": "Mostrar solo esta parte",
       "hide": "Ocultar esta parte",
       "all": "Mostrar todas las partes"
     },
     "switcher": {
-      "toTypical": "Mostrar típica",
+      "toTypical": "Mostrar anatomía típica",
       "toCondition": "Mostrar {name}",
       "pause": "Pausar el flujo",
       "slow": "Lento"
@@ -576,17 +576,17 @@
         "typical": [
           {
             "feature": "Punta de las amígdalas cerebelosas",
-            "model": "Unos 1 mm por encima de la línea punteada",
-            "published": "Promedio de unos 1 mm por encima; rango normal de unos 7 mm por encima a 5 mm por debajo"
+            "model": "Alrededor de 1 mm por encima de la línea punteada",
+            "published": "En promedio, alrededor de 1 mm por encima; rango normal de unos 7 mm por encima a 5 mm por debajo"
           },
           {
             "feature": "Abertura del cráneo, de adelante hacia atrás",
-            "model": "Unos 35 mm (Simple), 38 mm (Realista)",
+            "model": "Unos 35 mm (Sencillo), 38 mm (Realista)",
             "published": "Unos 33 a 36 mm; 36 ± 3 mm en un estudio de adultos sanos"
           },
           {
             "feature": "Canal espinal en el cuello",
-            "model": "Unos 14,5 mm (Simple)",
+            "model": "Unos 14,5 mm (Sencillo)",
             "published": "13 a 15 mm en adultos"
           }
         ],
@@ -610,7 +610,7 @@
           },
           {
             "feature": "Siringe",
-            "model": "En la parte de la médula espinal del cuello, con forma de cuentas",
+            "model": "En la parte de la médula espinal que está en el cuello, en forma de cuentas",
             "published": "Sobre todo en la parte del cuello; larga, en forma de huso o de cuentas, de unas 5 vértebras de largo en promedio"
           }
         ],
@@ -623,7 +623,7 @@
           {
             "feature": "Hueso retirado",
             "model": "Unos 30 × 25 mm en la parte de atrás de la abertura del cráneo, y los 25 mm del medio del arco de atrás del primer hueso del cuello",
-            "published": "Unos pocos centímetros, según cada paciente (por ejemplo, 2,5 × 3 cm); unos 2,5 cm del arco del primer hueso del cuello"
+            "published": "Unos pocos centímetros, adaptado a cada paciente (por ejemplo, 2,5 × 3 cm); unos 2,5 cm del arco del primer hueso del cuello"
           }
         ]
       }

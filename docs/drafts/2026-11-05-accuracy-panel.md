@@ -1,6 +1,6 @@
 # 3D Explorer: "How close is this to real anatomy?" (accuracy panel), wording for Matthew's approval (November 5, 2026)
 
-**Status: draft, waiting for Matthew's approval.** 3D roadmap step 4, from the plan Matthew approved on Nov 5.
+**Status: approved by Matthew on Nov 5 ("Accuracy wording approved"); recorded in COPY.md.** 3D roadmap step 4, from the plan Matthew approved on Nov 5.
 
 **What it is:** a folded section in the Explorer, next to the part card. It shows, for the condition on screen, the model's checked numbers beside the published ranges.
 

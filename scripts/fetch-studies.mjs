@@ -6,8 +6,8 @@
  * a day old. Visitors' browsers never contact ClinicalTrials.gov; they get this file as part of the site.
  *
  * Studies Matthew decided not to list (leftOut in src/data/study-summaries.json) are skipped, and so is any study whose
- * status hasn't been confirmed by its team in the last 2 years: ClinicalTrials.gov itself calls such a status
- * "unknown" (Matthew's rule, November 5, 2026).
+ * status hasn't been confirmed by its team in the last 2 years (Matthew's rule, November 5, 2026). ClinicalTrials.gov
+ * uses the same limit, marking a status "unknown" once it has gone 2 years unchecked and the planned end has passed.
  * Only facts from the registry are kept (title, status, type, ages, sites, sponsor, the official summary). Plain
  * summaries written by Open Chiari live separately in src/data/study-summaries.json and appear only once Matthew has
  * approved them. Studies that don't have one yet are listed at the end, so they can be written.

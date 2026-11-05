@@ -72,3 +72,5 @@ stay in English; "Explain It" is followed by "(Explíquelo)" where it is introdu
 
 Words that sound alike but must not be used: *amígdalas* alone (throat tonsils); *médula* alone (could mean bone
 marrow); *quiste* for syrinx (the site doesn't call it a cyst).
+
+Sticker phrases (Awareness kit) speak to the reader with "tú", like the children's story, and avoid masculine-only words where a neutral one exists (for example "Súper valiente" for "Brave kid"). Back-translation check 4.

@@ -68,6 +68,10 @@ const spanish = new URL(isSpanish ? here : otherLanguagePath(here), site).href;
   // Visits: totals only, never anything about the visitor (src/lib/count.ts).
   import { countVisit } from '../lib/count';
   countVisit();
+  // Links that leave the site open in a new tab (src/lib/external-links.ts).
+  import { openExternalLinksInNewTabs } from '../lib/external-links';
+  if (document.body) openExternalLinksInNewTabs();
+  else document.addEventListener('DOMContentLoaded', openExternalLinksInNewTabs);
   // The offline helper, on the real site only (tests and previews run without it).
   // Not inside another site's frame or on the embed page: people who never visited Open Chiari shouldn't get a copy.
   if ('serviceWorker' in navigator && location.hostname === 'openchiari.org' && window.top === window.self && !location.pathname.includes('/embed/'))

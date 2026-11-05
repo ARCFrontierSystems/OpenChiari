@@ -49,7 +49,7 @@ The main model is realistic (from Z-Anatomy); a light Simple model is the fallba
 
 **Viewer tools:**
 
-- **Layers:** skin, skull and spine, brain, spinal fluid, nerves, blood vessels; each with an on/off control and an opacity slider.
+- **Layers:** skin, skull and spine, brain, spinal fluid; each with an on/off control and an opacity slider. (Nerves and blood vessels were planned too; Matthew removed them on 2026-11-05, as no model has them.)
 - **Cut-away:** slider from whole model to midline to far side; the midline cut matches the figures in `design/figures/`.
 - **Structure list:** searchable list of the 10 labeled structures; tapping one (in the list or the model) highlights it and shows its info card (text in COPY.md).
 - **Fluid flow:** a pulsing animation timed to a heartbeat; restricted-flow marks in Chiari views. Labeled "simplified."

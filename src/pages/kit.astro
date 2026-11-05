@@ -5,6 +5,8 @@
  * public/kit/ (run it again after the text or figure changes). No donation handling (CLAUDE.md "Don't").
  */
 import Base from '../layouts/Base.astro';
+import AnatomyFigure from '../components/AnatomyFigure.astro';
+import { ribbonSvg } from '../lib/ribbon';
 import { getStrings, getRoutes } from '../i18n';
 const routes = getRoutes(Astro.currentLocale);
 
@@ -13,8 +15,15 @@ const k = s.kit;
 // Spanish pages offer the Spanish files (made by make-kit.mjs --locale es into public/kit/es/).
 const base = Astro.currentLocale === 'es' ? '/kit/es/' : '/kit/';
 const fig = s.figure.ariaPrefix + s.figure.aria.chiari + '.';
+const b = k.builder;
+// The model credit exactly as CLAUDE.md rule 3 gives it, and the approved Chiari I caption (the poster shows the figure).
+const f = s.footer;
+const credit = `${f.modelBefore.replace(/^\.\s*/, '')} ${f.zAnatomy} ${f.modelAfter}`;
+const caption = s.home.figCaption.narrow;
+const notAdvice = `${f.notAdvice} ${f.notAdviceRest.wide}`;
+const spanishNotice = Astro.currentLocale === 'es' ? s.translation.noticeShort : '';
 const items = [
-  { id: 'social', preview: base + 'preview-social.png', alt: `${k.socialHeadline} ${fig} ${k.socialFooter}`, files: [{ href: base + 'social-post.png', label: 'PNG' }] },
+  { id: 'social', preview: base + 'preview-social.png', alt: `${k.explain.headline} ${k.explain.lines.join(' ')} ${fig} ${k.explain.footer}`, files: [{ href: base + 'social-post.png', label: 'PNG' }] },
   {
     id: 'quote',
     preview: base + 'preview-quote.png',
@@ -34,6 +43,15 @@ const items = [
       { href: base + 'poster-a4.pdf', label: 'A4' },
     ],
   },
+  ...(['everyone', 'surgery'] as const).map((sheet) => ({
+    id: sheet === 'everyone' ? ('stickersEveryone' as const) : ('stickersSurgery' as const),
+    preview: base + `preview-stickers-${sheet}.png`,
+    alt: `${k.stickers.sheets[sheet].title}: ${k.stickers.sheets[sheet].messages.join(', ')}. ${k.stickers.blank}.`,
+    files: [
+      { href: base + `stickers-${sheet}-letter.pdf`, label: k.letter },
+      { href: base + `stickers-${sheet}-a4.pdf`, label: 'A4' },
+    ],
+  })),
 ] as const;
 ---
 
@@ -67,17 +85,209 @@ const items = [
       ))}
     </ul>
 
+    <section class="builder" id="make" aria-labelledby="make-title">
+      <h2 id="make-title" class="serif">{b.title}</h2>
+      <p class="builder-intro">{b.intro}</p>
+      <div class="builder-layout">
+        <form class="builder-form" data-builder autocomplete="off">
+          <fieldset>
+            <legend>{b.design}</legend>
+            {Object.entries(b.designs).map(([id, label], i) => (
+              <label class="choice"><input type="radio" name="design" value={id} checked={i === 0} /> {label}</label>
+            ))}
+          </fieldset>
+          <label class="field" data-for="graphic">
+            <span>{b.message}</span>
+            <select data-field="message">
+              {b.messages.map((m) => <option value={m}>{m}</option>)}
+            </select>
+            <small>{b.messageHint}</small>
+          </label>
+          <label class="field" data-for="graphic">
+            <span>{b.own}</span>
+            <input type="text" maxlength="120" placeholder={b.ownHint} data-field="own" />
+            <small>{b.yours}</small>
+          </label>
+          <label class="field" data-for="graphic">
+            <span>{b.name}</span>
+            <input type="text" maxlength="80" data-field="name" />
+          </label>
+          <label class="field" data-for="graphic">
+            <span>{b.when}</span>
+            <input type="text" maxlength="80" data-field="when" />
+          </label>
+          <label class="field" data-for="stickers" hidden>
+            <span>{b.stickerText}</span>
+            <textarea rows="3" maxlength="60" data-field="sticker"></textarea>
+            <small>{b.stickerHint}</small>
+          </label>
+          <div class="field" data-for="graphic">
+            <label for="builder-image">{b.image}</label>
+            <input id="builder-image" type="file" accept="image/png, image/jpeg, image/webp" data-field="image" />
+            <small>{b.imageHint}</small>
+            <button type="button" class="button button-secondary" data-remove-image hidden>{b.removeImage}</button>
+          </div>
+          <fieldset>
+            <legend>{b.color}</legend>
+            {Object.entries(b.colors).map(([id, label], i) => (
+              <label class="choice"><input type="radio" name="theme" value={id} checked={i === 0} /> {label}</label>
+            ))}
+          </fieldset>
+          <fieldset data-for="print" hidden>
+            <legend>{b.size}</legend>
+            <label class="choice"><input type="radio" name="paper" value="letter" checked /> {k.letter}</label>
+            <label class="choice"><input type="radio" name="paper" value="A4" /> A4</label>
+          </fieldset>
+          <div class="builder-actions">
+            <button type="button" class="button button-primary" data-builder-download>{b.download}</button>
+            <button type="button" class="button button-primary" data-builder-print hidden>{b.print}</button>
+          </div>
+        </form>
+        <div class="builder-preview" aria-label={b.preview}>
+          <canvas data-builder-canvas role="img" aria-label={b.preview}></canvas>
+          <div class="sheet-frame" data-sheet-frame hidden>
+            <div class="sheet" data-sheet>
+              <div class="poster" data-poster hidden>
+                <img class="poster-image" data-poster-image alt="" hidden />
+                <p class="poster-title serif" data-out="message"></p>
+                <div class="poster-figure"><AnatomyFigure condition="chiari" flow={false} labels={false} measure={true} /></div>
+                <div class="poster-own" data-out-wrap="own"><p data-out="own"></p></div>
+                <p class="poster-meta" data-out="name"></p>
+                <p class="poster-meta" data-out="when"></p>
+                <div class="poster-foot">
+                  <p class="mono poster-site">openchiari.org</p>
+                  <p><strong>{f.notAdvice}</strong> {f.notAdviceRest.wide} {caption}</p>
+                  <p>{credit}</p>
+                  {spanishNotice && <p>{spanishNotice}</p>}
+                </div>
+              </div>
+              <div class="sticker-sheet" data-stickers hidden>
+                {Array.from({ length: 12 }, () => <div class="sticker"><span class="sticker-ribbon" set:html={ribbonSvg('currentColor')} /><p data-sticker-text></p></div>)}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="orgs" aria-labelledby="orgs-title">
       <div>
         <h2 id="orgs-title" class="serif">{k.orgsTitle}</h2>
         <p>{k.orgsText}</p>
       </div>
-      <a class="button button-secondary" href={routes.about}>{k.contact}</a>
+      <a class="button button-secondary" href="#make">{b.title}</a>
     </section>
 
     <p class="license">{k.license}</p>
   </div>
 </Base>
+
+<script>
+  import strings from '../i18n/client';
+  import { drawGraphic, type Shape, type Theme } from '../lib/kit-builder';
+
+  // Everything below runs on the visitor's device. Nothing is uploaded, sent or stored.
+  const b = strings.kit.builder;
+  const f = strings.footer;
+  const spanish = document.documentElement.lang === 'es';
+  const form = document.querySelector<HTMLFormElement>('[data-builder]')!;
+  const canvas = document.querySelector<HTMLCanvasElement>('[data-builder-canvas]')!;
+  const frame = document.querySelector<HTMLElement>('[data-sheet-frame]')!;
+  const root = document.documentElement;
+  let image: ImageBitmap | null = null;
+  let imageUrl = '';
+  form.addEventListener('submit', (e) => e.preventDefault());
+
+  const value = (name: string) => form.querySelector<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(`[data-field="${name}"]`)!.value.trim();
+  const picked = (name: string) => form.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`)!.value;
+
+  async function render() {
+    const design = picked('design');
+    const theme = picked('theme') as Theme;
+    const graphic = design === 'square' || design === 'story';
+    form.querySelectorAll<HTMLElement>('[data-for="graphic"]').forEach((el) => (el.hidden = design === 'stickers'));
+    form.querySelector<HTMLElement>('[data-for="stickers"]')!.hidden = design !== 'stickers';
+    form.querySelector<HTMLElement>('[data-for="print"]')!.hidden = graphic;
+    document.querySelector<HTMLElement>('[data-builder-download]')!.hidden = !graphic;
+    document.querySelector<HTMLElement>('[data-builder-print]')!.hidden = graphic;
+    canvas.hidden = !graphic;
+    frame.hidden = graphic;
+    frame.dataset.theme = theme;
+    frame.dataset.design = design;
+    if (graphic) {
+      await drawGraphic(canvas, {
+        shape: design as Shape,
+        theme,
+        message: value('message'),
+        own: value('own'),
+        name: value('name'),
+        when: value('when'),
+        image,
+        site: 'openchiari.org',
+        small: [`${f.notAdvice} ${f.notAdviceRest.wide}`, spanish ? strings.translation.noticeShort : ''].filter(Boolean).join(' '),
+      });
+      return;
+    }
+    // Poster and stickers are pages to print; their text is set as text only, never as HTML.
+    document.querySelector<HTMLElement>('[data-poster]')!.hidden = design !== 'poster';
+    document.querySelector<HTMLElement>('[data-stickers]')!.hidden = design !== 'stickers';
+    for (const key of ['message', 'own', 'name', 'when']) {
+      document.querySelectorAll<HTMLElement>(`[data-out="${key}"]`).forEach((el) => (el.textContent = value(key)));
+    }
+    document.querySelector<HTMLElement>('[data-out-wrap="own"]')!.hidden = !value('own');
+    const posterImage = document.querySelector<HTMLImageElement>('[data-poster-image]')!;
+    posterImage.hidden = !imageUrl;
+    if (imageUrl) posterImage.src = imageUrl;
+    const words = value('sticker');
+    document.querySelectorAll<HTMLElement>('[data-sticker-text]').forEach((el) => (el.textContent = words));
+  }
+
+  form.addEventListener('input', () => void render());
+  form.addEventListener('change', () => void render());
+
+  form.querySelector<HTMLInputElement>('[data-field="image"]')!.addEventListener('change', async (e) => {
+    const file = (e.target as HTMLInputElement).files?.[0];
+    if (!file) return;
+    image = await createImageBitmap(file);
+    if (imageUrl) URL.revokeObjectURL(imageUrl);
+    imageUrl = URL.createObjectURL(file);
+    document.querySelector<HTMLElement>('[data-remove-image]')!.hidden = false;
+    void render();
+  });
+  document.querySelector('[data-remove-image]')!.addEventListener('click', () => {
+    image = null;
+    if (imageUrl) URL.revokeObjectURL(imageUrl);
+    imageUrl = '';
+    form.querySelector<HTMLInputElement>('[data-field="image"]')!.value = '';
+    document.querySelector<HTMLElement>('[data-remove-image]')!.hidden = true;
+    void render();
+  });
+
+  document.querySelector('[data-builder-download]')!.addEventListener('click', async () => {
+    await render();
+    canvas.toBlob((blob) => {
+      if (!blob) return;
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `open-chiari-${picked('design')}.png`;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 10000);
+    }, 'image/png');
+  });
+
+  // Printing: only the sheet prints, at the paper size chosen.
+  const pageStyle = document.createElement('style');
+  document.head.append(pageStyle);
+  document.querySelector('[data-builder-print]')!.addEventListener('click', async () => {
+    await render();
+    pageStyle.textContent = `@page { size: ${picked('paper') === 'A4' ? 'A4' : 'letter'}; margin: 0; }`;
+    root.dataset.printing = 'kit';
+    window.print();
+  });
+  window.addEventListener('afterprint', () => delete root.dataset.printing);
+
+  void render();
+</script>
 
 <style>
   .kit {
@@ -183,6 +393,293 @@ const items = [
   @media (max-width: 720px) {
     .page-intro h1 {
       font-size: 34px;
+    }
+  }
+
+  /* ---------- Make your own ---------- */
+  .builder {
+    margin-top: var(--s-56);
+    border-top: 2px solid var(--ink);
+    padding-top: var(--s-16);
+  }
+  .builder h2 {
+    font-size: 30px;
+  }
+  .builder-intro {
+    max-width: 44em;
+    color: var(--ink-2);
+    margin: var(--s-8) 0 var(--s-24);
+  }
+  .builder-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-32);
+    align-items: flex-start;
+  }
+  .builder-form {
+    flex: 1 1 340px;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .builder-form fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+  }
+  .builder-form legend,
+  .field > span,
+  .field > label {
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .builder-form legend {
+    width: 100%;
+  }
+  .choice {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: var(--touch);
+    cursor: pointer;
+  }
+  .choice input {
+    accent-color: var(--accent);
+    width: 18px;
+    height: 18px;
+    margin: 0;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .field[hidden] {
+    display: none;
+  }
+  .field input[type='text'],
+  .field select,
+  .field textarea {
+    min-height: var(--touch);
+    padding: 0 12px;
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--ink);
+    font: 400 16px var(--font-sans);
+  }
+  .field textarea {
+    padding: 10px 12px;
+    line-height: 1.4;
+  }
+  .field input[type='file'] {
+    min-height: var(--touch);
+    font: inherit;
+  }
+  .field small {
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .field .button,
+  .builder-actions .button {
+    align-self: flex-start;
+  }
+  .builder-actions .button[hidden],
+  .field .button[hidden] {
+    display: none;
+  }
+  .builder-preview {
+    flex: 1 1 340px;
+    max-width: 520px;
+  }
+  .builder-preview canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
+    object-fit: contain;
+    border: 1px solid var(--rule);
+  }
+  .builder-preview canvas[hidden] {
+    display: none;
+  }
+  /* The print sheet, shown scaled down as a preview. */
+  .sheet-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 8.5 / 11;
+    overflow: hidden;
+    border: 1px solid var(--rule);
+    background: #fff;
+  }
+  .sheet-frame[hidden] {
+    display: none;
+  }
+  .sheet {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 8.5in;
+    height: 11in;
+    transform-origin: top left;
+    transform: scale(var(--sheet-scale, 0.55));
+    background: #fff;
+    color: #1c1d21;
+  }
+  .poster {
+    height: 100%;
+    padding: 0.7in;
+    display: flex;
+    flex-direction: column;
+    gap: 0.18in;
+  }
+  .poster[hidden],
+  .sticker-sheet[hidden],
+  .poster [hidden] {
+    display: none;
+  }
+  .poster-image {
+    max-height: 1.2in;
+    max-width: 3in;
+    object-fit: contain;
+    align-self: flex-start;
+  }
+  .poster-title {
+    font-size: 38pt;
+    line-height: 1.1;
+    margin: 0;
+  }
+  .poster-figure {
+    flex: 1;
+    min-height: 0;
+  }
+  .poster-figure :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+  .poster-own {
+    border-left: 6px solid #5b027e;
+    background: #f5f5f3;
+    padding: 0.14in 0.2in;
+    font-size: 15pt;
+  }
+  .poster-own p {
+    margin: 0;
+  }
+  .poster-meta {
+    margin: 0;
+    font-size: 14pt;
+    font-weight: 600;
+    color: #5e5f66;
+  }
+  .poster-meta:empty {
+    display: none;
+  }
+  .poster-foot {
+    font-size: 8.5pt;
+    line-height: 1.4;
+    color: #5e5f66;
+  }
+  .poster-foot p {
+    margin: 0;
+  }
+  .poster-site {
+    font-size: 14pt;
+    color: #5b027e;
+    margin-bottom: 0.06in !important;
+  }
+  .sticker-sheet {
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 2.25in);
+    grid-auto-rows: 2.25in;
+    gap: 0.25in;
+    justify-content: center;
+    align-content: center;
+  }
+  .sticker {
+    border-radius: 50%;
+    outline: 1px dashed #a9a8a2;
+    outline-offset: 0.04in;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0.3in;
+    background: #5b027e;
+    color: #fff;
+  }
+  .sticker {
+    position: relative;
+  }
+  .sticker-ribbon {
+    position: absolute;
+    inset: 0.22in;
+    color: #7a2a9c;
+  }
+  .sticker-ribbon :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+  [data-theme='light'] .sticker-ribbon {
+    color: #d9bce8;
+  }
+  [data-theme='dark'] .sticker-ribbon {
+    color: #2c2433;
+  }
+  .sticker p {
+    position: relative;
+    margin: 0;
+    font: 600 22pt/1.1 var(--font-serif, 'Source Serif 4', serif);
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+  }
+  [data-theme='light'] .sticker {
+    background: #ebd7f4;
+    color: #3e0157;
+  }
+  [data-theme='dark'] .sticker {
+    background: #17181c;
+    color: #ecEae4;
+  }
+  [data-theme='dark'] .poster,
+  [data-theme='purple'] .poster {
+    border-top: 0.18in solid #5b027e;
+  }
+
+  @media print {
+    :global(:root[data-printing='kit'] body > *:not(main)),
+    :global(:root[data-printing='kit'] main > *:not(.kit)),
+    :global(:root[data-printing='kit'] .kit > *:not(.builder)),
+    :global(:root[data-printing='kit'] .builder > *:not(.builder-layout)),
+    :global(:root[data-printing='kit'] .builder-form),
+    :global(:root[data-printing='kit'] .skip-link) {
+      display: none !important;
+    }
+    :global(:root[data-printing='kit'] body) {
+      background: #fff !important;
+    }
+    :global(:root[data-printing='kit']) .kit,
+    :global(:root[data-printing='kit']) .builder {
+      padding: 0;
+      margin: 0;
+      border: 0;
+    }
+    :global(:root[data-printing='kit']) .builder-preview {
+      max-width: none;
+    }
+    :global(:root[data-printing='kit']) .sheet-frame {
+      border: 0;
+      aspect-ratio: auto;
+      overflow: visible;
+    }
+    :global(:root[data-printing='kit']) .sheet {
+      position: static;
+      transform: none;
     }
   }
 </style>

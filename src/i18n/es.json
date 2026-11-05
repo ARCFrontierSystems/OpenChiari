@@ -200,6 +200,27 @@
           "title": "Apoye a las organizaciones de Chiari",
           "wide": "Done o sea voluntario en los grupos que financian la investigación y apoyan a las familias.",
           "narrow": "Done o sea voluntario en sus propios sitios web."
+        },
+        {
+          "num": "07",
+          "page": "children",
+          "title": "Cómo ayudar a su hijo",
+          "wide": "Cómo preparar a un niño para la cirugía de Chiari: consejos, un cuento con dibujos, páginas para colorear y una hoja para la escuela.",
+          "narrow": "Consejos, un cuento con dibujos y una hoja para la escuela."
+        },
+        {
+          "num": "08",
+          "page": "kit",
+          "title": "Kit de concientización",
+          "wide": "Publicaciones, pósteres y calcomanías gratis para compartir, o haga los suyos con sus palabras y su logotipo.",
+          "narrow": "Publicaciones, pósteres y calcomanías gratis para compartir."
+        },
+        {
+          "num": "09",
+          "page": "connect",
+          "title": "Conectar con otras personas",
+          "wide": "Foros y grupos de apoyo para personas con Chiari y sus familias.",
+          "narrow": "Foros y grupos de apoyo."
         }
       ]
     }
@@ -291,9 +312,7 @@
       "skin": "Piel",
       "bone": "Cráneo y columna",
       "brain": "Cerebro",
-      "csf": "Líquido cefalorraquídeo",
-      "nerves": "Nervios",
-      "vessels": "Vasos sanguíneos"
+      "csf": "Líquido cefalorraquídeo"
     },
     "opacitySuffix": ": opacidad",
     "cutaway": "Corte",
@@ -427,7 +446,6 @@
       "far": "Corte pasada la línea media, hacia el lado opuesto"
     },
     "evidencePage": "Notas de evidencia",
-    "notInModel": "Aún no están en este modelo",
     "cough": {
       "title": "¿Por qué toser puede provocar un dolor de cabeza?",
       "text": [
@@ -473,7 +491,8 @@
         }
       ],
       "caption": "Animación simplificada. La línea de la incisión es aproximada; su longitud varía."
-    }
+    },
+    "home": "Inicio"
   },
   "evidence": {
     "inEnglish": "Estas notas están en inglés, igual que las fuentes que citan.",
@@ -1258,7 +1277,7 @@
     "logoSpace": "su logotipo",
     "items": {
       "social": {
-        "title": "Publicación cuadrada para redes sociales",
+        "title": "Publicación cuadrada: qué es Chiari",
         "format": "1080 × 1080 · PNG"
       },
       "quote": {
@@ -1272,14 +1291,110 @@
       "poster": {
         "title": "Cartel y folleto para eventos",
         "format": "Carta y A4 · PDF, con espacio para logotipo"
+      },
+      "stickersEveryone": {
+        "title": "Calcomanías para todos",
+        "format": "Carta y A4 · PDF, para papel adhesivo de hoja completa"
+      },
+      "stickersSurgery": {
+        "title": "Calcomanías para después de la cirugía",
+        "format": "Carta y A4 · PDF, para papel adhesivo de hoja completa"
       }
     },
     "download": "Descargar",
     "letter": "Carta",
     "orgsTitle": "Para organizaciones",
-    "orgsText": "¿Necesita el kit con sus colores o una versión para un evento en particular? Escríbanos y se lo hacemos, gratis.",
+    "orgsText": "¿Quiere su propia versión? Use \"Haga su propio diseño\" más abajo para agregar sus palabras, su logotipo y sus colores. Nada de lo que agregue se envía a ningún lugar.",
     "contact": "Contactar a Open Chiari",
-    "license": "Los gráficos del kit se pueden usar y compartir libremente, CC BY-SA 4.0. Los gráficos que muestran el modelo 3D también llevan el crédito de Z-Anatomy y BodyParts3D."
+    "license": "Los gráficos del kit se pueden usar y compartir libremente, CC BY-SA 4.0. Los gráficos que muestran el modelo 3D también llevan el crédito de Z-Anatomy y BodyParts3D.",
+    "explain": {
+      "headline": "¿Qué es la malformación de Chiari?",
+      "lines": [
+        "La parte más baja de la parte de atrás del cerebro se extiende por debajo de la abertura en la base del cráneo.",
+        "La mayoría de las personas nacen con las diferencias del cráneo que la causan. Algunas nunca tienen síntomas; otras los notan por primera vez en la adolescencia o en la edad adulta.",
+        "El síntoma clásico es un dolor de cabeza en la parte de atrás de la cabeza después de toser, estornudar o hacer un esfuerzo.",
+        "Los síntomas de Chiari a menudo dan pocas señales visibles. Pregunte cómo puede ayudar."
+      ],
+      "footer": "Véalo en 3D en openchiari.org · #ChiariAwareness"
+    },
+    "stickers": {
+      "title": "Calcomanías",
+      "format": "Carta y A4 · PDF, para papel adhesivo de hoja completa",
+      "how": "Imprima en papel adhesivo de hoja completa al 100 % del tamaño y luego recorte por los círculos punteados.",
+      "blank": "Escriba lo suyo",
+      "site": "openchiari.org",
+      "sheets": {
+        "everyone": {
+          "title": "Calcomanías para todos",
+          "messages": [
+            "Luchando contra Chiari",
+            "Cerebro valiente",
+            "Un día a la vez",
+            "Descansar también es fuerza",
+            "Sigo siendo yo",
+            "Pregúntame sobre Chiari",
+            "No estás solo",
+            "De morado por Chiari",
+            "Invisible, no imaginario"
+          ]
+        },
+        "surgery": {
+          "title": "Calcomanías para después de la cirugía",
+          "messages": [
+            "Club del zíper",
+            "Mi cicatriz, mi orgullo",
+            "Cada cicatriz cuenta una historia",
+            "Hice algo difícil",
+            "Súper valiente",
+            "Sanar toma tiempo",
+            "Modo recuperación",
+            "Estrella del hospital",
+            "Cerebro valiente"
+          ]
+        }
+      }
+    },
+    "builder": {
+      "title": "Haga su propio diseño",
+      "intro": "Elija un diseño y un mensaje, agregue sus propias palabras, un logotipo o una foto, y descárguelo. Todo ocurre en su dispositivo: nada de lo que agregue se envía ni se guarda.",
+      "design": "Diseño",
+      "designs": {
+        "square": "Publicación cuadrada",
+        "story": "Historia",
+        "poster": "Póster",
+        "stickers": "Hoja de calcomanías"
+      },
+      "message": "Mensaje",
+      "messageHint": "Los datos médicos solo vienen de esta lista, para que cada imagen sea correcta.",
+      "messages": [
+        "¿Qué es la malformación de Chiari?",
+        "Los síntomas de Chiari a menudo dan pocas señales visibles. Pregunte cómo puede ayudar.",
+        "Tengo malformación de Chiari.",
+        "Chiari es diferente en cada persona, y muchas personas con el tipo I no tienen ningún síntoma.",
+        "La mayoría de las personas nacen con las diferencias del cráneo que la causan. Algunas nunca tienen síntomas; otras los notan por primera vez en la adolescencia o en la edad adulta.",
+        "El síntoma clásico es un dolor de cabeza en la parte de atrás de la cabeza después de toser, estornudar o hacer un esfuerzo."
+      ],
+      "own": "Su propia frase (opcional)",
+      "ownHint": "Por ejemplo: Camino por mi hija Emma",
+      "name": "Nombre, grupo o evento (opcional)",
+      "when": "Fecha y lugar (opcional)",
+      "stickerText": "Sus palabras para las calcomanías",
+      "stickerHint": "Hasta 3 líneas cortas. Aparecen en las 12 calcomanías.",
+      "image": "Logotipo o foto (opcional)",
+      "imageHint": "Se queda en su dispositivo.",
+      "removeImage": "Quitar",
+      "color": "Colores",
+      "colors": {
+        "purple": "Morado",
+        "light": "Claro",
+        "dark": "Oscuro"
+      },
+      "size": "Tamaño del papel",
+      "download": "Descargar imagen",
+      "print": "Imprimir o guardar como PDF",
+      "preview": "Vista previa",
+      "yours": "Sus propias palabras aparecen en un recuadro aparte, para que quede claro que son suyas."
+    }
   },
   "children": {
     "title": "Cómo ayudar a su hijo con la cirugía de Chiari",
@@ -1402,6 +1517,11 @@
       "print": "Imprimir la hoja para la escuela",
       "callIf": "Por favor llámeme de inmediato si"
     },
-    "pageNote": "No es consejo médico. Nada de lo que escriba en esta página se guarda ni se envía."
+    "pageNote": "No es consejo médico. Nada de lo que escriba en esta página se guarda ni se envía.",
+    "stickers": {
+      "before": "Para después de la cirugía, también hay calcomanías para imprimir:",
+      "link": "calcomanías para después de la cirugía",
+      "after": "."
+    }
   }
 }

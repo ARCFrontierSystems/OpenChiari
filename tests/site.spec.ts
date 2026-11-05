@@ -1218,6 +1218,21 @@ test('Explorer: "How close is this to real anatomy?" shows the checked numbers f
   await expect(panel).toContainText('13 to 15 mm in adults');
 });
 
+test('Reading your MRI report: a real side-view MRI with numbered markers that match the 3D labels, credited, linked from the Explorer', async ({ page, request }) => {
+  await page.goto('/mri/');
+  const view = page.locator('#mri-view');
+  await expect(view.getByRole('heading', { level: 2 })).toHaveText('What a side-view MRI looks like');
+  await expect(view.locator('.mri-marker')).toHaveCount(7);
+  await expect(view.locator('.mri-legend li')).toHaveCount(7);
+  await expect(view.locator('.mri-legend li').first()).toContainText('Cerebrum');
+  await expect(view.locator('.mri-legend a').first()).toHaveAttribute('href', '/explorer/#typ.side.l.pcerebrum');
+  await expect(view).toContainText('OpenNeuro ds004507');
+  await expect(view).toContainText("aren't marked");
+  expect((await request.get('/mri/sagittal-t2.png')).status()).toBe(200);
+  await page.goto('/explorer/');
+  await expect(page.locator('.x-caption a', { hasText: 'Compare with a real MRI' })).toHaveAttribute('href', '/mri/#mri-view');
+});
+
 test('Awareness kit: every graphic and printable downloads, and the ZIP carries the credit', async ({ page, request }) => {
   await page.goto('/kit/');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Awareness kit');

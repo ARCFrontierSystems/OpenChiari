@@ -160,7 +160,7 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
         <div class="x-footnotes only-wide-x">
           <p class="x-hint" data-3d-only>{x.hint}</p>
           <p class="x-caption">
-            {x.captionIllustration} · {x.captionFlow} · <a href={routes.evidence + '#' + EVIDENCE_SECTION[st.condition]} data-evidence>{x.evidence}</a>
+            {x.captionIllustration} · {x.captionFlow} · <a href={routes.evidence + '#' + EVIDENCE_SECTION[st.condition]} data-evidence>{x.evidence}</a> · <a href={routes.mri + '#mri-view'}>{x.mriLink}</a>
           </p>
         </div>
       </main>

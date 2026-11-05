@@ -627,7 +627,8 @@
           }
         ]
       }
-    }
+    },
+    "mriLink": "Comparar con una resonancia real"
   },
   "evidence": {
     "inEnglish": "Estas notas están en inglés, igual que las fuentes que citan.",
@@ -1928,7 +1929,16 @@
     "nextLink": "Prepare su cita",
     "nextAfter": ".",
     "sourcesBefore": "Cada oración de esta página viene de una fuente publicada, que aparece en las",
-    "sourcesLink": "notas de evidencia"
+    "sourcesLink": "notas de evidencia",
+    "view": {
+      "title": "Cómo se ve una resonancia de lado",
+      "intro": "Esta es una resonancia real de un adulto sano voluntario, de una colección pública de investigación, cortada por la mitad como el modelo 3D. En este tipo de estudio, llamado T2, el líquido cefalorraquídeo se ve claro y el cerebro y la médula espinal se ven más oscuros. Los números coinciden con las etiquetas del modelo 3D.",
+      "alt": "Resonancia de lado de la cabeza y el cuello de un adulto sano, con marcadores numerados en el cerebro, el cerebelo, el cuarto ventrículo, el tronco encefálico, la médula espinal, el líquido cefalorraquídeo y la vértebra C2.",
+      "caption": "Resonancia de un adulto sano voluntario, vista de lado en la línea media (T2). No es un estudio de Chiari ni el suyo: el estudio de cada persona se ve un poco distinto. Los investigadores quitaron la cara antes de compartirla.",
+      "notMarked": "El punto más bajo de las amígdalas cerebelosas y los bordes de la abertura del cráneo no están marcados: ubicarlos con precisión es tarea de un radiólogo.",
+      "credit": "Resonancia: Bédard S, Cohen-Adad J. Spinal Cord Head Positions, OpenNeuro ds004507 (dominio público, CC0).",
+      "seeIt": "Verlo en 3D"
+    }
   },
   "next": {
     "label": "Siguiente",

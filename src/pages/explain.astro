@@ -12,6 +12,7 @@
  * is never in the link. Nothing is stored. An old link's note is only ever inserted as plain text.
  */
 import Base from '../layouts/Base.astro';
+import ListenButton from '../components/ListenButton.astro';
 import { getStrings, getRoutes } from '../i18n';
 import { NOTE_MAX } from '../explorer/share';
 const routes = getRoutes(Astro.currentLocale);
@@ -64,6 +65,7 @@ const t = s.explain;
             <a class="button button-secondary" data-sms href="sms:">{t.sms}</a>
             <a class="button button-secondary" data-email href="mailto:">{t.email}</a>
             <button type="button" class="button button-secondary" data-qr-open>{t.qr}</button>
+            <button type="button" class="button button-secondary" data-picture>{t.picture}</button>
           </div>
           <p class="status" role="status" data-status></p>
           <p class="hint">{t.privacy}</p>
@@ -80,6 +82,7 @@ const t = s.explain;
     <!-- What the recipient sees -->
     <section class="recipient" data-recipient hidden aria-labelledby="shared-title">
       <h1 id="shared-title" class="eyebrow mono">{t.sharedWithYou}</h1>
+      <ListenButton target="[data-recipient]" />
       <blockquote class="note serif" data-shared-note hidden></blockquote>
       <figure class="card">
         <div class="stage" data-stage>
@@ -100,6 +103,7 @@ const t = s.explain;
 
 <script>
   import qrcode from 'qrcode-generator';
+  import { makePicture, sharePicture, figureImage } from '../lib/view-picture';
   import { createStore, initialState, type ViewState } from '../explorer/state';
   import { decodeView, encodeView, NOTE_MAX, type Orbit } from '../explorer/share';
   import { anatomyFigureSvg } from '../lib/anatomy-figure';
@@ -129,7 +133,7 @@ const t = s.explain;
   const figure = section.querySelector<HTMLElement>('[data-figure]')!;
   // Screen readers hear what the view shows (the same description the 3D view gets once it has loaded).
   host.setAttribute('aria-label', `${strings.figure.ariaPrefix}${strings.figure.aria[store.get().condition]}. ${x.viewNames[store.get().camera]}.`);
-  let viewer: { orbit(): Orbit } | null = null;
+  let viewer: { orbit(): Orbit; snapshot(): HTMLCanvasElement } | null = null;
   /** Rewrites the link (make-a-link mode only; set below). */
   let refreshLink = () => {};
   store.subscribe((st) => {
@@ -149,7 +153,7 @@ const t = s.explain;
         startOrbit: shared?.orbit ?? null,
         interactive,
       });
-      viewer = (host as HTMLElement & { viewer: { orbit(): Orbit } }).viewer;
+      viewer = (host as HTMLElement & { viewer: { orbit(): Orbit; snapshot(): HTMLCanvasElement } }).viewer;
       void v;
       section.classList.add('has-3d');
       if (!interactive) host.setAttribute('role', 'img');
@@ -259,6 +263,28 @@ const t = s.explain;
         }
       });
     }
+    // A picture of the view, for messaging apps that don't show link previews (made on the device; no note on it).
+    section.querySelector('[data-picture]')!.addEventListener('click', async () => {
+      const st = store.get();
+      const f = strings.footer;
+      const parts = [`${x.captionIllustration}.`];
+      if (st.flow) parts.push(`${x.captionFlow}.`);
+      parts.push(`${x.captionTonsils}.`);
+      try {
+        const view = viewer ? viewer.snapshot() : await figureImage(anatomyFigureSvg({ condition: st.condition, flow: st.flow, labels: false, measure: st.measure, dark: true }, strings.figure));
+        const blob = await makePicture(view, {
+          title: `${x.conditions[st.condition].label}, ${viewName(st)}`,
+          caption: parts.join(' '),
+          advice: `${f.notAdvice} ${f.notAdviceRest.wide}`,
+          credit: `${f.modelBefore.replace(/^\.\s*/, '')} ${f.zAnatomy} ${f.modelAfter}`,
+          site: 'openchiari.org',
+        });
+        const result = await sharePicture(blob, `open-chiari-${st.condition}.png`);
+        if (result === 'saved') status.textContent = t.pictureSaved;
+      } catch (error) {
+        console.warn('Picture not made.', error);
+      }
+    });
     // "Explain It links made": counted once when the link is copied, shared, texted, emailed or shown as a QR code.
     // Only the fact is counted, never the link, the view or the note.
     section.querySelectorAll('[data-copy], [data-share], [data-sms], [data-email], [data-qr-open]').forEach((el) =>

@@ -1,7 +1,7 @@
 # Makes the web versions of the logo (design/brand/open-chiari-logo.png) into public/brand/:
 #   logo.png        see-through, for light backgrounds (page header)
 #   logo-dark.png   see-through, light outline and lettering, for the dark 3D Explorer header
-#   icon-32.png, icon-180.png, icon-512.png   the head-and-brain mark, for browser tabs and home screens
+#   icon-32.png, icon-180.png, icon-192.png, icon-512.png   the head-and-brain mark, for browser tabs and home screens
 #   share.png       1200 x 630, the logo on white, the picture shown when a link is shared
 # Run: python3 scripts/make-brand.py   (needs Pillow)
 import colorsys, os
@@ -57,7 +57,7 @@ head.paste((255, 255, 255), (465 - 112, 690 - 128, head.width, head.height))  # 
 side = max(head.size)
 mark = Image.new('RGB', (side, side), (255, 255, 255))
 mark.paste(head, ((side - head.width) // 2, (side - head.height) // 2))
-for size in (32, 180, 512):
+for size in (32, 180, 192, 512):
     mark.resize((size, size), Image.LANCZOS).save(os.path.join(out, f'icon-{size}.png'))
 
 share = Image.new('RGB', (1200, 630), (255, 255, 255))

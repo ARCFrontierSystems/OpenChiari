@@ -8,6 +8,7 @@
  */
 import TranslationNotice from '../components/TranslationNotice.astro';
 import Head from '../components/Head.astro';
+import ListenButton from '../components/ListenButton.astro';
 import { anatomyFigureSvg } from '../lib/anatomy-figure';
 import { getStrings, getRoutes, externalLinks } from '../i18n';
 const routes = getRoutes(Astro.currentLocale);
@@ -49,6 +50,7 @@ const first = t.steps[0];
         <p class="tour-step mono" data-step>{t.stepOf.replace('{n}', '1').replace('{total}', String(total))}</p>
         <h1 class="serif" tabindex="-1" data-title>{first.title}</h1>
         <p class="tour-text" data-text>{first.text}</p>
+        <div class="tour-listen"><ListenButton target=".tour-panel" dark /></div>
         <div class="tour-buttons">
           <button type="button" class="button button-secondary" data-back hidden>{t.back}</button>
           <button type="button" class="button button-primary" data-next>{t.next.replace('{title}', t.steps[1].title.toLowerCase())}</button>
@@ -69,6 +71,7 @@ const first = t.steps[0];
       import { createStore, initialState, type ViewState } from '../explorer/state';
       import { anatomyFigureSvg } from '../lib/anatomy-figure';
       import { count } from '../lib/count';
+      import { stopSpeaking } from '../lib/speak';
       import strings from '../i18n/client';
 
       const t = strings.tour;
@@ -95,6 +98,7 @@ const first = t.steps[0];
 
       let step = 0;
       function show(n: number, focus = true) {
+        stopSpeaking(); // a new step stops the reading of the last one
         step = n;
         const s = t.steps[n];
         $('[data-step]').textContent = t.stepOf.replace('{n}', String(n + 1)).replace('{total}', String(t.steps.length));
@@ -300,6 +304,9 @@ const first = t.steps[0];
   }
   :global(:root[data-calm='on']) .tour-text {
     font-size: 19px;
+  }
+  .tour-listen {
+    margin-top: 4px;
   }
   .tour-buttons {
     display: flex;

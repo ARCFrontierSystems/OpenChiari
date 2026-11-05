@@ -4,6 +4,7 @@
  * All text comes from src/i18n/en.json, copied word for word from docs/COPY.md.
  */
 import Base from '../layouts/Base.astro';
+import ListenButton from '../components/ListenButton.astro';
 import AnatomyFigure from '../components/AnatomyFigure.astro';
 import { getStrings, getRoutes } from '../i18n';
 const routes = getRoutes(Astro.currentLocale);
@@ -47,6 +48,7 @@ const calm = getStrings(Astro.currentLocale).calm;
   <section class="band band-surface" aria-labelledby="what-is">
     <div class="container band-inner">
       <h2 class="section-title" id="what-is">{h.whatIs.title}</h2>
+      <ListenButton />
       <div class="facts">
         {[h.whatIs.whatItIs, h.whatIs.whoHasIt, h.whatIs.howFound].map((fact) => (
           <div class="fact">
@@ -64,6 +66,7 @@ const calm = getStrings(Astro.currentLocale).calm;
     <div class="container band-inner feel">
       <div class="feel-intro">
         <h2 class="section-title" id="feel">{h.feel.title}</h2>
+      <ListenButton />
         <p class="only-wide feel-lede">{h.feel.intro}</p>
         <blockquote class="classic serif">
           <span class="only-wide">{h.feel.classic.wide}</span><span class="only-narrow">{h.feel.classic.narrow}</span>
@@ -86,6 +89,7 @@ const calm = getStrings(Astro.currentLocale).calm;
   <section class="band band-surface" aria-labelledby="myths">
     <div class="container band-inner">
       <h2 class="section-title" id="myths">{h.myths.title}</h2>
+      <ListenButton />
       <dl class="myths">
         {h.myths.items.map((m) => (
           <div class="myth">

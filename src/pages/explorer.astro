@@ -6,6 +6,7 @@
  * take effect on the model in steps 4 to 6.
  * All text from src/i18n/en.json (medical text word for word from docs/COPY.md).
  */
+import ListenButton from '../components/ListenButton.astro';
 import TranslationNotice from '../components/TranslationNotice.astro';
 import Head from '../components/Head.astro';
 import Footer from '../components/Footer.astro';
@@ -173,7 +174,8 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
             </li>
           ))}
         </ul>
-        <div class="x-card" aria-live="polite">
+        <div class="x-card x-card-wide" aria-live="polite">
+          <ListenButton target=".x-card-wide" dark />
           <p class="x-h"><span data-part-num>{part.num}</span> · {x.selected}</p>
           <h2 class="x-card-title" data-part-name>{part.name}</h2>
           <p class="x-card-text" data-part-text>{part.text}</p>
@@ -192,6 +194,7 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
           ))}
         </fieldset>
         <div class="x-sheet-note" aria-live="polite">
+          <ListenButton target=".x-sheet-note" dark />
           <p class="x-h" data-cond-title>{cond.label}</p>
           <p data-cond-note-short>{cond.noteShort}</p>
         </div>

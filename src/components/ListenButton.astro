@@ -1,0 +1,60 @@
+---
+/**
+ * "Listen": the device's own voice reads this part of the page (src/lib/speak.ts). Hidden until the browser shows it
+ * can speak. `target` is a CSS selector for what to read; without it, the button's own <section>.
+ */
+import { getStrings } from '../i18n';
+
+interface Props {
+  target?: string;
+  dark?: boolean;
+}
+const { target = '', dark = false } = Astro.props;
+const t = getStrings(Astro.currentLocale).listen;
+---
+
+<button type="button" class:list={['listen', { dark }]} data-listen={target} data-listen-skip data-listen-text={t.listen} data-stop-text={t.stop} aria-pressed="false" title={t.label} hidden>
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v4h3l5 4V6L7 10H4z"></path><path d="M16 9a4 4 0 0 1 0 6"></path></svg>
+  <span data-listen-label>{t.listen}</span>
+</button>
+
+<script>
+  import { bindListenButtons } from '../lib/speak';
+  bindListenButtons();
+</script>
+
+<style>
+  .listen {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: var(--touch);
+    padding: 0 14px;
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--ink);
+    font: 500 15px var(--font-sans);
+    cursor: pointer;
+  }
+  .listen[hidden] {
+    display: none;
+  }
+  .listen[aria-pressed='true'] {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .dark {
+    border-color: var(--x-control-border);
+    color: var(--x-text);
+  }
+  .dark[aria-pressed='true'] {
+    border-color: var(--x-accent);
+    color: var(--x-accent);
+  }
+  :global(:root[data-calm='on']) .listen {
+    min-height: 56px;
+    font-size: 17px;
+  }
+</style>

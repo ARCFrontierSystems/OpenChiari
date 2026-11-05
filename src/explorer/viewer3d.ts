@@ -1212,6 +1212,22 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   (host as HTMLElement & { viewer?: unknown }).viewer = {
     look,
     reset: frame,
+    /** Explain It picture: the view as it is now, drawn fresh at full sharpness (the labels are not part of it). */
+    snapshot(): HTMLCanvasElement {
+      const ratio = renderer.getPixelRatio();
+      renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+      renderer.setSize(hostW, hostH, false);
+      applyOpacity();
+      renderer.render(scene, camera);
+      const copy = document.createElement('canvas');
+      copy.width = renderer.domElement.width;
+      copy.height = renderer.domElement.height;
+      copy.getContext('2d')!.drawImage(renderer.domElement, 0, 0);
+      renderer.setPixelRatio(ratio);
+      renderer.setSize(hostW, hostH, false);
+      requestRender();
+      return copy;
+    },
     /** The camera now, as an Explain It link records it: azimuth, elevation (degrees) and zoom (1 = whole head). */
     orbit() {
       const [az, el] = anglesNow();

@@ -1,0 +1,39 @@
+---
+/** One clear next step at the end of a page (consistency pass, Nov 5: pages shouldn't dead-end). */
+import { getStrings, getRoutes } from '../i18n';
+
+interface Props {
+  from: 'prep' | 'children' | 'model' | 'privacy' | 'evidence' | 'mri';
+}
+const { from } = Astro.props;
+const n = getStrings(Astro.currentLocale).next;
+const routes = getRoutes(Astro.currentLocale);
+const step = n[from];
+---
+
+<p class="next-step">
+  <span class="next-label mono">{n.label}</span>
+  <a href={routes[step.page as keyof typeof routes]}>{step.text} <span aria-hidden="true">→</span></a>
+</p>
+
+<style>
+  .next-step {
+    margin: var(--s-40) 0 0;
+    padding-top: var(--s-16);
+    border-top: 1px solid var(--rule);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--s-4) var(--s-12);
+  }
+  .next-label {
+    font-size: var(--text-mono);
+    color: var(--muted);
+  }
+  .next-step a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch);
+    font-weight: 600;
+  }
+</style>

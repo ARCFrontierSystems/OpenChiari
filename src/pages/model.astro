@@ -8,6 +8,7 @@
 import { statSync } from 'node:fs';
 import { join } from 'node:path';
 import Base from '../layouts/Base.astro';
+import NextStep from '../components/NextStep.astro';
 import AnatomyFigure from '../components/AnatomyFigure.astro';
 import { getStrings, externalLinks } from '../i18n';
 
@@ -104,6 +105,7 @@ const embedCode = `<iframe src="https://openchiari.org/embed/#v=c1&switch=1&labe
     </section>
 
     <p class="footnote">{t.footnote}</p>
+    <NextStep from="model" />
   </div>
 </Base>
 
@@ -165,7 +167,7 @@ const embedCode = `<iframe src="https://openchiari.org/embed/#v=c1&switch=1&labe
     gap: var(--s-16);
   }
   .page-intro h1 {
-    font-size: 42px;
+    font-size: var(--h1-page);
     line-height: 1.1;
   }
   .lead {
@@ -204,7 +206,7 @@ const embedCode = `<iframe src="https://openchiari.org/embed/#v=c1&switch=1&labe
     color: var(--muted);
   }
   section h2.serif {
-    font-size: 28px;
+    font-size: var(--h2-section);
     margin-bottom: var(--s-24);
   }
   .embed {
@@ -338,7 +340,7 @@ const embedCode = `<iframe src="https://openchiari.org/embed/#v=c1&switch=1&labe
       gap: var(--s-40);
     }
     .page-intro h1 {
-      font-size: 32px;
+      font-size: var(--h1-page);
     }
     .facts div {
       grid-template-columns: 1fr;

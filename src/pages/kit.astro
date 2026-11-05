@@ -93,6 +93,14 @@ const items = [
       ))}
     </ul>
 
+    <section class="orgs" aria-labelledby="orgs-title">
+      <div>
+        <h2 id="orgs-title" class="serif">{k.orgsTitle}</h2>
+        <p>{k.orgsText}</p>
+      </div>
+      <a class="button button-secondary" href="#make">{b.title}</a>
+    </section>
+
     <section class="builder" id="make" aria-labelledby="make-title">
       <h2 id="make-title" class="serif">{b.title}</h2>
       <p class="builder-intro">{b.intro}</p>
@@ -237,13 +245,6 @@ const items = [
       </div>
     </section>
 
-    <section class="orgs" aria-labelledby="orgs-title">
-      <div>
-        <h2 id="orgs-title" class="serif">{k.orgsTitle}</h2>
-        <p>{k.orgsText}</p>
-      </div>
-      <a class="button button-secondary" href="#make">{b.title}</a>
-    </section>
 
     <p class="license">{k.license}</p>
   </div>
@@ -485,7 +486,7 @@ const items = [
     margin-bottom: var(--s-8);
   }
   .page-intro h1 {
-    font-size: var(--h1);
+    font-size: var(--h1-page);
     line-height: 1.08;
     margin-bottom: var(--s-16);
   }
@@ -553,7 +554,7 @@ const items = [
     gap: var(--s-16) var(--s-32);
     background: var(--surface);
     border: 1px solid var(--rule);
-    border-left: 3px solid var(--awareness);
+    border-left: 3px solid var(--accent);
   }
   .orgs h2 {
     font-size: 24px;
@@ -569,7 +570,7 @@ const items = [
   }
   @media (max-width: 720px) {
     .page-intro h1 {
-      font-size: 34px;
+      font-size: var(--h1-page);
     }
   }
 
@@ -580,7 +581,7 @@ const items = [
     padding-top: var(--s-16);
   }
   .builder h2 {
-    font-size: 30px;
+    font-size: var(--h2-section);
   }
   .builder-intro {
     max-width: 44em;
@@ -636,7 +637,7 @@ const items = [
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--awareness);
+    background: var(--accent);
     color: var(--paper);
     font-size: 15px;
   }
@@ -700,12 +701,12 @@ const items = [
     border-color: var(--muted);
   }
   .card:has(input:checked) {
-    border-color: var(--awareness);
-    box-shadow: inset 0 0 0 1px var(--awareness);
+    border-color: var(--accent);
+    box-shadow: inset 0 0 0 1px var(--accent);
   }
   .card input {
     flex: none;
-    accent-color: var(--awareness);
+    accent-color: var(--accent);
     width: 18px;
     height: 18px;
     margin: 2px 0 0;
@@ -738,7 +739,7 @@ const items = [
     display: block;
     width: 30px;
     height: 30px;
-    border: 2px solid var(--awareness);
+    border: 2px solid var(--accent);
     border-radius: 3px;
   }
   .shape-story {
@@ -752,7 +753,7 @@ const items = [
   }
   .shape-stickers {
     border: 0;
-    background: radial-gradient(circle at 25% 25%, var(--awareness) 22%, transparent 24%), radial-gradient(circle at 75% 25%, var(--awareness) 22%, transparent 24%), radial-gradient(circle at 25% 75%, var(--awareness) 22%, transparent 24%), radial-gradient(circle at 75% 75%, var(--awareness) 22%, transparent 24%);
+    background: radial-gradient(circle at 25% 25%, var(--accent) 22%, transparent 24%), radial-gradient(circle at 75% 25%, var(--accent) 22%, transparent 24%), radial-gradient(circle at 25% 75%, var(--accent) 22%, transparent 24%), radial-gradient(circle at 75% 75%, var(--accent) 22%, transparent 24%);
   }
   .message-cards {
     display: flex;
@@ -778,8 +779,8 @@ const items = [
     cursor: pointer;
   }
   .starter:hover {
-    border-color: var(--awareness);
-    color: var(--awareness);
+    border-color: var(--accent);
+    color: var(--accent);
   }
   .swatches,
   .inline-choices {
@@ -800,7 +801,7 @@ const items = [
   .swatch input,
   .choice input,
   .check input {
-    accent-color: var(--awareness);
+    accent-color: var(--accent);
     width: 18px;
     height: 18px;
     margin: 0;
@@ -820,6 +821,7 @@ const items = [
   }
   .chip-dark {
     background: #17181c;
+    box-shadow: 0 0 0 1px var(--muted);
   }
   .image-chosen {
     display: flex;
@@ -880,7 +882,7 @@ const items = [
   }
   .preview-size {
     display: none;
-    min-height: 40px;
+    min-height: var(--touch);
     padding: 0 12px;
     border: 1px solid var(--input-border);
     border-radius: var(--radius);

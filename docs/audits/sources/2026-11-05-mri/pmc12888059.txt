@@ -1,0 +1,277 @@
+
+ Chiari Malformation Type I: A Review of Pathophysiology, Cerebrospinal Fluid Flow Dynamics, Diagnosis, Surgical Management, and Its Relationship to Syringomyelia - PMC
+ Skip to main content
+ An official website of the United States government
+ Here's how you know 
+ Here's how you know 
+ Official websites use .gov 
+ A
+ .gov website belongs to an official
+ government organization in the United States.
+ Secure .gov websites use HTTPS 
+ A lock (
+ Lock 
+ Locked padlock icon
+ ) or https:// means you've safely
+ connected to the .gov website. Share sensitive
+ information only on official, secure websites.
+ Search
+ Log in 
+ Dashboard
+ Publications
+ Account settings
+ Log out
+ Search…
+ Search NCBI
+ Primary site navigation
+ Search
+ Logged in as:
+ Dashboard
+ Publications
+ Account settings
+ Log in
+ Search PMC Full-Text Archive 
+ Search in PMC 
+ Journal List
+ User Guide
+ PERMALINK
+ Copy 
+ As a library, NLM provides access to scientific literature. Inclusion in an NLM database does not imply endorsement of, or agreement with,
+ the contents by NLM or the National Institutes of Health.
+ Learn more:
+ PMC Disclaimer 
+ |
+ PMC Copyright Notice
+ Cureus 
+. 2026 Jan 10;18(1):e101226. doi: 10.7759/cureus.101226 
+ Search in PMC 
+ Search in PubMed 
+ View in NLM Catalog 
+ Add to search 
+ Chiari Malformation Type I: A Review of Pathophysiology, Cerebrospinal Fluid Flow Dynamics, Diagnosis, Surgical Management, and Its Relationship to Syringomyelia
+ Maryam S Alhosani 
+ Maryam S Alhosani 
+ 1 
+Department of Medicine, University of Georgia, Tbilisi, GEO 
+ Find articles by Maryam S Alhosani 
+ 1, ✉ , Sopio Gachechiladze 
+ Sopio Gachechiladze 
+ 1 
+Department of Medicine, University of Georgia, Tbilisi, GEO 
+ Find articles by Sopio Gachechiladze 
+ 1 
+ Editors: Alexander Muacevic , John R Adler 
+ Author information 
+ Article notes 
+ Copyright and License information 
+ 1 
+Department of Medicine, University of Georgia, Tbilisi, GEO 
+ ✉ 
+Maryam S. Alhosani alhosanimaryam2255@gmail.com 
+ ✉ Corresponding author.
+ Accepted 2026 Jan 10; Collection date 2026 Jan.
+ Copyright © 2026, Alhosani et al.
+ This is an open access article distributed under the terms of the Creative Commons Attribution License CC-BY 4.0., which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+ PMC Copyright notice 
+ PMCID: PMC12888059  PMID: 41674734 
+ Abstract
+ Chiari malformation type I (CM-I) is a neurological disorder characterized by the herniation of the cerebellar tonsils through the foramen magnum, resulting in the obstruction of cerebrospinal fluid (CSF) flow and the compression of the brainstem and upper cervical spinal cord. These disturbances contribute to symptoms such as headaches exacerbated by Valsalva maneuvers, dizziness, neck pain, muscle weakness, sensory disturbances, and coordination difficulties. This review provides an overview of the pathophysiology of CM-I, the role of disrupted CSF dynamics, and diagnostic approaches including magnetic resonance imaging (MRI) and cine MRI. Moreover, this review provides current management strategies ranging from conservative therapy to posterior fossa decompression. Additionally, the relationship between CM-I and syringomyelia is examined, emphasizing how altered CSF flow contributes to syrinx formation. Greater understanding of these mechanisms supports earlier diagnosis and more targeted treatment, highlighting the need for continued research into neuroprotective therapies that enhance long-term outcomes and quality of life for patients with CM-I.
+ Keywords: cerebellar tonsillar herniation, chiari malformation type i, csf dynamics, csf flow obstruction, hydrocephalus, neurological outcome, posterior fossa decompression, syringomyelia
+ Introduction and background
+ Chiari malformation type I (CM-I) is a congenital or acquired structural abnormality characterized by the caudal displacement of the cerebellar tonsils through the foramen magnum by ≥5 mm [ 1 , 2 ]. This downward herniation disrupts the normal craniospinal pressure gradient and leads to the obstruction of cerebrospinal fluid (CSF) flow at the craniocervical junction. As a result, patients may develop increased intracranial pressure, compression of the brainstem and upper cervical spinal cord, and formation of syringomyelia due to altered CSF pulsatility within the spinal subarachnoid space. Figure 1 illustrates the anatomical changes associated with CM-I, including inferior displacement of the cerebellar tonsils and alteration of CSF pathways at the craniovertebral junction.
+ Figure 1. Schematic illustration of CM-I demonstrating the inferior descent of the cerebellar tonsils through the foramen magnum, resulting in hindbrain crowding and CSF flow obstruction.
+ Open in a new tab 
+ The depiction is based on established diagnostic criteria defining CM-I as tonsillar herniation ≥5 mm below the foramen magnum [ 1 , 2 ].
+ CM-I: Chiari malformation type I; CSF: cerebrospinal fluid
+ Epidemiologically, CM-I is the most common Chiari malformation. This malformation type is estimated to occur in approximately one in 1000 live births. CM-I is increasingly recognized due to the widespread use of magnetic resonance imaging (MRI), with prevalence estimated at 1% in the general population. Although some individuals remain asymptomatic, many present with hallmark symptoms such as occipital headaches exacerbated by coughing, sneezing, or straining (Valsalva maneuvers), neck pain, sensory disturbances, dizziness, imbalance, or cranial nerve dysfunction. In pediatric and adolescent patients, scoliosis may be a presenting feature, often associated with syringomyelia [ 2 - 4 ].
+ Given the heterogeneity of symptoms and overlap with other neurological disorders, accurate diagnosis and understanding of underlying pathophysiological mechanisms, including CSF flow obstruction and syrinx formation, are critical for optimal management. Posterior fossa decompression remains the primary surgical intervention for symptomatic CM-I, aiming to restore CSF circulation, relieve neural compression, and reduce syrinx size when present.
+ This review summarizes the current knowledge on CM-I, with emphasis on pathophysiology, CSF flow dynamics, clinical presentation, diagnostic evaluation, and contemporary surgical approaches. Additionally, it highlights the strong relationship between CM-I and syringomyelia and underscores the importance of early recognition and individualized treatment strategies.
+ Review
+ Methods
+ This narrative review was conducted using peer-reviewed literature obtained from PubMed, Google Scholar, and major neurosurgical and radiology textbooks published between 1994 and 2025. Search terms included "Chiari malformation type I", "cerebellar tonsillar herniation", "CSF flow dynamics", "syringomyelia", and "posterior fossa decompression". Articles discussing epidemiology, pathophysiology, clinical presentation, imaging diagnostics, management options, and postoperative outcomes were included. Non-English publications, isolated case reports without clinical relevance, and non-peer-reviewed sources were excluded. This review synthesizes current evidence to highlight key diagnostic features, treatment strategies, and long-term outcomes in individuals with CM-I.
+ Pathogenesis (etiology)/embryology and posterior fossa development
+ The embryological and pathophysiological mechanisms underlying Chiari malformations have been reported with several theories proposed to explain posterior fossa underdevelopment, hindbrain herniation, and altered CSF dynamics. Comprehensive reviews have also highlighted the interplay between abnormal embryologic development, craniocervical crowding, and pressure dissociation across the foramen magnum as central contributors to disease manifestation and associated conditions such as syringomyelia. The pathophysiological sequence leading to hindbrain herniation and CSF obstruction is illustrated schematically below. 
+ The causes of Chiari malformation vary and may be congenital or acquired. In many individuals, Chiari malformation develops when the lower back part of the brain (cerebellar tonsils) pushes through the foramen magnum, where the brain and spinal cord meet. This often occurs when the posterior fossa is smaller than expected, causing the cerebellum to sit lower than normal and become crowded in the area where the cerebellum and spinal cord should be located. This increased pressure leads to cerebellar tonsillar displacement and downward herniation through the foramen magnum. Chiari malformations are almost always present at birth (congenital), though symptoms may not appear until later in life. In some cases, the condition is inherited from a biological family and results from a genetic change (mutation). Very rarely, a Chiari malformation can develop in someone who was not born with it. In these cases, the skull or spinal cord may change shape due to a brain tumor, a cyst, hematoma (blood accumulation), hydrocephalus, or intracranial hypertension or pseudotumor cerebri. Chiari malformation may also occur in association with certain underlying health conditions such as Goldenhar syndrome, achondroplasia, spina bifida, connective tissue disorders like Ehlers-Danlos syndrome, or other abnormalities that influence skull or spinal cord development [ 5 - 7 ].
+ Clinical features (signs and symptoms) 
+ Clinical manifestations of CM-I range from mild to severe and may vary from person to person. Approximately 30% of these patients may be asymptomatic. The most characteristic symptom is headache, typically located at the back of the head and often triggered or worsened by coughing, sneezing, straining, or bending forward. Many patients also experience neck and shoulder pain due to the compression of the C1-C2 nerves, along with dizziness, vertigo, and difficulties with balance and coordination. Muscle weakness and numbness or tingling in the arms or legs are common, reflecting sensory pathway involvement. Visual symptoms such as double vision, blurred vision, and increased light sensitivity may occur. Hearing disturbances, including tinnitus or hearing loss, are also frequently reported. Additional symptoms include swallowing difficulties, drooling, choking or gagging, and persistent nausea with episodes of vomiting. Some patients develop chronic fatigue, palpitations, or a general feeling of being unwell. 
+ Sleep disturbances such as insomnia, as well as difficulty breathing during sleep, may also be present. Loss of bladder or bowel control, fainting episodes, and curved spine (scoliosis) may occur, especially when syringomyelia is associated. Because symptoms can fluctuate over time, they may appear in childhood, adolescence, or adulthood and may worsen with activities that increase intracranial pressure. Clinical observations and population-based studies suggest a higher prevalence of CM-I among females compared to males [ 8 - 10 ].
+ Pathophysiology of CSF flow
+ CM-I is the most frequently encountered form of Chiari malformations and is defined by the downward displacement of the cerebellar tonsils through the foramen magnum into the upper cervical spinal canal. This structural abnormality alters the relationship between the skull base, brainstem, and cervical cord, leading to the obstruction of CSF flow and mechanical compression of surrounding neural tissues. The resulting disruption in CSF dynamics and pressure regulation contributes to a wide range of symptoms, from occipital headaches and neck pain to sensory disturbances, motor weakness, and, in some cases, the development of syringomyelia [ 11 - 13 ].
+ Figure 2 summarizes the pathophysiological cascade, demonstrating the relationships between ventricular abnormalities, posterior fossa crowding, CSF obstruction, hindbrain herniation, and subsequent hydrocephalus in Chiari malformation.
+ Figure 2. Original flowchart illustrating the pathophysiological mechanisms of CM-I. The diagram highlights cerebellar tonsillar descent ≥5 mm through the foramen magnum, resulting in the partial obstruction of CSF flow at the craniocervical junction and altered CSF pressure dynamics between intracranial and spinal compartments. These changes may contribute to chronic neural compression with brainstem and upper cervical spinal cord symptoms, as well as spinal CSF disturbances leading to syringomyelia. Ventricular dilation and hydrocephalus are shown as secondary findings and are more commonly associated with acquired Chiari malformations rather than classic CM-I.
+ Open in a new tab 
+ Illustration created by the authors and synthesized from established pathophysiological mechanisms described in the literature [ 2 , 6 - 8 , 11 - 15 ].
+ CM-I: Chiari malformation type I; CSF: cerebrospinal fluid
+ Management of CM-I includes both conservative and surgical strategies. Treatment decisions typically depend on symptom severity, radiologic findings, and the presence of associated abnormalities such as syringomyelia. A multidisciplinary approach, incorporating neurology, radiology, neurosurgery, and primary care, optimizes diagnostic accuracy, guides the appropriate selection of imaging studies, and improves patient outcomes. Posterior fossa decompression remains the standard surgical intervention for symptomatic cases, aiming to restore normal CSF flow, reduce neural compression, and prevent the progression of associated complications. Objectives of clinical evaluation for CM-I include identifying the underlying etiology, selecting appropriate diagnostic tests, determining the most suitable management plan, and promoting effective communication and coordination across the healthcare team to enhance long-term outcomes. 
+ Associated conditions and complications of CM-I
+ Chiari malformations comprise a spectrum of hindbrain abnormalities that vary in severity, with progressive displacement of neural structures leading to the increasing disruption of CSF circulation. As an example, CM-I is characterized by the isolated descent of the cerebellar tonsils through the foramen magnum and commonly progresses to the development of syringomyelia and hydromyelia. A syrinx is a fluid-filled cavity that can develop within the spine and can also occur when CSF is not flowing properly between your brain and spine, due to impaired CSF flow at the craniocervical junction. Moreover, axons of second-order neurons crossing within the spinothalamic tract are mainly affected, leading to the loss of pain and temperature sensation in the bilateral upper extremities. As accumulation expands, it may damage the anterior horn and eventually lower motor neuron (LMN) findings [ 14 , 15 ].
+ In contrast, Chiari malformation type II represents a more severe form than CM-I with an extensive hindbrain and brainstem displacement and is mainly associated with hydrocephalus, myelomeningocele, syringomyelia, and tethered cord syndrome, a life-threatening condition that occurs when CSF builds up in your head as a result of ventricular outflow obstruction [ 16 ]. Hydrocephalus happens when the CSF cannot drain. As a result, CSF buildup occurs, causing an intracranial pressure inside the skull. 
+ CSF accumulation can cause damage to your spinal cord and result in symptoms like movement and balance problems, pain, muscle weakness, numbness or tingling, muscle spasms, decreased sensation in hot and cold, and loss of bladder and bowel control. Tethered cord syndrome may also occur. Children born with myelomeningocele (a severe form of spina bifida) frequently develop tethered cord syndrome as they grow [ 16 ]. This occurs when their spinal cord attaches to their lower back, and over the course of the syndrome, there can be slow and progressive nerve damage that affects the muscles of their body and legs. It can also affect their bowel and bladder function. In addition, symptoms of Chiari malformation can affect your mood, especially if you experience insomnia or severe headaches. Some people may develop depression as well.
+ Although CM-I is most commonly identified as an isolated congenital complication, it has also been reported in association with rare syndromic and developmental conditions. Case reports in the literature describe associations between CM-I and disorders affecting skeletal and neurodevelopment, including acromesomelic dwarfism, suggesting a possible shared embryological basis related to posterior fossa development and hindbrain crowding. These observations highlight the heterogeneity of CM-I and support the concept that structural abnormalities beyond tonsillar herniation alone may contribute to disease expression [ 17 ].
+ Diagnostic evaluation 
+ Diagnosis of Chiari malformation typically begins with a complete physical examination. During the exam, the healthcare provider assesses movement, balance, coordination, and sensation in the hands and feet and may also look for memory problems, learning challenges, and developmental delays in children. To confirm the diagnosis, imaging studies of the brain and spinal cord are ordered. MRI is the gold standard for the diagnostic evaluation of CM-I. Sagittal MRI of the brain and cervical spine allows the precise visualization of the cerebellar tonsils in relation to the foramen magnum, with caudal descent exceeding 5 mm generally considered abnormal and supportive of the diagnosis [ 2 ]. Beyond confirming tonsillar herniation, MRI is essential for identifying associated conditions, including syringomyelia and other severe manifestations that require prompt recognition, such as hydrocephalus or extensive brainstem involvement [ 18 - 20 ].
+ Comprehensive imaging of the craniocervical junction and spinal cord, therefore, plays a critical role in assessing disease severity, guiding management decisions, and determining the need for urgent intervention. Representative MRI findings are illustrated in Figures 3 - 4 .
+ Figure 3. Sagittal MRI demonstrating cerebellar tonsillar herniation (arrow).
+ Open in a new tab 
+ Image reproduced from Open-i, National Library of Medicine (NIH) [ 21 ] (CC BY 3.0 Deed). 
+ MRI: magnetic resonance imaging
+ Figure 4. Sagittal T2-weighted MRI showing normal tonsillar position (a) and inferior cerebellar tonsillar herniation consistent with CM-I (b, arrow).
+ Open in a new tab 
+ Image reproduced from Open-i, National Library of Medicine (NIH) [ 22 ] (CC BY 4.0 Deed). 
+ MRI: magnetic resonance imaging; CM-I: Chiari malformation type I
+ Cine MRI, which is similar to a traditional MRI, allows the visualization of CSF flow around the base of the skull and helps identify flow obstruction. Computed tomography (CT) scans may also be used to detect bony abnormalities of the skull base and spinal column. X-rays can assess bone structure in the skull and neck. In some cases, Chiari malformations are detected on prenatal ultrasounds before birth. Ultrasound uses sound waves to produce real-time images of soft tissues. If a patient does not experience symptoms of Chiari malformation, the diagnosis may be made incidentally while imaging is performed for another unrelated reason. 
+ Management and treatment
+ Management of Chiari malformation depends on the severity of symptoms and the degree of neurological involvement. Individuals without symptoms typically do not require treatment, and healthcare providers monitor their condition with periodic clinical evaluations and MRI studies. For mild symptoms such as headache or neck pain, treatment often includes pain medications, particularly nonsteroidal anti-inflammatory drugs (NSAIDs) like ibuprofen or naproxen, as well as muscle relaxants to reduce neck stiffness or spasms. Physical therapy may also be recommended to help manage discomfort and improve function. Patients are advised to avoid activities that increase intracranial pressure, including heavy lifting, straining, and exposure to sneezing triggers such as allergies, as well as chronic coughing. Additional supportive measures may involve massage therapy or using hearing aids or glasses if hearing or vision loss is present.
+ In more severe or progressive cases, surgical intervention may be necessary. Surgical options include craniectomy, in which the surgeon removes a small portion of the skull to relieve pressure on the brain and improve CSF flow.
+ In some individuals, surgical intervention is required to manage Chiari malformation. The primary operation performed for CM-I is posterior fossa decompression, a procedure that involves removing a small portion of the skull to relieve pressure on the brain and upper cervical spinal cord. During surgery, the neurosurgeon may also widen the opening of the dura or place a dural graft to increase space and improve CSF flow. In some cases, part of the cerebellar tonsils may be reduced or removed, or a catheter may be inserted to assist CSF drainage. A C1 laminectomy is commonly performed to create additional space [ 13 , 23 - 25 ].
+ The overall goal of these surgical techniques is to decompress the brainstem and spinal cord, restore normal CSF circulation, and prevent further neurological impairment. When hydrocephalus is present, a shunt may be placed to divert excess CSF away from the brain and spinal canal to another part of the body. Collectively, these procedures aim to decompress the brainstem and spinal cord, restore CSF flow, improve neurological function, and prevent further deterioration. A schematic illustration of posterior fossa decompression using a representative dural opening is shown in Figure 5 .
+ Figure 5. Schematic illustration of a T-shaped fascial incision used in posterior fossa decompression surgery.
+ Open in a new tab 
+ Image reproduced from Open-i, National Library of Medicine (NIH) [ 26 ] (CC BY 2.0 Deed).
+ Prevention of CM-I 
+ Because CM-I is primarily a congenital structural condition, there are no known methods to prevent its development before birth. However, early recognition and monitoring can help prevent complications by allowing timely intervention. Preventive strategies focus on reducing symptom progression, which includes avoiding activities that increase intracranial pressure, such as heavy lifting, straining, or chronic coughing, and managing contributing factors like allergies that may trigger sneezing. Regular follow-up with healthcare providers and early evaluation of new or worsening symptoms play an important role in preventing long-term neurological impairment.
+ Prognosis and outlook 
+ The prognosis for Chiari malformation varies according to the severity of the condition, the presence of associated abnormalities such as syringomyelia, and the timing of treatment. Surgical outcomes are generally favorable, with studies showing that approximately 73% of patients experience improvement within the first postoperative year [ 27 ] and up to 79% show sustained improvement at one to three years of follow-up. Posterior fossa decompression leads to symptom relief in nearly two-thirds of patients, particularly those without syringomyelia. When a syrinx is present, it may shrink or resolve following surgical treatment or appropriate management. Headache symptoms often improve significantly, with some reports indicating 80-90% relief after medication or surgery. Radiological pre- and postoperative findings in Figure 6 illustrate the anatomical and physiological changes associated with CM-I and its surgical management [ 28 ].
+ Figure 6. Sagittal T2-weighted MRI demonstrating CM-I before and after surgical decompression. Preoperative images show cerebellar tonsillar herniation with associated cervicomedullary compression, while postoperative images demonstrate the restoration of CSF flow and decompression at the foramen magnum.
+ Open in a new tab 
+ Image reproduced from Open-i, National Library of Medicine (NIH) [ 29 ] (CC BY 4.0 Deed).
+ MRI: magnetic resonance imaging; CM-I: Chiari malformation type I; CSF: cerebrospinal fluid
+ As a result, radiological improvement following posterior fossa decompression is illustrated in Figure  7 .
+ Figure 7. Pre- and postoperative sagittal T2-weighted MRI in a patient with CM-I and syringomyelia. (A) Preoperative image showing a prominent syrinx (arrow). (B) Postoperative image obtained 12 months after surgery showing reduction in syrinx size and restoration of CSF flow.
+ Open in a new tab 
+ Image reproduced from Open-i, National Library of Medicine (NIH) [ 30 ] (CC BY 2.0 Deed).
+ MRI: magnetic resonance imaging; CM-I: Chiari malformation type I; CSF: cerebrospinal fluid
+ Although Chiari malformation can be serious in certain cases, many individuals remain stable for years, and symptoms may not appear until adolescence or adulthood when imaging is performed for another reason. There is no definitive cure, but treatment can reduce symptoms, prevent life-threatening complications, and substantially improve quality of life. Early diagnosis and intervention are associated with better long-term outcomes, and ongoing follow-up with healthcare providers is essential to monitor symptoms and guide individualized care.
+ Advancing integrated healthcare team efficiency 
+ Optimal management of CM-I requires a coordinated interprofessional team that may include neurologists, pediatricians, neurosurgeons, nurses, social workers, and physical therapists. Individuals with CM-I often experience a wide range of physical and functional limitations, such as difficulties with swallowing, speech, or gait, making comprehensive and collaborative care essential. Although the overall prognosis is generally favorable, timely recognition and appropriate evaluation, whether for conservative or surgical treatment, are critical to preventing long-term deterioration.
+ A team-based approach promotes patient-centered care, enhances safety, and improves clinical outcomes. Effective management relies on regular communication among specialists, interdisciplinary case discussions, and shared decision-making to incorporate perspectives from multiple fields. Treatment plans must be holistic, addressing not only neurological deficits but also psychological and social needs. Long-term management includes ongoing monitoring, consistent follow-up, and modifications to treatment strategies as symptoms evolve.
+ Care coordination further strengthens outcomes by prioritizing patient preferences, involving them in decisions about their care, and streamlining referrals between healthcare providers. Efficient information-sharing systems ensure that all team members have access to accurate and timely patient data. By integrating these strategies and fostering strong interprofessional collaboration, healthcare teams create a supportive environment that promotes positive outcomes, improves patient safety, and effectively meets the complex needs of individuals with CM-I [ 31 ].
+ Discussion
+ CM-I represents a complex neuroanatomical condition characterized by impaired CSF dynamics, neural compression, and a broad spectrum of clinical manifestations. Although the underlying pathology is well described, significant variability exists in symptom severity, timing of presentation, and radiologic findings, making clinical management challenging. Early recognition remains essential, as timely evaluation allows clinicians to distinguish CM-I from other causes of posterior fossa crowding, including idiopathic intracranial hypertension, craniocervical instability, or incidental tonsillar ectopia. This differentiation is crucial because radiologic tonsillar descent alone does not always correlate with symptom burden and clinical decision-making must integrate both imaging and patient-reported symptoms.
+ Beyond anatomical explanations, recent studies have begun to explore whether developmental and genetic factors may contribute to the variability seen in CM-I. Some research has examined genes involved in bone development and cranial structure, suggesting that its alterations or constriction is noted to be the primary cause of CM-I. However, findings across studies remain inconsistent. While a few reports propose possible links between CM-I and bone-related genetic pathways, others have not demonstrated a clear relationship between bone mineral density (BMD) and disease expression. These mixed results reinforce the idea that CM-I is a multifactorial condition, in which genetic, developmental, and anatomical factors likely interact rather than act independently. Some research found a relationship between bone-related genes and CM-I due to certain genes that have been associated with craniofacial development [ 32 ].
+ Advances in neuroimaging, particularly MRI and cine MRI, have improved the understanding of CSF flow disturbances and provided a stronger foundation for predicting surgical outcomes. Nonetheless, no universal criteria currently exist to guide the selection of patients who will benefit most from operative intervention. While posterior fossa decompression remains the standard of care for symptomatic individuals, the degree of decompression, the use of duraplasty, and whether tonsillar reduction should be performed vary widely across institutions. Comparative studies have shown generally favorable results, with most patients achieving symptom improvement; however, postoperative complications such as CSF leakage, pseudomeningocele formation, or meningitis highlight the need for careful surgical planning and individualized risk assessment.
+ Syringomyelia remains an important determinant of prognosis and treatment strategy. Although decompression frequently leads to syrinx reduction, not all patients experience complete resolution, suggesting that factors beyond mechanical CSF obstruction may contribute to syrinx pathophysiology. Ongoing research is needed to clarify the interplay between spinal canal compliance, CSF pulsatility, and neural tissue biomechanics. Furthermore, long-term outcomes vary, particularly among individuals who present in adulthood, emphasizing the importance of continuous monitoring and multidisciplinary care.
+ Interprofessional collaboration significantly enhances patient outcomes. Coordinated contributions from neurosurgeons, neurologists, rehabilitation specialists, and primary care providers support comprehensive, patient-centered treatment plans. Beyond acute management, long-term strategies should address psychosocial considerations, rehabilitation needs, and education on activity modification to prevent symptom exacerbation. As research continues to evolve, future studies should aim to refine diagnostic criteria, standardize surgical approaches, and identify biomarkers that predict disease progression or surgical success.
+ Overall, these findings highlight the need of more integrated approach to CM-I that considers anatomical, developmental, and genetic influences when interpreting clinical and imaging findings. CM-I has a generally favorable prognosis when appropriately managed, and ongoing investigation and multidisciplinary care remain central to improving quality of life and long-term neurological outcomes for affected individuals.
+ Limitations
+ This review is limited by the variability and quality of available studies on CM-I. Most research consists of observational data rather than randomized trials, which may introduce selection bias. Differences in diagnostic criteria, imaging techniques, and surgical approaches across studies make direct comparisons difficult. Additionally, long-term outcome data, particularly regarding CSF flow dynamics and postoperative improvement, remain inconsistent. These limitations may affect the generalizability of the conclusions presented in this review.
+ Another limitation of this review is the reliance on heterogeneous study designs, including retrospective analyses, case series, and narrative reviews, which limits the ability to draw definitive causal conclusions. Variability in imaging techniques, diagnostic thresholds for tonsillar herniation, and definitions of syringomyelia across studies further complicates the direct comparison of outcomes. Additionally, publication bias and the relative scarcity of large prospective or randomized studies may influence the strength and generalizability of the findings.
+ Conclusions
+ CM-I is a complex neurological disorder caused by the downward displacement of the cerebellar tonsils through the foramen magnum, leading to impaired CSF flow and a range of clinical symptoms. Understanding its pathophysiology, associated conditions such as syringomyelia, and broad clinical variability is essential for accurate diagnosis and management. Early recognition, appropriate imaging, and timely intervention, whether conservative or surgical, are critical for preventing complications and optimizing long-term outcomes. MRI, including cine MRI, remains essential for diagnosis, assessment of CSF flow abnormalities, and surgical planning. Surgical decompression is the primary treatment for symptomatic patients, with outcomes influenced by anatomical factors, the presence of syringomyelia, and variations in surgical technique. Despite advances in imaging and management, significant variability persists in diagnostic criteria and treatment strategies. Future prospective studies with standardized imaging protocols and outcome measures are needed to improve patient selection, optimize surgical approaches, enhance long-term outcomes, and improve quality of life.
+ Disclosures
+ Conflicts of interest: In compliance with the ICMJE uniform disclosure form, all authors declare the following:
+ Payment/services info: All authors have declared that no financial support was received from any organization for the submitted work.
+ Financial relationships: All authors have declared that they have no financial relationships at present or within the previous three years with any organizations that might have an interest in the submitted work.
+ Other relationships: All authors have declared that there are no other relationships or activities that could appear to have influenced the submitted work.
+ Author Contributions
+ Concept and design:   Maryam S. Alhosani, Sopio Gachechiladze
+ Acquisition, analysis, or interpretation of data:   Maryam S. Alhosani, Sopio Gachechiladze
+ Drafting of the manuscript:   Maryam S. Alhosani, Sopio Gachechiladze
+ Critical review of the manuscript for important intellectual content:   Maryam S. Alhosani, Sopio Gachechiladze
+ References
+ 1. Chiari malformation type 1 - diagnosis and treatment [Article in Norwegian] Fric R, Ringstad G, Eide PK. Tidsskr Nor Laegeforen. 2019;139 doi: 10.4045/tidsskr.18.0455. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 2. Chiari malformation type 1 in adults. Zisakis A, Sun R, Pepper J, Tsermoulas G. Adv Tech Stand Neurosurg. 2023;46:149–173. doi: 10.1007/978-3-031-28202-7_8. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 3. Chiari syndrome: advances in epidemiology and pathogenesis: a systematic review. Rodríguez-Blanque R, Almazán-Soto C, Piqueras-Sola B, Sánchez-García JC, Reinoso-Cobo A, Menor-Rodríguez MJ, Cortés-Martín J. J Clin Med. 2023;12:6694. doi: 10.3390/jcm12206694. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 4. Chiari malformations: diagnosis, treatments and failures. Abd-El-Barr MM, Strong CI, Groff MW. https://pubmed.ncbi.nlm.nih.gov/25418275/ J Neurosurg Sci. 2014;58:215–221. [ PubMed ] [ Google Scholar ]
+ 5. Neurosurgical management of patients with Ehlers-Danlos syndrome: a descriptive case series. Rock MB, Zhao DY, Felbaum DR, Sandhu FA. J Craniovertebr Junction Spine. 2023;14:24–34. doi: 10.4103/jcvjs.jcvjs_127_22. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 6. The pathogenesis of Chiari I malformation and syringomyelia. Sekula RF Jr, Arnone GD, Crocker C, Aziz KM, Alperin N. Neurol Res. 2011;33:232–239. doi: 10.1179/016164111X12962202723724. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 7. The pathogenesis of Chiari malformation and syringomyelia: a case report and systematic review of current theories. Sivakumaran P, Ashwood N, Kamal M, Jayakumar N. Cureus. 2023;15:0. doi: 10.7759/cureus.47301. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 8. Exploring pathogenesis, prevalence, and genetic associations in Chiari malformation type 1: a contemporary perspective. Mohd Rosdi SN, Omar S, Mohamad Ghazali M, Ghani AR, Mohamed Yusoff AA. Asian Biomed (Res Rev News) 2024;18:148–156. doi: 10.2478/abm-2024-0021. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 9. Evidence for sex differences in morphological abnormalities in type I Chiari malformation. [
+Dec;
+2025 
+];Houston JR, Allen NJ, Eppelheimer MS, et al. Neuroradiol J. 2019 32:458–466. doi: 10.1177/1971400919857212. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 10. Atypical familial presentation of Chiari 1 malformation: a case report. Hsu M, Majeed AJ, Newmaster KT, Harkins E, Mainali G, Naik S, Paudel S. Cureus. 2025;17:0. doi: 10.7759/cureus.82039. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 11. Embryology and pathophysiology of the Chiari I and II malformations: a comprehensive review. Shoja MM, Johal J, Oakes WJ, Tubbs RS. Clin Anat. 2018;31:202–215. doi: 10.1002/ca.22939. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 12. Pathogenesis and cerebrospinal fluid hydrodynamics of the Chiari I malformation. Buell TJ, Heiss JD, Oldfield EH. Neurosurg Clin N Am. 2015;26:495–499. doi: 10.1016/j.nec.2015.06.003. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 13. Pathophysiology of syringomyelia associated with Chiari I malformation of the cerebellar tonsils. Implications for diagnosis and treatment. Oldfield EH, Muraszko K, Shawker TH, Patronas NJ. J Neurosurg. 1994;80:3–15. doi: 10.3171/jns.1994.80.1.0003. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 14. Syringomyelia with obstructive hydrocephalus at the foramens of Luschka and Magendie successfully treated by endoscopic third ventriculostomy. Kawaguchi T, Fujimura M, Tominaga T. Surg Neurol. 2009;71:349-52, discussion 352. doi: 10.1016/j.surneu.2007.08.015. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 15. Acquired Chiari I malformation with syringomyelia secondary to colloid cyst with hydrocephalus-case report and review of literature. Thotakura AK, Marabathina NR. World Neurosurg. 2017;108:995–994. doi: 10.1016/j.wneu.2017.09.012. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 16. Kuhn J, Weisbrod LJ, Emmady PD. StatPearls [Internet] Treasure Island (FL): StatPearls Publishing; 2025. Chiari malformation type 2. [ PubMed ] [ Google Scholar ]
+ 17. A case report of Arnold Chiari type 1 malformation in acromesomelic dwarf infant. Maurya MR, Ravi R, Pungavkar SA. Pan Afr Med J. 2021;38:58. doi: 10.11604/pamj.2021.38.58.27295. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 18. MRI insights in Chiari malformation type 1 and variations with hydrosyringomyelia. Hatgaonkar AM, Mahajan SM, Hatgoankar KA, Bandre GR. Cureus. 2024;16:0. doi: 10.7759/cureus.55676. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 19. Chiari type 1 malformation and magnetic resonance imaging [Article in French] Masson C, Colombani JM. Presse Med. 2005;34:1662–1667. doi: 10.1016/s0755-4982(05)84244-7. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 20. The role of cine flow MRI in children with Chiari I malformation. Ventureyra EC, Aziz HA, Vassilyadi M. Childs Nerv Syst. 2003;19:109–113. doi: 10.1007/s00381-002-0701-1. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 21. Mosaic trisomy 8 detected by fibroblasts cultured of skin. [
+Dec;
+2025 
+];Giraldo G, Gómez AM, Mora L, Suarez-Obando F, Moreno O. https://openi.nlm.nih.gov/detailedresult?img=PMC4975130_1657-9534-cm-47-02-00100-gf03&query=chiari%20malformation&it=xg&req=4&npos=21 . Colomb Med (Cali) 2025 47:100–104. [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 22. Task-specific and general cognitive effects in Chiari malformation type I. [
+Dec;
+2025 
+];Allen PA, Houston JR, Pollock JW, et al. https://openi.nlm.nih.gov/detailedresult?img=PMC3988081_pone.0094844.g001&query=chiari%20pathophysiology&it=xg&req=4&npos=1 . PLoS One. 2025 9:0. doi: 10.1371/journal.pone.0094844. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 23. The surgical treatment of Chiari I malformation. Klekamp J, Batzdorf U, Samii M, Bothe HW. Acta Neurochir (Wien) 1996;138:788–801. doi: 10.1007/BF01411256. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 24. Surgical treatment of Chiari I malformation: indications and approaches. Alden TD, Ojemann JG, Park TS. Neurosurg Focus. 2001;11:0. doi: 10.3171/foc.2001.11.1.3. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 25. Surgical management of Chiari I malformation based on different cerebrospinal fluid flow patterns at the cranial-vertebral junction. Fan T, Zhao H, Zhao X, Liang C, Wang Y, Gai Q. Neurosurg Rev. 2017;40:663–670. doi: 10.1007/s10143-017-0824-1. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 26. Comparison of dural grafts in Chiari decompression surgery: review of the literature. [
+Dec;
+2025 
+]. 2025. https://openi.nlm.nih.gov/detailedresult?img=PMC2944852_JCJS-1-29-g002&query=chiari%20surgery&it=xg&lic=by&req=4&npos=2 . https://openi.nlm.nih.gov/detailedresult?img=PMC2944852_JCJS-1-29-g002&query=chiari%20surgery&it=xg&lic=by&req=4&npos=2 [ DOI ] [ PMC free article ] [ PubMed ]
+ 27. Kular S, Karsonovich T. StatPearls [Internet] Treasure Island (FL): StatPearls Publishing; 2024. Chiari malformation type 1. [ PubMed ] [ Google Scholar ]
+ 28. Reoperation in Chiari-1 malformations. Talamonti G, Picano M, Fragale M, Marcati E, Meccariello G, Boeris D, Cenzato M. J Clin Med. 2023;12:2853. doi: 10.3390/jcm12082853. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 29. Chiari 1 malformation presenting as central sleep apnea during pregnancy: a case report, treatment considerations, and review of the literature. [
+Dec;
+2025 
+]. 2025. https://openi.nlm.nih.gov/detailedresult?img=PMC4208407_fneur-05-00195-g003&query=chiari%20surgery&it=xg&lic=by&req=4&npos=10 . https://openi.nlm.nih.gov/detailedresult?img=PMC4208407_fneur-05-00195-g003&query=chiari%20surgery&it=xg&lic=by&req=4&npos=10 [ DOI ] [ PMC free article ] [ PubMed ]
+ 30. Delamination technique together with longitudinal incisions for treatment of Chiari I/syringomyelia complex: a prospective clinical study. [
+Dec;
+2025 
+]. 2025. https://openi.nlm.nih.gov/detailedresult?img=PMC2706797_1743-8454-6-7-4&query=chiari%20surgery&it=xg&req=4&npos=18 . https://openi.nlm.nih.gov/detailedresult?img=PMC2706797_1743-8454-6-7-4&query=chiari%20surgery&it=xg&req=4&npos=18 [ DOI ] [ PMC free article ] [ PubMed ]
+ 31. Hidalgo JA, Tork CA, Varacallo MA. StatPearls [Internet] Treasure Island (FL): StatPearls Publishing; 2025. Arnold-Chiari malformation. [ PubMed ] [ Google Scholar ]
+ 32. On the association between Chiari malformation type 1, bone mineral density and bone related genes. Martínez-Gil N, Mellibovsky L, Manzano-López González D, et al. Bone Rep. 2022;16:101181. doi: 10.1016/j.bonr.2022.101181. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ Articles from Cureus are provided here courtesy of Cureus Inc. 
+ ACTIONS
+ View on publisher site 
+ PDF (4.8 MB) 
+ Cite 
+ Collections 
+ Permalink 
+ PERMALINK
+ Copy 
+ RESOURCES
+ Similar articles
+ Cited by other articles
+ Links to NCBI Databases
+ Cite
+ Copy 
+ Download .nbib 
+ .nbib 
+ Format: 
+ AMA
+ APA
+ MLA
+ NLM
+ Add to Collections
+ Create a new collection 
+ Add to an existing collection 
+ Name your collection
+ * 
+ Choose a collection
+ Unable to load your collection due to an error
+ Please try again 
+ Add
+ Cancel
+ Follow NCBI
+ NCBI on X (formerly known as Twitter) 
+ NCBI on Facebook 
+ NCBI on LinkedIn 
+ NCBI on GitHub 
+ NCBI RSS feed 
+ Connect with NLM
+ NLM on X (formerly known as Twitter) 
+ NLM on Facebook 
+ NLM on YouTube 
+ National Library of Medicine
+ 8600 Rockville Pike
+ Bethesda, MD 20894 
+ Web Policies
+ FOIA
+ HHS Vulnerability Disclosure
+ Help
+ Accessibility
+ Careers
+ NLM
+ NIH
+ HHS
+ USA.gov
+ Back to Top 

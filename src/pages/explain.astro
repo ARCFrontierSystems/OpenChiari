@@ -364,7 +364,7 @@ const t = s.explain;
     gap: var(--s-24);
   }
   .form h1 {
-    font-size: 40px;
+    font-size: var(--h1-page);
     line-height: 1.1;
   }
   .intro {
@@ -435,18 +435,20 @@ const t = s.explain;
   .copy {
     flex: 1 0 auto;
   }
+  /* Two share buttons per row, so longer labels (Spanish "Correo electrónico") fit inside their buttons. */
   .share-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--s-8);
   }
   .share-row [hidden] {
     display: none;
   }
   .share-row .button {
-    padding: 0 var(--s-8);
-    white-space: nowrap;
+    padding: 4px var(--s-8);
     font-size: 15px;
+    text-align: center;
+    line-height: 1.25;
   }
   button.button {
     font: inherit;
@@ -606,7 +608,7 @@ const t = s.explain;
     color: var(--muted);
   }
   .recipient h2 {
-    font-size: 28px;
+    font-size: var(--h2-section);
     margin-top: var(--s-12);
   }
   .looking :global(ol) {
@@ -631,8 +633,37 @@ const t = s.explain;
     .ex {
       padding-top: var(--s-24);
     }
+    /* Phones: what the page is (Back, title, intro) comes first, then a shorter preview, then the note and link. */
+    .create {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      gap: var(--s-16);
+    }
+    .create .form {
+      display: contents;
+    }
+    .create .form > p:first-child {
+      order: -3;
+      margin: 0;
+    }
+    .create .form > h1 {
+      order: -2;
+      margin: 0;
+    }
+    .create .form > .intro {
+      order: -1;
+      margin: 0;
+    }
+    .create .preview {
+      flex: none;
+      width: 100%;
+    }
+    .create .stage {
+      height: 46vh;
+    }
     .form h1 {
-      font-size: 32px;
+      font-size: var(--h1-page);
     }
     .stage {
       height: 62vh;
@@ -641,7 +672,7 @@ const t = s.explain;
       font-size: 19px;
     }
     .recipient h2 {
-      font-size: 24px;
+      font-size: var(--h2-section);
     }
   }
 </style>

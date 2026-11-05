@@ -173,6 +173,14 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
             </li>
           ))}
         </ul>
+        <div class="x-card x-card-wide" aria-live="polite">
+          <ListenButton target=".x-card-wide" dark />
+          <p class="x-h"><span data-part-num>{part.num}</span> · {x.selected}</p>
+          <h2 class="x-card-title" data-part-name>{part.name}</h2>
+          <p class="x-card-text" data-part-text>{part.text}</p>
+          <p class="x-card-note" data-cond-note>{cond.note}</p>
+          <p class="x-size-note" data-size-note hidden={!(['chiari', 'syrinx'].includes(st.condition) && st.measure)}>{x.sizeNote}</p>
+        </div>
         <details class="x-cough x-cough-wide" data-cough-panel hidden={!['typical', 'chiari'].includes(st.condition)}>
           <summary>{x.cough.title}</summary>
           {x.cough.text.map((line) => <p>{line}</p>)}
@@ -195,14 +203,6 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
           <button type="button" class="x-tool" data-surgery-stop hidden>{x.surgery.stop}</button>
           <p class="x-cough-caption">{x.surgery.caption} {x.captionIllustration} · {x.captionTonsils}</p>
         </details>
-        <div class="x-card x-card-wide" aria-live="polite">
-          <ListenButton target=".x-card-wide" dark />
-          <p class="x-h"><span data-part-num>{part.num}</span> · {x.selected}</p>
-          <h2 class="x-card-title" data-part-name>{part.name}</h2>
-          <p class="x-card-text" data-part-text>{part.text}</p>
-          <p class="x-card-note" data-cond-note>{cond.note}</p>
-          <p class="x-size-note" data-size-note hidden={!(['chiari', 'syrinx'].includes(st.condition) && st.measure)}>{x.sizeNote}</p>
-        </div>
       </aside>
 
       <section class="x-sheet only-narrow-x" aria-label={x.condition}>
@@ -1254,13 +1254,14 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
       color: var(--x-text);
     }
 
+    /* Phones: the model takes most of the first screen, and the panel under it flows with the page (no box that
+       scrolls inside the page, which cut off the surgery steps and, in Calm mode, the cough question). */
     .workspace {
       position: relative;
       grid-template-columns: minmax(0, 1fr);
-      grid-template-rows: minmax(0, 1fr) auto;
-      height: calc(100vh - 57px);
-      height: calc(100svh - 57px);
-      min-height: 560px;
+      grid-template-rows: auto auto;
+      height: auto;
+      min-height: 0;
     }
     /* The left panel becomes the "Layers" panel, opened from the viewport. */
     .x-left {
@@ -1285,6 +1286,9 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
     }
     .x-view {
       grid-row: 1;
+      height: 62vh;
+      height: 62svh;
+      min-height: 340px;
     }
     .x-figure {
       inset: 8px 8px 8px 8px;
@@ -1312,9 +1316,6 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
       display: flex;
       flex-direction: column;
       gap: var(--s-12);
-      max-height: 50vh;
-      max-height: 50svh;
-      overflow-y: auto;
     }
     .x-cond-grid {
       margin: 0;

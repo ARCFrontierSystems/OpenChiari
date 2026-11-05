@@ -1,0 +1,301 @@
+
+ Cough-Associated Headache in Patients with Chiari I Malformation: CSF Flow Analysis by Means of Cine Phase-Contrast MR Imaging - PMC
+ Skip to main content
+ An official website of the United States government
+ Here's how you know 
+ Here's how you know 
+ Official websites use .gov 
+ A
+ .gov website belongs to an official
+ government organization in the United States.
+ Secure .gov websites use HTTPS 
+ A lock (
+ Lock 
+ Locked padlock icon
+ ) or https:// means you've safely
+ connected to the .gov website. Share sensitive
+ information only on official, secure websites.
+ Search
+ Log in 
+ Dashboard
+ Publications
+ Account settings
+ Log out
+ Search…
+ Search NCBI
+ Primary site navigation
+ Search
+ Logged in as:
+ Dashboard
+ Publications
+ Account settings
+ Log in
+ Search PMC Full-Text Archive 
+ Search in PMC 
+ Journal List
+ User Guide
+ PERMALINK
+ Copy 
+ As a library, NLM provides access to scientific literature. Inclusion in an NLM database does not imply endorsement of, or agreement with,
+ the contents by NLM or the National Institutes of Health.
+ Learn more:
+ PMC Disclaimer 
+ |
+ PMC Copyright Notice
+ AJNR Am J Neuroradiol 
+. 2011 Apr;32(4):739–742. doi: 10.3174/ajnr.A2369 
+ Search in PMC 
+ Search in PubMed 
+ View in NLM Catalog 
+ Add to search 
+ Cough-Associated Headache in Patients with Chiari I Malformation: CSF Flow Analysis by Means of Cine Phase-Contrast MR Imaging
+ RA Bhadelia 
+ RA Bhadelia 
+ a From the Tufts Medical Center and Tufts University School of Medicine (R.A.B., S.P., S.H.E., D.D.-D., C.H.), Boston, Massachusetts
+ b Beth Israel Deaconess Medical Center and Harvard Medical School (R.A.B., P.D.), Boston, Massachusetts
+ Find articles by RA Bhadelia 
+ a, b, ✉ , E Frederick 
+ E Frederick 
+ c Brigham and Women's Hospital and Harvard Medical School (E.F., S.P.), Boston, Massachusetts.
+ Find articles by E Frederick 
+ c , S Patz 
+ S Patz 
+ a From the Tufts Medical Center and Tufts University School of Medicine (R.A.B., S.P., S.H.E., D.D.-D., C.H.), Boston, Massachusetts
+ c Brigham and Women's Hospital and Harvard Medical School (E.F., S.P.), Boston, Massachusetts.
+ Find articles by S Patz 
+ a, c , P Dubey 
+ P Dubey 
+ b Beth Israel Deaconess Medical Center and Harvard Medical School (R.A.B., P.D.), Boston, Massachusetts
+ Find articles by P Dubey 
+ b , SH Erbay 
+ SH Erbay 
+ a From the Tufts Medical Center and Tufts University School of Medicine (R.A.B., S.P., S.H.E., D.D.-D., C.H.), Boston, Massachusetts
+ Find articles by SH Erbay 
+ a , D Do-Dai 
+ D Do-Dai 
+ a From the Tufts Medical Center and Tufts University School of Medicine (R.A.B., S.P., S.H.E., D.D.-D., C.H.), Boston, Massachusetts
+ Find articles by D Do-Dai 
+ a , C Heilman 
+ C Heilman 
+ a From the Tufts Medical Center and Tufts University School of Medicine (R.A.B., S.P., S.H.E., D.D.-D., C.H.), Boston, Massachusetts
+ Find articles by C Heilman 
+ a 
+ Author information 
+ Article notes 
+ Copyright and License information 
+ a From the Tufts Medical Center and Tufts University School of Medicine (R.A.B., S.P., S.H.E., D.D.-D., C.H.), Boston, Massachusetts
+ b Beth Israel Deaconess Medical Center and Harvard Medical School (R.A.B., P.D.), Boston, Massachusetts
+ c Brigham and Women's Hospital and Harvard Medical School (E.F., S.P.), Boston, Massachusetts.
+ ✉ Please address correspondence to Rafeeque A. Bhadelia, MD, 
+Department of Radiology, Beth Israel Deaconess Medical Center, WCB90, 330 Brookline Ave, Boston, MA 02115; e-mail: rbhadeli@bidmc.harvard.edu 
+ ✉ Corresponding author.
+ Series information
+ Clinical Report
+ Received 2010 Aug 4; Accepted 2010 Aug 31.
+ Copyright © American Society of Neuroradiology
+ PMC Copyright notice 
+ PMCID: PMC7965870  PMID: 21330393 
+ SUMMARY:
+ The purpose of this study was to analyze the CSF flow in patients with Chiari I to determine differences between patients with and without CAH. Thirty patients with Chiari I malformation underwent cine-PC CSF flow imaging in the sagittal plane. CSF flow pulsations were analyzed by placing regions of interest in the anterior cervical subarachnoid space. Maximum CSF systolic (craniocaudal) and diastolic (caudocranial) velocities as well as the durations of CSF systole and diastole (measured in fractions of the cardiac cycle) were determined. In the region of interest just below the foramen magnum, patients with CAH had a significantly shorter CSF systole and longer diastole ( P = .02). A CSF diastolic length of ≥0.75 of the cardiac cycle was 67% sensitive and 86% specific for CAH. Our results indicate that Cine-PC imaging can show differences in CSF flow patterns in patients with Chiari I with and without CAH.
+ Patients with Chiari I malformation of the cerebellar tonsils have a variety of subjective symptoms, of which headache is the most common, occurring in ≤75% of them. 1 – 4 Among the different types of headaches seen in patients with Chiari I, sudden short-lasting suboccipital headache precipitated by cough, exertion, or Valsalva-like maneuvers is considered to be a distinctive entity. 1 – 5 This CAH is attributed to abnormal CSF flow at the foramen magnum and is, when severe, considered an indication for decompressive surgery. 3 , 6 , 7 
+ Previously, invasive techniques have been used to show differences in cranial and spinal pressures in patients with Chiari I with CAH compared with those without this symptom. 2 , 3 , 5 Cine-PC MR imaging can noninvasively demonstrate biphasic CSF flow between the head and spine that occurs due to craniospinal pressure variations during a cardiac cycle. 8 – 10 Although cine-PC has been used to assess flow abnormalities in patients with Chiari I compared with healthy subjects and also to differentiate symptomatic and asymptomatic patients, 7 , 11 – 19 it has previously not been used to assess differences in CSF flow between patients with Chiari I with and without CAH. Demonstrating these differences would be useful not only in understanding the pathophysiology of CAH but also in helping clinicians in making management decisions in patients with unclear symptoms and inconclusive routine imaging.
+ The purpose of this study was to analyze the CSF flow in patients with Chiari I to determine differences between patients with and without CAH.
+ Materials and Methods
+ Thirty patients with Chiari I malformation (age range, 5–64 years; mean, 29 ± 14 years; female/male ratio, 24:6) underwent MR imaging on a 1.5T magnet (Signa; GE Healthcare, Milwaukee, Wisconsin; software, Version 11.0) between 2003 and 2007.
+ Institutional review board approval was obtained for this retrospective study with waiver of informed consent.
+ All patients were referred for management to a single neurosurgeon specializing in the treatment of Chiari I malformation. The main inclusion criterion was that the MR imaging examination be performed on a scanner from a single vendor using the same flow imaging sequence. The main exclusion criteria were a history of previous decompressive surgery or significant patient motion on flow images. Of the 32 consecutive patients sent for flow imaging during the period of study, 2 had significant motion artifacts on flow images and were excluded.
+ Patient records were evaluated for notes made by the neurosurgeon at the time of the initial clinical visit. CAH was considered present only when the symptoms were specific for a short-lasting suboccipital headache initiated or aggravated by cough, exertion, or a Valsalva-like maneuver.
+ MR Imaging
+ T1- and T2-weighted images of the cervical and thoracic spine were examined to determine the extent of tonsillar herniation and the presence or absence of syringomyelia. A commercially available cine-PC sequence was used to perform retrospectively cardiac-gated CSF flow imaging in the midline sagittal plane by using a peripheral pulse trigger (finger photoplethysmography). The imaging parameters were the following: TR, 30–35 ms; TE, 10 ms; flip angle, 20°; imaging matrix, 256 × 192; FOV, 240 cm 2 ; section thickness, 5 mm; and 2 signal-intensity averages. Most patients (23/30) had imaging performed at a velocity encoding of 5 cm/s. Higher velocity-encoding values of 7 or 10 cm/s were used for patients <10 years of age or if velocity aliasing (recognized as a sharp transition of pixel intensities) was detected by the technologist at the time of imaging. The encoding direction was head to foot in all patients. Phase-contrast images were obtained at each of a total of 32 time points, equally spaced over the cardiac cycle. The total imaging time was dependent on the patient's heart rate and varied between 4 and 7 minutes. The patients were instructed to breathe normally during the flow imaging.
+ Image Analysis
+ Two neuroradiologists determined the extent of tonsillar herniation by consensus as described previously. 20 , 21 A tonsillar herniation ≥5 mm was considered a Chiari I malformation. The presence or absence of syringomyelia was also recorded. The Cine-PC images were transferred to an independent workstation for CSF flow analysis by using the software program Analyze, Version 5.0 (Mayo Clinic, Rochester, Minnesota). Using the region-of-interest function of the program, we placed 2 regions of interest in the anterior subarachnoid space of the upper cervical spine ( Fig 1 ). The first region of interest was placed immediately below the foramen magnum (region 1), and the second region of interest was placed at the level of the disk space between the second and third cervical vertebrae (region 2). The size of the regions of interest ranged from 8 to 20 pixels (10–25 mm 2 ). Each region of interest was initially placed on an image and was propagated to include all 64 (32 phase +32 magnitude) images. To correct the gradient-induced additive errors that can offset the zero-velocity baseline, we subtracted average values of a relatively static brain region with zero average motion, as described previously. 14 , 22 – 24 This background region of interest (region 3) was placed in the region of the lower pons, described as having minimal motion in healthy subjects and in patients with Chiari I malformation. 23 , 24 Subtraction of the relatively static tissue phase shift (region 3) from that obtained for the CSF (regions 1 and 2) was used to calculate the mean velocity at each time point. All the regions of interest were placed by a neuroradiologist with 15 years of experience, without knowledge of the patient's clinical information.
+ Fig 1.
+ Open in a new tab 
+ Regions of interest. Region 1 is seen immediately below the foramen magnum, and region 2 is seen at the C2–3 intervertebral disk level. Region 3 is placed on the pons away from the foramen magnum for background subtraction.
+ The region-of-interest statistics output from Analyze included the mean signal intensity of each region of interest from each image of the sequence. These data were then transferred to an Excel file. Using a scale factor available from the image header, we converted all signal-intensity values to velocity information after background correction. Mean velocity values at each time point in the cardiac cycle were plotted as waveforms with velocity on the y-axis and fractions of the cardiac cycle on the x-axis ( Fig 2 ). The fractions of the cardiac cycle were used as temporal parameters in place of actual heart rates to normalize findings among subjects with different heart rates. 14 , 22 , 23 The positive values on the waveform correspond to systolic (craniocaudal) and the negative values correspond to diastolic (caudocranial) CSF flow. These CSF velocity waveforms were analyzed to determine maximum CSF systolic and diastolic velocities in millimeters per second and durations of CSF systole and diastole in fractions of the cardiac cycle ( Fig 2 ).
+ Fig 2.
+ Open in a new tab 
+ CSF velocity waveform from a patient without CAH showing CSF systolic (positive) and diastolic (negative) velocities and durations.
+ Data Analysis
+ Statistical analyses were performed by using a nonparametric Kruskal-Wallis test for evaluation of group differences. We also determined the sensitivity and specificity of CSF flow parameters in predicting the presence of CAH. A χ 2 test was performed to determine if the presence of syringomyelia was not the reason for group differences between subjects with and without CAH. A P value ≤ .05 was considered statistically significant.
+ Results
+ Nine of 30 (30%, 6 females, 3 males) patients with Chiari I had CAH. There was no difference in age between patients with and without CAH (On-line Table).
+ The results showing comparison of patients with and without CAH are presented in the On-line Table. Tonsillar herniation was greater in patients with CAH compared with those without it, but the differences were not statistically significant ( P = .10).
+ At region 1 (immediately below the foramen magnum), no significant differences were seen in maximum systolic and diastolic velocities between patients with and without CAH. However, in patients with CAH, the CSF systole was significantly shorter and the CSF diastole was significantly longer, compared with those without CAH ( Fig 3 ). A CSF diastolic length of ≥0.75 was 67% sensitive and 86% specific in predicting the presence of CAH.
+ Fig 3.
+ Open in a new tab 
+ CSF velocity waveform in a patient without CAH is shown along with the waveform from a patient with CAH. Note the longer CSF diastole (and shorter systole) in the patient with CAH compared with the patient without it.
+ At region 2 (C2–3 intervertebral disk level), there were no differences (On-line Table) in CSF flow between patients with Chiari I with and without CAH.
+ We also evaluated whether the presence of syringomyelia was not contributing to the differences observed between patients with and without CAH. Twelve of the 30 patients (40%) with Chiari I malformation had syringomyelia, 5 of whom had CAH, and 7 of whom did not. There was no significant difference in the proportion of syringomyelia between patients with and without CAH ( P = .3). Additionally, the mean CSF systolic flow duration of patients with syringomyelia (0.38 ± 0.15) and without syringomyelia (0.34 ± 0.11) was not significantly different ( P = .29).
+ Discussion
+ Our results show that Cine-PC imaging can demonstrate differences in CSF flow patterns between patients with Chiari I with and without CAH. Those with this symptom had much shorter CSF systole and longer CSF diastole compared with those without it. In addition, CSF diastolic duration of ≥0.75 of the cardiac cycle was moderately sensitive and specific in predicting the presence of CAH in patients with Chiari I malformation. The results also show that the presence of syringomyelia was not a contributory factor in CSF flow differences seen in patients with Chiari I with and without CAH.
+ Differentiating which patients with Chiari I malformation will improve with a surgical decompression versus those who will not can be difficult on the basis of symptoms and anatomic MR images alone. 1 , 2 , 6 , 7 , 15 This is because patients diagnosed with Chiari I malformation frequently have a multitude of subjective symptoms. It is often unclear which symptoms, if any, are actually due to the Chiari I malformation. This distinction is particularly true when the foramen magnum is not extremely tight; there is no syrinx, and the cerebellar tonsils are not pointed or deformed on anatomic imaging. However, classic CAHs generally are thought to be due specifically to a Chiari malformation and typically do improve with a successful decompression. They are much more specific to Chiari I malformations than constant daily headaches, extremity numbness, fatigue, dizziness, vertigo, nausea, or swallowing problems. The difficulty of sorting out which patient with a Chiari malformation really needs a decompression is further confounded by the increasing use of MR imaging for investigating headache and consequent imaging reports of a minor degree of tonsillar herniation as a Chiari I malformation.
+ CAHs are seen in ≤30% of patients with Chiari I malformation and are believed to be due to CSF flow impairment at the foramen magnum. 1 , 2 , 5 – 7 , 14 , 15 , 19 If severe, these headaches are considered to be an indication for decompressive surgery. However, in the presence of unclear symptoms and inconclusive anatomic imaging, an objective test directly assessing CSF flow dynamics at the foramen magnum can assist neurosurgeons in making decisions about decompressive surgery. Thus, we investigated whether we could correlate Cine-PC-imaging-demonstrated CSF flow abnormalities with this symptom. On the basis of findings presented here, we believe that cine-PC CSF flow imaging can provide this additional information and assist in clinical decision-making in the management of patients with Chiari I. We also believe that the development of ultrafast or real-time imaging for dynamically studying CSF flow can further improve the ability of cine-PC in assessing patients with Chiari I.
+ Several theories have been proposed to explain the pathophysiology of CAH in patients with Chiari I. Most agree that tonsillar herniation produces impairment of CSF flow at the foramen magnum and results in this symptom. However, there is a difference of opinion as to the exact mechanism responsible for CAH. Williams 5 studied ventricular and spinal pressures at rest and after coughing in patients with Chiari I and showed that in patients with CAH, a pressure difference developed between the head and spine after coughing. He proposed that normal compensatory movement of CSF across the foramen magnum in response to coughing is impaired in patients with Chiari I, leading to transient elevation of intracranial pressure resulting in headache. Sansur et al 3 systematically studied the spinal intrathecal pressures in patients with Chiari I. They observed elevated intrathecal pressure at baseline and during coughing in patients with Chiari I with CAH compared with those without it. On the basis of their results, these investigators attributed CAH in patients with Chiari I to an exaggerated spinal CSF pressure response to coughing, from entrapment of spinal CSF by tonsillar herniation, resulting in stretching of the spinal dura to cause headache.
+ Although cine-PC provides direct visualization of CSF flow between the head and spine, which is dependent on craniospinal pressure changes, we were able to investigate this fact only during resting, due to long scanning times of the cine-PC sequence (several 100 heart beats) used in this study. We are, therefore, unable to correlate our findings directly to the previous investigations described above. However, development of ultrafast or real-time imaging in the future to dynamically study CSF flow at resting and during and after coughing in patients with Chiari I may help to further understand the pathophysiology of CAH.
+ Previous studies have reported lower maximum CSF systolic flow velocities and shorter CSF systolic (and longer CSF diastolic) flow durations in patients with Chiari I compared with healthy subjects. 13 , 14 , 25 , 26 Although it is difficult to directly compare these results with those of our observations (in the absence of the knowledge of how many of their patients had CAH), the reported CSF velocities and durations in these different Chiari I patient populations are similar to our results. 13 , 14 , 25 , 26 Because the differences in CSF flow between patients with Chiari I and healthy subjects has been thoroughly evaluated previously, in this study, we only sought to correlate cine-PC-demonstrated CSF flow abnormalities to the specific subjective symptom of CAH.
+ One major limitation of our study was the use of the sagittal plane for imaging, which limited our evaluation of CSF flow to velocity measurements in the midline. In most of our patients in this retrospective study, only sagittal cine-PC images were available for review because the sagittal plane provides a quick overview of CSF flow above and below the foramen magnum in the time required for a single cine-PC sequence (approximately 5 minutes) and can be easily added to routine clinical imaging. However, we believe that our results are still valid. First, although CSF flow cannot be measured precisely with sagittal imaging due to partial volume effects and inability to assess the entire diameter of the spinal canal, measurement of peak velocities is still valid because our direction encoding (head to foot) was along the direction of maximum CSF flow. 27 Second, the peak velocities and flow durations reported by us are consistent with results obtained by others using sagittal cine-PC imaging in different Chiari I populations. 13 , 14 , 25 , 26 
+ Finally, long diastolic durations observed by us in patients with Chiari I with CAH with sagittal imaging are consistent with the phenomenon of anterior diastolic CSF flow jets reported in symptomatic patients with Chiari I by Quigley et al 19 by using axial cine-PC imaging. These investigators also observed simultaneous bidirectional flow at the foramen magnum. Their findings may also explain why by using sagittal cine-PC imaging, we observed larger diastolic CSF flow displacement (area under the negative portion of the CSF waveform) than systolic CSF flow displacement (area under the positive portion of the CSF waveform) as depicted in Fig 3 in a patient with CAH.
+ In conclusion, our findings indicate that cine-PC CSF flow imaging has the potential to be used as an objective tool for clinical decision-making in the management of patients with Chiari I with CAH.
+ Supplementary Material
+ 2369_table.pdf 
+ 2369_table.pdf (17.4KB, pdf) 
+ Abbreviations
+ CAH 
+ cough-associated headache
+ Cine-PC 
+ cine phase-contrast
+ CSF diastole 
+ duration of CSF diastolic flow (fraction of the cardiac cycle)
+ CSF systole 
+ duration of CSF systolic flow (fraction of the cardiac cycle)
+ MSV 
+ maximum systolic velocity (millimeters/second)
+ MDV 
+ maximum diastolic velocity (millimeters/second)
+ Footnotes
+ Indicates article with supplemental on-line table.
+ References
+ 1. 
+Pascual J, Oterino A, Berciano J. Headache in type I Chiari malformation. Neurology
+1992;42:1519–21 [ DOI ] [ PubMed ] [ Google Scholar ]
+ 2. 
+Pascual J, Gonzalez-Mandly A, Martin R, et al. Headaches precipitated by cough, prolonged exercise or sexual activity: a prospective etiological and clinical study. J Headache Pain
+2008;9:259–66 [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 3. 
+Sansur CA, Heiss JD, DeVroom HL, et al. Pathophysiology of headache associated with cough in patients with Chiari I malformation. J Neurosurg
+2003;98:453–58 [ DOI ] [ PubMed ] [ Google Scholar ]
+ 4. 
+Stovner LJ. Headache associated with the Chiari type I malformation. Headache
+1993;33:175–81 [ DOI ] [ PubMed ] [ Google Scholar ]
+ 5. 
+Williams B. Cough headache due to craniospinal pressure dissociation. Arch Neurol
+1980;37:226–30 [ DOI ] [ PubMed ] [ Google Scholar ]
+ 6. 
+Arnett BC. Tonsillar ectopia and headaches. Neurol Clin
+2004;22:229–36 [ DOI ] [ PubMed ] [ Google Scholar ]
+ 7. 
+McGirt MJ, Nimjee SM, Floyd J, et al. Correlation of cerebrospinal fluid flow dynamics and headache in Chiari I malformation. Neurosurgery
+2005;56:716–21,discussion 716–21 [ DOI ] [ PubMed ] [ Google Scholar ]
+ 8. 
+Alperin NJ, Lee SH, Loth F, et al. MR-intracranial pressure (ICP): a method to measure intracranial elastance and pressure noninvasively by means of MR imaging—baboon and human study. Radiology
+2000;217:877–85 [ DOI ] [ PubMed ] [ Google Scholar ]
+ 9. 
+Bhadelia RA, Bogdan AR, Wolpert SM. Analysis of cerebrospinal fluid flow waveforms with gated phase-contrast MR velocity measurements. AJNR Am J Neuroradiol
+1995;16:389–400 [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 10. 
+Levy LM, Di Chiro G. MR phase imaging and cerebrospinal fluid flow in the head and spine. Neuroradiology
+1990;32:399–406 [ DOI ] [ PubMed ] [ Google Scholar ]
+ 11. 
+Alperin N, Kulkarni K, Loth F, et al. Analysis of magnetic resonance imaging-based blood and cerebrospinal fluid flow measurements in patients with Chiari I malformation: a system approach. Neurosurg Focus
+2001;11:E6. [ DOI ] [ PubMed ] [ Google Scholar ]
+ 12. 
+Alperin N, Sivaramakrishnan A, Lichtor T. Magnetic resonance imaging-based measurements of cerebrospinal fluid and blood flow as indicators of intracranial compliance in patients with Chiari malformation. J Neurosurg
+2005;103:46–52 [ DOI ] [ PubMed ] [ Google Scholar ]
+ 13. 
+Armonda RA, Citrin CM, Foley KT, et al. Quantitative cine-mode magnetic resonance imaging of Chiari I malformations: an analysis of cerebrospinal fluid dynamics. Neurosurgery
+1994;35:214–23,discussion 223–24 [ DOI ] [ PubMed ] [ Google Scholar ]
+ 14. 
+Bhadelia RA, Bogdan AR, Wolpert SM, et al. Cerebrospinal fluid flow waveforms: analysis in patients with Chiari I malformation by means of gated phase-contrast MR imaging velocity measurements. Radiology
+1995;196:195–202 [ DOI ] [ PubMed ] [ Google Scholar ]
+ 15. 
+Hofkes SK, Iskandar BJ, Turski PA, et al. Differentiation between symptomatic Chiari I malformation and asymptomatic tonsillar ectopia by using cerebrospinal fluid flow imaging: initial estimate of imaging accuracy. Radiology
+2007;245:532–40 [ DOI ] [ PubMed ] [ Google Scholar ]
+ 16. 
+Hofmann E, Warmuth-Metz M, Bendszus M, et al. Phase-contrast MR imaging of the cervical CSF and spinal cord: volumetric motion analysis in patients with Chiari I malformation. AJNR Am J Neuroradiol
+2000;21:151–58 [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 17. 
+Liu B, Wang ZY, Xie JC, et al. Cerebrospinal fluid dynamics in Chiari malformation associated with syringomyelia. Chin Med J (Engl)
+2007;120:219–23 [ PubMed ] [ Google Scholar ]
+ 18. 
+Pujol J, Roig C, Capdevila A, et al. Motion of the cerebellar tonsils in Chiari type I malformation studied by cine phase-contrast MRI. Neurology
+1995;45:1746–53 [ DOI ] [ PubMed ] [ Google Scholar ]
+ 19. 
+Quigley MF, Iskandar B, Quigley ME, et al. Cerebrospinal fluid flow in foramen magnum: temporal and spatial patterns at MR imaging in volunteers and in patients with Chiari I malformation. Radiology
+2004;232:229–36 [ DOI ] [ PubMed ] [ Google Scholar ]
+ 20. 
+Elster AD, Chen MY. Chiari I malformations: clinical and radiologic reappraisal. Radiology
+1992;183:347–53 [ DOI ] [ PubMed ] [ Google Scholar ]
+ 21. 
+Stovner LJ, Rinck P. Syringomyelia in Chiari malformation: relation to extent of cerebellar tissue herniation. Neurosurgery
+1992;31:913–17,discussion 917 [ DOI ] [ PubMed ] [ Google Scholar ]
+ 22. 
+Enzmann DR, Pelc NJ. Normal flow patterns of intracranial and spinal cerebrospinal fluid defined with phase-contrast cine MR imaging. Radiology
+1991;178:467–74 [ DOI ] [ PubMed ] [ Google Scholar ]
+ 23. 
+Enzmann DR, Pelc NJ. Brain motion: measurement with phase-contrast MR imaging. Radiology
+1992;185:653–60 [ DOI ] [ PubMed ] [ Google Scholar ]
+ 24. 
+Wolpert SM, Bhadelia RA, Bogdan AR, et al. Chiari I malformations: assessment with phase-contrast velocity MR. AJNR Am J Neuroradiol
+1994;15:1299–308 [ PMC free article ] [ PubMed ] [ Google Scholar ]
+ 25. 
+Koc K, Anik Y, Anik I, et al. Chiari 1 malformation with syringomyelia: correlation of phase-contrast cine MR imaging and outcome. Turk Neurosurg
+2007;17:183–92 [ PubMed ] [ Google Scholar ]
+ 26. 
+Sakas DE, Korfias SI, Wayte SC, et al. Chiari malformation: CSF flow dynamics in the craniocervical junction and syrinx. Acta Neurochir (Wien)
+2005;147:1223–33 [ DOI ] [ PubMed ] [ Google Scholar ]
+ 27. 
+Lotz J, Meier C, Leppert A, et al. Cardiovascular flow measurement with phase-contrast MR imaging: basic facts and implementation. Radiographics
+2002;22:651–71
+ [ DOI ] [ PubMed ] [ Google Scholar ]
+ Associated Data
+ This section collects any data citations, data availability statements, or supplementary materials included in this article. 
+ Supplementary Materials
+ 2369_table.pdf 
+ 2369_table.pdf (17.4KB, pdf) 
+ Articles from AJNR: American Journal of Neuroradiology are provided here courtesy of American Society of Neuroradiology 
+ ACTIONS
+ View on publisher site 
+ PDF (747.6 KB) 
+ Cite 
+ Collections 
+ Permalink 
+ PERMALINK
+ Copy 
+ RESOURCES
+ Similar articles
+ Cited by other articles
+ Links to NCBI Databases
+ Cite
+ Copy 
+ Download .nbib 
+ .nbib 
+ Format: 
+ AMA
+ APA
+ MLA
+ NLM
+ Add to Collections
+ Create a new collection 
+ Add to an existing collection 
+ Name your collection
+ * 
+ Choose a collection
+ Unable to load your collection due to an error
+ Please try again 
+ Add
+ Cancel
+ Follow NCBI
+ NCBI on X (formerly known as Twitter) 
+ NCBI on Facebook 
+ NCBI on LinkedIn 
+ NCBI on GitHub 
+ NCBI RSS feed 
+ Connect with NLM
+ NLM on X (formerly known as Twitter) 
+ NLM on Facebook 
+ NLM on YouTube 
+ National Library of Medicine
+ 8600 Rockville Pike
+ Bethesda, MD 20894 
+ Web Policies
+ FOIA
+ HHS Vulnerability Disclosure
+ Help
+ Accessibility
+ Careers
+ NLM
+ NIH
+ HHS
+ USA.gov
+ Back to Top 

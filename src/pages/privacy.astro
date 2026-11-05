@@ -4,6 +4,7 @@
  * docs/COPY.md. Counting is described as Open Chiari's own counter (functions/api/count.js).
  */
 import Base from '../layouts/Base.astro';
+import NextStep from '../components/NextStep.astro';
 import { getStrings, getRoutes, externalLinks } from '../i18n';
 const routes = getRoutes(Astro.currentLocale);
 
@@ -58,6 +59,7 @@ const t = getStrings(Astro.currentLocale).privacy;
       <h2 id="changes-title" class="serif">{t.changesTitle}</h2>
       <p>{t.changes}</p>
     </section>
+    <NextStep from="privacy" />
   </div>
 </Base>
 
@@ -79,7 +81,7 @@ const t = getStrings(Astro.currentLocale).privacy;
     gap: var(--s-12);
   }
   .page-intro h1 {
-    font-size: 42px;
+    font-size: var(--h1-page);
     line-height: 1.1;
   }
   .updated {
@@ -100,7 +102,7 @@ const t = getStrings(Astro.currentLocale).privacy;
     color: var(--ink-2);
   }
   h2.serif {
-    font-size: 26px;
+    font-size: var(--h2-section);
   }
   .ruled {
     padding-bottom: var(--s-16);
@@ -138,7 +140,7 @@ const t = getStrings(Astro.currentLocale).privacy;
       gap: var(--s-32);
     }
     .page-intro h1 {
-      font-size: 32px;
+      font-size: var(--h1-page);
     }
     .lead {
       font-size: 18px;

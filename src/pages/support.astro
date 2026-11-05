@@ -40,12 +40,12 @@ const otherHref: Record<string, string> = { studies: routes.studies, kit: routes
           </div>
           <div class="org-actions">
             <a class="button button-primary" href={links[o.id].donate}>{t.donate}</a>
-            <a class="button button-secondary only-wide" href={links[o.id].second}>{o.second}</a>
+            <a class="button button-secondary" href={links[o.id].second}>{o.second}</a>
           </div>
         </li>
       ))}
     </ul>
-    <p class="checked only-wide">{t.checked}</p>
+    <p class="checked">{t.checked}</p>
 
     <section class="connect" id="connect" aria-labelledby="connect-title">
       <h2 id="connect-title" class="serif">{t.connect.title}</h2>
@@ -93,7 +93,7 @@ const otherHref: Record<string, string> = { studies: routes.studies, kit: routes
     gap: 10px;
   }
   .page-intro h1 {
-    font-size: 42px;
+    font-size: var(--h1-page);
     line-height: 1.1;
   }
   .page-intro p {
@@ -147,7 +147,7 @@ const otherHref: Record<string, string> = { studies: routes.studies, kit: routes
     margin-top: calc(-1 * var(--s-24));
   }
   .other h2 {
-    font-size: 28px;
+    font-size: var(--h2-section);
     padding-bottom: var(--s-16);
     border-bottom: 2px solid var(--ink);
   }
@@ -180,7 +180,7 @@ const otherHref: Record<string, string> = { studies: routes.studies, kit: routes
     color: var(--ink-2);
   }
   .connect h2 {
-    font-size: 28px;
+    font-size: var(--h2-section);
     padding-bottom: var(--s-16);
     border-bottom: 2px solid var(--ink);
   }
@@ -239,7 +239,7 @@ const otherHref: Record<string, string> = { studies: routes.studies, kit: routes
       gap: var(--s-32);
     }
     .page-intro h1 {
-      font-size: 32px;
+      font-size: var(--h1-page);
     }
     .org h2 {
       font-size: 21px;

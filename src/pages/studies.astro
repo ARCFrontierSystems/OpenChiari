@@ -140,7 +140,7 @@ const cards = studies.map((st) => {
                     <span class="status">{t.status.RECRUITING}</span>
                     <span>{t.types[c.type]}</span>
                     <span>{t.ages[c.age]}</span>
-                    {c.remote ? <span>{t.remote}</span> : c.location && <span class="only-wide">{c.location}</span>}
+                    {c.remote ? <span>{t.remote}</span> : c.location && <span>{c.location}</span>}
                   </p>
                   <h2 class="serif">
                     <a href={externalLinks.ctgovStudy + c.nct} rel="noopener" lang={spanish ? 'en' : undefined}>{c.title}</a>
@@ -152,7 +152,7 @@ const cards = studies.map((st) => {
                       <span lang={c.english ? 'en' : undefined}>{c.summary}</span>
                     </p>
                   )}
-                  <dl class="only-wide">
+                  <dl>
                     {c.whatYoudDo && (
                       <>
                         <dt>{t.whatYoudDo}</dt>
@@ -168,7 +168,6 @@ const cards = studies.map((st) => {
                     <dt>{t.listing}</dt>
                     <dd><a href={externalLinks.ctgovStudy + c.nct} rel="noopener">{t.listingLink.replace('{nct}', c.nct)}</a></dd>
                   </dl>
-                  <p class="byline only-narrow">{[c.sponsor, c.remote ? t.remoteLine : c.location].filter(Boolean).join(' · ')}</p>
                 </article>
               ))}
             </div>
@@ -182,9 +181,9 @@ const cards = studies.map((st) => {
 
         <aside class="before">
           <h2>{t.beforeTitle}</h2>
-          <p><span class="only-wide">{t.before.wide}</span><span class="only-narrow">{t.before.narrow}</span></p>
+          <p>{t.before.wide}</p>
         </aside>
-        <p class="registry only-wide">
+        <p class="registry">
           {t.registryBefore} <a href={externalLinks.bjcsfRegistry} rel="noopener">{t.registry}</a> {t.registryAfter}
         </p>
         {processed && (
@@ -302,7 +301,7 @@ const cards = studies.map((st) => {
     margin-bottom: var(--s-40);
   }
   .page-intro h1 {
-    font-size: var(--h1);
+    font-size: var(--h1-page);
     line-height: 1.08;
     max-width: 14em;
     margin-bottom: var(--s-16);
@@ -470,7 +469,7 @@ const cards = studies.map((st) => {
       gap: var(--s-16);
     }
     .page-intro h1 {
-      font-size: 34px;
+      font-size: var(--h1-page);
     }
     .page-intro {
       margin-bottom: var(--s-24);

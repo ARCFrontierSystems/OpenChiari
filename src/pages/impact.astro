@@ -64,14 +64,14 @@ const lastRun = fmtDate(q.lastRun);
             <tr><th scope="col">{t.columns.check}</th><th scope="col">{t.columns.phone}</th><th scope="col">{t.columns.desktop}</th><th scope="col">{t.columns.means}</th></tr>
           </thead>
           <tbody>
-            <tr><th scope="row">{t.accessibility}</th><td>{score(q.phone.accessibility)}</td><td>{score(q.desktop.accessibility)}</td><td>{t.accessibilityMeans}</td></tr>
-            <tr><th scope="row">{t.speed}</th><td>{score(q.phone.speed)}</td><td>{score(q.desktop.speed)}</td><td>{t.speedMeans}</td></tr>
+            <tr><th scope="row">{t.accessibility}</th><td data-label={t.columns.phone}>{score(q.phone.accessibility)}</td><td data-label={t.columns.desktop}>{score(q.desktop.accessibility)}</td><td data-label={t.columns.means}>{t.accessibilityMeans}</td></tr>
+            <tr><th scope="row">{t.speed}</th><td data-label={t.columns.phone}>{score(q.phone.speed)}</td><td data-label={t.columns.desktop}>{score(q.desktop.speed)}</td><td data-label={t.columns.means}>{t.speedMeans}</td></tr>
             <tr>
               <th scope="row">{t.standard}</th>
               <td colspan="2">{t.standardValue.replace('{result}', q.wcag === 'pass' ? t.wcagPass : q.wcag === 'issues' ? t.wcagIssues : t.notMeasured.toLowerCase())}</td>
-              <td>{t.standardMeans}</td>
+              <td data-label={t.columns.means}>{t.standardMeans}</td>
             </tr>
-            <tr><th scope="row">{t.accuracy}</th><td colspan="2">{t.accuracyValue}</td><td>{t.accuracyMeans}</td></tr>
+            <tr><th scope="row">{t.accuracy}</th><td colspan="2">{t.accuracyValue}</td><td data-label={t.columns.means}>{t.accuracyMeans}</td></tr>
           </tbody>
         </table>
       </div>
@@ -106,7 +106,7 @@ const lastRun = fmtDate(q.lastRun);
     margin-bottom: var(--s-40);
   }
   .page-intro h1 {
-    font-size: var(--h1);
+    font-size: var(--h1-page);
     line-height: 1.08;
     margin-bottom: var(--s-16);
   }
@@ -127,7 +127,7 @@ const lastRun = fmtDate(q.lastRun);
     margin-bottom: var(--s-24);
   }
   .block h2 {
-    font-size: 28px;
+    font-size: var(--h2-section);
   }
   .block-head .mono {
     font-size: var(--text-mono);
@@ -169,6 +169,37 @@ const lastRun = fmtDate(q.lastRun);
   }
   .table-wrap {
     overflow-x: auto;
+  }
+  /* Phones: each row becomes a small card (check, then each value with its column name), so nothing is squeezed. */
+  @media (max-width: 640px) {
+    table,
+    tbody,
+    tr,
+    th,
+    td {
+      display: block;
+    }
+    thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+    tbody tr {
+      border-bottom: 1px solid var(--rule);
+      padding: var(--s-8) 0;
+    }
+    tbody th,
+    tbody td {
+      border: 0;
+      padding: 4px var(--s-16);
+    }
+    td[data-label]::before {
+      content: attr(data-label) ': ';
+      font-weight: 600;
+      color: var(--muted);
+    }
   }
   table {
     width: 100%;
@@ -220,7 +251,7 @@ const lastRun = fmtDate(q.lastRun);
   .orgs {
     background: var(--surface);
     border: 1px solid var(--rule);
-    border-left: 3px solid var(--awareness);
+    border-left: 3px solid var(--accent);
     padding: var(--s-24);
   }
   .orgs h2 {
@@ -233,7 +264,7 @@ const lastRun = fmtDate(q.lastRun);
   }
   @media (max-width: 860px) {
     .page-intro h1 {
-      font-size: 34px;
+      font-size: var(--h1-page);
     }
     .open {
       grid-template-columns: minmax(0, 1fr);

@@ -32,6 +32,13 @@ blockquote {
   margin: 0;
 }
 
+/* Headings that wrap stay together (body text uses 1.6, which looks like two separate lines in a heading). */
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+}
+
 a {
   color: var(--accent);
 }

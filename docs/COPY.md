@@ -1136,3 +1136,9 @@ After the independent audits (`docs/audits/2026-11-05-surgery-and-children-audit
 ## Packing list: add your own items (2026-11-05, asked for by Matthew)
 
 - Under the packing list: "Add your own item" with an Add button (Spanish: "Agregue su propio artículo" / "Agregar"). The items are ticked, printed with the list as plain text, and never stored or sent. Non-medical.
+
+## About, "Made by" (2026-11-05): Matthew's own wording ("Go with the following")
+
+- Matthew Borgfeld, as an independent project. Matthew has Chiari malformation and had surgery for it at the age of 5. He made Open Chiari so that people facing the same diagnosis, and the families of children who have it, can see what's happening and go into appointments with better questions. He is a patient, not a doctor: the medical content rests on the published sources in the evidence notes.
+- Spanish: Matthew Borgfeld, como proyecto independiente. Matthew tiene malformación de Chiari y fue operado por ella a los 5 años. Creó Open Chiari para que las personas que enfrentan el mismo diagnóstico, y las familias de niños que la tienen, puedan ver lo que está pasando y llegar a sus citas con mejores preguntas. Es paciente, no médico: el contenido médico se basa en las fuentes publicadas que aparecen en las notas de evidencia.
+- Personal, not medical: no evidence row needed. Matthew chose to share this publicly.

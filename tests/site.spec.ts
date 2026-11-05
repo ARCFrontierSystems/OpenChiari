@@ -1505,10 +1505,20 @@ test('Explorer: the size line shows with the 12 mm views, and the cough plays an
   await expect(panel).toContainText("Researchers don't all agree on how this works");
   await expect(panel).toContainText('Animation simplified.');
   const button = panel.getByRole('button', { name: 'Cough' });
+  // The first message shows for under a second, so record every message as it is set (polling can miss it on a slow
+  // machine) and check both were announced, in order.
+  await panel.locator('[data-cough-status]').evaluate((el) => {
+    const seen: string[] = [];
+    (window as unknown as { coughSeen: string[] }).coughSeen = seen;
+    new MutationObserver(() => seen.push(el.textContent ?? '')).observe(el, { childList: true, characterData: true, subtree: true });
+  });
   await button.click();
-  await expect(panel.locator('[data-cough-status]')).toHaveText('During the cough: some spinal fluid moves up from the spine into the head.');
   await expect(panel.locator('[data-cough-status]')).toHaveText('Then it flows back down.', { timeout: 10000 });
   await expect(button).toBeEnabled({ timeout: 10000 });
+  expect(await page.evaluate(() => (window as unknown as { coughSeen: string[] }).coughSeen)).toEqual([
+    'During the cough: some spinal fluid moves up from the spine into the head.',
+    'Then it flows back down.',
+  ]);
   // Not offered for the syrinx and after-surgery views.
   await page.getByRole('radio', { name: 'Chiari I with syrinx' }).first().check({ force: true });
   await expect(panel).toBeHidden();

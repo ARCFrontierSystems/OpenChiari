@@ -59,7 +59,7 @@ const href = (key: string) => (routes as Record<string, string>)[key];
       <section class="contact" aria-labelledby="contact-title">
         <h2 id="contact-title">{t.contactTitle}</h2>
         <p>{t.contact}</p>
-        <p><a class="mono email" href={externalLinks.email}>{t.email}</a></p>
+        <p><Fragment set:html="<!--email_off-->" /><a class="mono email" href={externalLinks.email}>{t.email}</a><Fragment set:html="<!--/email_off-->" /></p>
         <p class="small">{t.noMedical}</p>
       </section>
       <section class="made-by" aria-labelledby="made-by-title">

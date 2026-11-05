@@ -30,7 +30,7 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
     <div class="prep-layout">
       <form class="prep-form" aria-label={t.formLabel} data-prep-form autocomplete="off">
         {t.groups.map((g, i) => (
-          <details class="group" data-group={g.id} data-collapse-on-phone={i >= 2 ? '' : undefined} open={!('folded' in g && g.folded)}>
+          <details class="group" data-group={g.id} data-collapse-on-phone={i >= 2 ? '' : undefined} open={!('folded' in g && g.folded)} data-folded={'folded' in g && g.folded ? '' : undefined}>
             <summary>
               <span class="group-title">{g.title}</span>
               <span class:list={['group-count', { 'only-narrow': !('folded' in g && g.folded) }]} aria-hidden="true">{'\u00A0· ' + g.questions.length}</span>
@@ -344,6 +344,16 @@ const count = (forms: { one: string; other: string }, n: number) => (n === 1 ? f
   }
   .group[open] .group-count {
     display: none;
+  }
+  .group[data-folded] summary::after {
+    content: '+';
+    margin-left: auto;
+    font-weight: 400;
+    font-size: 1.3em;
+    line-height: 1;
+  }
+  .group[data-folded][open] summary::after {
+    content: '\2212';
   }
   .group fieldset {
     margin: 0;

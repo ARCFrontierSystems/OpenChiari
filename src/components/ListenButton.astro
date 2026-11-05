@@ -49,6 +49,11 @@ const t = getStrings(Astro.currentLocale).listen;
     border-color: var(--x-control-border);
     color: var(--x-text);
   }
+  /* The light-blue ring on dark pages (the dark blue one is too faint there: walk-through 2, item 4). */
+  .dark:focus-visible {
+    outline: 2px solid var(--x-accent);
+    outline-offset: 2px;
+  }
   .dark[aria-pressed='true'] {
     border-color: var(--x-accent);
     color: var(--x-accent);

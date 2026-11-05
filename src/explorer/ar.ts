@@ -48,8 +48,8 @@ async function quickLook(model: THREE.Group, text: ArText): Promise<void> {
   const { USDZExporter } = await import('three/examples/jsm/exporters/USDZExporter.js');
   const data = await new USDZExporter().parseAsync(placeOnFloor(model));
   const url = URL.createObjectURL(new Blob([data], { type: 'model/vnd.usdz+zip' }));
-  // Apple's banner under the model carries the name and the required caption.
-  const banner = new URLSearchParams({ checkoutTitle: text.title, checkoutSubtitle: `${text.caption} ${text.advice}` });
+  // Apple's banner under the model carries the name, the required caption, "Not medical advice" and the model credit.
+  const banner = new URLSearchParams({ checkoutTitle: text.title, checkoutSubtitle: `${text.caption} ${text.advice} ${text.credit}` });
   const a = document.createElement('a');
   a.rel = 'ar';
   a.href = `${url}#${banner.toString().replace(/\+/g, '%20')}`;

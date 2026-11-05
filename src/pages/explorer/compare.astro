@@ -11,7 +11,7 @@
 import TranslationNotice from '../../components/TranslationNotice.astro';
 import Head from '../../components/Head.astro';
 import { anatomyFigureSvg, CONDITIONS } from '../../lib/anatomy-figure';
-import { getStrings, getRoutes, externalLinks } from '../../i18n';
+import { getStrings, getRoutes, externalLinks, otherLanguagePath } from '../../i18n';
 const routes = getRoutes(Astro.currentLocale);
 
 const s = getStrings(Astro.currentLocale);
@@ -43,6 +43,7 @@ const note = (c: string) => (t.notes as Record<string, string>)[c] ?? x.conditio
       <h1>{t.title}</h1>
       <span class="cmp-spacer"></span>
       <label class="cmp-check"><input type="checkbox" checked data-together /> {t.rotateTogether}</label>
+      <a class="cmp-lang" href={otherLanguagePath(Astro.url.pathname)} lang={Astro.currentLocale === 'es' ? 'en' : 'es'} hreflang={Astro.currentLocale === 'es' ? 'en' : 'es'} data-other-lang>{s.header.espanol}</a>
       <a class="cmp-back" href={routes.explorer}>{t.back}</a>
     </header>
 
@@ -210,6 +211,11 @@ const note = (c: string) => (t.notes as Record<string, string>)[c] ?? x.conditio
     height: 18px;
     margin: 0;
     accent-color: var(--x-accent);
+  }
+  .cmp-lang {
+    min-height: var(--touch);
+    display: inline-flex;
+    align-items: center;
   }
   .cmp-back {
     min-height: var(--touch);

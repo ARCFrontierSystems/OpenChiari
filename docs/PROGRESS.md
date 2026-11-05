@@ -3,6 +3,32 @@
 Claude Code: add an entry after each working session (date, what was done, what's next, open questions). Newest first.
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
+## 2026-11-05: Second check-up, site walk-through (`docs/audits/2026-11-05-site-checkup-2.md`)
+
+32 pages were checked, each on desktop and phone, in light and Dim mode: 0 accessibility problems, no errors, no broken links. Today's features all work.
+
+- **Fixed in code (not yet published):**
+  - the contact address is marked so Cloudflare leaves it as plain text;
+  - the Spanish desktop header now fits on one row from 1200 px wide; narrower, or in Calm mode, it uses the menu;
+  - a stronger focus ring on Listen buttons on dark pages;
+  - a + / − mark on the cough panel and on the folded Visit prep groups;
+  - the English kit page works offline;
+  - offline pages that weren't saved fall back to Home;
+  - the "Copy embed code" button uses the site font;
+  - the embed-code box stays visible in Dim mode;
+  - more room between the Spanish layer rows;
+  - an Español link on the tour and side-by-side pages;
+  - the iPhone room view's banner now also carries the model credit.
+- **Already fixed before the report:**
+  - Listen skips the English pronunciation guide (Spanish Home);
+  - the Android room view shows "Not medical advice" and the credit.
+- **For Matthew, in the Cloudflare dashboard:**
+  - Cloudflare Web Analytics is switched on for the live site and loads a script from Cloudflare's address in every visitor's browser. Matthew chose Open Chiari's own counters instead, and CLAUDE.md rule 2 forbids third-party requests, so it should be turned off.
+  - Email Address Obfuscation can stay on now that the address is marked.
+- **Left as is:**
+  - The 3D model is saved for offline use only after the 3D Explorer has been opened once. This keeps the first visit light.
+  - On phones, the captions below the Explorer view need a scroll. They are on the page.
+
 ## 2026-11-05: Surgery questions, "Helping your child", and a citable copy (built, not published)
 
 Matthew chose these three ("Go with 2, 3, and 4").

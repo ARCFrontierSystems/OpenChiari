@@ -395,6 +395,16 @@ test.describe('Doctor visit prep', () => {
   });
 });
 
+test('the contact address is marked so Cloudflare leaves it as plain text, and the English kit page works offline', async ({ request }) => {
+  for (const path of ['/about/', '/privacy/', '/es/about/', '/es/privacy/']) {
+    const html = await (await request.get(path)).text();
+    expect(html, path).toMatch(/<!--email_off-->[^]*?hello@openchiari\.org[^]*?<!--\/email_off-->/);
+  }
+  const sw = await (await request.get('/sw.js')).text();
+  expect(sw).toContain('"/kit/"');
+  expect(sw).not.toContain('"/kit/poster-letter.pdf"');
+});
+
 test.describe('Helping your child', () => {
   test('the school sheet prints what was typed, as text only, and nothing is stored or sent', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });

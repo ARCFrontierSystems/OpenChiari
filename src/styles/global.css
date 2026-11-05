@@ -82,7 +82,10 @@ a:hover {
   min-height: var(--button-height);
   padding: 0 22px;
   border-radius: var(--radius);
+  /* A <button> doesn't take the page font by itself (walk-through 2, item 12). */
+  font: inherit;
   font-weight: 500;
+  cursor: pointer;
   text-decoration: none;
   border: 1px solid transparent;
 }

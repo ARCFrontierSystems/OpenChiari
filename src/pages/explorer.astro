@@ -707,8 +707,20 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
     min-height: var(--touch);
     display: flex;
     align-items: center;
+    gap: 12px;
     font-weight: 600;
     cursor: pointer;
+  }
+  /* A plain + or − shows it opens (walk-through 2, item 10). */
+  .x-cough summary::after {
+    content: '+';
+    margin-left: auto;
+    font-weight: 400;
+    font-size: 1.3em;
+    line-height: 1;
+  }
+  .x-cough[open] summary::after {
+    content: '\2212';
   }
   .x-cough p {
     margin: 0 0 var(--s-8);
@@ -735,6 +747,8 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
     grid-template-columns: 20px minmax(0, 1fr) 84px;
     align-items: center;
     column-gap: 10px;
+    /* Room between rows when a long (Spanish) label wraps (walk-through 2, item 15). */
+    row-gap: 6px;
   }
   .x-layers input[type='checkbox'] {
     width: 16px;
@@ -746,6 +760,7 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
     min-height: var(--touch);
     display: flex;
     align-items: center;
+    line-height: 1.25;
     cursor: pointer;
   }
   .x-layers label:has(.x-na) {

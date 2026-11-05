@@ -33,7 +33,7 @@ self.addEventListener('fetch', (event) => {
           if (response.ok) caches.open(CACHE).then((cache) => cache.put(url.pathname, response.clone()));
           return response;
         })
-        .catch(() => caches.match(url.pathname).then((hit) => hit || caches.match(url.pathname.replace(/\/?$/, '/')) || caches.match('/'))),
+        .catch(async () => (await caches.match(url.pathname)) || (await caches.match(url.pathname.replace(/\/?$/, '/'))) || (await caches.match('/')) || Response.error()),
     );
     return;
   }

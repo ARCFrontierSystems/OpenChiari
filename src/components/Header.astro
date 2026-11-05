@@ -300,6 +300,52 @@ const otherHref = otherLanguagePath(current);
     }
   }
 
+  /* Spanish labels are longer: tighter spacing keeps the bar on one row from 1200 px wide; below that, and with
+     Calm mode's larger text, the nav moves into the menu, as it does for English below 961 px. (Walk-through 2, item 3.) */
+  @media (min-width: 961px) {
+    :global(:root:lang(es)) .bar {
+      gap: 10px;
+      flex-wrap: nowrap;
+    }
+    :global(:root:lang(es)) .nav-wide {
+      gap: 14px;
+      flex-wrap: nowrap;
+    }
+    :global(:root:lang(es)) .bar > * {
+      white-space: nowrap;
+    }
+  }
+  @media (min-width: 961px) and (max-width: 1199px) {
+    :global(:root:lang(es)) .nav-wide,
+    :global(:root:lang(es)) .nav-wide-only {
+      display: none;
+    }
+    :global(:root:lang(es)) .brand {
+      flex: 1 1 auto;
+    }
+    :global(:root:lang(es)) .menu-button {
+      display: inline-flex;
+    }
+    :global(:root:lang(es)) .menu:not([hidden]) {
+      display: flex;
+    }
+  }
+  @media (min-width: 961px) and (max-width: 1599px) {
+    :global(:root:lang(es)[data-calm='on']) .nav-wide,
+    :global(:root:lang(es)[data-calm='on']) .nav-wide-only {
+      display: none;
+    }
+    :global(:root:lang(es)[data-calm='on']) .brand {
+      flex: 1 1 auto;
+    }
+    :global(:root:lang(es)[data-calm='on']) .menu-button {
+      display: inline-flex;
+    }
+    :global(:root:lang(es)[data-calm='on']) .menu:not([hidden]) {
+      display: flex;
+    }
+  }
+
   /* Calm mode: larger header text everywhere. */
   :global(:root[data-calm='on']) .nav-wide,
   :global(:root[data-calm='on']) .lang {

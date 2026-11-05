@@ -51,7 +51,7 @@ const t = getStrings(Astro.currentLocale).privacy;
 
     <section aria-labelledby="email-title">
       <h2 id="email-title" class="serif">{t.emailTitle}</h2>
-      <p>{t.email.before} <a href={externalLinks.email}>{t.email.address}</a>{t.email.after}</p>
+      <p>{t.email.before} <Fragment set:html="<!--email_off-->" /><a href={externalLinks.email}>{t.email.address}</a><Fragment set:html="<!--/email_off-->" />{t.email.after}</p>
     </section>
 
     <section aria-labelledby="changes-title">

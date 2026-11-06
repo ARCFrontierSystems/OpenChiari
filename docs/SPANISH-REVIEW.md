@@ -16,7 +16,7 @@ Known deliberate differences: the Explain It starter note says the same thing in
 limit; "(en inglés)" is added where content stays in English (official study listings, the downloadable figure set);
 Support adds "Sus sitios web pueden estar solo en inglés."
 
-Please check the **medical sentences** first (208 rows), then the rest (872 rows).
+Please check the **medical sentences** first (208 rows), then the rest (874 rows).
 Made by `scripts/make-spanish-review.mjs`; rebuild it after any text change.
 
 ## Medical sentences
@@ -758,6 +758,8 @@ Made by `scripts/make-spanish-review.mjs`; rebuild it after any text change.
 | `studies.near` | Near | Cerca de | Near |
 | `studies.nearPlaceholder` | City, state or ZIP | Ciudad, estado o código postal | City, state or ZIP code |
 | `studies.nearHint` | Only used to sort the list on your device. | Solo se usa para ordenar la lista en su dispositivo. | Only used to sort the list on your device. |
+| `studies.nearFound` | Closest first. | Los más cercanos primero. |  **(changed since the back-translation; it reads the earlier Spanish)** |
+| `studies.nearNone` | None of these studies has a site near “{place}”. Each study shows where it takes place. | Ninguno de estos estudios tiene un centro cerca de «{place}». Cada estudio indica dónde se realiza. |  **(changed since the back-translation; it reads the earlier Spanish)** |
 | `studies.remoteFilter` | Can take part from home | Se puede participar desde casa | Can take part from home |
 | `studies.countOne` | 1 study recruiting | 1 estudio busca participantes | 1 study is looking for participants |
 | `studies.countOther` | {n} studies recruiting | {n} estudios buscan participantes | {n} studies are looking for participants |

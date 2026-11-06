@@ -599,6 +599,35 @@ test('Awareness kit, Make your own: messages only from the approved list, downlo
   expect(requests.filter((u) => !u.startsWith('blob:'))).toEqual([]);
 });
 
+test('Make your own: very long words wrap instead of running off the picture or the poster', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/kit/', { waitUntil: 'networkidle' });
+  await page.locator('[data-field="own"]').fill('gsgausgaudgasiudgiadpfgiaoudfghpaighdfpaiusghfpuiashfpasiuhf[aioshf[oaishf[oasihf[aiosfha[siofgaf');
+  await page.locator('[data-field="name"]').fill('x'.repeat(80));
+  await page.locator('[data-field="when"]').fill('https://www.example.org/a-very-long-event-address-with-no-spaces-at-all');
+  // The right-hand margin of the picture stays plain background, from top to bottom (square and story, with and
+  // without the picture of Chiari).
+  const marginClear = () =>
+    page.locator('[data-builder-canvas]').evaluate((c: HTMLCanvasElement) => {
+      const ctx = c.getContext('2d')!;
+      const pad = c.height > c.width ? 104 : 84;
+      const strip = ctx.getImageData(c.width - pad + 8, 0, pad - 8, c.height).data;
+      const [r, g, b] = [strip[0], strip[1], strip[2]];
+      for (let i = 0; i < strip.length; i += 4) if (Math.abs(strip[i] - r) + Math.abs(strip[i + 1] - g) + Math.abs(strip[i + 2] - b) > 12) return false;
+      return true;
+    });
+  for (const design of ['square', 'story']) {
+    await page.locator(`input[name="design"][value="${design}"]`).check();
+    for (const figure of [false, true]) {
+      await page.locator('[data-field="figure"]').setChecked(figure);
+      await expect.poll(marginClear).toBe(true);
+    }
+  }
+  await page.locator('input[name="design"][value="poster"]').check();
+  const overflowing = await page.locator('[data-poster] p').evaluateAll((ps) => ps.filter((p) => p.scrollWidth > p.clientWidth + 1).length);
+  expect(overflowing).toBe(0);
+});
+
 test('Make your own on a phone: no sideways scrolling, and the preview stays in view while you fill it in', async ({ page }) => {
   for (const path of ['/kit/', '/es/kit/']) {
     await page.setViewportSize({ width: 360, height: 740 });
@@ -865,7 +894,20 @@ test('Research studies: the list, its filters and Near sorting work on the devic
     await page.getByLabel('Near').fill(state);
     const firstPlaces = await cards.first().getAttribute('data-places');
     expect(firstPlaces!.toLowerCase()).toContain(`|${state.toLowerCase()}|`);
+    await expect(page.locator('[data-near-result]')).toHaveText('Closest first.');
   }
+  // A place with no study site nearby says so, rather than seeming to do nothing; clearing the box clears the message.
+  await page.getByLabel('Near').fill('Zzyzx');
+  await expect(page.locator('[data-near-result]')).toHaveText('None of these studies has a site near “Zzyzx”. Each study shows where it takes place.');
+  // A US ZIP is never matched to a postal code abroad that happens to share its digits.
+  const abroad = data.studies.flatMap((s: { sites: { zip: string; country: string }[] }) => s.sites).find((x: { zip: string; country: string }) => /^\d{5}$/.test(x.zip) && x.country !== 'United States');
+  const hasUs = data.studies.some((s: { sites: { country: string }[] }) => s.sites.some((x) => x.country === 'United States'));
+  if (abroad && !hasUs) {
+    await page.getByLabel('Near').fill(abroad.zip);
+    await expect(page.locator('[data-near-result]')).toHaveText(`None of these studies has a site near “${abroad.zip}”. Each study shows where it takes place.`);
+  }
+  await page.getByLabel('Near').fill('');
+  await expect(page.locator('[data-near-result]')).toHaveText('');
   expect(sent).toEqual([]);
 });
 
@@ -1231,6 +1273,21 @@ test('Reading your MRI report: a real side-view MRI with numbered markers that m
   expect((await request.get('/mri/sagittal-t2.png')).status()).toBe(200);
   await page.goto('/explorer/');
   await expect(page.locator('.x-caption a', { hasText: 'Compare with a real MRI' })).toHaveAttribute('href', '/mri/#mri-view');
+});
+
+test('Explorer: the slider\'s middle label sits exactly over the midline position, in English and Spanish', async ({ page }) => {
+  // Lining the slider up with a label that sat left of the middle gave a cut 10 mm to one side, which misses the syrinx.
+  await page.setViewportSize({ width: 1440, height: 900 });
+  for (const path of ['/explorer/', '/es/explorer/']) {
+    await page.goto(path);
+    const offset = await page.evaluate(() => {
+      const s = document.querySelector('[data-cut]')!.getBoundingClientRect();
+      const m = document.querySelector('[data-cut-scale] span:nth-child(2)')!.getBoundingClientRect();
+      return Math.abs(m.left + m.width / 2 - (s.left + s.width / 2));
+    });
+    expect(offset).toBeLessThan(2);
+    await expect(page.locator('[data-cut]')).toHaveAttribute('list', 'cut-midline');
+  }
 });
 
 test('Explorer: cut front to back (coronal) or across (axial), on the realistic model, described, and kept in links', async ({ page }) => {

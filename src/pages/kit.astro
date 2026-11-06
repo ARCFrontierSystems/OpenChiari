@@ -98,7 +98,6 @@ const items = [
         <h2 id="orgs-title" class="serif">{k.orgsTitle}</h2>
         <p>{k.orgsText}</p>
       </div>
-      <a class="button button-secondary" href="#make">{b.title}</a>
     </section>
 
     <section class="builder" id="make" aria-labelledby="make-title">
@@ -1026,6 +1025,8 @@ const items = [
   .poster-body {
     flex: 1;
     min-height: 0;
+    /* A very long word or web address breaks onto the next line instead of running off the page. */
+    overflow-wrap: anywhere;
     padding: 0.45in 0.7in 0.6in;
     display: flex;
     flex-direction: column;

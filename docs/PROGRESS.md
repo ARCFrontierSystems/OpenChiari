@@ -4,6 +4,13 @@ Claude Code: add an entry after each working session (date, what was done, what'
 Matthew's preference: when a step is done, lay out what the next step will cover.
 
 
+## 2026-11-06: Fixes Matthew found
+
+- **Make your own:** the "Make your own" button in the For organizations box was removed (it jumped a few lines to the builder right under it). Very long words or web addresses now wrap instead of running off the picture (square post, story) or the poster; a long name or place now leaves room for its extra lines. New test fills every box with long text and checks the right margin stays clear.
+- **Research studies, Near:** typing a place sorted the list silently, and with only two recruiting studies (France and Italy) a US ZIP changed nothing visible. Now a line under the box says "Closest first." or that no study has a site near the place typed. US ZIPs are compared only with US sites (a French postal code such as 80054 no longer counts as near a Colorado ZIP). Spanish: back-translation check 8.
+- **Realistic model, Chiari I with syrinx:** the syrinx was there but hard to see: a thin streak low in the neck, in nearly the same blue as the spinal fluid beside it. It now has the same dark blue edge (#3F6F90) as in the Simple model's picture, wherever a cut passes through it (side, front or across). No change to its shape or size (EVIDENCE.md "Syrinx").
+- **Test fix:** the cough test records each message as it is set (a slow test machine missed the short first one).
+
 ## 2026-11-05: 3D roadmap published
 
 - **PR #18 (live):**

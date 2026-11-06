@@ -116,6 +116,7 @@ const cards = studies.map((st) => {
           <label for="near" class="legend">{t.near}</label>
           <input id="near" type="text" autocomplete="off" placeholder={t.nearPlaceholder} aria-describedby="near-hint" data-near />
           <p class="hint" id="near-hint">{t.nearHint}</p>
+          <p class="near-result" aria-live="polite" data-near-result></p>
         </div>
         <label class="check"><input type="checkbox" name="remote" data-remote /> {t.remoteFilter}</label>
       </form>
@@ -222,7 +223,9 @@ const cards = studies.map((st) => {
   // Nothing is ever submitted anywhere.
   form.addEventListener('submit', (e) => e.preventDefault());
 
-  /** How close a study's sites are to what was typed: ZIP, then city, then state, then country. Text only, on the device. */
+  /** How close a study's sites are to what was typed: ZIP, then city, then state, then country. Text only, on the device.
+   *  A score of 1 or more means a real match (same ZIP area, city, state or country); 0.5 only means the same first
+   *  ZIP digit, which helps the order but is not "near". */
   function closeness(card: HTMLElement, query: string) {
     const parts = query.toLowerCase().split(/[\s,]+/).filter(Boolean);
     if (!parts.length) return 0;
@@ -233,10 +236,12 @@ const cards = studies.map((st) => {
     for (const site of (card.dataset.places ?? '').split(';')) {
       const [city, state, siteZip, country] = site.toLowerCase().split('|');
       let score = 0;
-      if (zip && siteZip) {
+      // ZIP codes are compared only with sites in the United States: a French or Italian postal code that happens to
+      // share digits with a US ZIP is not nearby.
+      if (zip && siteZip && country === 'united states') {
         if (siteZip.startsWith(zip)) score = 6;
-        else if (siteZip.slice(0, 3) === zip.slice(0, 3)) score = 5;
-        else if (siteZip[0] === zip[0]) score = 1.5;
+        else if (zip.length >= 3 && siteZip.slice(0, 3) === zip.slice(0, 3)) score = 5;
+        else if (siteZip[0] === zip[0]) score = 0.5;
       }
       if (city && words.some((w) => w === city || w.startsWith(city + ' '))) score = Math.max(score, 4);
       if (state && stateWords.has(state)) score = Math.max(score, 3);
@@ -245,6 +250,9 @@ const cards = studies.map((st) => {
     }
     return best;
   }
+
+  const nearResult = document.querySelector<HTMLElement>('[data-near-result]')!;
+  let resultTimer = 0;
 
   function update() {
     const conditions = Array.from(form.querySelectorAll<HTMLInputElement>('input[name="condition"]:checked')).map((b) => b.value);
@@ -265,6 +273,11 @@ const cards = studies.map((st) => {
       .map((card) => ({ card, score: closeness(card, query), remote: card.dataset.remote === 'true' ? 1 : 0 }))
       .sort((a, b) => b.score - a.score || (query ? b.remote - a.remote : 0) || a.card.dataset.title!.localeCompare(b.card.dataset.title!));
     list?.replaceChildren(...ranked.map((r) => r.card));
+    // Say what the sorting did, so typing a place never seems to do nothing. Set once typing pauses, so a screen
+    // reader announces it once rather than at every letter.
+    const message = !query || !cards.length ? '' : ranked.some((r) => !r.card.hidden && r.score >= 1) ? t.nearFound : t.nearNone.replace('{place}', query);
+    clearTimeout(resultTimer);
+    resultTimer = window.setTimeout(() => (nearResult.textContent = message), message ? 500 : 0);
 
     const countEl = document.querySelector('[data-count]');
     if (countEl) countEl.textContent = shown === 1 ? t.countOne : t.countOther.replace('{n}', String(shown));
@@ -362,6 +375,14 @@ const cards = studies.map((st) => {
     background: var(--surface);
     font: inherit;
     color: var(--ink);
+  }
+  .near-result {
+    margin: var(--s-8) 0 0;
+    font-size: var(--text-small);
+    color: var(--ink-2);
+  }
+  .near-result:empty {
+    margin: 0;
   }
   .hint {
     margin-top: var(--s-4);

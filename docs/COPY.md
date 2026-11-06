@@ -1224,3 +1224,10 @@ Draft: `docs/drafts/2026-11-05-mri-view.md`; check: `docs/audits/2026-11-05-mri-
 - **Reading your MRI report, What a side-view MRI looks like:** This is a real MRI of a healthy adult volunteer, from a public research collection, cut down the middle like the 3D model. On this kind of image, called T2, spinal fluid looks bright and the brain and spinal cord look darker. On other kinds, such as T1, fluid looks dark. The numbers match the labels in the 3D model. Markers 01 Cerebrum · 03 Cerebellum · 04 Fourth ventricle · 05 Brainstem · 08 Spinal cord · 09 Spinal fluid (CSF) · 10 C2 vertebra, each "See it in 3D". Caption: MRI of a healthy adult volunteer, side view at the midline (T2), from a study of healthy volunteers, not a Chiari study. It's not your scan: everyone's scan looks a little different. The researchers removed the face before sharing it. Note: The lowest point of the cerebellar tonsils and the edges of the skull opening aren't marked: placing them precisely is a radiologist's job. Credit: MRI: Bédard S, Cohen-Adad J. Spinal Cord Head Positions, OpenNeuro ds004507, doi:10.18112/openneuro.ds004507.v1.1.2 (public domain, CC0).
 - **3D Explorer:** "Compare with a real MRI" (under the view). Cut-away, Cut direction: Side · Front · Across. MRI uses the same three directions: sagittal (side), coronal (front) and axial (across). Slider ends: Front · Skull opening · Back / Lower · Skull opening · Higher. Descriptions: Cut front to back (coronal), seen from behind; Cut across (axial), seen from below.
 
+
+## Research studies "Near" messages (2026-11-06): interface wording, not medical; Matthew reported the bug ("Entering a zip code on research studies does not seem to do anything")
+
+Shown under the Near box once typing pauses. Spanish: back-translation check 8; pending medical-translator review.
+
+- **Found:** Closest first.
+- **Nothing nearby:** None of these studies has a site near "{place}". Each study shows where it takes place.

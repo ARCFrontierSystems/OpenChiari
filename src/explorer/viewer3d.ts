@@ -632,6 +632,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
     hostH = h;
     labelsWasHidden = null;
     outlineMaterial.resolution.set(w, h);
+    syrinxOutlineMaterial.resolution.set(w, h);
     renderer.setSize(w, h, false);
     renderer.domElement.style.width = '100%';
     renderer.domElement.style.height = '100%';
@@ -797,15 +798,36 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
   outline.visible = false;
   outline.frustumCulled = false;
   scene.add(outline);
+  // The syrinx always has a dark blue edge where the cut passes through it, as in the Simple model's picture
+  // (fill #7FB3D3, edge #3F6F90): its fill is close to the spinal fluid's blue, and without the edge it is easy to miss
+  // inside the cord. When the syrinx is the selected part, the light selection outline takes over.
+  // Unlike the selection outline, it is hidden behind anything solid in front of it (it is always on, so it must not
+  // show through the head when the view is turned).
+  const syrinxOutlineMaterial = new LineMaterial({ color: 0x3f6f90, linewidth: 2.5, transparent: true });
+  const syrinxOutline = new LineSegments2(new LineSegmentsGeometry(), syrinxOutlineMaterial);
+  syrinxOutline.renderOrder = 2850;
+  syrinxOutline.visible = false;
+  syrinxOutline.frustumCulled = false;
+  scene.add(syrinxOutline);
   const triA = new THREE.Vector3(), triB = new THREE.Vector3(), triC = new THREE.Vector3();
   function updateOutline() {
-    const st = store.get();
+    setLines(outline, cutLines((p) => isSelected(p, highlighted)));
+    setLines(syrinxOutline, cutLines((p) => p.partId === 'syrinx' && highlighted !== 'syrinx'));
+  }
+  function setLines(line: LineSegments2, points: number[]) {
+    line.visible = points.length > 0;
+    if (line.visible) {
+      line.geometry.dispose();
+      line.geometry = new LineSegmentsGeometry().setPositions(points);
+    }
+  }
+  /** Where the cut plane passes through the chosen structures of the realistic model, as line pieces. */
+  function cutLines(pick: (p: Part) => boolean): number[] {
     const depth = cutD;
-    void st;
     const points: number[] = [];
     if (realisticShown()) {
       for (const p of parts) {
-        if (p.model !== 'realistic' || !p.mesh.visible || !isSelected(p, highlighted)) continue;
+        if (p.model !== 'realistic' || !p.mesh.visible || !pick(p)) continue;
         const pos = p.mesh.geometry.getAttribute('position');
         const index = p.mesh.geometry.getIndex();
         const count = index ? index.count : pos.count;
@@ -827,11 +849,7 @@ export async function createViewer(host: HTMLElement, store: Store, figureString
         }
       }
     }
-    outline.visible = points.length > 0;
-    if (outline.visible) {
-      outline.geometry.dispose();
-      outline.geometry = new LineSegmentsGeometry().setPositions(points);
-    }
+    return points;
   }
 
   // ----- Camera presets (glide, or jump in Calm mode) -----

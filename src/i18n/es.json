@@ -1367,6 +1367,8 @@
     "near": "Cerca de",
     "nearPlaceholder": "Ciudad, estado o código postal",
     "nearHint": "Solo se usa para ordenar la lista en su dispositivo.",
+    "nearFound": "Los más cercanos primero.",
+    "nearNone": "Ninguno de estos estudios tiene un centro cerca de «{place}». Cada estudio indica dónde se realiza.",
     "remoteFilter": "Se puede participar desde casa",
     "countOne": "1 estudio busca participantes",
     "countOther": "{n} estudios buscan participantes",

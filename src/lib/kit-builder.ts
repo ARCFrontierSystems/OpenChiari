@@ -44,11 +44,27 @@ export const THEMES: Record<Theme, { bg: string; ink: string; soft: string; acce
 const SERIF = "'Source Serif 4', Georgia, serif";
 const SANS = "'IBM Plex Sans', system-ui, sans-serif";
 
+/** Splits a word that is wider than the line on its own (a long web address, or a run of letters with no spaces)
+ *  into pieces that fit, so nothing runs off the edge of the picture. */
+function splitLong(ctx: CanvasRenderingContext2D, word: string, width: number): string[] {
+  if (ctx.measureText(word).width <= width) return [word];
+  const pieces: string[] = [];
+  let piece = '';
+  for (const ch of Array.from(word)) {
+    if (piece && ctx.measureText(piece + ch).width > width) {
+      pieces.push(piece);
+      piece = ch;
+    } else piece += ch;
+  }
+  if (piece) pieces.push(piece);
+  return pieces;
+}
+
 /** Breaks text into lines that fit the width at the current font. */
 function lines(ctx: CanvasRenderingContext2D, text: string, width: number): string[] {
   const out: string[] = [];
   let line = '';
-  for (const word of text.split(/\s+/).filter(Boolean)) {
+  for (const word of text.split(/\s+/).filter(Boolean).flatMap((w) => splitLong(ctx, w, width))) {
     const test = line ? `${line} ${word}` : word;
     if (ctx.measureText(test).width > width && line) {
       out.push(line);
@@ -130,7 +146,10 @@ export async function drawGraphic(canvas: HTMLCanvasElement, o: GraphicOptions):
   const ownLines = o.own ? lines(ctx, o.own, textW - 56) : [];
   const meta = [o.name, o.when].filter(Boolean);
   const metaPx = story ? 34 : 28;
-  const ownH = (ownLines.length ? ownLines.length * ownPx * 1.35 + 56 : 0) + (meta.length ? meta.length * metaPx * 1.4 + (ownLines.length ? 24 : 0) : 0);
+  // A long name or place can take more than one line: count the lines it will really use.
+  ctx.font = `600 ${metaPx}px ${SANS}`;
+  const metaLines = meta.reduce((n, m) => n + lines(ctx, m, textW).length, 0);
+  const ownH = (ownLines.length ? ownLines.length * ownPx * 1.35 + 56 : 0) + (metaLines ? metaLines * metaPx * 1.4 + (ownLines.length ? 24 : 0) : 0);
 
   // The message (and its answer), as large as fits. With the picture: on a story it goes below the message and keeps
   // about 40% of the space; on a square post it goes in a panel beside the message, so it always fits.

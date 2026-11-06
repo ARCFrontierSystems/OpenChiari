@@ -1367,6 +1367,8 @@
     "near": "Near",
     "nearPlaceholder": "City, state or ZIP",
     "nearHint": "Only used to sort the list on your device.",
+    "nearFound": "Closest first.",
+    "nearNone": "None of these studies has a site near “{place}”. Each study shows where it takes place.",
     "remoteFilter": "Can take part from home",
     "countOne": "1 study recruiting",
     "countOther": "{n} studies recruiting",

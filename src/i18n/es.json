@@ -627,6 +627,30 @@
           }
         ]
       }
+    },
+    "mriLink": "Comparar con una resonancia real",
+    "cutPlanes": {
+      "label": "Dirección del corte",
+      "sagittal": "De lado",
+      "coronal": "Frontal",
+      "axial": "Transversal",
+      "hint": "La resonancia usa las mismas tres direcciones: sagital (de lado), coronal (frontal) y axial (transversal).",
+      "ends": {
+        "coronal": [
+          "Adelante",
+          "Abertura del cráneo",
+          "Atrás"
+        ],
+        "axial": [
+          "Más abajo",
+          "Abertura del cráneo",
+          "Más arriba"
+        ]
+      },
+      "describe": {
+        "coronal": "Corte de adelante hacia atrás (coronal), visto desde atrás",
+        "axial": "Corte transversal (axial), visto desde abajo"
+      }
     }
   },
   "evidence": {
@@ -1928,7 +1952,16 @@
     "nextLink": "Prepare su cita",
     "nextAfter": ".",
     "sourcesBefore": "Cada oración de esta página viene de una fuente publicada, que aparece en las",
-    "sourcesLink": "notas de evidencia"
+    "sourcesLink": "notas de evidencia",
+    "view": {
+      "title": "Cómo se ve una resonancia de lado",
+      "intro": "Esta es una resonancia real de una persona adulta sana que participó como voluntaria, de una colección pública de investigación, vista en un corte por la línea media, como el modelo 3D. En este tipo de imagen, llamada T2, el líquido cefalorraquídeo se ve blanco y el cerebro y la médula espinal se ven más oscuros. En otros tipos, como T1, el líquido se ve oscuro. Los números coinciden con las etiquetas del modelo 3D.",
+      "alt": "Resonancia de lado de la cabeza y el cuello de una persona adulta sana, con marcadores numerados en el cerebro, el cerebelo, el cuarto ventrículo, el tronco encefálico, la médula espinal, el líquido cefalorraquídeo y la vértebra C2.",
+      "caption": "Resonancia de una persona adulta sana que participó como voluntaria, vista de lado en la línea media (T2), de un estudio de voluntarios sanos, no de un estudio de Chiari. No es su estudio: el estudio de cada persona se ve un poco distinto. Los investigadores quitaron la cara antes de compartir las imágenes.",
+      "notMarked": "El punto más bajo de las amígdalas cerebelosas y los bordes de la abertura del cráneo no están marcados: ubicarlos con precisión es tarea de un radiólogo.",
+      "credit": "Resonancia: Bédard S, Cohen-Adad J. Spinal Cord Head Positions, OpenNeuro ds004507, doi:10.18112/openneuro.ds004507.v1.1.2 (dominio público, CC0).",
+      "seeIt": "Verlo en 3D"
+    }
   },
   "next": {
     "label": "Siguiente",

@@ -1218,6 +1218,45 @@ test('Explorer: "How close is this to real anatomy?" shows the checked numbers f
   await expect(panel).toContainText('13 to 15 mm in adults');
 });
 
+test('Reading your MRI report: a real side-view MRI with numbered markers that match the 3D labels, credited, linked from the Explorer', async ({ page, request }) => {
+  await page.goto('/mri/');
+  const view = page.locator('#mri-view');
+  await expect(view.getByRole('heading', { level: 2 })).toHaveText('What a side-view MRI looks like');
+  await expect(view.locator('.mri-marker')).toHaveCount(7);
+  await expect(view.locator('.mri-legend li')).toHaveCount(7);
+  await expect(view.locator('.mri-legend li').first()).toContainText('Cerebrum');
+  await expect(view.locator('.mri-legend a').first()).toHaveAttribute('href', '/explorer/#typ.side.l.pcerebrum');
+  await expect(view).toContainText('OpenNeuro ds004507');
+  await expect(view).toContainText("aren't marked");
+  expect((await request.get('/mri/sagittal-t2.png')).status()).toBe(200);
+  await page.goto('/explorer/');
+  await expect(page.locator('.x-caption a', { hasText: 'Compare with a real MRI' })).toHaveAttribute('href', '/mri/#mri-view');
+});
+
+test('Explorer: cut front to back (coronal) or across (axial), on the realistic model, described, and kept in links', async ({ page }) => {
+  test.setTimeout(120000); // loads the realistic model
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/explorer/');
+  await expect(page.locator('body')).toHaveClass(/has-3d/, { timeout: 30000 });
+  const left = page.locator('.x-left');
+  await left.locator('[data-plane="coronal"]').click();
+  await expect(left.locator('[data-plane="coronal"]')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('[data-model="realistic"]').first()).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('.x-view [data-camera="back"]').first()).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('[data-viewer]')).toHaveAttribute('aria-label', /Cut front to back \(coronal\), seen from behind/);
+  await expect(left.locator('[data-cut-scale] span')).toHaveText(['Front', 'Skull opening', 'Back']);
+  await left.locator('[data-plane="axial"]').click();
+  await expect(page.locator('.x-view [data-camera="below"]').first()).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('[data-viewer]')).toHaveAttribute('aria-label', /Cut across \(axial\), seen from below/);
+  // Back to the Simple model means back to the side cut.
+  await page.locator('[data-model="simple"]').first().click();
+  await expect(left.locator('[data-plane="sagittal"]')).toHaveAttribute('aria-pressed', 'true');
+  // A link keeps the direction.
+  await page.goto('about:blank');
+  await page.goto('/explorer/#c1.back.kc');
+  await expect(page.locator('.x-left [data-plane="coronal"]')).toHaveAttribute('aria-pressed', 'true');
+});
+
 test('Awareness kit: every graphic and printable downloads, and the ZIP carries the credit', async ({ page, request }) => {
   await page.goto('/kit/');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Awareness kit');
@@ -1466,10 +1505,20 @@ test('Explorer: the size line shows with the 12 mm views, and the cough plays an
   await expect(panel).toContainText("Researchers don't all agree on how this works");
   await expect(panel).toContainText('Animation simplified.');
   const button = panel.getByRole('button', { name: 'Cough' });
+  // The first message shows for under a second, so record every message as it is set (polling can miss it on a slow
+  // machine) and check both were announced, in order.
+  await panel.locator('[data-cough-status]').evaluate((el) => {
+    const seen: string[] = [];
+    (window as unknown as { coughSeen: string[] }).coughSeen = seen;
+    new MutationObserver(() => seen.push(el.textContent ?? '')).observe(el, { childList: true, characterData: true, subtree: true });
+  });
   await button.click();
-  await expect(panel.locator('[data-cough-status]')).toHaveText('During the cough: some spinal fluid moves up from the spine into the head.');
   await expect(panel.locator('[data-cough-status]')).toHaveText('Then it flows back down.', { timeout: 10000 });
   await expect(button).toBeEnabled({ timeout: 10000 });
+  expect(await page.evaluate(() => (window as unknown as { coughSeen: string[] }).coughSeen)).toEqual([
+    'During the cough: some spinal fluid moves up from the spine into the head.',
+    'Then it flows back down.',
+  ]);
   // Not offered for the syrinx and after-surgery views.
   await page.getByRole('radio', { name: 'Chiari I with syrinx' }).first().check({ force: true });
   await expect(panel).toBeHidden();

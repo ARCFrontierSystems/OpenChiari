@@ -22,6 +22,8 @@ export type CameraView = 'side' | 'back' | 'below' | 'front' | 'close' | 'custom
 export const CAMERA_PRESETS: Exclude<CameraView, 'custom'>[] = ['side', 'back', 'below', 'front', 'close'];
 /** Which structures show: all, only the selected one, or all but the selected one. */
 export type Focus = 'all' | 'only' | 'hide';
+/** Which way the cut-away runs: side to side (sagittal), front to back (coronal) or across (axial). */
+export type CutPlane = 'sagittal' | 'coronal' | 'axial';
 
 export interface ViewState {
   condition: Condition;
@@ -35,6 +37,7 @@ export interface ViewState {
   part: string;
   camera: CameraView;
   focus: Focus;
+  plane: CutPlane;
 }
 
 // Starting view. Skin starts on, so the midline cut matches the figures; the mockup had it off.
@@ -55,6 +58,7 @@ export const initialState: ViewState = {
   part: 'tonsil',
   camera: 'side',
   focus: 'all',
+  plane: 'sagittal',
 };
 
 type Listener = (state: ViewState) => void;

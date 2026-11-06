@@ -90,8 +90,14 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
 
         <section class="x-section" aria-labelledby="cut-heading">
           <h2 class="x-h" id="cut-heading">{x.cutaway}</h2>
+          <div class="x-segmented x-planes" role="group" aria-label={x.cutPlanes.label} data-3d-only>
+            {(['sagittal', 'coronal', 'axial'] as const).map((pl) => (
+              <button type="button" data-plane={pl} aria-pressed={pl === st.plane ? 'true' : 'false'}>{x.cutPlanes[pl]}</button>
+            ))}
+          </div>
           <input class="x-cut" type="range" min="0" max="100" step="5" value={st.cut} data-cut aria-label={x.cutawayAria} />
-          <div class="x-scale" aria-hidden="true"><span>{x.cutWhole}</span><span>{x.cutMidline}</span><span>{x.cutFar}</span></div>
+          <div class="x-scale" aria-hidden="true" data-cut-scale><span>{x.cutWhole}</span><span>{x.cutMidline}</span><span>{x.cutFar}</span></div>
+          <p class="x-plane-hint" data-3d-only>{x.cutPlanes.hint}</p>
         </section>
 
         <section class="x-section" aria-labelledby="model-heading">
@@ -160,7 +166,7 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
         <div class="x-footnotes only-wide-x">
           <p class="x-hint" data-3d-only>{x.hint}</p>
           <p class="x-caption">
-            {x.captionIllustration} · {x.captionFlow} · <a href={routes.evidence + '#' + EVIDENCE_SECTION[st.condition]} data-evidence>{x.evidence}</a>
+            {x.captionIllustration} · {x.captionFlow} · <a href={routes.evidence + '#' + EVIDENCE_SECTION[st.condition]} data-evidence>{x.evidence}</a> · <a href={routes.mri + '#mri-view'}>{x.mriLink}</a>
           </p>
         </div>
       </main>
@@ -397,6 +403,29 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
         range.addEventListener('input', () => store.setLayer(range.dataset.layerOpacity as (typeof LAYERS)[number], { opacity: Number(range.value) })),
       );
       $$<HTMLInputElement>('[data-cut]').forEach((range) => range.addEventListener('input', () => store.set({ cut: Number(range.value) })));
+      // Cut direction: side keeps the side view; front looks from behind; across looks from below (as MRI shows it).
+      // The cut starts through the skull opening (or at the midline for the side cut).
+      const PLANE_CAMERA = { sagittal: 'side', coronal: 'back', axial: 'below' } as const;
+      $$<HTMLButtonElement>('[data-plane]').forEach((button) =>
+        button.addEventListener('click', () => {
+          const plane = button.dataset.plane as ViewState['plane'];
+          if (plane === store.get().plane) return;
+          // The flow and the measure live on the midline, so they step aside for the other two directions.
+          // Front and across cuts use the realistic model: the Simple model is drawn from side-view outlines, so cut
+          // any other way it would show shapes that aren't anatomy.
+          store.set({ plane, cut: 50, camera: PLANE_CAMERA[plane], ...(plane === 'sagittal' ? {} : { flow: false, measure: false, labels: false, model: 'realistic' }) });
+        }),
+      );
+      store.subscribe((st) => {
+        // Back to the Simple model means back to the side cut (see above).
+        if (st.model === 'simple' && st.plane !== 'sagittal') {
+          store.set({ plane: 'sagittal', cut: 50, camera: 'side' });
+          return;
+        }
+        $$<HTMLButtonElement>('[data-plane]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.plane === st.plane)));
+        const ends = st.plane === 'sagittal' ? [x.cutWhole, x.cutMidline, x.cutFar] : x.cutPlanes.ends[st.plane];
+        $$<HTMLElement>('[data-cut-scale]').forEach((scale) => scale.querySelectorAll('span').forEach((s, i) => s.textContent !== ends[i] && (s.textContent = ends[i])));
+      });
       // Phones: the Realistic switch sits with the other view tools, so it's easy to find.
       $$<HTMLButtonElement>('[data-model-toggle]').forEach((button) =>
         button.addEventListener('click', () => store.set({ model: store.get().model === 'realistic' ? 'simple' : 'realistic' })),
@@ -461,7 +490,8 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
       const describe = (st: ViewState) => {
         if (stageDescription && st.condition === 'surgery') return `${strings.figure.ariaPrefix}${stageDescription}`;
         const cut = st.cut === 50 ? 'midline' : st.cut === 0 ? 'whole' : st.cut < 50 ? 'near' : 'far';
-        return `${strings.figure.ariaPrefix}${strings.figure.aria[st.condition]}. ${x.viewNames[st.camera]}. ${x.cutNames[cut]}.`;
+        const cutText = st.plane === 'sagittal' ? x.cutNames[cut] : x.cutPlanes.describe[st.plane];
+        return `${strings.figure.ariaPrefix}${strings.figure.aria[st.condition]}. ${x.viewNames[st.camera]}. ${cutText}.`;
       };
       import('../explorer/viewer3d').then(async ({ webglAvailable, createViewer, labelAnchor }) => {
         if (!webglAvailable()) return;
@@ -1304,6 +1334,15 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
     line-height: 1.45;
   }
   .x-accuracy-list :global(.x-acc-key) {
+    color: var(--x-muted);
+  }
+  .x-segmented.x-planes {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-bottom: var(--s-8);
+  }
+  .x-plane-hint {
+    margin: var(--s-8) 0 0;
+    font-size: 12px;
     color: var(--x-muted);
   }
   .x-part-actions {

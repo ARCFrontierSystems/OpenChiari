@@ -1275,6 +1275,21 @@ test('Reading your MRI report: a real side-view MRI with numbered markers that m
   await expect(page.locator('.x-caption a', { hasText: 'Compare with a real MRI' })).toHaveAttribute('href', '/mri/#mri-view');
 });
 
+test('Explorer: the slider\'s middle label sits exactly over the midline position, in English and Spanish', async ({ page }) => {
+  // Lining the slider up with a label that sat left of the middle gave a cut 10 mm to one side, which misses the syrinx.
+  await page.setViewportSize({ width: 1440, height: 900 });
+  for (const path of ['/explorer/', '/es/explorer/']) {
+    await page.goto(path);
+    const offset = await page.evaluate(() => {
+      const s = document.querySelector('[data-cut]')!.getBoundingClientRect();
+      const m = document.querySelector('[data-cut-scale] span:nth-child(2)')!.getBoundingClientRect();
+      return Math.abs(m.left + m.width / 2 - (s.left + s.width / 2));
+    });
+    expect(offset).toBeLessThan(2);
+    await expect(page.locator('[data-cut]')).toHaveAttribute('list', 'cut-midline');
+  }
+});
+
 test('Explorer: cut front to back (coronal) or across (axial), on the realistic model, described, and kept in links', async ({ page }) => {
   test.setTimeout(120000); // loads the realistic model
   await page.setViewportSize({ width: 1280, height: 900 });

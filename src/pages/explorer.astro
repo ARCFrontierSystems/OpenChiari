@@ -95,7 +95,8 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
               <button type="button" data-plane={pl} aria-pressed={pl === st.plane ? 'true' : 'false'}>{x.cutPlanes[pl]}</button>
             ))}
           </div>
-          <input class="x-cut" type="range" min="0" max="100" step="5" value={st.cut} data-cut aria-label={x.cutawayAria} />
+          <input class="x-cut" type="range" min="0" max="100" step="5" value={st.cut} data-cut aria-label={x.cutawayAria} list="cut-midline" />
+          <datalist id="cut-midline"><option value="50"></option></datalist>
           <div class="x-scale" aria-hidden="true" data-cut-scale><span>{x.cutWhole}</span><span>{x.cutMidline}</span><span>{x.cutFar}</span></div>
           <p class="x-plane-hint" data-3d-only>{x.cutPlanes.hint}</p>
         </section>
@@ -1037,13 +1038,23 @@ const EVIDENCE_SECTION: Record<string, string> = { typical: '3d-model-shapes', c
     margin: 0;
     accent-color: var(--x-accent);
   }
+  /* Three columns, the middle one centred: the "Midline" (or "Skull opening") label sits exactly over the slider's
+     middle, where the cut is at the midline. (Spaced out evenly, it sat left of the middle, and lining the slider up with
+     it gave a cut 10 mm to one side, which misses the syrinx.) */
   .x-scale {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: 4px;
     margin-top: -6px;
     font-family: var(--font-mono);
     font-size: var(--x-size-caption);
     color: var(--x-muted);
+  }
+  .x-scale > :nth-child(2) {
+    text-align: center;
+  }
+  .x-scale > :last-child {
+    text-align: right;
   }
 
   /* Segmented control (Model) */
